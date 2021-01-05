@@ -1,0 +1,7 @@
+openapi-generator*.jar
+swagger.json
+package/*
+!package/.npmignore
+!package/.openapi-generator-ignore
+!package/README.md
+!package/tsconfig.json
