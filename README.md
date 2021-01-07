@@ -8,7 +8,6 @@ $ ./generate-package.sh <path-to-openapi-generator-jar> <path-to-swagger-json> <
 ```
 
 It will create and build the API client in the `package/` directory.
-Additionally it will set a [custom README](./package_readme.md) with basic usage info about the package.
 
 ### Script parameters
 
