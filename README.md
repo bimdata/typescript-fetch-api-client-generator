@@ -7,7 +7,7 @@ You can generate the API client package with the `generate-package.sh` shell scr
 $ ./generate-package.sh <path-to-openapi-generator-jar> <path-to-swagger-json> <package-version>
 ```
 
-It will create and build the API client in the `package/` directory.
+It will create the API client in the `package/` directory.
 
 ### Script parameters
 
