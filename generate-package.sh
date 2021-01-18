@@ -37,8 +37,4 @@ typescriptThreePlus=true,\
 npmName=@bimdata/typescript-fetch-api-client,\
 npmVersion=$VERSION
 
-cd $OUTPUT
-npm install
-npm run build
-
 exit 0
