@@ -1,12 +1,2 @@
 openapi-generator*.jar
 swagger.json
-package/*
-
-!package/src/
-package/src/*
-!package/src/index.ts
-
-!package/.npmignore
-!package/.openapi-generator-ignore
-!package/README.md
-!package/package.json

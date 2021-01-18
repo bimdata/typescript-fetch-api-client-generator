@@ -4,3 +4,4 @@ src/
 .openapi-generator-ignore
 package.json
 tsconfig.json
+config
