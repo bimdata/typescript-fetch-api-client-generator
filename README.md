@@ -4,7 +4,7 @@ This repository contains a script to generate a _typescript-fetch_ API client fo
 
 You can generate the API client package with the `generate-package.sh` shell script as follow:
 ```
-$ ./generate-package.sh <path-to-openapi-generator-jar> <path-to-swagger-json> <package-version>
+$ ./generate-package.sh <path-to-openapi-generator-jar> <path-to-swagger-json> <path-to-output-directory> <package-version>
 ```
 
 It will create and build the API client in the `package/` directory.
@@ -15,4 +15,5 @@ It will create and build the API client in the `package/` directory.
 |:-----:| ------------------------ |:---------:| ----------------------- |
 | $1    | Generator jar            | false     | ./openapi-generator.jar |
 | $2    | Swagger definition file  | false     | ./swagger.json          |
-| $3    | Package version          | false     | 0.0.1                   |
+| $3    | Output directory         | false     | ./package               |
+| $4    | Package version          | false     | 0.0.1                   |
