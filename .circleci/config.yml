@@ -1,0 +1,47 @@
+version: 2
+
+references:
+  container_config: &container_config
+    docker:
+      - image: circleci/node:12
+    working_directory: ~/repo
+
+
+  restore_npm_cache: &restore_npm_cache
+    restore_cache:
+      keys:
+        - v1-npm-{{ checksum "package.json" }}
+        - v1-npm
+
+jobs:
+  release:
+    <<: *container_config
+    steps:
+      - checkout
+      - *restore_npm_cache
+      - add_ssh_keys
+      - run:
+          name: Avoid hosts unknown for github
+          command: echo -e " StrictHostKeyChecking no\n" >> ~/.ssh/config
+      - run: cd package
+      - run: npm ci
+      - run: npm run build
+      - run: npm install @semantic-release/npm @semantic-release/github conventional-changelog-eslint
+      - run: npx semantic-release --extends ./config/release.config.js
+      - save_cache:
+          key: v1-npm-{{ checksum "package.json" }}
+          paths:
+            - package/node_modules/
+            - ~/.npm
+            - ~/.cache
+
+workflows:
+  version: 2
+  test_and_release:
+    jobs:
+      - release:
+          context: semantic-release
+          filters:
+            branches:
+              only:
+                - master
