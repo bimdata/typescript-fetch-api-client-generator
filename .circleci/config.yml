@@ -27,7 +27,7 @@ jobs:
       - run: npm i
       - run: npm run build
       - run: npm install @semantic-release/npm @semantic-release/github conventional-changelog-eslint
-      - run: npx semantic-release --extends ./config/release.config.js
+      - run: npx semantic-release --extends ../config/release.config.js
       - save_cache:
           key: v1-npm-{{ checksum "package.json" }}
           paths:
