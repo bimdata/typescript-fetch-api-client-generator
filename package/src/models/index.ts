@@ -1,9 +1,7 @@
 export * from './BcfProject';
-export * from './BcfUser';
 export * from './CheckPlan';
 export * from './CheckerResult';
 export * from './Classification';
-export * from './ClientUser';
 export * from './ClippingPlane';
 export * from './Cloud';
 export * from './CloudInvitation';
@@ -36,6 +34,7 @@ export * from './Label';
 export * from './Layer';
 export * from './LayerElement';
 export * from './Line';
+export * from './Organization';
 export * from './OrthogonalCamera';
 export * from './PerspectiveCamera';
 export * from './Point';
