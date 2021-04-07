@@ -25,7 +25,7 @@ import {
 } from './';
 
 /**
- * 
+ * Default behavior: - retrieve kwargs in the route (cloud_pk, project_pk, etc) - trim the _pk (cloud_pk => cloud) - check if the object has a foreign key with the name - if so, set the foreign key to the value in the route Override: If the serializer has a method \"get_parents\", we call it and set the parents The method \"get_parents\" should return an iterable of tuples : (parent_field_name, parent_object)
  * @export
  * @interface Ifc
  */
@@ -133,23 +133,29 @@ export interface Ifc {
      */
     readonly projectId?: string;
     /**
-     * [x,y,z] array of the position of the local_placement in world coordinates
+     * 
      * @type {Array<number>}
      * @memberof Ifc
      */
     worldPosition?: Array<number> | null;
     /**
-     * List of errors that happened during IFC processing
+     * 
      * @type {Array<string>}
      * @memberof Ifc
      */
     readonly errors?: Array<string>;
     /**
-     * List of warnings that happened during IFC processing
+     * 
      * @type {Array<string>}
      * @memberof Ifc
      */
     readonly warnings?: Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Ifc
+     */
+    archived?: boolean;
 }
 
 export function IfcFromJSON(json: any): Ifc {
@@ -182,6 +188,7 @@ export function IfcFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ifc {
         'worldPosition': !exists(json, 'world_position') ? undefined : json['world_position'],
         'errors': !exists(json, 'errors') ? undefined : json['errors'],
         'warnings': !exists(json, 'warnings') ? undefined : json['warnings'],
+        'archived': !exists(json, 'archived') ? undefined : json['archived'],
     };
 }
 
@@ -198,6 +205,7 @@ export function IfcToJSON(value?: Ifc | null): any {
         'source': value.source,
         'document': DocumentToJSON(value.document),
         'world_position': value.worldPosition,
+        'archived': value.archived,
     };
 }
 

@@ -14,62 +14,69 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Default behavior: - retrieve kwargs in the route (cloud_pk, project_pk, etc) - trim the _pk (cloud_pk => cloud) - check if the object has a foreign key with the name - if so, set the foreign key to the value in the route Override: If the serializer has a method \"get_parents\", we call it and set the parents The method \"get_parents\" should return an iterable of tuples : (parent_field_name, parent_object)
+ * 
  * @export
- * @interface Layer
+ * @interface RawMaterial
  */
-export interface Layer {
+export interface RawMaterial {
     /**
      * 
      * @type {number}
-     * @memberof Layer
+     * @memberof RawMaterial
      */
     readonly id?: number;
     /**
-     * Name of the layer
+     * 
+     * @type {number}
+     * @memberof RawMaterial
+     */
+    stepId: number;
+    /**
+     * 
      * @type {string}
-     * @memberof Layer
+     * @memberof RawMaterial
      */
     name: string;
     /**
      * 
      * @type {string}
-     * @memberof Layer
-     */
-    identifier?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Layer
+     * @memberof RawMaterial
      */
     description?: string | null;
     /**
      * 
-     * @type {Array<string>}
-     * @memberof Layer
+     * @type {string}
+     * @memberof RawMaterial
      */
-    elements: Array<string>;
+    category?: string | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof RawMaterial
+     */
+    psets?: Array<number> | null;
 }
 
-export function LayerFromJSON(json: any): Layer {
-    return LayerFromJSONTyped(json, false);
+export function RawMaterialFromJSON(json: any): RawMaterial {
+    return RawMaterialFromJSONTyped(json, false);
 }
 
-export function LayerFromJSONTyped(json: any, ignoreDiscriminator: boolean): Layer {
+export function RawMaterialFromJSONTyped(json: any, ignoreDiscriminator: boolean): RawMaterial {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
+        'stepId': json['step_id'],
         'name': json['name'],
-        'identifier': !exists(json, 'identifier') ? undefined : json['identifier'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'elements': json['elements'],
+        'category': !exists(json, 'category') ? undefined : json['category'],
+        'psets': !exists(json, 'psets') ? undefined : json['psets'],
     };
 }
 
-export function LayerToJSON(value?: Layer | null): any {
+export function RawMaterialToJSON(value?: RawMaterial | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -78,10 +85,11 @@ export function LayerToJSON(value?: Layer | null): any {
     }
     return {
         
+        'step_id': value.stepId,
         'name': value.name,
-        'identifier': value.identifier,
         'description': value.description,
-        'elements': value.elements,
+        'category': value.category,
+        'psets': value.psets,
     };
 }
 

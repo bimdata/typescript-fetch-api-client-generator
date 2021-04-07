@@ -14,76 +14,69 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Rule,
-    RuleFromJSON,
-    RuleFromJSONTyped,
-    RuleToJSON,
+    PropertySet,
+    PropertySetFromJSON,
+    PropertySetFromJSONTyped,
+    PropertySetToJSON,
 } from './';
 
 /**
  * Default behavior: - retrieve kwargs in the route (cloud_pk, project_pk, etc) - trim the _pk (cloud_pk => cloud) - check if the object has a foreign key with the name - if so, set the foreign key to the value in the route Override: If the serializer has a method \"get_parents\", we call it and set the parents The method \"get_parents\" should return an iterable of tuples : (parent_field_name, parent_object)
  * @export
- * @interface Ruleset
+ * @interface Material
  */
-export interface Ruleset {
+export interface Material {
     /**
      * 
      * @type {number}
-     * @memberof Ruleset
+     * @memberof Material
      */
     readonly id?: number;
     /**
      * 
-     * @type {number}
-     * @memberof Ruleset
-     */
-    parentRulesetId?: number;
-    /**
-     * 
      * @type {string}
-     * @memberof Ruleset
+     * @memberof Material
      */
     name: string;
     /**
      * 
      * @type {string}
-     * @memberof Ruleset
+     * @memberof Material
+     */
+    category?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Material
      */
     description?: string | null;
     /**
      * 
-     * @type {Array<Rule>}
-     * @memberof Ruleset
+     * @type {Array<PropertySet>}
+     * @memberof Material
      */
-    rules?: Array<Rule>;
-    /**
-     * 
-     * @type {Array<Ruleset>}
-     * @memberof Ruleset
-     */
-    rulesets?: Array<Ruleset>;
+    propertySets: Array<PropertySet>;
 }
 
-export function RulesetFromJSON(json: any): Ruleset {
-    return RulesetFromJSONTyped(json, false);
+export function MaterialFromJSON(json: any): Material {
+    return MaterialFromJSONTyped(json, false);
 }
 
-export function RulesetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ruleset {
+export function MaterialFromJSONTyped(json: any, ignoreDiscriminator: boolean): Material {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'parentRulesetId': !exists(json, 'parent_ruleset_id') ? undefined : json['parent_ruleset_id'],
         'name': json['name'],
+        'category': !exists(json, 'category') ? undefined : json['category'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'rules': !exists(json, 'rules') ? undefined : ((json['rules'] as Array<any>).map(RuleFromJSON)),
-        'rulesets': !exists(json, 'rulesets') ? undefined : ((json['rulesets'] as Array<any>).map(RulesetFromJSON)),
+        'propertySets': ((json['property_sets'] as Array<any>).map(PropertySetFromJSON)),
     };
 }
 
-export function RulesetToJSON(value?: Ruleset | null): any {
+export function MaterialToJSON(value?: Material | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -92,11 +85,10 @@ export function RulesetToJSON(value?: Ruleset | null): any {
     }
     return {
         
-        'parent_ruleset_id': value.parentRulesetId,
         'name': value.name,
+        'category': value.category,
         'description': value.description,
-        'rules': value.rules === undefined ? undefined : ((value.rules as Array<any>).map(RuleToJSON)),
-        'rulesets': value.rulesets === undefined ? undefined : ((value.rulesets as Array<any>).map(RulesetToJSON)),
+        'property_sets': ((value.propertySets as Array<any>).map(PropertySetToJSON)),
     };
 }
 

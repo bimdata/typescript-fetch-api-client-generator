@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * TopicType(id, topic_type)
  * @export
  * @interface TopicType
  */

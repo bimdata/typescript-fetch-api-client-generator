@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * Label(id, label)
  * @export
  * @interface Label
  */

@@ -14,48 +14,48 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Direction(id, x, y, z)
+ * 
  * @export
- * @interface Direction
+ * @interface RawMaterialListComponents
  */
-export interface Direction {
+export interface RawMaterialListComponents {
     /**
      * 
      * @type {number}
-     * @memberof Direction
+     * @memberof RawMaterialListComponents
      */
-    x: number;
+    readonly id?: number;
     /**
      * 
      * @type {number}
-     * @memberof Direction
+     * @memberof RawMaterialListComponents
      */
-    y: number;
+    material?: number | null;
     /**
      * 
      * @type {number}
-     * @memberof Direction
+     * @memberof RawMaterialListComponents
      */
-    z: number;
+    materialOption: number;
 }
 
-export function DirectionFromJSON(json: any): Direction {
-    return DirectionFromJSONTyped(json, false);
+export function RawMaterialListComponentsFromJSON(json: any): RawMaterialListComponents {
+    return RawMaterialListComponentsFromJSONTyped(json, false);
 }
 
-export function DirectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): Direction {
+export function RawMaterialListComponentsFromJSONTyped(json: any, ignoreDiscriminator: boolean): RawMaterialListComponents {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'x': json['x'],
-        'y': json['y'],
-        'z': json['z'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'material': !exists(json, 'material') ? undefined : json['material'],
+        'materialOption': json['material_option'],
     };
 }
 
-export function DirectionToJSON(value?: Direction | null): any {
+export function RawMaterialListComponentsToJSON(value?: RawMaterialListComponents | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -64,9 +64,8 @@ export function DirectionToJSON(value?: Direction | null): any {
     }
     return {
         
-        'x': value.x,
-        'y': value.y,
-        'z': value.z,
+        'material': value.material,
+        'material_option': value.materialOption,
     };
 }
 

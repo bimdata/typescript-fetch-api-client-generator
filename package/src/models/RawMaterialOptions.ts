@@ -14,48 +14,48 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Direction(id, x, y, z)
+ * 
  * @export
- * @interface Direction
+ * @interface RawMaterialOptions
  */
-export interface Direction {
+export interface RawMaterialOptions {
     /**
      * 
      * @type {number}
-     * @memberof Direction
+     * @memberof RawMaterialOptions
      */
-    x: number;
+    readonly id?: number;
     /**
      * 
      * @type {number}
-     * @memberof Direction
+     * @memberof RawMaterialOptions
      */
-    y: number;
+    thickness?: number | null;
     /**
      * 
-     * @type {number}
-     * @memberof Direction
+     * @type {Array<number>}
+     * @memberof RawMaterialOptions
      */
-    z: number;
+    materialList?: Array<number> | null;
 }
 
-export function DirectionFromJSON(json: any): Direction {
-    return DirectionFromJSONTyped(json, false);
+export function RawMaterialOptionsFromJSON(json: any): RawMaterialOptions {
+    return RawMaterialOptionsFromJSONTyped(json, false);
 }
 
-export function DirectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): Direction {
+export function RawMaterialOptionsFromJSONTyped(json: any, ignoreDiscriminator: boolean): RawMaterialOptions {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'x': json['x'],
-        'y': json['y'],
-        'z': json['z'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'thickness': !exists(json, 'thickness') ? undefined : json['thickness'],
+        'materialList': !exists(json, 'material_list') ? undefined : json['material_list'],
     };
 }
 
-export function DirectionToJSON(value?: Direction | null): any {
+export function RawMaterialOptionsToJSON(value?: RawMaterialOptions | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -64,9 +64,8 @@ export function DirectionToJSON(value?: Direction | null): any {
     }
     return {
         
-        'x': value.x,
-        'y': value.y,
-        'z': value.z,
+        'thickness': value.thickness,
+        'material_list': value.materialList,
     };
 }
 

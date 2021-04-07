@@ -3300,7 +3300,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Each member of a project can see other members of the project Required scopes: cloud:read
+     * Each member of a project can see other members of the project Required scopes: cloud:read, bcf:read
      * Retrieve a user in a project
      */
     async getProjectUserRaw(requestParameters: GetProjectUserRequest): Promise<runtime.ApiResponse<User>> {
@@ -3353,7 +3353,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Each member of a project can see other members of the project Required scopes: cloud:read
+     * Each member of a project can see other members of the project Required scopes: cloud:read, bcf:read
      * Retrieve a user in a project
      */
     async getProjectUser(requestParameters: GetProjectUserRequest): Promise<User> {
@@ -3362,7 +3362,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Each member of a project can see other members of the project Required scopes: cloud:read
+     * Each member of a project can see other members of the project Required scopes: cloud:read, bcf:read
      * Retrieve all users in a project, or a list with a filter by email
      */
     async getProjectUsersRaw(requestParameters: GetProjectUsersRequest): Promise<runtime.ApiResponse<Array<User>>> {
@@ -3427,7 +3427,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Each member of a project can see other members of the project Required scopes: cloud:read
+     * Each member of a project can see other members of the project Required scopes: cloud:read, bcf:read
      * Retrieve all users in a project, or a list with a filter by email
      */
     async getProjectUsers(requestParameters: GetProjectUsersRequest): Promise<Array<User>> {

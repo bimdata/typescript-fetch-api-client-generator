@@ -21,7 +21,7 @@ import {
 } from './';
 
 /**
- * 
+ * Line(id, start_point, end_point, viewpoint)
  * @export
  * @interface Line
  */

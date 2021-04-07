@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * CheckPlan(id, name, project, description, created_at, updated_at, protected)
  * @export
  * @interface IfcCheckerCheckplan
  */

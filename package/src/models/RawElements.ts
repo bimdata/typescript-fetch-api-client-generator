@@ -30,6 +30,10 @@ import {
     RawLayerFromJSON,
     RawLayerFromJSONTyped,
     RawLayerToJSON,
+    RawMaterialList,
+    RawMaterialListFromJSON,
+    RawMaterialListFromJSONTyped,
+    RawMaterialListToJSON,
     RawPropertySet,
     RawPropertySetFromJSON,
     RawPropertySetFromJSONTyped,
@@ -88,6 +92,12 @@ export interface RawElements {
     systems?: Array<RawSystem> | null;
     /**
      * 
+     * @type {RawMaterialList}
+     * @memberof RawElements
+     */
+    materialList?: RawMaterialList | null;
+    /**
+     * 
      * @type {Array<RawElement>}
      * @memberof RawElements
      */
@@ -110,6 +120,7 @@ export function RawElementsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'classifications': !exists(json, 'classifications') ? undefined : (json['classifications'] === null ? null : (json['classifications'] as Array<any>).map(RawClassificationFromJSON)),
         'layers': !exists(json, 'layers') ? undefined : (json['layers'] === null ? null : (json['layers'] as Array<any>).map(RawLayerFromJSON)),
         'systems': !exists(json, 'systems') ? undefined : (json['systems'] === null ? null : (json['systems'] as Array<any>).map(RawSystemFromJSON)),
+        'materialList': !exists(json, 'material_list') ? undefined : RawMaterialListFromJSON(json['material_list']),
         'elements': ((json['elements'] as Array<any>).map(RawElementFromJSON)),
     };
 }
@@ -129,6 +140,7 @@ export function RawElementsToJSON(value?: RawElements | null): any {
         'classifications': value.classifications === undefined ? undefined : (value.classifications === null ? null : (value.classifications as Array<any>).map(RawClassificationToJSON)),
         'layers': value.layers === undefined ? undefined : (value.layers === null ? null : (value.layers as Array<any>).map(RawLayerToJSON)),
         'systems': value.systems === undefined ? undefined : (value.systems === null ? null : (value.systems as Array<any>).map(RawSystemToJSON)),
+        'material_list': RawMaterialListToJSON(value.materialList),
         'elements': ((value.elements as Array<any>).map(RawElementToJSON)),
     };
 }

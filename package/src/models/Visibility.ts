@@ -25,7 +25,7 @@ import {
 } from './';
 
 /**
- * 
+ * Visibility(id, default_visibility, view_setup_hints)
  * @export
  * @interface Visibility
  */

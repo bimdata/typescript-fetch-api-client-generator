@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * UserProject(id, user, project, role)
  * @export
  * @interface UserProjectUpdate
  */

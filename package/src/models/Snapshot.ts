@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * Snapshot(id, snapshot_type, snapshot_data)
  * @export
  * @interface Snapshot
  */

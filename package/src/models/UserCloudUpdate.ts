@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * UserCloud(id, user, cloud, role)
  * @export
  * @interface UserCloudUpdate
  */

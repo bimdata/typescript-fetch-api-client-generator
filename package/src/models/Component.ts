@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * Component(id, ifc_guid, originating_system, authoring_tool_id, components_set, coloring, visibility)
  * @export
  * @interface Component
  */

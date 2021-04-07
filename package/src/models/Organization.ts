@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * Organization(id, name, is_personnal, created_at, updated_at, logo)
  * @export
  * @interface Organization
  */
@@ -37,6 +37,24 @@ export interface Organization {
      * @memberof Organization
      */
     readonly isPersonnal?: boolean;
+    /**
+     * Creation date
+     * @type {Date}
+     * @memberof Organization
+     */
+    readonly createdAt?: Date;
+    /**
+     * Date of the last update
+     * @type {Date}
+     * @memberof Organization
+     */
+    readonly updatedAt?: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof Organization
+     */
+    readonly logo?: string | null;
 }
 
 export function OrganizationFromJSON(json: any): Organization {
@@ -52,6 +70,9 @@ export function OrganizationFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': json['name'],
         'isPersonnal': !exists(json, 'is_personnal') ? undefined : json['is_personnal'],
+        'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
+        'updatedAt': !exists(json, 'updated_at') ? undefined : (new Date(json['updated_at'])),
+        'logo': !exists(json, 'logo') ? undefined : json['logo'],
     };
 }
 

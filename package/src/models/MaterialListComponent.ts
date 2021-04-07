@@ -13,56 +13,53 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    Material,
+    MaterialFromJSON,
+    MaterialFromJSONTyped,
+    MaterialToJSON,
+    MaterialOption,
+    MaterialOptionFromJSON,
+    MaterialOptionFromJSONTyped,
+    MaterialOptionToJSON,
+} from './';
+
 /**
  * Default behavior: - retrieve kwargs in the route (cloud_pk, project_pk, etc) - trim the _pk (cloud_pk => cloud) - check if the object has a foreign key with the name - if so, set the foreign key to the value in the route Override: If the serializer has a method \"get_parents\", we call it and set the parents The method \"get_parents\" should return an iterable of tuples : (parent_field_name, parent_object)
  * @export
- * @interface Classification
+ * @interface MaterialListComponent
  */
-export interface Classification {
+export interface MaterialListComponent {
     /**
      * 
-     * @type {number}
-     * @memberof Classification
+     * @type {Material}
+     * @memberof MaterialListComponent
      */
-    readonly id?: number;
+    material?: Material;
     /**
-     * Name of the classification (uniformat, Untec, custom, etc)
-     * @type {string}
-     * @memberof Classification
+     * 
+     * @type {MaterialOption}
+     * @memberof MaterialListComponent
      */
-    name?: string | null;
-    /**
-     * Code of the classification
-     * @type {string}
-     * @memberof Classification
-     */
-    notation?: string | null;
-    /**
-     * Full title of the classification
-     * @type {string}
-     * @memberof Classification
-     */
-    title?: string | null;
+    option: MaterialOption;
 }
 
-export function ClassificationFromJSON(json: any): Classification {
-    return ClassificationFromJSONTyped(json, false);
+export function MaterialListComponentFromJSON(json: any): MaterialListComponent {
+    return MaterialListComponentFromJSONTyped(json, false);
 }
 
-export function ClassificationFromJSONTyped(json: any, ignoreDiscriminator: boolean): Classification {
+export function MaterialListComponentFromJSONTyped(json: any, ignoreDiscriminator: boolean): MaterialListComponent {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'notation': !exists(json, 'notation') ? undefined : json['notation'],
-        'title': !exists(json, 'title') ? undefined : json['title'],
+        'material': !exists(json, 'material') ? undefined : MaterialFromJSON(json['material']),
+        'option': MaterialOptionFromJSON(json['option']),
     };
 }
 
-export function ClassificationToJSON(value?: Classification | null): any {
+export function MaterialListComponentToJSON(value?: MaterialListComponent | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -71,9 +68,8 @@ export function ClassificationToJSON(value?: Classification | null): any {
     }
     return {
         
-        'name': value.name,
-        'notation': value.notation,
-        'title': value.title,
+        'material': MaterialToJSON(value.material),
+        'option': MaterialOptionToJSON(value.option),
     };
 }
 

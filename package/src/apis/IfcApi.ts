@@ -51,6 +51,9 @@ import {
     Layer,
     LayerFromJSON,
     LayerToJSON,
+    Material,
+    MaterialFromJSON,
+    MaterialToJSON,
     ProcessorHandler,
     ProcessorHandlerFromJSON,
     ProcessorHandlerToJSON,
@@ -653,6 +656,19 @@ export interface GetIfcMapRequest {
     projectPk: string;
 }
 
+export interface GetIfcMaterialRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetIfcMaterialsRequest {
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+}
+
 export interface GetIfcPropertiesRequest {
     cloudPk: string;
     ifcPk: string;
@@ -720,6 +736,21 @@ export interface GetLayerRequest {
 
 export interface GetLayersRequest {
     cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetMaterialRequest {
+    cloudPk: string;
+    elementUuid: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetMaterialsRequest {
+    cloudPk: string;
+    elementUuid: string;
     ifcPk: string;
     projectPk: string;
 }
@@ -3183,7 +3214,7 @@ export class IfcApi extends runtime.BaseAPI {
 
     /**
      * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file Required scopes: ifc:write
-     * Delete a zone of a model
+     * Delete an element of a model
      */
     async deleteElementRaw(requestParameters: DeleteElementRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
@@ -3240,7 +3271,7 @@ export class IfcApi extends runtime.BaseAPI {
 
     /**
      * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file Required scopes: ifc:write
-     * Delete a zone of a model
+     * Delete an element of a model
      */
     async deleteElement(requestParameters: DeleteElementRequest): Promise<void> {
         await this.deleteElementRaw(requestParameters);
@@ -4039,7 +4070,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update all fields of a element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update all fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
      * Update all fields of an element
      */
     async fullUpdateElementRaw(requestParameters: FullUpdateElementRequest): Promise<runtime.ApiResponse<Element>> {
@@ -4103,7 +4134,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update all fields of a element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update all fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
      * Update all fields of an element
      */
     async fullUpdateElement(requestParameters: FullUpdateElementRequest): Promise<Element> {
@@ -6295,6 +6326,134 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve a material of a model Required scopes: ifc:read
+     * Retrieve a material of a model
+     */
+    async getIfcMaterialRaw(requestParameters: GetIfcMaterialRequest): Promise<runtime.ApiResponse<Material>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterial.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcMaterial.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcMaterial.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterial.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/material/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MaterialFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a material of a model Required scopes: ifc:read
+     * Retrieve a material of a model
+     */
+    async getIfcMaterial(requestParameters: GetIfcMaterialRequest): Promise<Material> {
+        const response = await this.getIfcMaterialRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all materials of a model. Required scopes: ifc:read
+     * Retrieve all materials of a model
+     */
+    async getIfcMaterialsRaw(requestParameters: GetIfcMaterialsRequest): Promise<runtime.ApiResponse<Array<Material>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterials.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcMaterials.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterials.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/material`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MaterialFromJSON));
+    }
+
+    /**
+     * Retrieve all materials of a model. Required scopes: ifc:read
+     * Retrieve all materials of a model
+     */
+    async getIfcMaterials(requestParameters: GetIfcMaterialsRequest): Promise<Array<Material>> {
+        const response = await this.getIfcMaterialsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * Retrieve all PropertySets of a model Required scopes: ifc:read
      * Retrieve all Properties of a model
      */
@@ -6991,6 +7150,142 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async getLayers(requestParameters: GetLayersRequest): Promise<Array<Layer>> {
         const response = await this.getLayersRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a material of a model Required scopes: ifc:read
+     * Retrieve a material of a model
+     */
+    async getMaterialRaw(requestParameters: GetMaterialRequest): Promise<runtime.ApiResponse<Material>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterial.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getMaterial.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getMaterial.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getMaterial.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterial.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/material/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MaterialFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a material of a model Required scopes: ifc:read
+     * Retrieve a material of a model
+     */
+    async getMaterial(requestParameters: GetMaterialRequest): Promise<Material> {
+        const response = await this.getMaterialRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all materials of a model. Required scopes: ifc:read
+     * Retrieve all materials of a model
+     */
+    async getMaterialsRaw(requestParameters: GetMaterialsRequest): Promise<runtime.ApiResponse<Array<Material>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterials.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getMaterials.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getMaterials.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterials.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/material`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MaterialFromJSON));
+    }
+
+    /**
+     * Retrieve all materials of a model. Required scopes: ifc:read
+     * Retrieve all materials of a model
+     */
+    async getMaterials(requestParameters: GetMaterialsRequest): Promise<Array<Material>> {
+        const response = await this.getMaterialsRaw(requestParameters);
         return await response.value();
     }
 
@@ -8820,8 +9115,8 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a zone. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
-     * Update some fields of a zone
+     * Update some fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of an element
      */
     async updateElementRaw(requestParameters: UpdateElementRequest): Promise<runtime.ApiResponse<Element>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
@@ -8884,8 +9179,8 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a zone. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
-     * Update some fields of a zone
+     * Update some fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of an element
      */
     async updateElement(requestParameters: UpdateElementRequest): Promise<Element> {
         const response = await this.updateElementRaw(requestParameters);

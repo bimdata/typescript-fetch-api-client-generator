@@ -14,19 +14,19 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * Ifc(id, creator, document, project, created_at, updated_at, structure_file, systems_file, zones_file, map_file, gltf_file, gltf_with_openings_file, bvh_tree_file, viewer_360_file, xkt_file, world_position, is_demo, errors, warnings, source, update_check_needed, archived)
  * @export
  * @interface IfcErrors
  */
 export interface IfcErrors {
     /**
-     * List of errors that happened during IFC processing
+     * 
      * @type {Array<string>}
      * @memberof IfcErrors
      */
     errors?: Array<string> | null;
     /**
-     * List of warnings that happened during IFC processing
+     * 
      * @type {Array<string>}
      * @memberof IfcErrors
      */

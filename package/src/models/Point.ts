@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * Point(id, x, y, z)
  * @export
  * @interface Point
  */

@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * Stage(id, stage)
  * @export
  * @interface Stage
  */

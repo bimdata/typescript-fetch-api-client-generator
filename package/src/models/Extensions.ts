@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * Extensions(id, project)
  * @export
  * @interface Extensions
  */

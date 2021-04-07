@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * 
+ * CheckerResult(id, error_detail, checker, status, result, collisions, created_at, updated_at)
  * @export
  * @interface IfcCheckerResults
  */

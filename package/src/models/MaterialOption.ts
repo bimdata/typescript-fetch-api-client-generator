@@ -16,53 +16,46 @@ import { exists, mapValues } from '../runtime';
 /**
  * Default behavior: - retrieve kwargs in the route (cloud_pk, project_pk, etc) - trim the _pk (cloud_pk => cloud) - check if the object has a foreign key with the name - if so, set the foreign key to the value in the route Override: If the serializer has a method \"get_parents\", we call it and set the parents The method \"get_parents\" should return an iterable of tuples : (parent_field_name, parent_object)
  * @export
- * @interface Classification
+ * @interface MaterialOption
  */
-export interface Classification {
+export interface MaterialOption {
     /**
      * 
      * @type {number}
-     * @memberof Classification
+     * @memberof MaterialOption
      */
     readonly id?: number;
     /**
-     * Name of the classification (uniformat, Untec, custom, etc)
-     * @type {string}
-     * @memberof Classification
+     * 
+     * @type {number}
+     * @memberof MaterialOption
      */
-    name?: string | null;
+    thickness?: number;
     /**
-     * Code of the classification
+     * 
      * @type {string}
-     * @memberof Classification
+     * @memberof MaterialOption
      */
-    notation?: string | null;
-    /**
-     * Full title of the classification
-     * @type {string}
-     * @memberof Classification
-     */
-    title?: string | null;
+    readonly listComponents?: string;
 }
 
-export function ClassificationFromJSON(json: any): Classification {
-    return ClassificationFromJSONTyped(json, false);
+export function MaterialOptionFromJSON(json: any): MaterialOption {
+    return MaterialOptionFromJSONTyped(json, false);
 }
 
-export function ClassificationFromJSONTyped(json: any, ignoreDiscriminator: boolean): Classification {
+export function MaterialOptionFromJSONTyped(json: any, ignoreDiscriminator: boolean): MaterialOption {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'notation': !exists(json, 'notation') ? undefined : json['notation'],
-        'title': !exists(json, 'title') ? undefined : json['title'],
+        'thickness': !exists(json, 'thickness') ? undefined : json['thickness'],
+        'listComponents': !exists(json, 'list_components') ? undefined : json['list_components'],
     };
 }
 
-export function ClassificationToJSON(value?: Classification | null): any {
+export function MaterialOptionToJSON(value?: MaterialOption | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -71,9 +64,7 @@ export function ClassificationToJSON(value?: Classification | null): any {
     }
     return {
         
-        'name': value.name,
-        'notation': value.notation,
-        'title': value.title,
+        'thickness': value.thickness,
     };
 }
 

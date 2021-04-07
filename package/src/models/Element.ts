@@ -22,6 +22,10 @@ import {
     LayerElementFromJSON,
     LayerElementFromJSONTyped,
     LayerElementToJSON,
+    MaterialListComponent,
+    MaterialListComponentFromJSON,
+    MaterialListComponentFromJSONTyped,
+    MaterialListComponentToJSON,
     PropertySet,
     PropertySetFromJSON,
     PropertySetFromJSONTyped,
@@ -29,7 +33,7 @@ import {
 } from './';
 
 /**
- * 
+ * Default behavior: - retrieve kwargs in the route (cloud_pk, project_pk, etc) - trim the _pk (cloud_pk => cloud) - check if the object has a foreign key with the name - if so, set the foreign key to the value in the route Override: If the serializer has a method \"get_parents\", we call it and set the parents The method \"get_parents\" should return an iterable of tuples : (parent_field_name, parent_object)
  * @export
  * @interface Element
  */
@@ -72,6 +76,12 @@ export interface Element {
     classifications?: Array<Classification>;
     /**
      * 
+     * @type {Array<MaterialListComponent>}
+     * @memberof Element
+     */
+    readonly materialList?: Array<MaterialListComponent>;
+    /**
+     * 
      * @type {Array<LayerElement>}
      * @memberof Element
      */
@@ -94,6 +104,7 @@ export function ElementFromJSONTyped(json: any, ignoreDiscriminator: boolean): E
         'attributes': !exists(json, 'attributes') ? undefined : PropertySetFromJSON(json['attributes']),
         'propertySets': !exists(json, 'property_sets') ? undefined : ((json['property_sets'] as Array<any>).map(PropertySetFromJSON)),
         'classifications': !exists(json, 'classifications') ? undefined : ((json['classifications'] as Array<any>).map(ClassificationFromJSON)),
+        'materialList': !exists(json, 'material_list') ? undefined : ((json['material_list'] as Array<any>).map(MaterialListComponentFromJSON)),
         'layers': !exists(json, 'layers') ? undefined : ((json['layers'] as Array<any>).map(LayerElementFromJSON)),
     };
 }
