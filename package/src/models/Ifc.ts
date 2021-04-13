@@ -156,6 +156,12 @@ export interface Ifc {
      * @memberof Ifc
      */
     archived?: boolean;
+    /**
+     * This field is only for information. Updating it won\'t impact the export.
+     * @type {string}
+     * @memberof Ifc
+     */
+    version?: string | null;
 }
 
 export function IfcFromJSON(json: any): Ifc {
@@ -189,6 +195,7 @@ export function IfcFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ifc {
         'errors': !exists(json, 'errors') ? undefined : json['errors'],
         'warnings': !exists(json, 'warnings') ? undefined : json['warnings'],
         'archived': !exists(json, 'archived') ? undefined : json['archived'],
+        'version': !exists(json, 'version') ? undefined : json['version'],
     };
 }
 
@@ -206,6 +213,7 @@ export function IfcToJSON(value?: Ifc | null): any {
         'document': DocumentToJSON(value.document),
         'world_position': value.worldPosition,
         'archived': value.archived,
+        'version': value.version,
     };
 }
 
