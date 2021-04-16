@@ -162,6 +162,12 @@ export interface Ifc {
      * @memberof Ifc
      */
     version?: string | null;
+    /**
+     * 
+     * @type {Array<Array<number>>}
+     * @memberof Ifc
+     */
+    northVector?: Array<Array<number>> | null;
 }
 
 export function IfcFromJSON(json: any): Ifc {
@@ -196,6 +202,7 @@ export function IfcFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ifc {
         'warnings': !exists(json, 'warnings') ? undefined : json['warnings'],
         'archived': !exists(json, 'archived') ? undefined : json['archived'],
         'version': !exists(json, 'version') ? undefined : json['version'],
+        'northVector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
     };
 }
 
@@ -214,6 +221,7 @@ export function IfcToJSON(value?: Ifc | null): any {
         'world_position': value.worldPosition,
         'archived': value.archived,
         'version': value.version,
+        'north_vector': value.northVector,
     };
 }
 
