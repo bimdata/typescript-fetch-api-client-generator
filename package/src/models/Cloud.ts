@@ -66,6 +66,12 @@ export interface Cloud {
     organization?: Organization;
     /**
      * 
+     * @type {number}
+     * @memberof Cloud
+     */
+    organizationId?: number;
+    /**
+     * 
      * @type {User}
      * @memberof Cloud
      */
@@ -117,6 +123,7 @@ export function CloudFromJSONTyped(json: any, ignoreDiscriminator: boolean): Clo
         'features': !exists(json, 'features') ? undefined : ((json['features'] as Array<any>).map(FeatureFromJSON)),
         'marketplaceApps': !exists(json, 'marketplace_apps') ? undefined : json['marketplace_apps'],
         'organization': !exists(json, 'organization') ? undefined : OrganizationFromJSON(json['organization']),
+        'organizationId': !exists(json, 'organization_id') ? undefined : json['organization_id'],
         'creator': !exists(json, 'creator') ? undefined : UserFromJSON(json['creator']),
         'creatorApp': !exists(json, 'creator_app') ? undefined : json['creator_app'],
         'isDefault': !exists(json, 'is_default') ? undefined : json['is_default'],
@@ -137,6 +144,7 @@ export function CloudToJSON(value?: Cloud | null): any {
         
         'name': value.name,
         'organization': OrganizationToJSON(value.organization),
+        'organization_id': value.organizationId,
         'creator': UserToJSON(value.creator),
     };
 }
