@@ -21,7 +21,7 @@ import {
 } from './';
 
 /**
- * Folder child with recursive children field, useful for openapi generator
+ * 
  * @export
  * @interface RecursiveFolderChildren
  */

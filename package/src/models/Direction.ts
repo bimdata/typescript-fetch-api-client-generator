@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Direction(id, x, y, z)
+ * 
  * @export
  * @interface Direction
  */

@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Default behavior: - retrieve kwargs in the route (cloud_pk, project_pk, etc) - trim the _pk (cloud_pk => cloud) - check if the object has a foreign key with the name - if so, set the foreign key to the value in the route Override: If the serializer has a method \"get_parents\", we call it and set the parents The method \"get_parents\" should return an iterable of tuples : (parent_field_name, parent_object)
+ * 
  * @export
  * @interface Unit
  */
@@ -50,7 +50,7 @@ export interface Unit {
      */
     prefix?: string | null;
     /**
-     * 
+     * List of 7 units dimensions
      * @type {Array<number>}
      * @memberof Unit
      */
@@ -66,7 +66,7 @@ export interface Unit {
      * @type {Unit}
      * @memberof Unit
      */
-    conversionBaseunit?: Unit;
+    conversionBaseunit?: Unit | null;
     /**
      * List of constitutive unit elements by id with corresponding exponent (ex: [meterID/1, secondID/-1] for velocity)
      * @type {object}

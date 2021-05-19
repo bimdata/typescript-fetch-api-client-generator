@@ -18,6 +18,10 @@ import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    MarketplaceApp,
+    MarketplaceAppFromJSON,
+    MarketplaceAppFromJSONTyped,
+    MarketplaceAppToJSON,
     Organization,
     OrganizationFromJSON,
     OrganizationFromJSONTyped,
@@ -29,7 +33,7 @@ import {
 } from './';
 
 /**
- * Cloud(id, creator, creator_app, organization, name, created_at, updated_at, is_default, image)
+ * 
  * @export
  * @interface Cloud
  */
@@ -54,10 +58,10 @@ export interface Cloud {
     readonly features?: Array<Feature>;
     /**
      * 
-     * @type {string}
+     * @type {Array<MarketplaceApp>}
      * @memberof Cloud
      */
-    readonly marketplaceApps?: string;
+    readonly marketplaceApps?: Array<MarketplaceApp>;
     /**
      * 
      * @type {Organization}
@@ -121,7 +125,7 @@ export function CloudFromJSONTyped(json: any, ignoreDiscriminator: boolean): Clo
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': json['name'],
         'features': !exists(json, 'features') ? undefined : ((json['features'] as Array<any>).map(FeatureFromJSON)),
-        'marketplaceApps': !exists(json, 'marketplace_apps') ? undefined : json['marketplace_apps'],
+        'marketplaceApps': !exists(json, 'marketplace_apps') ? undefined : ((json['marketplace_apps'] as Array<any>).map(MarketplaceAppFromJSON)),
         'organization': !exists(json, 'organization') ? undefined : OrganizationFromJSON(json['organization']),
         'organizationId': !exists(json, 'organization_id') ? undefined : json['organization_id'],
         'creator': !exists(json, 'creator') ? undefined : UserFromJSON(json['creator']),

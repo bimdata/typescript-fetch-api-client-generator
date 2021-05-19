@@ -34,6 +34,8 @@ export * from './Label';
 export * from './Layer';
 export * from './LayerElement';
 export * from './Line';
+export * from './MarketplaceApp';
+export * from './MarketplaceAppImage';
 export * from './Material';
 export * from './MaterialListComponent';
 export * from './MaterialOption';

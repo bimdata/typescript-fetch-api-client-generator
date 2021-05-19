@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Organization(id, name, is_personnal, created_at, updated_at, logo)
+ * 
  * @export
  * @interface Organization
  */

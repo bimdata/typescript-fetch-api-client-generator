@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * ViewSetupHints(id, spaces_visible, space_boundaries_visible, openings_visible)
+ * 
  * @export
  * @interface ViewSetupHints
  */

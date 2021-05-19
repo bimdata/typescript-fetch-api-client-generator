@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Feature(id, name, cloud_setup_url, secret, viewer_url)
+ * 
  * @export
  * @interface Feature
  */

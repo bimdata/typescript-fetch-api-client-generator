@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Priority(id, priority)
+ * 
  * @export
  * @interface Priority
  */

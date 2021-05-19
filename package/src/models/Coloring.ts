@@ -21,7 +21,7 @@ import {
 } from './';
 
 /**
- * Coloring(id, color, components_parent)
+ * 
  * @export
  * @interface Coloring
  */

@@ -16,60 +16,46 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Layer
+ * @interface MarketplaceAppImage
  */
-export interface Layer {
+export interface MarketplaceAppImage {
     /**
      * 
      * @type {number}
-     * @memberof Layer
+     * @memberof MarketplaceAppImage
      */
     readonly id?: number;
     /**
-     * Name of the layer
-     * @type {string}
-     * @memberof Layer
-     */
-    name: string;
-    /**
      * 
      * @type {string}
-     * @memberof Layer
+     * @memberof MarketplaceAppImage
      */
-    identifier?: string | null;
+    readonly image?: string;
     /**
      * 
-     * @type {string}
-     * @memberof Layer
+     * @type {number}
+     * @memberof MarketplaceAppImage
      */
-    description?: string | null;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Layer
-     */
-    elements: Array<string>;
+    readonly order?: number;
 }
 
-export function LayerFromJSON(json: any): Layer {
-    return LayerFromJSONTyped(json, false);
+export function MarketplaceAppImageFromJSON(json: any): MarketplaceAppImage {
+    return MarketplaceAppImageFromJSONTyped(json, false);
 }
 
-export function LayerFromJSONTyped(json: any, ignoreDiscriminator: boolean): Layer {
+export function MarketplaceAppImageFromJSONTyped(json: any, ignoreDiscriminator: boolean): MarketplaceAppImage {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': json['name'],
-        'identifier': !exists(json, 'identifier') ? undefined : json['identifier'],
-        'description': !exists(json, 'description') ? undefined : json['description'],
-        'elements': json['elements'],
+        'image': !exists(json, 'image') ? undefined : json['image'],
+        'order': !exists(json, 'order') ? undefined : json['order'],
     };
 }
 
-export function LayerToJSON(value?: Layer | null): any {
+export function MarketplaceAppImageToJSON(value?: MarketplaceAppImage | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -78,10 +64,6 @@ export function LayerToJSON(value?: Layer | null): any {
     }
     return {
         
-        'name': value.name,
-        'identifier': value.identifier,
-        'description': value.description,
-        'elements': value.elements,
     };
 }
 

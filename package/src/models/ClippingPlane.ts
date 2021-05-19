@@ -25,7 +25,7 @@ import {
 } from './';
 
 /**
- * ClippingPlane(id, location, direction, viewpoint)
+ * 
  * @export
  * @interface ClippingPlane
  */

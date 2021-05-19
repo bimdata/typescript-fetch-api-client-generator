@@ -29,7 +29,7 @@ import {
 } from './';
 
 /**
- * ComponentsParent(id, visibility)
+ * 
  * @export
  * @interface ComponentsParent
  */
@@ -45,7 +45,7 @@ export interface ComponentsParent {
      * @type {Visibility}
      * @memberof ComponentsParent
      */
-    visibility?: Visibility;
+    visibility?: Visibility | null;
     /**
      * 
      * @type {Array<Component>}

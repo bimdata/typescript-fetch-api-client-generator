@@ -21,7 +21,7 @@ import {
 } from './';
 
 /**
- * Default behavior: - retrieve kwargs in the route (cloud_pk, project_pk, etc) - trim the _pk (cloud_pk => cloud) - check if the object has a foreign key with the name - if so, set the foreign key to the value in the route Override: If the serializer has a method \"get_parents\", we call it and set the parents The method \"get_parents\" should return an iterable of tuples : (parent_field_name, parent_object)
+ * 
  * @export
  * @interface Material
  */
@@ -37,19 +37,19 @@ export interface Material {
      * @type {string}
      * @memberof Material
      */
-    name: string;
+    readonly name?: string;
     /**
      * 
      * @type {string}
      * @memberof Material
      */
-    category?: string | null;
+    readonly category?: string;
     /**
      * 
      * @type {string}
      * @memberof Material
      */
-    description?: string | null;
+    readonly description?: string;
     /**
      * 
      * @type {Array<PropertySet>}
@@ -69,7 +69,7 @@ export function MaterialFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': json['name'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
         'category': !exists(json, 'category') ? undefined : json['category'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'propertySets': ((json['property_sets'] as Array<any>).map(PropertySetFromJSON)),
@@ -85,9 +85,6 @@ export function MaterialToJSON(value?: Material | null): any {
     }
     return {
         
-        'name': value.name,
-        'category': value.category,
-        'description': value.description,
         'property_sets': ((value.propertySets as Array<any>).map(PropertySetToJSON)),
     };
 }
