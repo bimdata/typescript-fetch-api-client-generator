@@ -99,10 +99,10 @@ export interface Document {
     ifcSource?: DocumentIfcSourceEnum;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Document
      */
-    readonly ifcId?: number;
+    readonly ifcId?: string;
 }
 
 export function DocumentFromJSON(json: any): Document {

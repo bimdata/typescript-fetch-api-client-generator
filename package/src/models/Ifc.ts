@@ -168,6 +168,12 @@ export interface Ifc {
      * @memberof Ifc
      */
     northVector?: Array<Array<number>> | null;
+    /**
+     * This is the angle in clockwise degree to apply on the 2D to optimise the horizontality of objects. This field is only for information. Updating it won\'t impact the export.
+     * @type {number}
+     * @memberof Ifc
+     */
+    recommanded2dAngle?: number | null;
 }
 
 export function IfcFromJSON(json: any): Ifc {
@@ -203,6 +209,7 @@ export function IfcFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ifc {
         'archived': !exists(json, 'archived') ? undefined : json['archived'],
         'version': !exists(json, 'version') ? undefined : json['version'],
         'northVector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
+        'recommanded2dAngle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
     };
 }
 
@@ -222,6 +229,7 @@ export function IfcToJSON(value?: Ifc | null): any {
         'archived': value.archived,
         'version': value.version,
         'north_vector': value.northVector,
+        'recommanded_2d_angle': value.recommanded2dAngle,
     };
 }
 
