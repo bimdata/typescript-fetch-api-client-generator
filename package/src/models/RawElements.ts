@@ -95,7 +95,7 @@ export interface RawElements {
      * @type {RawMaterialList}
      * @memberof RawElements
      */
-    materialList?: RawMaterialList | null;
+    materials?: RawMaterialList | null;
     /**
      * 
      * @type {Array<RawElement>}
@@ -120,7 +120,7 @@ export function RawElementsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'classifications': !exists(json, 'classifications') ? undefined : (json['classifications'] === null ? null : (json['classifications'] as Array<any>).map(RawClassificationFromJSON)),
         'layers': !exists(json, 'layers') ? undefined : (json['layers'] === null ? null : (json['layers'] as Array<any>).map(RawLayerFromJSON)),
         'systems': !exists(json, 'systems') ? undefined : (json['systems'] === null ? null : (json['systems'] as Array<any>).map(RawSystemFromJSON)),
-        'materialList': !exists(json, 'material_list') ? undefined : RawMaterialListFromJSON(json['material_list']),
+        'materials': !exists(json, 'materials') ? undefined : RawMaterialListFromJSON(json['materials']),
         'elements': ((json['elements'] as Array<any>).map(RawElementFromJSON)),
     };
 }
@@ -140,7 +140,7 @@ export function RawElementsToJSON(value?: RawElements | null): any {
         'classifications': value.classifications === undefined ? undefined : (value.classifications === null ? null : (value.classifications as Array<any>).map(RawClassificationToJSON)),
         'layers': value.layers === undefined ? undefined : (value.layers === null ? null : (value.layers as Array<any>).map(RawLayerToJSON)),
         'systems': value.systems === undefined ? undefined : (value.systems === null ? null : (value.systems as Array<any>).map(RawSystemToJSON)),
-        'material_list': RawMaterialListToJSON(value.materialList),
+        'materials': RawMaterialListToJSON(value.materials),
         'elements': ((value.elements as Array<any>).map(RawElementToJSON)),
     };
 }
