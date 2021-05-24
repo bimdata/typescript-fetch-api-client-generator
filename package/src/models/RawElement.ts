@@ -39,10 +39,10 @@ export interface RawElement {
     attributes?: number | null;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<number>}
      * @memberof RawElement
      */
-    readonly materialList?: Array<string> | null;
+    materialList?: Array<number> | null;
     /**
      * 
      * @type {Array<number>}
@@ -102,6 +102,7 @@ export function RawElementToJSON(value?: RawElement | null): any {
         'uuid': value.uuid,
         'type': value.type,
         'attributes': value.attributes,
+        'material_list': value.materialList,
         'psets': value.psets,
         'classifications': value.classifications,
         'layers': value.layers,
