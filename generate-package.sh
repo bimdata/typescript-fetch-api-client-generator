@@ -23,6 +23,8 @@ fi
 
 OUTPUT=./package
 
+rm -rf $OUTPUT/src/runtime.ts $OUTPUT/src/apis $OUTPUT/src/models $OUTPUT/dist $OUTPUT/tsconfig.json
+
 # See https://openapi-generator.tech/docs/generators/typescript-fetch
 # for a list of available additional properties.
 java \
