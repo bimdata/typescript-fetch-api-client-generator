@@ -1,0 +1,31 @@
+
+name: Typescript Api Client
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  publish:
+    runs-on: self-hosted
+    if: contains('
+      refs/heads/master
+      refs/heads/main'
+      , github.ref)
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install --prefix package
+      - name: Build
+        run: npm run build --prefix package
+      - name: Release
+        run: npx semantic-release -e ./config/release.config.js
+        working-directory: ./package
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPOS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} 
