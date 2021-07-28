@@ -26,7 +26,7 @@ export interface ProjectRole {
      */
     project: number;
     /**
-     * User\'s role in the project
+     * User's role in the project
      * @type {number}
      * @memberof ProjectRole
      */

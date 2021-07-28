@@ -58,7 +58,7 @@ export interface UpdateWebHookRequest {
 }
 
 /**
- * no description
+ * 
  */
 export class WebhookApi extends runtime.BaseAPI {
 

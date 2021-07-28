@@ -20,7 +20,7 @@ import { exists, mapValues } from '../runtime';
  */
 export interface UserProjectUpdate {
     /**
-     * User\'s role in the project
+     * User's role in the project
      * @type {number}
      * @memberof UserProjectUpdate
      */

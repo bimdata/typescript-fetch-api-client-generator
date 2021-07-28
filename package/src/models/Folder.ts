@@ -43,7 +43,7 @@ export interface Folder {
      */
     parentId?: number | null;
     /**
-     * Value is \"Folder\". It is usefull to parse the tree and discriminate folders and files
+     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
      * @memberof Folder
      */

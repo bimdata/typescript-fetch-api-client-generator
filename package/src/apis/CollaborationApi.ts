@@ -406,7 +406,7 @@ export interface UpdateSelfUserRequest {
 }
 
 /**
- * no description
+ * 
  */
 export class CollaborationApi extends runtime.BaseAPI {
 

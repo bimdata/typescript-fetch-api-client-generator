@@ -320,7 +320,7 @@ export interface UpdateRulesetRequest {
 }
 
 /**
- * no description
+ * 
  */
 export class CheckerApi extends runtime.BaseAPI {
 

@@ -20,49 +20,49 @@ import { exists, mapValues } from '../runtime';
  */
 export interface IfcExport {
     /**
-     * Exported IFC will include classifications from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won\'t include classifications(NONE)
+     * Exported IFC will include classifications from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include classifications(NONE)
      * @type {string}
      * @memberof IfcExport
      */
     classifications?: IfcExportClassificationsEnum;
     /**
-     * Exported IFC will include zones from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won\'t include zones(NONE)
+     * Exported IFC will include zones from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include zones(NONE)
      * @type {string}
      * @memberof IfcExport
      */
     zones?: IfcExportZonesEnum;
     /**
-     * Exported IFC will include properties from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won\'t include properties(NONE)
+     * Exported IFC will include properties from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include properties(NONE)
      * @type {string}
      * @memberof IfcExport
      */
     properties?: IfcExportPropertiesEnum;
     /**
-     * Exported IFC will include systems from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won\'t include systems(NONE)
+     * Exported IFC will include systems from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include systems(NONE)
      * @type {string}
      * @memberof IfcExport
      */
     systems?: IfcExportSystemsEnum;
     /**
-     * Exported IFC will include layers from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won\'t include layers(NONE)
+     * Exported IFC will include layers from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include layers(NONE)
      * @type {string}
      * @memberof IfcExport
      */
     layers?: IfcExportLayersEnum;
     /**
-     * Exported IFC will include materials from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won\'t include materials(NONE)
+     * Exported IFC will include materials from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include materials(NONE)
      * @type {string}
      * @memberof IfcExport
      */
     materials?: IfcExportMaterialsEnum;
     /**
-     * Exported IFC will include attributes from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won\'t include attributes(NONE)
+     * Exported IFC will include attributes from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include attributes(NONE)
      * @type {string}
      * @memberof IfcExport
      */
     attributes?: IfcExportAttributesEnum;
     /**
-     * Exported IFC will include the structure from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won\'t include structure(NONE)
+     * Exported IFC will include the structure from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include structure(NONE)
      * @type {string}
      * @memberof IfcExport
      */
@@ -74,7 +74,7 @@ export interface IfcExport {
      */
     uuids?: Array<string>;
     /**
-     * The name of the exported IFC file. It MUST end with .ifc or the exported file won\'t be processed by BIMData
+     * The name of the exported IFC file. It MUST end with .ifc or the exported file won't be processed by BIMData
      * @type {string}
      * @memberof IfcExport
      */

@@ -13,8 +13,6 @@ export * from './ComponentsParent';
 export * from './Direction';
 export * from './Document';
 export * from './Element';
-export * from './ElementClassificationRelation';
-export * from './ElementPropertySetRelation';
 export * from './Extensions';
 export * from './Feature';
 export * from './Folder';

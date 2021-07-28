@@ -51,7 +51,7 @@ export interface RecursiveFolderChildren {
      */
     creator?: User;
     /**
-     * Values can be \'Folder\', \'Document\' or \'Ifc\'. It is usefull to parse the tree and discriminate folders and files
+     * Values can be 'Folder', 'Document' or 'Ifc'. It is usefull to parse the tree and discriminate folders and files
      * @type {string}
      * @memberof RecursiveFolderChildren
      */

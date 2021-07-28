@@ -246,7 +246,7 @@ export interface UpdateViewpointRequest {
 }
 
 /**
- * no description
+ * 
  */
 export class BcfApi extends runtime.BaseAPI {
 

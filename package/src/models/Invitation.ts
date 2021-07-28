@@ -68,7 +68,10 @@ export interface Invitation {
      */
     email: string;
     /**
-     *  A: Accepted D: Denied P: Pending 
+     * 
+     * A: Accepted
+     * D: Denied
+     * P: Pending
      * @type {string}
      * @memberof Invitation
      */

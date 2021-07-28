@@ -26,7 +26,7 @@ export interface Feature {
      */
     name: string;
     /**
-     * Viewer\'s url to load instead of standard\'s one
+     * Viewer's url to load instead of standard's one
      * @type {string}
      * @memberof Feature
      */

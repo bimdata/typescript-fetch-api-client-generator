@@ -157,19 +157,19 @@ export interface Ifc {
      */
     archived?: boolean;
     /**
-     * This field is only for information. Updating it won\'t impact the export.
+     * This field is only for information. Updating it won't impact the export.
      * @type {string}
      * @memberof Ifc
      */
     version?: string | null;
     /**
-     * This field is only for information. Updating it won\'t impact the export.
+     * This field is only for information. Updating it won't impact the export.
      * @type {Array<Array<number>>}
      * @memberof Ifc
      */
     northVector?: Array<Array<number>> | null;
     /**
-     * This is the angle in clockwise degree to apply on the 2D to optimise the horizontality of objects. This field is only for information. Updating it won\'t impact the export.
+     * This is the angle in clockwise degree to apply on the 2D to optimise the horizontality of objects. This field is only for information. Updating it won't impact the export.
      * @type {number}
      * @memberof Ifc
      */

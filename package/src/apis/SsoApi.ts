@@ -44,7 +44,7 @@ export interface GetInvitationsRequest {
 }
 
 /**
- * no description
+ * 
  */
 export class SsoApi extends runtime.BaseAPI {
 
