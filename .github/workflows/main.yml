@@ -23,6 +23,13 @@ jobs:
         run: npm install --prefix package
       - name: Build
         run: npm run build --prefix package
+      - name: Install release dependencies
+        run: |
+          npm install --no-save \
+            --prefix package \
+            @semantic-release/npm \
+            @semantic-release/github \
+            conventional-changelog-eslint \
       - name: Release
         run: npx semantic-release -e ./config/release.config.js
         working-directory: ./package
