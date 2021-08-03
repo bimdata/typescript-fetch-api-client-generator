@@ -14,10 +14,6 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    RecursiveFolderChildren,
-    RecursiveFolderChildrenFromJSON,
-    RecursiveFolderChildrenFromJSONTyped,
-    RecursiveFolderChildrenToJSON,
     User,
     UserFromJSON,
     UserFromJSONTyped,
@@ -27,82 +23,76 @@ import {
 /**
  * 
  * @export
- * @interface Folder
+ * @interface InlineObject1
  */
-export interface Folder {
+export interface InlineObject1 {
     /**
      * 
      * @type {number}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     readonly id?: number;
     /**
      * 
      * @type {number}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     parentId?: number | null;
     /**
      * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     readonly type?: string;
     /**
      * Name of the folder
      * @type {string}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     name: string;
     /**
      * Creation date
      * @type {Date}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     readonly createdAt?: Date;
     /**
      * Date of the last update
      * @type {Date}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     readonly updatedAt?: Date;
     /**
      * 
      * @type {User}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     createdBy?: User;
     /**
      * 
      * @type {Array<number>}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     readonly groups?: Array<number>;
     /**
      * Permission for a Folder
      * @type {number}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     defaultPermission?: number;
     /**
      * Aggregate of group user permissions and folder default permission
      * @type {number}
-     * @memberof Folder
+     * @memberof InlineObject1
      */
     readonly userPermission?: number;
-    /**
-     * 
-     * @type {Array<RecursiveFolderChildren>}
-     * @memberof Folder
-     */
-    readonly children?: Array<RecursiveFolderChildren>;
 }
 
-export function FolderFromJSON(json: any): Folder {
-    return FolderFromJSONTyped(json, false);
+export function InlineObject1FromJSON(json: any): InlineObject1 {
+    return InlineObject1FromJSONTyped(json, false);
 }
 
-export function FolderFromJSONTyped(json: any, ignoreDiscriminator: boolean): Folder {
+export function InlineObject1FromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineObject1 {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -118,11 +108,10 @@ export function FolderFromJSONTyped(json: any, ignoreDiscriminator: boolean): Fo
         'groups': !exists(json, 'groups') ? undefined : json['groups'],
         'defaultPermission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'userPermission': !exists(json, 'user_permission') ? undefined : json['user_permission'],
-        'children': !exists(json, 'children') ? undefined : ((json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),
     };
 }
 
-export function FolderToJSON(value?: Folder | null): any {
+export function InlineObject1ToJSON(value?: InlineObject1 | null): any {
     if (value === undefined) {
         return undefined;
     }

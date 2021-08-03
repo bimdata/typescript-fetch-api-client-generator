@@ -30,6 +30,36 @@ import {
     Folder,
     FolderFromJSON,
     FolderToJSON,
+    FosUserId,
+    FosUserIdFromJSON,
+    FosUserIdToJSON,
+    GroupFolder,
+    GroupFolderFromJSON,
+    GroupFolderToJSON,
+    InlineObject,
+    InlineObjectFromJSON,
+    InlineObjectToJSON,
+    InlineObject1,
+    InlineObject1FromJSON,
+    InlineObject1ToJSON,
+    InlineObject2,
+    InlineObject2FromJSON,
+    InlineObject2ToJSON,
+    InlineObject3,
+    InlineObject3FromJSON,
+    InlineObject3ToJSON,
+    InlineObject4,
+    InlineObject4FromJSON,
+    InlineObject4ToJSON,
+    InlineObject5,
+    InlineObject5FromJSON,
+    InlineObject5ToJSON,
+    InlineResponse200,
+    InlineResponse200FromJSON,
+    InlineResponse200ToJSON,
+    InlineResponse2001,
+    InlineResponse2001FromJSON,
+    InlineResponse2001ToJSON,
     Project,
     ProjectFromJSON,
     ProjectToJSON,
@@ -55,6 +85,13 @@ import {
     UserProjectUpdateFromJSON,
     UserProjectUpdateToJSON,
 } from '../models';
+
+export interface AddGroupMemberRequest {
+    cloudPk: string;
+    groupPk: string;
+    projectPk: string;
+    data: FosUserId;
+}
 
 export interface CancelCloudUserInvitationRequest {
     cloudPk: string;
@@ -108,7 +145,13 @@ export interface CreateDocumentRequest {
 export interface CreateFolderRequest {
     cloudPk: string;
     projectPk: string;
-    data: Folder;
+    data: InlineObject;
+}
+
+export interface CreateManageGroupRequest {
+    cloudPk: string;
+    projectPk: string;
+    data: InlineObject3;
 }
 
 export interface CreateProjectRequest {
@@ -144,6 +187,19 @@ export interface DeleteDocumentRequest {
 }
 
 export interface DeleteFolderRequest {
+    cloudPk: string;
+    id: number;
+    projectPk: string;
+}
+
+export interface DeleteGroupMemberRequest {
+    cloudPk: string;
+    groupPk: string;
+    id: number;
+    projectPk: string;
+}
+
+export interface DeleteManageGroupRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
@@ -203,7 +259,22 @@ export interface FullUpdateFolderRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
-    data: Folder;
+    data: InlineObject1;
+}
+
+export interface FullUpdateGroupFolderRequest {
+    cloudPk: string;
+    folderPk: string;
+    id: number;
+    projectPk: string;
+    data: GroupFolder;
+}
+
+export interface FullUpdateManageGroupRequest {
+    cloudPk: string;
+    id: number;
+    projectPk: string;
+    data: InlineObject4;
 }
 
 export interface FullUpdateProjectRequest {
@@ -280,6 +351,28 @@ export interface GetFolderRequest {
 }
 
 export interface GetFoldersRequest {
+    cloudPk: string;
+    projectPk: string;
+}
+
+export interface GetGroupRequest {
+    cloudPk: string;
+    id: number;
+    projectPk: string;
+}
+
+export interface GetGroupsRequest {
+    cloudPk: string;
+    projectPk: string;
+}
+
+export interface GetManageGroupRequest {
+    cloudPk: string;
+    id: number;
+    projectPk: string;
+}
+
+export interface GetManageGroupsRequest {
     cloudPk: string;
     projectPk: string;
 }
@@ -378,7 +471,22 @@ export interface UpdateFolderRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
-    data: Folder;
+    data: InlineObject2;
+}
+
+export interface UpdateGroupFolderRequest {
+    cloudPk: string;
+    folderPk: string;
+    id: number;
+    projectPk: string;
+    data: GroupFolder;
+}
+
+export interface UpdateManageGroupRequest {
+    cloudPk: string;
+    id: number;
+    projectPk: string;
+    data: InlineObject5;
 }
 
 export interface UpdateProjectRequest {
@@ -409,6 +517,75 @@ export interface UpdateSelfUserRequest {
  * 
  */
 export class CollaborationApi extends runtime.BaseAPI {
+
+    /**
+     * Add a user to a group. Must be an admin of the project Required scopes: org:manage
+     * Add a user to a group
+     */
+    async addGroupMemberRaw(requestParameters: AddGroupMemberRequest): Promise<runtime.ApiResponse<User>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addGroupMember.');
+        }
+
+        if (requestParameters.groupPk === null || requestParameters.groupPk === undefined) {
+            throw new runtime.RequiredError('groupPk','Required parameter requestParameters.groupPk was null or undefined when calling addGroupMember.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling addGroupMember.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling addGroupMember.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{group_pk}/member`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"group_pk"}}`, encodeURIComponent(String(requestParameters.groupPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: FosUserIdToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
+    }
+
+    /**
+     * Add a user to a group. Must be an admin of the project Required scopes: org:manage
+     * Add a user to a group
+     */
+    async addGroupMember(requestParameters: AddGroupMemberRequest): Promise<User> {
+        const response = await this.addGroupMemberRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      * Cancel a pending invitation Required scopes: org:manage
@@ -704,7 +881,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     *                  Create a DMS structure of folder                 Format request :                     [{                         \"name\": :name:                         \"parent_id\": :parent_id:    # optionnal                         \"children\": [{              # optionnal                             \"name\": :name:,                             \"children\": []                         }]                     }],  Required scopes: org:manage
+     *                  Create a DMS structure of folder                 Format request :                     [{                         \"name\": :name:                         \"parent_id\": :parent_id:                      # optionnal                         \"default_permission\": :default_permission:    # optionnal                         \"children\": [{                                # optionnal                             \"name\": :name:,                             \"children\": []                         }]                     }],  Required scopes: org:manage
      * Create a complete DMS tree
      */
     async createDMSTreeRaw(requestParameters: CreateDMSTreeRequest): Promise<runtime.ApiResponse<void>> {
@@ -760,7 +937,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     *                  Create a DMS structure of folder                 Format request :                     [{                         \"name\": :name:                         \"parent_id\": :parent_id:    # optionnal                         \"children\": [{              # optionnal                             \"name\": :name:,                             \"children\": []                         }]                     }],  Required scopes: org:manage
+     *                  Create a DMS structure of folder                 Format request :                     [{                         \"name\": :name:                         \"parent_id\": :parent_id:                      # optionnal                         \"default_permission\": :default_permission:    # optionnal                         \"children\": [{                                # optionnal                             \"name\": :name:,                             \"children\": []                         }]                     }],  Required scopes: org:manage
      * Create a complete DMS tree
      */
     async createDMSTree(requestParameters: CreateDMSTreeRequest): Promise<void> {
@@ -945,7 +1122,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * If the created folder have no parent, it will be put as a child of the default root folder of the project Required scopes: document:write
      * Create a folder
      */
-    async createFolderRaw(requestParameters: CreateFolderRequest): Promise<runtime.ApiResponse<Folder>> {
+    async createFolderRaw(requestParameters: CreateFolderRequest): Promise<runtime.ApiResponse<InlineResponse200>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createFolder.');
         }
@@ -991,18 +1168,83 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: FolderToJSON(requestParameters.data),
+            body: InlineObjectToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => FolderFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse200FromJSON(jsonValue));
     }
 
     /**
      * If the created folder have no parent, it will be put as a child of the default root folder of the project Required scopes: document:write
      * Create a folder
      */
-    async createFolder(requestParameters: CreateFolderRequest): Promise<Folder> {
+    async createFolder(requestParameters: CreateFolderRequest): Promise<InlineResponse200> {
         const response = await this.createFolderRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Create a group. Must be an admin of the project Required scopes: org:manage
+     * Create a group
+     */
+    async createManageGroupRaw(requestParameters: CreateManageGroupRequest): Promise<runtime.ApiResponse<InlineResponse2001>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createManageGroup.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createManageGroup.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createManageGroup.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: InlineObject3ToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2001FromJSON(jsonValue));
+    }
+
+    /**
+     * Create a group. Must be an admin of the project Required scopes: org:manage
+     * Create a group
+     */
+    async createManageGroup(requestParameters: CreateManageGroupRequest): Promise<InlineResponse2001> {
+        const response = await this.createManageGroupRaw(requestParameters);
         return await response.value();
     }
 
@@ -1423,6 +1665,132 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async deleteFolder(requestParameters: DeleteFolderRequest): Promise<void> {
         await this.deleteFolderRaw(requestParameters);
+    }
+
+    /**
+     * Delete a user from a group. Must be an admin of the project Required scopes: org:manage
+     * Delete a user from a group
+     */
+    async deleteGroupMemberRaw(requestParameters: DeleteGroupMemberRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteGroupMember.');
+        }
+
+        if (requestParameters.groupPk === null || requestParameters.groupPk === undefined) {
+            throw new runtime.RequiredError('groupPk','Required parameter requestParameters.groupPk was null or undefined when calling deleteGroupMember.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteGroupMember.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteGroupMember.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{group_pk}/member/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"group_pk"}}`, encodeURIComponent(String(requestParameters.groupPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a user from a group. Must be an admin of the project Required scopes: org:manage
+     * Delete a user from a group
+     */
+    async deleteGroupMember(requestParameters: DeleteGroupMemberRequest): Promise<void> {
+        await this.deleteGroupMemberRaw(requestParameters);
+    }
+
+    /**
+     * Delete a group. Must be an admin of the project Required scopes: org:manage
+     * Delete a group
+     */
+    async deleteManageGroupRaw(requestParameters: DeleteManageGroupRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteManageGroup.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteManageGroup.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteManageGroup.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a group. Must be an admin of the project Required scopes: org:manage
+     * Delete a group
+     */
+    async deleteManageGroup(requestParameters: DeleteManageGroupRequest): Promise<void> {
+        await this.deleteManageGroupRaw(requestParameters);
     }
 
     /**
@@ -1924,10 +2292,10 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update all fields of a folder Required scopes: document:write
+     * Update all fields of a folder. Only project admins can update the `default_permission` field Required scopes: document:write
      * Update all fields of a folder
      */
-    async fullUpdateFolderRaw(requestParameters: FullUpdateFolderRequest): Promise<runtime.ApiResponse<Folder>> {
+    async fullUpdateFolderRaw(requestParameters: FullUpdateFolderRequest): Promise<runtime.ApiResponse<InlineResponse200>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateFolder.');
         }
@@ -1977,18 +2345,160 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: FolderToJSON(requestParameters.data),
+            body: InlineObject1ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => FolderFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse200FromJSON(jsonValue));
     }
 
     /**
-     * Update all fields of a folder Required scopes: document:write
+     * Update all fields of a folder. Only project admins can update the `default_permission` field Required scopes: document:write
      * Update all fields of a folder
      */
-    async fullUpdateFolder(requestParameters: FullUpdateFolderRequest): Promise<Folder> {
+    async fullUpdateFolder(requestParameters: FullUpdateFolderRequest): Promise<InlineResponse200> {
         const response = await this.fullUpdateFolderRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update the permission of a group on a folder.             0: ACCESS_DENIED,             50: READ_ONLY,             100: READ_WRTIE  Required scopes: org:manage
+     * Update the permission of a group on a folder
+     */
+    async fullUpdateGroupFolderRaw(requestParameters: FullUpdateGroupFolderRequest): Promise<runtime.ApiResponse<GroupFolder>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateGroupFolder.');
+        }
+
+        if (requestParameters.folderPk === null || requestParameters.folderPk === undefined) {
+            throw new runtime.RequiredError('folderPk','Required parameter requestParameters.folderPk was null or undefined when calling fullUpdateGroupFolder.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling fullUpdateGroupFolder.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling fullUpdateGroupFolder.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling fullUpdateGroupFolder.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{folder_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"folder_pk"}}`, encodeURIComponent(String(requestParameters.folderPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: GroupFolderToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GroupFolderFromJSON(jsonValue));
+    }
+
+    /**
+     * Update the permission of a group on a folder.             0: ACCESS_DENIED,             50: READ_ONLY,             100: READ_WRTIE  Required scopes: org:manage
+     * Update the permission of a group on a folder
+     */
+    async fullUpdateGroupFolder(requestParameters: FullUpdateGroupFolderRequest): Promise<GroupFolder> {
+        const response = await this.fullUpdateGroupFolderRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update all fields of a group. Must be an admin of the project Required scopes: org:manage
+     * Update all fields of a group
+     */
+    async fullUpdateManageGroupRaw(requestParameters: FullUpdateManageGroupRequest): Promise<runtime.ApiResponse<InlineResponse2001>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateManageGroup.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling fullUpdateManageGroup.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling fullUpdateManageGroup.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling fullUpdateManageGroup.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: InlineObject4ToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2001FromJSON(jsonValue));
+    }
+
+    /**
+     * Update all fields of a group. Must be an admin of the project Required scopes: org:manage
+     * Update all fields of a group
+     */
+    async fullUpdateManageGroup(requestParameters: FullUpdateManageGroupRequest): Promise<InlineResponse2001> {
+        const response = await this.fullUpdateManageGroupRaw(requestParameters);
         return await response.value();
     }
 
@@ -2777,7 +3287,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a folder Required scopes: document:read
      * Retrieve a folder
      */
-    async getFolderRaw(requestParameters: GetFolderRequest): Promise<runtime.ApiResponse<Folder>> {
+    async getFolderRaw(requestParameters: GetFolderRequest): Promise<runtime.ApiResponse<InlineResponse200>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getFolder.');
         }
@@ -2823,14 +3333,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => FolderFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse200FromJSON(jsonValue));
     }
 
     /**
      * Retrieve a folder Required scopes: document:read
      * Retrieve a folder
      */
-    async getFolder(requestParameters: GetFolderRequest): Promise<Folder> {
+    async getFolder(requestParameters: GetFolderRequest): Promise<InlineResponse200> {
         const response = await this.getFolderRaw(requestParameters);
         return await response.value();
     }
@@ -2839,7 +3349,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all folders in the project. This is an array of folder. If you want to get the tree of all folders, see getProjectTree Required scopes: document:read
      * Retrieve all folders
      */
-    async getFoldersRaw(requestParameters: GetFoldersRequest): Promise<runtime.ApiResponse<Array<Folder>>> {
+    async getFoldersRaw(requestParameters: GetFoldersRequest): Promise<runtime.ApiResponse<Array<InlineResponse200>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getFolders.');
         }
@@ -2881,15 +3391,255 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FolderFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InlineResponse200FromJSON));
     }
 
     /**
      * Retrieve all folders in the project. This is an array of folder. If you want to get the tree of all folders, see getProjectTree Required scopes: document:read
      * Retrieve all folders
      */
-    async getFolders(requestParameters: GetFoldersRequest): Promise<Array<Folder>> {
+    async getFolders(requestParameters: GetFoldersRequest): Promise<Array<InlineResponse200>> {
         const response = await this.getFoldersRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a group to which the user belongs Required scopes: document:read
+     * Retrieve a group
+     */
+    async getGroupRaw(requestParameters: GetGroupRequest): Promise<runtime.ApiResponse<InlineResponse2001>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getGroup.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getGroup.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getGroup.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/me/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2001FromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a group to which the user belongs Required scopes: document:read
+     * Retrieve a group
+     */
+    async getGroup(requestParameters: GetGroupRequest): Promise<InlineResponse2001> {
+        const response = await this.getGroupRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieves all groups to which the user belongs Required scopes: document:read
+     * Retrieve all groups
+     */
+    async getGroupsRaw(requestParameters: GetGroupsRequest): Promise<runtime.ApiResponse<Array<InlineResponse2001>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getGroups.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getGroups.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/me/group`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InlineResponse2001FromJSON));
+    }
+
+    /**
+     * Retrieves all groups to which the user belongs Required scopes: document:read
+     * Retrieve all groups
+     */
+    async getGroups(requestParameters: GetGroupsRequest): Promise<Array<InlineResponse2001>> {
+        const response = await this.getGroupsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a group. Must be an admin of the project Required scopes: org:manage
+     * Retrieve a group
+     */
+    async getManageGroupRaw(requestParameters: GetManageGroupRequest): Promise<runtime.ApiResponse<InlineResponse2001>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getManageGroup.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getManageGroup.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getManageGroup.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2001FromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a group. Must be an admin of the project Required scopes: org:manage
+     * Retrieve a group
+     */
+    async getManageGroup(requestParameters: GetManageGroupRequest): Promise<InlineResponse2001> {
+        const response = await this.getManageGroupRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all groups in the project. Must be an admin of the project Required scopes: org:manage
+     * Retrieve all groups
+     */
+    async getManageGroupsRaw(requestParameters: GetManageGroupsRequest): Promise<runtime.ApiResponse<Array<InlineResponse2001>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getManageGroups.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getManageGroups.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InlineResponse2001FromJSON));
+    }
+
+    /**
+     * Retrieve all groups in the project. Must be an admin of the project Required scopes: org:manage
+     * Retrieve all groups
+     */
+    async getManageGroups(requestParameters: GetManageGroupsRequest): Promise<Array<InlineResponse2001>> {
+        const response = await this.getManageGroupsRaw(requestParameters);
         return await response.value();
     }
 
@@ -3980,10 +4730,10 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a folder Required scopes: document:write
+     * Update some fields of a folder. Only project admins can update the `default_permission` field Required scopes: document:write
      * Update some fields of a folder
      */
-    async updateFolderRaw(requestParameters: UpdateFolderRequest): Promise<runtime.ApiResponse<Folder>> {
+    async updateFolderRaw(requestParameters: UpdateFolderRequest): Promise<runtime.ApiResponse<InlineResponse200>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateFolder.');
         }
@@ -4033,18 +4783,160 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: FolderToJSON(requestParameters.data),
+            body: InlineObject2ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => FolderFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse200FromJSON(jsonValue));
     }
 
     /**
-     * Update some fields of a folder Required scopes: document:write
+     * Update some fields of a folder. Only project admins can update the `default_permission` field Required scopes: document:write
      * Update some fields of a folder
      */
-    async updateFolder(requestParameters: UpdateFolderRequest): Promise<Folder> {
+    async updateFolder(requestParameters: UpdateFolderRequest): Promise<InlineResponse200> {
         const response = await this.updateFolderRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update the permission of a group on a folder.             0: ACCESS_DENIED,             50: READ_ONLY,             100: READ_WRTIE  Required scopes: org:manage
+     * Update the permission of a group on a folder
+     */
+    async updateGroupFolderRaw(requestParameters: UpdateGroupFolderRequest): Promise<runtime.ApiResponse<GroupFolder>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateGroupFolder.');
+        }
+
+        if (requestParameters.folderPk === null || requestParameters.folderPk === undefined) {
+            throw new runtime.RequiredError('folderPk','Required parameter requestParameters.folderPk was null or undefined when calling updateGroupFolder.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateGroupFolder.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateGroupFolder.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateGroupFolder.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{folder_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"folder_pk"}}`, encodeURIComponent(String(requestParameters.folderPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: GroupFolderToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GroupFolderFromJSON(jsonValue));
+    }
+
+    /**
+     * Update the permission of a group on a folder.             0: ACCESS_DENIED,             50: READ_ONLY,             100: READ_WRTIE  Required scopes: org:manage
+     * Update the permission of a group on a folder
+     */
+    async updateGroupFolder(requestParameters: UpdateGroupFolderRequest): Promise<GroupFolder> {
+        const response = await this.updateGroupFolderRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a group. Must be an admin of the project Required scopes: org:manage
+     * Update some fields of a group
+     */
+    async updateManageGroupRaw(requestParameters: UpdateManageGroupRequest): Promise<runtime.ApiResponse<InlineResponse2001>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateManageGroup.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateManageGroup.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateManageGroup.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateManageGroup.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: InlineObject5ToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2001FromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a group. Must be an admin of the project Required scopes: org:manage
+     * Update some fields of a group
+     */
+    async updateManageGroup(requestParameters: UpdateManageGroupRequest): Promise<InlineResponse2001> {
+        const response = await this.updateManageGroupRaw(requestParameters);
         return await response.value();
     }
 

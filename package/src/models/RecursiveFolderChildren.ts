@@ -105,6 +105,18 @@ export interface RecursiveFolderChildren {
      */
     readonly file?: string;
     /**
+     * Default permissions of folder
+     * @type {number}
+     * @memberof RecursiveFolderChildren
+     */
+    readonly defaultPermission?: number;
+    /**
+     * Aggregate of group user permissions and folder default permission
+     * @type {number}
+     * @memberof RecursiveFolderChildren
+     */
+    readonly userPermission?: number;
+    /**
      * 
      * @type {Array<RecursiveFolderChildren>}
      * @memberof RecursiveFolderChildren
@@ -135,6 +147,8 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
         'size': !exists(json, 'size') ? undefined : json['size'],
         'ifcId': !exists(json, 'ifc_id') ? undefined : json['ifc_id'],
         'file': !exists(json, 'file') ? undefined : json['file'],
+        'defaultPermission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'userPermission': !exists(json, 'user_permission') ? undefined : json['user_permission'],
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),
     };
 }
