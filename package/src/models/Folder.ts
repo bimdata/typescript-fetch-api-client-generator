@@ -14,6 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    FolderGroupPermission,
+    FolderGroupPermissionFromJSON,
+    FolderGroupPermissionFromJSONTyped,
+    FolderGroupPermissionToJSON,
     RecursiveFolderChildren,
     RecursiveFolderChildrenFromJSON,
     RecursiveFolderChildrenFromJSONTyped,
@@ -74,10 +78,10 @@ export interface Folder {
     createdBy?: User;
     /**
      * 
-     * @type {Array<number>}
+     * @type {Array<FolderGroupPermission>}
      * @memberof Folder
      */
-    readonly groups?: Array<number>;
+    readonly groupsPermissions?: Array<FolderGroupPermission>;
     /**
      * Permission for a Folder
      * @type {number}
@@ -115,7 +119,7 @@ export function FolderFromJSONTyped(json: any, ignoreDiscriminator: boolean): Fo
         'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
         'updatedAt': !exists(json, 'updated_at') ? undefined : (new Date(json['updated_at'])),
         'createdBy': !exists(json, 'created_by') ? undefined : UserFromJSON(json['created_by']),
-        'groups': !exists(json, 'groups') ? undefined : json['groups'],
+        'groupsPermissions': !exists(json, 'groups_permissions') ? undefined : ((json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
         'defaultPermission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'userPermission': !exists(json, 'user_permission') ? undefined : json['user_permission'],
         'children': !exists(json, 'children') ? undefined : ((json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),

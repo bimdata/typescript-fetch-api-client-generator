@@ -14,6 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    FolderGroupPermission,
+    FolderGroupPermissionFromJSON,
+    FolderGroupPermissionFromJSONTyped,
+    FolderGroupPermissionToJSON,
     User,
     UserFromJSON,
     UserFromJSONTyped,
@@ -105,6 +109,12 @@ export interface RecursiveFolderChildren {
      */
     readonly file?: string;
     /**
+     * 
+     * @type {FolderGroupPermission}
+     * @memberof RecursiveFolderChildren
+     */
+    groupsPermissions?: FolderGroupPermission;
+    /**
      * Default permissions of folder
      * @type {number}
      * @memberof RecursiveFolderChildren
@@ -147,6 +157,7 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
         'size': !exists(json, 'size') ? undefined : json['size'],
         'ifcId': !exists(json, 'ifc_id') ? undefined : json['ifc_id'],
         'file': !exists(json, 'file') ? undefined : json['file'],
+        'groupsPermissions': !exists(json, 'groups_permissions') ? undefined : FolderGroupPermissionFromJSON(json['groups_permissions']),
         'defaultPermission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'userPermission': !exists(json, 'user_permission') ? undefined : json['user_permission'],
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),
@@ -172,6 +183,7 @@ export function RecursiveFolderChildrenToJSON(value?: RecursiveFolderChildren | 
         'file_name': value.fileName,
         'description': value.description,
         'size': value.size,
+        'groups_permissions': FolderGroupPermissionToJSON(value.groupsPermissions),
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(RecursiveFolderChildrenToJSON)),
     };
 }

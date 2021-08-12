@@ -16,6 +16,7 @@ export * from './Element';
 export * from './Extensions';
 export * from './Feature';
 export * from './Folder';
+export * from './FolderGroupPermission';
 export * from './FosUserId';
 export * from './FullTopic';
 export * from './GroupFolder';
