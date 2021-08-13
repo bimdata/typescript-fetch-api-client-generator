@@ -51,12 +51,6 @@ export interface SelfUser {
      * @type {string}
      * @memberof SelfUser
      */
-    company?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SelfUser
-     */
     firstname: string;
     /**
      * 
@@ -112,6 +106,12 @@ export interface SelfUser {
      * @memberof SelfUser
      */
     readonly sub?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SelfUser
+     */
+    readonly profilePicture?: string;
 }
 
 export function SelfUserFromJSON(json: any): SelfUser {
@@ -126,7 +126,6 @@ export function SelfUserFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'email': json['email'],
-        'company': !exists(json, 'company') ? undefined : json['company'],
         'firstname': json['firstname'],
         'lastname': json['lastname'],
         'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
@@ -137,6 +136,7 @@ export function SelfUserFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'provider': !exists(json, 'provider') ? undefined : json['provider'],
         'providerSub': !exists(json, 'provider_sub') ? undefined : json['provider_sub'],
         'sub': !exists(json, 'sub') ? undefined : json['sub'],
+        'profilePicture': !exists(json, 'profile_picture') ? undefined : json['profile_picture'],
     };
 }
 
@@ -150,7 +150,6 @@ export function SelfUserToJSON(value?: SelfUser | null): any {
     return {
         
         'email': value.email,
-        'company': value.company,
         'firstname': value.firstname,
         'lastname': value.lastname,
         'provider_sub': value.providerSub,

@@ -36,12 +36,6 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    readonly company?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof User
-     */
     readonly firstname?: string;
     /**
      * 
@@ -85,6 +79,12 @@ export interface User {
      * @memberof User
      */
     readonly sub?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    readonly profilePicture?: string;
 }
 
 export function UserFromJSON(json: any): User {
@@ -99,7 +99,6 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'email': !exists(json, 'email') ? undefined : json['email'],
-        'company': !exists(json, 'company') ? undefined : json['company'],
         'firstname': !exists(json, 'firstname') ? undefined : json['firstname'],
         'lastname': !exists(json, 'lastname') ? undefined : json['lastname'],
         'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
@@ -108,6 +107,7 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
         'projectRole': !exists(json, 'project_role') ? undefined : json['project_role'],
         'provider': !exists(json, 'provider') ? undefined : json['provider'],
         'sub': !exists(json, 'sub') ? undefined : json['sub'],
+        'profilePicture': !exists(json, 'profile_picture') ? undefined : json['profile_picture'],
     };
 }
 
