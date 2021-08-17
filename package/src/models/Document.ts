@@ -103,6 +103,12 @@ export interface Document {
      * @memberof Document
      */
     readonly ifcId?: string;
+    /**
+     * Aggregate of group user permissions and folder default permission
+     * @type {number}
+     * @memberof Document
+     */
+    readonly userPermission?: number;
 }
 
 export function DocumentFromJSON(json: any): Document {
@@ -129,6 +135,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'updatedAt': !exists(json, 'updated_at') ? undefined : (new Date(json['updated_at'])),
         'ifcSource': !exists(json, 'ifc_source') ? undefined : json['ifc_source'],
         'ifcId': !exists(json, 'ifc_id') ? undefined : json['ifc_id'],
+        'userPermission': !exists(json, 'user_permission') ? undefined : json['user_permission'],
     };
 }
 
