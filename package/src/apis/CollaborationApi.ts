@@ -69,12 +69,18 @@ import {
     ProjectInvitation,
     ProjectInvitationFromJSON,
     ProjectInvitationToJSON,
+    ProjectSize,
+    ProjectSizeFromJSON,
+    ProjectSizeToJSON,
     ProjectWithChildren,
     ProjectWithChildrenFromJSON,
     ProjectWithChildrenToJSON,
     SelfUser,
     SelfUserFromJSON,
     SelfUserToJSON,
+    Size,
+    SizeFromJSON,
+    SizeToJSON,
     User,
     UserFromJSON,
     UserToJSON,
@@ -401,6 +407,11 @@ export interface GetProjectDMSTreeRequest {
 export interface GetProjectInvitationsRequest {
     cloudPk: string;
     projectPk: string;
+}
+
+export interface GetProjectSizeRequest {
+    cloudPk: string;
+    id: number;
 }
 
 export interface GetProjectSubTreeRequest {
@@ -2932,10 +2943,10 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns the size of the cloud in Bytes
-     * Get size of all ifc files in the cloud
+     *  Returns the sizes of the cloud in Bytes. The response fields depends on the role of the user. If the user is an admin, all field will be returned. If the user is a standard user, only `remaining_total_size` and `remaining_smart_data_size` will be set. If the call is made from an API access, role admin (100) will be returned and all fields will be set. The fields `managed by` indicate if the subscription for this cloud is an API subscription or a BIMData Platform subscription. If the cloud is managed by an API plan, the remaining sizes will take others organizations\'s clouds size into account 
+     * Returns the sizes of the cloud in Bytes.
      */
-    async getCloudSizeRaw(requestParameters: GetCloudSizeRequest): Promise<runtime.ApiResponse<number>> {
+    async getCloudSizeRaw(requestParameters: GetCloudSizeRequest): Promise<runtime.ApiResponse<Size>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCloudSize.');
         }
@@ -2973,14 +2984,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.TextApiResponse(response) as any;
+        return new runtime.JSONApiResponse(response, (jsonValue) => SizeFromJSON(jsonValue));
     }
 
     /**
-     * Returns the size of the cloud in Bytes
-     * Get size of all ifc files in the cloud
+     *  Returns the sizes of the cloud in Bytes. The response fields depends on the role of the user. If the user is an admin, all field will be returned. If the user is a standard user, only `remaining_total_size` and `remaining_smart_data_size` will be set. If the call is made from an API access, role admin (100) will be returned and all fields will be set. The fields `managed by` indicate if the subscription for this cloud is an API subscription or a BIMData Platform subscription. If the cloud is managed by an API plan, the remaining sizes will take others organizations\'s clouds size into account 
+     * Returns the sizes of the cloud in Bytes.
      */
-    async getCloudSize(requestParameters: GetCloudSizeRequest): Promise<number> {
+    async getCloudSize(requestParameters: GetCloudSizeRequest): Promise<Size> {
         const response = await this.getCloudSizeRaw(requestParameters);
         return await response.value();
     }
@@ -3934,6 +3945,64 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getProjectInvitations(requestParameters: GetProjectInvitationsRequest): Promise<Array<ProjectInvitation>> {
         const response = await this.getProjectInvitationsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Returns the size of the project in Bytes
+     * Get size of all ifc files in the project
+     */
+    async getProjectSizeRaw(requestParameters: GetProjectSizeRequest): Promise<runtime.ApiResponse<ProjectSize>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectSize.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProjectSize.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{id}/size`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ProjectSizeFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns the size of the project in Bytes
+     * Get size of all ifc files in the project
+     */
+    async getProjectSize(requestParameters: GetProjectSizeRequest): Promise<ProjectSize> {
+        const response = await this.getProjectSizeRaw(requestParameters);
         return await response.value();
     }
 

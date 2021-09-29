@@ -21,6 +21,12 @@ import {
     Element,
     ElementFromJSON,
     ElementToJSON,
+    ElementClassificationRelation,
+    ElementClassificationRelationFromJSON,
+    ElementClassificationRelationToJSON,
+    ElementPropertySetRelation,
+    ElementPropertySetRelationFromJSON,
+    ElementPropertySetRelationToJSON,
     Ifc,
     IfcFromJSON,
     IfcToJSON,
@@ -173,6 +179,7 @@ export interface CreateClassificationElementRelationsRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
+    data: Array<ElementClassificationRelation>;
 }
 
 export interface CreateClassificationsOfElementRequest {
@@ -260,6 +267,7 @@ export interface CreatePropertySetElementRelationsRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
+    data: Array<ElementPropertySetRelation>;
 }
 
 export interface CreateRawElementsRequest {
@@ -1922,7 +1930,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:write
+     * Create association between existing classification and existing element Required scopes: ifc:write
      * Create association between existing classification and existing element
      */
     async createClassificationElementRelationsRaw(requestParameters: CreateClassificationElementRelationsRequest): Promise<runtime.ApiResponse<void>> {
@@ -1938,9 +1946,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createClassificationElementRelations.');
         }
 
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createClassificationElementRelations.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -1969,13 +1983,14 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.data.map(ElementClassificationRelationToJSON),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     *  Required scopes: ifc:write
+     * Create association between existing classification and existing element Required scopes: ifc:write
      * Create association between existing classification and existing element
      */
     async createClassificationElementRelations(requestParameters: CreateClassificationElementRelationsRequest): Promise<void> {
@@ -2717,7 +2732,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:write
+     * Create association between existing PropertySet and existing element Required scopes: ifc:write
      * Create association between PropertySet and element
      */
     async createPropertySetElementRelationsRaw(requestParameters: CreatePropertySetElementRelationsRequest): Promise<runtime.ApiResponse<void>> {
@@ -2733,9 +2748,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createPropertySetElementRelations.');
         }
 
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createPropertySetElementRelations.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -2764,13 +2785,14 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.data.map(ElementPropertySetRelationToJSON),
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     *  Required scopes: ifc:write
+     * Create association between existing PropertySet and existing element Required scopes: ifc:write
      * Create association between PropertySet and element
      */
     async createPropertySetElementRelations(requestParameters: CreatePropertySetElementRelationsRequest): Promise<void> {
@@ -8262,10 +8284,10 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:read
+     * List all associations between classifications and elements Required scopes: ifc:read
      * List all associations between classifications and elements
      */
-    async listClassificationElementRelationsRaw(requestParameters: ListClassificationElementRelationsRequest): Promise<runtime.ApiResponse<void>> {
+    async listClassificationElementRelationsRaw(requestParameters: ListClassificationElementRelationsRequest): Promise<runtime.ApiResponse<Array<ElementClassificationRelation>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling listClassificationElementRelations.');
         }
@@ -8311,15 +8333,16 @@ export class IfcApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementClassificationRelationFromJSON));
     }
 
     /**
-     *  Required scopes: ifc:read
+     * List all associations between classifications and elements Required scopes: ifc:read
      * List all associations between classifications and elements
      */
-    async listClassificationElementRelations(requestParameters: ListClassificationElementRelationsRequest): Promise<void> {
-        await this.listClassificationElementRelationsRaw(requestParameters);
+    async listClassificationElementRelations(requestParameters: ListClassificationElementRelationsRequest): Promise<Array<ElementClassificationRelation>> {
+        const response = await this.listClassificationElementRelationsRaw(requestParameters);
+        return await response.value();
     }
 
     /**
