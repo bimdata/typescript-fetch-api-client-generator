@@ -2944,7 +2944,7 @@ export class CollaborationApi extends runtime.BaseAPI {
 
     /**
      *  Returns the sizes of the cloud in Bytes. The response fields depends on the role of the user. If the user is an admin, all field will be returned. If the user is a standard user, only `remaining_total_size` and `remaining_smart_data_size` will be set. If the call is made from an API access, role admin (100) will be returned and all fields will be set. The fields `managed by` indicate if the subscription for this cloud is an API subscription or a BIMData Platform subscription. If the cloud is managed by an API plan, the remaining sizes will take others organizations\'s clouds size into account 
-     * Returns the sizes of the cloud in Bytes.
+     * summary
      */
     async getCloudSizeRaw(requestParameters: GetCloudSizeRequest): Promise<runtime.ApiResponse<Size>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -2989,7 +2989,7 @@ export class CollaborationApi extends runtime.BaseAPI {
 
     /**
      *  Returns the sizes of the cloud in Bytes. The response fields depends on the role of the user. If the user is an admin, all field will be returned. If the user is a standard user, only `remaining_total_size` and `remaining_smart_data_size` will be set. If the call is made from an API access, role admin (100) will be returned and all fields will be set. The fields `managed by` indicate if the subscription for this cloud is an API subscription or a BIMData Platform subscription. If the cloud is managed by an API plan, the remaining sizes will take others organizations\'s clouds size into account 
-     * Returns the sizes of the cloud in Bytes.
+     * summary
      */
     async getCloudSize(requestParameters: GetCloudSizeRequest): Promise<Size> {
         const response = await this.getCloudSizeRaw(requestParameters);
