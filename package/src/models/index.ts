@@ -97,6 +97,7 @@ export * from './TopicType';
 export * from './Unit';
 export * from './User';
 export * from './UserCloudUpdate';
+export * from './UserProject';
 export * from './UserProjectUpdate';
 export * from './ViewSetupHints';
 export * from './Viewpoint';

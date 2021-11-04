@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    User,
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
+    UserProject,
+    UserProjectFromJSON,
+    UserProjectFromJSONTyped,
+    UserProjectToJSON,
 } from './';
 
 /**
@@ -46,10 +46,10 @@ export interface InlineObject4 {
     color?: string | null;
     /**
      * 
-     * @type {Array<User>}
+     * @type {Array<UserProject>}
      * @memberof InlineObject4
      */
-    readonly members?: Array<User>;
+    readonly members?: Array<UserProject>;
 }
 
 export function InlineObject4FromJSON(json: any): InlineObject4 {
@@ -65,7 +65,7 @@ export function InlineObject4FromJSONTyped(json: any, ignoreDiscriminator: boole
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': json['name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'members': !exists(json, 'members') ? undefined : ((json['members'] as Array<any>).map(UserFromJSON)),
+        'members': !exists(json, 'members') ? undefined : ((json['members'] as Array<any>).map(UserProjectFromJSON)),
     };
 }
 

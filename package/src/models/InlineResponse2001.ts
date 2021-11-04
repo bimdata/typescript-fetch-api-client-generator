@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    User,
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
+    UserProject,
+    UserProjectFromJSON,
+    UserProjectFromJSONTyped,
+    UserProjectToJSON,
 } from './';
 
 /**
@@ -46,10 +46,10 @@ export interface InlineResponse2001 {
     color?: string | null;
     /**
      * 
-     * @type {Array<User>}
+     * @type {Array<UserProject>}
      * @memberof InlineResponse2001
      */
-    readonly members?: Array<User>;
+    readonly members?: Array<UserProject>;
 }
 
 export function InlineResponse2001FromJSON(json: any): InlineResponse2001 {
@@ -65,7 +65,7 @@ export function InlineResponse2001FromJSONTyped(json: any, ignoreDiscriminator: 
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': json['name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'members': !exists(json, 'members') ? undefined : ((json['members'] as Array<any>).map(UserFromJSON)),
+        'members': !exists(json, 'members') ? undefined : ((json['members'] as Array<any>).map(UserProjectFromJSON)),
     };
 }
 

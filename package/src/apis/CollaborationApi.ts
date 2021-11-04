@@ -87,6 +87,9 @@ import {
     UserCloudUpdate,
     UserCloudUpdateFromJSON,
     UserCloudUpdateToJSON,
+    UserProject,
+    UserProjectFromJSON,
+    UserProjectToJSON,
     UserProjectUpdate,
     UserProjectUpdateFromJSON,
     UserProjectUpdateToJSON,
@@ -533,7 +536,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a user to a group. Must be an admin of the project Required scopes: org:manage
      * Add a user to a group
      */
-    async addGroupMemberRaw(requestParameters: AddGroupMemberRequest): Promise<runtime.ApiResponse<User>> {
+    async addGroupMemberRaw(requestParameters: AddGroupMemberRequest): Promise<runtime.ApiResponse<UserProject>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addGroupMember.');
         }
@@ -586,14 +589,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             body: FosUserIdToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserProjectFromJSON(jsonValue));
     }
 
     /**
      * Add a user to a group. Must be an admin of the project Required scopes: org:manage
      * Add a user to a group
      */
-    async addGroupMember(requestParameters: AddGroupMemberRequest): Promise<User> {
+    async addGroupMember(requestParameters: AddGroupMemberRequest): Promise<UserProject> {
         const response = await this.addGroupMemberRaw(requestParameters);
         return await response.value();
     }
