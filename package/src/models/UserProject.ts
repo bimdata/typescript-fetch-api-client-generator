@@ -13,47 +13,62 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    ProjectInvitation,
-    ProjectInvitationFromJSON,
-    ProjectInvitationFromJSONTyped,
-    ProjectInvitationToJSON,
-    User,
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-} from './';
-
 /**
  * 
+ * This is a flattened nested represetation of FosUser and Invitation models
+ * in this serializer.
  * @export
  * @interface UserProject
  */
 export interface UserProject {
     /**
-     * User's role in the project
+     * 
      * @type {number}
      * @memberof UserProject
      */
-    role?: number;
-    /**
-     * 
-     * @type {User}
-     * @memberof UserProject
-     */
-    user?: User;
-    /**
-     * 
-     * @type {ProjectInvitation}
-     * @memberof UserProject
-     */
-    invitation?: ProjectInvitation;
+    readonly id?: number;
     /**
      * 
      * @type {number}
      * @memberof UserProject
      */
-    project: number;
+    readonly userId?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserProject
+     */
+    readonly invitationId?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserProject
+     */
+    readonly email?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserProject
+     */
+    readonly firstname?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserProject
+     */
+    readonly lastname?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserProject
+     */
+    readonly profilePicture?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserProject
+     */
+    readonly role?: number;
 }
 
 export function UserProjectFromJSON(json: any): UserProject {
@@ -66,10 +81,14 @@ export function UserProjectFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'userId': !exists(json, 'user_id') ? undefined : json['user_id'],
+        'invitationId': !exists(json, 'invitation_id') ? undefined : json['invitation_id'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
+        'firstname': !exists(json, 'firstname') ? undefined : json['firstname'],
+        'lastname': !exists(json, 'lastname') ? undefined : json['lastname'],
+        'profilePicture': !exists(json, 'profile_picture') ? undefined : json['profile_picture'],
         'role': !exists(json, 'role') ? undefined : json['role'],
-        'user': !exists(json, 'user') ? undefined : UserFromJSON(json['user']),
-        'invitation': !exists(json, 'invitation') ? undefined : ProjectInvitationFromJSON(json['invitation']),
-        'project': json['project'],
     };
 }
 
@@ -82,10 +101,6 @@ export function UserProjectToJSON(value?: UserProject | null): any {
     }
     return {
         
-        'role': value.role,
-        'user': UserToJSON(value.user),
-        'invitation': ProjectInvitationToJSON(value.invitation),
-        'project': value.project,
     };
 }
 

@@ -21,16 +21,22 @@ import { exists, mapValues } from '../runtime';
 export interface Size {
     /**
      * 
+     * @type {boolean}
+     * @memberof Size
+     */
+    readonly isUnsupervised?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof Size
      */
     managedBy: SizeManagedByEnum;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof Size
      */
-    role: SizeRoleEnum;
+    role: number;
     /**
      * 
      * @type {number}
@@ -91,6 +97,7 @@ export function SizeFromJSONTyped(json: any, ignoreDiscriminator: boolean): Size
     }
     return {
         
+        'isUnsupervised': !exists(json, 'is_unsupervised') ? undefined : json['is_unsupervised'],
         'managedBy': json['managed_by'],
         'role': json['role'],
         'totalSize': !exists(json, 'total_size') ? undefined : json['total_size'],
@@ -125,14 +132,6 @@ export function SizeToJSON(value?: Size | null): any {
 export enum SizeManagedByEnum {
     BIMDATAPLATFORM = 'BIMDATA_PLATFORM',
     ORGANIZATION = 'ORGANIZATION'
-}
-/**
-* @export
-* @enum {string}
-*/
-export enum SizeRoleEnum {
-    A = 'A',
-    D = 'D'
 }
 
 

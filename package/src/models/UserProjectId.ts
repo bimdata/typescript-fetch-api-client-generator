@@ -16,32 +16,32 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface FosUserId
+ * @interface UserProjectId
  */
-export interface FosUserId {
+export interface UserProjectId {
     /**
      * 
      * @type {number}
-     * @memberof FosUserId
+     * @memberof UserProjectId
      */
-    userId: number;
+    userprojectId: number;
 }
 
-export function FosUserIdFromJSON(json: any): FosUserId {
-    return FosUserIdFromJSONTyped(json, false);
+export function UserProjectIdFromJSON(json: any): UserProjectId {
+    return UserProjectIdFromJSONTyped(json, false);
 }
 
-export function FosUserIdFromJSONTyped(json: any, ignoreDiscriminator: boolean): FosUserId {
+export function UserProjectIdFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserProjectId {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'userId': json['user_id'],
+        'userprojectId': json['userproject_id'],
     };
 }
 
-export function FosUserIdToJSON(value?: FosUserId | null): any {
+export function UserProjectIdToJSON(value?: UserProjectId | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -50,7 +50,7 @@ export function FosUserIdToJSON(value?: FosUserId | null): any {
     }
     return {
         
-        'user_id': value.userId,
+        'userproject_id': value.userprojectId,
     };
 }
 

@@ -30,9 +30,6 @@ import {
     Folder,
     FolderFromJSON,
     FolderToJSON,
-    FosUserId,
-    FosUserIdFromJSON,
-    FosUserIdToJSON,
     GroupFolder,
     GroupFolderFromJSON,
     GroupFolderToJSON,
@@ -90,6 +87,9 @@ import {
     UserProject,
     UserProjectFromJSON,
     UserProjectToJSON,
+    UserProjectId,
+    UserProjectIdFromJSON,
+    UserProjectIdToJSON,
     UserProjectUpdate,
     UserProjectUpdateFromJSON,
     UserProjectUpdateToJSON,
@@ -99,7 +99,7 @@ export interface AddGroupMemberRequest {
     cloudPk: string;
     groupPk: string;
     projectPk: string;
-    data: FosUserId;
+    data: UserProjectId;
 }
 
 export interface CancelCloudUserInvitationRequest {
@@ -204,7 +204,7 @@ export interface DeleteFolderRequest {
 export interface DeleteGroupMemberRequest {
     cloudPk: string;
     groupPk: string;
-    id: number;
+    id: string;
     projectPk: string;
 }
 
@@ -227,7 +227,7 @@ export interface DeleteProjectAccessTokenRequest {
 
 export interface DeleteProjectUserRequest {
     cloudPk: string;
-    id: number;
+    id: string;
     projectPk: string;
 }
 
@@ -297,13 +297,6 @@ export interface FullUpdateProjectAccessTokenRequest {
     projectPk: string;
     token: string;
     data: ProjectAccessToken;
-}
-
-export interface FullUpdateProjectUserRequest {
-    cloudPk: string;
-    id: number;
-    projectPk: string;
-    data: UserProjectUpdate;
 }
 
 export interface GetClassificationRequest {
@@ -426,12 +419,6 @@ export interface GetProjectTreeRequest {
     id: number;
 }
 
-export interface GetProjectUserRequest {
-    cloudPk: string;
-    id: number;
-    projectPk: string;
-}
-
 export interface GetProjectUsersRequest {
     cloudPk: string;
     projectPk: string;
@@ -518,7 +505,7 @@ export interface UpdateProjectAccessTokenRequest {
 
 export interface UpdateProjectUserRequest {
     cloudPk: string;
-    id: number;
+    id: string;
     projectPk: string;
     data: UserProjectUpdate;
 }
@@ -533,7 +520,7 @@ export interface UpdateSelfUserRequest {
 export class CollaborationApi extends runtime.BaseAPI {
 
     /**
-     * Add a user to a group. Must be an admin of the project Required scopes: org:manage
+     * Add a userproject to a group. Must be an admin of the project Required scopes: org:manage
      * Add a user to a group
      */
     async addGroupMemberRaw(requestParameters: AddGroupMemberRequest): Promise<runtime.ApiResponse<UserProject>> {
@@ -586,14 +573,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: FosUserIdToJSON(requestParameters.data),
+            body: UserProjectIdToJSON(requestParameters.data),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProjectFromJSON(jsonValue));
     }
 
     /**
-     * Add a user to a group. Must be an admin of the project Required scopes: org:manage
+     * Add a userproject to a group. Must be an admin of the project Required scopes: org:manage
      * Add a user to a group
      */
     async addGroupMember(requestParameters: AddGroupMemberRequest): Promise<UserProject> {
@@ -1682,7 +1669,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a user from a group. Must be an admin of the project Required scopes: org:manage
+     * Delete a userproject from a group. Id is the userproject_id. Must be an admin of the project. Required scopes: org:manage
      * Delete a user from a group
      */
     async deleteGroupMemberRaw(requestParameters: DeleteGroupMemberRequest): Promise<runtime.ApiResponse<void>> {
@@ -1739,7 +1726,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a user from a group. Must be an admin of the project Required scopes: org:manage
+     * Delete a userproject from a group. Id is the userproject_id. Must be an admin of the project. Required scopes: org:manage
      * Delete a user from a group
      */
     async deleteGroupMember(requestParameters: DeleteGroupMemberRequest): Promise<void> {
@@ -2647,75 +2634,6 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async fullUpdateProjectAccessToken(requestParameters: FullUpdateProjectAccessTokenRequest): Promise<ProjectAccessToken> {
         const response = await this.fullUpdateProjectAccessTokenRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Change the user role in the cloud Required scopes: cloud:manage
-     * Update all fields of a project user
-     */
-    async fullUpdateProjectUserRaw(requestParameters: FullUpdateProjectUserRequest): Promise<runtime.ApiResponse<User>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateProjectUser.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling fullUpdateProjectUser.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling fullUpdateProjectUser.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling fullUpdateProjectUser.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'PUT',
-            headers: headerParameters,
-            query: queryParameters,
-            body: UserProjectUpdateToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
-    }
-
-    /**
-     * Change the user role in the cloud Required scopes: cloud:manage
-     * Update all fields of a project user
-     */
-    async fullUpdateProjectUser(requestParameters: FullUpdateProjectUserRequest): Promise<User> {
-        const response = await this.fullUpdateProjectUserRaw(requestParameters);
         return await response.value();
     }
 
@@ -4123,71 +4041,9 @@ export class CollaborationApi extends runtime.BaseAPI {
 
     /**
      * Each member of a project can see other members of the project Required scopes: cloud:read, bcf:read
-     * Retrieve a user in a project
-     */
-    async getProjectUserRaw(requestParameters: GetProjectUserRequest): Promise<runtime.ApiResponse<User>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectUser.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProjectUser.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectUser.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
-    }
-
-    /**
-     * Each member of a project can see other members of the project Required scopes: cloud:read, bcf:read
-     * Retrieve a user in a project
-     */
-    async getProjectUser(requestParameters: GetProjectUserRequest): Promise<User> {
-        const response = await this.getProjectUserRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Each member of a project can see other members of the project Required scopes: cloud:read, bcf:read
      * Retrieve all users in a project, or a list with a filter by email
      */
-    async getProjectUsersRaw(requestParameters: GetProjectUsersRequest): Promise<runtime.ApiResponse<Array<User>>> {
+    async getProjectUsersRaw(requestParameters: GetProjectUsersRequest): Promise<runtime.ApiResponse<Array<UserProject>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectUsers.');
         }
@@ -4245,14 +4101,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserProjectFromJSON));
     }
 
     /**
      * Each member of a project can see other members of the project Required scopes: cloud:read, bcf:read
      * Retrieve all users in a project, or a list with a filter by email
      */
-    async getProjectUsers(requestParameters: GetProjectUsersRequest): Promise<Array<User>> {
+    async getProjectUsers(requestParameters: GetProjectUsersRequest): Promise<Array<UserProject>> {
         const response = await this.getProjectUsersRaw(requestParameters);
         return await response.value();
     }
@@ -5148,9 +5004,9 @@ export class CollaborationApi extends runtime.BaseAPI {
 
     /**
      * Change the user role in the cloud Required scopes: cloud:manage
-     * Update some fields of a project user
+     * Change the user role in the cloud
      */
-    async updateProjectUserRaw(requestParameters: UpdateProjectUserRequest): Promise<runtime.ApiResponse<User>> {
+    async updateProjectUserRaw(requestParameters: UpdateProjectUserRequest): Promise<runtime.ApiResponse<UserProject>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProjectUser.');
         }
@@ -5203,14 +5059,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             body: UserProjectUpdateToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserProjectFromJSON(jsonValue));
     }
 
     /**
      * Change the user role in the cloud Required scopes: cloud:manage
-     * Update some fields of a project user
+     * Change the user role in the cloud
      */
-    async updateProjectUser(requestParameters: UpdateProjectUserRequest): Promise<User> {
+    async updateProjectUser(requestParameters: UpdateProjectUserRequest): Promise<UserProject> {
         const response = await this.updateProjectUserRaw(requestParameters);
         return await response.value();
     }
