@@ -443,6 +443,11 @@ export interface InviteProjectUserRequest {
     data: ProjectInvitation;
 }
 
+export interface LeaveProjectRequest {
+    cloudPk: string;
+    id: number;
+}
+
 export interface UpdateClassificationRequest {
     cloudPk: string;
     id: number;
@@ -4391,6 +4396,63 @@ export class CollaborationApi extends runtime.BaseAPI {
     async inviteProjectUser(requestParameters: InviteProjectUserRequest): Promise<ProjectInvitation> {
         const response = await this.inviteProjectUserRaw(requestParameters);
         return await response.value();
+    }
+
+    /**
+     * Leave the project. Only authenticated users (no app) can call this route. Required scopes: org:manage
+     * Leave the project
+     */
+    async leaveProjectRaw(requestParameters: LeaveProjectRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling leaveProject.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling leaveProject.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{id}/leave`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Leave the project. Only authenticated users (no app) can call this route. Required scopes: org:manage
+     * Leave the project
+     */
+    async leaveProject(requestParameters: LeaveProjectRequest): Promise<void> {
+        await this.leaveProjectRaw(requestParameters);
     }
 
     /**
