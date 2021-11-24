@@ -14,14 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    FolderGroupPermission,
-    FolderGroupPermissionFromJSON,
-    FolderGroupPermissionFromJSONTyped,
-    FolderGroupPermissionToJSON,
-    User,
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
+    UserProject,
+    UserProjectFromJSON,
+    UserProjectFromJSONTyped,
+    UserProjectToJSON,
 } from './';
 
 /**
@@ -37,59 +33,23 @@ export interface InlineObject2 {
      */
     readonly id?: number;
     /**
-     * 
-     * @type {number}
-     * @memberof InlineObject2
-     */
-    parentId?: number | null;
-    /**
-     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
-     * @type {string}
-     * @memberof InlineObject2
-     */
-    readonly type?: string;
-    /**
-     * Name of the folder
+     * Full name of the group
      * @type {string}
      * @memberof InlineObject2
      */
     name: string;
     /**
-     * Creation date
-     * @type {Date}
+     * 
+     * @type {string}
      * @memberof InlineObject2
      */
-    readonly createdAt?: Date;
-    /**
-     * Date of the last update
-     * @type {Date}
-     * @memberof InlineObject2
-     */
-    readonly updatedAt?: Date;
+    color?: string | null;
     /**
      * 
-     * @type {User}
+     * @type {Array<UserProject>}
      * @memberof InlineObject2
      */
-    createdBy?: User;
-    /**
-     * 
-     * @type {Array<FolderGroupPermission>}
-     * @memberof InlineObject2
-     */
-    readonly groupsPermissions?: Array<FolderGroupPermission>;
-    /**
-     * Permission for a Folder
-     * @type {number}
-     * @memberof InlineObject2
-     */
-    defaultPermission?: number;
-    /**
-     * Aggregate of group user permissions and folder default permission
-     * @type {number}
-     * @memberof InlineObject2
-     */
-    readonly userPermission?: number;
+    readonly members?: Array<UserProject>;
 }
 
 export function InlineObject2FromJSON(json: any): InlineObject2 {
@@ -103,15 +63,9 @@ export function InlineObject2FromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'type': !exists(json, 'type') ? undefined : json['type'],
         'name': json['name'],
-        'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
-        'updatedAt': !exists(json, 'updated_at') ? undefined : (new Date(json['updated_at'])),
-        'createdBy': !exists(json, 'created_by') ? undefined : UserFromJSON(json['created_by']),
-        'groupsPermissions': !exists(json, 'groups_permissions') ? undefined : ((json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
-        'defaultPermission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
-        'userPermission': !exists(json, 'user_permission') ? undefined : json['user_permission'],
+        'color': !exists(json, 'color') ? undefined : json['color'],
+        'members': !exists(json, 'members') ? undefined : ((json['members'] as Array<any>).map(UserProjectFromJSON)),
     };
 }
 
@@ -124,10 +78,8 @@ export function InlineObject2ToJSON(value?: InlineObject2 | null): any {
     }
     return {
         
-        'parent_id': value.parentId,
         'name': value.name,
-        'created_by': UserToJSON(value.createdBy),
-        'default_permission': value.defaultPermission,
+        'color': value.color,
     };
 }
 

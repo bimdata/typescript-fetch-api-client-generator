@@ -30,12 +30,6 @@ export interface DeleteWebHookRequest {
     id: string;
 }
 
-export interface FullUpdateWebHookRequest {
-    cloudPk: string;
-    id: string;
-    data: WebHook;
-}
-
 export interface GetWebHookRequest {
     cloudPk: string;
     id: string;
@@ -178,71 +172,6 @@ export class WebhookApi extends runtime.BaseAPI {
      */
     async deleteWebHook(requestParameters: DeleteWebHookRequest): Promise<void> {
         await this.deleteWebHookRaw(requestParameters);
-    }
-
-    /**
-     * Update all field of a webhook Required scopes: webhook:manage
-     * Update all field of a webhook
-     */
-    async fullUpdateWebHookRaw(requestParameters: FullUpdateWebHookRequest): Promise<runtime.ApiResponse<WebHook>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateWebHook.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling fullUpdateWebHook.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling fullUpdateWebHook.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'PUT',
-            headers: headerParameters,
-            query: queryParameters,
-            body: WebHookToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
-    }
-
-    /**
-     * Update all field of a webhook Required scopes: webhook:manage
-     * Update all field of a webhook
-     */
-    async fullUpdateWebHook(requestParameters: FullUpdateWebHookRequest): Promise<WebHook> {
-        const response = await this.fullUpdateWebHookRaw(requestParameters);
-        return await response.value();
     }
 
     /**
