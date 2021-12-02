@@ -20,6 +20,12 @@ import { exists, mapValues } from '../runtime';
  */
 export interface PublicOrganization {
     /**
+     * 
+     * @type {number}
+     * @memberof PublicOrganization
+     */
+    readonly id?: number;
+    /**
      * Name of the organization
      * @type {string}
      * @memberof PublicOrganization
@@ -43,6 +49,7 @@ export function PublicOrganizationFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'name': json['name'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
     };
