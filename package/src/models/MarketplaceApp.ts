@@ -18,6 +18,10 @@ import {
     MarketplaceAppImageFromJSON,
     MarketplaceAppImageFromJSONTyped,
     MarketplaceAppImageToJSON,
+    PublicOrganization,
+    PublicOrganizationFromJSON,
+    PublicOrganizationFromJSONTyped,
+    PublicOrganizationToJSON,
     User,
     UserFromJSON,
     UserFromJSONTyped,
@@ -122,10 +126,10 @@ export interface MarketplaceApp {
     readonly images?: Array<MarketplaceAppImage>;
     /**
      * 
-     * @type {string}
+     * @type {PublicOrganization}
      * @memberof MarketplaceApp
      */
-    readonly organizationId?: string;
+    organization?: PublicOrganization;
 }
 
 export function MarketplaceAppFromJSON(json: any): MarketplaceApp {
@@ -153,7 +157,7 @@ export function MarketplaceAppFromJSONTyped(json: any, ignoreDiscriminator: bool
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'images': !exists(json, 'images') ? undefined : ((json['images'] as Array<any>).map(MarketplaceAppImageFromJSON)),
-        'organizationId': !exists(json, 'organization_id') ? undefined : json['organization_id'],
+        'organization': !exists(json, 'organization') ? undefined : PublicOrganizationFromJSON(json['organization']),
     };
 }
 
@@ -177,6 +181,7 @@ export function MarketplaceAppToJSON(value?: MarketplaceApp | null): any {
         'settings_url': value.settingsUrl,
         'is_public': value.isPublic,
         'tags': value.tags,
+        'organization': PublicOrganizationToJSON(value.organization),
     };
 }
 

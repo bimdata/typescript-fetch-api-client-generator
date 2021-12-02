@@ -62,6 +62,7 @@ export * from './ProjectWithChildren';
 export * from './Property';
 export * from './PropertyDefinition';
 export * from './PropertySet';
+export * from './PublicOrganization';
 export * from './RawClassification';
 export * from './RawDefinition';
 export * from './RawElement';
