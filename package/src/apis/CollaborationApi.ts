@@ -30,6 +30,9 @@ import {
     Folder,
     FolderFromJSON,
     FolderToJSON,
+    FolderUserProject,
+    FolderUserProjectFromJSON,
+    FolderUserProjectToJSON,
     GroupFolder,
     GroupFolderFromJSON,
     GroupFolderToJSON,
@@ -87,7 +90,24 @@ import {
     UserProjectUpdate,
     UserProjectUpdateFromJSON,
     UserProjectUpdateToJSON,
+    Visa,
+    VisaFromJSON,
+    VisaToJSON,
+    VisaComment,
+    VisaCommentFromJSON,
+    VisaCommentToJSON,
+    VisaValidation,
+    VisaValidationFromJSON,
+    VisaValidationToJSON,
 } from '../models';
+
+export interface AcceptValidationRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    visaPk: string;
+}
 
 export interface AddGroupMemberRequest {
     cloudPk: string;
@@ -109,6 +129,13 @@ export interface CancelProjectUserInvitationRequest {
 
 export interface CheckAccessRequest {
     id: number;
+}
+
+export interface CloseVisaRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
 }
 
 export interface CreateClassificationRequest {
@@ -168,6 +195,29 @@ export interface CreateProjectAccessTokenRequest {
     data: ProjectAccessToken;
 }
 
+export interface CreateValidationRequest {
+    cloudPk: string;
+    documentPk: string;
+    projectPk: string;
+    visaPk: string;
+    data: VisaValidation;
+}
+
+export interface CreateVisaRequest {
+    cloudPk: string;
+    documentPk: string;
+    projectPk: string;
+    data: Visa;
+}
+
+export interface CreateVisaCommentRequest {
+    cloudPk: string;
+    documentPk: string;
+    projectPk: string;
+    visaPk: string;
+    data: VisaComment;
+}
+
 export interface DeleteClassificationRequest {
     cloudPk: string;
     id: number;
@@ -225,6 +275,37 @@ export interface DeleteProjectUserRequest {
     projectPk: string;
 }
 
+export interface DeleteValidationRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    visaPk: string;
+}
+
+export interface DeleteVisaRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+}
+
+export interface DeleteVisaCommentRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    visaPk: string;
+}
+
+export interface DenyValidationRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    visaPk: string;
+}
+
 export interface GetClassificationRequest {
     cloudPk: string;
     id: number;
@@ -278,6 +359,12 @@ export interface GetFolderRequest {
     projectPk: string;
 }
 
+export interface GetFolderProjectUsersRequest {
+    cloudPk: string;
+    folderPk: string;
+    projectPk: string;
+}
+
 export interface GetFoldersRequest {
     cloudPk: string;
     projectPk: string;
@@ -321,6 +408,11 @@ export interface GetProjectAccessTokensRequest {
     projectPk: string;
 }
 
+export interface GetProjectCreatorVisasRequest {
+    cloudPk: string;
+    projectPk: string;
+}
+
 export interface GetProjectDMSTreeRequest {
     cloudPk: string;
     id: number;
@@ -354,8 +446,56 @@ export interface GetProjectUsersRequest {
     emailEndswith?: string;
 }
 
+export interface GetProjectValidatorVisasRequest {
+    cloudPk: string;
+    projectPk: string;
+}
+
 export interface GetProjectsRequest {
     cloudPk: string;
+}
+
+export interface GetValidationRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    visaPk: string;
+}
+
+export interface GetValidationsRequest {
+    cloudPk: string;
+    documentPk: string;
+    projectPk: string;
+    visaPk: string;
+}
+
+export interface GetVisaRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+}
+
+export interface GetVisaCommentRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    visaPk: string;
+}
+
+export interface GetVisaCommentsRequest {
+    cloudPk: string;
+    documentPk: string;
+    projectPk: string;
+    visaPk: string;
+}
+
+export interface GetVisasRequest {
+    cloudPk: string;
+    documentPk: string;
+    projectPk: string;
 }
 
 export interface InviteCloudUserRequest {
@@ -372,6 +512,28 @@ export interface InviteProjectUserRequest {
 export interface LeaveProjectRequest {
     cloudPk: string;
     id: number;
+}
+
+export interface PauseVisaRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+}
+
+export interface ResetValidationRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    visaPk: string;
+}
+
+export interface ResumeVisaRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
 }
 
 export interface UpdateClassificationRequest {
@@ -441,10 +603,105 @@ export interface UpdateProjectUserRequest {
     data: UserProjectUpdate;
 }
 
+export interface UpdateValidationRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    visaPk: string;
+    data: VisaValidation;
+}
+
+export interface UpdateVisaRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    data: Visa;
+}
+
+export interface UpdateVisaCommentRequest {
+    cloudPk: string;
+    documentPk: string;
+    id: number;
+    projectPk: string;
+    visaPk: string;
+    data: VisaComment;
+}
+
 /**
  * 
  */
 export class CollaborationApi extends runtime.BaseAPI {
+
+    /**
+     * Accept a validation Required scopes: document:write
+     * Accept a validation
+     */
+    async acceptValidationRaw(requestParameters: AcceptValidationRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling acceptValidation.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling acceptValidation.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling acceptValidation.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling acceptValidation.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling acceptValidation.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/accept`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Accept a validation Required scopes: document:write
+     * Accept a validation
+     */
+    async acceptValidation(requestParameters: AcceptValidationRequest): Promise<void> {
+        await this.acceptValidationRaw(requestParameters);
+    }
 
     /**
      * Add a userproject to a group. Must be an admin of the project Required scopes: org:manage
@@ -684,6 +941,71 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async checkAccess(requestParameters: CheckAccessRequest): Promise<void> {
         await this.checkAccessRaw(requestParameters);
+    }
+
+    /**
+     * Close a visa of a document Required scopes: document:write
+     * Close a visa of a document
+     */
+    async closeVisaRaw(requestParameters: CloseVisaRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling closeVisa.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling closeVisa.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling closeVisa.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling closeVisa.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}/close`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Close a visa of a document Required scopes: document:write
+     * Close a visa of a document
+     */
+    async closeVisa(requestParameters: CloseVisaRequest): Promise<void> {
+        await this.closeVisaRaw(requestParameters);
     }
 
     /**
@@ -1303,6 +1625,221 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * Add a validation to a visa Required scopes: document:write
+     * Add a validation to a visa
+     */
+    async createValidationRaw(requestParameters: CreateValidationRequest): Promise<runtime.ApiResponse<VisaValidation>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createValidation.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling createValidation.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createValidation.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling createValidation.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createValidation.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: VisaValidationToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaValidationFromJSON(jsonValue));
+    }
+
+    /**
+     * Add a validation to a visa Required scopes: document:write
+     * Add a validation to a visa
+     */
+    async createValidation(requestParameters: CreateValidationRequest): Promise<VisaValidation> {
+        const response = await this.createValidationRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Create a visa Required scopes: document:write
+     * Create a visa
+     */
+    async createVisaRaw(requestParameters: CreateVisaRequest): Promise<runtime.ApiResponse<Visa>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createVisa.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling createVisa.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createVisa.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createVisa.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: VisaToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a visa Required scopes: document:write
+     * Create a visa
+     */
+    async createVisa(requestParameters: CreateVisaRequest): Promise<Visa> {
+        const response = await this.createVisaRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Add a comment Required scopes: document:write
+     * Add a comment
+     */
+    async createVisaCommentRaw(requestParameters: CreateVisaCommentRequest): Promise<runtime.ApiResponse<VisaComment>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createVisaComment.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling createVisaComment.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createVisaComment.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling createVisaComment.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createVisaComment.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: VisaCommentToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaCommentFromJSON(jsonValue));
+    }
+
+    /**
+     * Add a comment Required scopes: document:write
+     * Add a comment
+     */
+    async createVisaComment(requestParameters: CreateVisaCommentRequest): Promise<VisaComment> {
+        const response = await this.createVisaCommentRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * All elements having this classification will lose it Required scopes: ifc:write
      * Delete a classification
      */
@@ -1898,6 +2435,278 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async deleteProjectUser(requestParameters: DeleteProjectUserRequest): Promise<void> {
         await this.deleteProjectUserRaw(requestParameters);
+    }
+
+    /**
+     * Remove a validation Required scopes: document:write
+     * Remove a validation
+     */
+    async deleteValidationRaw(requestParameters: DeleteValidationRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteValidation.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteValidation.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteValidation.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteValidation.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling deleteValidation.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Remove a validation Required scopes: document:write
+     * Remove a validation
+     */
+    async deleteValidation(requestParameters: DeleteValidationRequest): Promise<void> {
+        await this.deleteValidationRaw(requestParameters);
+    }
+
+    /**
+     * Remove a visa Required scopes: document:write
+     * Remove a visa
+     */
+    async deleteVisaRaw(requestParameters: DeleteVisaRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteVisa.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteVisa.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteVisa.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteVisa.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Remove a visa Required scopes: document:write
+     * Remove a visa
+     */
+    async deleteVisa(requestParameters: DeleteVisaRequest): Promise<void> {
+        await this.deleteVisaRaw(requestParameters);
+    }
+
+    /**
+     * Remove a comment Required scopes: document:write
+     * Remove a comment
+     */
+    async deleteVisaCommentRaw(requestParameters: DeleteVisaCommentRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteVisaComment.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteVisaComment.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteVisaComment.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteVisaComment.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling deleteVisaComment.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Remove a comment Required scopes: document:write
+     * Remove a comment
+     */
+    async deleteVisaComment(requestParameters: DeleteVisaCommentRequest): Promise<void> {
+        await this.deleteVisaCommentRaw(requestParameters);
+    }
+
+    /**
+     * Deny a validation Required scopes: document:write
+     * Deny a validation
+     */
+    async denyValidationRaw(requestParameters: DenyValidationRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling denyValidation.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling denyValidation.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling denyValidation.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling denyValidation.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling denyValidation.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/deny`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Deny a validation Required scopes: document:write
+     * Deny a validation
+     */
+    async denyValidation(requestParameters: DenyValidationRequest): Promise<void> {
+        await this.denyValidationRaw(requestParameters);
     }
 
     /**
@@ -2541,6 +3350,68 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve all users in a project with the permission on the folder Required scopes: document:read
+     * Retrieve all users in a project with the permission on the folder
+     */
+    async getFolderProjectUsersRaw(requestParameters: GetFolderProjectUsersRequest): Promise<runtime.ApiResponse<Array<FolderUserProject>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getFolderProjectUsers.');
+        }
+
+        if (requestParameters.folderPk === null || requestParameters.folderPk === undefined) {
+            throw new runtime.RequiredError('folderPk','Required parameter requestParameters.folderPk was null or undefined when calling getFolderProjectUsers.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getFolderProjectUsers.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{folder_pk}/user`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"folder_pk"}}`, encodeURIComponent(String(requestParameters.folderPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FolderUserProjectFromJSON));
+    }
+
+    /**
+     * Retrieve all users in a project with the permission on the folder Required scopes: document:read
+     * Retrieve all users in a project with the permission on the folder
+     */
+    async getFolderProjectUsers(requestParameters: GetFolderProjectUsersRequest): Promise<Array<FolderUserProject>> {
+        const response = await this.getFolderProjectUsersRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * Retrieve all folders in the project. This is an array of folder. If you want to get the tree of all folders, see getProjectTree Required scopes: document:read
      * Retrieve all folders
      */
@@ -3017,6 +3888,64 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * List visas created by user in a project Required scopes: document:read
+     * List visas created by user
+     */
+    async getProjectCreatorVisasRaw(requestParameters: GetProjectCreatorVisasRequest): Promise<runtime.ApiResponse<Array<Visa>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectCreatorVisas.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectCreatorVisas.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/me/visa/creator`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaFromJSON));
+    }
+
+    /**
+     * List visas created by user in a project Required scopes: document:read
+     * List visas created by user
+     */
+    async getProjectCreatorVisas(requestParameters: GetProjectCreatorVisasRequest): Promise<Array<Visa>> {
+        const response = await this.getProjectCreatorVisasRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * Retrieve the complete DMS tree (all folders and all documents in the project)
      * Retrieve the complete DMS tree
      */
@@ -3377,6 +4306,64 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * List visas where user is a validator in a project Required scopes: document:read
+     * List visas where user is a validator
+     */
+    async getProjectValidatorVisasRaw(requestParameters: GetProjectValidatorVisasRequest): Promise<runtime.ApiResponse<Array<Visa>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectValidatorVisas.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectValidatorVisas.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/me/visa/validator`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaFromJSON));
+    }
+
+    /**
+     * List visas where user is a validator in a project Required scopes: document:read
+     * List visas where user is a validator
+     */
+    async getProjectValidatorVisas(requestParameters: GetProjectValidatorVisasRequest): Promise<Array<Visa>> {
+        const response = await this.getProjectValidatorVisasRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * Retrieve all projects of the cloud. All project are shown at the same level. see #getProjectSubTree
      * Retrieve all projects
      */
@@ -3527,6 +4514,406 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getSelfUser(): Promise<SelfUser> {
         const response = await this.getSelfUserRaw();
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a validation to a visa Required scopes: document:read
+     * Retrieve a validation to a visa
+     */
+    async getValidationRaw(requestParameters: GetValidationRequest): Promise<runtime.ApiResponse<VisaValidation>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getValidation.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getValidation.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getValidation.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getValidation.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getValidation.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaValidationFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a validation to a visa Required scopes: document:read
+     * Retrieve a validation to a visa
+     */
+    async getValidation(requestParameters: GetValidationRequest): Promise<VisaValidation> {
+        const response = await this.getValidationRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * List all validations to a visa Required scopes: document:read
+     * List all validations to a visa
+     */
+    async getValidationsRaw(requestParameters: GetValidationsRequest): Promise<runtime.ApiResponse<Array<VisaValidation>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getValidations.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getValidations.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getValidations.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getValidations.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaValidationFromJSON));
+    }
+
+    /**
+     * List all validations to a visa Required scopes: document:read
+     * List all validations to a visa
+     */
+    async getValidations(requestParameters: GetValidationsRequest): Promise<Array<VisaValidation>> {
+        const response = await this.getValidationsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a unique visa of a document Required scopes: document:read
+     * Retrieve a visa of a document
+     */
+    async getVisaRaw(requestParameters: GetVisaRequest): Promise<runtime.ApiResponse<Visa>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisa.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getVisa.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getVisa.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisa.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a unique visa of a document Required scopes: document:read
+     * Retrieve a visa of a document
+     */
+    async getVisa(requestParameters: GetVisaRequest): Promise<Visa> {
+        const response = await this.getVisaRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a comment Required scopes: document:read
+     * Retrieve a comment
+     */
+    async getVisaCommentRaw(requestParameters: GetVisaCommentRequest): Promise<runtime.ApiResponse<VisaComment>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisaComment.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getVisaComment.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getVisaComment.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisaComment.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getVisaComment.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaCommentFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a comment Required scopes: document:read
+     * Retrieve a comment
+     */
+    async getVisaComment(requestParameters: GetVisaCommentRequest): Promise<VisaComment> {
+        const response = await this.getVisaCommentRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * List all comment of a visa Required scopes: document:read
+     * List all comment of a visa
+     */
+    async getVisaCommentsRaw(requestParameters: GetVisaCommentsRequest): Promise<runtime.ApiResponse<Array<VisaComment>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisaComments.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getVisaComments.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisaComments.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getVisaComments.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaCommentFromJSON));
+    }
+
+    /**
+     * List all comment of a visa Required scopes: document:read
+     * List all comment of a visa
+     */
+    async getVisaComments(requestParameters: GetVisaCommentsRequest): Promise<Array<VisaComment>> {
+        const response = await this.getVisaCommentsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * List all visas of a document Required scopes: document:read
+     * List all visas of a document
+     */
+    async getVisasRaw(requestParameters: GetVisasRequest): Promise<runtime.ApiResponse<Array<Visa>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisas.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getVisas.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisas.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaFromJSON));
+    }
+
+    /**
+     * List all visas of a document Required scopes: document:read
+     * List all visas of a document
+     */
+    async getVisas(requestParameters: GetVisasRequest): Promise<Array<Visa>> {
+        const response = await this.getVisasRaw(requestParameters);
         return await response.value();
     }
 
@@ -3711,6 +5098,205 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async leaveProject(requestParameters: LeaveProjectRequest): Promise<void> {
         await this.leaveProjectRaw(requestParameters);
+    }
+
+    /**
+     * Pause a visa of a document Required scopes: document:write
+     * Pause a visa of a document
+     */
+    async pauseVisaRaw(requestParameters: PauseVisaRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling pauseVisa.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling pauseVisa.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling pauseVisa.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling pauseVisa.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}/pause`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Pause a visa of a document Required scopes: document:write
+     * Pause a visa of a document
+     */
+    async pauseVisa(requestParameters: PauseVisaRequest): Promise<void> {
+        await this.pauseVisaRaw(requestParameters);
+    }
+
+    /**
+     * Reset a validation if the validation has been accepted or rejected Required scopes: document:write
+     * Reset a validation
+     */
+    async resetValidationRaw(requestParameters: ResetValidationRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling resetValidation.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling resetValidation.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling resetValidation.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling resetValidation.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling resetValidation.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/reset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Reset a validation if the validation has been accepted or rejected Required scopes: document:write
+     * Reset a validation
+     */
+    async resetValidation(requestParameters: ResetValidationRequest): Promise<void> {
+        await this.resetValidationRaw(requestParameters);
+    }
+
+    /**
+     * Resume a visa of a document after a pause Required scopes: document:write
+     * Resume a visa of a document
+     */
+    async resumeVisaRaw(requestParameters: ResumeVisaRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling resumeVisa.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling resumeVisa.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling resumeVisa.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling resumeVisa.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}/resume`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Resume a visa of a document after a pause Required scopes: document:write
+     * Resume a visa of a document
+     */
+    async resumeVisa(requestParameters: ResumeVisaRequest): Promise<void> {
+        await this.resumeVisaRaw(requestParameters);
     }
 
     /**
@@ -4388,6 +5974,233 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async updateProjectUser(requestParameters: UpdateProjectUserRequest): Promise<UserProject> {
         const response = await this.updateProjectUserRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update the validator of validation. This route is only useful for an App Required scopes: document:write
+     * Update the validator of validation
+     */
+    async updateValidationRaw(requestParameters: UpdateValidationRequest): Promise<runtime.ApiResponse<VisaValidation>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateValidation.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling updateValidation.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateValidation.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateValidation.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling updateValidation.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateValidation.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: VisaValidationToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaValidationFromJSON(jsonValue));
+    }
+
+    /**
+     * Update the validator of validation. This route is only useful for an App Required scopes: document:write
+     * Update the validator of validation
+     */
+    async updateValidation(requestParameters: UpdateValidationRequest): Promise<VisaValidation> {
+        const response = await this.updateValidationRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a visa Required scopes: document:write
+     * Update some fields of a visa
+     */
+    async updateVisaRaw(requestParameters: UpdateVisaRequest): Promise<runtime.ApiResponse<Visa>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateVisa.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling updateVisa.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateVisa.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateVisa.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateVisa.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: VisaToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a visa Required scopes: document:write
+     * Update some fields of a visa
+     */
+    async updateVisa(requestParameters: UpdateVisaRequest): Promise<Visa> {
+        const response = await this.updateVisaRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a comment Required scopes: document:write
+     * Update some fields of a comment
+     */
+    async updateVisaCommentRaw(requestParameters: UpdateVisaCommentRequest): Promise<runtime.ApiResponse<VisaComment>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateVisaComment.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling updateVisaComment.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateVisaComment.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateVisaComment.');
+        }
+
+        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
+            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling updateVisaComment.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateVisaComment.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: VisaCommentToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaCommentFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a comment Required scopes: document:write
+     * Update some fields of a comment
+     */
+    async updateVisaComment(requestParameters: UpdateVisaCommentRequest): Promise<VisaComment> {
+        const response = await this.updateVisaCommentRaw(requestParameters);
         return await response.value();
     }
 
