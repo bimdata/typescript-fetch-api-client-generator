@@ -45,7 +45,7 @@ export interface VisaValidation {
      */
     validator?: UserProject;
     /**
-     * This is the userproject_id. This field is only used if the call is made from an App
+     * This is the userproject_id
      * @type {number}
      * @memberof VisaValidation
      */

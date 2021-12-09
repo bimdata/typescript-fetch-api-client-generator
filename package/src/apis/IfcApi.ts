@@ -18,6 +18,9 @@ import {
     Classification,
     ClassificationFromJSON,
     ClassificationToJSON,
+    Document,
+    DocumentFromJSON,
+    DocumentToJSON,
     Element,
     ElementFromJSON,
     ElementToJSON,
@@ -106,24 +109,28 @@ export interface BulkDeleteIfcPropertiesRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
+    data: Array<number>;
 }
 
 export interface BulkDeleteIfcPropertyDefinitionsRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
+    data: Array<number>;
 }
 
 export interface BulkDeleteIfcUnitsRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
+    data: Array<number>;
 }
 
 export interface BulkDeletePropertySetRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
+    data: Array<number>;
 }
 
 export interface BulkFullUpdateElementsRequest {
@@ -145,6 +152,15 @@ export interface BulkRemoveClassificationsOfElementRequest {
     elementUuid: string;
     ifcPk: string;
     projectPk: string;
+    data: Array<number>;
+}
+
+export interface BulkRemoveDocumentsOfElementRequest {
+    cloudPk: string;
+    elementUuid: string;
+    ifcPk: string;
+    projectPk: string;
+    data: Array<number>;
 }
 
 export interface BulkRemoveElementsFromClassificationRequest {
@@ -152,6 +168,7 @@ export interface BulkRemoveElementsFromClassificationRequest {
     ifcClassificationPk: string;
     ifcPk: string;
     projectPk: string;
+    data: Array<number>;
 }
 
 export interface BulkUpdateElementsRequest {
@@ -419,6 +436,13 @@ export interface GetAccessTokensRequest {
 }
 
 export interface GetClassificationsOfElementRequest {
+    cloudPk: string;
+    elementUuid: string;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetDocumentsOfElementRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -725,6 +749,14 @@ export interface GetZonesRequest {
     color?: string;
 }
 
+export interface LinkDocumentsOfElementRequest {
+    cloudPk: string;
+    elementUuid: string;
+    ifcPk: string;
+    projectPk: string;
+    data: Array<number>;
+}
+
 export interface ListClassificationElementRelationsRequest {
     cloudPk: string;
     ifcPk: string;
@@ -752,6 +784,14 @@ export interface RemoveAllElementPropertySetRequest {
 }
 
 export interface RemoveClassificationOfElementRequest {
+    cloudPk: string;
+    elementUuid: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface RemoveDocumentOfElementRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -1075,7 +1115,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Delete many Property of a model
      */
     async bulkDeleteIfcPropertiesRaw(requestParameters: BulkDeleteIfcPropertiesRequest): Promise<runtime.ApiResponse<void>> {
@@ -1091,9 +1131,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcProperties.');
         }
 
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcProperties.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -1122,13 +1168,14 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.data,
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Delete many Property of a model
      */
     async bulkDeleteIfcProperties(requestParameters: BulkDeleteIfcPropertiesRequest): Promise<void> {
@@ -1136,7 +1183,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Delete many PropertyDefinitions of a model
      */
     async bulkDeleteIfcPropertyDefinitionsRaw(requestParameters: BulkDeleteIfcPropertyDefinitionsRequest): Promise<runtime.ApiResponse<void>> {
@@ -1152,9 +1199,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
         }
 
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -1183,13 +1236,14 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.data,
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Delete many PropertyDefinitions of a model
      */
     async bulkDeleteIfcPropertyDefinitions(requestParameters: BulkDeleteIfcPropertyDefinitionsRequest): Promise<void> {
@@ -1197,7 +1251,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Delete many Units of a model
      */
     async bulkDeleteIfcUnitsRaw(requestParameters: BulkDeleteIfcUnitsRequest): Promise<runtime.ApiResponse<void>> {
@@ -1213,9 +1267,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcUnits.');
         }
 
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcUnits.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -1244,13 +1304,14 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.data,
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Delete many Units of a model
      */
     async bulkDeleteIfcUnits(requestParameters: BulkDeleteIfcUnitsRequest): Promise<void> {
@@ -1258,7 +1319,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Delete many PropertySet of a model
      */
     async bulkDeletePropertySetRaw(requestParameters: BulkDeletePropertySetRequest): Promise<runtime.ApiResponse<void>> {
@@ -1274,9 +1335,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeletePropertySet.');
         }
 
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeletePropertySet.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -1305,13 +1372,14 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.data,
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Delete many PropertySet of a model
      */
     async bulkDeletePropertySet(requestParameters: BulkDeletePropertySetRequest): Promise<void> {
@@ -1457,7 +1525,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Remove many classifications from an element
      */
     async bulkRemoveClassificationsOfElementRaw(requestParameters: BulkRemoveClassificationsOfElementRequest): Promise<runtime.ApiResponse<void>> {
@@ -1477,9 +1545,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveClassificationsOfElement.');
         }
 
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkRemoveClassificationsOfElement.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -1508,13 +1582,14 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.data,
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Remove many classifications from an element
      */
     async bulkRemoveClassificationsOfElement(requestParameters: BulkRemoveClassificationsOfElementRequest): Promise<void> {
@@ -1522,7 +1597,79 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     * Remove many documents from an element
+     */
+    async bulkRemoveDocumentsOfElementRaw(requestParameters: BulkRemoveDocumentsOfElementRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveDocumentsOfElement.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling bulkRemoveDocumentsOfElement.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkRemoveDocumentsOfElement.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveDocumentsOfElement.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkRemoveDocumentsOfElement.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/documents/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.data,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     * Remove many documents from an element
+     */
+    async bulkRemoveDocumentsOfElement(requestParameters: BulkRemoveDocumentsOfElementRequest): Promise<void> {
+        await this.bulkRemoveDocumentsOfElementRaw(requestParameters);
+    }
+
+    /**
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Remove the classifications from all elements
      */
     async bulkRemoveElementsFromClassificationRaw(requestParameters: BulkRemoveElementsFromClassificationRequest): Promise<runtime.ApiResponse<void>> {
@@ -1542,9 +1689,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveElementsFromClassification.');
         }
 
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkRemoveElementsFromClassification.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -1573,13 +1726,14 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.data,
         });
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     *          Bulk delete.         You should send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
      * Remove the classifications from all elements
      */
     async bulkRemoveElementsFromClassification(requestParameters: BulkRemoveElementsFromClassificationRequest): Promise<void> {
@@ -4124,6 +4278,72 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async getClassificationsOfElement(requestParameters: GetClassificationsOfElementRequest): Promise<Array<Classification>> {
         const response = await this.getClassificationsOfElementRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all documents of an element Required scopes: ifc:read
+     * Retrieve all documents of an element
+     */
+    async getDocumentsOfElementRaw(requestParameters: GetDocumentsOfElementRequest): Promise<runtime.ApiResponse<Array<Document>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocumentsOfElement.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getDocumentsOfElement.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getDocumentsOfElement.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocumentsOfElement.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/documents`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
+    }
+
+    /**
+     * Retrieve all documents of an element Required scopes: ifc:read
+     * Retrieve all documents of an element
+     */
+    async getDocumentsOfElement(requestParameters: GetDocumentsOfElementRequest): Promise<Array<Document>> {
+        const response = await this.getDocumentsOfElementRaw(requestParameters);
         return await response.value();
     }
 
@@ -6886,6 +7106,79 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     * Link one or many documents to an element
+     */
+    async linkDocumentsOfElementRaw(requestParameters: LinkDocumentsOfElementRequest): Promise<runtime.ApiResponse<Array<Document>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling linkDocumentsOfElement.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling linkDocumentsOfElement.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling linkDocumentsOfElement.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling linkDocumentsOfElement.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling linkDocumentsOfElement.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/documents`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.data,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
+    }
+
+    /**
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     * Link one or many documents to an element
+     */
+    async linkDocumentsOfElement(requestParameters: LinkDocumentsOfElementRequest): Promise<Array<Document>> {
+        const response = await this.linkDocumentsOfElementRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      * List all associations between classifications and elements Required scopes: ifc:read
      * List all associations between classifications and elements
      */
@@ -7211,6 +7504,75 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async removeClassificationOfElement(requestParameters: RemoveClassificationOfElementRequest): Promise<void> {
         await this.removeClassificationOfElementRaw(requestParameters);
+    }
+
+    /**
+     * The document will not be deleted Required scopes: ifc:write
+     * Remove a documents from an element
+     */
+    async removeDocumentOfElementRaw(requestParameters: RemoveDocumentOfElementRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeDocumentOfElement.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeDocumentOfElement.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeDocumentOfElement.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeDocumentOfElement.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeDocumentOfElement.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/documents/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * The document will not be deleted Required scopes: ifc:write
+     * Remove a documents from an element
+     */
+    async removeDocumentOfElement(requestParameters: RemoveDocumentOfElementRequest): Promise<void> {
+        await this.removeDocumentOfElementRaw(requestParameters);
     }
 
     /**
