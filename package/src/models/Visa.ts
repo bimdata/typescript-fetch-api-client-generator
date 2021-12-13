@@ -14,6 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    Document,
+    DocumentFromJSON,
+    DocumentFromJSONTyped,
+    DocumentToJSON,
     UserProject,
     UserProjectFromJSON,
     UserProjectFromJSONTyped,
@@ -72,6 +76,12 @@ export interface Visa {
     description?: string | null;
     /**
      * 
+     * @type {Document}
+     * @memberof Visa
+     */
+    document?: Document;
+    /**
+     * 
      * @type {Array<VisaComment>}
      * @memberof Visa
      */
@@ -112,6 +122,7 @@ export function VisaFromJSONTyped(json: any, ignoreDiscriminator: boolean): Visa
         'creatorId': !exists(json, 'creator_id') ? undefined : json['creator_id'],
         'status': !exists(json, 'status') ? undefined : json['status'],
         'description': !exists(json, 'description') ? undefined : json['description'],
+        'document': !exists(json, 'document') ? undefined : DocumentFromJSON(json['document']),
         'comments': !exists(json, 'comments') ? undefined : ((json['comments'] as Array<any>).map(VisaCommentFromJSON)),
         'deadline': !exists(json, 'deadline') ? undefined : (json['deadline'] === null ? null : new Date(json['deadline'])),
         'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
@@ -131,6 +142,7 @@ export function VisaToJSON(value?: Visa | null): any {
         'creator': UserProjectToJSON(value.creator),
         'creator_id': value.creatorId,
         'description': value.description,
+        'document': DocumentToJSON(value.document),
         'deadline': value.deadline === undefined ? undefined : (value.deadline === null ? null : value.deadline.toISOString().substr(0,10)),
     };
 }
