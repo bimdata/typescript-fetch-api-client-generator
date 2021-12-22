@@ -12,6 +12,7 @@ export * from './Component';
 export * from './ComponentsParent';
 export * from './Direction';
 export * from './Document';
+export * from './DocumentWithElementList';
 export * from './Element';
 export * from './ElementClassificationRelation';
 export * from './ElementPropertySetRelation';

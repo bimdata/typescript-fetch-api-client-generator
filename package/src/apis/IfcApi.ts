@@ -21,6 +21,9 @@ import {
     Document,
     DocumentFromJSON,
     DocumentToJSON,
+    DocumentWithElementList,
+    DocumentWithElementListFromJSON,
+    DocumentWithElementListToJSON,
     Element,
     ElementFromJSON,
     ElementToJSON,
@@ -454,6 +457,15 @@ export interface GetElementRequest {
     ifcPk: string;
     projectPk: string;
     uuid: string;
+}
+
+export interface GetElementLinkedDocumentsRequest {
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+    type?: string;
+    classification?: string;
+    classificationNotation?: string;
 }
 
 export interface GetElementPropertySetRequest {
@@ -4410,6 +4422,80 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async getElement(requestParameters: GetElementRequest): Promise<Element> {
         const response = await this.getElementRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all documents linked to any element with the list of uuids Required scopes: ifc:read
+     * Retrieve all documents linked to any element
+     */
+    async getElementLinkedDocumentsRaw(requestParameters: GetElementLinkedDocumentsRequest): Promise<runtime.ApiResponse<Array<DocumentWithElementList>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementLinkedDocuments.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementLinkedDocuments.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementLinkedDocuments.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.type !== undefined) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
+        if (requestParameters.classification !== undefined) {
+            queryParameters['classification'] = requestParameters.classification;
+        }
+
+        if (requestParameters.classificationNotation !== undefined) {
+            queryParameters['classification__notation'] = requestParameters.classificationNotation;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/documents`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentWithElementListFromJSON));
+    }
+
+    /**
+     * Retrieve all documents linked to any element with the list of uuids Required scopes: ifc:read
+     * Retrieve all documents linked to any element
+     */
+    async getElementLinkedDocuments(requestParameters: GetElementLinkedDocumentsRequest): Promise<Array<DocumentWithElementList>> {
+        const response = await this.getElementLinkedDocumentsRaw(requestParameters);
         return await response.value();
     }
 
