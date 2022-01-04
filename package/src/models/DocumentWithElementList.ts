@@ -34,10 +34,10 @@ export interface DocumentWithElementList {
     document?: Document;
     /**
      * 
-     * @type {Array<number>}
+     * @type {Array<string>}
      * @memberof DocumentWithElementList
      */
-    readonly elementUuids?: Array<number>;
+    readonly elementUuids?: Array<string>;
 }
 
 export function DocumentWithElementListFromJSON(json: any): DocumentWithElementList {
