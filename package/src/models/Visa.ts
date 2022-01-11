@@ -51,6 +51,12 @@ export interface Visa {
      */
     readonly validations?: Array<VisaValidation>;
     /**
+     * Validation IDs where one or more validators have no longer access to the visa document.
+     * @type {Array<number>}
+     * @memberof Visa
+     */
+    readonly validationsInError?: Array<number>;
+    /**
      * 
      * @type {UserProject}
      * @memberof Visa
@@ -118,6 +124,7 @@ export function VisaFromJSONTyped(json: any, ignoreDiscriminator: boolean): Visa
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'validations': !exists(json, 'validations') ? undefined : ((json['validations'] as Array<any>).map(VisaValidationFromJSON)),
+        'validationsInError': !exists(json, 'validations_in_error') ? undefined : json['validations_in_error'],
         'creator': !exists(json, 'creator') ? undefined : UserProjectFromJSON(json['creator']),
         'creatorId': !exists(json, 'creator_id') ? undefined : json['creator_id'],
         'status': !exists(json, 'status') ? undefined : json['status'],
