@@ -625,6 +625,7 @@ export interface GetIfcsRequest {
     projectPk: string;
     status?: string;
     source?: string;
+    type?: string;
 }
 
 export interface GetLayerRequest {
@@ -3958,7 +3959,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result Required scopes: ifc:write
+     * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result Required scopes: ifc:write
      * Export IFC
      */
     async exportIfcRaw(requestParameters: ExportIfcRequest): Promise<runtime.ApiResponse<IfcExport>> {
@@ -4018,7 +4019,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result Required scopes: ifc:write
+     * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result Required scopes: ifc:write
      * Export IFC
      */
     async exportIfc(requestParameters: ExportIfcRequest): Promise<IfcExport> {
@@ -5868,7 +5869,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all models Required scopes: ifc:read
+     * Retrieve all models. For legacy reasons, this route is named IFC but now handle all models types (DWG, PDF, IFC, etc). The field `type` allows you to discriminate which kind of model it is. Required scopes: ifc:read
      * Retrieve all models
      */
     async getIfcsRaw(requestParameters: GetIfcsRequest): Promise<runtime.ApiResponse<Array<Ifc>>> {
@@ -5888,6 +5889,10 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (requestParameters.source !== undefined) {
             queryParameters['source'] = requestParameters.source;
+        }
+
+        if (requestParameters.type !== undefined) {
+            queryParameters['type'] = requestParameters.type;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -5925,7 +5930,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all models Required scopes: ifc:read
+     * Retrieve all models. For legacy reasons, this route is named IFC but now handle all models types (DWG, PDF, IFC, etc). The field `type` allows you to discriminate which kind of model it is. Required scopes: ifc:read
      * Retrieve all models
      */
     async getIfcs(requestParameters: GetIfcsRequest): Promise<Array<Ifc>> {
@@ -7327,7 +7332,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list Required scopes: ifc:write
+     * Only works for IFC files. Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list Required scopes: ifc:write
      * Merge IFC files
      */
     async mergeIfcsRaw(requestParameters: MergeIfcsRequest): Promise<runtime.ApiResponse<void>> {
@@ -7383,7 +7388,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list Required scopes: ifc:write
+     * Only works for IFC files. Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list Required scopes: ifc:write
      * Merge IFC files
      */
     async mergeIfcs(requestParameters: MergeIfcsRequest): Promise<void> {
@@ -7391,7 +7396,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC Required scopes: ifc:write
+     * Only works for IFC files. Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC Required scopes: ifc:write
      * Optimize the IFC
      */
     async optimizeIfcRaw(requestParameters: OptimizeIfcRequest): Promise<runtime.ApiResponse<void>> {
@@ -7451,7 +7456,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC Required scopes: ifc:write
+     * Only works for IFC files. Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC Required scopes: ifc:write
      * Optimize the IFC
      */
     async optimizeIfc(requestParameters: OptimizeIfcRequest): Promise<void> {

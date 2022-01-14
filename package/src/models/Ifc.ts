@@ -44,6 +44,12 @@ export interface Ifc {
     readonly name?: string;
     /**
      * 
+     * @type {string}
+     * @memberof Ifc
+     */
+    readonly type?: string;
+    /**
+     * 
      * @type {User}
      * @memberof Ifc
      */
@@ -188,6 +194,7 @@ export function IfcFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ifc {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'type': !exists(json, 'type') ? undefined : json['type'],
         'creator': !exists(json, 'creator') ? undefined : UserFromJSON(json['creator']),
         'status': !exists(json, 'status') ? undefined : json['status'],
         'source': !exists(json, 'source') ? undefined : json['source'],

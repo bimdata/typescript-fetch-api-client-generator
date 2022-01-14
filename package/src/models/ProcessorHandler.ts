@@ -27,10 +27,10 @@ export interface ProcessorHandler {
     readonly id?: number;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof ProcessorHandler
      */
-    readonly processor?: number;
+    readonly worker?: string;
     /**
      * 
      * @type {string}
@@ -56,7 +56,7 @@ export function ProcessorHandlerFromJSONTyped(json: any, ignoreDiscriminator: bo
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'processor': !exists(json, 'processor') ? undefined : json['processor'],
+        'worker': !exists(json, 'worker') ? undefined : json['worker'],
         'status': !exists(json, 'status') ? undefined : json['status'],
         'detailMessage': !exists(json, 'detail_message') ? undefined : json['detail_message'],
     };
