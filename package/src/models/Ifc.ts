@@ -47,7 +47,7 @@ export interface Ifc {
      * @type {string}
      * @memberof Ifc
      */
-    readonly type?: string;
+    readonly type?: IfcTypeEnum;
     /**
      * 
      * @type {User}
@@ -240,6 +240,22 @@ export function IfcToJSON(value?: Ifc | null): any {
     };
 }
 
+/**
+* @export
+* @enum {string}
+*/
+export enum IfcTypeEnum {
+    IFC = 'IFC',
+    DWG = 'DWG',
+    DXF = 'DXF',
+    GLTF = 'GLTF',
+    PDF = 'PDF',
+    JPEG = 'JPEG',
+    PNG = 'PNG',
+    OBJ = 'OBJ',
+    DAE = 'DAE',
+    BFX = 'BFX'
+}
 /**
 * @export
 * @enum {string}

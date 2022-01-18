@@ -10,6 +10,7 @@ export * from './Coloring';
 export * from './Comment';
 export * from './Component';
 export * from './ComponentsParent';
+export * from './CreateModel';
 export * from './Direction';
 export * from './Document';
 export * from './DocumentWithElementList';

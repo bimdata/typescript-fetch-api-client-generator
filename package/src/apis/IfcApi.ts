@@ -18,6 +18,9 @@ import {
     Classification,
     ClassificationFromJSON,
     ClassificationToJSON,
+    CreateModel,
+    CreateModelFromJSON,
+    CreateModelToJSON,
     Document,
     DocumentFromJSON,
     DocumentToJSON,
@@ -276,6 +279,12 @@ export interface CreateLayerRequest {
     data: Layer;
 }
 
+export interface CreateModelRequest {
+    cloudPk: string;
+    projectPk: string;
+    data: CreateModel;
+}
+
 export interface CreatePropertySetRequest {
     cloudPk: string;
     ifcPk: string;
@@ -371,6 +380,12 @@ export interface DeleteLayerRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
+    projectPk: string;
+}
+
+export interface DeleteModelWithoutDocRequest {
+    cloudPk: string;
+    id: number;
     projectPk: string;
 }
 
@@ -2694,6 +2709,71 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
+     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write
+     * Make a PDF or Image file a Model
+     */
+    async createModelRaw(requestParameters: CreateModelRequest): Promise<runtime.ApiResponse<Ifc>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createModel.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createModel.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createModel.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/create-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateModelToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => IfcFromJSON(jsonValue));
+    }
+
+    /**
+     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write
+     * Make a PDF or Image file a Model
+     */
+    async createModel(requestParameters: CreateModelRequest): Promise<Ifc> {
+        const response = await this.createModelRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
      * Create a PropertySet
      */
@@ -3309,7 +3389,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * It will delete the related document too Required scopes: ifc:write
+     * It will also delete the related document Required scopes: ifc:write
      * Delete a model
      */
     async deleteIfcRaw(requestParameters: DeleteIfcRequest): Promise<runtime.ApiResponse<void>> {
@@ -3362,7 +3442,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * It will delete the related document too Required scopes: ifc:write
+     * It will also delete the related document Required scopes: ifc:write
      * Delete a model
      */
     async deleteIfc(requestParameters: DeleteIfcRequest): Promise<void> {
@@ -3627,6 +3707,67 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async deleteLayer(requestParameters: DeleteLayerRequest): Promise<void> {
         await this.deleteLayerRaw(requestParameters);
+    }
+
+    /**
+     * Delete the Model without deleting the related document Required scopes: ifc:write
+     * Delete the Model without deleting the related document
+     */
+    async deleteModelWithoutDocRaw(requestParameters: DeleteModelWithoutDocRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModelWithoutDoc.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModelWithoutDoc.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModelWithoutDoc.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{id}/delete-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete the Model without deleting the related document Required scopes: ifc:write
+     * Delete the Model without deleting the related document
+     */
+    async deleteModelWithoutDoc(requestParameters: DeleteModelWithoutDocRequest): Promise<void> {
+        await this.deleteModelWithoutDocRaw(requestParameters);
     }
 
     /**
