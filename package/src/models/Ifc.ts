@@ -41,7 +41,7 @@ export interface Ifc {
      * @type {string}
      * @memberof Ifc
      */
-    readonly name?: string;
+    name?: string | null;
     /**
      * 
      * @type {string}
@@ -229,6 +229,7 @@ export function IfcToJSON(value?: Ifc | null): any {
     }
     return {
         
+        'name': value.name,
         'creator': UserToJSON(value.creator),
         'source': value.source,
         'document': DocumentToJSON(value.document),
@@ -254,7 +255,8 @@ export enum IfcTypeEnum {
     PNG = 'PNG',
     OBJ = 'OBJ',
     DAE = 'DAE',
-    BFX = 'BFX'
+    BFX = 'BFX',
+    METABUILDING = 'METABUILDING'
 }
 /**
 * @export
