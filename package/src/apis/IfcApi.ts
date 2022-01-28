@@ -334,7 +334,6 @@ export interface CreateStoreyPlanRequest {
     ifcPk: string;
     projectPk: string;
     storeyPk: string;
-    data: Storey;
 }
 
 export interface CreateSystemRequest {
@@ -3180,7 +3179,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a 2d model in storey Required scopes: ifc:write
+     * Create a 2d model in storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write
      * Create a 2d model in storey
      */
     async createStoreyPlanRaw(requestParameters: CreateStoreyPlanRequest): Promise<runtime.ApiResponse<Storey>> {
@@ -3204,15 +3203,9 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling createStoreyPlan.');
         }
 
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createStoreyPlan.');
-        }
-
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -3241,14 +3234,13 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: StoreyToJSON(requestParameters.data),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
     }
 
     /**
-     * Create a 2d model in storey Required scopes: ifc:write
+     * Create a 2d model in storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write
      * Create a 2d model in storey
      */
     async createStoreyPlan(requestParameters: CreateStoreyPlanRequest): Promise<Storey> {
@@ -4585,7 +4577,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          This route allows you to create storeys, modify them, delete them and organize them by order.         If the optional field \"id\" is present, the storey will be modified. Otherwise, a new storey will be created.         If an \"id\" present in the api is not present in the list passed in parameter, the corresponding storey will be deleted.         An storey with \"is_site=True\" will be stored without order.  Required scopes: ifc:write
+     *          This route allows you to create storeys, modify them, delete them and organize them by order.         If the optional field \"id\" is present, the storey will be modified. Otherwise, a new storey will be created.         If an \"id\" present in the api is not present in the list passed in parameter, the corresponding storey will be deleted.         A storey with \"is_site=True\" will be stored without order. There can be only one storey with \"is_site=True\"\"  Required scopes: ifc:write
      * Update all fields of all storeys
      */
     async fullUpdateStoreysRaw(requestParameters: FullUpdateStoreysRequest): Promise<runtime.ApiResponse<Array<Storey>>> {
@@ -4645,7 +4637,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          This route allows you to create storeys, modify them, delete them and organize them by order.         If the optional field \"id\" is present, the storey will be modified. Otherwise, a new storey will be created.         If an \"id\" present in the api is not present in the list passed in parameter, the corresponding storey will be deleted.         An storey with \"is_site=True\" will be stored without order.  Required scopes: ifc:write
+     *          This route allows you to create storeys, modify them, delete them and organize them by order.         If the optional field \"id\" is present, the storey will be modified. Otherwise, a new storey will be created.         If an \"id\" present in the api is not present in the list passed in parameter, the corresponding storey will be deleted.         A storey with \"is_site=True\" will be stored without order. There can be only one storey with \"is_site=True\"\"  Required scopes: ifc:write
      * Update all fields of all storeys
      */
     async fullUpdateStoreys(requestParameters: FullUpdateStoreysRequest): Promise<Array<Storey>> {
