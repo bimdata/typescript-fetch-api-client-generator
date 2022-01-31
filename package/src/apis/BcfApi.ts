@@ -56,6 +56,7 @@ export interface CreateCommentRequest {
 export interface CreateFullTopicRequest {
     projectsPk: string;
     data: FullTopic;
+    imgFormat?: CreateFullTopicImgFormatEnum;
 }
 
 export interface CreateTopicRequest {
@@ -67,6 +68,7 @@ export interface CreateViewpointRequest {
     projectsPk: string;
     topicsGuid: string;
     data: Viewpoint;
+    imgFormat?: CreateViewpointImgFormatEnum;
 }
 
 export interface DeleteCommentRequest {
@@ -84,6 +86,7 @@ export interface DeleteViewpointRequest {
     guid: string;
     projectsPk: string;
     topicsGuid: string;
+    imgFormat?: DeleteViewpointImgFormatEnum;
 }
 
 export interface DownloadBcfExportRequest {
@@ -108,6 +111,7 @@ export interface FullUpdateFullTopicRequest {
     guid: string;
     projectsPk: string;
     data: FullTopic;
+    imgFormat?: FullUpdateFullTopicImgFormatEnum;
 }
 
 export interface FullUpdateTopicRequest {
@@ -121,6 +125,7 @@ export interface FullUpdateViewpointRequest {
     projectsPk: string;
     topicsGuid: string;
     data: Viewpoint;
+    imgFormat?: FullUpdateViewpointImgFormatEnum;
 }
 
 export interface GetBcfProjectRequest {
@@ -151,12 +156,14 @@ export interface GetExtensionsRequest {
 export interface GetFullTopicRequest {
     guid: string;
     projectsPk: string;
+    imgFormat?: GetFullTopicImgFormatEnum;
 }
 
 export interface GetFullTopicsRequest {
     projectsPk: string;
     ifcs?: string;
     format?: string;
+    imgFormat?: GetFullTopicsImgFormatEnum;
 }
 
 export interface GetSelectionsRequest {
@@ -179,6 +186,7 @@ export interface GetTopicRequest {
 export interface GetTopicViewpointsRequest {
     projectsPk: string;
     topicsGuid: string;
+    imgFormat?: GetTopicViewpointsImgFormatEnum;
 }
 
 export interface GetTopicsRequest {
@@ -191,11 +199,13 @@ export interface GetViewpointRequest {
     guid: string;
     projectsPk: string;
     topicsGuid: string;
+    imgFormat?: GetViewpointImgFormatEnum;
 }
 
 export interface GetViewpointsRequest {
     projectsPk: string;
     topicsGuid: string;
+    imgFormat?: GetViewpointsImgFormatEnum;
 }
 
 export interface GetVisibilitiesRequest {
@@ -230,6 +240,7 @@ export interface UpdateFullTopicRequest {
     guid: string;
     projectsPk: string;
     data: FullTopic;
+    imgFormat?: UpdateFullTopicImgFormatEnum;
 }
 
 export interface UpdateTopicRequest {
@@ -243,6 +254,7 @@ export interface UpdateViewpointRequest {
     projectsPk: string;
     topicsGuid: string;
     data: Viewpoint;
+    imgFormat?: UpdateViewpointImgFormatEnum;
 }
 
 /**
@@ -329,6 +341,10 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -455,6 +471,10 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -638,6 +658,10 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -892,6 +916,10 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
@@ -1025,6 +1053,10 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1427,6 +1459,10 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1487,6 +1523,10 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (requestParameters.format !== undefined) {
             queryParameters['format'] = requestParameters.format;
+        }
+
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -1729,6 +1769,10 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1903,6 +1947,10 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1960,6 +2008,10 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2353,6 +2405,10 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
@@ -2487,6 +2543,10 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.imgFormat !== undefined) {
+            queryParameters['img_format'] = requestParameters.imgFormat;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
@@ -2533,4 +2593,89 @@ export class BcfApi extends runtime.BaseAPI {
         return await response.value();
     }
 
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum CreateFullTopicImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum CreateViewpointImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum DeleteViewpointImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum FullUpdateFullTopicImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum FullUpdateViewpointImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetFullTopicImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetFullTopicsImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetTopicViewpointsImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetViewpointImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetViewpointsImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum UpdateFullTopicImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum UpdateViewpointImgFormatEnum {
+    Url = 'url'
 }
