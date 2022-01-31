@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Ifc,
-    IfcFromJSON,
-    IfcFromJSONTyped,
-    IfcToJSON,
+    ModelWithPositioningPlan,
+    ModelWithPositioningPlanFromJSON,
+    ModelWithPositioningPlanFromJSONTyped,
+    ModelWithPositioningPlanToJSON,
 } from './';
 
 /**
@@ -58,10 +58,10 @@ export interface Storey {
     readonly order?: number;
     /**
      * 
-     * @type {Array<Ifc>}
+     * @type {Array<ModelWithPositioningPlan>}
      * @memberof Storey
      */
-    readonly models?: Array<Ifc>;
+    readonly models?: Array<ModelWithPositioningPlan>;
     /**
      * 
      * @type {number}
@@ -91,7 +91,7 @@ export function StoreyFromJSONTyped(json: any, ignoreDiscriminator: boolean): St
         'name': json['name'],
         'elevation': !exists(json, 'elevation') ? undefined : json['elevation'],
         'order': !exists(json, 'order') ? undefined : json['order'],
-        'models': !exists(json, 'models') ? undefined : ((json['models'] as Array<any>).map(IfcFromJSON)),
+        'models': !exists(json, 'models') ? undefined : ((json['models'] as Array<any>).map(ModelWithPositioningPlanFromJSON)),
         'modelsUnreachableCount': !exists(json, 'models_unreachable_count') ? undefined : json['models_unreachable_count'],
         'isSite': !exists(json, 'is_site') ? undefined : json['is_site'],
     };

@@ -60,12 +60,18 @@ import {
     IfcOptimize,
     IfcOptimizeFromJSON,
     IfcOptimizeToJSON,
+    InlineObject4,
+    InlineObject4FromJSON,
+    InlineObject4ToJSON,
     Layer,
     LayerFromJSON,
     LayerToJSON,
     Material,
     MaterialFromJSON,
     MaterialToJSON,
+    PositioningPlan,
+    PositioningPlanFromJSON,
+    PositioningPlanToJSON,
     ProcessorHandler,
     ProcessorHandlerFromJSON,
     ProcessorHandlerToJSON,
@@ -330,10 +336,10 @@ export interface CreateSpaceRequest {
 
 export interface CreateStoreyPlanRequest {
     cloudPk: string;
-    id: number;
     ifcPk: string;
     projectPk: string;
     storeyPk: string;
+    data: InlineObject4;
 }
 
 export interface CreateSystemRequest {
@@ -729,6 +735,14 @@ export interface GetModelStoreysRequest {
     projectPk: string;
 }
 
+export interface GetPlanPositioningRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+    storeyPk: string;
+}
+
 export interface GetProcessorHandlerRequest {
     cloudPk: string;
     id: number;
@@ -1014,6 +1028,15 @@ export interface UpdateLayerRequest {
     ifcPk: string;
     projectPk: string;
     data: Layer;
+}
+
+export interface UpdatePlanPositioningRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+    storeyPk: string;
+    data: PositioningPlan;
 }
 
 export interface UpdateProcessorHandlerRequest {
@@ -3179,16 +3202,12 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a 2d model in storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write
-     * Create a 2d model in storey
+     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write
+     * Create a relation between a 2d model and a storey
      */
     async createStoreyPlanRaw(requestParameters: CreateStoreyPlanRequest): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createStoreyPlan.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createStoreyPlan.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
@@ -3203,9 +3222,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling createStoreyPlan.');
         }
 
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createStoreyPlan.');
+        }
+
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
@@ -3230,18 +3255,19 @@ export class IfcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey/{storey_pk}/plan/{id}/add`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_pk"}}`, encodeURIComponent(String(requestParameters.storeyPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey/{storey_pk}/plan/add`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_pk"}}`, encodeURIComponent(String(requestParameters.storeyPk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: InlineObject4ToJSON(requestParameters.data),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
     }
 
     /**
-     * Create a 2d model in storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write
-     * Create a 2d model in storey
+     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write
+     * Create a relation between a 2d model and a storey
      */
     async createStoreyPlan(requestParameters: CreateStoreyPlanRequest): Promise<Storey> {
         const response = await this.createStoreyPlanRaw(requestParameters);
@@ -4167,8 +4193,8 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a 2D model Required scopes: ifc:write
-     * Delete a 2d model
+     * Delete the relation between a 2d model and a storey Required scopes: ifc:write
+     * Delete the relation between a 2d model and a storey
      */
     async deleteStoreyPlanRaw(requestParameters: DeleteStoreyPlanRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
@@ -4218,7 +4244,7 @@ export class IfcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey/{storey_pk}/plan/{id}/delete`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_pk"}}`, encodeURIComponent(String(requestParameters.storeyPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey/{storey_pk}/plan/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_pk"}}`, encodeURIComponent(String(requestParameters.storeyPk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4228,8 +4254,8 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a 2D model Required scopes: ifc:write
-     * Delete a 2d model
+     * Delete the relation between a 2d model and a storey Required scopes: ifc:write
+     * Delete the relation between a 2d model and a storey
      */
     async deleteStoreyPlan(requestParameters: DeleteStoreyPlanRequest): Promise<void> {
         await this.deleteStoreyPlanRaw(requestParameters);
@@ -6876,6 +6902,76 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve the postioning of the plan in the storey Required scopes: ifc:read
+     * Retrieve the postioning of the plan in the storey
+     */
+    async getPlanPositioningRaw(requestParameters: GetPlanPositioningRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPlanPositioning.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPlanPositioning.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getPlanPositioning.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPlanPositioning.');
+        }
+
+        if (requestParameters.storeyPk === null || requestParameters.storeyPk === undefined) {
+            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling getPlanPositioning.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey/{storey_pk}/plan/{id}/positioning`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_pk"}}`, encodeURIComponent(String(requestParameters.storeyPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PositioningPlanFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve the postioning of the plan in the storey Required scopes: ifc:read
+     * Retrieve the postioning of the plan in the storey
+     */
+    async getPlanPositioning(requestParameters: GetPlanPositioningRequest): Promise<PositioningPlan> {
+        const response = await this.getPlanPositioningRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
      *  Required scopes: ifc:read
      * Retrieve a processor handler
      */
@@ -9480,6 +9576,83 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async updateLayer(requestParameters: UpdateLayerRequest): Promise<Layer> {
         const response = await this.updateLayerRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update the postioning of the plan in the storey Required scopes: ifc:write
+     * Update the postioning of the plan in the storey
+     */
+    async updatePlanPositioningRaw(requestParameters: UpdatePlanPositioningRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updatePlanPositioning.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePlanPositioning.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updatePlanPositioning.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updatePlanPositioning.');
+        }
+
+        if (requestParameters.storeyPk === null || requestParameters.storeyPk === undefined) {
+            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling updatePlanPositioning.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updatePlanPositioning.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey/{storey_pk}/plan/{id}/positioning`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_pk"}}`, encodeURIComponent(String(requestParameters.storeyPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PositioningPlanToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PositioningPlanFromJSON(jsonValue));
+    }
+
+    /**
+     * Update the postioning of the plan in the storey Required scopes: ifc:write
+     * Update the postioning of the plan in the storey
+     */
+    async updatePlanPositioning(requestParameters: UpdatePlanPositioningRequest): Promise<PositioningPlan> {
+        const response = await this.updatePlanPositioningRaw(requestParameters);
         return await response.value();
     }
 
