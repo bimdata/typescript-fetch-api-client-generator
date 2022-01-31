@@ -64,6 +64,12 @@ export interface Storey {
     readonly models?: Array<Ifc>;
     /**
      * 
+     * @type {number}
+     * @memberof Storey
+     */
+    readonly modelsUnreachableCount?: number;
+    /**
+     * 
      * @type {boolean}
      * @memberof Storey
      */
@@ -86,6 +92,7 @@ export function StoreyFromJSONTyped(json: any, ignoreDiscriminator: boolean): St
         'elevation': !exists(json, 'elevation') ? undefined : json['elevation'],
         'order': !exists(json, 'order') ? undefined : json['order'],
         'models': !exists(json, 'models') ? undefined : ((json['models'] as Array<any>).map(IfcFromJSON)),
+        'modelsUnreachableCount': !exists(json, 'models_unreachable_count') ? undefined : json['models_unreachable_count'],
         'isSite': !exists(json, 'is_site') ? undefined : json['is_site'],
     };
 }
