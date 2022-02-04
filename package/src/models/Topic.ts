@@ -110,11 +110,17 @@ export interface Topic {
      */
     dueDate?: Date | null;
     /**
-     * 
+     * DEPRECATED: Use 'models' instead
      * @type {Array<number>}
      * @memberof Topic
      */
     ifcs?: Array<number>;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof Topic
+     */
+    models?: Array<number>;
     /**
      * 
      * @type {string}
@@ -161,6 +167,7 @@ export function TopicFromJSONTyped(json: any, ignoreDiscriminator: boolean): Top
         'description': !exists(json, 'description') ? undefined : json['description'],
         'dueDate': !exists(json, 'due_date') ? undefined : (json['due_date'] === null ? null : new Date(json['due_date'])),
         'ifcs': !exists(json, 'ifcs') ? undefined : json['ifcs'],
+        'models': !exists(json, 'models') ? undefined : json['models'],
         'format': !exists(json, 'format') ? undefined : json['format'],
         'index': !exists(json, 'index') ? undefined : json['index'],
         'project': json['project'],
@@ -191,6 +198,7 @@ export function TopicToJSON(value?: Topic | null): any {
         'description': value.description,
         'due_date': value.dueDate === undefined ? undefined : (value.dueDate === null ? null : value.dueDate.toISOString()),
         'ifcs': value.ifcs,
+        'models': value.models,
         'format': value.format,
         'index': value.index,
         'project': value.project,

@@ -92,13 +92,25 @@ export interface Document {
      */
     readonly updatedAt?: Date;
     /**
-     * Define the ifc.source field if the upload is an IFC
+     * Define the model.source field if the upload is a Model (IFC, PDF, DWG...)
+     * @type {string}
+     * @memberof Document
+     */
+    modelSource?: DocumentModelSourceEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Document
+     */
+    readonly modelId?: string;
+    /**
+     * DEPRECATED: Use 'model_source' instead. Define the model.source field if the upload is a Model (IFC, PDF, DWG...)
      * @type {string}
      * @memberof Document
      */
     ifcSource?: DocumentIfcSourceEnum;
     /**
-     * 
+     * DEPRECATED: Use 'model_id' instead.
      * @type {string}
      * @memberof Document
      */
@@ -133,6 +145,8 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'size': !exists(json, 'size') ? undefined : json['size'],
         'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
         'updatedAt': !exists(json, 'updated_at') ? undefined : (new Date(json['updated_at'])),
+        'modelSource': !exists(json, 'model_source') ? undefined : json['model_source'],
+        'modelId': !exists(json, 'model_id') ? undefined : json['model_id'],
         'ifcSource': !exists(json, 'ifc_source') ? undefined : json['ifc_source'],
         'ifcId': !exists(json, 'ifc_id') ? undefined : json['ifc_id'],
         'userPermission': !exists(json, 'user_permission') ? undefined : json['user_permission'],
@@ -155,10 +169,22 @@ export function DocumentToJSON(value?: Document | null): any {
         'file_name': value.fileName,
         'description': value.description,
         'size': value.size,
+        'model_source': value.modelSource,
         'ifc_source': value.ifcSource,
     };
 }
 
+/**
+* @export
+* @enum {string}
+*/
+export enum DocumentModelSourceEnum {
+    UPLOAD = 'UPLOAD',
+    SPLIT = 'SPLIT',
+    MERGE = 'MERGE',
+    EXPORT = 'EXPORT',
+    OPTIMIZED = 'OPTIMIZED'
+}
 /**
 * @export
 * @enum {string}

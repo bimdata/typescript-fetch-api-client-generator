@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    CheckerResult,
+    CheckerResultFromJSON,
+    CheckerResultToJSON,
     Classification,
     ClassificationFromJSON,
     ClassificationToJSON,
@@ -39,21 +42,15 @@ import {
     ElementPropertySetRelation,
     ElementPropertySetRelationFromJSON,
     ElementPropertySetRelationToJSON,
-    Ifc,
-    IfcFromJSON,
-    IfcToJSON,
     IfcAccessToken,
     IfcAccessTokenFromJSON,
     IfcAccessTokenToJSON,
-    IfcErrors,
-    IfcErrorsFromJSON,
-    IfcErrorsToJSON,
+    IfcChecker,
+    IfcCheckerFromJSON,
+    IfcCheckerToJSON,
     IfcExport,
     IfcExportFromJSON,
     IfcExportToJSON,
-    IfcFiles,
-    IfcFilesFromJSON,
-    IfcFilesToJSON,
     IfcMerge,
     IfcMergeFromJSON,
     IfcMergeToJSON,
@@ -69,6 +66,15 @@ import {
     Material,
     MaterialFromJSON,
     MaterialToJSON,
+    Model,
+    ModelFromJSON,
+    ModelToJSON,
+    ModelErrors,
+    ModelErrorsFromJSON,
+    ModelErrorsToJSON,
+    ModelFiles,
+    ModelFilesFromJSON,
+    ModelFilesToJSON,
     PositioningPlan,
     PositioningPlanFromJSON,
     PositioningPlanToJSON,
@@ -113,62 +119,62 @@ import {
     ZoneSpaceToJSON,
 } from '../models';
 
-export interface AddIfcErrorsRequest {
+export interface AddIfcErrorsDeprecatedRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
-    data: IfcErrors;
+    data: ModelErrors;
 }
 
-export interface BulkDeleteIfcClassificationsRequest {
+export interface BulkDeleteIfcClassificationsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface BulkDeleteIfcPropertiesRequest {
-    cloudPk: string;
-    ifcPk: string;
-    projectPk: string;
-    data: Array<number>;
-}
-
-export interface BulkDeleteIfcPropertyDefinitionsRequest {
+export interface BulkDeleteIfcPropertiesDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<number>;
 }
 
-export interface BulkDeleteIfcUnitsRequest {
+export interface BulkDeleteIfcPropertyDefinitionsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<number>;
 }
 
-export interface BulkDeletePropertySetRequest {
+export interface BulkDeleteIfcUnitsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<number>;
 }
 
-export interface BulkFullUpdateElementsRequest {
+export interface BulkDeletePropertySetDeprecatedRequest {
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+    data: Array<number>;
+}
+
+export interface BulkFullUpdateElementsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<Element>;
 }
 
-export interface BulkFullUpdateIfcPropertyRequest {
+export interface BulkFullUpdateIfcPropertyDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<Property>;
 }
 
-export interface BulkRemoveClassificationsOfElementRequest {
+export interface BulkRemoveClassificationsOfElementDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -176,7 +182,7 @@ export interface BulkRemoveClassificationsOfElementRequest {
     data: Array<number>;
 }
 
-export interface BulkRemoveDocumentsOfElementRequest {
+export interface BulkRemoveDocumentsOfElementDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -184,43 +190,58 @@ export interface BulkRemoveDocumentsOfElementRequest {
     data: Array<number>;
 }
 
-export interface BulkRemoveElementsFromClassificationRequest {
+export interface BulkRemoveElementsFromClassificationDeprecatedRequest {
     cloudPk: string;
-    ifcClassificationPk: string;
     ifcPk: string;
+    modelClassificationPk: string;
     projectPk: string;
     data: Array<number>;
 }
 
-export interface BulkUpdateElementsRequest {
+export interface BulkUpdateElementsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<Element>;
 }
 
-export interface BulkUpdateIfcPropertyRequest {
+export interface BulkUpdateIfcPropertyDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<Property>;
 }
 
-export interface CreateAccessTokenRequest {
+export interface CreateAccessTokenDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: IfcAccessToken;
 }
 
-export interface CreateClassificationElementRelationsRequest {
+export interface CreateCheckerDeprecatedRequest {
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+    data: IfcChecker;
+}
+
+export interface CreateCheckerResultDeprecatedRequest {
+    checkerPk: string;
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+    data: CheckerResult;
+}
+
+export interface CreateClassificationElementRelationsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<ElementClassificationRelation>;
 }
 
-export interface CreateClassificationsOfElementRequest {
+export interface CreateClassificationsOfElementDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -228,14 +249,14 @@ export interface CreateClassificationsOfElementRequest {
     data: Array<Classification>;
 }
 
-export interface CreateElementRequest {
+export interface CreateElementDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<Element>;
 }
 
-export interface CreateElementPropertySetRequest {
+export interface CreateElementPropertySetDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -243,16 +264,7 @@ export interface CreateElementPropertySetRequest {
     data: PropertySet;
 }
 
-export interface CreateElementPropertySetPropertyRequest {
-    cloudPk: string;
-    elementUuid: string;
-    ifcPk: string;
-    projectPk: string;
-    propertysetPk: string;
-    data: Property;
-}
-
-export interface CreateElementPropertySetPropertyDefinitionRequest {
+export interface CreateElementPropertySetPropertyDefinitionDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -262,7 +274,7 @@ export interface CreateElementPropertySetPropertyDefinitionRequest {
     data: PropertyDefinition;
 }
 
-export interface CreateElementPropertySetPropertyDefinitionUnitRequest {
+export interface CreateElementPropertySetPropertyDefinitionUnitDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -273,68 +285,77 @@ export interface CreateElementPropertySetPropertyDefinitionUnitRequest {
     data: Unit;
 }
 
-export interface CreateIfcPropertyDefinitionRequest {
+export interface CreateElementPropertySetPropertyDeprecatedRequest {
+    cloudPk: string;
+    elementUuid: string;
+    ifcPk: string;
+    projectPk: string;
+    propertysetPk: string;
+    data: Property;
+}
+
+export interface CreateIfcDeprecatedRequest {
+    cloudPk: string;
+    projectPk: string;
+    data: CreateModel;
+}
+
+export interface CreateIfcPropertyDefinitionDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<PropertyDefinition>;
 }
 
-export interface CreateIfcUnitRequest {
+export interface CreateIfcUnitDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<Unit>;
 }
 
-export interface CreateLayerRequest {
+export interface CreateLayerDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Layer;
 }
 
-export interface CreateMetaBuildingRequest {
+export interface CreateMetaBuildingDeprecatedRequest {
     cloudPk: string;
     projectPk: string;
     data: CreateBuilding;
 }
 
-export interface CreateModelRequest {
-    cloudPk: string;
-    projectPk: string;
-    data: CreateModel;
-}
-
-export interface CreatePropertySetRequest {
+export interface CreatePropertySetDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<PropertySet>;
 }
 
-export interface CreatePropertySetElementRelationsRequest {
+export interface CreatePropertySetElementRelationsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<ElementPropertySetRelation>;
 }
 
-export interface CreateRawElementsRequest {
+export interface CreateRawElementsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: RawElements;
 }
 
-export interface CreateSpaceRequest {
+export interface CreateSpaceDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<Space>;
 }
 
-export interface CreateStoreyPlanRequest {
+export interface CreateStoreyPlanDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -342,21 +363,21 @@ export interface CreateStoreyPlanRequest {
     data: InlineObject4;
 }
 
-export interface CreateSystemRequest {
+export interface CreateSystemDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: System;
 }
 
-export interface CreateZoneRequest {
+export interface CreateZoneDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<Zone>;
 }
 
-export interface CreateZoneSpaceRequest {
+export interface CreateZoneSpaceDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -364,82 +385,97 @@ export interface CreateZoneSpaceRequest {
     data: ZoneSpace;
 }
 
-export interface DeleteAccessTokenRequest {
+export interface DeleteAccessTokenDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     token: string;
 }
 
-export interface DeleteElementRequest {
+export interface DeleteCheckerDeprecatedRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface DeleteCheckerResultDeprecatedRequest {
+    checkerPk: string;
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface DeleteElementDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     uuid: string;
 }
 
-export interface DeleteIfcRequest {
+export interface DeleteIfcDeprecatedRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
 }
 
-export interface DeleteIfcPropertyRequest {
-    cloudPk: string;
-    id: number;
-    ifcPk: string;
-    projectPk: string;
-}
-
-export interface DeleteIfcPropertyDefinitionRequest {
+export interface DeleteIfcPropertyDefinitionDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface DeleteIfcUnitRequest {
+export interface DeleteIfcPropertyDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface DeleteLayerRequest {
+export interface DeleteIfcUnitDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface DeleteModelWithoutDocRequest {
+export interface DeleteIfcWithoutDocDeprecatedRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
 }
 
-export interface DeletePropertySetRequest {
-    cloudPk: string;
-    id: number;
-    ifcPk: string;
-    projectPk: string;
-}
-
-export interface DeleteSpaceRequest {
+export interface DeleteLayerDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface DeleteStoreyRequest {
+export interface DeletePropertySetDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface DeleteStoreyPlanRequest {
+export interface DeleteSpaceDeprecatedRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface DeleteStoreyDeprecatedRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface DeleteStoreyPlanDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -447,21 +483,21 @@ export interface DeleteStoreyPlanRequest {
     storeyPk: string;
 }
 
-export interface DeleteSystemRequest {
+export interface DeleteSystemDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     uuid: string;
 }
 
-export interface DeleteZoneRequest {
+export interface DeleteZoneDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface DeleteZoneSpaceRequest {
+export interface DeleteZoneSpaceDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -469,14 +505,14 @@ export interface DeleteZoneSpaceRequest {
     zonePk: string;
 }
 
-export interface ExportIfcRequest {
+export interface ExportIfcDeprecatedRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
     data: IfcExport;
 }
 
-export interface FullUpdateElementRequest {
+export interface FullUpdateElementDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -484,48 +520,76 @@ export interface FullUpdateElementRequest {
     data: Element;
 }
 
-export interface FullUpdateStoreysRequest {
+export interface FullUpdateStoreysDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     data: Array<StoreyRequest>;
 }
 
-export interface GetAccessTokenRequest {
+export interface GetAccessTokenDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     token: string;
 }
 
-export interface GetAccessTokensRequest {
+export interface GetAccessTokensDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetClassificationsOfElementRequest {
+export interface GetCheckerDeprecatedRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetCheckerResultDeprecatedRequest {
+    checkerPk: string;
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetCheckerResultsDeprecatedRequest {
+    checkerPk: string;
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetCheckersDeprecatedRequest {
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetClassificationsOfElementDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetDocumentsOfElementRequest {
+export interface GetDocumentsOfElementDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetElementRequest {
+export interface GetElementDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     uuid: string;
 }
 
-export interface GetElementLinkedDocumentsRequest {
+export interface GetElementLinkedDocumentsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -534,7 +598,7 @@ export interface GetElementLinkedDocumentsRequest {
     classificationNotation?: string;
 }
 
-export interface GetElementPropertySetRequest {
+export interface GetElementPropertySetDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -542,7 +606,7 @@ export interface GetElementPropertySetRequest {
     projectPk: string;
 }
 
-export interface GetElementPropertySetPropertiesRequest {
+export interface GetElementPropertySetPropertiesDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -550,16 +614,7 @@ export interface GetElementPropertySetPropertiesRequest {
     propertysetPk: string;
 }
 
-export interface GetElementPropertySetPropertyRequest {
-    cloudPk: string;
-    elementUuid: string;
-    id: number;
-    ifcPk: string;
-    projectPk: string;
-    propertysetPk: string;
-}
-
-export interface GetElementPropertySetPropertyDefinitionRequest {
+export interface GetElementPropertySetPropertyDefinitionDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -569,7 +624,7 @@ export interface GetElementPropertySetPropertyDefinitionRequest {
     propertysetPk: string;
 }
 
-export interface GetElementPropertySetPropertyDefinitionUnitRequest {
+export interface GetElementPropertySetPropertyDefinitionUnitDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -580,7 +635,7 @@ export interface GetElementPropertySetPropertyDefinitionUnitRequest {
     propertysetPk: string;
 }
 
-export interface GetElementPropertySetPropertyDefinitionUnitsRequest {
+export interface GetElementPropertySetPropertyDefinitionUnitsDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -590,7 +645,7 @@ export interface GetElementPropertySetPropertyDefinitionUnitsRequest {
     propertysetPk: string;
 }
 
-export interface GetElementPropertySetPropertyDefinitionsRequest {
+export interface GetElementPropertySetPropertyDefinitionsDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -599,14 +654,23 @@ export interface GetElementPropertySetPropertyDefinitionsRequest {
     propertysetPk: string;
 }
 
-export interface GetElementPropertySetsRequest {
+export interface GetElementPropertySetPropertyDeprecatedRequest {
+    cloudPk: string;
+    elementUuid: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+    propertysetPk: string;
+}
+
+export interface GetElementPropertySetsDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetElementsRequest {
+export interface GetElementsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -615,78 +679,78 @@ export interface GetElementsRequest {
     classificationNotation?: string;
 }
 
-export interface GetElementsFromClassificationRequest {
+export interface GetElementsFromClassificationDeprecatedRequest {
     cloudPk: string;
-    ifcClassificationPk: string;
+    ifcPk: string;
+    modelClassificationPk: string;
+    projectPk: string;
+}
+
+export interface GetIfcClassificationsDeprecatedRequest {
+    cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetIfcRequest {
+export interface GetIfcDeprecatedRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
 }
 
-export interface GetIfcClassificationsRequest {
-    cloudPk: string;
-    ifcPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcMaterialRequest {
-    cloudPk: string;
-    id: number;
-    ifcPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcMaterialsRequest {
-    cloudPk: string;
-    ifcPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcPropertiesRequest {
-    cloudPk: string;
-    ifcPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcPropertyRequest {
+export interface GetIfcMaterialDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetIfcPropertyDefinitionRequest {
+export interface GetIfcMaterialsDeprecatedRequest {
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetIfcPropertiesDeprecatedRequest {
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetIfcPropertyDefinitionDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetIfcPropertyDefinitionsRequest {
+export interface GetIfcPropertyDefinitionsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetIfcUnitRequest {
+export interface GetIfcPropertyDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetIfcUnitsRequest {
+export interface GetIfcUnitDeprecatedRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetIfcUnitsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetIfcsRequest {
+export interface GetIfcsDeprecatedRequest {
     cloudPk: string;
     projectPk: string;
     status?: string;
@@ -694,20 +758,20 @@ export interface GetIfcsRequest {
     type?: string;
 }
 
-export interface GetLayerRequest {
+export interface GetLayerDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetLayersRequest {
+export interface GetLayersDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetMaterialRequest {
+export interface GetMaterialDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -715,27 +779,14 @@ export interface GetMaterialRequest {
     projectPk: string;
 }
 
-export interface GetMaterialsRequest {
+export interface GetMaterialsDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetModelStoreyRequest {
-    cloudPk: string;
-    id: number;
-    ifcPk: string;
-    projectPk: string;
-}
-
-export interface GetModelStoreysRequest {
-    cloudPk: string;
-    ifcPk: string;
-    projectPk: string;
-}
-
-export interface GetPlanPositioningRequest {
+export interface GetPlanPositioningDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -743,33 +794,33 @@ export interface GetPlanPositioningRequest {
     storeyPk: string;
 }
 
-export interface GetProcessorHandlerRequest {
+export interface GetProcessorHandlerDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetProcessorHandlersRequest {
+export interface GetProcessorHandlersDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetPropertySetRequest {
+export interface GetPropertySetDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetPropertySetsRequest {
+export interface GetPropertySetsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetRawElementsRequest {
+export interface GetRawElementsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -778,14 +829,14 @@ export interface GetRawElementsRequest {
     classificationNotation?: string;
 }
 
-export interface GetSimpleElementRequest {
+export interface GetSimpleElementDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     uuid: string;
 }
 
-export interface GetSimpleElementsRequest {
+export interface GetSimpleElementsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -794,40 +845,53 @@ export interface GetSimpleElementsRequest {
     classificationNotation?: string;
 }
 
-export interface GetSpaceRequest {
+export interface GetSpaceDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetSpacesRequest {
+export interface GetSpacesDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetSystemRequest {
+export interface GetStoreyDeprecatedRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetStoreysDeprecatedRequest {
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+}
+
+export interface GetSystemDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     uuid: string;
 }
 
-export interface GetSystemsRequest {
+export interface GetSystemsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetZoneRequest {
+export interface GetZoneDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface GetZoneSpaceRequest {
+export interface GetZoneSpaceDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -835,21 +899,29 @@ export interface GetZoneSpaceRequest {
     zonePk: string;
 }
 
-export interface GetZoneSpacesRequest {
+export interface GetZoneSpacesDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     zonePk: string;
 }
 
-export interface GetZonesRequest {
+export interface GetZonesDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
     color?: string;
 }
 
-export interface LinkDocumentsOfElementRequest {
+export interface LaunchNewCheckDeprecatedRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+    data: IfcChecker;
+}
+
+export interface LinkDocumentsOfElementDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
@@ -857,41 +929,33 @@ export interface LinkDocumentsOfElementRequest {
     data: Array<number>;
 }
 
-export interface ListClassificationElementRelationsRequest {
+export interface ListClassificationElementRelationsDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface MergeIfcsRequest {
+export interface MergeIfcsDeprecatedRequest {
     cloudPk: string;
     projectPk: string;
     data: IfcMerge;
 }
 
-export interface OptimizeIfcRequest {
+export interface OptimizeIfcDeprecatedRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
     data: IfcOptimize;
 }
 
-export interface RemoveAllElementPropertySetRequest {
+export interface RemoveAllElementPropertySetDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     ifcPk: string;
     projectPk: string;
 }
 
-export interface RemoveClassificationOfElementRequest {
-    cloudPk: string;
-    elementUuid: string;
-    id: number;
-    ifcPk: string;
-    projectPk: string;
-}
-
-export interface RemoveDocumentOfElementRequest {
+export interface RemoveClassificationOfElementDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -899,7 +963,7 @@ export interface RemoveDocumentOfElementRequest {
     projectPk: string;
 }
 
-export interface RemoveElementPropertySetRequest {
+export interface RemoveDocumentOfElementDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -907,16 +971,15 @@ export interface RemoveElementPropertySetRequest {
     projectPk: string;
 }
 
-export interface RemoveElementPropertySetPropertyRequest {
+export interface RemoveElementPropertySetDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
     ifcPk: string;
     projectPk: string;
-    propertysetPk: string;
 }
 
-export interface RemoveElementPropertySetPropertyDefinitionRequest {
+export interface RemoveElementPropertySetPropertyDefinitionDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -926,7 +989,7 @@ export interface RemoveElementPropertySetPropertyDefinitionRequest {
     propertysetPk: string;
 }
 
-export interface RemoveElementPropertySetPropertyDefinitionUnitRequest {
+export interface RemoveElementPropertySetPropertyDefinitionUnitDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -937,21 +1000,30 @@ export interface RemoveElementPropertySetPropertyDefinitionUnitRequest {
     propertysetPk: string;
 }
 
-export interface RemoveElementsFromClassificationRequest {
+export interface RemoveElementPropertySetPropertyDeprecatedRequest {
     cloudPk: string;
-    ifcClassificationPk: string;
+    elementUuid: string;
+    id: number;
     ifcPk: string;
+    projectPk: string;
+    propertysetPk: string;
+}
+
+export interface RemoveElementsFromClassificationDeprecatedRequest {
+    cloudPk: string;
+    ifcPk: string;
+    modelClassificationPk: string;
     projectPk: string;
     uuid: string;
 }
 
-export interface ReprocessIfcRequest {
+export interface ReprocessIfcDeprecatedRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
 }
 
-export interface UpdateAccessTokenRequest {
+export interface UpdateAccessTokenDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -959,7 +1031,24 @@ export interface UpdateAccessTokenRequest {
     data: IfcAccessToken;
 }
 
-export interface UpdateElementRequest {
+export interface UpdateCheckerDeprecatedRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+    data: IfcChecker;
+}
+
+export interface UpdateCheckerResultDeprecatedRequest {
+    checkerPk: string;
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+    data: CheckerResult;
+}
+
+export interface UpdateElementDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -967,7 +1056,7 @@ export interface UpdateElementRequest {
     data: Element;
 }
 
-export interface UpdateElementPropertySetPropertyRequest {
+export interface UpdateElementPropertySetPropertyDeprecatedRequest {
     cloudPk: string;
     elementUuid: string;
     id: number;
@@ -977,14 +1066,14 @@ export interface UpdateElementPropertySetPropertyRequest {
     data: Property;
 }
 
-export interface UpdateIfcRequest {
+export interface UpdateIfcDeprecatedRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
-    data: Ifc;
+    data: Model;
 }
 
-export interface UpdateIfcFilesRequest {
+export interface UpdateIfcFilesDeprecatedRequest {
     cloudPk: string;
     id: number;
     projectPk: string;
@@ -998,15 +1087,7 @@ export interface UpdateIfcFilesRequest {
     xktFile?: Blob | null;
 }
 
-export interface UpdateIfcPropertyRequest {
-    cloudPk: string;
-    id: number;
-    ifcPk: string;
-    projectPk: string;
-    data: Property;
-}
-
-export interface UpdateIfcPropertyDefinitionRequest {
+export interface UpdateIfcPropertyDefinitionDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1014,7 +1095,15 @@ export interface UpdateIfcPropertyDefinitionRequest {
     data: PropertyDefinition;
 }
 
-export interface UpdateIfcUnitRequest {
+export interface UpdateIfcPropertyDeprecatedRequest {
+    cloudPk: string;
+    id: number;
+    ifcPk: string;
+    projectPk: string;
+    data: Property;
+}
+
+export interface UpdateIfcUnitDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1022,7 +1111,7 @@ export interface UpdateIfcUnitRequest {
     data: Unit;
 }
 
-export interface UpdateLayerRequest {
+export interface UpdateLayerDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1030,7 +1119,7 @@ export interface UpdateLayerRequest {
     data: Layer;
 }
 
-export interface UpdatePlanPositioningRequest {
+export interface UpdatePlanPositioningDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1039,7 +1128,7 @@ export interface UpdatePlanPositioningRequest {
     data: PositioningPlan;
 }
 
-export interface UpdateProcessorHandlerRequest {
+export interface UpdateProcessorHandlerDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1047,7 +1136,7 @@ export interface UpdateProcessorHandlerRequest {
     data: ProcessorHandler;
 }
 
-export interface UpdatePropertySetRequest {
+export interface UpdatePropertySetDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1055,7 +1144,7 @@ export interface UpdatePropertySetRequest {
     data: PropertySet;
 }
 
-export interface UpdateSpaceRequest {
+export interface UpdateSpaceDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1063,7 +1152,7 @@ export interface UpdateSpaceRequest {
     data: Space;
 }
 
-export interface UpdateStoreyRequest {
+export interface UpdateStoreyDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1071,7 +1160,7 @@ export interface UpdateStoreyRequest {
     data: Storey;
 }
 
-export interface UpdateSystemRequest {
+export interface UpdateSystemDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
@@ -1079,7 +1168,7 @@ export interface UpdateSystemRequest {
     data: System;
 }
 
-export interface UpdateZoneRequest {
+export interface UpdateZoneDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1087,7 +1176,7 @@ export interface UpdateZoneRequest {
     data: Zone;
 }
 
-export interface UpdateZoneSpaceRequest {
+export interface UpdateZoneSpaceDeprecatedRequest {
     cloudPk: string;
     id: number;
     ifcPk: string;
@@ -1102,24 +1191,24 @@ export interface UpdateZoneSpaceRequest {
 export class IfcApi extends runtime.BaseAPI {
 
     /**
-     * IFC errors are warnings and errors during IFC process. They alert about missing elements or malformed files Required scopes: ifc:write
-     * Add errors to IFC
+     * Model errors are warnings and errors during model process. They alert about missing elements or malformed files Required scopes: ifc:write, model:write
+     * Add errors to model
      */
-    async addIfcErrorsRaw(requestParameters: AddIfcErrorsRequest): Promise<runtime.ApiResponse<IfcErrors>> {
+    async addIfcErrorsDeprecatedRaw(requestParameters: AddIfcErrorsDeprecatedRequest): Promise<runtime.ApiResponse<ModelErrors>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addIfcErrors.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addIfcErrorsDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling addIfcErrors.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling addIfcErrorsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling addIfcErrors.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling addIfcErrorsDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling addIfcErrors.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling addIfcErrorsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1155,36 +1244,36 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: IfcErrorsToJSON(requestParameters.data),
+            body: ModelErrorsToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcErrorsFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelErrorsFromJSON(jsonValue));
     }
 
     /**
-     * IFC errors are warnings and errors during IFC process. They alert about missing elements or malformed files Required scopes: ifc:write
-     * Add errors to IFC
+     * Model errors are warnings and errors during model process. They alert about missing elements or malformed files Required scopes: ifc:write, model:write
+     * Add errors to model
      */
-    async addIfcErrors(requestParameters: AddIfcErrorsRequest): Promise<IfcErrors> {
-        const response = await this.addIfcErrorsRaw(requestParameters);
+    async addIfcErrorsDeprecated(requestParameters: AddIfcErrorsDeprecatedRequest): Promise<ModelErrors> {
+        const response = await this.addIfcErrorsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *              Delete relation between filtered classifications (eg. /classifications?name=untec) and all ifc\'s elements.             No classification will be deleted on this endpoint, only the relation between ifc\'s elements and their classification.  Required scopes: ifc:write
+     *              Delete relation between filtered classifications (eg. /classifications?name=untec) and all mode\'s elements.             No classification will be deleted on this endpoint, only the relation between model\'s elements and their classification.  Required scopes: ifc:write, model:write
      * Remove all classifications from model\'s elements
      */
-    async bulkDeleteIfcClassificationsRaw(requestParameters: BulkDeleteIfcClassificationsRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteIfcClassificationsDeprecatedRaw(requestParameters: BulkDeleteIfcClassificationsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcClassifications.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcClassificationsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeleteIfcClassifications.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeleteIfcClassificationsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcClassifications.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcClassificationsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1224,32 +1313,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *              Delete relation between filtered classifications (eg. /classifications?name=untec) and all ifc\'s elements.             No classification will be deleted on this endpoint, only the relation between ifc\'s elements and their classification.  Required scopes: ifc:write
+     *              Delete relation between filtered classifications (eg. /classifications?name=untec) and all mode\'s elements.             No classification will be deleted on this endpoint, only the relation between model\'s elements and their classification.  Required scopes: ifc:write, model:write
      * Remove all classifications from model\'s elements
      */
-    async bulkDeleteIfcClassifications(requestParameters: BulkDeleteIfcClassificationsRequest): Promise<void> {
-        await this.bulkDeleteIfcClassificationsRaw(requestParameters);
+    async bulkDeleteIfcClassificationsDeprecated(requestParameters: BulkDeleteIfcClassificationsDeprecatedRequest): Promise<void> {
+        await this.bulkDeleteIfcClassificationsDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many Property of a model
      */
-    async bulkDeleteIfcPropertiesRaw(requestParameters: BulkDeleteIfcPropertiesRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteIfcPropertiesDeprecatedRaw(requestParameters: BulkDeleteIfcPropertiesDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcProperties.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcPropertiesDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeleteIfcProperties.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeleteIfcPropertiesDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcProperties.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcPropertiesDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcProperties.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcPropertiesDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1292,32 +1381,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many Property of a model
      */
-    async bulkDeleteIfcProperties(requestParameters: BulkDeleteIfcPropertiesRequest): Promise<void> {
-        await this.bulkDeleteIfcPropertiesRaw(requestParameters);
+    async bulkDeleteIfcPropertiesDeprecated(requestParameters: BulkDeleteIfcPropertiesDeprecatedRequest): Promise<void> {
+        await this.bulkDeleteIfcPropertiesDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many PropertyDefinitions of a model
      */
-    async bulkDeleteIfcPropertyDefinitionsRaw(requestParameters: BulkDeleteIfcPropertyDefinitionsRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteIfcPropertyDefinitionsDeprecatedRaw(requestParameters: BulkDeleteIfcPropertyDefinitionsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeleteIfcPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcPropertyDefinitionsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1360,32 +1449,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many PropertyDefinitions of a model
      */
-    async bulkDeleteIfcPropertyDefinitions(requestParameters: BulkDeleteIfcPropertyDefinitionsRequest): Promise<void> {
-        await this.bulkDeleteIfcPropertyDefinitionsRaw(requestParameters);
+    async bulkDeleteIfcPropertyDefinitionsDeprecated(requestParameters: BulkDeleteIfcPropertyDefinitionsDeprecatedRequest): Promise<void> {
+        await this.bulkDeleteIfcPropertyDefinitionsDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many Units of a model
      */
-    async bulkDeleteIfcUnitsRaw(requestParameters: BulkDeleteIfcUnitsRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteIfcUnitsDeprecatedRaw(requestParameters: BulkDeleteIfcUnitsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcUnits.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcUnitsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeleteIfcUnits.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeleteIfcUnitsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcUnits.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcUnitsDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcUnits.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcUnitsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1428,32 +1517,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many Units of a model
      */
-    async bulkDeleteIfcUnits(requestParameters: BulkDeleteIfcUnitsRequest): Promise<void> {
-        await this.bulkDeleteIfcUnitsRaw(requestParameters);
+    async bulkDeleteIfcUnitsDeprecated(requestParameters: BulkDeleteIfcUnitsDeprecatedRequest): Promise<void> {
+        await this.bulkDeleteIfcUnitsDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many PropertySet of a model
      */
-    async bulkDeletePropertySetRaw(requestParameters: BulkDeletePropertySetRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeletePropertySetDeprecatedRaw(requestParameters: BulkDeletePropertySetDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeletePropertySet.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeletePropertySetDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeletePropertySet.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkDeletePropertySetDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeletePropertySet.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeletePropertySetDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeletePropertySet.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeletePropertySetDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1496,32 +1585,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many PropertySet of a model
      */
-    async bulkDeletePropertySet(requestParameters: BulkDeletePropertySetRequest): Promise<void> {
-        await this.bulkDeletePropertySetRaw(requestParameters);
+    async bulkDeletePropertySetDeprecated(requestParameters: BulkDeletePropertySetDeprecatedRequest): Promise<void> {
+        await this.bulkDeletePropertySetDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Update many elements at once (only changing fields may be defined)
      */
-    async bulkFullUpdateElementsRaw(requestParameters: BulkFullUpdateElementsRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async bulkFullUpdateElementsDeprecatedRaw(requestParameters: BulkFullUpdateElementsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateElements.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateElementsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkFullUpdateElements.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkFullUpdateElementsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkFullUpdateElements.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkFullUpdateElementsDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkFullUpdateElements.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkFullUpdateElementsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1564,33 +1653,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Update many elements at once (only changing fields may be defined)
      */
-    async bulkFullUpdateElements(requestParameters: BulkFullUpdateElementsRequest): Promise<Array<Element>> {
-        const response = await this.bulkFullUpdateElementsRaw(requestParameters);
+    async bulkFullUpdateElementsDeprecated(requestParameters: BulkFullUpdateElementsDeprecatedRequest): Promise<Array<Element>> {
+        const response = await this.bulkFullUpdateElementsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Update some fields of many properties of a model
      */
-    async bulkFullUpdateIfcPropertyRaw(requestParameters: BulkFullUpdateIfcPropertyRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async bulkFullUpdateIfcPropertyDeprecatedRaw(requestParameters: BulkFullUpdateIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateIfcProperty.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkFullUpdateIfcProperty.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkFullUpdateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkFullUpdateIfcProperty.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkFullUpdateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkFullUpdateIfcProperty.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkFullUpdateIfcPropertyDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1633,37 +1722,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Update some fields of many properties of a model
      */
-    async bulkFullUpdateIfcProperty(requestParameters: BulkFullUpdateIfcPropertyRequest): Promise<Array<Property>> {
-        const response = await this.bulkFullUpdateIfcPropertyRaw(requestParameters);
+    async bulkFullUpdateIfcPropertyDeprecated(requestParameters: BulkFullUpdateIfcPropertyDeprecatedRequest): Promise<Array<Property>> {
+        const response = await this.bulkFullUpdateIfcPropertyDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Remove many classifications from an element
      */
-    async bulkRemoveClassificationsOfElementRaw(requestParameters: BulkRemoveClassificationsOfElementRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkRemoveClassificationsOfElementDeprecatedRaw(requestParameters: BulkRemoveClassificationsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveClassificationsOfElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveClassificationsOfElementDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling bulkRemoveClassificationsOfElement.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling bulkRemoveClassificationsOfElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkRemoveClassificationsOfElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkRemoveClassificationsOfElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveClassificationsOfElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveClassificationsOfElementDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkRemoveClassificationsOfElement.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkRemoveClassificationsOfElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1706,36 +1795,36 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Remove many classifications from an element
      */
-    async bulkRemoveClassificationsOfElement(requestParameters: BulkRemoveClassificationsOfElementRequest): Promise<void> {
-        await this.bulkRemoveClassificationsOfElementRaw(requestParameters);
+    async bulkRemoveClassificationsOfElementDeprecated(requestParameters: BulkRemoveClassificationsOfElementDeprecatedRequest): Promise<void> {
+        await this.bulkRemoveClassificationsOfElementDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Remove many documents from an element
      */
-    async bulkRemoveDocumentsOfElementRaw(requestParameters: BulkRemoveDocumentsOfElementRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkRemoveDocumentsOfElementDeprecatedRaw(requestParameters: BulkRemoveDocumentsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveDocumentsOfElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveDocumentsOfElementDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling bulkRemoveDocumentsOfElement.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling bulkRemoveDocumentsOfElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkRemoveDocumentsOfElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkRemoveDocumentsOfElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveDocumentsOfElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveDocumentsOfElementDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkRemoveDocumentsOfElement.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkRemoveDocumentsOfElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1778,36 +1867,36 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Remove many documents from an element
      */
-    async bulkRemoveDocumentsOfElement(requestParameters: BulkRemoveDocumentsOfElementRequest): Promise<void> {
-        await this.bulkRemoveDocumentsOfElementRaw(requestParameters);
+    async bulkRemoveDocumentsOfElementDeprecated(requestParameters: BulkRemoveDocumentsOfElementDeprecatedRequest): Promise<void> {
+        await this.bulkRemoveDocumentsOfElementDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Remove the classifications from all elements
      */
-    async bulkRemoveElementsFromClassificationRaw(requestParameters: BulkRemoveElementsFromClassificationRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkRemoveElementsFromClassificationDeprecatedRaw(requestParameters: BulkRemoveElementsFromClassificationDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveElementsFromClassification.');
-        }
-
-        if (requestParameters.ifcClassificationPk === null || requestParameters.ifcClassificationPk === undefined) {
-            throw new runtime.RequiredError('ifcClassificationPk','Required parameter requestParameters.ifcClassificationPk was null or undefined when calling bulkRemoveElementsFromClassification.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveElementsFromClassificationDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkRemoveElementsFromClassification.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkRemoveElementsFromClassificationDeprecated.');
+        }
+
+        if (requestParameters.modelClassificationPk === null || requestParameters.modelClassificationPk === undefined) {
+            throw new runtime.RequiredError('modelClassificationPk','Required parameter requestParameters.modelClassificationPk was null or undefined when calling bulkRemoveElementsFromClassificationDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveElementsFromClassification.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveElementsFromClassificationDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkRemoveElementsFromClassification.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkRemoveElementsFromClassificationDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1839,7 +1928,7 @@ export class IfcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/classification/{ifc_classification_pk}/element/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_classification_pk"}}`, encodeURIComponent(String(requestParameters.ifcClassificationPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/classification/{model_classification_pk}/element/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"model_classification_pk"}}`, encodeURIComponent(String(requestParameters.modelClassificationPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1850,32 +1939,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write
+     *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Remove the classifications from all elements
      */
-    async bulkRemoveElementsFromClassification(requestParameters: BulkRemoveElementsFromClassificationRequest): Promise<void> {
-        await this.bulkRemoveElementsFromClassificationRaw(requestParameters);
+    async bulkRemoveElementsFromClassificationDeprecated(requestParameters: BulkRemoveElementsFromClassificationDeprecatedRequest): Promise<void> {
+        await this.bulkRemoveElementsFromClassificationDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Update many elements at once (all field must be defined)
      */
-    async bulkUpdateElementsRaw(requestParameters: BulkUpdateElementsRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async bulkUpdateElementsDeprecatedRaw(requestParameters: BulkUpdateElementsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateElements.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateElementsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkUpdateElements.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkUpdateElementsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkUpdateElements.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkUpdateElementsDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkUpdateElements.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkUpdateElementsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1918,11 +2007,11 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Update many elements at once (all field must be defined)
      */
-    async bulkUpdateElements(requestParameters: BulkUpdateElementsRequest): Promise<Array<Element>> {
-        const response = await this.bulkUpdateElementsRaw(requestParameters);
+    async bulkUpdateElementsDeprecated(requestParameters: BulkUpdateElementsDeprecatedRequest): Promise<Array<Element>> {
+        const response = await this.bulkUpdateElementsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
@@ -1930,21 +2019,21 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors 
      * Update all fields of many properties of a model
      */
-    async bulkUpdateIfcPropertyRaw(requestParameters: BulkUpdateIfcPropertyRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async bulkUpdateIfcPropertyDeprecatedRaw(requestParameters: BulkUpdateIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateIfcProperty.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkUpdateIfcProperty.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling bulkUpdateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkUpdateIfcProperty.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkUpdateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkUpdateIfcProperty.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkUpdateIfcPropertyDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1990,30 +2079,30 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors 
      * Update all fields of many properties of a model
      */
-    async bulkUpdateIfcProperty(requestParameters: BulkUpdateIfcPropertyRequest): Promise<Array<Property>> {
-        const response = await this.bulkUpdateIfcPropertyRaw(requestParameters);
+    async bulkUpdateIfcPropertyDeprecated(requestParameters: BulkUpdateIfcPropertyDeprecatedRequest): Promise<Array<Property>> {
+        const response = await this.bulkUpdateIfcPropertyDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Tokens are read_only by default and are valid 1 day Required scopes: ifc:token_manage
+     * Tokens are read_only by default and are valid 1 day Required scopes: ifc:token_manage, model:token_manage
      * Create a token for this model
      */
-    async createAccessTokenRaw(requestParameters: CreateAccessTokenRequest): Promise<runtime.ApiResponse<IfcAccessToken>> {
+    async createAccessTokenDeprecatedRaw(requestParameters: CreateAccessTokenDeprecatedRequest): Promise<runtime.ApiResponse<IfcAccessToken>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createAccessToken.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createAccessTokenDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createAccessToken.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createAccessTokenDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createAccessToken.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createAccessTokenDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createAccessToken.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createAccessTokenDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2056,33 +2145,175 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Tokens are read_only by default and are valid 1 day Required scopes: ifc:token_manage
+     * Tokens are read_only by default and are valid 1 day Required scopes: ifc:token_manage, model:token_manage
      * Create a token for this model
      */
-    async createAccessToken(requestParameters: CreateAccessTokenRequest): Promise<IfcAccessToken> {
-        const response = await this.createAccessTokenRaw(requestParameters);
+    async createAccessTokenDeprecated(requestParameters: CreateAccessTokenDeprecatedRequest): Promise<IfcAccessToken> {
+        const response = await this.createAccessTokenDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Create association between existing classification and existing element Required scopes: ifc:write
-     * Create association between existing classification and existing element
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:write, ifc:read
+     * Create a checker to a model
      */
-    async createClassificationElementRelationsRaw(requestParameters: CreateClassificationElementRelationsRequest): Promise<runtime.ApiResponse<void>> {
+    async createCheckerDeprecatedRaw(requestParameters: CreateCheckerDeprecatedRequest): Promise<runtime.ApiResponse<IfcChecker>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassificationElementRelations.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createCheckerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createClassificationElementRelations.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createCheckerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createClassificationElementRelations.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createCheckerDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createClassificationElementRelations.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createCheckerDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: IfcCheckerToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
+    }
+
+    /**
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:write, ifc:read
+     * Create a checker to a model
+     */
+    async createCheckerDeprecated(requestParameters: CreateCheckerDeprecatedRequest): Promise<IfcChecker> {
+        const response = await this.createCheckerDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * TCreate a CheckerResult Required scopes: check:write
+     * Create a CheckerResult
+     */
+    async createCheckerResultDeprecatedRaw(requestParameters: CreateCheckerResultDeprecatedRequest): Promise<runtime.ApiResponse<CheckerResult>> {
+        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
+            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling createCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createCheckerResultDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CheckerResultToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
+    }
+
+    /**
+     * TCreate a CheckerResult Required scopes: check:write
+     * Create a CheckerResult
+     */
+    async createCheckerResultDeprecated(requestParameters: CreateCheckerResultDeprecatedRequest): Promise<CheckerResult> {
+        const response = await this.createCheckerResultDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Create association between existing classification and existing element Required scopes: ifc:write, model:write
+     * Create association between existing classification and existing element
+     */
+    async createClassificationElementRelationsDeprecatedRaw(requestParameters: CreateClassificationElementRelationsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassificationElementRelationsDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createClassificationElementRelationsDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createClassificationElementRelationsDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createClassificationElementRelationsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2125,36 +2356,36 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create association between existing classification and existing element Required scopes: ifc:write
+     * Create association between existing classification and existing element Required scopes: ifc:write, model:write
      * Create association between existing classification and existing element
      */
-    async createClassificationElementRelations(requestParameters: CreateClassificationElementRelationsRequest): Promise<void> {
-        await this.createClassificationElementRelationsRaw(requestParameters);
+    async createClassificationElementRelationsDeprecated(requestParameters: CreateClassificationElementRelationsDeprecatedRequest): Promise<void> {
+        await this.createClassificationElementRelationsDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors      If classification created already exists, it will just be added to item\'s classifications and will not be duplicated  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors      If classification created already exists, it will just be added to item\'s classifications and will not be duplicated  Required scopes: ifc:write, model:write
      * Create one or many classifications to an element
      */
-    async createClassificationsOfElementRaw(requestParameters: CreateClassificationsOfElementRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+    async createClassificationsOfElementDeprecatedRaw(requestParameters: CreateClassificationsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassificationsOfElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassificationsOfElementDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createClassificationsOfElement.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createClassificationsOfElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createClassificationsOfElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createClassificationsOfElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createClassificationsOfElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createClassificationsOfElementDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createClassificationsOfElement.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createClassificationsOfElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2197,33 +2428,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors      If classification created already exists, it will just be added to item\'s classifications and will not be duplicated  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors      If classification created already exists, it will just be added to item\'s classifications and will not be duplicated  Required scopes: ifc:write, model:write
      * Create one or many classifications to an element
      */
-    async createClassificationsOfElement(requestParameters: CreateClassificationsOfElementRequest): Promise<Array<Classification>> {
-        const response = await this.createClassificationsOfElementRaw(requestParameters);
+    async createClassificationsOfElementDeprecated(requestParameters: CreateClassificationsOfElementDeprecatedRequest): Promise<Array<Classification>> {
+        const response = await this.createClassificationsOfElementDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Create an element in the model
      */
-    async createElementRaw(requestParameters: CreateElementRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async createElementDeprecatedRaw(requestParameters: CreateElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElement.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2266,37 +2497,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Create an element in the model
      */
-    async createElement(requestParameters: CreateElementRequest): Promise<Array<Element>> {
-        const response = await this.createElementRaw(requestParameters);
+    async createElementDeprecated(requestParameters: CreateElementDeprecatedRequest): Promise<Array<Element>> {
+        const response = await this.createElementDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Create a PropertySets that will be automatically linked to the element Required scopes: ifc:write
+     * Create a PropertySets that will be automatically linked to the element Required scopes: ifc:write, model:write
      * Create a PropertySets to an element
      */
-    async createElementPropertySetRaw(requestParameters: CreateElementPropertySetRequest): Promise<runtime.ApiResponse<PropertySet>> {
+    async createElementPropertySetDeprecatedRaw(requestParameters: CreateElementPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<PropertySet>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySet.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySet.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElementPropertySet.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElementPropertySetDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySet.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElementPropertySet.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElementPropertySetDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2339,122 +2570,45 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a PropertySets that will be automatically linked to the element Required scopes: ifc:write
+     * Create a PropertySets that will be automatically linked to the element Required scopes: ifc:write, model:write
      * Create a PropertySets to an element
      */
-    async createElementPropertySet(requestParameters: CreateElementPropertySetRequest): Promise<PropertySet> {
-        const response = await this.createElementPropertySetRaw(requestParameters);
+    async createElementPropertySetDeprecated(requestParameters: CreateElementPropertySetDeprecatedRequest): Promise<PropertySet> {
+        const response = await this.createElementPropertySetDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *  Required scopes: ifc:write
-     * Create a property to a PropertySet
-     */
-    async createElementPropertySetPropertyRaw(requestParameters: CreateElementPropertySetPropertyRequest): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetProperty.');
-        }
-
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetProperty.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElementPropertySetProperty.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetProperty.');
-        }
-
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetProperty.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElementPropertySetProperty.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PropertyToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
-    }
-
-    /**
-     *  Required scopes: ifc:write
-     * Create a property to a PropertySet
-     */
-    async createElementPropertySetProperty(requestParameters: CreateElementPropertySetPropertyRequest): Promise<Property> {
-        const response = await this.createElementPropertySetPropertyRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     *  Required scopes: ifc:write
+     *  Required scopes: ifc:write, model:write
      * Create a Definition to a Property
      */
-    async createElementPropertySetPropertyDefinitionRaw(requestParameters: CreateElementPropertySetPropertyDefinitionRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+    async createElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters: CreateElementPropertySetPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling createElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2497,49 +2651,49 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:write
+     *  Required scopes: ifc:write, model:write
      * Create a Definition to a Property
      */
-    async createElementPropertySetPropertyDefinition(requestParameters: CreateElementPropertySetPropertyDefinitionRequest): Promise<PropertyDefinition> {
-        const response = await this.createElementPropertySetPropertyDefinitionRaw(requestParameters);
+    async createElementPropertySetPropertyDefinitionDeprecated(requestParameters: CreateElementPropertySetPropertyDefinitionDeprecatedRequest): Promise<PropertyDefinition> {
+        const response = await this.createElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Create a Unit to a Definition Required scopes: ifc:write
+     * Create a Unit to a Definition Required scopes: ifc:write, model:write
      * Create a Unit to a Definition
      */
-    async createElementPropertySetPropertyDefinitionUnitRaw(requestParameters: CreateElementPropertySetPropertyDefinitionUnitRequest): Promise<runtime.ApiResponse<Unit>> {
+    async createElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters: CreateElementPropertySetPropertyDefinitionUnitDeprecatedRequest): Promise<runtime.ApiResponse<Unit>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.propertydefinitionPk === null || requestParameters.propertydefinitionPk === undefined) {
-            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2582,33 +2736,175 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a Unit to a Definition Required scopes: ifc:write
+     * Create a Unit to a Definition Required scopes: ifc:write, model:write
      * Create a Unit to a Definition
      */
-    async createElementPropertySetPropertyDefinitionUnit(requestParameters: CreateElementPropertySetPropertyDefinitionUnitRequest): Promise<Unit> {
-        const response = await this.createElementPropertySetPropertyDefinitionUnitRaw(requestParameters);
+    async createElementPropertySetPropertyDefinitionUnitDeprecated(requestParameters: CreateElementPropertySetPropertyDefinitionUnitDeprecatedRequest): Promise<Unit> {
+        const response = await this.createElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
-     * Create a PropertyDefinition on the model
+     *  Required scopes: ifc:write, model:write
+     * Create a property to a PropertySet
      */
-    async createIfcPropertyDefinitionRaw(requestParameters: CreateIfcPropertyDefinitionRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
+    async createElementPropertySetPropertyDeprecatedRaw(requestParameters: CreateElementPropertySetPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcPropertyDefinition.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDeprecated.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createIfcPropertyDefinition.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createIfcPropertyDefinition.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetPropertyDeprecated.');
+        }
+
+        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createIfcPropertyDefinition.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createElementPropertySetPropertyDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PropertyToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
+    }
+
+    /**
+     *  Required scopes: ifc:write, model:write
+     * Create a property to a PropertySet
+     */
+    async createElementPropertySetPropertyDeprecated(requestParameters: CreateElementPropertySetPropertyDeprecatedRequest): Promise<Property> {
+        const response = await this.createElementPropertySetPropertyDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write, model:write
+     * Make a PDF or Image file a Model
+     */
+    async createIfcDeprecatedRaw(requestParameters: CreateIfcDeprecatedRequest): Promise<runtime.ApiResponse<Model>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createIfcDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createIfcDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/create-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateModelToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
+    }
+
+    /**
+     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write, model:write
+     * Make a PDF or Image file a Model
+     */
+    async createIfcDeprecated(requestParameters: CreateIfcDeprecatedRequest): Promise<Model> {
+        const response = await this.createIfcDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
+     * Create a PropertyDefinition on the model
+     */
+    async createIfcPropertyDefinitionDeprecatedRaw(requestParameters: CreateIfcPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcPropertyDefinitionDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createIfcPropertyDefinitionDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createIfcPropertyDefinitionDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createIfcPropertyDefinitionDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2651,33 +2947,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Create a PropertyDefinition on the model
      */
-    async createIfcPropertyDefinition(requestParameters: CreateIfcPropertyDefinitionRequest): Promise<Array<PropertyDefinition>> {
-        const response = await this.createIfcPropertyDefinitionRaw(requestParameters);
+    async createIfcPropertyDefinitionDeprecated(requestParameters: CreateIfcPropertyDefinitionDeprecatedRequest): Promise<Array<PropertyDefinition>> {
+        const response = await this.createIfcPropertyDefinitionDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Create a Unit on a model
      */
-    async createIfcUnitRaw(requestParameters: CreateIfcUnitRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
+    async createIfcUnitDeprecatedRaw(requestParameters: CreateIfcUnitDeprecatedRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcUnit.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcUnitDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createIfcUnit.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createIfcUnitDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createIfcUnit.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createIfcUnitDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createIfcUnit.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createIfcUnitDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2720,33 +3016,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Create a Unit on a model
      */
-    async createIfcUnit(requestParameters: CreateIfcUnitRequest): Promise<Array<Unit>> {
-        const response = await this.createIfcUnitRaw(requestParameters);
+    async createIfcUnitDeprecated(requestParameters: CreateIfcUnitDeprecatedRequest): Promise<Array<Unit>> {
+        const response = await this.createIfcUnitDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Create a layer in the model
      */
-    async createLayerRaw(requestParameters: CreateLayerRequest): Promise<runtime.ApiResponse<Layer>> {
+    async createLayerDeprecatedRaw(requestParameters: CreateLayerDeprecatedRequest): Promise<runtime.ApiResponse<Layer>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createLayer.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createLayerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createLayer.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createLayerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createLayer.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createLayerDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createLayer.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createLayerDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2789,29 +3085,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Create a layer in the model
      */
-    async createLayer(requestParameters: CreateLayerRequest): Promise<Layer> {
-        const response = await this.createLayerRaw(requestParameters);
+    async createLayerDeprecated(requestParameters: CreateLayerDeprecatedRequest): Promise<Layer> {
+        const response = await this.createLayerDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Create an empty 3D Model to be used in BIMData services Required scopes: ifc:write
+     * Create an empty 3D Model to be used in BIMData services Required scopes: ifc:write, model:write
      * Create an empty 3D Model
      */
-    async createMetaBuildingRaw(requestParameters: CreateMetaBuildingRequest): Promise<runtime.ApiResponse<Ifc>> {
+    async createMetaBuildingDeprecatedRaw(requestParameters: CreateMetaBuildingDeprecatedRequest): Promise<runtime.ApiResponse<Model>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createMetaBuilding.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createMetaBuildingDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createMetaBuilding.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createMetaBuildingDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createMetaBuilding.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createMetaBuildingDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2850,102 +3146,37 @@ export class IfcApi extends runtime.BaseAPI {
             body: CreateBuildingToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
     }
 
     /**
-     * Create an empty 3D Model to be used in BIMData services Required scopes: ifc:write
+     * Create an empty 3D Model to be used in BIMData services Required scopes: ifc:write, model:write
      * Create an empty 3D Model
      */
-    async createMetaBuilding(requestParameters: CreateMetaBuildingRequest): Promise<Ifc> {
-        const response = await this.createMetaBuildingRaw(requestParameters);
+    async createMetaBuildingDeprecated(requestParameters: CreateMetaBuildingDeprecatedRequest): Promise<Model> {
+        const response = await this.createMetaBuildingDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write
-     * Make a PDF or Image file a Model
-     */
-    async createModelRaw(requestParameters: CreateModelRequest): Promise<runtime.ApiResponse<Ifc>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createModel.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createModel.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createModel.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/create-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: CreateModelToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcFromJSON(jsonValue));
-    }
-
-    /**
-     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write
-     * Make a PDF or Image file a Model
-     */
-    async createModel(requestParameters: CreateModelRequest): Promise<Ifc> {
-        const response = await this.createModelRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Create a PropertySet
      */
-    async createPropertySetRaw(requestParameters: CreatePropertySetRequest): Promise<runtime.ApiResponse<Array<PropertySet>>> {
+    async createPropertySetDeprecatedRaw(requestParameters: CreatePropertySetDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertySet>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createPropertySet.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createPropertySetDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createPropertySet.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createPropertySetDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createPropertySet.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createPropertySetDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createPropertySet.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createPropertySetDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2988,33 +3219,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Create a PropertySet
      */
-    async createPropertySet(requestParameters: CreatePropertySetRequest): Promise<Array<PropertySet>> {
-        const response = await this.createPropertySetRaw(requestParameters);
+    async createPropertySetDeprecated(requestParameters: CreatePropertySetDeprecatedRequest): Promise<Array<PropertySet>> {
+        const response = await this.createPropertySetDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Create association between existing PropertySet and existing element Required scopes: ifc:write
+     * Create association between existing PropertySet and existing element Required scopes: ifc:write, model:write
      * Create association between PropertySet and element
      */
-    async createPropertySetElementRelationsRaw(requestParameters: CreatePropertySetElementRelationsRequest): Promise<runtime.ApiResponse<void>> {
+    async createPropertySetElementRelationsDeprecatedRaw(requestParameters: CreatePropertySetElementRelationsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createPropertySetElementRelations.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createPropertySetElementRelationsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createPropertySetElementRelations.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createPropertySetElementRelationsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createPropertySetElementRelations.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createPropertySetElementRelationsDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createPropertySetElementRelations.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createPropertySetElementRelationsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3057,32 +3288,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create association between existing PropertySet and existing element Required scopes: ifc:write
+     * Create association between existing PropertySet and existing element Required scopes: ifc:write, model:write
      * Create association between PropertySet and element
      */
-    async createPropertySetElementRelations(requestParameters: CreatePropertySetElementRelationsRequest): Promise<void> {
-        await this.createPropertySetElementRelationsRaw(requestParameters);
+    async createPropertySetElementRelationsDeprecated(requestParameters: CreatePropertySetElementRelationsDeprecatedRequest): Promise<void> {
+        await this.createPropertySetElementRelationsDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          You can use the same optimized structure to post multiple elements, property_sets, properties, definitions and units at once.         For performance reasons, we do not check the validity of the json. If the json is malformed, an error 500 without more explaination may be returned instead of a 400.  Required scopes: ifc:write
+     *          You can use the same optimized structure to post multiple elements, property_sets, properties, definitions and units at once.         For performance reasons, we do not check the validity of the json. If the json is malformed, an error 500 without more explaination may be returned instead of a 400.  Required scopes: ifc:write, model:write
      * Create elements in an optimized format
      */
-    async createRawElementsRaw(requestParameters: CreateRawElementsRequest): Promise<runtime.ApiResponse<void>> {
+    async createRawElementsDeprecatedRaw(requestParameters: CreateRawElementsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createRawElements.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createRawElementsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createRawElements.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createRawElementsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createRawElements.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createRawElementsDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createRawElements.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createRawElementsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3125,32 +3356,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          You can use the same optimized structure to post multiple elements, property_sets, properties, definitions and units at once.         For performance reasons, we do not check the validity of the json. If the json is malformed, an error 500 without more explaination may be returned instead of a 400.  Required scopes: ifc:write
+     *          You can use the same optimized structure to post multiple elements, property_sets, properties, definitions and units at once.         For performance reasons, we do not check the validity of the json. If the json is malformed, an error 500 without more explaination may be returned instead of a 400.  Required scopes: ifc:write, model:write
      * Create elements in an optimized format
      */
-    async createRawElements(requestParameters: CreateRawElementsRequest): Promise<void> {
-        await this.createRawElementsRaw(requestParameters);
+    async createRawElementsDeprecated(requestParameters: CreateRawElementsDeprecatedRequest): Promise<void> {
+        await this.createRawElementsDeprecatedRaw(requestParameters);
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Create a space in the model
      */
-    async createSpaceRaw(requestParameters: CreateSpaceRequest): Promise<runtime.ApiResponse<Array<Space>>> {
+    async createSpaceDeprecatedRaw(requestParameters: CreateSpaceDeprecatedRequest): Promise<runtime.ApiResponse<Array<Space>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createSpace.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createSpaceDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createSpace.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createSpaceDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createSpace.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createSpaceDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createSpace.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createSpaceDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3193,37 +3424,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Create a space in the model
      */
-    async createSpace(requestParameters: CreateSpaceRequest): Promise<Array<Space>> {
-        const response = await this.createSpaceRaw(requestParameters);
+    async createSpaceDeprecated(requestParameters: CreateSpaceDeprecatedRequest): Promise<Array<Space>> {
+        const response = await this.createSpaceDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write
+     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a storey
      */
-    async createStoreyPlanRaw(requestParameters: CreateStoreyPlanRequest): Promise<runtime.ApiResponse<Storey>> {
+    async createStoreyPlanDeprecatedRaw(requestParameters: CreateStoreyPlanDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createStoreyPlan.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createStoreyPlanDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createStoreyPlan.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createStoreyPlanDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createStoreyPlan.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createStoreyPlanDeprecated.');
         }
 
         if (requestParameters.storeyPk === null || requestParameters.storeyPk === undefined) {
-            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling createStoreyPlan.');
+            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling createStoreyPlanDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createStoreyPlan.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createStoreyPlanDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3266,33 +3497,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write
+     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\') Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a storey
      */
-    async createStoreyPlan(requestParameters: CreateStoreyPlanRequest): Promise<Storey> {
-        const response = await this.createStoreyPlanRaw(requestParameters);
+    async createStoreyPlanDeprecated(requestParameters: CreateStoreyPlanDeprecatedRequest): Promise<Storey> {
+        const response = await this.createStoreyPlanDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Create a system in the model
      */
-    async createSystemRaw(requestParameters: CreateSystemRequest): Promise<runtime.ApiResponse<System>> {
+    async createSystemDeprecatedRaw(requestParameters: CreateSystemDeprecatedRequest): Promise<runtime.ApiResponse<System>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createSystem.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createSystemDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createSystem.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createSystemDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createSystem.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createSystemDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createSystem.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createSystemDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3335,33 +3566,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Create a system in the model
      */
-    async createSystem(requestParameters: CreateSystemRequest): Promise<System> {
-        const response = await this.createSystemRaw(requestParameters);
+    async createSystemDeprecated(requestParameters: CreateSystemDeprecatedRequest): Promise<System> {
+        const response = await this.createSystemDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Create a zone in the model
      */
-    async createZoneRaw(requestParameters: CreateZoneRequest): Promise<runtime.ApiResponse<Array<Zone>>> {
+    async createZoneDeprecatedRaw(requestParameters: CreateZoneDeprecatedRequest): Promise<runtime.ApiResponse<Array<Zone>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createZone.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createZoneDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createZone.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createZoneDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createZone.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createZoneDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createZone.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createZoneDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3404,37 +3635,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Create a zone in the model
      */
-    async createZone(requestParameters: CreateZoneRequest): Promise<Array<Zone>> {
-        const response = await this.createZoneRaw(requestParameters);
+    async createZoneDeprecated(requestParameters: CreateZoneDeprecatedRequest): Promise<Array<Zone>> {
+        const response = await this.createZoneDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Create a space in a zone
      */
-    async createZoneSpaceRaw(requestParameters: CreateZoneSpaceRequest): Promise<runtime.ApiResponse<ZoneSpace>> {
+    async createZoneSpaceDeprecatedRaw(requestParameters: CreateZoneSpaceDeprecatedRequest): Promise<runtime.ApiResponse<ZoneSpace>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createZoneSpace.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createZoneSpaceDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createZoneSpace.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createZoneSpaceDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createZoneSpace.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createZoneSpaceDeprecated.');
         }
 
         if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling createZoneSpace.');
+            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling createZoneSpaceDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createZoneSpace.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createZoneSpaceDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3477,33 +3708,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Create a space in a zone
      */
-    async createZoneSpace(requestParameters: CreateZoneSpaceRequest): Promise<ZoneSpace> {
-        const response = await this.createZoneSpaceRaw(requestParameters);
+    async createZoneSpaceDeprecated(requestParameters: CreateZoneSpaceDeprecatedRequest): Promise<ZoneSpace> {
+        const response = await this.createZoneSpaceDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Deleting a token will revoke it. Required scopes: ifc:token_manage
+     * Deleting a token will revoke it. Required scopes: ifc:token_manage, model:token_manage
      * Delete a token
      */
-    async deleteAccessTokenRaw(requestParameters: DeleteAccessTokenRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteAccessTokenDeprecatedRaw(requestParameters: DeleteAccessTokenDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteAccessToken.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteAccessTokenDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteAccessToken.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteAccessTokenDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteAccessToken.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteAccessTokenDeprecated.');
         }
 
         if (requestParameters.token === null || requestParameters.token === undefined) {
-            throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling deleteAccessToken.');
+            throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling deleteAccessTokenDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3543,32 +3774,166 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deleting a token will revoke it. Required scopes: ifc:token_manage
+     * Deleting a token will revoke it. Required scopes: ifc:token_manage, model:token_manage
      * Delete a token
      */
-    async deleteAccessToken(requestParameters: DeleteAccessTokenRequest): Promise<void> {
-        await this.deleteAccessTokenRaw(requestParameters);
+    async deleteAccessTokenDeprecated(requestParameters: DeleteAccessTokenDeprecatedRequest): Promise<void> {
+        await this.deleteAccessTokenDeprecatedRaw(requestParameters);
     }
 
     /**
-     * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file Required scopes: ifc:write
-     * Delete an element of a model
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:write, ifc:read
+     * Delete a checker of a model
      */
-    async deleteElementRaw(requestParameters: DeleteElementRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCheckerDeprecatedRaw(requestParameters: DeleteCheckerDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteCheckerDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCheckerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteCheckerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteCheckerDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:write, ifc:read
+     * Delete a checker of a model
+     */
+    async deleteCheckerDeprecated(requestParameters: DeleteCheckerDeprecatedRequest): Promise<void> {
+        await this.deleteCheckerDeprecatedRaw(requestParameters);
+    }
+
+    /**
+     * Delete a CheckerResult Required scopes: check:write
+     * Delete a CheckerResult
+     */
+    async deleteCheckerResultDeprecatedRaw(requestParameters: DeleteCheckerResultDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
+            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling deleteCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteCheckerResultDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a CheckerResult Required scopes: check:write
+     * Delete a CheckerResult
+     */
+    async deleteCheckerResultDeprecated(requestParameters: DeleteCheckerResultDeprecatedRequest): Promise<void> {
+        await this.deleteCheckerResultDeprecatedRaw(requestParameters);
+    }
+
+    /**
+     * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
+     * Delete an element of a model
+     */
+    async deleteElementDeprecatedRaw(requestParameters: DeleteElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteElementDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteElementDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteElementDeprecated.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
-            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteElement.');
+            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3608,28 +3973,28 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete an element of a model
      */
-    async deleteElement(requestParameters: DeleteElementRequest): Promise<void> {
-        await this.deleteElementRaw(requestParameters);
+    async deleteElementDeprecated(requestParameters: DeleteElementDeprecatedRequest): Promise<void> {
+        await this.deleteElementDeprecatedRaw(requestParameters);
     }
 
     /**
-     * It will also delete the related document Required scopes: ifc:write
+     * It will also delete the related document Required scopes: ifc:write, model:write
      * Delete a model
      */
-    async deleteIfcRaw(requestParameters: DeleteIfcRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteIfcDeprecatedRaw(requestParameters: DeleteIfcDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfc.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfc.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfc.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3669,97 +4034,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * It will also delete the related document Required scopes: ifc:write
+     * It will also delete the related document Required scopes: ifc:write, model:write
      * Delete a model
      */
-    async deleteIfc(requestParameters: DeleteIfcRequest): Promise<void> {
-        await this.deleteIfcRaw(requestParameters);
+    async deleteIfcDeprecated(requestParameters: DeleteIfcDeprecatedRequest): Promise<void> {
+        await this.deleteIfcDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Delete a Property of a model Required scopes: ifc:write
-     * Delete a Property of a model
-     */
-    async deleteIfcPropertyRaw(requestParameters: DeleteIfcPropertyRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcProperty.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcProperty.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteIfcProperty.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcProperty.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Delete a Property of a model Required scopes: ifc:write
-     * Delete a Property of a model
-     */
-    async deleteIfcProperty(requestParameters: DeleteIfcPropertyRequest): Promise<void> {
-        await this.deleteIfcPropertyRaw(requestParameters);
-    }
-
-    /**
-     * Delete a PropertyDefinitions of a model Required scopes: ifc:write
+     * Delete a PropertyDefinitions of a model Required scopes: ifc:write, model:write
      * Delete a PropertyDefinitions of a model
      */
-    async deleteIfcPropertyDefinitionRaw(requestParameters: DeleteIfcPropertyDefinitionRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteIfcPropertyDefinitionDeprecatedRaw(requestParameters: DeleteIfcPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcPropertyDefinition.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcPropertyDefinition.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteIfcPropertyDefinition.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcPropertyDefinition.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcPropertyDefinitionDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3799,32 +4099,97 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a PropertyDefinitions of a model Required scopes: ifc:write
+     * Delete a PropertyDefinitions of a model Required scopes: ifc:write, model:write
      * Delete a PropertyDefinitions of a model
      */
-    async deleteIfcPropertyDefinition(requestParameters: DeleteIfcPropertyDefinitionRequest): Promise<void> {
-        await this.deleteIfcPropertyDefinitionRaw(requestParameters);
+    async deleteIfcPropertyDefinitionDeprecated(requestParameters: DeleteIfcPropertyDefinitionDeprecatedRequest): Promise<void> {
+        await this.deleteIfcPropertyDefinitionDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Delete a Unit of a model Required scopes: ifc:write
-     * Delete a Unit of a model
+     * Delete a Property of a model Required scopes: ifc:write, model:write
+     * Delete a Property of a model
      */
-    async deleteIfcUnitRaw(requestParameters: DeleteIfcUnitRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteIfcPropertyDeprecatedRaw(requestParameters: DeleteIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcUnit.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcPropertyDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcUnit.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcPropertyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteIfcUnit.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteIfcPropertyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcUnit.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcPropertyDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a Property of a model Required scopes: ifc:write, model:write
+     * Delete a Property of a model
+     */
+    async deleteIfcPropertyDeprecated(requestParameters: DeleteIfcPropertyDeprecatedRequest): Promise<void> {
+        await this.deleteIfcPropertyDeprecatedRaw(requestParameters);
+    }
+
+    /**
+     * Delete a Unit of a model Required scopes: ifc:write, model:write
+     * Delete a Unit of a model
+     */
+    async deleteIfcUnitDeprecatedRaw(requestParameters: DeleteIfcUnitDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcUnitDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3864,93 +4229,28 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a Unit of a model Required scopes: ifc:write
+     * Delete a Unit of a model Required scopes: ifc:write, model:write
      * Delete a Unit of a model
      */
-    async deleteIfcUnit(requestParameters: DeleteIfcUnitRequest): Promise<void> {
-        await this.deleteIfcUnitRaw(requestParameters);
+    async deleteIfcUnitDeprecated(requestParameters: DeleteIfcUnitDeprecatedRequest): Promise<void> {
+        await this.deleteIfcUnitDeprecatedRaw(requestParameters);
     }
 
     /**
-     * The IFC file will not be updated. The remaining layers are available in API and will be available when exporting an IFC file Required scopes: ifc:write
-     * Delete a layer of a model
-     */
-    async deleteLayerRaw(requestParameters: DeleteLayerRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteLayer.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteLayer.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteLayer.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteLayer.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/layer/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * The IFC file will not be updated. The remaining layers are available in API and will be available when exporting an IFC file Required scopes: ifc:write
-     * Delete a layer of a model
-     */
-    async deleteLayer(requestParameters: DeleteLayerRequest): Promise<void> {
-        await this.deleteLayerRaw(requestParameters);
-    }
-
-    /**
-     * Delete the Model without deleting the related document Required scopes: ifc:write
+     * Delete the Model without deleting the related document Required scopes: ifc:write, model:write
      * Delete the Model without deleting the related document
      */
-    async deleteModelWithoutDocRaw(requestParameters: DeleteModelWithoutDocRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteIfcWithoutDocDeprecatedRaw(requestParameters: DeleteIfcWithoutDocDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModelWithoutDoc.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcWithoutDocDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModelWithoutDoc.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcWithoutDocDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModelWithoutDoc.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcWithoutDocDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -3990,32 +4290,97 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete the Model without deleting the related document Required scopes: ifc:write
+     * Delete the Model without deleting the related document Required scopes: ifc:write, model:write
      * Delete the Model without deleting the related document
      */
-    async deleteModelWithoutDoc(requestParameters: DeleteModelWithoutDocRequest): Promise<void> {
-        await this.deleteModelWithoutDocRaw(requestParameters);
+    async deleteIfcWithoutDocDeprecated(requestParameters: DeleteIfcWithoutDocDeprecatedRequest): Promise<void> {
+        await this.deleteIfcWithoutDocDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Delete a PropertySet of a model Required scopes: ifc:write
-     * Delete a PropertySet of a model
+     * The IFC file will not be updated. The remaining layers are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
+     * Delete a layer of a model
      */
-    async deletePropertySetRaw(requestParameters: DeletePropertySetRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteLayerDeprecatedRaw(requestParameters: DeleteLayerDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deletePropertySet.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteLayerDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePropertySet.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteLayerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deletePropertySet.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteLayerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deletePropertySet.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteLayerDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/layer/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * The IFC file will not be updated. The remaining layers are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
+     * Delete a layer of a model
+     */
+    async deleteLayerDeprecated(requestParameters: DeleteLayerDeprecatedRequest): Promise<void> {
+        await this.deleteLayerDeprecatedRaw(requestParameters);
+    }
+
+    /**
+     * Delete a PropertySet of a model Required scopes: ifc:write, model:write
+     * Delete a PropertySet of a model
+     */
+    async deletePropertySetDeprecatedRaw(requestParameters: DeletePropertySetDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deletePropertySetDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePropertySetDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deletePropertySetDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deletePropertySetDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4055,32 +4420,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a PropertySet of a model Required scopes: ifc:write
+     * Delete a PropertySet of a model Required scopes: ifc:write, model:write
      * Delete a PropertySet of a model
      */
-    async deletePropertySet(requestParameters: DeletePropertySetRequest): Promise<void> {
-        await this.deletePropertySetRaw(requestParameters);
+    async deletePropertySetDeprecated(requestParameters: DeletePropertySetDeprecatedRequest): Promise<void> {
+        await this.deletePropertySetDeprecatedRaw(requestParameters);
     }
 
     /**
-     * It will not delete related zones. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file Required scopes: ifc:write
+     * It will not delete related zones. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete a space
      */
-    async deleteSpaceRaw(requestParameters: DeleteSpaceRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteSpaceDeprecatedRaw(requestParameters: DeleteSpaceDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteSpace.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteSpaceDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteSpace.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteSpaceDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteSpace.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteSpaceDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteSpace.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteSpaceDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4120,32 +4485,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * It will not delete related zones. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file Required scopes: ifc:write
+     * It will not delete related zones. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete a space
      */
-    async deleteSpace(requestParameters: DeleteSpaceRequest): Promise<void> {
-        await this.deleteSpaceRaw(requestParameters);
+    async deleteSpaceDeprecated(requestParameters: DeleteSpaceDeprecatedRequest): Promise<void> {
+        await this.deleteSpaceDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Delete a storey of a model Required scopes: ifc:write
+     * Delete a storey of a model Required scopes: ifc:write, model:write
      * Delete a storey of a model
      */
-    async deleteStoreyRaw(requestParameters: DeleteStoreyRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteStoreyDeprecatedRaw(requestParameters: DeleteStoreyDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteStorey.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteStoreyDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteStorey.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteStoreyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteStorey.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteStoreyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteStorey.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteStoreyDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4185,36 +4550,36 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a storey of a model Required scopes: ifc:write
+     * Delete a storey of a model Required scopes: ifc:write, model:write
      * Delete a storey of a model
      */
-    async deleteStorey(requestParameters: DeleteStoreyRequest): Promise<void> {
-        await this.deleteStoreyRaw(requestParameters);
+    async deleteStoreyDeprecated(requestParameters: DeleteStoreyDeprecatedRequest): Promise<void> {
+        await this.deleteStoreyDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Delete the relation between a 2d model and a storey Required scopes: ifc:write
+     * Delete the relation between a 2d model and a storey Required scopes: ifc:write, model:write
      * Delete the relation between a 2d model and a storey
      */
-    async deleteStoreyPlanRaw(requestParameters: DeleteStoreyPlanRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteStoreyPlanDeprecatedRaw(requestParameters: DeleteStoreyPlanDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteStoreyPlan.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteStoreyPlanDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteStoreyPlan.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteStoreyPlanDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteStoreyPlan.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteStoreyPlanDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteStoreyPlan.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteStoreyPlanDeprecated.');
         }
 
         if (requestParameters.storeyPk === null || requestParameters.storeyPk === undefined) {
-            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling deleteStoreyPlan.');
+            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling deleteStoreyPlanDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4254,32 +4619,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete the relation between a 2d model and a storey Required scopes: ifc:write
+     * Delete the relation between a 2d model and a storey Required scopes: ifc:write, model:write
      * Delete the relation between a 2d model and a storey
      */
-    async deleteStoreyPlan(requestParameters: DeleteStoreyPlanRequest): Promise<void> {
-        await this.deleteStoreyPlanRaw(requestParameters);
+    async deleteStoreyPlanDeprecated(requestParameters: DeleteStoreyPlanDeprecatedRequest): Promise<void> {
+        await this.deleteStoreyPlanDeprecatedRaw(requestParameters);
     }
 
     /**
-     * The IFC file will not be updated. The remaining systems are available in API and will be available when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The remaining systems are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete a system of a model
      */
-    async deleteSystemRaw(requestParameters: DeleteSystemRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteSystemDeprecatedRaw(requestParameters: DeleteSystemDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteSystem.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteSystemDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteSystem.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteSystemDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteSystem.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteSystemDeprecated.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
-            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteSystem.');
+            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteSystemDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4319,32 +4684,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The IFC file will not be updated. The remaining systems are available in API and will be available when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The remaining systems are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete a system of a model
      */
-    async deleteSystem(requestParameters: DeleteSystemRequest): Promise<void> {
-        await this.deleteSystemRaw(requestParameters);
+    async deleteSystemDeprecated(requestParameters: DeleteSystemDeprecatedRequest): Promise<void> {
+        await this.deleteSystemDeprecatedRaw(requestParameters);
     }
 
     /**
-     * The IFC file will not be updated. The remaining zones are available in API and will be available when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The remaining zones are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete a zone of a model
      */
-    async deleteZoneRaw(requestParameters: DeleteZoneRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteZoneDeprecatedRaw(requestParameters: DeleteZoneDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteZone.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteZoneDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteZone.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteZoneDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteZone.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteZoneDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteZone.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteZoneDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4384,36 +4749,36 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The IFC file will not be updated. The remaining zones are available in API and will be available when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The remaining zones are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete a zone of a model
      */
-    async deleteZone(requestParameters: DeleteZoneRequest): Promise<void> {
-        await this.deleteZoneRaw(requestParameters);
+    async deleteZoneDeprecated(requestParameters: DeleteZoneDeprecatedRequest): Promise<void> {
+        await this.deleteZoneDeprecatedRaw(requestParameters);
     }
 
     /**
-     * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete a space of a zone
      */
-    async deleteZoneSpaceRaw(requestParameters: DeleteZoneSpaceRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteZoneSpaceDeprecatedRaw(requestParameters: DeleteZoneSpaceDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteZoneSpace.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteZoneSpaceDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteZoneSpace.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteZoneSpaceDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteZoneSpace.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteZoneSpaceDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteZoneSpace.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteZoneSpaceDeprecated.');
         }
 
         if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling deleteZoneSpace.');
+            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling deleteZoneSpaceDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4453,32 +4818,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file Required scopes: ifc:write
+     * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete a space of a zone
      */
-    async deleteZoneSpace(requestParameters: DeleteZoneSpaceRequest): Promise<void> {
-        await this.deleteZoneSpaceRaw(requestParameters);
+    async deleteZoneSpaceDeprecated(requestParameters: DeleteZoneSpaceDeprecatedRequest): Promise<void> {
+        await this.deleteZoneSpaceDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result Required scopes: ifc:write
+     * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result Required scopes: ifc:write, model:write
      * Export IFC
      */
-    async exportIfcRaw(requestParameters: ExportIfcRequest): Promise<runtime.ApiResponse<IfcExport>> {
+    async exportIfcDeprecatedRaw(requestParameters: ExportIfcDeprecatedRequest): Promise<runtime.ApiResponse<IfcExport>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling exportIfc.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling exportIfcDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling exportIfc.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling exportIfcDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling exportIfc.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling exportIfcDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling exportIfc.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling exportIfcDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4521,37 +4886,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result Required scopes: ifc:write
+     * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result Required scopes: ifc:write, model:write
      * Export IFC
      */
-    async exportIfc(requestParameters: ExportIfcRequest): Promise<IfcExport> {
-        const response = await this.exportIfcRaw(requestParameters);
+    async exportIfcDeprecated(requestParameters: ExportIfcDeprecatedRequest): Promise<IfcExport> {
+        const response = await this.exportIfcDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update all fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update all fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update all fields of an element
      */
-    async fullUpdateElementRaw(requestParameters: FullUpdateElementRequest): Promise<runtime.ApiResponse<Element>> {
+    async fullUpdateElementDeprecatedRaw(requestParameters: FullUpdateElementDeprecatedRequest): Promise<runtime.ApiResponse<Element>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling fullUpdateElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling fullUpdateElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling fullUpdateElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling fullUpdateElementDeprecated.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
-            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling fullUpdateElement.');
+            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling fullUpdateElementDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling fullUpdateElement.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling fullUpdateElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4594,33 +4959,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update all fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update all fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update all fields of an element
      */
-    async fullUpdateElement(requestParameters: FullUpdateElementRequest): Promise<Element> {
-        const response = await this.fullUpdateElementRaw(requestParameters);
+    async fullUpdateElementDeprecated(requestParameters: FullUpdateElementDeprecatedRequest): Promise<Element> {
+        const response = await this.fullUpdateElementDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          This route allows you to create storeys, modify them, delete them and organize them by order.         If the optional field \"id\" is present, the storey will be modified. Otherwise, a new storey will be created.         If an \"id\" present in the api is not present in the list passed in parameter, the corresponding storey will be deleted.         A storey with \"is_site=True\" will be stored without order. There can be only one storey with \"is_site=True\"\"  Required scopes: ifc:write
+     *          This route allows you to create storeys, modify them, delete them and organize them by order.         If the optional field \"id\" is present, the storey will be modified. Otherwise, a new storey will be created.         If an \"id\" present in the api is not present in the list passed in parameter, the corresponding storey will be deleted.         A storey with \"is_site=True\" will be stored without order. There can be only one storey with \"is_site=True\"\"  Required scopes: ifc:write, model:write
      * Update all fields of all storeys
      */
-    async fullUpdateStoreysRaw(requestParameters: FullUpdateStoreysRequest): Promise<runtime.ApiResponse<Array<Storey>>> {
+    async fullUpdateStoreysDeprecatedRaw(requestParameters: FullUpdateStoreysDeprecatedRequest): Promise<runtime.ApiResponse<Array<Storey>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateStoreys.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateStoreysDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling fullUpdateStoreys.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling fullUpdateStoreysDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling fullUpdateStoreys.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling fullUpdateStoreysDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling fullUpdateStoreys.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling fullUpdateStoreysDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4663,33 +5028,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          This route allows you to create storeys, modify them, delete them and organize them by order.         If the optional field \"id\" is present, the storey will be modified. Otherwise, a new storey will be created.         If an \"id\" present in the api is not present in the list passed in parameter, the corresponding storey will be deleted.         A storey with \"is_site=True\" will be stored without order. There can be only one storey with \"is_site=True\"\"  Required scopes: ifc:write
+     *          This route allows you to create storeys, modify them, delete them and organize them by order.         If the optional field \"id\" is present, the storey will be modified. Otherwise, a new storey will be created.         If an \"id\" present in the api is not present in the list passed in parameter, the corresponding storey will be deleted.         A storey with \"is_site=True\" will be stored without order. There can be only one storey with \"is_site=True\"\"  Required scopes: ifc:write, model:write
      * Update all fields of all storeys
      */
-    async fullUpdateStoreys(requestParameters: FullUpdateStoreysRequest): Promise<Array<Storey>> {
-        const response = await this.fullUpdateStoreysRaw(requestParameters);
+    async fullUpdateStoreysDeprecated(requestParameters: FullUpdateStoreysDeprecatedRequest): Promise<Array<Storey>> {
+        const response = await this.fullUpdateStoreysDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve one token created for this model Required scopes: ifc:token_manage
+     * Retrieve one token created for this model Required scopes: ifc:token_manage, model:token_manage
      * Retrieve one token created for this model
      */
-    async getAccessTokenRaw(requestParameters: GetAccessTokenRequest): Promise<runtime.ApiResponse<IfcAccessToken>> {
+    async getAccessTokenDeprecatedRaw(requestParameters: GetAccessTokenDeprecatedRequest): Promise<runtime.ApiResponse<IfcAccessToken>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getAccessToken.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getAccessTokenDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getAccessToken.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getAccessTokenDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getAccessToken.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getAccessTokenDeprecated.');
         }
 
         if (requestParameters.token === null || requestParameters.token === undefined) {
-            throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling getAccessToken.');
+            throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling getAccessTokenDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4729,29 +5094,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve one token created for this model Required scopes: ifc:token_manage
+     * Retrieve one token created for this model Required scopes: ifc:token_manage, model:token_manage
      * Retrieve one token created for this model
      */
-    async getAccessToken(requestParameters: GetAccessTokenRequest): Promise<IfcAccessToken> {
-        const response = await this.getAccessTokenRaw(requestParameters);
+    async getAccessTokenDeprecated(requestParameters: GetAccessTokenDeprecatedRequest): Promise<IfcAccessToken> {
+        const response = await this.getAccessTokenDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all tokens created for this model Required scopes: ifc:token_manage
+     * Retrieve all tokens created for this model Required scopes: ifc:token_manage, model:token_manage
      * Retrieve all tokens created for this model
      */
-    async getAccessTokensRaw(requestParameters: GetAccessTokensRequest): Promise<runtime.ApiResponse<Array<IfcAccessToken>>> {
+    async getAccessTokensDeprecatedRaw(requestParameters: GetAccessTokensDeprecatedRequest): Promise<runtime.ApiResponse<Array<IfcAccessToken>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getAccessTokens.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getAccessTokensDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getAccessTokens.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getAccessTokensDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getAccessTokens.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getAccessTokensDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4791,33 +5156,297 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all tokens created for this model Required scopes: ifc:token_manage
+     * Retrieve all tokens created for this model Required scopes: ifc:token_manage, model:token_manage
      * Retrieve all tokens created for this model
      */
-    async getAccessTokens(requestParameters: GetAccessTokensRequest): Promise<Array<IfcAccessToken>> {
-        const response = await this.getAccessTokensRaw(requestParameters);
+    async getAccessTokensDeprecated(requestParameters: GetAccessTokensDeprecatedRequest): Promise<Array<IfcAccessToken>> {
+        const response = await this.getAccessTokensDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all classifications of an element Required scopes: ifc:read
-     * Retrieve all classifications of an element
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:read, ifc:read
+     * Retrieve a checker of a model
      */
-    async getClassificationsOfElementRaw(requestParameters: GetClassificationsOfElementRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+    async getCheckerDeprecatedRaw(requestParameters: GetCheckerDeprecatedRequest): Promise<runtime.ApiResponse<IfcChecker>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getClassificationsOfElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckerDeprecated.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getClassificationsOfElement.');
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCheckerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getClassificationsOfElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getCheckerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getClassificationsOfElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
+    }
+
+    /**
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:read, ifc:read
+     * Retrieve a checker of a model
+     */
+    async getCheckerDeprecated(requestParameters: GetCheckerDeprecatedRequest): Promise<IfcChecker> {
+        const response = await this.getCheckerDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve one CheckerResult Required scopes: check:read
+     * Retrieve one CheckerResult
+     */
+    async getCheckerResultDeprecatedRaw(requestParameters: GetCheckerResultDeprecatedRequest): Promise<runtime.ApiResponse<CheckerResult>> {
+        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
+            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling getCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerResultDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve one CheckerResult Required scopes: check:read
+     * Retrieve one CheckerResult
+     */
+    async getCheckerResultDeprecated(requestParameters: GetCheckerResultDeprecatedRequest): Promise<CheckerResult> {
+        const response = await this.getCheckerResultDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all CheckerResults Required scopes: check:read
+     * Retrieve all CheckerResults
+     */
+    async getCheckerResultsDeprecatedRaw(requestParameters: GetCheckerResultsDeprecatedRequest): Promise<runtime.ApiResponse<Array<CheckerResult>>> {
+        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
+            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling getCheckerResultsDeprecated.');
+        }
+
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckerResultsDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getCheckerResultsDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerResultsDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CheckerResultFromJSON));
+    }
+
+    /**
+     * Retrieve all CheckerResults Required scopes: check:read
+     * Retrieve all CheckerResults
+     */
+    async getCheckerResultsDeprecated(requestParameters: GetCheckerResultsDeprecatedRequest): Promise<Array<CheckerResult>> {
+        const response = await this.getCheckerResultsDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:read, ifc:read
+     * Retrieve all checkers of a model
+     */
+    async getCheckersDeprecatedRaw(requestParameters: GetCheckersDeprecatedRequest): Promise<runtime.ApiResponse<Array<IfcChecker>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckersDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getCheckersDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckersDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(IfcCheckerFromJSON));
+    }
+
+    /**
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:read, ifc:read
+     * Retrieve all checkers of a model
+     */
+    async getCheckersDeprecated(requestParameters: GetCheckersDeprecatedRequest): Promise<Array<IfcChecker>> {
+        const response = await this.getCheckersDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all classifications of an element Required scopes: ifc:read, model:read
+     * Retrieve all classifications of an element
+     */
+    async getClassificationsOfElementDeprecatedRaw(requestParameters: GetClassificationsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getClassificationsOfElementDeprecated.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getClassificationsOfElementDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getClassificationsOfElementDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getClassificationsOfElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4857,33 +5486,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all classifications of an element Required scopes: ifc:read
+     * Retrieve all classifications of an element Required scopes: ifc:read, model:read
      * Retrieve all classifications of an element
      */
-    async getClassificationsOfElement(requestParameters: GetClassificationsOfElementRequest): Promise<Array<Classification>> {
-        const response = await this.getClassificationsOfElementRaw(requestParameters);
+    async getClassificationsOfElementDeprecated(requestParameters: GetClassificationsOfElementDeprecatedRequest): Promise<Array<Classification>> {
+        const response = await this.getClassificationsOfElementDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all documents of an element Required scopes: ifc:read
+     * Retrieve all documents of an element Required scopes: ifc:read, model:read
      * Retrieve all documents of an element
      */
-    async getDocumentsOfElementRaw(requestParameters: GetDocumentsOfElementRequest): Promise<runtime.ApiResponse<Array<Document>>> {
+    async getDocumentsOfElementDeprecatedRaw(requestParameters: GetDocumentsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Document>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocumentsOfElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocumentsOfElementDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getDocumentsOfElement.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getDocumentsOfElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getDocumentsOfElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getDocumentsOfElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocumentsOfElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocumentsOfElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4923,33 +5552,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all documents of an element Required scopes: ifc:read
+     * Retrieve all documents of an element Required scopes: ifc:read, model:read
      * Retrieve all documents of an element
      */
-    async getDocumentsOfElement(requestParameters: GetDocumentsOfElementRequest): Promise<Array<Document>> {
-        const response = await this.getDocumentsOfElementRaw(requestParameters);
+    async getDocumentsOfElementDeprecated(requestParameters: GetDocumentsOfElementDeprecatedRequest): Promise<Array<Document>> {
+        const response = await this.getDocumentsOfElementDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve an element of a model Required scopes: ifc:read
+     * Retrieve an element of a model Required scopes: ifc:read, model:read
      * Retrieve an element of a model
      */
-    async getElementRaw(requestParameters: GetElementRequest): Promise<runtime.ApiResponse<Element>> {
+    async getElementDeprecatedRaw(requestParameters: GetElementDeprecatedRequest): Promise<runtime.ApiResponse<Element>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementDeprecated.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
-            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getElement.');
+            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -4989,29 +5618,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve an element of a model Required scopes: ifc:read
+     * Retrieve an element of a model Required scopes: ifc:read, model:read
      * Retrieve an element of a model
      */
-    async getElement(requestParameters: GetElementRequest): Promise<Element> {
-        const response = await this.getElementRaw(requestParameters);
+    async getElementDeprecated(requestParameters: GetElementDeprecatedRequest): Promise<Element> {
+        const response = await this.getElementDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all documents linked to any element with the list of uuids Required scopes: ifc:read
+     * Retrieve all documents linked to any element with the list of uuids Required scopes: ifc:read, model:read
      * Retrieve all documents linked to any element
      */
-    async getElementLinkedDocumentsRaw(requestParameters: GetElementLinkedDocumentsRequest): Promise<runtime.ApiResponse<Array<DocumentWithElementList>>> {
+    async getElementLinkedDocumentsDeprecatedRaw(requestParameters: GetElementLinkedDocumentsDeprecatedRequest): Promise<runtime.ApiResponse<Array<DocumentWithElementList>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementLinkedDocuments.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementLinkedDocumentsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementLinkedDocuments.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementLinkedDocumentsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementLinkedDocuments.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementLinkedDocumentsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5063,37 +5692,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all documents linked to any element with the list of uuids Required scopes: ifc:read
+     * Retrieve all documents linked to any element with the list of uuids Required scopes: ifc:read, model:read
      * Retrieve all documents linked to any element
      */
-    async getElementLinkedDocuments(requestParameters: GetElementLinkedDocumentsRequest): Promise<Array<DocumentWithElementList>> {
-        const response = await this.getElementLinkedDocumentsRaw(requestParameters);
+    async getElementLinkedDocumentsDeprecated(requestParameters: GetElementLinkedDocumentsDeprecatedRequest): Promise<Array<DocumentWithElementList>> {
+        const response = await this.getElementLinkedDocumentsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a PropertySet of an element Required scopes: ifc:read
+     * Retrieve a PropertySet of an element Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of an element
      */
-    async getElementPropertySetRaw(requestParameters: GetElementPropertySetRequest): Promise<runtime.ApiResponse<PropertySet>> {
+    async getElementPropertySetDeprecatedRaw(requestParameters: GetElementPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<PropertySet>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySet.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySet.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySet.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySet.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySet.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5133,37 +5762,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a PropertySet of an element Required scopes: ifc:read
+     * Retrieve a PropertySet of an element Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of an element
      */
-    async getElementPropertySet(requestParameters: GetElementPropertySetRequest): Promise<PropertySet> {
-        const response = await this.getElementPropertySetRaw(requestParameters);
+    async getElementPropertySetDeprecated(requestParameters: GetElementPropertySetDeprecatedRequest): Promise<PropertySet> {
+        const response = await this.getElementPropertySetDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all Properties of a PropertySet Required scopes: ifc:read
+     * Retrieve all Properties of a PropertySet Required scopes: ifc:read, model:read
      * Retrieve all Properties of a PropertySet
      */
-    async getElementPropertySetPropertiesRaw(requestParameters: GetElementPropertySetPropertiesRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async getElementPropertySetPropertiesDeprecatedRaw(requestParameters: GetElementPropertySetPropertiesDeprecatedRequest): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetProperties.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertiesDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetProperties.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertiesDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetProperties.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertiesDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetProperties.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertiesDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetProperties.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertiesDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5203,119 +5832,45 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all Properties of a PropertySet Required scopes: ifc:read
+     * Retrieve all Properties of a PropertySet Required scopes: ifc:read, model:read
      * Retrieve all Properties of a PropertySet
      */
-    async getElementPropertySetProperties(requestParameters: GetElementPropertySetPropertiesRequest): Promise<Array<Property>> {
-        const response = await this.getElementPropertySetPropertiesRaw(requestParameters);
+    async getElementPropertySetPropertiesDeprecated(requestParameters: GetElementPropertySetPropertiesDeprecatedRequest): Promise<Array<Property>> {
+        const response = await this.getElementPropertySetPropertiesDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a Property of a PropertySet Required scopes: ifc:read
-     * Retrieve a Property of a PropertySet
-     */
-    async getElementPropertySetPropertyRaw(requestParameters: GetElementPropertySetPropertyRequest): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetProperty.');
-        }
-
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetProperty.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetProperty.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetProperty.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetProperty.');
-        }
-
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetProperty.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve a Property of a PropertySet Required scopes: ifc:read
-     * Retrieve a Property of a PropertySet
-     */
-    async getElementPropertySetProperty(requestParameters: GetElementPropertySetPropertyRequest): Promise<Property> {
-        const response = await this.getElementPropertySetPropertyRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve a Definition of a Property Required scopes: ifc:read
+     * Retrieve a Definition of a Property Required scopes: ifc:read, model:read
      * Retrieve a Definition of a Property
      */
-    async getElementPropertySetPropertyDefinitionRaw(requestParameters: GetElementPropertySetPropertyDefinitionRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+    async getElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5355,49 +5910,49 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a Definition of a Property Required scopes: ifc:read
+     * Retrieve a Definition of a Property Required scopes: ifc:read, model:read
      * Retrieve a Definition of a Property
      */
-    async getElementPropertySetPropertyDefinition(requestParameters: GetElementPropertySetPropertyDefinitionRequest): Promise<PropertyDefinition> {
-        const response = await this.getElementPropertySetPropertyDefinitionRaw(requestParameters);
+    async getElementPropertySetPropertyDefinitionDeprecated(requestParameters: GetElementPropertySetPropertyDefinitionDeprecatedRequest): Promise<PropertyDefinition> {
+        const response = await this.getElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a Unit of a Definition Required scopes: ifc:read
+     * Retrieve a Unit of a Definition Required scopes: ifc:read, model:read
      * Retrieve a Unit of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnitRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitRequest): Promise<runtime.ApiResponse<Unit>> {
+    async getElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitDeprecatedRequest): Promise<runtime.ApiResponse<Unit>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.propertydefinitionPk === null || requestParameters.propertydefinitionPk === undefined) {
-            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5437,45 +5992,45 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a Unit of a Definition Required scopes: ifc:read
+     * Retrieve a Unit of a Definition Required scopes: ifc:read, model:read
      * Retrieve a Unit of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnit(requestParameters: GetElementPropertySetPropertyDefinitionUnitRequest): Promise<Unit> {
-        const response = await this.getElementPropertySetPropertyDefinitionUnitRaw(requestParameters);
+    async getElementPropertySetPropertyDefinitionUnitDeprecated(requestParameters: GetElementPropertySetPropertyDefinitionUnitDeprecatedRequest): Promise<Unit> {
+        const response = await this.getElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all Units of a Definition Required scopes: ifc:read
+     * Retrieve all Units of a Definition Required scopes: ifc:read, model:read
      * Retrieve all Units of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnitsRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitsRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
+    async getElementPropertySetPropertyDefinitionUnitsDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitsDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitionUnitsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitsDeprecated.');
         }
 
         if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitsDeprecated.');
         }
 
         if (requestParameters.propertydefinitionPk === null || requestParameters.propertydefinitionPk === undefined) {
-            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitsDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5515,41 +6070,41 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all Units of a Definition Required scopes: ifc:read
+     * Retrieve all Units of a Definition Required scopes: ifc:read, model:read
      * Retrieve all Units of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnits(requestParameters: GetElementPropertySetPropertyDefinitionUnitsRequest): Promise<Array<Unit>> {
-        const response = await this.getElementPropertySetPropertyDefinitionUnitsRaw(requestParameters);
+    async getElementPropertySetPropertyDefinitionUnitsDeprecated(requestParameters: GetElementPropertySetPropertyDefinitionUnitsDeprecatedRequest): Promise<Array<Unit>> {
+        const response = await this.getElementPropertySetPropertyDefinitionUnitsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all Definitions of a PropertySet Required scopes: ifc:read
+     * Retrieve all Definitions of a PropertySet Required scopes: ifc:read, model:read
      * Retrieve all Definitions of a PropertySet
      */
-    async getElementPropertySetPropertyDefinitionsRaw(requestParameters: GetElementPropertySetPropertyDefinitionsRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
+    async getElementPropertySetPropertyDefinitionsDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionsDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5589,33 +6144,107 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all Definitions of a PropertySet Required scopes: ifc:read
+     * Retrieve all Definitions of a PropertySet Required scopes: ifc:read, model:read
      * Retrieve all Definitions of a PropertySet
      */
-    async getElementPropertySetPropertyDefinitions(requestParameters: GetElementPropertySetPropertyDefinitionsRequest): Promise<Array<PropertyDefinition>> {
-        const response = await this.getElementPropertySetPropertyDefinitionsRaw(requestParameters);
+    async getElementPropertySetPropertyDefinitionsDeprecated(requestParameters: GetElementPropertySetPropertyDefinitionsDeprecatedRequest): Promise<Array<PropertyDefinition>> {
+        const response = await this.getElementPropertySetPropertyDefinitionsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all PropertySets of an element Required scopes: ifc:read
-     * Retrieve all PropertySets of an element
+     * Retrieve a Property of a PropertySet Required scopes: ifc:read, model:read
+     * Retrieve a Property of a PropertySet
      */
-    async getElementPropertySetsRaw(requestParameters: GetElementPropertySetsRequest): Promise<runtime.ApiResponse<Array<PropertySet>>> {
+    async getElementPropertySetPropertyDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySets.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySets.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySets.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySets.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDeprecated.');
+        }
+
+        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a Property of a PropertySet Required scopes: ifc:read, model:read
+     * Retrieve a Property of a PropertySet
+     */
+    async getElementPropertySetPropertyDeprecated(requestParameters: GetElementPropertySetPropertyDeprecatedRequest): Promise<Property> {
+        const response = await this.getElementPropertySetPropertyDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all PropertySets of an element Required scopes: ifc:read, model:read
+     * Retrieve all PropertySets of an element
+     */
+    async getElementPropertySetsDeprecatedRaw(requestParameters: GetElementPropertySetsDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertySet>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetsDeprecated.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetsDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementPropertySetsDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5655,29 +6284,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all PropertySets of an element Required scopes: ifc:read
+     * Retrieve all PropertySets of an element Required scopes: ifc:read, model:read
      * Retrieve all PropertySets of an element
      */
-    async getElementPropertySets(requestParameters: GetElementPropertySetsRequest): Promise<Array<PropertySet>> {
-        const response = await this.getElementPropertySetsRaw(requestParameters);
+    async getElementPropertySetsDeprecated(requestParameters: GetElementPropertySetsDeprecatedRequest): Promise<Array<PropertySet>> {
+        const response = await this.getElementPropertySetsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see getRawElements Required scopes: ifc:read
+     * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see getRawElements Required scopes: ifc:read, model:read
      * Retrieve all elements of a model
      */
-    async getElementsRaw(requestParameters: GetElementsRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async getElementsDeprecatedRaw(requestParameters: GetElementsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElements.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElements.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElements.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5729,33 +6358,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see getRawElements Required scopes: ifc:read
+     * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see getRawElements Required scopes: ifc:read, model:read
      * Retrieve all elements of a model
      */
-    async getElements(requestParameters: GetElementsRequest): Promise<Array<Element>> {
-        const response = await this.getElementsRaw(requestParameters);
+    async getElementsDeprecated(requestParameters: GetElementsDeprecatedRequest): Promise<Array<Element>> {
+        const response = await this.getElementsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all elements with the classification Required scopes: ifc:read
+     * Retrieve all elements with the classification Required scopes: ifc:read, model:read
      * Retrieve all elements with the classification
      */
-    async getElementsFromClassificationRaw(requestParameters: GetElementsFromClassificationRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async getElementsFromClassificationDeprecatedRaw(requestParameters: GetElementsFromClassificationDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementsFromClassification.');
-        }
-
-        if (requestParameters.ifcClassificationPk === null || requestParameters.ifcClassificationPk === undefined) {
-            throw new runtime.RequiredError('ifcClassificationPk','Required parameter requestParameters.ifcClassificationPk was null or undefined when calling getElementsFromClassification.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementsFromClassificationDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementsFromClassification.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getElementsFromClassificationDeprecated.');
+        }
+
+        if (requestParameters.modelClassificationPk === null || requestParameters.modelClassificationPk === undefined) {
+            throw new runtime.RequiredError('modelClassificationPk','Required parameter requestParameters.modelClassificationPk was null or undefined when calling getElementsFromClassificationDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementsFromClassification.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementsFromClassificationDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5785,7 +6414,7 @@ export class IfcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/classification/{ifc_classification_pk}/element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_classification_pk"}}`, encodeURIComponent(String(requestParameters.ifcClassificationPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/classification/{model_classification_pk}/element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"model_classification_pk"}}`, encodeURIComponent(String(requestParameters.modelClassificationPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5795,91 +6424,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all elements with the classification Required scopes: ifc:read
+     * Retrieve all elements with the classification Required scopes: ifc:read, model:read
      * Retrieve all elements with the classification
      */
-    async getElementsFromClassification(requestParameters: GetElementsFromClassificationRequest): Promise<Array<Element>> {
-        const response = await this.getElementsFromClassificationRaw(requestParameters);
+    async getElementsFromClassificationDeprecated(requestParameters: GetElementsFromClassificationDeprecatedRequest): Promise<Array<Element>> {
+        const response = await this.getElementsFromClassificationDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *  Required scopes: ifc:read
-     * Retrieve one model
-     */
-    async getIfcRaw(requestParameters: GetIfcRequest): Promise<runtime.ApiResponse<Ifc>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfc.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfc.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfc.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcFromJSON(jsonValue));
-    }
-
-    /**
-     *  Required scopes: ifc:read
-     * Retrieve one model
-     */
-    async getIfc(requestParameters: GetIfcRequest): Promise<Ifc> {
-        const response = await this.getIfcRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve all classifications in a model Required scopes: ifc:read
+     * Retrieve all classifications in a model Required scopes: ifc:read, model:read
      * Retrieve all classifications in a model
      */
-    async getIfcClassificationsRaw(requestParameters: GetIfcClassificationsRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+    async getIfcClassificationsDeprecatedRaw(requestParameters: GetIfcClassificationsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcClassifications.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcClassificationsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcClassifications.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcClassificationsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcClassifications.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcClassificationsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5919,33 +6486,95 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all classifications in a model Required scopes: ifc:read
+     * Retrieve all classifications in a model Required scopes: ifc:read, model:read
      * Retrieve all classifications in a model
      */
-    async getIfcClassifications(requestParameters: GetIfcClassificationsRequest): Promise<Array<Classification>> {
-        const response = await this.getIfcClassificationsRaw(requestParameters);
+    async getIfcClassificationsDeprecated(requestParameters: GetIfcClassificationsDeprecatedRequest): Promise<Array<Classification>> {
+        const response = await this.getIfcClassificationsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a material of a model Required scopes: ifc:read
-     * Retrieve a material of a model
+     *  Required scopes: ifc:read, model:read
+     * Retrieve one model
      */
-    async getIfcMaterialRaw(requestParameters: GetIfcMaterialRequest): Promise<runtime.ApiResponse<Material>> {
+    async getIfcDeprecatedRaw(requestParameters: GetIfcDeprecatedRequest): Promise<runtime.ApiResponse<Model>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterial.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcMaterial.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcMaterial.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterial.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
+    }
+
+    /**
+     *  Required scopes: ifc:read, model:read
+     * Retrieve one model
+     */
+    async getIfcDeprecated(requestParameters: GetIfcDeprecatedRequest): Promise<Model> {
+        const response = await this.getIfcDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a material of a model Required scopes: ifc:read, model:read
+     * Retrieve a material of a model
+     */
+    async getIfcMaterialDeprecatedRaw(requestParameters: GetIfcMaterialDeprecatedRequest): Promise<runtime.ApiResponse<Material>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterialDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcMaterialDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcMaterialDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterialDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -5985,29 +6614,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a material of a model Required scopes: ifc:read
+     * Retrieve a material of a model Required scopes: ifc:read, model:read
      * Retrieve a material of a model
      */
-    async getIfcMaterial(requestParameters: GetIfcMaterialRequest): Promise<Material> {
-        const response = await this.getIfcMaterialRaw(requestParameters);
+    async getIfcMaterialDeprecated(requestParameters: GetIfcMaterialDeprecatedRequest): Promise<Material> {
+        const response = await this.getIfcMaterialDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all materials of a model. Required scopes: ifc:read
+     * Retrieve all materials of a model. Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getIfcMaterialsRaw(requestParameters: GetIfcMaterialsRequest): Promise<runtime.ApiResponse<Array<Material>>> {
+    async getIfcMaterialsDeprecatedRaw(requestParameters: GetIfcMaterialsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Material>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterials.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterialsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcMaterials.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcMaterialsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterials.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterialsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6047,29 +6676,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all materials of a model. Required scopes: ifc:read
+     * Retrieve all materials of a model. Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getIfcMaterials(requestParameters: GetIfcMaterialsRequest): Promise<Array<Material>> {
-        const response = await this.getIfcMaterialsRaw(requestParameters);
+    async getIfcMaterialsDeprecated(requestParameters: GetIfcMaterialsDeprecatedRequest): Promise<Array<Material>> {
+        const response = await this.getIfcMaterialsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all PropertySets of a model Required scopes: ifc:read
+     * Retrieve all PropertySets of a model Required scopes: ifc:read, model:read
      * Retrieve all Properties of a model
      */
-    async getIfcPropertiesRaw(requestParameters: GetIfcPropertiesRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async getIfcPropertiesDeprecatedRaw(requestParameters: GetIfcPropertiesDeprecatedRequest): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcProperties.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertiesDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcProperties.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcPropertiesDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcProperties.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertiesDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6109,99 +6738,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all PropertySets of a model Required scopes: ifc:read
+     * Retrieve all PropertySets of a model Required scopes: ifc:read, model:read
      * Retrieve all Properties of a model
      */
-    async getIfcProperties(requestParameters: GetIfcPropertiesRequest): Promise<Array<Property>> {
-        const response = await this.getIfcPropertiesRaw(requestParameters);
+    async getIfcPropertiesDeprecated(requestParameters: GetIfcPropertiesDeprecatedRequest): Promise<Array<Property>> {
+        const response = await this.getIfcPropertiesDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a Property of a model Required scopes: ifc:read
-     * Retrieve a Property of a model
-     */
-    async getIfcPropertyRaw(requestParameters: GetIfcPropertyRequest): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcProperty.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcProperty.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcProperty.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcProperty.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve a Property of a model Required scopes: ifc:read
-     * Retrieve a Property of a model
-     */
-    async getIfcProperty(requestParameters: GetIfcPropertyRequest): Promise<Property> {
-        const response = await this.getIfcPropertyRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve a PropertyDefinition of a model Required scopes: ifc:read
+     * Retrieve a PropertyDefinition of a model Required scopes: ifc:read, model:read
      * Retrieve a PropertyDefinition of a model
      */
-    async getIfcPropertyDefinitionRaw(requestParameters: GetIfcPropertyDefinitionRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+    async getIfcPropertyDefinitionDeprecatedRaw(requestParameters: GetIfcPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDefinition.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcPropertyDefinition.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcPropertyDefinition.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDefinition.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDefinitionDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6241,29 +6804,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a PropertyDefinition of a model Required scopes: ifc:read
+     * Retrieve a PropertyDefinition of a model Required scopes: ifc:read, model:read
      * Retrieve a PropertyDefinition of a model
      */
-    async getIfcPropertyDefinition(requestParameters: GetIfcPropertyDefinitionRequest): Promise<PropertyDefinition> {
-        const response = await this.getIfcPropertyDefinitionRaw(requestParameters);
+    async getIfcPropertyDefinitionDeprecated(requestParameters: GetIfcPropertyDefinitionDeprecatedRequest): Promise<PropertyDefinition> {
+        const response = await this.getIfcPropertyDefinitionDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all PropertyDefinitions of a model Required scopes: ifc:read
+     * Retrieve all PropertyDefinitions of a model Required scopes: ifc:read, model:read
      * Retrieve all PropertyDefinitions of a model
      */
-    async getIfcPropertyDefinitionsRaw(requestParameters: GetIfcPropertyDefinitionsRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
+    async getIfcPropertyDefinitionsDeprecatedRaw(requestParameters: GetIfcPropertyDefinitionsDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcPropertyDefinitionsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDefinitionsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6303,33 +6866,99 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all PropertyDefinitions of a model Required scopes: ifc:read
+     * Retrieve all PropertyDefinitions of a model Required scopes: ifc:read, model:read
      * Retrieve all PropertyDefinitions of a model
      */
-    async getIfcPropertyDefinitions(requestParameters: GetIfcPropertyDefinitionsRequest): Promise<Array<PropertyDefinition>> {
-        const response = await this.getIfcPropertyDefinitionsRaw(requestParameters);
+    async getIfcPropertyDefinitionsDeprecated(requestParameters: GetIfcPropertyDefinitionsDeprecatedRequest): Promise<Array<PropertyDefinition>> {
+        const response = await this.getIfcPropertyDefinitionsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a Unit of a model Required scopes: ifc:read
-     * Retrieve a Unit of a model
+     * Retrieve a Property of a model Required scopes: ifc:read, model:read
+     * Retrieve a Property of a model
      */
-    async getIfcUnitRaw(requestParameters: GetIfcUnitRequest): Promise<runtime.ApiResponse<Unit>> {
+    async getIfcPropertyDeprecatedRaw(requestParameters: GetIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcUnit.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcUnit.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcPropertyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcUnit.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcPropertyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcUnit.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a Property of a model Required scopes: ifc:read, model:read
+     * Retrieve a Property of a model
+     */
+    async getIfcPropertyDeprecated(requestParameters: GetIfcPropertyDeprecatedRequest): Promise<Property> {
+        const response = await this.getIfcPropertyDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a Unit of a model Required scopes: ifc:read, model:read
+     * Retrieve a Unit of a model
+     */
+    async getIfcUnitDeprecatedRaw(requestParameters: GetIfcUnitDeprecatedRequest): Promise<runtime.ApiResponse<Unit>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcUnitDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6369,29 +6998,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a Unit of a model Required scopes: ifc:read
+     * Retrieve a Unit of a model Required scopes: ifc:read, model:read
      * Retrieve a Unit of a model
      */
-    async getIfcUnit(requestParameters: GetIfcUnitRequest): Promise<Unit> {
-        const response = await this.getIfcUnitRaw(requestParameters);
+    async getIfcUnitDeprecated(requestParameters: GetIfcUnitDeprecatedRequest): Promise<Unit> {
+        const response = await this.getIfcUnitDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all Units of a model Required scopes: ifc:read
+     * Retrieve all Units of a model Required scopes: ifc:read, model:read
      * Retrieve all Units of a model
      */
-    async getIfcUnitsRaw(requestParameters: GetIfcUnitsRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
+    async getIfcUnitsDeprecatedRaw(requestParameters: GetIfcUnitsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcUnits.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcUnitsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcUnits.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getIfcUnitsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcUnits.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcUnitsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6431,25 +7060,25 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all Units of a model Required scopes: ifc:read
+     * Retrieve all Units of a model Required scopes: ifc:read, model:read
      * Retrieve all Units of a model
      */
-    async getIfcUnits(requestParameters: GetIfcUnitsRequest): Promise<Array<Unit>> {
-        const response = await this.getIfcUnitsRaw(requestParameters);
+    async getIfcUnitsDeprecated(requestParameters: GetIfcUnitsDeprecatedRequest): Promise<Array<Unit>> {
+        const response = await this.getIfcUnitsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all models. For legacy reasons, this route is named IFC but now handle all models types (DWG, PDF, IFC, etc). The field `type` allows you to discriminate which kind of model it is. Required scopes: ifc:read
+     * Retrieve all models. The field `type` allows you to discriminate which kind of model it is. Required scopes: ifc:read, model:read
      * Retrieve all models
      */
-    async getIfcsRaw(requestParameters: GetIfcsRequest): Promise<runtime.ApiResponse<Array<Ifc>>> {
+    async getIfcsDeprecatedRaw(requestParameters: GetIfcsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Model>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcs.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcs.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6497,37 +7126,37 @@ export class IfcApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(IfcFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ModelFromJSON));
     }
 
     /**
-     * Retrieve all models. For legacy reasons, this route is named IFC but now handle all models types (DWG, PDF, IFC, etc). The field `type` allows you to discriminate which kind of model it is. Required scopes: ifc:read
+     * Retrieve all models. The field `type` allows you to discriminate which kind of model it is. Required scopes: ifc:read, model:read
      * Retrieve all models
      */
-    async getIfcs(requestParameters: GetIfcsRequest): Promise<Array<Ifc>> {
-        const response = await this.getIfcsRaw(requestParameters);
+    async getIfcsDeprecated(requestParameters: GetIfcsDeprecatedRequest): Promise<Array<Model>> {
+        const response = await this.getIfcsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a layer of a model Required scopes: ifc:read
+     * Retrieve a layer of a model Required scopes: ifc:read, model:read
      * Retrieve a layer of a model
      */
-    async getLayerRaw(requestParameters: GetLayerRequest): Promise<runtime.ApiResponse<Layer>> {
+    async getLayerDeprecatedRaw(requestParameters: GetLayerDeprecatedRequest): Promise<runtime.ApiResponse<Layer>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getLayer.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getLayerDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getLayer.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getLayerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getLayer.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getLayerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getLayer.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getLayerDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6567,29 +7196,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a layer of a model Required scopes: ifc:read
+     * Retrieve a layer of a model Required scopes: ifc:read, model:read
      * Retrieve a layer of a model
      */
-    async getLayer(requestParameters: GetLayerRequest): Promise<Layer> {
-        const response = await this.getLayerRaw(requestParameters);
+    async getLayerDeprecated(requestParameters: GetLayerDeprecatedRequest): Promise<Layer> {
+        const response = await this.getLayerDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all layers of a model. Required scopes: ifc:read
+     * Retrieve all layers of a model. Required scopes: ifc:read, model:read
      * Retrieve all layers of a model
      */
-    async getLayersRaw(requestParameters: GetLayersRequest): Promise<runtime.ApiResponse<Array<Layer>>> {
+    async getLayersDeprecatedRaw(requestParameters: GetLayersDeprecatedRequest): Promise<runtime.ApiResponse<Array<Layer>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getLayers.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getLayersDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getLayers.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getLayersDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getLayers.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getLayersDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6629,37 +7258,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all layers of a model. Required scopes: ifc:read
+     * Retrieve all layers of a model. Required scopes: ifc:read, model:read
      * Retrieve all layers of a model
      */
-    async getLayers(requestParameters: GetLayersRequest): Promise<Array<Layer>> {
-        const response = await this.getLayersRaw(requestParameters);
+    async getLayersDeprecated(requestParameters: GetLayersDeprecatedRequest): Promise<Array<Layer>> {
+        const response = await this.getLayersDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a material of a model Required scopes: ifc:read
+     * Retrieve a material of a model Required scopes: ifc:read, model:read
      * Retrieve a material of a model
      */
-    async getMaterialRaw(requestParameters: GetMaterialRequest): Promise<runtime.ApiResponse<Material>> {
+    async getMaterialDeprecatedRaw(requestParameters: GetMaterialDeprecatedRequest): Promise<runtime.ApiResponse<Material>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterial.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterialDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getMaterial.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getMaterialDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getMaterial.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getMaterialDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getMaterial.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getMaterialDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterial.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterialDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6699,33 +7328,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a material of a model Required scopes: ifc:read
+     * Retrieve a material of a model Required scopes: ifc:read, model:read
      * Retrieve a material of a model
      */
-    async getMaterial(requestParameters: GetMaterialRequest): Promise<Material> {
-        const response = await this.getMaterialRaw(requestParameters);
+    async getMaterialDeprecated(requestParameters: GetMaterialDeprecatedRequest): Promise<Material> {
+        const response = await this.getMaterialDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all materials of a model. Required scopes: ifc:read
+     * Retrieve all materials of a model. Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getMaterialsRaw(requestParameters: GetMaterialsRequest): Promise<runtime.ApiResponse<Array<Material>>> {
+    async getMaterialsDeprecatedRaw(requestParameters: GetMaterialsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Material>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterials.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterialsDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getMaterials.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getMaterialsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getMaterials.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getMaterialsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterials.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterialsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6765,165 +7394,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all materials of a model. Required scopes: ifc:read
+     * Retrieve all materials of a model. Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getMaterials(requestParameters: GetMaterialsRequest): Promise<Array<Material>> {
-        const response = await this.getMaterialsRaw(requestParameters);
+    async getMaterialsDeprecated(requestParameters: GetMaterialsDeprecatedRequest): Promise<Array<Material>> {
+        const response = await this.getMaterialsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a storey of a model Required scopes: ifc:read
-     * Retrieve a storey of a model
-     */
-    async getModelStoreyRaw(requestParameters: GetModelStoreyRequest): Promise<runtime.ApiResponse<Storey>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelStorey.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModelStorey.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getModelStorey.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelStorey.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve a storey of a model Required scopes: ifc:read
-     * Retrieve a storey of a model
-     */
-    async getModelStorey(requestParameters: GetModelStoreyRequest): Promise<Storey> {
-        const response = await this.getModelStoreyRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve all storeys of a model. Required scopes: ifc:read
-     * Retrieve all storeys of a model
-     */
-    async getModelStoreysRaw(requestParameters: GetModelStoreysRequest): Promise<runtime.ApiResponse<Array<Storey>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelStoreys.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getModelStoreys.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelStoreys.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StoreyFromJSON));
-    }
-
-    /**
-     * Retrieve all storeys of a model. Required scopes: ifc:read
-     * Retrieve all storeys of a model
-     */
-    async getModelStoreys(requestParameters: GetModelStoreysRequest): Promise<Array<Storey>> {
-        const response = await this.getModelStoreysRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve the postioning of the plan in the storey Required scopes: ifc:read
+     * Retrieve the postioning of the plan in the storey Required scopes: ifc:read, model:read
      * Retrieve the postioning of the plan in the storey
      */
-    async getPlanPositioningRaw(requestParameters: GetPlanPositioningRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
+    async getPlanPositioningDeprecatedRaw(requestParameters: GetPlanPositioningDeprecatedRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPlanPositioning.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPlanPositioningDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPlanPositioning.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPlanPositioningDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getPlanPositioning.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getPlanPositioningDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPlanPositioning.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPlanPositioningDeprecated.');
         }
 
         if (requestParameters.storeyPk === null || requestParameters.storeyPk === undefined) {
-            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling getPlanPositioning.');
+            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling getPlanPositioningDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -6963,33 +7464,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve the postioning of the plan in the storey Required scopes: ifc:read
+     * Retrieve the postioning of the plan in the storey Required scopes: ifc:read, model:read
      * Retrieve the postioning of the plan in the storey
      */
-    async getPlanPositioning(requestParameters: GetPlanPositioningRequest): Promise<PositioningPlan> {
-        const response = await this.getPlanPositioningRaw(requestParameters);
+    async getPlanPositioningDeprecated(requestParameters: GetPlanPositioningDeprecatedRequest): Promise<PositioningPlan> {
+        const response = await this.getPlanPositioningDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *  Required scopes: ifc:read
+     *  Required scopes: ifc:read, model:read
      * Retrieve a processor handler
      */
-    async getProcessorHandlerRaw(requestParameters: GetProcessorHandlerRequest): Promise<runtime.ApiResponse<ProcessorHandler>> {
+    async getProcessorHandlerDeprecatedRaw(requestParameters: GetProcessorHandlerDeprecatedRequest): Promise<runtime.ApiResponse<ProcessorHandler>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProcessorHandler.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProcessorHandlerDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProcessorHandler.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProcessorHandlerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getProcessorHandler.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getProcessorHandlerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProcessorHandler.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProcessorHandlerDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7029,29 +7530,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:read
+     *  Required scopes: ifc:read, model:read
      * Retrieve a processor handler
      */
-    async getProcessorHandler(requestParameters: GetProcessorHandlerRequest): Promise<ProcessorHandler> {
-        const response = await this.getProcessorHandlerRaw(requestParameters);
+    async getProcessorHandlerDeprecated(requestParameters: GetProcessorHandlerDeprecatedRequest): Promise<ProcessorHandler> {
+        const response = await this.getProcessorHandlerDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *  Required scopes: ifc:read
+     *  Required scopes: ifc:read, model:read
      * Get all processor handlers
      */
-    async getProcessorHandlersRaw(requestParameters: GetProcessorHandlersRequest): Promise<runtime.ApiResponse<Array<ProcessorHandler>>> {
+    async getProcessorHandlersDeprecatedRaw(requestParameters: GetProcessorHandlersDeprecatedRequest): Promise<runtime.ApiResponse<Array<ProcessorHandler>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProcessorHandlers.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProcessorHandlersDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getProcessorHandlers.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getProcessorHandlersDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProcessorHandlers.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProcessorHandlersDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7091,33 +7592,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:read
+     *  Required scopes: ifc:read, model:read
      * Get all processor handlers
      */
-    async getProcessorHandlers(requestParameters: GetProcessorHandlersRequest): Promise<Array<ProcessorHandler>> {
-        const response = await this.getProcessorHandlersRaw(requestParameters);
+    async getProcessorHandlersDeprecated(requestParameters: GetProcessorHandlersDeprecatedRequest): Promise<Array<ProcessorHandler>> {
+        const response = await this.getProcessorHandlersDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a PropertySet of a model Required scopes: ifc:read
+     * Retrieve a PropertySet of a model Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of a model
      */
-    async getPropertySetRaw(requestParameters: GetPropertySetRequest): Promise<runtime.ApiResponse<PropertySet>> {
+    async getPropertySetDeprecatedRaw(requestParameters: GetPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<PropertySet>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPropertySet.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPropertySetDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPropertySet.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPropertySetDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getPropertySet.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getPropertySetDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPropertySet.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPropertySetDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7157,29 +7658,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a PropertySet of a model Required scopes: ifc:read
+     * Retrieve a PropertySet of a model Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of a model
      */
-    async getPropertySet(requestParameters: GetPropertySetRequest): Promise<PropertySet> {
-        const response = await this.getPropertySetRaw(requestParameters);
+    async getPropertySetDeprecated(requestParameters: GetPropertySetDeprecatedRequest): Promise<PropertySet> {
+        const response = await this.getPropertySetDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all PropertySets of a model Required scopes: ifc:read
+     * Retrieve all PropertySets of a model Required scopes: ifc:read, model:read
      * Retrieve all PropertySets of a model
      */
-    async getPropertySetsRaw(requestParameters: GetPropertySetsRequest): Promise<runtime.ApiResponse<Array<PropertySet>>> {
+    async getPropertySetsDeprecatedRaw(requestParameters: GetPropertySetsDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertySet>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPropertySets.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPropertySetsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getPropertySets.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getPropertySetsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPropertySets.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPropertySetsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7219,29 +7720,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all PropertySets of a model Required scopes: ifc:read
+     * Retrieve all PropertySets of a model Required scopes: ifc:read, model:read
      * Retrieve all PropertySets of a model
      */
-    async getPropertySets(requestParameters: GetPropertySetsRequest): Promise<Array<PropertySet>> {
-        const response = await this.getPropertySetsRaw(requestParameters);
+    async getPropertySetsDeprecated(requestParameters: GetPropertySetsDeprecatedRequest): Promise<Array<PropertySet>> {
+        const response = await this.getPropertySetsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read
+     *          Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read, model:read
      * Retrieve all elements in a optimized format
      */
-    async getRawElementsRaw(requestParameters: GetRawElementsRequest): Promise<runtime.ApiResponse<RawElements>> {
+    async getRawElementsDeprecatedRaw(requestParameters: GetRawElementsDeprecatedRequest): Promise<runtime.ApiResponse<RawElements>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRawElements.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRawElementsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getRawElements.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getRawElementsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRawElements.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRawElementsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7293,33 +7794,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read
+     *          Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read, model:read
      * Retrieve all elements in a optimized format
      */
-    async getRawElements(requestParameters: GetRawElementsRequest): Promise<RawElements> {
-        const response = await this.getRawElementsRaw(requestParameters);
+    async getRawElementsDeprecated(requestParameters: GetRawElementsDeprecatedRequest): Promise<RawElements> {
+        const response = await this.getRawElementsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Retrieve an element of a model with a simple value representation         Format response :             {                 :element_uuid: {                     \"attributes\": {                         :property_name: value,                         :property_name: value                     },                     :property_set_name: {                         :property_name: value,                         :property_name: value                     }                 }             }  Required scopes: ifc:read
+     *          Retrieve an element of a model with a simple value representation         Format response :             {                 :element_uuid: {                     \"attributes\": {                         :property_name: value,                         :property_name: value                     },                     :property_set_name: {                         :property_name: value,                         :property_name: value                     }                 }             }  Required scopes: ifc:read, model:read
      * Retrieve an element of a model with a simple value representation
      */
-    async getSimpleElementRaw(requestParameters: GetSimpleElementRequest): Promise<runtime.ApiResponse<SimpleElement>> {
+    async getSimpleElementDeprecatedRaw(requestParameters: GetSimpleElementDeprecatedRequest): Promise<runtime.ApiResponse<SimpleElement>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSimpleElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSimpleElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSimpleElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSimpleElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSimpleElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSimpleElementDeprecated.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
-            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getSimpleElement.');
+            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getSimpleElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7359,29 +7860,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Retrieve an element of a model with a simple value representation         Format response :             {                 :element_uuid: {                     \"attributes\": {                         :property_name: value,                         :property_name: value                     },                     :property_set_name: {                         :property_name: value,                         :property_name: value                     }                 }             }  Required scopes: ifc:read
+     *          Retrieve an element of a model with a simple value representation         Format response :             {                 :element_uuid: {                     \"attributes\": {                         :property_name: value,                         :property_name: value                     },                     :property_set_name: {                         :property_name: value,                         :property_name: value                     }                 }             }  Required scopes: ifc:read, model:read
      * Retrieve an element of a model with a simple value representation
      */
-    async getSimpleElement(requestParameters: GetSimpleElementRequest): Promise<SimpleElement> {
-        const response = await this.getSimpleElementRaw(requestParameters);
+    async getSimpleElementDeprecated(requestParameters: GetSimpleElementDeprecatedRequest): Promise<SimpleElement> {
+        const response = await this.getSimpleElementDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Retrieve all elements of a model with a simple value representation         Format response :             {                 :element_uuid: {                     \"attributes\": {                         :property_name: value,                         :property_name: value                     },                     :property_set_name: {                         :property_name: value,                         :property_name: value                     }                 }             }  Required scopes: ifc:read
+     *          Retrieve all elements of a model with a simple value representation         Format response :             {                 :element_uuid: {                     \"attributes\": {                         :property_name: value,                         :property_name: value                     },                     :property_set_name: {                         :property_name: value,                         :property_name: value                     }                 }             }  Required scopes: ifc:read, model:read
      * Retrieve all elements of a model with a simple value representation
      */
-    async getSimpleElementsRaw(requestParameters: GetSimpleElementsRequest): Promise<runtime.ApiResponse<SimpleElement>> {
+    async getSimpleElementsDeprecatedRaw(requestParameters: GetSimpleElementsDeprecatedRequest): Promise<runtime.ApiResponse<SimpleElement>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSimpleElements.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSimpleElementsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSimpleElements.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSimpleElementsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSimpleElements.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSimpleElementsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7433,33 +7934,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Retrieve all elements of a model with a simple value representation         Format response :             {                 :element_uuid: {                     \"attributes\": {                         :property_name: value,                         :property_name: value                     },                     :property_set_name: {                         :property_name: value,                         :property_name: value                     }                 }             }  Required scopes: ifc:read
+     *          Retrieve all elements of a model with a simple value representation         Format response :             {                 :element_uuid: {                     \"attributes\": {                         :property_name: value,                         :property_name: value                     },                     :property_set_name: {                         :property_name: value,                         :property_name: value                     }                 }             }  Required scopes: ifc:read, model:read
      * Retrieve all elements of a model with a simple value representation
      */
-    async getSimpleElements(requestParameters: GetSimpleElementsRequest): Promise<SimpleElement> {
-        const response = await this.getSimpleElementsRaw(requestParameters);
+    async getSimpleElementsDeprecated(requestParameters: GetSimpleElementsDeprecatedRequest): Promise<SimpleElement> {
+        const response = await this.getSimpleElementsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve one space of the model Required scopes: ifc:read
+     * Retrieve one space of the model Required scopes: ifc:read, model:read
      * Retrieve one space of the model
      */
-    async getSpaceRaw(requestParameters: GetSpaceRequest): Promise<runtime.ApiResponse<Space>> {
+    async getSpaceDeprecatedRaw(requestParameters: GetSpaceDeprecatedRequest): Promise<runtime.ApiResponse<Space>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSpace.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSpaceDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSpace.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSpaceDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSpace.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSpaceDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSpace.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSpaceDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7499,29 +8000,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve one space of the model Required scopes: ifc:read
+     * Retrieve one space of the model Required scopes: ifc:read, model:read
      * Retrieve one space of the model
      */
-    async getSpace(requestParameters: GetSpaceRequest): Promise<Space> {
-        const response = await this.getSpaceRaw(requestParameters);
+    async getSpaceDeprecated(requestParameters: GetSpaceDeprecatedRequest): Promise<Space> {
+        const response = await this.getSpaceDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all spaces of the model Required scopes: ifc:read
+     * Retrieve all spaces of the model Required scopes: ifc:read, model:read
      * Retrieve all spaces of the model
      */
-    async getSpacesRaw(requestParameters: GetSpacesRequest): Promise<runtime.ApiResponse<Array<Space>>> {
+    async getSpacesDeprecatedRaw(requestParameters: GetSpacesDeprecatedRequest): Promise<runtime.ApiResponse<Array<Space>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSpaces.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSpacesDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSpaces.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSpacesDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSpaces.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSpacesDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7561,33 +8062,161 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all spaces of the model Required scopes: ifc:read
+     * Retrieve all spaces of the model Required scopes: ifc:read, model:read
      * Retrieve all spaces of the model
      */
-    async getSpaces(requestParameters: GetSpacesRequest): Promise<Array<Space>> {
-        const response = await this.getSpacesRaw(requestParameters);
+    async getSpacesDeprecated(requestParameters: GetSpacesDeprecatedRequest): Promise<Array<Space>> {
+        const response = await this.getSpacesDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve a system of a model Required scopes: ifc:read
-     * Retrieve a system of a model
+     * Retrieve a storey of a model Required scopes: ifc:read, model:read
+     * Retrieve a storey of a model
      */
-    async getSystemRaw(requestParameters: GetSystemRequest): Promise<runtime.ApiResponse<System>> {
+    async getStoreyDeprecatedRaw(requestParameters: GetStoreyDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSystem.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getStoreyDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getStoreyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSystem.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getStoreyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSystem.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getStoreyDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a storey of a model Required scopes: ifc:read, model:read
+     * Retrieve a storey of a model
+     */
+    async getStoreyDeprecated(requestParameters: GetStoreyDeprecatedRequest): Promise<Storey> {
+        const response = await this.getStoreyDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all storeys of a model. Required scopes: ifc:read, model:read
+     * Retrieve all storeys of a model
+     */
+    async getStoreysDeprecatedRaw(requestParameters: GetStoreysDeprecatedRequest): Promise<runtime.ApiResponse<Array<Storey>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getStoreysDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getStoreysDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getStoreysDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StoreyFromJSON));
+    }
+
+    /**
+     * Retrieve all storeys of a model. Required scopes: ifc:read, model:read
+     * Retrieve all storeys of a model
+     */
+    async getStoreysDeprecated(requestParameters: GetStoreysDeprecatedRequest): Promise<Array<Storey>> {
+        const response = await this.getStoreysDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a system of a model Required scopes: ifc:read, model:read
+     * Retrieve a system of a model
+     */
+    async getSystemDeprecatedRaw(requestParameters: GetSystemDeprecatedRequest): Promise<runtime.ApiResponse<System>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSystemDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSystemDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSystemDeprecated.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
-            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getSystem.');
+            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getSystemDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7627,29 +8256,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a system of a model Required scopes: ifc:read
+     * Retrieve a system of a model Required scopes: ifc:read, model:read
      * Retrieve a system of a model
      */
-    async getSystem(requestParameters: GetSystemRequest): Promise<System> {
-        const response = await this.getSystemRaw(requestParameters);
+    async getSystemDeprecated(requestParameters: GetSystemDeprecatedRequest): Promise<System> {
+        const response = await this.getSystemDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all systems of a model. Required scopes: ifc:read
+     * Retrieve all systems of a model. Required scopes: ifc:read, model:read
      * Retrieve all systems of a model
      */
-    async getSystemsRaw(requestParameters: GetSystemsRequest): Promise<runtime.ApiResponse<Array<System>>> {
+    async getSystemsDeprecatedRaw(requestParameters: GetSystemsDeprecatedRequest): Promise<runtime.ApiResponse<Array<System>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSystems.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSystemsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSystems.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getSystemsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSystems.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSystemsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7689,33 +8318,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all systems of a model. Required scopes: ifc:read
+     * Retrieve all systems of a model. Required scopes: ifc:read, model:read
      * Retrieve all systems of a model
      */
-    async getSystems(requestParameters: GetSystemsRequest): Promise<Array<System>> {
-        const response = await this.getSystemsRaw(requestParameters);
+    async getSystemsDeprecated(requestParameters: GetSystemsDeprecatedRequest): Promise<Array<System>> {
+        const response = await this.getSystemsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve one zone of a model Required scopes: ifc:read
+     * Retrieve one zone of a model Required scopes: ifc:read, model:read
      * Retrieve one zone of a model
      */
-    async getZoneRaw(requestParameters: GetZoneRequest): Promise<runtime.ApiResponse<Zone>> {
+    async getZoneDeprecatedRaw(requestParameters: GetZoneDeprecatedRequest): Promise<runtime.ApiResponse<Zone>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZone.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getZone.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getZoneDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getZone.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getZoneDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZone.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZoneDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7755,37 +8384,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve one zone of a model Required scopes: ifc:read
+     * Retrieve one zone of a model Required scopes: ifc:read, model:read
      * Retrieve one zone of a model
      */
-    async getZone(requestParameters: GetZoneRequest): Promise<Zone> {
-        const response = await this.getZoneRaw(requestParameters);
+    async getZoneDeprecated(requestParameters: GetZoneDeprecatedRequest): Promise<Zone> {
+        const response = await this.getZoneDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve one space of a zone Required scopes: ifc:read
+     * Retrieve one space of a zone Required scopes: ifc:read, model:read
      * Retrieve one space of a zone
      */
-    async getZoneSpaceRaw(requestParameters: GetZoneSpaceRequest): Promise<runtime.ApiResponse<ZoneSpace>> {
+    async getZoneSpaceDeprecatedRaw(requestParameters: GetZoneSpaceDeprecatedRequest): Promise<runtime.ApiResponse<ZoneSpace>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneSpace.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneSpaceDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getZoneSpace.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getZoneSpaceDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getZoneSpace.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getZoneSpaceDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZoneSpace.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZoneSpaceDeprecated.');
         }
 
         if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling getZoneSpace.');
+            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling getZoneSpaceDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7825,33 +8454,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve one space of a zone Required scopes: ifc:read
+     * Retrieve one space of a zone Required scopes: ifc:read, model:read
      * Retrieve one space of a zone
      */
-    async getZoneSpace(requestParameters: GetZoneSpaceRequest): Promise<ZoneSpace> {
-        const response = await this.getZoneSpaceRaw(requestParameters);
+    async getZoneSpaceDeprecated(requestParameters: GetZoneSpaceDeprecatedRequest): Promise<ZoneSpace> {
+        const response = await this.getZoneSpaceDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve all spaces of a zone Required scopes: ifc:read
+     * Retrieve all spaces of a zone Required scopes: ifc:read, model:read
      * Retrieve all spaces of a zone
      */
-    async getZoneSpacesRaw(requestParameters: GetZoneSpacesRequest): Promise<runtime.ApiResponse<Array<ZoneSpace>>> {
+    async getZoneSpacesDeprecatedRaw(requestParameters: GetZoneSpacesDeprecatedRequest): Promise<runtime.ApiResponse<Array<ZoneSpace>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneSpaces.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneSpacesDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getZoneSpaces.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getZoneSpacesDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZoneSpaces.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZoneSpacesDeprecated.');
         }
 
         if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling getZoneSpaces.');
+            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling getZoneSpacesDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7891,29 +8520,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all spaces of a zone Required scopes: ifc:read
+     * Retrieve all spaces of a zone Required scopes: ifc:read, model:read
      * Retrieve all spaces of a zone
      */
-    async getZoneSpaces(requestParameters: GetZoneSpacesRequest): Promise<Array<ZoneSpace>> {
-        const response = await this.getZoneSpacesRaw(requestParameters);
+    async getZoneSpacesDeprecated(requestParameters: GetZoneSpacesDeprecatedRequest): Promise<Array<ZoneSpace>> {
+        const response = await this.getZoneSpacesDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Retrieve parent zones of a model. Children zones we\'ll be in the \'zones\' field Required scopes: ifc:read
+     * Retrieve parent zones of a model. Children zones we\'ll be in the \'zones\' field Required scopes: ifc:read, model:read
      * Retrieve zones of a model
      */
-    async getZonesRaw(requestParameters: GetZonesRequest): Promise<runtime.ApiResponse<Array<Zone>>> {
+    async getZonesDeprecatedRaw(requestParameters: GetZonesDeprecatedRequest): Promise<runtime.ApiResponse<Array<Zone>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZones.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZonesDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getZones.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getZonesDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZones.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZonesDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -7957,37 +8586,109 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve parent zones of a model. Children zones we\'ll be in the \'zones\' field Required scopes: ifc:read
+     * Retrieve parent zones of a model. Children zones we\'ll be in the \'zones\' field Required scopes: ifc:read, model:read
      * Retrieve zones of a model
      */
-    async getZones(requestParameters: GetZonesRequest): Promise<Array<Zone>> {
-        const response = await this.getZonesRaw(requestParameters);
+    async getZonesDeprecated(requestParameters: GetZonesDeprecatedRequest): Promise<Array<Zone>> {
+        const response = await this.getZonesDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
-     * Link one or many documents to an element
+     * Starts a new check in the checker Required scopes: check:write, ifc:read
+     * Launch a new check on the model
      */
-    async linkDocumentsOfElementRaw(requestParameters: LinkDocumentsOfElementRequest): Promise<runtime.ApiResponse<Array<Document>>> {
+    async launchNewCheckDeprecatedRaw(requestParameters: LaunchNewCheckDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling linkDocumentsOfElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling launchNewCheckDeprecated.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling linkDocumentsOfElement.');
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling launchNewCheckDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling linkDocumentsOfElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling launchNewCheckDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling linkDocumentsOfElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling launchNewCheckDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling linkDocumentsOfElement.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling launchNewCheckDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}/launch-check`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: IfcCheckerToJSON(requestParameters.data),
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Starts a new check in the checker Required scopes: check:write, ifc:read
+     * Launch a new check on the model
+     */
+    async launchNewCheckDeprecated(requestParameters: LaunchNewCheckDeprecatedRequest): Promise<void> {
+        await this.launchNewCheckDeprecatedRaw(requestParameters);
+    }
+
+    /**
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
+     * Link one or many documents to an element
+     */
+    async linkDocumentsOfElementDeprecatedRaw(requestParameters: LinkDocumentsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Document>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling linkDocumentsOfElementDeprecated.');
+        }
+
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling linkDocumentsOfElementDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling linkDocumentsOfElementDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling linkDocumentsOfElementDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling linkDocumentsOfElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8030,29 +8731,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Link one or many documents to an element
      */
-    async linkDocumentsOfElement(requestParameters: LinkDocumentsOfElementRequest): Promise<Array<Document>> {
-        const response = await this.linkDocumentsOfElementRaw(requestParameters);
+    async linkDocumentsOfElementDeprecated(requestParameters: LinkDocumentsOfElementDeprecatedRequest): Promise<Array<Document>> {
+        const response = await this.linkDocumentsOfElementDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * List all associations between classifications and elements Required scopes: ifc:read
+     * List all associations between classifications and elements Required scopes: ifc:read, model:read
      * List all associations between classifications and elements
      */
-    async listClassificationElementRelationsRaw(requestParameters: ListClassificationElementRelationsRequest): Promise<runtime.ApiResponse<Array<ElementClassificationRelation>>> {
+    async listClassificationElementRelationsDeprecatedRaw(requestParameters: ListClassificationElementRelationsDeprecatedRequest): Promise<runtime.ApiResponse<Array<ElementClassificationRelation>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling listClassificationElementRelations.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling listClassificationElementRelationsDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling listClassificationElementRelations.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling listClassificationElementRelationsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling listClassificationElementRelations.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling listClassificationElementRelationsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8092,29 +8793,29 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * List all associations between classifications and elements Required scopes: ifc:read
+     * List all associations between classifications and elements Required scopes: ifc:read, model:read
      * List all associations between classifications and elements
      */
-    async listClassificationElementRelations(requestParameters: ListClassificationElementRelationsRequest): Promise<Array<ElementClassificationRelation>> {
-        const response = await this.listClassificationElementRelationsRaw(requestParameters);
+    async listClassificationElementRelationsDeprecated(requestParameters: ListClassificationElementRelationsDeprecatedRequest): Promise<Array<ElementClassificationRelation>> {
+        const response = await this.listClassificationElementRelationsDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Only works for IFC files. Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list Required scopes: ifc:write
+     * Only works for IFC files. Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list Required scopes: ifc:write, model:write
      * Merge IFC files
      */
-    async mergeIfcsRaw(requestParameters: MergeIfcsRequest): Promise<runtime.ApiResponse<void>> {
+    async mergeIfcsDeprecatedRaw(requestParameters: MergeIfcsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling mergeIfcs.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling mergeIfcsDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling mergeIfcs.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling mergeIfcsDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling mergeIfcs.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling mergeIfcsDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8157,32 +8858,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Only works for IFC files. Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list Required scopes: ifc:write
+     * Only works for IFC files. Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list Required scopes: ifc:write, model:write
      * Merge IFC files
      */
-    async mergeIfcs(requestParameters: MergeIfcsRequest): Promise<void> {
-        await this.mergeIfcsRaw(requestParameters);
+    async mergeIfcsDeprecated(requestParameters: MergeIfcsDeprecatedRequest): Promise<void> {
+        await this.mergeIfcsDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Only works for IFC files. Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC Required scopes: ifc:write
+     * Only works for IFC files. Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC Required scopes: ifc:write, model:write
      * Optimize the IFC
      */
-    async optimizeIfcRaw(requestParameters: OptimizeIfcRequest): Promise<runtime.ApiResponse<void>> {
+    async optimizeIfcDeprecatedRaw(requestParameters: OptimizeIfcDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling optimizeIfc.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling optimizeIfcDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling optimizeIfc.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling optimizeIfcDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling optimizeIfc.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling optimizeIfcDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling optimizeIfc.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling optimizeIfcDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8225,32 +8926,32 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Only works for IFC files. Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC Required scopes: ifc:write
+     * Only works for IFC files. Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC Required scopes: ifc:write, model:write
      * Optimize the IFC
      */
-    async optimizeIfc(requestParameters: OptimizeIfcRequest): Promise<void> {
-        await this.optimizeIfcRaw(requestParameters);
+    async optimizeIfcDeprecated(requestParameters: OptimizeIfcDeprecatedRequest): Promise<void> {
+        await this.optimizeIfcDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Remove all property sets from element. Property Sets will not be deleted, just detached from element Required scopes: ifc:write
+     * Remove all property sets from element. Property Sets will not be deleted, just detached from element Required scopes: ifc:write, model:write
      * Remove all property sets from element
      */
-    async removeAllElementPropertySetRaw(requestParameters: RemoveAllElementPropertySetRequest): Promise<runtime.ApiResponse<void>> {
+    async removeAllElementPropertySetDeprecatedRaw(requestParameters: RemoveAllElementPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeAllElementPropertySet.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeAllElementPropertySetDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeAllElementPropertySet.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeAllElementPropertySetDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeAllElementPropertySet.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeAllElementPropertySetDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeAllElementPropertySet.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeAllElementPropertySetDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8290,36 +8991,36 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Remove all property sets from element. Property Sets will not be deleted, just detached from element Required scopes: ifc:write
+     * Remove all property sets from element. Property Sets will not be deleted, just detached from element Required scopes: ifc:write, model:write
      * Remove all property sets from element
      */
-    async removeAllElementPropertySet(requestParameters: RemoveAllElementPropertySetRequest): Promise<void> {
-        await this.removeAllElementPropertySetRaw(requestParameters);
+    async removeAllElementPropertySetDeprecated(requestParameters: RemoveAllElementPropertySetDeprecatedRequest): Promise<void> {
+        await this.removeAllElementPropertySetDeprecatedRaw(requestParameters);
     }
 
     /**
-     * The classification will not be deleted Required scopes: ifc:write
+     * The classification will not be deleted Required scopes: ifc:write, model:write
      * Remove a classification from an element
      */
-    async removeClassificationOfElementRaw(requestParameters: RemoveClassificationOfElementRequest): Promise<runtime.ApiResponse<void>> {
+    async removeClassificationOfElementDeprecatedRaw(requestParameters: RemoveClassificationOfElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeClassificationOfElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeClassificationOfElementDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeClassificationOfElement.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeClassificationOfElementDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeClassificationOfElement.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeClassificationOfElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeClassificationOfElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeClassificationOfElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeClassificationOfElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeClassificationOfElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8359,36 +9060,36 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The classification will not be deleted Required scopes: ifc:write
+     * The classification will not be deleted Required scopes: ifc:write, model:write
      * Remove a classification from an element
      */
-    async removeClassificationOfElement(requestParameters: RemoveClassificationOfElementRequest): Promise<void> {
-        await this.removeClassificationOfElementRaw(requestParameters);
+    async removeClassificationOfElementDeprecated(requestParameters: RemoveClassificationOfElementDeprecatedRequest): Promise<void> {
+        await this.removeClassificationOfElementDeprecatedRaw(requestParameters);
     }
 
     /**
-     * The document will not be deleted Required scopes: ifc:write
+     * The document will not be deleted Required scopes: ifc:write, model:write
      * Remove a documents from an element
      */
-    async removeDocumentOfElementRaw(requestParameters: RemoveDocumentOfElementRequest): Promise<runtime.ApiResponse<void>> {
+    async removeDocumentOfElementDeprecatedRaw(requestParameters: RemoveDocumentOfElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeDocumentOfElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeDocumentOfElementDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeDocumentOfElement.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeDocumentOfElementDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeDocumentOfElement.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeDocumentOfElementDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeDocumentOfElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeDocumentOfElementDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeDocumentOfElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeDocumentOfElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8428,36 +9129,36 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The document will not be deleted Required scopes: ifc:write
+     * The document will not be deleted Required scopes: ifc:write, model:write
      * Remove a documents from an element
      */
-    async removeDocumentOfElement(requestParameters: RemoveDocumentOfElementRequest): Promise<void> {
-        await this.removeDocumentOfElementRaw(requestParameters);
+    async removeDocumentOfElementDeprecated(requestParameters: RemoveDocumentOfElementDeprecatedRequest): Promise<void> {
+        await this.removeDocumentOfElementDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Delete the relation between the element and the property set. Does not delete any object Required scopes: ifc:write
+     * Delete the relation between the element and the property set. Does not delete any object Required scopes: ifc:write, model:write
      * Remove a PropertySet from an element
      */
-    async removeElementPropertySetRaw(requestParameters: RemoveElementPropertySetRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementPropertySetDeprecatedRaw(requestParameters: RemoveElementPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySet.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySet.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySet.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementPropertySet.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementPropertySetDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySet.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8497,117 +9198,44 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete the relation between the element and the property set. Does not delete any object Required scopes: ifc:write
+     * Delete the relation between the element and the property set. Does not delete any object Required scopes: ifc:write, model:write
      * Remove a PropertySet from an element
      */
-    async removeElementPropertySet(requestParameters: RemoveElementPropertySetRequest): Promise<void> {
-        await this.removeElementPropertySetRaw(requestParameters);
+    async removeElementPropertySetDeprecated(requestParameters: RemoveElementPropertySetDeprecatedRequest): Promise<void> {
+        await this.removeElementPropertySetDeprecatedRaw(requestParameters);
     }
 
     /**
-     *  Required scopes: ifc:write
-     * Remove a property from a PropertySet
-     */
-    async removeElementPropertySetPropertyRaw(requestParameters: RemoveElementPropertySetPropertyRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetProperty.');
-        }
-
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetProperty.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetProperty.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementPropertySetProperty.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetProperty.');
-        }
-
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetProperty.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     *  Required scopes: ifc:write
-     * Remove a property from a PropertySet
-     */
-    async removeElementPropertySetProperty(requestParameters: RemoveElementPropertySetPropertyRequest): Promise<void> {
-        await this.removeElementPropertySetPropertyRaw(requestParameters);
-    }
-
-    /**
-     *  Required scopes: ifc:write
+     *  Required scopes: ifc:write, model:write
      * Remove a Definition from a Property
      */
-    async removeElementPropertySetPropertyDefinitionRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling removeElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDefinitionDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8647,48 +9275,48 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:write
+     *  Required scopes: ifc:write, model:write
      * Remove a Definition from a Property
      */
-    async removeElementPropertySetPropertyDefinition(requestParameters: RemoveElementPropertySetPropertyDefinitionRequest): Promise<void> {
-        await this.removeElementPropertySetPropertyDefinitionRaw(requestParameters);
+    async removeElementPropertySetPropertyDefinitionDeprecated(requestParameters: RemoveElementPropertySetPropertyDefinitionDeprecatedRequest): Promise<void> {
+        await this.removeElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Remove a Unit from a Definition Required scopes: ifc:write
+     * Remove a Unit from a Definition Required scopes: ifc:write, model:write
      * Remove a Unit from a Definition
      */
-    async removeElementPropertySetPropertyDefinitionUnitRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionUnitRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionUnitDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.propertydefinitionPk === null || requestParameters.propertydefinitionPk === undefined) {
-            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8728,36 +9356,40 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Remove a Unit from a Definition Required scopes: ifc:write
+     * Remove a Unit from a Definition Required scopes: ifc:write, model:write
      * Remove a Unit from a Definition
      */
-    async removeElementPropertySetPropertyDefinitionUnit(requestParameters: RemoveElementPropertySetPropertyDefinitionUnitRequest): Promise<void> {
-        await this.removeElementPropertySetPropertyDefinitionUnitRaw(requestParameters);
+    async removeElementPropertySetPropertyDefinitionUnitDeprecated(requestParameters: RemoveElementPropertySetPropertyDefinitionUnitDeprecatedRequest): Promise<void> {
+        await this.removeElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Remove the classification from all elements. No element nor classification will be deleted Required scopes: ifc:write
-     * Remove the classification from all elements
+     *  Required scopes: ifc:write, model:write
+     * Remove a property from a PropertySet
      */
-    async removeElementsFromClassificationRaw(requestParameters: RemoveElementsFromClassificationRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementPropertySetPropertyDeprecatedRaw(requestParameters: RemoveElementPropertySetPropertyDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementsFromClassification.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
         }
 
-        if (requestParameters.ifcClassificationPk === null || requestParameters.ifcClassificationPk === undefined) {
-            throw new runtime.RequiredError('ifcClassificationPk','Required parameter requestParameters.ifcClassificationPk was null or undefined when calling removeElementsFromClassification.');
+        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementsFromClassification.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementsFromClassification.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
         }
 
-        if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
-            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling removeElementsFromClassification.');
+        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8787,7 +9419,7 @@ export class IfcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/classification/{ifc_classification_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_classification_pk"}}`, encodeURIComponent(String(requestParameters.ifcClassificationPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -8797,28 +9429,97 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Remove the classification from all elements. No element nor classification will be deleted Required scopes: ifc:write
-     * Remove the classification from all elements
+     *  Required scopes: ifc:write, model:write
+     * Remove a property from a PropertySet
      */
-    async removeElementsFromClassification(requestParameters: RemoveElementsFromClassificationRequest): Promise<void> {
-        await this.removeElementsFromClassificationRaw(requestParameters);
+    async removeElementPropertySetPropertyDeprecated(requestParameters: RemoveElementPropertySetPropertyDeprecatedRequest): Promise<void> {
+        await this.removeElementPropertySetPropertyDeprecatedRaw(requestParameters);
     }
 
     /**
-     * Reprocess the IFC. All data that are not in the original IFC files will be lost Required scopes: ifc:write
-     * Reprocess IFC file
+     * Remove the classification from all elements. No element nor classification will be deleted Required scopes: ifc:write, model:write
+     * Remove the classification from all elements
      */
-    async reprocessIfcRaw(requestParameters: ReprocessIfcRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementsFromClassificationDeprecatedRaw(requestParameters: RemoveElementsFromClassificationDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling reprocessIfc.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementsFromClassificationDeprecated.');
         }
 
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling reprocessIfc.');
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling removeElementsFromClassificationDeprecated.');
+        }
+
+        if (requestParameters.modelClassificationPk === null || requestParameters.modelClassificationPk === undefined) {
+            throw new runtime.RequiredError('modelClassificationPk','Required parameter requestParameters.modelClassificationPk was null or undefined when calling removeElementsFromClassificationDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling reprocessIfc.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementsFromClassificationDeprecated.');
+        }
+
+        if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
+            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling removeElementsFromClassificationDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/classification/{model_classification_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"model_classification_pk"}}`, encodeURIComponent(String(requestParameters.modelClassificationPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Remove the classification from all elements. No element nor classification will be deleted Required scopes: ifc:write, model:write
+     * Remove the classification from all elements
+     */
+    async removeElementsFromClassificationDeprecated(requestParameters: RemoveElementsFromClassificationDeprecatedRequest): Promise<void> {
+        await this.removeElementsFromClassificationDeprecatedRaw(requestParameters);
+    }
+
+    /**
+     * Reprocess the model. All data that are not in the original model files will be lost Required scopes: ifc:write, model:write
+     * Reprocess Model file
+     */
+    async reprocessIfcDeprecatedRaw(requestParameters: ReprocessIfcDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling reprocessIfcDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling reprocessIfcDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling reprocessIfcDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8858,36 +9559,36 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Reprocess the IFC. All data that are not in the original IFC files will be lost Required scopes: ifc:write
-     * Reprocess IFC file
+     * Reprocess the model. All data that are not in the original model files will be lost Required scopes: ifc:write, model:write
+     * Reprocess Model file
      */
-    async reprocessIfc(requestParameters: ReprocessIfcRequest): Promise<void> {
-        await this.reprocessIfcRaw(requestParameters);
+    async reprocessIfcDeprecated(requestParameters: ReprocessIfcDeprecatedRequest): Promise<void> {
+        await this.reprocessIfcDeprecatedRaw(requestParameters);
     }
 
     /**
-     * You can update the expiration date or the read_only field Required scopes: ifc:token_manage
+     * You can update the expiration date or the read_only field Required scopes: ifc:token_manage, model:token_manage
      * Update some fields of a token
      */
-    async updateAccessTokenRaw(requestParameters: UpdateAccessTokenRequest): Promise<runtime.ApiResponse<IfcAccessToken>> {
+    async updateAccessTokenDeprecatedRaw(requestParameters: UpdateAccessTokenDeprecatedRequest): Promise<runtime.ApiResponse<IfcAccessToken>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateAccessToken.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateAccessTokenDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateAccessToken.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateAccessTokenDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateAccessToken.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateAccessTokenDeprecated.');
         }
 
         if (requestParameters.token === null || requestParameters.token === undefined) {
-            throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling updateAccessToken.');
+            throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling updateAccessTokenDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateAccessToken.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateAccessTokenDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -8930,37 +9631,187 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * You can update the expiration date or the read_only field Required scopes: ifc:token_manage
+     * You can update the expiration date or the read_only field Required scopes: ifc:token_manage, model:token_manage
      * Update some fields of a token
      */
-    async updateAccessToken(requestParameters: UpdateAccessTokenRequest): Promise<IfcAccessToken> {
-        const response = await this.updateAccessTokenRaw(requestParameters);
+    async updateAccessTokenDeprecated(requestParameters: UpdateAccessTokenDeprecatedRequest): Promise<IfcAccessToken> {
+        const response = await this.updateAccessTokenDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
-     * Update some fields of an element
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:write, ifc:read
+     * Update some fields of a checker of a model
      */
-    async updateElementRaw(requestParameters: UpdateElementRequest): Promise<runtime.ApiResponse<Element>> {
+    async updateCheckerDeprecatedRaw(requestParameters: UpdateCheckerDeprecatedRequest): Promise<runtime.ApiResponse<IfcChecker>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateElement.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateCheckerDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCheckerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateElement.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateCheckerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateElement.');
-        }
-
-        if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
-            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling updateElement.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateCheckerDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateElement.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateCheckerDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: IfcCheckerToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
+    }
+
+    /**
+     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results Required scopes: check:write, ifc:read
+     * Update some fields of a checker of a model
+     */
+    async updateCheckerDeprecated(requestParameters: UpdateCheckerDeprecatedRequest): Promise<IfcChecker> {
+        const response = await this.updateCheckerDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a CheckerResult Required scopes: check:write
+     * Update some fields of a CheckerResult
+     */
+    async updateCheckerResultDeprecatedRaw(requestParameters: UpdateCheckerResultDeprecatedRequest): Promise<runtime.ApiResponse<CheckerResult>> {
+        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
+            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling updateCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateCheckerResultDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateCheckerResultDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CheckerResultToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a CheckerResult Required scopes: check:write
+     * Update some fields of a CheckerResult
+     */
+    async updateCheckerResultDeprecated(requestParameters: UpdateCheckerResultDeprecatedRequest): Promise<CheckerResult> {
+        const response = await this.updateCheckerResultDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
+     * Update some fields of an element
+     */
+    async updateElementDeprecatedRaw(requestParameters: UpdateElementDeprecatedRequest): Promise<runtime.ApiResponse<Element>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateElementDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateElementDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateElementDeprecated.');
+        }
+
+        if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
+            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling updateElementDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateElementDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9003,45 +9854,45 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of an element
      */
-    async updateElement(requestParameters: UpdateElementRequest): Promise<Element> {
-        const response = await this.updateElementRaw(requestParameters);
+    async updateElementDeprecated(requestParameters: UpdateElementDeprecatedRequest): Promise<Element> {
+        const response = await this.updateElementDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update a property value from an element. If the element is the only one to have this property, the property will be update in place. If many elements share this property, a new property will be created to replace the property for this element. Keeping the property for all other elements. If you want to update the property of all elements, see updateIfcProperty Required scopes: ifc:write
+     * Update a property value from an element. If the element is the only one to have this property, the property will be update in place. If many elements share this property, a new property will be created to replace the property for this element. Keeping the property for all other elements. If you want to update the property of all elements, see updateIfcProperty Required scopes: ifc:write, model:write
      * Update a property from an element
      */
-    async updateElementPropertySetPropertyRaw(requestParameters: UpdateElementPropertySetPropertyRequest): Promise<runtime.ApiResponse<Property>> {
+    async updateElementPropertySetPropertyDeprecatedRaw(requestParameters: UpdateElementPropertySetPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateElementPropertySetProperty.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling updateElementPropertySetProperty.');
+            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling updateElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateElementPropertySetProperty.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateElementPropertySetProperty.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateElementPropertySetProperty.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling updateElementPropertySetProperty.');
+            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling updateElementPropertySetPropertyDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateElementPropertySetProperty.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateElementPropertySetPropertyDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9084,33 +9935,33 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update a property value from an element. If the element is the only one to have this property, the property will be update in place. If many elements share this property, a new property will be created to replace the property for this element. Keeping the property for all other elements. If you want to update the property of all elements, see updateIfcProperty Required scopes: ifc:write
+     * Update a property value from an element. If the element is the only one to have this property, the property will be update in place. If many elements share this property, a new property will be created to replace the property for this element. Keeping the property for all other elements. If you want to update the property of all elements, see updateIfcProperty Required scopes: ifc:write, model:write
      * Update a property from an element
      */
-    async updateElementPropertySetProperty(requestParameters: UpdateElementPropertySetPropertyRequest): Promise<Property> {
-        const response = await this.updateElementPropertySetPropertyRaw(requestParameters);
+    async updateElementPropertySetPropertyDeprecated(requestParameters: UpdateElementPropertySetPropertyDeprecatedRequest): Promise<Property> {
+        const response = await this.updateElementPropertySetPropertyDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of a model Required scopes: ifc:write
+     * Update some fields of a model Required scopes: ifc:write, model:write
      * Update some fields of a model
      */
-    async updateIfcRaw(requestParameters: UpdateIfcRequest): Promise<runtime.ApiResponse<Ifc>> {
+    async updateIfcDeprecatedRaw(requestParameters: UpdateIfcDeprecatedRequest): Promise<runtime.ApiResponse<Model>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfc.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfc.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfc.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfc.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9146,36 +9997,36 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: IfcToJSON(requestParameters.data),
+            body: ModelToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
     }
 
     /**
-     * Update some fields of a model Required scopes: ifc:write
+     * Update some fields of a model Required scopes: ifc:write, model:write
      * Update some fields of a model
      */
-    async updateIfc(requestParameters: UpdateIfcRequest): Promise<Ifc> {
-        const response = await this.updateIfcRaw(requestParameters);
+    async updateIfcDeprecated(requestParameters: UpdateIfcDeprecatedRequest): Promise<Model> {
+        const response = await this.updateIfcDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *          Patch ifc files (gltf, structure, svg, etc)  Required scopes: ifc:write
+     *          Patch model files (gltf, structure, svg, etc)  Required scopes: ifc:write, model:write
      * Update models file (gltf, svg, structure, etc)
      */
-    async updateIfcFilesRaw(requestParameters: UpdateIfcFilesRequest): Promise<runtime.ApiResponse<IfcFiles>> {
+    async updateIfcFilesDeprecatedRaw(requestParameters: UpdateIfcFilesDeprecatedRequest): Promise<runtime.ApiResponse<ModelFiles>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcFiles.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcFilesDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcFiles.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcFilesDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcFiles.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcFilesDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9275,114 +10126,41 @@ export class IfcApi extends runtime.BaseAPI {
             body: formParams,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcFilesFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelFilesFromJSON(jsonValue));
     }
 
     /**
-     *          Patch ifc files (gltf, structure, svg, etc)  Required scopes: ifc:write
+     *          Patch model files (gltf, structure, svg, etc)  Required scopes: ifc:write, model:write
      * Update models file (gltf, svg, structure, etc)
      */
-    async updateIfcFiles(requestParameters: UpdateIfcFilesRequest): Promise<IfcFiles> {
-        const response = await this.updateIfcFilesRaw(requestParameters);
+    async updateIfcFilesDeprecated(requestParameters: UpdateIfcFilesDeprecatedRequest): Promise<ModelFiles> {
+        const response = await this.updateIfcFilesDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of a Property Required scopes: ifc:write
-     * Update some fields of a Property
-     */
-    async updateIfcPropertyRaw(requestParameters: UpdateIfcPropertyRequest): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcProperty.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcProperty.');
-        }
-
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateIfcProperty.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcProperty.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcProperty.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PropertyToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
-    }
-
-    /**
-     * Update some fields of a Property Required scopes: ifc:write
-     * Update some fields of a Property
-     */
-    async updateIfcProperty(requestParameters: UpdateIfcPropertyRequest): Promise<Property> {
-        const response = await this.updateIfcPropertyRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     *  Required scopes: ifc:write
+     *  Required scopes: ifc:write, model:write
      * Update some fields of many PropertyDefinitions of a model
      */
-    async updateIfcPropertyDefinitionRaw(requestParameters: UpdateIfcPropertyDefinitionRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+    async updateIfcPropertyDefinitionDeprecatedRaw(requestParameters: UpdateIfcPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcPropertyDefinition.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcPropertyDefinition.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateIfcPropertyDefinition.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcPropertyDefinition.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcPropertyDefinitionDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcPropertyDefinition.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcPropertyDefinitionDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9425,37 +10203,110 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:write
+     *  Required scopes: ifc:write, model:write
      * Update some fields of many PropertyDefinitions of a model
      */
-    async updateIfcPropertyDefinition(requestParameters: UpdateIfcPropertyDefinitionRequest): Promise<PropertyDefinition> {
-        const response = await this.updateIfcPropertyDefinitionRaw(requestParameters);
+    async updateIfcPropertyDefinitionDeprecated(requestParameters: UpdateIfcPropertyDefinitionDeprecatedRequest): Promise<PropertyDefinition> {
+        const response = await this.updateIfcPropertyDefinitionDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *  Required scopes: ifc:write
-     * Update some fields of a Unit of a model
+     * Update some fields of a Property Required scopes: ifc:write, model:write
+     * Update some fields of a Property
      */
-    async updateIfcUnitRaw(requestParameters: UpdateIfcUnitRequest): Promise<runtime.ApiResponse<Unit>> {
+    async updateIfcPropertyDeprecatedRaw(requestParameters: UpdateIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcUnit.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcUnit.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateIfcUnit.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcUnit.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcPropertyDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcUnit.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcPropertyDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PropertyToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a Property Required scopes: ifc:write, model:write
+     * Update some fields of a Property
+     */
+    async updateIfcPropertyDeprecated(requestParameters: UpdateIfcPropertyDeprecatedRequest): Promise<Property> {
+        const response = await this.updateIfcPropertyDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     *  Required scopes: ifc:write, model:write
+     * Update some fields of a Unit of a model
+     */
+    async updateIfcUnitDeprecatedRaw(requestParameters: UpdateIfcUnitDeprecatedRequest): Promise<runtime.ApiResponse<Unit>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcUnitDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcUnitDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9498,37 +10349,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:write
+     *  Required scopes: ifc:write, model:write
      * Update some fields of a Unit of a model
      */
-    async updateIfcUnit(requestParameters: UpdateIfcUnitRequest): Promise<Unit> {
-        const response = await this.updateIfcUnitRaw(requestParameters);
+    async updateIfcUnitDeprecated(requestParameters: UpdateIfcUnitDeprecatedRequest): Promise<Unit> {
+        const response = await this.updateIfcUnitDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of a layer. The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a layer. The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a layer
      */
-    async updateLayerRaw(requestParameters: UpdateLayerRequest): Promise<runtime.ApiResponse<Layer>> {
+    async updateLayerDeprecatedRaw(requestParameters: UpdateLayerDeprecatedRequest): Promise<runtime.ApiResponse<Layer>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateLayer.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateLayerDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateLayer.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateLayerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateLayer.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateLayerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateLayer.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateLayerDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateLayer.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateLayerDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9571,41 +10422,41 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a layer. The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a layer. The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a layer
      */
-    async updateLayer(requestParameters: UpdateLayerRequest): Promise<Layer> {
-        const response = await this.updateLayerRaw(requestParameters);
+    async updateLayerDeprecated(requestParameters: UpdateLayerDeprecatedRequest): Promise<Layer> {
+        const response = await this.updateLayerDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update the postioning of the plan in the storey Required scopes: ifc:write
+     * Update the postioning of the plan in the storey Required scopes: ifc:write, model:write
      * Update the postioning of the plan in the storey
      */
-    async updatePlanPositioningRaw(requestParameters: UpdatePlanPositioningRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
+    async updatePlanPositioningDeprecatedRaw(requestParameters: UpdatePlanPositioningDeprecatedRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updatePlanPositioning.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updatePlanPositioningDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePlanPositioning.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePlanPositioningDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updatePlanPositioning.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updatePlanPositioningDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updatePlanPositioning.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updatePlanPositioningDeprecated.');
         }
 
         if (requestParameters.storeyPk === null || requestParameters.storeyPk === undefined) {
-            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling updatePlanPositioning.');
+            throw new runtime.RequiredError('storeyPk','Required parameter requestParameters.storeyPk was null or undefined when calling updatePlanPositioningDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updatePlanPositioning.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updatePlanPositioningDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9648,37 +10499,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update the postioning of the plan in the storey Required scopes: ifc:write
+     * Update the postioning of the plan in the storey Required scopes: ifc:write, model:write
      * Update the postioning of the plan in the storey
      */
-    async updatePlanPositioning(requestParameters: UpdatePlanPositioningRequest): Promise<PositioningPlan> {
-        const response = await this.updatePlanPositioningRaw(requestParameters);
+    async updatePlanPositioningDeprecated(requestParameters: UpdatePlanPositioningDeprecatedRequest): Promise<PositioningPlan> {
+        const response = await this.updatePlanPositioningDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     *  Required scopes: ifc:write
+     *  Required scopes: ifc:write, model:write
      * Update the status of a processor handler
      */
-    async updateProcessorHandlerRaw(requestParameters: UpdateProcessorHandlerRequest): Promise<runtime.ApiResponse<ProcessorHandler>> {
+    async updateProcessorHandlerDeprecatedRaw(requestParameters: UpdateProcessorHandlerDeprecatedRequest): Promise<runtime.ApiResponse<ProcessorHandler>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProcessorHandler.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProcessorHandlerDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateProcessorHandler.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateProcessorHandlerDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateProcessorHandler.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateProcessorHandlerDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateProcessorHandler.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateProcessorHandlerDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateProcessorHandler.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateProcessorHandlerDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9721,37 +10572,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Required scopes: ifc:write
+     *  Required scopes: ifc:write, model:write
      * Update the status of a processor handler
      */
-    async updateProcessorHandler(requestParameters: UpdateProcessorHandlerRequest): Promise<ProcessorHandler> {
-        const response = await this.updateProcessorHandlerRaw(requestParameters);
+    async updateProcessorHandlerDeprecated(requestParameters: UpdateProcessorHandlerDeprecatedRequest): Promise<ProcessorHandler> {
+        const response = await this.updateProcessorHandlerDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of a PropertySet Required scopes: ifc:write
+     * Update some fields of a PropertySet Required scopes: ifc:write, model:write
      * Update some fields of a PropertySet
      */
-    async updatePropertySetRaw(requestParameters: UpdatePropertySetRequest): Promise<runtime.ApiResponse<PropertySet>> {
+    async updatePropertySetDeprecatedRaw(requestParameters: UpdatePropertySetDeprecatedRequest): Promise<runtime.ApiResponse<PropertySet>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updatePropertySet.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updatePropertySetDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePropertySet.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePropertySetDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updatePropertySet.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updatePropertySetDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updatePropertySet.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updatePropertySetDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updatePropertySet.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updatePropertySetDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9794,37 +10645,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a PropertySet Required scopes: ifc:write
+     * Update some fields of a PropertySet Required scopes: ifc:write, model:write
      * Update some fields of a PropertySet
      */
-    async updatePropertySet(requestParameters: UpdatePropertySetRequest): Promise<PropertySet> {
-        const response = await this.updatePropertySetRaw(requestParameters);
+    async updatePropertySetDeprecated(requestParameters: UpdatePropertySetDeprecatedRequest): Promise<PropertySet> {
+        const response = await this.updatePropertySetDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateSpaceRaw(requestParameters: UpdateSpaceRequest): Promise<runtime.ApiResponse<Space>> {
+    async updateSpaceDeprecatedRaw(requestParameters: UpdateSpaceDeprecatedRequest): Promise<runtime.ApiResponse<Space>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateSpace.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateSpaceDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateSpace.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateSpaceDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateSpace.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateSpaceDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateSpace.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateSpaceDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateSpace.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateSpaceDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9867,37 +10718,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateSpace(requestParameters: UpdateSpaceRequest): Promise<Space> {
-        const response = await this.updateSpaceRaw(requestParameters);
+    async updateSpaceDeprecated(requestParameters: UpdateSpaceDeprecatedRequest): Promise<Space> {
+        const response = await this.updateSpaceDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of a storey Required scopes: ifc:write
+     * Update some fields of a storey Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStoreyRaw(requestParameters: UpdateStoreyRequest): Promise<runtime.ApiResponse<Storey>> {
+    async updateStoreyDeprecatedRaw(requestParameters: UpdateStoreyDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateStorey.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateStoreyDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateStorey.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateStoreyDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateStorey.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateStoreyDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateStorey.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateStoreyDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateStorey.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateStoreyDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -9940,37 +10791,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a storey Required scopes: ifc:write
+     * Update some fields of a storey Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStorey(requestParameters: UpdateStoreyRequest): Promise<Storey> {
-        const response = await this.updateStoreyRaw(requestParameters);
+    async updateStoreyDeprecated(requestParameters: UpdateStoreyDeprecatedRequest): Promise<Storey> {
+        const response = await this.updateStoreyDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of a system. The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a system. The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a system
      */
-    async updateSystemRaw(requestParameters: UpdateSystemRequest): Promise<runtime.ApiResponse<System>> {
+    async updateSystemDeprecatedRaw(requestParameters: UpdateSystemDeprecatedRequest): Promise<runtime.ApiResponse<System>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateSystem.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateSystemDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateSystem.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateSystemDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateSystem.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateSystemDeprecated.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
-            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling updateSystem.');
+            throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling updateSystemDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateSystem.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateSystemDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -10013,37 +10864,37 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a system. The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a system. The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a system
      */
-    async updateSystem(requestParameters: UpdateSystemRequest): Promise<System> {
-        const response = await this.updateSystemRaw(requestParameters);
+    async updateSystemDeprecated(requestParameters: UpdateSystemDeprecatedRequest): Promise<System> {
+        const response = await this.updateSystemDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of a zone. The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a zone. The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a zone
      */
-    async updateZoneRaw(requestParameters: UpdateZoneRequest): Promise<runtime.ApiResponse<Zone>> {
+    async updateZoneDeprecatedRaw(requestParameters: UpdateZoneDeprecatedRequest): Promise<runtime.ApiResponse<Zone>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateZone.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateZoneDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateZone.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateZoneDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateZone.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateZoneDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateZone.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateZoneDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateZone.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateZoneDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -10086,41 +10937,41 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a zone. The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a zone. The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a zone
      */
-    async updateZone(requestParameters: UpdateZoneRequest): Promise<Zone> {
-        const response = await this.updateZoneRaw(requestParameters);
+    async updateZoneDeprecated(requestParameters: UpdateZoneDeprecatedRequest): Promise<Zone> {
+        const response = await this.updateZoneDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
     /**
-     * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateZoneSpaceRaw(requestParameters: UpdateZoneSpaceRequest): Promise<runtime.ApiResponse<ZoneSpace>> {
+    async updateZoneSpaceDeprecatedRaw(requestParameters: UpdateZoneSpaceDeprecatedRequest): Promise<runtime.ApiResponse<ZoneSpace>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateZoneSpace.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateZoneSpaceDeprecated.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateZoneSpace.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateZoneSpaceDeprecated.');
         }
 
         if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateZoneSpace.');
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateZoneSpaceDeprecated.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateZoneSpace.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateZoneSpaceDeprecated.');
         }
 
         if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling updateZoneSpace.');
+            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling updateZoneSpaceDeprecated.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateZoneSpace.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateZoneSpaceDeprecated.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -10163,11 +11014,11 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write
+     * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateZoneSpace(requestParameters: UpdateZoneSpaceRequest): Promise<ZoneSpace> {
-        const response = await this.updateZoneSpaceRaw(requestParameters);
+    async updateZoneSpaceDeprecated(requestParameters: UpdateZoneSpaceDeprecatedRequest): Promise<ZoneSpace> {
+        const response = await this.updateZoneSpaceDeprecatedRaw(requestParameters);
         return await response.value();
     }
 

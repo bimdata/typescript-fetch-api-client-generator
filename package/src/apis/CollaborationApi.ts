@@ -169,6 +169,7 @@ export interface CreateDocumentRequest {
     fileName?: string;
     description?: string | null;
     size?: number | null;
+    modelSource?: CreateDocumentModelSourceEnum;
     ifcSource?: CreateDocumentIfcSourceEnum;
 }
 
@@ -1009,7 +1010,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors      If created classification already exists, it will not be duplicated and the previous one will be returned.     You also can add a \'classification\' filter on this endpoint. By ex: /classification?name=\'untec\'. The name is case sensitive  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors      If created classification already exists, it will not be duplicated and the previous one will be returned.     You also can add a \'classification\' filter on this endpoint. By ex: /classification?name=\'untec\'. The name is case sensitive  Required scopes: ifc:write, model:write
      * Create a classification
      */
     async createClassificationRaw(requestParameters: CreateClassificationRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
@@ -1065,7 +1066,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors      If created classification already exists, it will not be duplicated and the previous one will be returned.     You also can add a \'classification\' filter on this endpoint. By ex: /classification?name=\'untec\'. The name is case sensitive  Required scopes: ifc:write
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors      If created classification already exists, it will not be duplicated and the previous one will be returned.     You also can add a \'classification\' filter on this endpoint. By ex: /classification?name=\'untec\'. The name is case sensitive  Required scopes: ifc:write, model:write
      * Create a classification
      */
     async createClassification(requestParameters: CreateClassificationRequest): Promise<Array<Classification>> {
@@ -1342,6 +1343,10 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (requestParameters.size !== undefined) {
             formParams.append('size', requestParameters.size as any);
+        }
+
+        if (requestParameters.modelSource !== undefined) {
+            formParams.append('model_source', requestParameters.modelSource as any);
         }
 
         if (requestParameters.ifcSource !== undefined) {
@@ -1840,7 +1845,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * All elements having this classification will lose it Required scopes: ifc:write
+     * All elements having this classification will lose it Required scopes: ifc:write, model:write
      * Delete a classification
      */
     async deleteClassificationRaw(requestParameters: DeleteClassificationRequest): Promise<runtime.ApiResponse<void>> {
@@ -1893,7 +1898,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * All elements having this classification will lose it Required scopes: ifc:write
+     * All elements having this classification will lose it Required scopes: ifc:write, model:write
      * Delete a classification
      */
     async deleteClassification(requestParameters: DeleteClassificationRequest): Promise<void> {
@@ -2710,7 +2715,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a classification Required scopes: ifc:read
+     * Retrieve a classification Required scopes: ifc:read, model:read
      * Retrieve a classification
      */
     async getClassificationRaw(requestParameters: GetClassificationRequest): Promise<runtime.ApiResponse<Classification>> {
@@ -2763,7 +2768,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a classification Required scopes: ifc:read
+     * Retrieve a classification Required scopes: ifc:read, model:read
      * Retrieve a classification
      */
     async getClassification(requestParameters: GetClassificationRequest): Promise<Classification> {
@@ -2772,7 +2777,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all classifications of all models in the project Required scopes: ifc:read
+     * Retrieve all classifications of all models in the project Required scopes: ifc:read, model:read
      * Retrieve all classifications
      */
     async getClassificationsRaw(requestParameters: GetClassificationsRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
@@ -2821,7 +2826,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all classifications of all models in the project Required scopes: ifc:read
+     * Retrieve all classifications of all models in the project Required scopes: ifc:read, model:read
      * Retrieve all classifications
      */
     async getClassifications(requestParameters: GetClassificationsRequest): Promise<Array<Classification>> {
@@ -4063,7 +4068,7 @@ export class CollaborationApi extends runtime.BaseAPI {
 
     /**
      * Returns the size of the project in Bytes
-     * Get size of all ifc files in the project
+     * Get size of all model files in the project
      */
     async getProjectSizeRaw(requestParameters: GetProjectSizeRequest): Promise<runtime.ApiResponse<ProjectSize>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
@@ -4112,7 +4117,7 @@ export class CollaborationApi extends runtime.BaseAPI {
 
     /**
      * Returns the size of the project in Bytes
-     * Get size of all ifc files in the project
+     * Get size of all model files in the project
      */
     async getProjectSize(requestParameters: GetProjectSizeRequest): Promise<ProjectSize> {
         const response = await this.getProjectSizeRaw(requestParameters);
@@ -5300,7 +5305,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a classification Required scopes: ifc:write
+     * Update some fields of a classification Required scopes: ifc:write, model:write
      * Update some fields of a classification
      */
     async updateClassificationRaw(requestParameters: UpdateClassificationRequest): Promise<runtime.ApiResponse<Classification>> {
@@ -5360,7 +5365,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a classification Required scopes: ifc:write
+     * Update some fields of a classification Required scopes: ifc:write, model:write
      * Update some fields of a classification
      */
     async updateClassification(requestParameters: UpdateClassificationRequest): Promise<Classification> {
@@ -6206,6 +6211,17 @@ export class CollaborationApi extends runtime.BaseAPI {
 
 }
 
+/**
+    * @export
+    * @enum {string}
+    */
+export enum CreateDocumentModelSourceEnum {
+    UPLOAD = 'UPLOAD',
+    SPLIT = 'SPLIT',
+    MERGE = 'MERGE',
+    EXPORT = 'EXPORT',
+    OPTIMIZED = 'OPTIMIZED'
+}
 /**
     * @export
     * @enum {string}

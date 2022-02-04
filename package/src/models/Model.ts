@@ -27,166 +27,166 @@ import {
 /**
  * 
  * @export
- * @interface Ifc
+ * @interface Model
  */
-export interface Ifc {
+export interface Model {
     /**
      * 
      * @type {number}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly id?: number;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     name?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
-    readonly type?: IfcTypeEnum;
+    readonly type?: ModelTypeEnum;
     /**
      * 
      * @type {User}
-     * @memberof Ifc
+     * @memberof Model
      */
     creator?: User;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly status?: string;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
-    source?: IfcSourceEnum;
+    source?: ModelSourceEnum;
     /**
      * 
      * @type {Date}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly createdAt?: Date;
     /**
      * 
      * @type {Date}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly updatedAt?: Date;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly documentId?: string;
     /**
      * 
      * @type {Document}
-     * @memberof Ifc
+     * @memberof Model
      */
     document?: Document;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly structureFile?: string;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly systemsFile?: string;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly mapFile?: string;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly gltfFile?: string;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly bvhTreeFile?: string;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly viewer360File?: string;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly xktFile?: string;
     /**
      * 
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly projectId?: string;
     /**
      * [x,y,z] array of the position of the local_placement in world coordinates
      * @type {Array<number>}
-     * @memberof Ifc
+     * @memberof Model
      */
     worldPosition?: Array<number> | null;
     /**
      * List of errors that happened during IFC processing
      * @type {Array<string>}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly errors?: Array<string>;
     /**
      * List of warnings that happened during IFC processing
      * @type {Array<string>}
-     * @memberof Ifc
+     * @memberof Model
      */
     readonly warnings?: Array<string>;
     /**
      * 
      * @type {boolean}
-     * @memberof Ifc
+     * @memberof Model
      */
     archived?: boolean;
     /**
      * This field is only for information. Updating it won't impact the export.
      * @type {string}
-     * @memberof Ifc
+     * @memberof Model
      */
     version?: string | null;
     /**
      * This field is only for information. Updating it won't impact the export.
      * @type {Array<Array<number>>}
-     * @memberof Ifc
+     * @memberof Model
      */
     northVector?: Array<Array<number>> | null;
     /**
      * This is the angle in clockwise degree to apply on the 2D to optimise the horizontality of objects. This field is only for information. Updating it won't impact the export.
      * @type {number}
-     * @memberof Ifc
+     * @memberof Model
      */
     recommanded2dAngle?: number | null;
 }
 
-export function IfcFromJSON(json: any): Ifc {
-    return IfcFromJSONTyped(json, false);
+export function ModelFromJSON(json: any): Model {
+    return ModelFromJSONTyped(json, false);
 }
 
-export function IfcFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ifc {
+export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Model {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -220,7 +220,7 @@ export function IfcFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ifc {
     };
 }
 
-export function IfcToJSON(value?: Ifc | null): any {
+export function ModelToJSON(value?: Model | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -245,7 +245,7 @@ export function IfcToJSON(value?: Ifc | null): any {
 * @export
 * @enum {string}
 */
-export enum IfcTypeEnum {
+export enum ModelTypeEnum {
     IFC = 'IFC',
     DWG = 'DWG',
     DXF = 'DXF',
@@ -262,7 +262,7 @@ export enum IfcTypeEnum {
 * @export
 * @enum {string}
 */
-export enum IfcSourceEnum {
+export enum ModelSourceEnum {
     UPLOAD = 'UPLOAD',
     SPLIT = 'SPLIT',
     MERGE = 'MERGE',

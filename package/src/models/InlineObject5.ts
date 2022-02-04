@@ -16,39 +16,32 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface IfcErrors
+ * @interface InlineObject5
  */
-export interface IfcErrors {
+export interface InlineObject5 {
     /**
-     * List of errors that happened during IFC processing
-     * @type {Array<string>}
-     * @memberof IfcErrors
+     * model id
+     * @type {number}
+     * @memberof InlineObject5
      */
-    errors?: Array<string> | null;
-    /**
-     * List of warnings that happened during IFC processing
-     * @type {Array<string>}
-     * @memberof IfcErrors
-     */
-    warnings?: Array<string> | null;
+    id?: number;
 }
 
-export function IfcErrorsFromJSON(json: any): IfcErrors {
-    return IfcErrorsFromJSONTyped(json, false);
+export function InlineObject5FromJSON(json: any): InlineObject5 {
+    return InlineObject5FromJSONTyped(json, false);
 }
 
-export function IfcErrorsFromJSONTyped(json: any, ignoreDiscriminator: boolean): IfcErrors {
+export function InlineObject5FromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineObject5 {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'errors': !exists(json, 'errors') ? undefined : json['errors'],
-        'warnings': !exists(json, 'warnings') ? undefined : json['warnings'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
     };
 }
 
-export function IfcErrorsToJSON(value?: IfcErrors | null): any {
+export function InlineObject5ToJSON(value?: InlineObject5 | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +50,7 @@ export function IfcErrorsToJSON(value?: IfcErrors | null): any {
     }
     return {
         
-        'errors': value.errors,
-        'warnings': value.warnings,
+        'id': value.id,
     };
 }
 

@@ -16,64 +16,64 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface IfcFiles
+ * @interface ModelFiles
  */
-export interface IfcFiles {
+export interface ModelFiles {
     /**
      * 
      * @type {string}
-     * @memberof IfcFiles
+     * @memberof ModelFiles
      */
     readonly structureFile?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof IfcFiles
+     * @memberof ModelFiles
      */
     readonly systemsFile?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof IfcFiles
+     * @memberof ModelFiles
      */
     readonly mapFile?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof IfcFiles
+     * @memberof ModelFiles
      */
     readonly gltfFile?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof IfcFiles
+     * @memberof ModelFiles
      */
     readonly gltfWithOpeningsFile?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof IfcFiles
+     * @memberof ModelFiles
      */
     readonly bvhTreeFile?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof IfcFiles
+     * @memberof ModelFiles
      */
     readonly viewer360File?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof IfcFiles
+     * @memberof ModelFiles
      */
     readonly xktFile?: string | null;
 }
 
-export function IfcFilesFromJSON(json: any): IfcFiles {
-    return IfcFilesFromJSONTyped(json, false);
+export function ModelFilesFromJSON(json: any): ModelFiles {
+    return ModelFilesFromJSONTyped(json, false);
 }
 
-export function IfcFilesFromJSONTyped(json: any, ignoreDiscriminator: boolean): IfcFiles {
+export function ModelFilesFromJSONTyped(json: any, ignoreDiscriminator: boolean): ModelFiles {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -90,7 +90,7 @@ export function IfcFilesFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function IfcFilesToJSON(value?: IfcFiles | null): any {
+export function ModelFilesToJSON(value?: ModelFiles | null): any {
     if (value === undefined) {
         return undefined;
     }

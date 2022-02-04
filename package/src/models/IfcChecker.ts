@@ -14,10 +14,6 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Ifc,
-    IfcFromJSON,
-    IfcFromJSONTyped,
-    IfcToJSON,
     IfcCheckerCheckplan,
     IfcCheckerCheckplanFromJSON,
     IfcCheckerCheckplanFromJSONTyped,
@@ -26,6 +22,10 @@ import {
     IfcCheckerResultsFromJSON,
     IfcCheckerResultsFromJSONTyped,
     IfcCheckerResultsToJSON,
+    Model,
+    ModelFromJSON,
+    ModelFromJSONTyped,
+    ModelToJSON,
     User,
     UserFromJSON,
     UserFromJSONTyped,
@@ -46,10 +46,10 @@ export interface IfcChecker {
     readonly id?: number;
     /**
      * 
-     * @type {Ifc}
+     * @type {Model}
      * @memberof IfcChecker
      */
-    ifc?: Ifc;
+    ifc?: Model;
     /**
      * 
      * @type {User}
@@ -105,7 +105,7 @@ export function IfcCheckerFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'ifc': !exists(json, 'ifc') ? undefined : IfcFromJSON(json['ifc']),
+        'ifc': !exists(json, 'ifc') ? undefined : ModelFromJSON(json['ifc']),
         'creator': !exists(json, 'creator') ? undefined : UserFromJSON(json['creator']),
         'name': !exists(json, 'name') ? undefined : json['name'],
         'checkplanId': !exists(json, 'checkplan_id') ? undefined : json['checkplan_id'],
@@ -125,7 +125,7 @@ export function IfcCheckerToJSON(value?: IfcChecker | null): any {
     }
     return {
         
-        'ifc': IfcToJSON(value.ifc),
+        'ifc': ModelToJSON(value.ifc),
         'creator': UserToJSON(value.creator),
         'name': value.name,
         'checkplan_id': value.checkplanId,

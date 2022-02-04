@@ -161,6 +161,7 @@ export interface GetFullTopicRequest {
 
 export interface GetFullTopicsRequest {
     projectsPk: string;
+    models?: string;
     ifcs?: string;
     format?: string;
     imgFormat?: GetFullTopicsImgFormatEnum;
@@ -191,6 +192,7 @@ export interface GetTopicViewpointsRequest {
 
 export interface GetTopicsRequest {
     projectsPk: string;
+    models?: string;
     ifcs?: string;
     format?: string;
 }
@@ -1517,6 +1519,10 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.models !== undefined) {
+            queryParameters['models'] = requestParameters.models;
+        }
+
         if (requestParameters.ifcs !== undefined) {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
@@ -1826,6 +1832,10 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.models !== undefined) {
+            queryParameters['models'] = requestParameters.models;
+        }
 
         if (requestParameters.ifcs !== undefined) {
             queryParameters['ifcs'] = requestParameters.ifcs;

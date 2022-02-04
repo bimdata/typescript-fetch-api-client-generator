@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Ifc,
-    IfcFromJSON,
-    IfcFromJSONTyped,
-    IfcToJSON,
+    Model,
+    ModelFromJSON,
+    ModelFromJSONTyped,
+    ModelToJSON,
 } from './';
 
 /**
@@ -58,10 +58,10 @@ export interface ModelWithPositioningPlan {
     opacity?: number | null;
     /**
      * 
-     * @type {Ifc}
+     * @type {Model}
      * @memberof ModelWithPositioningPlan
      */
-    plan?: Ifc;
+    plan?: Model;
 }
 
 export function ModelWithPositioningPlanFromJSON(json: any): ModelWithPositioningPlan {
@@ -79,7 +79,7 @@ export function ModelWithPositioningPlanFromJSONTyped(json: any, ignoreDiscrimin
         'rotateZ': !exists(json, 'rotate_z') ? undefined : json['rotate_z'],
         'scale': !exists(json, 'scale') ? undefined : json['scale'],
         'opacity': !exists(json, 'opacity') ? undefined : json['opacity'],
-        'plan': !exists(json, 'plan') ? undefined : IfcFromJSON(json['plan']),
+        'plan': !exists(json, 'plan') ? undefined : ModelFromJSON(json['plan']),
     };
 }
 
@@ -97,7 +97,7 @@ export function ModelWithPositioningPlanToJSON(value?: ModelWithPositioningPlan 
         'rotate_z': value.rotateZ,
         'scale': value.scale,
         'opacity': value.opacity,
-        'plan': IfcToJSON(value.plan),
+        'plan': ModelToJSON(value.plan),
     };
 }
 

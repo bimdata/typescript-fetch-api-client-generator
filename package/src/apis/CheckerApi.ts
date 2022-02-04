@@ -37,7 +37,7 @@ import {
 
 export interface CreateCheckerRequest {
     cloudPk: string;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
     data: IfcChecker;
 }
@@ -45,7 +45,7 @@ export interface CreateCheckerRequest {
 export interface CreateCheckerResultRequest {
     checkerPk: string;
     cloudPk: string;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
     data: CheckerResult;
 }
@@ -83,7 +83,7 @@ export interface CreateRulesetRequest {
 export interface DeleteCheckerRequest {
     cloudPk: string;
     id: number;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
 }
 
@@ -91,7 +91,7 @@ export interface DeleteCheckerResultRequest {
     checkerPk: string;
     cloudPk: string;
     id: number;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
 }
 
@@ -128,7 +128,7 @@ export interface DeleteRulesetRequest {
 export interface GetCheckerRequest {
     cloudPk: string;
     id: number;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
 }
 
@@ -136,20 +136,20 @@ export interface GetCheckerResultRequest {
     checkerPk: string;
     cloudPk: string;
     id: number;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
 }
 
 export interface GetCheckerResultsRequest {
     checkerPk: string;
     cloudPk: string;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
 }
 
 export interface GetCheckersRequest {
     cloudPk: string;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
 }
 
@@ -212,7 +212,7 @@ export interface GetRulesetsRequest {
 export interface LaunchNewCheckRequest {
     cloudPk: string;
     id: number;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
     data: IfcChecker;
 }
@@ -220,7 +220,7 @@ export interface LaunchNewCheckRequest {
 export interface UpdateCheckerRequest {
     cloudPk: string;
     id: number;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
     data: IfcChecker;
 }
@@ -229,7 +229,7 @@ export interface UpdateCheckerResultRequest {
     checkerPk: string;
     cloudPk: string;
     id: number;
-    ifcPk: string;
+    modelPk: string;
     projectPk: string;
     data: CheckerResult;
 }
@@ -282,8 +282,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createChecker.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createChecker.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createChecker.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -323,7 +323,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -355,8 +355,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createCheckerResult.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling createCheckerResult.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createCheckerResult.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -396,7 +396,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -712,8 +712,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteChecker.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteChecker.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteChecker.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -747,7 +747,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -781,8 +781,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCheckerResult.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling deleteCheckerResult.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteCheckerResult.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -816,7 +816,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1114,8 +1114,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getChecker.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getChecker.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getChecker.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -1149,7 +1149,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1184,8 +1184,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCheckerResult.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getCheckerResult.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getCheckerResult.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -1219,7 +1219,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1250,8 +1250,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckerResults.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getCheckerResults.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getCheckerResults.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -1285,7 +1285,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1312,8 +1312,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckers.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling getCheckers.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getCheckers.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -1347,7 +1347,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1906,8 +1906,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling launchNewCheck.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling launchNewCheck.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling launchNewCheck.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -1947,7 +1947,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}/launch-check`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}/launch-check`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -1978,8 +1978,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateChecker.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateChecker.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateChecker.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -2019,7 +2019,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -2055,8 +2055,8 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCheckerResult.');
         }
 
-        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
-            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateCheckerResult.');
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateCheckerResult.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
@@ -2096,7 +2096,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,

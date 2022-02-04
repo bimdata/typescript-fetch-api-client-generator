@@ -37,7 +37,7 @@ export interface Storey {
      * @type {string}
      * @memberof Storey
      */
-    readonly ifcId?: string;
+    readonly buildingId?: string;
     /**
      * 
      * @type {string}
@@ -87,7 +87,7 @@ export function StoreyFromJSONTyped(json: any, ignoreDiscriminator: boolean): St
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'ifcId': !exists(json, 'ifc_id') ? undefined : json['ifc_id'],
+        'buildingId': !exists(json, 'building_id') ? undefined : json['building_id'],
         'name': json['name'],
         'elevation': !exists(json, 'elevation') ? undefined : json['elevation'],
         'order': !exists(json, 'order') ? undefined : json['order'],

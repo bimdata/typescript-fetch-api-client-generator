@@ -55,11 +55,23 @@ export interface RecursiveFolderChildren {
      */
     creator?: User;
     /**
-     * Values can be 'Folder', 'Document' or 'Ifc'. It is usefull to parse the tree and discriminate folders and files
+     * DEPRECATED: Use 'nature' instead. Values can be 'Folder', 'Document' or 'Ifc'. It is usefull to parse the tree and discriminate folders and files
      * @type {string}
      * @memberof RecursiveFolderChildren
      */
     readonly type?: RecursiveFolderChildrenTypeEnum;
+    /**
+     * Values can be 'Folder', 'Document' or 'Model'. It is usefull to parse the tree and discriminate folders and files
+     * @type {string}
+     * @memberof RecursiveFolderChildren
+     */
+    readonly nature?: RecursiveFolderChildrenNatureEnum;
+    /**
+     * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, GLTF, DAE, BFX
+     * @type {string}
+     * @memberof RecursiveFolderChildren
+     */
+    readonly modelType?: RecursiveFolderChildrenModelTypeEnum;
     /**
      * 
      * @type {string}
@@ -101,7 +113,13 @@ export interface RecursiveFolderChildren {
      * @type {number}
      * @memberof RecursiveFolderChildren
      */
-    readonly ifcId?: number;
+    readonly modelId?: number | null;
+    /**
+     * DEPRECATED: Use 'model_id' instead
+     * @type {number}
+     * @memberof RecursiveFolderChildren
+     */
+    readonly ifcId?: number | null;
     /**
      * 
      * @type {string}
@@ -149,12 +167,15 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
         'createdBy': !exists(json, 'created_by') ? undefined : UserFromJSON(json['created_by']),
         'creator': !exists(json, 'creator') ? undefined : UserFromJSON(json['creator']),
         'type': !exists(json, 'type') ? undefined : json['type'],
+        'nature': !exists(json, 'nature') ? undefined : json['nature'],
+        'modelType': !exists(json, 'model_type') ? undefined : json['model_type'],
         'name': json['name'],
         'createdAt': (new Date(json['created_at'])),
         'updatedAt': (new Date(json['updated_at'])),
         'fileName': !exists(json, 'file_name') ? undefined : json['file_name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'size': !exists(json, 'size') ? undefined : json['size'],
+        'modelId': !exists(json, 'model_id') ? undefined : json['model_id'],
         'ifcId': !exists(json, 'ifc_id') ? undefined : json['ifc_id'],
         'file': !exists(json, 'file') ? undefined : json['file'],
         'groupsPermissions': !exists(json, 'groups_permissions') ? undefined : (json['groups_permissions'] === null ? null : (json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
@@ -195,6 +216,31 @@ export enum RecursiveFolderChildrenTypeEnum {
     Folder = 'Folder',
     Document = 'Document',
     Ifc = 'Ifc'
+}
+/**
+* @export
+* @enum {string}
+*/
+export enum RecursiveFolderChildrenNatureEnum {
+    Folder = 'Folder',
+    Document = 'Document',
+    Model = 'Model'
+}
+/**
+* @export
+* @enum {string}
+*/
+export enum RecursiveFolderChildrenModelTypeEnum {
+    IFC = 'IFC',
+    DWG = 'DWG',
+    DXF = 'DXF',
+    GLTF = 'GLTF',
+    PDF = 'PDF',
+    JPEG = 'JPEG',
+    PNG = 'PNG',
+    OBJ = 'OBJ',
+    DAE = 'DAE',
+    BFX = 'BFX'
 }
 
 

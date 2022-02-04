@@ -47,11 +47,17 @@ export interface Folder {
      */
     parentId?: number | null;
     /**
-     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
      * @memberof Folder
      */
     readonly type?: string;
+    /**
+     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * @type {string}
+     * @memberof Folder
+     */
+    readonly nature?: string;
     /**
      * Name of the folder
      * @type {string}
@@ -115,6 +121,7 @@ export function FolderFromJSONTyped(json: any, ignoreDiscriminator: boolean): Fo
         'id': !exists(json, 'id') ? undefined : json['id'],
         'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'type': !exists(json, 'type') ? undefined : json['type'],
+        'nature': !exists(json, 'nature') ? undefined : json['nature'],
         'name': json['name'],
         'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
         'updatedAt': !exists(json, 'updated_at') ? undefined : (new Date(json['updated_at'])),

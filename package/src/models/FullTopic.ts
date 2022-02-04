@@ -79,11 +79,17 @@ export interface FullTopic {
      */
     referenceLinks?: Array<string> | null;
     /**
-     * 
+     * DEPRECATED: Use 'models' instead
      * @type {Array<number>}
      * @memberof FullTopic
      */
     ifcs?: Array<number>;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof FullTopic
+     */
+    models?: Array<number>;
     /**
      * 
      * @type {Array<string>}
@@ -177,6 +183,7 @@ export function FullTopicFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'description': !exists(json, 'description') ? undefined : json['description'],
         'referenceLinks': !exists(json, 'reference_links') ? undefined : json['reference_links'],
         'ifcs': !exists(json, 'ifcs') ? undefined : json['ifcs'],
+        'models': !exists(json, 'models') ? undefined : json['models'],
         'labels': !exists(json, 'labels') ? undefined : json['labels'],
         'topicType': !exists(json, 'topic_type') ? undefined : json['topic_type'],
         'topicStatus': !exists(json, 'topic_status') ? undefined : json['topic_status'],
@@ -209,6 +216,7 @@ export function FullTopicToJSON(value?: FullTopic | null): any {
         'description': value.description,
         'reference_links': value.referenceLinks,
         'ifcs': value.ifcs,
+        'models': value.models,
         'labels': value.labels,
         'topic_type': value.topicType,
         'topic_status': value.topicStatus,
