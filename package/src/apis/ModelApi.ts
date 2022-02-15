@@ -120,27 +120,27 @@ export interface AddModelErrorsRequest {
     data: ModelErrors;
 }
 
-export interface BulkDeleteIfcClassificationsRequest {
+export interface BulkDeleteModelClassificationsRequest {
     cloudPk: string;
     modelPk: string;
     projectPk: string;
 }
 
-export interface BulkDeleteIfcPropertiesRequest {
-    cloudPk: string;
-    modelPk: string;
-    projectPk: string;
-    data: Array<number>;
-}
-
-export interface BulkDeleteIfcPropertyDefinitionsRequest {
+export interface BulkDeleteModelPropertiesRequest {
     cloudPk: string;
     modelPk: string;
     projectPk: string;
     data: Array<number>;
 }
 
-export interface BulkDeleteIfcUnitsRequest {
+export interface BulkDeleteModelPropertyDefinitionsRequest {
+    cloudPk: string;
+    modelPk: string;
+    projectPk: string;
+    data: Array<number>;
+}
+
+export interface BulkDeleteModelUnitsRequest {
     cloudPk: string;
     modelPk: string;
     projectPk: string;
@@ -161,7 +161,7 @@ export interface BulkFullUpdateElementsRequest {
     data: Array<Element>;
 }
 
-export interface BulkFullUpdateIfcPropertyRequest {
+export interface BulkFullUpdateModelPropertyRequest {
     cloudPk: string;
     modelPk: string;
     projectPk: string;
@@ -199,7 +199,7 @@ export interface BulkUpdateElementsRequest {
     data: Array<Element>;
 }
 
-export interface BulkUpdateIfcPropertyRequest {
+export interface BulkUpdateModelPropertyRequest {
     cloudPk: string;
     modelPk: string;
     projectPk: string;
@@ -273,20 +273,6 @@ export interface CreateElementPropertySetPropertyDefinitionUnitRequest {
     data: Unit;
 }
 
-export interface CreateIfcPropertyDefinitionRequest {
-    cloudPk: string;
-    modelPk: string;
-    projectPk: string;
-    data: Array<PropertyDefinition>;
-}
-
-export interface CreateIfcUnitRequest {
-    cloudPk: string;
-    modelPk: string;
-    projectPk: string;
-    data: Array<Unit>;
-}
-
 export interface CreateLayerRequest {
     cloudPk: string;
     modelPk: string;
@@ -304,6 +290,20 @@ export interface CreateModelRequest {
     cloudPk: string;
     projectPk: string;
     data: CreateModel;
+}
+
+export interface CreateModelPropertyDefinitionRequest {
+    cloudPk: string;
+    modelPk: string;
+    projectPk: string;
+    data: Array<PropertyDefinition>;
+}
+
+export interface CreateModelUnitRequest {
+    cloudPk: string;
+    modelPk: string;
+    projectPk: string;
+    data: Array<Unit>;
 }
 
 export interface CreatePropertySetRequest {
@@ -378,27 +378,6 @@ export interface DeleteElementRequest {
     uuid: string;
 }
 
-export interface DeleteIfcPropertyRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface DeleteIfcPropertyDefinitionRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface DeleteIfcUnitRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-}
-
 export interface DeleteLayerRequest {
     cloudPk: string;
     id: number;
@@ -409,6 +388,27 @@ export interface DeleteLayerRequest {
 export interface DeleteModelRequest {
     cloudPk: string;
     id: number;
+    projectPk: string;
+}
+
+export interface DeleteModelPropertyRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface DeleteModelPropertyDefinitionRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface DeleteModelUnitRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
     projectPk: string;
 }
 
@@ -622,64 +622,6 @@ export interface GetElementsFromClassificationRequest {
     projectPk: string;
 }
 
-export interface GetIfcClassificationsRequest {
-    cloudPk: string;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcMaterialRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcMaterialsRequest {
-    cloudPk: string;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcPropertiesRequest {
-    cloudPk: string;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcPropertyRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcPropertyDefinitionRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcPropertyDefinitionsRequest {
-    cloudPk: string;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcUnitRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-}
-
-export interface GetIfcUnitsRequest {
-    cloudPk: string;
-    modelPk: string;
-    projectPk: string;
-}
-
 export interface GetLayerRequest {
     cloudPk: string;
     id: number;
@@ -711,6 +653,64 @@ export interface GetMaterialsRequest {
 export interface GetModelRequest {
     cloudPk: string;
     id: number;
+    projectPk: string;
+}
+
+export interface GetModelClassificationsRequest {
+    cloudPk: string;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface GetModelMaterialRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface GetModelMaterialsRequest {
+    cloudPk: string;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface GetModelPropertiesRequest {
+    cloudPk: string;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface GetModelPropertyRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface GetModelPropertyDefinitionRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface GetModelPropertyDefinitionsRequest {
+    cloudPk: string;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface GetModelUnitRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
+    projectPk: string;
+}
+
+export interface GetModelUnitsRequest {
+    cloudPk: string;
+    modelPk: string;
     projectPk: string;
 }
 
@@ -977,30 +977,6 @@ export interface UpdateElementPropertySetPropertyRequest {
     data: Property;
 }
 
-export interface UpdateIfcPropertyRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-    data: Property;
-}
-
-export interface UpdateIfcPropertyDefinitionRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-    data: PropertyDefinition;
-}
-
-export interface UpdateIfcUnitRequest {
-    cloudPk: string;
-    id: number;
-    modelPk: string;
-    projectPk: string;
-    data: Unit;
-}
-
 export interface UpdateLayerRequest {
     cloudPk: string;
     id: number;
@@ -1028,6 +1004,30 @@ export interface UpdateModelFilesRequest {
     bvhTreeFile?: Blob | null;
     viewer360File?: Blob | null;
     xktFile?: Blob | null;
+}
+
+export interface UpdateModelPropertyRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
+    projectPk: string;
+    data: Property;
+}
+
+export interface UpdateModelPropertyDefinitionRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
+    projectPk: string;
+    data: PropertyDefinition;
+}
+
+export interface UpdateModelUnitRequest {
+    cloudPk: string;
+    id: number;
+    modelPk: string;
+    projectPk: string;
+    data: Unit;
 }
 
 export interface UpdatePlanPositioningRequest {
@@ -1174,17 +1174,17 @@ export class ModelApi extends runtime.BaseAPI {
      *              Delete relation between filtered classifications (eg. /classifications?name=untec) and all mode\'s elements.             No classification will be deleted on this endpoint, only the relation between model\'s elements and their classification.  Required scopes: ifc:write, model:write
      * Remove all classifications from model\'s elements
      */
-    async bulkDeleteIfcClassificationsRaw(requestParameters: BulkDeleteIfcClassificationsRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteModelClassificationsRaw(requestParameters: BulkDeleteModelClassificationsRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcClassifications.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteModelClassifications.');
         }
 
         if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteIfcClassifications.');
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteModelClassifications.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcClassifications.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteModelClassifications.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1227,29 +1227,29 @@ export class ModelApi extends runtime.BaseAPI {
      *              Delete relation between filtered classifications (eg. /classifications?name=untec) and all mode\'s elements.             No classification will be deleted on this endpoint, only the relation between model\'s elements and their classification.  Required scopes: ifc:write, model:write
      * Remove all classifications from model\'s elements
      */
-    async bulkDeleteIfcClassifications(requestParameters: BulkDeleteIfcClassificationsRequest): Promise<void> {
-        await this.bulkDeleteIfcClassificationsRaw(requestParameters);
+    async bulkDeleteModelClassifications(requestParameters: BulkDeleteModelClassificationsRequest): Promise<void> {
+        await this.bulkDeleteModelClassificationsRaw(requestParameters);
     }
 
     /**
      *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many Property of a model
      */
-    async bulkDeleteIfcPropertiesRaw(requestParameters: BulkDeleteIfcPropertiesRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteModelPropertiesRaw(requestParameters: BulkDeleteModelPropertiesRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcProperties.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteModelProperties.');
         }
 
         if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteIfcProperties.');
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteModelProperties.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcProperties.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteModelProperties.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcProperties.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteModelProperties.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1295,29 +1295,29 @@ export class ModelApi extends runtime.BaseAPI {
      *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many Property of a model
      */
-    async bulkDeleteIfcProperties(requestParameters: BulkDeleteIfcPropertiesRequest): Promise<void> {
-        await this.bulkDeleteIfcPropertiesRaw(requestParameters);
+    async bulkDeleteModelProperties(requestParameters: BulkDeleteModelPropertiesRequest): Promise<void> {
+        await this.bulkDeleteModelPropertiesRaw(requestParameters);
     }
 
     /**
      *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many PropertyDefinitions of a model
      */
-    async bulkDeleteIfcPropertyDefinitionsRaw(requestParameters: BulkDeleteIfcPropertyDefinitionsRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteModelPropertyDefinitionsRaw(requestParameters: BulkDeleteModelPropertyDefinitionsRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
         }
 
         if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcPropertyDefinitions.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1363,29 +1363,29 @@ export class ModelApi extends runtime.BaseAPI {
      *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many PropertyDefinitions of a model
      */
-    async bulkDeleteIfcPropertyDefinitions(requestParameters: BulkDeleteIfcPropertyDefinitionsRequest): Promise<void> {
-        await this.bulkDeleteIfcPropertyDefinitionsRaw(requestParameters);
+    async bulkDeleteModelPropertyDefinitions(requestParameters: BulkDeleteModelPropertyDefinitionsRequest): Promise<void> {
+        await this.bulkDeleteModelPropertyDefinitionsRaw(requestParameters);
     }
 
     /**
      *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many Units of a model
      */
-    async bulkDeleteIfcUnitsRaw(requestParameters: BulkDeleteIfcUnitsRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteModelUnitsRaw(requestParameters: BulkDeleteModelUnitsRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcUnits.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteModelUnits.');
         }
 
         if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteIfcUnits.');
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteModelUnits.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcUnits.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteModelUnits.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteIfcUnits.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkDeleteModelUnits.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1431,8 +1431,8 @@ export class ModelApi extends runtime.BaseAPI {
      *          Bulk delete.         You must send a list of ids in the body.         These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted  Required scopes: ifc:write, model:write
      * Delete many Units of a model
      */
-    async bulkDeleteIfcUnits(requestParameters: BulkDeleteIfcUnitsRequest): Promise<void> {
-        await this.bulkDeleteIfcUnitsRaw(requestParameters);
+    async bulkDeleteModelUnits(requestParameters: BulkDeleteModelUnitsRequest): Promise<void> {
+        await this.bulkDeleteModelUnitsRaw(requestParameters);
     }
 
     /**
@@ -1576,21 +1576,21 @@ export class ModelApi extends runtime.BaseAPI {
      *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Update some fields of many properties of a model
      */
-    async bulkFullUpdateIfcPropertyRaw(requestParameters: BulkFullUpdateIfcPropertyRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async bulkFullUpdateModelPropertyRaw(requestParameters: BulkFullUpdateModelPropertyRequest): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateIfcProperty.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateModelProperty.');
         }
 
         if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkFullUpdateIfcProperty.');
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkFullUpdateModelProperty.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkFullUpdateIfcProperty.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkFullUpdateModelProperty.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkFullUpdateIfcProperty.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkFullUpdateModelProperty.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1636,8 +1636,8 @@ export class ModelApi extends runtime.BaseAPI {
      *          Bulk update.         Similar to update, but the body should be a list of objects to patch or put         The response will be a list (in the same order) of updated objects or of errors if any         If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
      * Update some fields of many properties of a model
      */
-    async bulkFullUpdateIfcProperty(requestParameters: BulkFullUpdateIfcPropertyRequest): Promise<Array<Property>> {
-        const response = await this.bulkFullUpdateIfcPropertyRaw(requestParameters);
+    async bulkFullUpdateModelProperty(requestParameters: BulkFullUpdateModelPropertyRequest): Promise<Array<Property>> {
+        const response = await this.bulkFullUpdateModelPropertyRaw(requestParameters);
         return await response.value();
     }
 
@@ -1930,21 +1930,21 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors 
      * Update all fields of many properties of a model
      */
-    async bulkUpdateIfcPropertyRaw(requestParameters: BulkUpdateIfcPropertyRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async bulkUpdateModelPropertyRaw(requestParameters: BulkUpdateModelPropertyRequest): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateIfcProperty.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateModelProperty.');
         }
 
         if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkUpdateIfcProperty.');
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkUpdateModelProperty.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkUpdateIfcProperty.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkUpdateModelProperty.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkUpdateIfcProperty.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling bulkUpdateModelProperty.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1990,8 +1990,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors 
      * Update all fields of many properties of a model
      */
-    async bulkUpdateIfcProperty(requestParameters: BulkUpdateIfcPropertyRequest): Promise<Array<Property>> {
-        const response = await this.bulkUpdateIfcPropertyRaw(requestParameters);
+    async bulkUpdateModelProperty(requestParameters: BulkUpdateModelPropertyRequest): Promise<Array<Property>> {
+        const response = await this.bulkUpdateModelPropertyRaw(requestParameters);
         return await response.value();
     }
 
@@ -2591,144 +2591,6 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
-     * Create a PropertyDefinition on the model
-     */
-    async createIfcPropertyDefinitionRaw(requestParameters: CreateIfcPropertyDefinitionRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createIfcPropertyDefinition.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: requestParameters.data.map(PropertyDefinitionToJSON),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyDefinitionFromJSON));
-    }
-
-    /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
-     * Create a PropertyDefinition on the model
-     */
-    async createIfcPropertyDefinition(requestParameters: CreateIfcPropertyDefinitionRequest): Promise<Array<PropertyDefinition>> {
-        const response = await this.createIfcPropertyDefinitionRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
-     * Create a Unit on a model
-     */
-    async createIfcUnitRaw(requestParameters: CreateIfcUnitRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcUnit.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createIfcUnit.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createIfcUnit.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createIfcUnit.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: requestParameters.data.map(UnitToJSON),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UnitFromJSON));
-    }
-
-    /**
-     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
-     * Create a Unit on a model
-     */
-    async createIfcUnit(requestParameters: CreateIfcUnitRequest): Promise<Array<Unit>> {
-        const response = await this.createIfcUnitRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Create a layer in the model
      */
@@ -2863,7 +2725,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write, model:write
+     * Make a PDF or Image file a Model to be used in BIMData services. If a model already exists, this route does nothing and returns a 201 with the model Required scopes: ifc:write, model:write
      * Make a PDF or Image file a Model
      */
     async createModelRaw(requestParameters: CreateModelRequest): Promise<runtime.ApiResponse<Model>> {
@@ -2919,11 +2781,149 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write, model:write
+     * Make a PDF or Image file a Model to be used in BIMData services. If a model already exists, this route does nothing and returns a 201 with the model Required scopes: ifc:write, model:write
      * Make a PDF or Image file a Model
      */
     async createModel(requestParameters: CreateModelRequest): Promise<Model> {
         const response = await this.createModelRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
+     * Create a PropertyDefinition on the model
+     */
+    async createModelPropertyDefinitionRaw(requestParameters: CreateModelPropertyDefinitionRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createModelPropertyDefinition.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createModelPropertyDefinition.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createModelPropertyDefinition.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createModelPropertyDefinition.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.data.map(PropertyDefinitionToJSON),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyDefinitionFromJSON));
+    }
+
+    /**
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
+     * Create a PropertyDefinition on the model
+     */
+    async createModelPropertyDefinition(requestParameters: CreateModelPropertyDefinitionRequest): Promise<Array<PropertyDefinition>> {
+        const response = await this.createModelPropertyDefinitionRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
+     * Create a Unit on a model
+     */
+    async createModelUnitRaw(requestParameters: CreateModelUnitRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createModelUnit.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createModelUnit.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createModelUnit.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createModelUnit.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.data.map(UnitToJSON),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UnitFromJSON));
+    }
+
+    /**
+     *          Bulk create available.         You can either post an object or a list of objects.         Is you post a list, the response will be a list (in the same order) of created objects or of errors if any         If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  Required scopes: ifc:write, model:write
+     * Create a Unit on a model
+     */
+    async createModelUnit(requestParameters: CreateModelUnitRequest): Promise<Array<Unit>> {
+        const response = await this.createModelUnitRaw(requestParameters);
         return await response.value();
     }
 
@@ -3616,201 +3616,6 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a Property of a model Required scopes: ifc:write, model:write
-     * Delete a Property of a model
-     */
-    async deleteIfcPropertyRaw(requestParameters: DeleteIfcPropertyRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcProperty.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcProperty.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteIfcProperty.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcProperty.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Delete a Property of a model Required scopes: ifc:write, model:write
-     * Delete a Property of a model
-     */
-    async deleteIfcProperty(requestParameters: DeleteIfcPropertyRequest): Promise<void> {
-        await this.deleteIfcPropertyRaw(requestParameters);
-    }
-
-    /**
-     * Delete a PropertyDefinitions of a model Required scopes: ifc:write, model:write
-     * Delete a PropertyDefinitions of a model
-     */
-    async deleteIfcPropertyDefinitionRaw(requestParameters: DeleteIfcPropertyDefinitionRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcPropertyDefinition.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Delete a PropertyDefinitions of a model Required scopes: ifc:write, model:write
-     * Delete a PropertyDefinitions of a model
-     */
-    async deleteIfcPropertyDefinition(requestParameters: DeleteIfcPropertyDefinitionRequest): Promise<void> {
-        await this.deleteIfcPropertyDefinitionRaw(requestParameters);
-    }
-
-    /**
-     * Delete a Unit of a model Required scopes: ifc:write, model:write
-     * Delete a Unit of a model
-     */
-    async deleteIfcUnitRaw(requestParameters: DeleteIfcUnitRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcUnit.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteIfcUnit.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteIfcUnit.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcUnit.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Delete a Unit of a model Required scopes: ifc:write, model:write
-     * Delete a Unit of a model
-     */
-    async deleteIfcUnit(requestParameters: DeleteIfcUnitRequest): Promise<void> {
-        await this.deleteIfcUnitRaw(requestParameters);
-    }
-
-    /**
      * The IFC file will not be updated. The remaining layers are available in API and will be available when exporting an IFC file Required scopes: ifc:write, model:write
      * Delete a layer of a model
      */
@@ -3934,6 +3739,201 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async deleteModel(requestParameters: DeleteModelRequest): Promise<void> {
         await this.deleteModelRaw(requestParameters);
+    }
+
+    /**
+     * Delete a Property of a model Required scopes: ifc:write, model:write
+     * Delete a Property of a model
+     */
+    async deleteModelPropertyRaw(requestParameters: DeleteModelPropertyRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModelProperty.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModelProperty.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteModelProperty.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModelProperty.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a Property of a model Required scopes: ifc:write, model:write
+     * Delete a Property of a model
+     */
+    async deleteModelProperty(requestParameters: DeleteModelPropertyRequest): Promise<void> {
+        await this.deleteModelPropertyRaw(requestParameters);
+    }
+
+    /**
+     * Delete a PropertyDefinitions of a model Required scopes: ifc:write, model:write
+     * Delete a PropertyDefinitions of a model
+     */
+    async deleteModelPropertyDefinitionRaw(requestParameters: DeleteModelPropertyDefinitionRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModelPropertyDefinition.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModelPropertyDefinition.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteModelPropertyDefinition.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModelPropertyDefinition.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a PropertyDefinitions of a model Required scopes: ifc:write, model:write
+     * Delete a PropertyDefinitions of a model
+     */
+    async deleteModelPropertyDefinition(requestParameters: DeleteModelPropertyDefinitionRequest): Promise<void> {
+        await this.deleteModelPropertyDefinitionRaw(requestParameters);
+    }
+
+    /**
+     * Delete a Unit of a model Required scopes: ifc:write, model:write
+     * Delete a Unit of a model
+     */
+    async deleteModelUnitRaw(requestParameters: DeleteModelUnitRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModelUnit.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModelUnit.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteModelUnit.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModelUnit.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a Unit of a model Required scopes: ifc:write, model:write
+     * Delete a Unit of a model
+     */
+    async deleteModelUnit(requestParameters: DeleteModelUnitRequest): Promise<void> {
+        await this.deleteModelUnitRaw(requestParameters);
     }
 
     /**
@@ -5804,580 +5804,6 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all classifications in a model Required scopes: ifc:read, model:read
-     * Retrieve all classifications in a model
-     */
-    async getIfcClassificationsRaw(requestParameters: GetIfcClassificationsRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcClassifications.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getIfcClassifications.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcClassifications.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ClassificationFromJSON));
-    }
-
-    /**
-     * Retrieve all classifications in a model Required scopes: ifc:read, model:read
-     * Retrieve all classifications in a model
-     */
-    async getIfcClassifications(requestParameters: GetIfcClassificationsRequest): Promise<Array<Classification>> {
-        const response = await this.getIfcClassificationsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve a material of a model Required scopes: ifc:read, model:read
-     * Retrieve a material of a model
-     */
-    async getIfcMaterialRaw(requestParameters: GetIfcMaterialRequest): Promise<runtime.ApiResponse<Material>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterial.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcMaterial.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getIfcMaterial.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterial.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/material/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => MaterialFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve a material of a model Required scopes: ifc:read, model:read
-     * Retrieve a material of a model
-     */
-    async getIfcMaterial(requestParameters: GetIfcMaterialRequest): Promise<Material> {
-        const response = await this.getIfcMaterialRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve all materials of a model. Required scopes: ifc:read, model:read
-     * Retrieve all materials of a model
-     */
-    async getIfcMaterialsRaw(requestParameters: GetIfcMaterialsRequest): Promise<runtime.ApiResponse<Array<Material>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterials.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getIfcMaterials.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterials.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/material`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MaterialFromJSON));
-    }
-
-    /**
-     * Retrieve all materials of a model. Required scopes: ifc:read, model:read
-     * Retrieve all materials of a model
-     */
-    async getIfcMaterials(requestParameters: GetIfcMaterialsRequest): Promise<Array<Material>> {
-        const response = await this.getIfcMaterialsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve all PropertySets of a model Required scopes: ifc:read, model:read
-     * Retrieve all Properties of a model
-     */
-    async getIfcPropertiesRaw(requestParameters: GetIfcPropertiesRequest): Promise<runtime.ApiResponse<Array<Property>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcProperties.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getIfcProperties.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcProperties.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyFromJSON));
-    }
-
-    /**
-     * Retrieve all PropertySets of a model Required scopes: ifc:read, model:read
-     * Retrieve all Properties of a model
-     */
-    async getIfcProperties(requestParameters: GetIfcPropertiesRequest): Promise<Array<Property>> {
-        const response = await this.getIfcPropertiesRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve a Property of a model Required scopes: ifc:read, model:read
-     * Retrieve a Property of a model
-     */
-    async getIfcPropertyRaw(requestParameters: GetIfcPropertyRequest): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcProperty.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcProperty.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getIfcProperty.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcProperty.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve a Property of a model Required scopes: ifc:read, model:read
-     * Retrieve a Property of a model
-     */
-    async getIfcProperty(requestParameters: GetIfcPropertyRequest): Promise<Property> {
-        const response = await this.getIfcPropertyRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve a PropertyDefinition of a model Required scopes: ifc:read, model:read
-     * Retrieve a PropertyDefinition of a model
-     */
-    async getIfcPropertyDefinitionRaw(requestParameters: GetIfcPropertyDefinitionRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDefinition.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve a PropertyDefinition of a model Required scopes: ifc:read, model:read
-     * Retrieve a PropertyDefinition of a model
-     */
-    async getIfcPropertyDefinition(requestParameters: GetIfcPropertyDefinitionRequest): Promise<PropertyDefinition> {
-        const response = await this.getIfcPropertyDefinitionRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve all PropertyDefinitions of a model Required scopes: ifc:read, model:read
-     * Retrieve all PropertyDefinitions of a model
-     */
-    async getIfcPropertyDefinitionsRaw(requestParameters: GetIfcPropertyDefinitionsRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDefinitions.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getIfcPropertyDefinitions.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDefinitions.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyDefinitionFromJSON));
-    }
-
-    /**
-     * Retrieve all PropertyDefinitions of a model Required scopes: ifc:read, model:read
-     * Retrieve all PropertyDefinitions of a model
-     */
-    async getIfcPropertyDefinitions(requestParameters: GetIfcPropertyDefinitionsRequest): Promise<Array<PropertyDefinition>> {
-        const response = await this.getIfcPropertyDefinitionsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve a Unit of a model Required scopes: ifc:read, model:read
-     * Retrieve a Unit of a model
-     */
-    async getIfcUnitRaw(requestParameters: GetIfcUnitRequest): Promise<runtime.ApiResponse<Unit>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcUnit.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getIfcUnit.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getIfcUnit.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcUnit.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve a Unit of a model Required scopes: ifc:read, model:read
-     * Retrieve a Unit of a model
-     */
-    async getIfcUnit(requestParameters: GetIfcUnitRequest): Promise<Unit> {
-        const response = await this.getIfcUnitRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve all Units of a model Required scopes: ifc:read, model:read
-     * Retrieve all Units of a model
-     */
-    async getIfcUnitsRaw(requestParameters: GetIfcUnitsRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcUnits.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getIfcUnits.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcUnits.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UnitFromJSON));
-    }
-
-    /**
-     * Retrieve all Units of a model Required scopes: ifc:read, model:read
-     * Retrieve all Units of a model
-     */
-    async getIfcUnits(requestParameters: GetIfcUnitsRequest): Promise<Array<Unit>> {
-        const response = await this.getIfcUnitsRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * Retrieve a layer of a model Required scopes: ifc:read, model:read
      * Retrieve a layer of a model
      */
@@ -6700,6 +6126,580 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async getModel(requestParameters: GetModelRequest): Promise<Model> {
         const response = await this.getModelRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all classifications in a model Required scopes: ifc:read, model:read
+     * Retrieve all classifications in a model
+     */
+    async getModelClassificationsRaw(requestParameters: GetModelClassificationsRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelClassifications.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelClassifications.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelClassifications.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ClassificationFromJSON));
+    }
+
+    /**
+     * Retrieve all classifications in a model Required scopes: ifc:read, model:read
+     * Retrieve all classifications in a model
+     */
+    async getModelClassifications(requestParameters: GetModelClassificationsRequest): Promise<Array<Classification>> {
+        const response = await this.getModelClassificationsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a material of a model Required scopes: ifc:read, model:read
+     * Retrieve a material of a model
+     */
+    async getModelMaterialRaw(requestParameters: GetModelMaterialRequest): Promise<runtime.ApiResponse<Material>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelMaterial.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModelMaterial.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelMaterial.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelMaterial.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/material/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MaterialFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a material of a model Required scopes: ifc:read, model:read
+     * Retrieve a material of a model
+     */
+    async getModelMaterial(requestParameters: GetModelMaterialRequest): Promise<Material> {
+        const response = await this.getModelMaterialRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all materials of a model. Required scopes: ifc:read, model:read
+     * Retrieve all materials of a model
+     */
+    async getModelMaterialsRaw(requestParameters: GetModelMaterialsRequest): Promise<runtime.ApiResponse<Array<Material>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelMaterials.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelMaterials.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelMaterials.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/material`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MaterialFromJSON));
+    }
+
+    /**
+     * Retrieve all materials of a model. Required scopes: ifc:read, model:read
+     * Retrieve all materials of a model
+     */
+    async getModelMaterials(requestParameters: GetModelMaterialsRequest): Promise<Array<Material>> {
+        const response = await this.getModelMaterialsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all PropertySets of a model Required scopes: ifc:read, model:read
+     * Retrieve all Properties of a model
+     */
+    async getModelPropertiesRaw(requestParameters: GetModelPropertiesRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelProperties.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelProperties.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelProperties.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyFromJSON));
+    }
+
+    /**
+     * Retrieve all PropertySets of a model Required scopes: ifc:read, model:read
+     * Retrieve all Properties of a model
+     */
+    async getModelProperties(requestParameters: GetModelPropertiesRequest): Promise<Array<Property>> {
+        const response = await this.getModelPropertiesRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a Property of a model Required scopes: ifc:read, model:read
+     * Retrieve a Property of a model
+     */
+    async getModelPropertyRaw(requestParameters: GetModelPropertyRequest): Promise<runtime.ApiResponse<Property>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelProperty.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModelProperty.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelProperty.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelProperty.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a Property of a model Required scopes: ifc:read, model:read
+     * Retrieve a Property of a model
+     */
+    async getModelProperty(requestParameters: GetModelPropertyRequest): Promise<Property> {
+        const response = await this.getModelPropertyRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a PropertyDefinition of a model Required scopes: ifc:read, model:read
+     * Retrieve a PropertyDefinition of a model
+     */
+    async getModelPropertyDefinitionRaw(requestParameters: GetModelPropertyDefinitionRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelPropertyDefinition.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModelPropertyDefinition.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelPropertyDefinition.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelPropertyDefinition.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a PropertyDefinition of a model Required scopes: ifc:read, model:read
+     * Retrieve a PropertyDefinition of a model
+     */
+    async getModelPropertyDefinition(requestParameters: GetModelPropertyDefinitionRequest): Promise<PropertyDefinition> {
+        const response = await this.getModelPropertyDefinitionRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all PropertyDefinitions of a model Required scopes: ifc:read, model:read
+     * Retrieve all PropertyDefinitions of a model
+     */
+    async getModelPropertyDefinitionsRaw(requestParameters: GetModelPropertyDefinitionsRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelPropertyDefinitions.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelPropertyDefinitions.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelPropertyDefinitions.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyDefinitionFromJSON));
+    }
+
+    /**
+     * Retrieve all PropertyDefinitions of a model Required scopes: ifc:read, model:read
+     * Retrieve all PropertyDefinitions of a model
+     */
+    async getModelPropertyDefinitions(requestParameters: GetModelPropertyDefinitionsRequest): Promise<Array<PropertyDefinition>> {
+        const response = await this.getModelPropertyDefinitionsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a Unit of a model Required scopes: ifc:read, model:read
+     * Retrieve a Unit of a model
+     */
+    async getModelUnitRaw(requestParameters: GetModelUnitRequest): Promise<runtime.ApiResponse<Unit>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelUnit.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModelUnit.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelUnit.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelUnit.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a Unit of a model Required scopes: ifc:read, model:read
+     * Retrieve a Unit of a model
+     */
+    async getModelUnit(requestParameters: GetModelUnitRequest): Promise<Unit> {
+        const response = await this.getModelUnitRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all Units of a model Required scopes: ifc:read, model:read
+     * Retrieve all Units of a model
+     */
+    async getModelUnitsRaw(requestParameters: GetModelUnitsRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelUnits.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelUnits.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelUnits.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UnitFromJSON));
+    }
+
+    /**
+     * Retrieve all Units of a model Required scopes: ifc:read, model:read
+     * Retrieve all Units of a model
+     */
+    async getModelUnits(requestParameters: GetModelUnitsRequest): Promise<Array<Unit>> {
+        const response = await this.getModelUnitsRaw(requestParameters);
         return await response.value();
     }
 
@@ -9093,225 +9093,6 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a Property Required scopes: ifc:write, model:write
-     * Update some fields of a Property
-     */
-    async updateIfcPropertyRaw(requestParameters: UpdateIfcPropertyRequest): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcProperty.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcProperty.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateIfcProperty.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcProperty.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcProperty.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PropertyToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
-    }
-
-    /**
-     * Update some fields of a Property Required scopes: ifc:write, model:write
-     * Update some fields of a Property
-     */
-    async updateIfcProperty(requestParameters: UpdateIfcPropertyRequest): Promise<Property> {
-        const response = await this.updateIfcPropertyRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     *  Required scopes: ifc:write, model:write
-     * Update some fields of many PropertyDefinitions of a model
-     */
-    async updateIfcPropertyDefinitionRaw(requestParameters: UpdateIfcPropertyDefinitionRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcPropertyDefinition.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcPropertyDefinition.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PropertyDefinitionToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
-    }
-
-    /**
-     *  Required scopes: ifc:write, model:write
-     * Update some fields of many PropertyDefinitions of a model
-     */
-    async updateIfcPropertyDefinition(requestParameters: UpdateIfcPropertyDefinitionRequest): Promise<PropertyDefinition> {
-        const response = await this.updateIfcPropertyDefinitionRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
-     *  Required scopes: ifc:write, model:write
-     * Update some fields of a Unit of a model
-     */
-    async updateIfcUnitRaw(requestParameters: UpdateIfcUnitRequest): Promise<runtime.ApiResponse<Unit>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcUnit.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateIfcUnit.');
-        }
-
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateIfcUnit.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcUnit.');
-        }
-
-        if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateIfcUnit.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-            body: UnitToJSON(requestParameters.data),
-        });
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
-    }
-
-    /**
-     *  Required scopes: ifc:write, model:write
-     * Update some fields of a Unit of a model
-     */
-    async updateIfcUnit(requestParameters: UpdateIfcUnitRequest): Promise<Unit> {
-        const response = await this.updateIfcUnitRaw(requestParameters);
-        return await response.value();
-    }
-
-    /**
      * Update some fields of a layer. The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file Required scopes: ifc:write, model:write
      * Update some fields of a layer
      */
@@ -9576,6 +9357,225 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async updateModelFiles(requestParameters: UpdateModelFilesRequest): Promise<ModelFiles> {
         const response = await this.updateModelFilesRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a Property Required scopes: ifc:write, model:write
+     * Update some fields of a Property
+     */
+    async updateModelPropertyRaw(requestParameters: UpdateModelPropertyRequest): Promise<runtime.ApiResponse<Property>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateModelProperty.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateModelProperty.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateModelProperty.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateModelProperty.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateModelProperty.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PropertyToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a Property Required scopes: ifc:write, model:write
+     * Update some fields of a Property
+     */
+    async updateModelProperty(requestParameters: UpdateModelPropertyRequest): Promise<Property> {
+        const response = await this.updateModelPropertyRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     *  Required scopes: ifc:write, model:write
+     * Update some fields of many PropertyDefinitions of a model
+     */
+    async updateModelPropertyDefinitionRaw(requestParameters: UpdateModelPropertyDefinitionRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateModelPropertyDefinition.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateModelPropertyDefinition.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateModelPropertyDefinition.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateModelPropertyDefinition.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateModelPropertyDefinition.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PropertyDefinitionToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
+    }
+
+    /**
+     *  Required scopes: ifc:write, model:write
+     * Update some fields of many PropertyDefinitions of a model
+     */
+    async updateModelPropertyDefinition(requestParameters: UpdateModelPropertyDefinitionRequest): Promise<PropertyDefinition> {
+        const response = await this.updateModelPropertyDefinitionRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     *  Required scopes: ifc:write, model:write
+     * Update some fields of a Unit of a model
+     */
+    async updateModelUnitRaw(requestParameters: UpdateModelUnitRequest): Promise<runtime.ApiResponse<Unit>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateModelUnit.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateModelUnit.');
+        }
+
+        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
+            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateModelUnit.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateModelUnit.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateModelUnit.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UnitToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
+    }
+
+    /**
+     *  Required scopes: ifc:write, model:write
+     * Update some fields of a Unit of a model
+     */
+    async updateModelUnit(requestParameters: UpdateModelUnitRequest): Promise<Unit> {
+        const response = await this.updateModelUnitRaw(requestParameters);
         return await response.value();
     }
 

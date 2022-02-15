@@ -2822,7 +2822,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write, model:write
+     * Make a PDF or Image file a Model to be used in BIMData services. If a model already exists, this route does nothing and returns a 201 with the model Required scopes: ifc:write, model:write
      * Make a PDF or Image file a Model
      */
     async createIfcDeprecatedRaw(requestParameters: CreateIfcDeprecatedRequest): Promise<runtime.ApiResponse<Model>> {
@@ -2878,7 +2878,7 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Make a PDF or Image file a Model to be used in BIMData services Required scopes: ifc:write, model:write
+     * Make a PDF or Image file a Model to be used in BIMData services. If a model already exists, this route does nothing and returns a 201 with the model Required scopes: ifc:write, model:write
      * Make a PDF or Image file a Model
      */
     async createIfcDeprecated(requestParameters: CreateIfcDeprecatedRequest): Promise<Model> {
