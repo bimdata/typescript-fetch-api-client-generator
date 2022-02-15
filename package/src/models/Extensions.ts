@@ -24,25 +24,31 @@ export interface Extensions {
      * @type {Array<string>}
      * @memberof Extensions
      */
-    topicType: Array<string> | null;
+    readonly topicType?: Array<string>;
     /**
      * 
      * @type {Array<string>}
      * @memberof Extensions
      */
-    topicStatus: Array<string> | null;
+    readonly topicStatus?: Array<string>;
     /**
      * 
      * @type {Array<string>}
      * @memberof Extensions
      */
-    topicLabel: Array<string> | null;
+    readonly topicLabel?: Array<string>;
     /**
      * 
      * @type {Array<string>}
      * @memberof Extensions
      */
-    priority: Array<string> | null;
+    readonly priority?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Extensions
+     */
+    readonly stage?: Array<string>;
     /**
      * 
      * @type {Array<string>}
@@ -50,11 +56,17 @@ export interface Extensions {
      */
     readonly userIdType?: Array<string>;
     /**
-     * 
+     * Non standard field. Arrays of priorities and this array are in the same order.
      * @type {Array<string>}
      * @memberof Extensions
      */
-    stage: Array<string> | null;
+    priorityColors: Array<string>;
+    /**
+     * Non standard field. Arrays of statuses and this array are in the same order.
+     * @type {Array<string>}
+     * @memberof Extensions
+     */
+    topicStatusColors: Array<string>;
 }
 
 export function ExtensionsFromJSON(json: any): Extensions {
@@ -67,12 +79,14 @@ export function ExtensionsFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
-        'topicType': json['topic_type'],
-        'topicStatus': json['topic_status'],
-        'topicLabel': json['topic_label'],
-        'priority': json['priority'],
+        'topicType': !exists(json, 'topic_type') ? undefined : json['topic_type'],
+        'topicStatus': !exists(json, 'topic_status') ? undefined : json['topic_status'],
+        'topicLabel': !exists(json, 'topic_label') ? undefined : json['topic_label'],
+        'priority': !exists(json, 'priority') ? undefined : json['priority'],
+        'stage': !exists(json, 'stage') ? undefined : json['stage'],
         'userIdType': !exists(json, 'user_id_type') ? undefined : json['user_id_type'],
-        'stage': json['stage'],
+        'priorityColors': json['priority_colors'],
+        'topicStatusColors': json['topic_status_colors'],
     };
 }
 
@@ -85,11 +99,8 @@ export function ExtensionsToJSON(value?: Extensions | null): any {
     }
     return {
         
-        'topic_type': value.topicType,
-        'topic_status': value.topicStatus,
-        'topic_label': value.topicLabel,
-        'priority': value.priority,
-        'stage': value.stage,
+        'priority_colors': value.priorityColors,
+        'topic_status_colors': value.topicStatusColors,
     };
 }
 

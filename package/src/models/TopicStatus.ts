@@ -21,10 +21,28 @@ import { exists, mapValues } from '../runtime';
 export interface TopicStatus {
     /**
      * 
+     * @type {number}
+     * @memberof TopicStatus
+     */
+    readonly id?: number;
+    /**
+     * 
      * @type {string}
      * @memberof TopicStatus
      */
     topicStatus: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TopicStatus
+     */
+    color?: string | null;
+    /**
+     * This field is automatically provided by the route, you don't need to provide it in the body
+     * @type {number}
+     * @memberof TopicStatus
+     */
+    project?: number;
 }
 
 export function TopicStatusFromJSON(json: any): TopicStatus {
@@ -37,7 +55,10 @@ export function TopicStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'topicStatus': json['topic_status'],
+        'color': !exists(json, 'color') ? undefined : json['color'],
+        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -51,6 +72,8 @@ export function TopicStatusToJSON(value?: TopicStatus | null): any {
     return {
         
         'topic_status': value.topicStatus,
+        'color': value.color,
+        'project': value.project,
     };
 }
 

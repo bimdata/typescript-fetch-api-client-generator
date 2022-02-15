@@ -21,10 +21,28 @@ import { exists, mapValues } from '../runtime';
 export interface Priority {
     /**
      * 
+     * @type {number}
+     * @memberof Priority
+     */
+    readonly id?: number;
+    /**
+     * 
      * @type {string}
      * @memberof Priority
      */
     priority: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Priority
+     */
+    color?: string | null;
+    /**
+     * This field is automatically provided by the route, you don't need to provide it in the body
+     * @type {number}
+     * @memberof Priority
+     */
+    project?: number;
 }
 
 export function PriorityFromJSON(json: any): Priority {
@@ -37,7 +55,10 @@ export function PriorityFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'priority': json['priority'],
+        'color': !exists(json, 'color') ? undefined : json['color'],
+        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -51,6 +72,8 @@ export function PriorityToJSON(value?: Priority | null): any {
     return {
         
         'priority': value.priority,
+        'color': value.color,
+        'project': value.project,
     };
 }
 

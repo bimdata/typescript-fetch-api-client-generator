@@ -16,46 +16,32 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Label
+ * @interface LabelRead
  */
-export interface Label {
-    /**
-     * 
-     * @type {number}
-     * @memberof Label
-     */
-    readonly id?: number;
+export interface LabelRead {
     /**
      * 
      * @type {string}
-     * @memberof Label
+     * @memberof LabelRead
      */
     label: string;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof Label
-     */
-    project?: number;
 }
 
-export function LabelFromJSON(json: any): Label {
-    return LabelFromJSONTyped(json, false);
+export function LabelReadFromJSON(json: any): LabelRead {
+    return LabelReadFromJSONTyped(json, false);
 }
 
-export function LabelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Label {
+export function LabelReadFromJSONTyped(json: any, ignoreDiscriminator: boolean): LabelRead {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
         'label': json['label'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
-export function LabelToJSON(value?: Label | null): any {
+export function LabelReadToJSON(value?: LabelRead | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -65,7 +51,6 @@ export function LabelToJSON(value?: Label | null): any {
     return {
         
         'label': value.label,
-        'project': value.project,
     };
 }
 

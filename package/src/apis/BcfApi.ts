@@ -27,18 +27,36 @@ import {
     Component,
     ComponentFromJSON,
     ComponentToJSON,
+    DetailedExtensions,
+    DetailedExtensionsFromJSON,
+    DetailedExtensionsToJSON,
     Extensions,
     ExtensionsFromJSON,
     ExtensionsToJSON,
     FullTopic,
     FullTopicFromJSON,
     FullTopicToJSON,
+    Label,
+    LabelFromJSON,
+    LabelToJSON,
+    Priority,
+    PriorityFromJSON,
+    PriorityToJSON,
     SelfBcfUser,
     SelfBcfUserFromJSON,
     SelfBcfUserToJSON,
+    Stage,
+    StageFromJSON,
+    StageToJSON,
     Topic,
     TopicFromJSON,
     TopicToJSON,
+    TopicStatus,
+    TopicStatusFromJSON,
+    TopicStatusToJSON,
+    TopicType,
+    TopicTypeFromJSON,
+    TopicTypeToJSON,
     Viewpoint,
     ViewpointFromJSON,
     ViewpointToJSON,
@@ -51,6 +69,31 @@ export interface CreateCommentRequest {
     projectsPk: string;
     topicsGuid: string;
     data: Comment;
+}
+
+export interface CreateExtensionLabelRequest {
+    projectsPk: string;
+    data: Label;
+}
+
+export interface CreateExtensionPriorityRequest {
+    projectsPk: string;
+    data: Priority;
+}
+
+export interface CreateExtensionStageRequest {
+    projectsPk: string;
+    data: Stage;
+}
+
+export interface CreateExtensionStatusRequest {
+    projectsPk: string;
+    data: TopicStatus;
+}
+
+export interface CreateExtensionTypeRequest {
+    projectsPk: string;
+    data: TopicType;
 }
 
 export interface CreateFullTopicRequest {
@@ -75,6 +118,31 @@ export interface DeleteCommentRequest {
     guid: string;
     projectsPk: string;
     topicsGuid: string;
+}
+
+export interface DeleteExtensionLabelRequest {
+    id: number;
+    projectsPk: string;
+}
+
+export interface DeleteExtensionPriorityRequest {
+    id: number;
+    projectsPk: string;
+}
+
+export interface DeleteExtensionStageRequest {
+    id: number;
+    projectsPk: string;
+}
+
+export interface DeleteExtensionStatusRequest {
+    id: number;
+    projectsPk: string;
+}
+
+export interface DeleteExtensionTypeRequest {
+    id: number;
+    projectsPk: string;
 }
 
 export interface DeleteTopicRequest {
@@ -149,8 +217,12 @@ export interface GetCommentsRequest {
     topicsGuid: string;
 }
 
+export interface GetDetailedExtensionsRequest {
+    id: number;
+}
+
 export interface GetExtensionsRequest {
-    projectsPk: string;
+    id: number;
 }
 
 export interface GetFullTopicRequest {
@@ -233,9 +305,34 @@ export interface UpdateCommentRequest {
     data: Comment;
 }
 
-export interface UpdateExtensionsRequest {
+export interface UpdateExtensionLabelRequest {
+    id: number;
     projectsPk: string;
-    data: Extensions;
+    data: Label;
+}
+
+export interface UpdateExtensionPriorityRequest {
+    id: number;
+    projectsPk: string;
+    data: Priority;
+}
+
+export interface UpdateExtensionStageRequest {
+    id: number;
+    projectsPk: string;
+    data: Stage;
+}
+
+export interface UpdateExtensionStatusRequest {
+    id: number;
+    projectsPk: string;
+    data: TopicStatus;
+}
+
+export interface UpdateExtensionTypeRequest {
+    id: number;
+    projectsPk: string;
+    data: TopicType;
 }
 
 export interface UpdateFullTopicRequest {
@@ -326,6 +423,311 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async createComment(requestParameters: CreateCommentRequest): Promise<Comment> {
         const response = await this.createCommentRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Create a Label available for the project Required scopes: bcf:write
+     * Create a Label
+     */
+    async createExtensionLabelRaw(requestParameters: CreateExtensionLabelRequest): Promise<runtime.ApiResponse<Label>> {
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionLabel.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createExtensionLabel.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/label`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: LabelToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => LabelFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Create a Label available for the project Required scopes: bcf:write
+     * Create a Label
+     */
+    async createExtensionLabel(requestParameters: CreateExtensionLabelRequest): Promise<Label> {
+        const response = await this.createExtensionLabelRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Create a Priority available for the project Required scopes: bcf:write
+     * Create a Priority
+     */
+    async createExtensionPriorityRaw(requestParameters: CreateExtensionPriorityRequest): Promise<runtime.ApiResponse<Priority>> {
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionPriority.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createExtensionPriority.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/priority`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PriorityToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PriorityFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Create a Priority available for the project Required scopes: bcf:write
+     * Create a Priority
+     */
+    async createExtensionPriority(requestParameters: CreateExtensionPriorityRequest): Promise<Priority> {
+        const response = await this.createExtensionPriorityRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Create a Stage available for the project Required scopes: bcf:write
+     * Create a Stage
+     */
+    async createExtensionStageRaw(requestParameters: CreateExtensionStageRequest): Promise<runtime.ApiResponse<Stage>> {
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionStage.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createExtensionStage.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/stage`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: StageToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => StageFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Create a Stage available for the project Required scopes: bcf:write
+     * Create a Stage
+     */
+    async createExtensionStage(requestParameters: CreateExtensionStageRequest): Promise<Stage> {
+        const response = await this.createExtensionStageRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Create a TopicStatus available for the project Required scopes: bcf:write
+     * Create a TopicStatus
+     */
+    async createExtensionStatusRaw(requestParameters: CreateExtensionStatusRequest): Promise<runtime.ApiResponse<TopicStatus>> {
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionStatus.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createExtensionStatus.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/status`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TopicStatusToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TopicStatusFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Create a TopicStatus available for the project Required scopes: bcf:write
+     * Create a TopicStatus
+     */
+    async createExtensionStatus(requestParameters: CreateExtensionStatusRequest): Promise<TopicStatus> {
+        const response = await this.createExtensionStatusRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Create a TopicType available for the project Required scopes: bcf:write
+     * Create a TopicType
+     */
+    async createExtensionTypeRaw(requestParameters: CreateExtensionTypeRequest): Promise<runtime.ApiResponse<TopicType>> {
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionType.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling createExtensionType.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/type`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TopicTypeToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TopicTypeFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Create a TopicType available for the project Required scopes: bcf:write
+     * Create a TopicType
+     */
+    async createExtensionType(requestParameters: CreateExtensionTypeRequest): Promise<TopicType> {
+        const response = await this.createExtensionTypeRaw(requestParameters);
         return await response.value();
     }
 
@@ -586,6 +988,291 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
+     * This is not a standard route. Delete a Label. Topics using this label won\'t be deleted  Required scopes: bcf:write
+     * Delete a Label
+     */
+    async deleteExtensionLabelRaw(requestParameters: DeleteExtensionLabelRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionLabel.');
+        }
+
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionLabel.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/label/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * This is not a standard route. Delete a Label. Topics using this label won\'t be deleted  Required scopes: bcf:write
+     * Delete a Label
+     */
+    async deleteExtensionLabel(requestParameters: DeleteExtensionLabelRequest): Promise<void> {
+        await this.deleteExtensionLabelRaw(requestParameters);
+    }
+
+    /**
+     * This is not a standard route. Delete a Priority. Topics using this priority won\'t be deleted  Required scopes: bcf:write
+     * Delete a Priority
+     */
+    async deleteExtensionPriorityRaw(requestParameters: DeleteExtensionPriorityRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionPriority.');
+        }
+
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionPriority.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/priority/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * This is not a standard route. Delete a Priority. Topics using this priority won\'t be deleted  Required scopes: bcf:write
+     * Delete a Priority
+     */
+    async deleteExtensionPriority(requestParameters: DeleteExtensionPriorityRequest): Promise<void> {
+        await this.deleteExtensionPriorityRaw(requestParameters);
+    }
+
+    /**
+     * This is not a standard route. Delete a Stage. Topics using this stage won\'t be deleted  Required scopes: bcf:write
+     * Delete a Stage
+     */
+    async deleteExtensionStageRaw(requestParameters: DeleteExtensionStageRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionStage.');
+        }
+
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionStage.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/stage/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * This is not a standard route. Delete a Stage. Topics using this stage won\'t be deleted  Required scopes: bcf:write
+     * Delete a Stage
+     */
+    async deleteExtensionStage(requestParameters: DeleteExtensionStageRequest): Promise<void> {
+        await this.deleteExtensionStageRaw(requestParameters);
+    }
+
+    /**
+     * This is not a standard route. Delete a TopicStatus. Topics using this status won\'t be deleted  Required scopes: bcf:write
+     * Delete a TopicStatus
+     */
+    async deleteExtensionStatusRaw(requestParameters: DeleteExtensionStatusRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionStatus.');
+        }
+
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionStatus.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/status/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * This is not a standard route. Delete a TopicStatus. Topics using this status won\'t be deleted  Required scopes: bcf:write
+     * Delete a TopicStatus
+     */
+    async deleteExtensionStatus(requestParameters: DeleteExtensionStatusRequest): Promise<void> {
+        await this.deleteExtensionStatusRaw(requestParameters);
+    }
+
+    /**
+     * This is not a standard route. Delete a TopicType. Topics using this type won\'t be deleted Required scopes: bcf:write
+     * Delete a TopicType
+     */
+    async deleteExtensionTypeRaw(requestParameters: DeleteExtensionTypeRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionType.');
+        }
+
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionType.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/type/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * This is not a standard route. Delete a TopicType. Topics using this type won\'t be deleted Required scopes: bcf:write
+     * Delete a TopicType
+     */
+    async deleteExtensionType(requestParameters: DeleteExtensionTypeRequest): Promise<void> {
+        await this.deleteExtensionTypeRaw(requestParameters);
+    }
+
+    /**
      * Delete a topic Required scopes: bcf:write
      * Delete a topic
      */
@@ -708,7 +1395,7 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * Export project\'s topics in bcf-xml format Required scopes: bcf:read
+     * This is not a standard route. Export project\'s topics in bcf-xml format Required scopes: bcf:read
      * Export project\'s topics in bcf-xml format
      */
     async downloadBcfExportRaw(requestParameters: DownloadBcfExportRequest): Promise<runtime.ApiResponse<Blob>> {
@@ -761,7 +1448,7 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * Export project\'s topics in bcf-xml format Required scopes: bcf:read
+     * This is not a standard route. Export project\'s topics in bcf-xml format Required scopes: bcf:read
      * Export project\'s topics in bcf-xml format
      */
     async downloadBcfExport(requestParameters: DownloadBcfExportRequest): Promise<Blob> {
@@ -1393,12 +2080,12 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve project extensions
-     * Retrieve project extensions
+     * This is not a standard route. Retrieve project detailed extensions Required scopes: bcf:read
+     * Retrieve project detailed extensions
      */
-    async getExtensionsRaw(requestParameters: GetExtensionsRequest): Promise<runtime.ApiResponse<Extensions>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getExtensions.');
+    async getDetailedExtensionsRaw(requestParameters: GetDetailedExtensionsRequest): Promise<runtime.ApiResponse<DetailedExtensions>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getDetailedExtensions.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -1428,7 +2115,61 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extensions`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{id}/detailed-extensions`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DetailedExtensionsFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Retrieve project detailed extensions Required scopes: bcf:read
+     * Retrieve project detailed extensions
+     */
+    async getDetailedExtensions(requestParameters: GetDetailedExtensionsRequest): Promise<DetailedExtensions> {
+        const response = await this.getDetailedExtensionsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve project extensions Required scopes: bcf:read
+     * Retrieve project extensions
+     */
+    async getExtensionsRaw(requestParameters: GetExtensionsRequest): Promise<runtime.ApiResponse<Extensions>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getExtensions.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{id}/extensions`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1438,7 +2179,7 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve project extensions
+     * Retrieve project extensions Required scopes: bcf:read
      * Retrieve project extensions
      */
     async getExtensions(requestParameters: GetExtensionsRequest): Promise<Extensions> {
@@ -2129,7 +2870,7 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * Import bcf-xml format into this project. If there are guid conflict, an error will be raised. If there are index conflicts, indexes of the imported file will be overriden with a new index. Author and assigned_to fields will be linked to existing users in the project. If no matching user are found, fields will be emptied. Only BCF 2.1 is supported Required scopes: bcf:write
+     * This is not a standard route. Import bcf-xml format into this project. If there are guid conflict, an error will be raised. If there are index conflicts, indexes of the imported file will be overriden with a new index. Author and assigned_to fields will be linked to existing users in the project. If no matching user are found, fields will be emptied. Only BCF 2.1 is supported Required scopes: bcf:write
      * Import bcf-xml format into this project
      */
     async importBcfRaw(requestParameters: ImportBcfRequest): Promise<runtime.ApiResponse<void>> {
@@ -2198,7 +2939,7 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * Import bcf-xml format into this project. If there are guid conflict, an error will be raised. If there are index conflicts, indexes of the imported file will be overriden with a new index. Author and assigned_to fields will be linked to existing users in the project. If no matching user are found, fields will be emptied. Only BCF 2.1 is supported Required scopes: bcf:write
+     * This is not a standard route. Import bcf-xml format into this project. If there are guid conflict, an error will be raised. If there are index conflicts, indexes of the imported file will be overriden with a new index. Author and assigned_to fields will be linked to existing users in the project. If no matching user are found, fields will be emptied. Only BCF 2.1 is supported Required scopes: bcf:write
      * Import bcf-xml format into this project
      */
     async importBcf(requestParameters: ImportBcfRequest): Promise<void> {
@@ -2336,16 +3077,20 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update project extensions
-     * Update project extensions
+     * This is not a standard route. Update a Label. All topics using this label will be updated Required scopes: bcf:write
+     * Update a Label
      */
-    async updateExtensionsRaw(requestParameters: UpdateExtensionsRequest): Promise<runtime.ApiResponse<Extensions>> {
+    async updateExtensionLabelRaw(requestParameters: UpdateExtensionLabelRequest): Promise<runtime.ApiResponse<Label>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionLabel.');
+        }
+
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensions.');
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionLabel.');
         }
 
         if (requestParameters.data === null || requestParameters.data === undefined) {
-            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateExtensions.');
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateExtensionLabel.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -2377,22 +3122,282 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extensions`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/label/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: ExtensionsToJSON(requestParameters.data),
+            body: LabelToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ExtensionsFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => LabelFromJSON(jsonValue));
     }
 
     /**
-     * Update project extensions
-     * Update project extensions
+     * This is not a standard route. Update a Label. All topics using this label will be updated Required scopes: bcf:write
+     * Update a Label
      */
-    async updateExtensions(requestParameters: UpdateExtensionsRequest): Promise<Extensions> {
-        const response = await this.updateExtensionsRaw(requestParameters);
+    async updateExtensionLabel(requestParameters: UpdateExtensionLabelRequest): Promise<Label> {
+        const response = await this.updateExtensionLabelRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Update a Priority. All topics using this priority will be updated Required scopes: bcf:write
+     * Update a Priority
+     */
+    async updateExtensionPriorityRaw(requestParameters: UpdateExtensionPriorityRequest): Promise<runtime.ApiResponse<Priority>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionPriority.');
+        }
+
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionPriority.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateExtensionPriority.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/priority/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PriorityToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PriorityFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Update a Priority. All topics using this priority will be updated Required scopes: bcf:write
+     * Update a Priority
+     */
+    async updateExtensionPriority(requestParameters: UpdateExtensionPriorityRequest): Promise<Priority> {
+        const response = await this.updateExtensionPriorityRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Update a Stage. All topics using this stage will be updated Required scopes: bcf:write
+     * Update a Stage
+     */
+    async updateExtensionStageRaw(requestParameters: UpdateExtensionStageRequest): Promise<runtime.ApiResponse<Stage>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionStage.');
+        }
+
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionStage.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateExtensionStage.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/stage/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: StageToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => StageFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Update a Stage. All topics using this stage will be updated Required scopes: bcf:write
+     * Update a Stage
+     */
+    async updateExtensionStage(requestParameters: UpdateExtensionStageRequest): Promise<Stage> {
+        const response = await this.updateExtensionStageRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Update a TopicStatus. All topics using this status will be updated Required scopes: bcf:write
+     * Update a TopicStatus
+     */
+    async updateExtensionStatusRaw(requestParameters: UpdateExtensionStatusRequest): Promise<runtime.ApiResponse<TopicStatus>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionStatus.');
+        }
+
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionStatus.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateExtensionStatus.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/status/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TopicStatusToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TopicStatusFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Update a TopicStatus. All topics using this status will be updated Required scopes: bcf:write
+     * Update a TopicStatus
+     */
+    async updateExtensionStatus(requestParameters: UpdateExtensionStatusRequest): Promise<TopicStatus> {
+        const response = await this.updateExtensionStatusRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Update a TopicType. All topics using this type will be updated Required scopes: bcf:write
+     * Update a TopicType
+     */
+    async updateExtensionTypeRaw(requestParameters: UpdateExtensionTypeRequest): Promise<runtime.ApiResponse<TopicType>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionType.');
+        }
+
+        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
+            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionType.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateExtensionType.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/extension/type/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TopicTypeToJSON(requestParameters.data),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TopicTypeFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Update a TopicType. All topics using this type will be updated Required scopes: bcf:write
+     * Update a TopicType
+     */
+    async updateExtensionType(requestParameters: UpdateExtensionTypeRequest): Promise<TopicType> {
+        const response = await this.updateExtensionTypeRaw(requestParameters);
         return await response.value();
     }
 

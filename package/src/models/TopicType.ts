@@ -21,10 +21,22 @@ import { exists, mapValues } from '../runtime';
 export interface TopicType {
     /**
      * 
+     * @type {number}
+     * @memberof TopicType
+     */
+    readonly id?: number;
+    /**
+     * 
      * @type {string}
      * @memberof TopicType
      */
     topicType: string;
+    /**
+     * This field is automatically provided by the route, you don't need to provide it in the body
+     * @type {number}
+     * @memberof TopicType
+     */
+    project?: number;
 }
 
 export function TopicTypeFromJSON(json: any): TopicType {
@@ -37,7 +49,9 @@ export function TopicTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'topicType': json['topic_type'],
+        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -51,6 +65,7 @@ export function TopicTypeToJSON(value?: TopicType | null): any {
     return {
         
         'topic_type': value.topicType,
+        'project': value.project,
     };
 }
 
