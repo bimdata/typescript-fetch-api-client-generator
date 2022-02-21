@@ -14,7 +14,7 @@ export function makeBIMDataApiClient(config) {
     set config(value) {
       this._config = new Configuration({
         basePath: value.apiUrl,
-        accessToken: () => `Bearer ${value.accessToken}`
+        accessToken: () => value.accessToken
       });
       Object.assign(this._clients, {
         bfcApi: new BcfApi(this._config),
@@ -32,8 +32,11 @@ export function makeBIMDataApiClient(config) {
       };
     },
 
+    
     // Getters
     get config() { return this._config; },
+    get authHeader() { return `Bearer ${this.config_.accessToken}`; },
+
     get bcfApi() { return this._clients.bfcApi; },
     get checkerApi() { return this._clients.checkerApi; },
     get collaborationApi() { return this._clients.collaborationApi; },
