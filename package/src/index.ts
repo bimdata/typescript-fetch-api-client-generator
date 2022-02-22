@@ -39,7 +39,7 @@ export function makeBIMDataApiClient(config) {
 
     // Getters
     get accessToken() { return this._accessToken; },
-    get authHeader() { return `Bearer ${this._accessToken}`; },
+    get authHeader() { return this._config.headers; },
     get config() { return this._config; },
 
     get bcfApi() { return this._clients.bfcApi; },
