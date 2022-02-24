@@ -47,7 +47,7 @@ export interface DetailedExtensions {
      * @type {Array<Label>}
      * @memberof DetailedExtensions
      */
-    labels?: Array<Label>;
+    topicLabels?: Array<Label>;
     /**
      * 
      * @type {Array<TopicType>}
@@ -84,7 +84,7 @@ export function DetailedExtensionsFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'labels': !exists(json, 'labels') ? undefined : ((json['labels'] as Array<any>).map(LabelFromJSON)),
+        'topicLabels': !exists(json, 'topic_labels') ? undefined : ((json['topic_labels'] as Array<any>).map(LabelFromJSON)),
         'topicTypes': !exists(json, 'topic_types') ? undefined : ((json['topic_types'] as Array<any>).map(TopicTypeFromJSON)),
         'topicStatuses': !exists(json, 'topic_statuses') ? undefined : ((json['topic_statuses'] as Array<any>).map(TopicStatusFromJSON)),
         'priorities': !exists(json, 'priorities') ? undefined : ((json['priorities'] as Array<any>).map(PriorityFromJSON)),
@@ -101,7 +101,7 @@ export function DetailedExtensionsToJSON(value?: DetailedExtensions | null): any
     }
     return {
         
-        'labels': value.labels === undefined ? undefined : ((value.labels as Array<any>).map(LabelToJSON)),
+        'topic_labels': value.topicLabels === undefined ? undefined : ((value.topicLabels as Array<any>).map(LabelToJSON)),
         'topic_types': value.topicTypes === undefined ? undefined : ((value.topicTypes as Array<any>).map(TopicTypeToJSON)),
         'topic_statuses': value.topicStatuses === undefined ? undefined : ((value.topicStatuses as Array<any>).map(TopicStatusToJSON)),
         'priorities': value.priorities === undefined ? undefined : ((value.priorities as Array<any>).map(PriorityToJSON)),
