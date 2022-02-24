@@ -145,6 +145,12 @@ export interface Model {
      */
     worldPosition?: Array<number> | null;
     /**
+     * How many meters a unit represents
+     * @type {number}
+     * @memberof Model
+     */
+    sizeRatio?: number | null;
+    /**
      * List of errors that happened during IFC processing
      * @type {Array<string>}
      * @memberof Model
@@ -211,6 +217,7 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'xktFile': !exists(json, 'xkt_file') ? undefined : json['xkt_file'],
         'projectId': !exists(json, 'project_id') ? undefined : json['project_id'],
         'worldPosition': !exists(json, 'world_position') ? undefined : json['world_position'],
+        'sizeRatio': !exists(json, 'size_ratio') ? undefined : json['size_ratio'],
         'errors': !exists(json, 'errors') ? undefined : json['errors'],
         'warnings': !exists(json, 'warnings') ? undefined : json['warnings'],
         'archived': !exists(json, 'archived') ? undefined : json['archived'],
@@ -234,6 +241,7 @@ export function ModelToJSON(value?: Model | null): any {
         'source': value.source,
         'document': DocumentToJSON(value.document),
         'world_position': value.worldPosition,
+        'size_ratio': value.sizeRatio,
         'archived': value.archived,
         'version': value.version,
         'north_vector': value.northVector,
