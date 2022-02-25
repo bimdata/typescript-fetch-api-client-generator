@@ -20,11 +20,11 @@ import { exists, mapValues } from '../runtime';
  */
 export interface InlineObject6 {
     /**
-     * model id
-     * @type {number}
+     * name of storey/building
+     * @type {string}
      * @memberof InlineObject6
      */
-    id?: number;
+    name?: string;
 }
 
 export function InlineObject6FromJSON(json: any): InlineObject6 {
@@ -37,7 +37,7 @@ export function InlineObject6FromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
     };
 }
 
@@ -50,7 +50,7 @@ export function InlineObject6ToJSON(value?: InlineObject6 | null): any {
     }
     return {
         
-        'id': value.id,
+        'name': value.name,
     };
 }
 

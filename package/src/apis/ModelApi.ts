@@ -60,15 +60,21 @@ import {
     InlineObject11,
     InlineObject11FromJSON,
     InlineObject11ToJSON,
-    InlineObject8,
-    InlineObject8FromJSON,
-    InlineObject8ToJSON,
-    InlineObject9,
-    InlineObject9FromJSON,
-    InlineObject9ToJSON,
-    InlineResponse2002,
-    InlineResponse2002FromJSON,
-    InlineResponse2002ToJSON,
+    InlineObject12,
+    InlineObject12FromJSON,
+    InlineObject12ToJSON,
+    InlineObject13,
+    InlineObject13FromJSON,
+    InlineObject13ToJSON,
+    InlineObject14,
+    InlineObject14FromJSON,
+    InlineObject14ToJSON,
+    InlineObject15,
+    InlineObject15FromJSON,
+    InlineObject15ToJSON,
+    InlineResponse201,
+    InlineResponse201FromJSON,
+    InlineResponse201ToJSON,
     Layer,
     LayerFromJSON,
     LayerToJSON,
@@ -229,7 +235,7 @@ export interface CreateBuildingRequest {
     cloudPk: string;
     modelPk: string;
     projectPk: string;
-    data: Building;
+    data: InlineObject10;
 }
 
 export interface CreateBuildingPlanRequest {
@@ -237,7 +243,7 @@ export interface CreateBuildingPlanRequest {
     cloudPk: string;
     modelPk: string;
     projectPk: string;
-    data: InlineObject8;
+    data: InlineObject11;
 }
 
 export interface CreateClassificationElementRelationsRequest {
@@ -365,7 +371,7 @@ export interface CreateStoreyRequest {
     cloudPk: string;
     modelPk: string;
     projectPk: string;
-    data: Storey;
+    data: InlineObject13;
 }
 
 export interface CreateStoreyPlanRequest {
@@ -373,7 +379,7 @@ export interface CreateStoreyPlanRequest {
     modelPk: string;
     projectPk: string;
     storeyUuid: string;
-    data: InlineObject10;
+    data: InlineObject14;
 }
 
 export interface CreateSystemRequest {
@@ -1027,7 +1033,7 @@ export interface UpdateBuildingRequest {
     modelPk: string;
     projectPk: string;
     uuid: string;
-    data: InlineObject9;
+    data: InlineObject12;
 }
 
 export interface UpdateBuildingPlanPositioningRequest {
@@ -1162,7 +1168,7 @@ export interface UpdateStoreyRequest {
     modelPk: string;
     projectPk: string;
     uuid: string;
-    data: InlineObject11;
+    data: InlineObject15;
 }
 
 export interface UpdateStoreyPlanPositioningRequest {
@@ -2171,7 +2177,7 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a building of a model. Required scopes: ifc:write, model:write
      * Create a building of a model
      */
-    async createBuildingRaw(requestParameters: CreateBuildingRequest): Promise<runtime.ApiResponse<Building>> {
+    async createBuildingRaw(requestParameters: CreateBuildingRequest): Promise<runtime.ApiResponse<InlineResponse201>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createBuilding.');
         }
@@ -2221,17 +2227,17 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: BuildingToJSON(requestParameters.data),
+            body: InlineObject10ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse201FromJSON(jsonValue));
     }
 
     /**
      * Create a building of a model. Required scopes: ifc:write, model:write
      * Create a building of a model
      */
-    async createBuilding(requestParameters: CreateBuildingRequest): Promise<Building> {
+    async createBuilding(requestParameters: CreateBuildingRequest): Promise<InlineResponse201> {
         const response = await this.createBuildingRaw(requestParameters);
         return await response.value();
     }
@@ -2294,7 +2300,7 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: InlineObject8ToJSON(requestParameters.data),
+            body: InlineObject11ToJSON(requestParameters.data),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
@@ -3450,7 +3456,7 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a storey of a model. Required scopes: ifc:write, model:write
      * Create a storey of a model
      */
-    async createStoreyRaw(requestParameters: CreateStoreyRequest): Promise<runtime.ApiResponse<Storey>> {
+    async createStoreyRaw(requestParameters: CreateStoreyRequest): Promise<runtime.ApiResponse<InlineResponse201>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createStorey.');
         }
@@ -3500,17 +3506,17 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: StoreyToJSON(requestParameters.data),
+            body: InlineObject13ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse201FromJSON(jsonValue));
     }
 
     /**
      * Create a storey of a model. Required scopes: ifc:write, model:write
      * Create a storey of a model
      */
-    async createStorey(requestParameters: CreateStoreyRequest): Promise<Storey> {
+    async createStorey(requestParameters: CreateStoreyRequest): Promise<InlineResponse201> {
         const response = await this.createStoreyRaw(requestParameters);
         return await response.value();
     }
@@ -3573,7 +3579,7 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: InlineObject10ToJSON(requestParameters.data),
+            body: InlineObject14ToJSON(requestParameters.data),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -9519,7 +9525,7 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a building Required scopes: ifc:write, model:write
      * Update some fields of a building
      */
-    async updateBuildingRaw(requestParameters: UpdateBuildingRequest): Promise<runtime.ApiResponse<InlineResponse2002>> {
+    async updateBuildingRaw(requestParameters: UpdateBuildingRequest): Promise<runtime.ApiResponse<InlineResponse201>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateBuilding.');
         }
@@ -9573,17 +9579,17 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: InlineObject9ToJSON(requestParameters.data),
+            body: InlineObject12ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2002FromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse201FromJSON(jsonValue));
     }
 
     /**
      * Update some fields of a building Required scopes: ifc:write, model:write
      * Update some fields of a building
      */
-    async updateBuilding(requestParameters: UpdateBuildingRequest): Promise<InlineResponse2002> {
+    async updateBuilding(requestParameters: UpdateBuildingRequest): Promise<InlineResponse201> {
         const response = await this.updateBuildingRaw(requestParameters);
         return await response.value();
     }
@@ -10744,7 +10750,7 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a storey Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStoreyRaw(requestParameters: UpdateStoreyRequest): Promise<runtime.ApiResponse<InlineResponse2002>> {
+    async updateStoreyRaw(requestParameters: UpdateStoreyRequest): Promise<runtime.ApiResponse<InlineResponse201>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateStorey.');
         }
@@ -10798,17 +10804,17 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: InlineObject11ToJSON(requestParameters.data),
+            body: InlineObject15ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2002FromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse201FromJSON(jsonValue));
     }
 
     /**
      * Update some fields of a storey Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStorey(requestParameters: UpdateStoreyRequest): Promise<InlineResponse2002> {
+    async updateStorey(requestParameters: UpdateStoreyRequest): Promise<InlineResponse201> {
         const response = await this.updateStoreyRaw(requestParameters);
         return await response.value();
     }

@@ -20,11 +20,11 @@ import { exists, mapValues } from '../runtime';
  */
 export interface InlineObject4 {
     /**
-     * model id
-     * @type {number}
+     * name of storey/building
+     * @type {string}
      * @memberof InlineObject4
      */
-    id?: number;
+    name?: string;
 }
 
 export function InlineObject4FromJSON(json: any): InlineObject4 {
@@ -37,7 +37,7 @@ export function InlineObject4FromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'id': !exists(json, 'id') ? undefined : json['id'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
     };
 }
 
@@ -50,7 +50,7 @@ export function InlineObject4ToJSON(value?: InlineObject4 | null): any {
     }
     return {
         
-        'id': value.id,
+        'name': value.name,
     };
 }
 

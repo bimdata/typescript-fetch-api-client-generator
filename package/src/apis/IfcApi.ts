@@ -72,9 +72,15 @@ import {
     InlineObject7,
     InlineObject7FromJSON,
     InlineObject7ToJSON,
-    InlineResponse2002,
-    InlineResponse2002FromJSON,
-    InlineResponse2002ToJSON,
+    InlineObject8,
+    InlineObject8FromJSON,
+    InlineObject8ToJSON,
+    InlineObject9,
+    InlineObject9FromJSON,
+    InlineObject9ToJSON,
+    InlineResponse201,
+    InlineResponse201FromJSON,
+    InlineResponse201ToJSON,
     Layer,
     LayerFromJSON,
     LayerToJSON,
@@ -235,7 +241,7 @@ export interface CreateBuildingDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
-    data: Building;
+    data: InlineObject4;
 }
 
 export interface CreateBuildingPlanDeprecatedRequest {
@@ -243,7 +249,7 @@ export interface CreateBuildingPlanDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
-    data: InlineObject4;
+    data: InlineObject5;
 }
 
 export interface CreateCheckerDeprecatedRequest {
@@ -386,7 +392,7 @@ export interface CreateStoreyDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
     projectPk: string;
-    data: Storey;
+    data: InlineObject7;
 }
 
 export interface CreateStoreyPlanDeprecatedRequest {
@@ -394,7 +400,7 @@ export interface CreateStoreyPlanDeprecatedRequest {
     ifcPk: string;
     projectPk: string;
     storeyUuid: string;
-    data: InlineObject6;
+    data: InlineObject8;
 }
 
 export interface CreateSystemDeprecatedRequest {
@@ -1099,7 +1105,7 @@ export interface UpdateBuildingDeprecatedRequest {
     ifcPk: string;
     projectPk: string;
     uuid: string;
-    data: InlineObject5;
+    data: InlineObject6;
 }
 
 export interface UpdateBuildingPlanPositioningDeprecatedRequest {
@@ -1251,7 +1257,7 @@ export interface UpdateStoreyDeprecatedRequest {
     ifcPk: string;
     projectPk: string;
     uuid: string;
-    data: InlineObject7;
+    data: InlineObject9;
 }
 
 export interface UpdateStoreyPlanPositioningDeprecatedRequest {
@@ -2260,7 +2266,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a building of a model. Required scopes: ifc:write, model:write
      * Create a building of a model
      */
-    async createBuildingDeprecatedRaw(requestParameters: CreateBuildingDeprecatedRequest): Promise<runtime.ApiResponse<Building>> {
+    async createBuildingDeprecatedRaw(requestParameters: CreateBuildingDeprecatedRequest): Promise<runtime.ApiResponse<InlineResponse201>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createBuildingDeprecated.');
         }
@@ -2310,17 +2316,17 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: BuildingToJSON(requestParameters.data),
+            body: InlineObject4ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse201FromJSON(jsonValue));
     }
 
     /**
      * Create a building of a model. Required scopes: ifc:write, model:write
      * Create a building of a model
      */
-    async createBuildingDeprecated(requestParameters: CreateBuildingDeprecatedRequest): Promise<Building> {
+    async createBuildingDeprecated(requestParameters: CreateBuildingDeprecatedRequest): Promise<InlineResponse201> {
         const response = await this.createBuildingDeprecatedRaw(requestParameters);
         return await response.value();
     }
@@ -2383,7 +2389,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: InlineObject4ToJSON(requestParameters.data),
+            body: InlineObject5ToJSON(requestParameters.data),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
@@ -3681,7 +3687,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a storey of a model. Required scopes: ifc:write, model:write
      * Create a storey of a model
      */
-    async createStoreyDeprecatedRaw(requestParameters: CreateStoreyDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
+    async createStoreyDeprecatedRaw(requestParameters: CreateStoreyDeprecatedRequest): Promise<runtime.ApiResponse<InlineResponse201>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createStoreyDeprecated.');
         }
@@ -3731,17 +3737,17 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: StoreyToJSON(requestParameters.data),
+            body: InlineObject7ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse201FromJSON(jsonValue));
     }
 
     /**
      * Create a storey of a model. Required scopes: ifc:write, model:write
      * Create a storey of a model
      */
-    async createStoreyDeprecated(requestParameters: CreateStoreyDeprecatedRequest): Promise<Storey> {
+    async createStoreyDeprecated(requestParameters: CreateStoreyDeprecatedRequest): Promise<InlineResponse201> {
         const response = await this.createStoreyDeprecatedRaw(requestParameters);
         return await response.value();
     }
@@ -3804,7 +3810,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: InlineObject6ToJSON(requestParameters.data),
+            body: InlineObject8ToJSON(requestParameters.data),
         });
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -10220,7 +10226,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a building Required scopes: ifc:write, model:write
      * Update some fields of a building
      */
-    async updateBuildingDeprecatedRaw(requestParameters: UpdateBuildingDeprecatedRequest): Promise<runtime.ApiResponse<InlineResponse2002>> {
+    async updateBuildingDeprecatedRaw(requestParameters: UpdateBuildingDeprecatedRequest): Promise<runtime.ApiResponse<InlineResponse201>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateBuildingDeprecated.');
         }
@@ -10274,17 +10280,17 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: InlineObject5ToJSON(requestParameters.data),
+            body: InlineObject6ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2002FromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse201FromJSON(jsonValue));
     }
 
     /**
      * Update some fields of a building Required scopes: ifc:write, model:write
      * Update some fields of a building
      */
-    async updateBuildingDeprecated(requestParameters: UpdateBuildingDeprecatedRequest): Promise<InlineResponse2002> {
+    async updateBuildingDeprecated(requestParameters: UpdateBuildingDeprecatedRequest): Promise<InlineResponse201> {
         const response = await this.updateBuildingDeprecatedRaw(requestParameters);
         return await response.value();
     }
@@ -11595,7 +11601,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a storey Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStoreyDeprecatedRaw(requestParameters: UpdateStoreyDeprecatedRequest): Promise<runtime.ApiResponse<InlineResponse2002>> {
+    async updateStoreyDeprecatedRaw(requestParameters: UpdateStoreyDeprecatedRequest): Promise<runtime.ApiResponse<InlineResponse201>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateStoreyDeprecated.');
         }
@@ -11649,17 +11655,17 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: InlineObject7ToJSON(requestParameters.data),
+            body: InlineObject9ToJSON(requestParameters.data),
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2002FromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse201FromJSON(jsonValue));
     }
 
     /**
      * Update some fields of a storey Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStoreyDeprecated(requestParameters: UpdateStoreyDeprecatedRequest): Promise<InlineResponse2002> {
+    async updateStoreyDeprecated(requestParameters: UpdateStoreyDeprecatedRequest): Promise<InlineResponse201> {
         const response = await this.updateStoreyDeprecatedRaw(requestParameters);
         return await response.value();
     }
