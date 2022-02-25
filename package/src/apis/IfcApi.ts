@@ -1199,6 +1199,22 @@ export interface UpdateLayerDeprecatedRequest {
     data: Layer;
 }
 
+export interface UpdateOrderBuildingPlanDeprecatedRequest {
+    buildingUuid: string;
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+    data: Array<string>;
+}
+
+export interface UpdateOrderStoreyPlanDeprecatedRequest {
+    cloudPk: string;
+    ifcPk: string;
+    projectPk: string;
+    storeyUuid: string;
+    data: Array<string>;
+}
+
 export interface UpdateOrderStoreysDeprecatedRequest {
     cloudPk: string;
     ifcPk: string;
@@ -11138,6 +11154,152 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async updateLayerDeprecated(requestParameters: UpdateLayerDeprecatedRequest): Promise<Layer> {
         const response = await this.updateLayerDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update order of all plan of a building Required scopes: ifc:write, model:write
+     * Update order of all plan of a building
+     */
+    async updateOrderBuildingPlanDeprecatedRaw(requestParameters: UpdateOrderBuildingPlanDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
+        if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
+            throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling updateOrderBuildingPlanDeprecated.');
+        }
+
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateOrderBuildingPlanDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateOrderBuildingPlanDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateOrderBuildingPlanDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateOrderBuildingPlanDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/building/{building_uuid}/plan/order`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.buildingUuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.data,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
+    }
+
+    /**
+     * Update order of all plan of a building Required scopes: ifc:write, model:write
+     * Update order of all plan of a building
+     */
+    async updateOrderBuildingPlanDeprecated(requestParameters: UpdateOrderBuildingPlanDeprecatedRequest): Promise<Storey> {
+        const response = await this.updateOrderBuildingPlanDeprecatedRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * Update order of all plan of a storey Required scopes: ifc:write, model:write
+     * Update order of all plan of a storey
+     */
+    async updateOrderStoreyPlanDeprecatedRaw(requestParameters: UpdateOrderStoreyPlanDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateOrderStoreyPlanDeprecated.');
+        }
+
+        if (requestParameters.ifcPk === null || requestParameters.ifcPk === undefined) {
+            throw new runtime.RequiredError('ifcPk','Required parameter requestParameters.ifcPk was null or undefined when calling updateOrderStoreyPlanDeprecated.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateOrderStoreyPlanDeprecated.');
+        }
+
+        if (requestParameters.storeyUuid === null || requestParameters.storeyUuid === undefined) {
+            throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling updateOrderStoreyPlanDeprecated.');
+        }
+
+        if (requestParameters.data === null || requestParameters.data === undefined) {
+            throw new runtime.RequiredError('data','Required parameter requestParameters.data was null or undefined when calling updateOrderStoreyPlanDeprecated.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("bimdata_connect", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            if (typeof this.configuration.accessToken === 'function') {
+                headerParameters["Authorization"] = this.configuration.accessToken("client_credentials", []);
+            } else {
+                headerParameters["Authorization"] = this.configuration.accessToken;
+            }
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/storey/{storey_uuid}/plan/order`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifcPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storeyUuid))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.data,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
+    }
+
+    /**
+     * Update order of all plan of a storey Required scopes: ifc:write, model:write
+     * Update order of all plan of a storey
+     */
+    async updateOrderStoreyPlanDeprecated(requestParameters: UpdateOrderStoreyPlanDeprecatedRequest): Promise<Storey> {
+        const response = await this.updateOrderStoreyPlanDeprecatedRaw(requestParameters);
         return await response.value();
     }
 
