@@ -43,13 +43,13 @@ export interface Material {
      * @type {string}
      * @memberof Material
      */
-    readonly category?: string;
+    readonly category?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Material
      */
-    readonly description?: string;
+    readonly description?: string | null;
     /**
      * 
      * @type {Array<PropertySet>}

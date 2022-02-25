@@ -36,13 +36,13 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    readonly firstname?: string;
+    readonly firstname?: string | null;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    readonly lastname?: string;
+    readonly lastname?: string | null;
     /**
      * 
      * @type {Date}
@@ -78,13 +78,13 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    readonly sub?: string;
+    readonly sub?: string | null;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    readonly profilePicture?: string;
+    readonly profilePicture?: string | null;
 }
 
 export function UserFromJSON(json: any): User {

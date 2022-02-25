@@ -23,40 +23,40 @@ import {
 /**
  * 
  * @export
- * @interface Storey
+ * @interface Building
  */
-export interface Storey {
+export interface Building {
     /**
      * IFC element or element type UUID
      * @type {string}
-     * @memberof Storey
+     * @memberof Building
      */
     readonly uuid?: string;
     /**
-     * Name of the storey
+     * Name of the building
      * @type {string}
-     * @memberof Storey
+     * @memberof Building
      */
     readonly name?: string;
     /**
      * 
      * @type {Array<ModelWithPositioningPlan>}
-     * @memberof Storey
+     * @memberof Building
      */
     readonly plans?: Array<ModelWithPositioningPlan>;
     /**
      * 
      * @type {number}
-     * @memberof Storey
+     * @memberof Building
      */
     readonly plansUnreachableCount?: number;
 }
 
-export function StoreyFromJSON(json: any): Storey {
-    return StoreyFromJSONTyped(json, false);
+export function BuildingFromJSON(json: any): Building {
+    return BuildingFromJSONTyped(json, false);
 }
 
-export function StoreyFromJSONTyped(json: any, ignoreDiscriminator: boolean): Storey {
+export function BuildingFromJSONTyped(json: any, ignoreDiscriminator: boolean): Building {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -69,7 +69,7 @@ export function StoreyFromJSONTyped(json: any, ignoreDiscriminator: boolean): St
     };
 }
 
-export function StoreyToJSON(value?: Storey | null): any {
+export function BuildingToJSON(value?: Building | null): any {
     if (value === undefined) {
         return undefined;
     }

@@ -30,7 +30,7 @@ export interface MaterialOption {
      * @type {number}
      * @memberof MaterialOption
      */
-    readonly thickness?: number;
+    readonly thickness?: number | null;
     /**
      * 
      * @type {Array<{ [key: string]: string; }>}

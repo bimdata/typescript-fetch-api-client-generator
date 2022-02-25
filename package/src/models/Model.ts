@@ -95,43 +95,43 @@ export interface Model {
      * @type {string}
      * @memberof Model
      */
-    readonly structureFile?: string;
+    readonly structureFile?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly systemsFile?: string;
+    readonly systemsFile?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly mapFile?: string;
+    readonly mapFile?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly gltfFile?: string;
+    readonly gltfFile?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly bvhTreeFile?: string;
+    readonly bvhTreeFile?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly viewer360File?: string;
+    readonly viewer360File?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly xktFile?: string;
+    readonly xktFile?: string | null;
     /**
      * 
      * @type {string}
@@ -155,13 +155,13 @@ export interface Model {
      * @type {Array<string>}
      * @memberof Model
      */
-    readonly errors?: Array<string>;
+    readonly errors?: Array<string> | null;
     /**
      * List of warnings that happened during IFC processing
      * @type {Array<string>}
      * @memberof Model
      */
-    readonly warnings?: Array<string>;
+    readonly warnings?: Array<string> | null;
     /**
      * 
      * @type {boolean}

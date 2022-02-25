@@ -16,53 +16,32 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface StoreyRequest
+ * @interface InlineObject6
  */
-export interface StoreyRequest {
+export interface InlineObject6 {
     /**
-     * 
+     * model id
      * @type {number}
-     * @memberof StoreyRequest
+     * @memberof InlineObject6
      */
     id?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof StoreyRequest
-     */
-    name: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof StoreyRequest
-     */
-    elevation?: number | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof StoreyRequest
-     */
-    isSite?: boolean;
 }
 
-export function StoreyRequestFromJSON(json: any): StoreyRequest {
-    return StoreyRequestFromJSONTyped(json, false);
+export function InlineObject6FromJSON(json: any): InlineObject6 {
+    return InlineObject6FromJSONTyped(json, false);
 }
 
-export function StoreyRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): StoreyRequest {
+export function InlineObject6FromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineObject6 {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': json['name'],
-        'elevation': !exists(json, 'elevation') ? undefined : json['elevation'],
-        'isSite': !exists(json, 'is_site') ? undefined : json['is_site'],
     };
 }
 
-export function StoreyRequestToJSON(value?: StoreyRequest | null): any {
+export function InlineObject6ToJSON(value?: InlineObject6 | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -72,9 +51,6 @@ export function StoreyRequestToJSON(value?: StoreyRequest | null): any {
     return {
         
         'id': value.id,
-        'name': value.name,
-        'elevation': value.elevation,
-        'is_site': value.isSite,
     };
 }
 

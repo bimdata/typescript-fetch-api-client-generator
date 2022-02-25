@@ -105,13 +105,13 @@ export interface SelfUser {
      * @type {string}
      * @memberof SelfUser
      */
-    readonly sub?: string;
+    readonly sub?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SelfUser
      */
-    readonly profilePicture?: string;
+    readonly profilePicture?: string | null;
 }
 
 export function SelfUserFromJSON(json: any): SelfUser {

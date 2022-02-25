@@ -16,22 +16,22 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface InlineObject5
+ * @interface InlineObject9
  */
-export interface InlineObject5 {
+export interface InlineObject9 {
     /**
      * name of storey/building
      * @type {string}
-     * @memberof InlineObject5
+     * @memberof InlineObject9
      */
     name?: string;
 }
 
-export function InlineObject5FromJSON(json: any): InlineObject5 {
-    return InlineObject5FromJSONTyped(json, false);
+export function InlineObject9FromJSON(json: any): InlineObject9 {
+    return InlineObject9FromJSONTyped(json, false);
 }
 
-export function InlineObject5FromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineObject5 {
+export function InlineObject9FromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineObject9 {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -41,7 +41,7 @@ export function InlineObject5FromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function InlineObject5ToJSON(value?: InlineObject5 | null): any {
+export function InlineObject9ToJSON(value?: InlineObject9 | null): any {
     if (value === undefined) {
         return undefined;
     }
