@@ -58,12 +58,6 @@ export interface VisaComment {
     content?: string;
     /**
      * 
-     * @type {number}
-     * @memberof VisaComment
-     */
-    replyToCommentId?: number | null;
-    /**
-     * 
      * @type {Date}
      * @memberof VisaComment
      */
@@ -91,7 +85,6 @@ export function VisaCommentFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'authorId': !exists(json, 'author_id') ? undefined : json['author_id'],
         'visaId': !exists(json, 'visa_id') ? undefined : json['visa_id'],
         'content': !exists(json, 'content') ? undefined : json['content'],
-        'replyToCommentId': !exists(json, 'reply_to_comment_id') ? undefined : json['reply_to_comment_id'],
         'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
         'updatedAt': !exists(json, 'updated_at') ? undefined : (new Date(json['updated_at'])),
     };
@@ -109,7 +102,6 @@ export function VisaCommentToJSON(value?: VisaComment | null): any {
         'author': UserProjectToJSON(value.author),
         'author_id': value.authorId,
         'content': value.content,
-        'reply_to_comment_id': value.replyToCommentId,
     };
 }
 
