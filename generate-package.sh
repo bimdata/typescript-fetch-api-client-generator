@@ -35,8 +35,8 @@ java \
   --additional-properties \
 allowUnicodeIdentifiers=true,\
 supportsES6=true,\
-typescriptThreePlus=true,\
 npmName=@bimdata/typescript-fetch-api-client,\
+useSingleRequestParameter=false,\
 npmVersion=$VERSION
 
 exit 0
