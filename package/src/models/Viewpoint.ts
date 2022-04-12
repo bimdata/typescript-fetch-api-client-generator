@@ -18,27 +18,37 @@ import {
     ClippingPlaneFromJSON,
     ClippingPlaneFromJSONTyped,
     ClippingPlaneToJSON,
+} from './ClippingPlane';
+import {
     ComponentsParent,
     ComponentsParentFromJSON,
     ComponentsParentFromJSONTyped,
     ComponentsParentToJSON,
+} from './ComponentsParent';
+import {
     Line,
     LineFromJSON,
     LineFromJSONTyped,
     LineToJSON,
+} from './Line';
+import {
     OrthogonalCamera,
     OrthogonalCameraFromJSON,
     OrthogonalCameraFromJSONTyped,
     OrthogonalCameraToJSON,
+} from './OrthogonalCamera';
+import {
     PerspectiveCamera,
     PerspectiveCameraFromJSON,
     PerspectiveCameraFromJSONTyped,
     PerspectiveCameraToJSON,
+} from './PerspectiveCamera';
+import {
     Snapshot,
     SnapshotFromJSON,
     SnapshotFromJSONTyped,
     SnapshotToJSON,
-} from './';
+} from './Snapshot';
 
 /**
  * Adds nested create feature
@@ -136,5 +146,4 @@ export function ViewpointToJSON(value?: Viewpoint | null): any {
         'components': ComponentsParentToJSON(value.components),
     };
 }
-
 

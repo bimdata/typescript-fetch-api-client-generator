@@ -69,4 +69,3 @@ export function PublicOrganizationToJSON(value?: PublicOrganization | null): any
     };
 }
 
-

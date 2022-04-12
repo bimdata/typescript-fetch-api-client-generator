@@ -18,7 +18,7 @@ import {
     RulesetFromJSON,
     RulesetFromJSONTyped,
     RulesetToJSON,
-} from './';
+} from './Ruleset';
 
 /**
  * Adds nested create feature
@@ -104,5 +104,4 @@ export function CheckPlanToJSON(value?: CheckPlan | null): any {
         'rulesets': value.rulesets === undefined ? undefined : ((value.rulesets as Array<any>).map(RulesetToJSON)),
     };
 }
-
 

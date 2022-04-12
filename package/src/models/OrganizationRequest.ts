@@ -62,4 +62,3 @@ export function OrganizationRequestToJSON(value?: OrganizationRequest | null): a
     };
 }
 
-

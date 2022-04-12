@@ -123,4 +123,3 @@ export function UserToJSON(value?: User | null): any {
     };
 }
 
-

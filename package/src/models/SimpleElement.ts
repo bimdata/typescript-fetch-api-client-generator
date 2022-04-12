@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    AnyType,
-    AnyTypeFromJSON,
-    AnyTypeFromJSONTyped,
-    AnyTypeToJSON,
-} from './';
-
 /**
  * 
  * @export
@@ -28,10 +21,10 @@ import {
 export interface SimpleElement {
     /**
      * uuid of element
-     * @type {{ [key: string]: { [key: string]: AnyType; }; }}
+     * @type {{ [key: string]: { [key: string]: any; }; }}
      * @memberof SimpleElement
      */
-    uuid: { [key: string]: { [key: string]: AnyType; }; };
+    uuid: { [key: string]: { [key: string]: any; }; };
 }
 
 export function SimpleElementFromJSON(json: any): SimpleElement {
@@ -60,5 +53,4 @@ export function SimpleElementToJSON(value?: SimpleElement | null): any {
         'uuid': value.uuid,
     };
 }
-
 

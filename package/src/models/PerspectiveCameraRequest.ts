@@ -18,11 +18,13 @@ import {
     DirectionRequestFromJSON,
     DirectionRequestFromJSONTyped,
     DirectionRequestToJSON,
+} from './DirectionRequest';
+import {
     PointRequest,
     PointRequestFromJSON,
     PointRequestFromJSONTyped,
     PointRequestToJSON,
-} from './';
+} from './PointRequest';
 
 /**
  * Adds nested create feature
@@ -96,5 +98,4 @@ export function PerspectiveCameraRequestToJSON(value?: PerspectiveCameraRequest 
         'bimdata_camera_direction': DirectionRequestToJSON(value.bimdataCameraDirection),
     };
 }
-
 

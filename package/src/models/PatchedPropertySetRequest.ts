@@ -18,7 +18,7 @@ import {
     PropertyRequestFromJSON,
     PropertyRequestFromJSONTyped,
     PropertyRequestToJSON,
-} from './';
+} from './PropertyRequest';
 
 /**
  * Adds nested create feature
@@ -84,5 +84,4 @@ export function PatchedPropertySetRequestToJSON(value?: PatchedPropertySetReques
         'properties': value.properties === undefined ? undefined : ((value.properties as Array<any>).map(PropertyRequestToJSON)),
     };
 }
-
 

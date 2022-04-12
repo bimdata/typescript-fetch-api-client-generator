@@ -18,19 +18,25 @@ import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+} from './Feature';
+import {
     MarketplaceApp,
     MarketplaceAppFromJSON,
     MarketplaceAppFromJSONTyped,
     MarketplaceAppToJSON,
+} from './MarketplaceApp';
+import {
     Organization,
     OrganizationFromJSON,
     OrganizationFromJSONTyped,
     OrganizationToJSON,
+} from './Organization';
+import {
     User,
     UserFromJSON,
     UserFromJSONTyped,
     UserToJSON,
-} from './';
+} from './User';
 
 /**
  * 
@@ -67,13 +73,13 @@ export interface Cloud {
      * @type {Organization}
      * @memberof Cloud
      */
-    readonly organization: Organization;
+    readonly organization: Organization | null;
     /**
      * 
      * @type {User}
      * @memberof Cloud
      */
-    readonly creator: User;
+    readonly creator: User | null;
     /**
      * 
      * @type {string}
@@ -143,5 +149,4 @@ export function CloudToJSON(value?: Cloud | null): any {
         'image': value.image,
     };
 }
-
 

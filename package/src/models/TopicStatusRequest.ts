@@ -70,4 +70,3 @@ export function TopicStatusRequestToJSON(value?: TopicStatusRequest | null): any
     };
 }
 
-

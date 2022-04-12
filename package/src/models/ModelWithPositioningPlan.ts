@@ -18,7 +18,7 @@ import {
     ModelFromJSON,
     ModelFromJSONTyped,
     ModelToJSON,
-} from './';
+} from './Model';
 
 /**
  * 
@@ -61,7 +61,7 @@ export interface ModelWithPositioningPlan {
      * @type {Model}
      * @memberof ModelWithPositioningPlan
      */
-    readonly plan: Model;
+    readonly plan: Model | null;
 }
 
 export function ModelWithPositioningPlanFromJSON(json: any): ModelWithPositioningPlan {
@@ -99,5 +99,4 @@ export function ModelWithPositioningPlanToJSON(value?: ModelWithPositioningPlan 
         'opacity': value.opacity,
     };
 }
-
 

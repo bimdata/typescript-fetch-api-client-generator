@@ -78,4 +78,3 @@ export function PatchedLayerRequestToJSON(value?: PatchedLayerRequest | null): a
     };
 }
 
-

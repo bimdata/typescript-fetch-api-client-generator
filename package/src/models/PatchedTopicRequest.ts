@@ -198,4 +198,3 @@ export function PatchedTopicRequestToJSON(value?: PatchedTopicRequest | null): a
     };
 }
 
-

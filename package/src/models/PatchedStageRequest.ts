@@ -62,4 +62,3 @@ export function PatchedStageRequestToJSON(value?: PatchedStageRequest | null): a
     };
 }
 
-

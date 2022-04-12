@@ -62,4 +62,3 @@ export function SnapshotRequestToJSON(value?: SnapshotRequest | null): any {
     };
 }
 
-

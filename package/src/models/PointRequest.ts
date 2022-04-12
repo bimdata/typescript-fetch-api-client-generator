@@ -70,4 +70,3 @@ export function PointRequestToJSON(value?: PointRequest | null): any {
     };
 }
 
-

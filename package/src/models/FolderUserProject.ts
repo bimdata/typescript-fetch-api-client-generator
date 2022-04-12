@@ -18,11 +18,13 @@ import {
     FolderPermissionEnumFromJSON,
     FolderPermissionEnumFromJSONTyped,
     FolderPermissionEnumToJSON,
+} from './FolderPermissionEnum';
+import {
     ProjectRoleEnum,
     ProjectRoleEnumFromJSON,
     ProjectRoleEnumFromJSONTyped,
     ProjectRoleEnumToJSON,
-} from './';
+} from './ProjectRoleEnum';
 
 /**
  * This is a flattened nested represetation of FosUser and Invitation models in this serializer.
@@ -77,13 +79,13 @@ export interface FolderUserProject {
      * @type {ProjectRoleEnum}
      * @memberof FolderUserProject
      */
-    readonly role: ProjectRoleEnum;
+    readonly role: ProjectRoleEnum | null;
     /**
      * 
      * @type {FolderPermissionEnum}
      * @memberof FolderUserProject
      */
-    readonly permission: FolderPermissionEnum;
+    readonly permission: FolderPermissionEnum | null;
 }
 
 export function FolderUserProjectFromJSON(json: any): FolderUserProject {
@@ -119,5 +121,4 @@ export function FolderUserProjectToJSON(value?: FolderUserProject | null): any {
         
     };
 }
-
 

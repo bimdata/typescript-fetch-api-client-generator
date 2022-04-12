@@ -18,7 +18,7 @@ import {
     ProjectRoleEnumFromJSON,
     ProjectRoleEnumFromJSONTyped,
     ProjectRoleEnumToJSON,
-} from './';
+} from './ProjectRoleEnum';
 
 /**
  * This is a flattened nested represetation of FosUser and Invitation models in this serializer.
@@ -73,7 +73,7 @@ export interface UserProject {
      * @type {ProjectRoleEnum}
      * @memberof UserProject
      */
-    readonly role: ProjectRoleEnum;
+    readonly role: ProjectRoleEnum | null;
 }
 
 export function UserProjectFromJSON(json: any): UserProject {
@@ -108,5 +108,4 @@ export function UserProjectToJSON(value?: UserProject | null): any {
         
     };
 }
-
 

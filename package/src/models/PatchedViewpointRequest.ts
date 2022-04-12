@@ -18,27 +18,37 @@ import {
     ClippingPlaneRequestFromJSON,
     ClippingPlaneRequestFromJSONTyped,
     ClippingPlaneRequestToJSON,
+} from './ClippingPlaneRequest';
+import {
     ComponentsParentRequest,
     ComponentsParentRequestFromJSON,
     ComponentsParentRequestFromJSONTyped,
     ComponentsParentRequestToJSON,
+} from './ComponentsParentRequest';
+import {
     LineRequest,
     LineRequestFromJSON,
     LineRequestFromJSONTyped,
     LineRequestToJSON,
+} from './LineRequest';
+import {
     OrthogonalCameraRequest,
     OrthogonalCameraRequestFromJSON,
     OrthogonalCameraRequestFromJSONTyped,
     OrthogonalCameraRequestToJSON,
+} from './OrthogonalCameraRequest';
+import {
     PerspectiveCameraRequest,
     PerspectiveCameraRequestFromJSON,
     PerspectiveCameraRequestFromJSONTyped,
     PerspectiveCameraRequestToJSON,
+} from './PerspectiveCameraRequest';
+import {
     SnapshotRequest,
     SnapshotRequestFromJSON,
     SnapshotRequestFromJSONTyped,
     SnapshotRequestToJSON,
-} from './';
+} from './SnapshotRequest';
 
 /**
  * Adds nested create feature
@@ -144,5 +154,4 @@ export function PatchedViewpointRequestToJSON(value?: PatchedViewpointRequest | 
         'temp_id': value.tempId,
     };
 }
-
 

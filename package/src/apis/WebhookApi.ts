@@ -66,7 +66,7 @@ export class WebhookApi extends runtime.BaseAPI {
      * Create a new Webhook  Required scopes: webhook:manage
      * Create a new Webhook
      */
-    async createWebHookRaw(requestParameters: CreateWebHookRequest): Promise<runtime.ApiResponse<WebHook>> {
+    async createWebHookRaw(requestParameters: CreateWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createWebHook.');
         }
@@ -75,7 +75,7 @@ export class WebhookApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('webHookRequest','Required parameter requestParameters.webHookRequest was null or undefined when calling createWebHook.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -87,11 +87,12 @@ export class WebhookApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -104,7 +105,7 @@ export class WebhookApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: WebHookRequestToJSON(requestParameters.webHookRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
     }
@@ -113,8 +114,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Create a new Webhook  Required scopes: webhook:manage
      * Create a new Webhook
      */
-    async createWebHook(cloudPk: number, webHookRequest: WebHookRequest): Promise<WebHook> {
-        const response = await this.createWebHookRaw({ cloudPk: cloudPk, webHookRequest: webHookRequest });
+    async createWebHook(cloudPk: number, webHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.createWebHookRaw({ cloudPk: cloudPk, webHookRequest: webHookRequest }, initOverrides);
         return await response.value();
     }
 
@@ -122,7 +123,7 @@ export class WebhookApi extends runtime.BaseAPI {
      * Delete a webhook  Required scopes: webhook:manage
      * Delete a webhook
      */
-    async deleteWebHookRaw(requestParameters: DeleteWebHookRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteWebHookRaw(requestParameters: DeleteWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteWebHook.');
         }
@@ -131,7 +132,7 @@ export class WebhookApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteWebHook.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -141,11 +142,12 @@ export class WebhookApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -157,7 +159,7 @@ export class WebhookApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -166,15 +168,15 @@ export class WebhookApi extends runtime.BaseAPI {
      * Delete a webhook  Required scopes: webhook:manage
      * Delete a webhook
      */
-    async deleteWebHook(cloudPk: number, id: number): Promise<void> {
-        await this.deleteWebHookRaw({ cloudPk: cloudPk, id: id });
+    async deleteWebHook(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteWebHookRaw({ cloudPk: cloudPk, id: id }, initOverrides);
     }
 
     /**
      * Retrieve one configured webhook  Required scopes: webhook:manage
      * Retrieve one configured webhook
      */
-    async getWebHookRaw(requestParameters: GetWebHookRequest): Promise<runtime.ApiResponse<WebHook>> {
+    async getWebHookRaw(requestParameters: GetWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getWebHook.');
         }
@@ -183,7 +185,7 @@ export class WebhookApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getWebHook.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -193,11 +195,12 @@ export class WebhookApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -209,7 +212,7 @@ export class WebhookApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
     }
@@ -218,8 +221,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Retrieve one configured webhook  Required scopes: webhook:manage
      * Retrieve one configured webhook
      */
-    async getWebHook(cloudPk: number, id: number): Promise<WebHook> {
-        const response = await this.getWebHookRaw({ cloudPk: cloudPk, id: id });
+    async getWebHook(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.getWebHookRaw({ cloudPk: cloudPk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -227,12 +230,12 @@ export class WebhookApi extends runtime.BaseAPI {
      * Retrieve all configured webhooks  Required scopes: webhook:manage
      * Retrieve all configured webhooks
      */
-    async getWebHooksRaw(requestParameters: GetWebHooksRequest): Promise<runtime.ApiResponse<Array<WebHook>>> {
+    async getWebHooksRaw(requestParameters: GetWebHooksRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<WebHook>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getWebHooks.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -242,11 +245,12 @@ export class WebhookApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -258,7 +262,7 @@ export class WebhookApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(WebHookFromJSON));
     }
@@ -267,8 +271,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Retrieve all configured webhooks  Required scopes: webhook:manage
      * Retrieve all configured webhooks
      */
-    async getWebHooks(cloudPk: number): Promise<Array<WebHook>> {
-        const response = await this.getWebHooksRaw({ cloudPk: cloudPk });
+    async getWebHooks(cloudPk: number, initOverrides?: RequestInit): Promise<Array<WebHook>> {
+        const response = await this.getWebHooksRaw({ cloudPk: cloudPk }, initOverrides);
         return await response.value();
     }
 
@@ -276,7 +280,7 @@ export class WebhookApi extends runtime.BaseAPI {
      * Trigger a Ping Event sending {\"ok\": true} to the webhook URL. Useful to test your app  Required scopes: webhook:manage
      * Test a webhook
      */
-    async pingWebHookRaw(requestParameters: PingWebHookRequest): Promise<runtime.ApiResponse<WebHook>> {
+    async pingWebHookRaw(requestParameters: PingWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling pingWebHook.');
         }
@@ -289,7 +293,7 @@ export class WebhookApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('webHookRequest','Required parameter requestParameters.webHookRequest was null or undefined when calling pingWebHook.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -301,11 +305,12 @@ export class WebhookApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -318,7 +323,7 @@ export class WebhookApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: WebHookRequestToJSON(requestParameters.webHookRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
     }
@@ -327,8 +332,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Trigger a Ping Event sending {\"ok\": true} to the webhook URL. Useful to test your app  Required scopes: webhook:manage
      * Test a webhook
      */
-    async pingWebHook(cloudPk: number, id: number, webHookRequest: WebHookRequest): Promise<WebHook> {
-        const response = await this.pingWebHookRaw({ cloudPk: cloudPk, id: id, webHookRequest: webHookRequest });
+    async pingWebHook(cloudPk: number, id: number, webHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.pingWebHookRaw({ cloudPk: cloudPk, id: id, webHookRequest: webHookRequest }, initOverrides);
         return await response.value();
     }
 
@@ -336,7 +341,7 @@ export class WebhookApi extends runtime.BaseAPI {
      * Update some field of a webhook  Required scopes: webhook:manage
      * Update some field of a webhook
      */
-    async updateWebHookRaw(requestParameters: UpdateWebHookRequest): Promise<runtime.ApiResponse<WebHook>> {
+    async updateWebHookRaw(requestParameters: UpdateWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateWebHook.');
         }
@@ -345,7 +350,7 @@ export class WebhookApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateWebHook.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -357,11 +362,12 @@ export class WebhookApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -374,7 +380,7 @@ export class WebhookApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedWebHookRequestToJSON(requestParameters.patchedWebHookRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
     }
@@ -383,8 +389,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Update some field of a webhook  Required scopes: webhook:manage
      * Update some field of a webhook
      */
-    async updateWebHook(cloudPk: number, id: number, patchedWebHookRequest?: PatchedWebHookRequest): Promise<WebHook> {
-        const response = await this.updateWebHookRaw({ cloudPk: cloudPk, id: id, patchedWebHookRequest: patchedWebHookRequest });
+    async updateWebHook(cloudPk: number, id: number, patchedWebHookRequest?: PatchedWebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.updateWebHookRaw({ cloudPk: cloudPk, id: id, patchedWebHookRequest: patchedWebHookRequest }, initOverrides);
         return await response.value();
     }
 

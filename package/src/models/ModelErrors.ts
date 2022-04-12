@@ -62,4 +62,3 @@ export function ModelErrorsToJSON(value?: ModelErrors | null): any {
     };
 }
 
-

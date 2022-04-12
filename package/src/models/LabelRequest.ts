@@ -62,4 +62,3 @@ export function LabelRequestToJSON(value?: LabelRequest | null): any {
     };
 }
 
-

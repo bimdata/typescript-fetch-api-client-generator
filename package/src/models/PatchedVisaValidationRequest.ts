@@ -54,4 +54,3 @@ export function PatchedVisaValidationRequestToJSON(value?: PatchedVisaValidation
     };
 }
 
-

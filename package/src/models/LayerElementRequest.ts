@@ -70,4 +70,3 @@ export function LayerElementRequestToJSON(value?: LayerElementRequest | null): a
     };
 }
 
-

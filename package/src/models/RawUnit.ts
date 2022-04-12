@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    AnyType,
-    AnyTypeFromJSON,
-    AnyTypeFromJSONTyped,
-    AnyTypeToJSON,
-} from './';
-
 /**
  * 
  * @export
@@ -58,10 +51,10 @@ export interface RawUnit {
     prefix?: string | null;
     /**
      * 
-     * @type {{ [key: string]: AnyType; }}
+     * @type {{ [key: string]: any; }}
      * @memberof RawUnit
      */
-    elements?: { [key: string]: AnyType; } | null;
+    elements?: { [key: string]: any; } | null;
     /**
      * 
      * @type {number}
@@ -103,7 +96,7 @@ export function RawUnitFromJSONTyped(json: any, ignoreDiscriminator: boolean): R
         'type': json['type'],
         'unitType': !exists(json, 'unit_type') ? undefined : json['unit_type'],
         'prefix': !exists(json, 'prefix') ? undefined : json['prefix'],
-        'elements': !exists(json, 'elements') ? undefined : (json['elements'] === null ? null : mapValues(json['elements'], AnyTypeFromJSON)),
+        'elements': !exists(json, 'elements') ? undefined : json['elements'],
         'conversionFactor': !exists(json, 'conversion_factor') ? undefined : json['conversion_factor'],
         'dimensions': !exists(json, 'dimensions') ? undefined : json['dimensions'],
         'conversionBaseunitIndex': !exists(json, 'conversion_baseunit_index') ? undefined : json['conversion_baseunit_index'],
@@ -124,12 +117,11 @@ export function RawUnitToJSON(value?: RawUnit | null): any {
         'type': value.type,
         'unit_type': value.unitType,
         'prefix': value.prefix,
-        'elements': value.elements === undefined ? undefined : (value.elements === null ? null : mapValues(value.elements, AnyTypeToJSON)),
+        'elements': value.elements,
         'conversion_factor': value.conversionFactor,
         'dimensions': value.dimensions,
         'conversion_baseunit_index': value.conversionBaseunitIndex,
         'is_default': value.isDefault,
     };
 }
-
 

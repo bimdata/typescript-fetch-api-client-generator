@@ -70,4 +70,3 @@ export function VisaRequestToJSON(value?: VisaRequest | null): any {
     };
 }
 
-

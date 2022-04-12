@@ -69,4 +69,3 @@ export function RawMaterialListComponentsToJSON(value?: RawMaterialListComponent
     };
 }
 
-

@@ -18,8 +18,8 @@
  * @enum {string}
  */
 export enum ManagedByEnum {
-    BIMDATAPLATFORM = 'BIMDATA_PLATFORM',
-    ORGANIZATION = 'ORGANIZATION'
+    BimdataPlatform = 'BIMDATA_PLATFORM',
+    Organization = 'ORGANIZATION'
 }
 
 export function ManagedByEnumFromJSON(json: any): ManagedByEnum {

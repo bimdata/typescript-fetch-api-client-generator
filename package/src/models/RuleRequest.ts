@@ -18,7 +18,7 @@ import {
     RuleComponentRequestFromJSON,
     RuleComponentRequestFromJSONTyped,
     RuleComponentRequestToJSON,
-} from './';
+} from './RuleComponentRequest';
 
 /**
  * Adds nested create feature
@@ -84,5 +84,4 @@ export function RuleRequestToJSON(value?: RuleRequest | null): any {
         'on': RuleRequestToJSON(value.on),
     };
 }
-
 

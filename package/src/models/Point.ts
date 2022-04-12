@@ -70,4 +70,3 @@ export function PointToJSON(value?: Point | null): any {
     };
 }
 
-

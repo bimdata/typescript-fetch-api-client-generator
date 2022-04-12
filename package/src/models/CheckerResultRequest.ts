@@ -18,7 +18,7 @@ import {
     CheckerStatusEnumFromJSON,
     CheckerStatusEnumFromJSONTyped,
     CheckerStatusEnumToJSON,
-} from './';
+} from './CheckerStatusEnum';
 
 /**
  * 
@@ -84,5 +84,4 @@ export function CheckerResultRequestToJSON(value?: CheckerResultRequest | null):
         'error_detail': value.errorDetail,
     };
 }
-
 

@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    AnyType,
-    AnyTypeFromJSON,
-    AnyTypeFromJSONTyped,
-    AnyTypeToJSON,
-} from './';
-
 /**
  * 
  * @export
@@ -34,10 +27,10 @@ export interface RuleComponentRequest {
     type?: string | null;
     /**
      * 
-     * @type {{ [key: string]: AnyType; }}
+     * @type {{ [key: string]: any; }}
      * @memberof RuleComponentRequest
      */
-    value?: { [key: string]: AnyType; } | null;
+    value?: { [key: string]: any; } | null;
     /**
      * 
      * @type {string}
@@ -46,10 +39,10 @@ export interface RuleComponentRequest {
     operator?: string | null;
     /**
      * 
-     * @type {{ [key: string]: AnyType; }}
+     * @type {{ [key: string]: any; }}
      * @memberof RuleComponentRequest
      */
-    params?: { [key: string]: AnyType; } | null;
+    params?: { [key: string]: any; } | null;
     /**
      * 
      * @type {string}
@@ -58,10 +51,10 @@ export interface RuleComponentRequest {
     condition?: string | null;
     /**
      * 
-     * @type {{ [key: string]: AnyType; }}
+     * @type {{ [key: string]: any; }}
      * @memberof RuleComponentRequest
      */
-    ruleComponents?: { [key: string]: AnyType; } | null;
+    ruleComponents?: { [key: string]: any; } | null;
 }
 
 export function RuleComponentRequestFromJSON(json: any): RuleComponentRequest {
@@ -75,11 +68,11 @@ export function RuleComponentRequestFromJSONTyped(json: any, ignoreDiscriminator
     return {
         
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'value': !exists(json, 'value') ? undefined : (json['value'] === null ? null : mapValues(json['value'], AnyTypeFromJSON)),
+        'value': !exists(json, 'value') ? undefined : json['value'],
         'operator': !exists(json, 'operator') ? undefined : json['operator'],
-        'params': !exists(json, 'params') ? undefined : (json['params'] === null ? null : mapValues(json['params'], AnyTypeFromJSON)),
+        'params': !exists(json, 'params') ? undefined : json['params'],
         'condition': !exists(json, 'condition') ? undefined : json['condition'],
-        'ruleComponents': !exists(json, 'rule_components') ? undefined : (json['rule_components'] === null ? null : mapValues(json['rule_components'], AnyTypeFromJSON)),
+        'ruleComponents': !exists(json, 'rule_components') ? undefined : json['rule_components'],
     };
 }
 
@@ -93,12 +86,11 @@ export function RuleComponentRequestToJSON(value?: RuleComponentRequest | null):
     return {
         
         'type': value.type,
-        'value': value.value === undefined ? undefined : (value.value === null ? null : mapValues(value.value, AnyTypeToJSON)),
+        'value': value.value,
         'operator': value.operator,
-        'params': value.params === undefined ? undefined : (value.params === null ? null : mapValues(value.params, AnyTypeToJSON)),
+        'params': value.params,
         'condition': value.condition,
-        'rule_components': value.ruleComponents === undefined ? undefined : (value.ruleComponents === null ? null : mapValues(value.ruleComponents, AnyTypeToJSON)),
+        'rule_components': value.ruleComponents,
     };
 }
-
 

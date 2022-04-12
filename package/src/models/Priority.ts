@@ -77,4 +77,3 @@ export function PriorityToJSON(value?: Priority | null): any {
     };
 }
 
-

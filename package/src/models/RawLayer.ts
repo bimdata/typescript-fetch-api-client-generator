@@ -77,4 +77,3 @@ export function RawLayerToJSON(value?: RawLayer | null): any {
     };
 }
 
-

@@ -70,4 +70,3 @@ export function PatchedCloudRequestToJSON(value?: PatchedCloudRequest | null): a
     };
 }
 
-

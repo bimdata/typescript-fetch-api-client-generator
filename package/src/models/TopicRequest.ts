@@ -198,4 +198,3 @@ export function TopicRequestToJSON(value?: TopicRequest | null): any {
     };
 }
 
-

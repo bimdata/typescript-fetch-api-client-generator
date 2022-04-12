@@ -18,15 +18,19 @@ import {
     ColoringFromJSON,
     ColoringFromJSONTyped,
     ColoringToJSON,
+} from './Coloring';
+import {
     Component,
     ComponentFromJSON,
     ComponentFromJSONTyped,
     ComponentToJSON,
+} from './Component';
+import {
     Visibility,
     VisibilityFromJSON,
     VisibilityFromJSONTyped,
     VisibilityToJSON,
-} from './';
+} from './Visibility';
 
 /**
  * Adds nested create feature
@@ -84,5 +88,4 @@ export function ComponentsParentToJSON(value?: ComponentsParent | null): any {
         'selection': value.selection === undefined ? undefined : ((value.selection as Array<any>).map(ComponentToJSON)),
     };
 }
-
 

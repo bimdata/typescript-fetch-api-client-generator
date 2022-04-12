@@ -70,4 +70,3 @@ export function PatchedVisaRequestToJSON(value?: PatchedVisaRequest | null): any
     };
 }
 
-

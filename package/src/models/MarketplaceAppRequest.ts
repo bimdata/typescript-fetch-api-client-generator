@@ -134,4 +134,3 @@ export function MarketplaceAppRequestToJSON(value?: MarketplaceAppRequest | null
     };
 }
 
-

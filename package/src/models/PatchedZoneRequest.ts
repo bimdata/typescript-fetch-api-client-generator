@@ -18,11 +18,13 @@ import {
     SpaceRequestFromJSON,
     SpaceRequestFromJSONTyped,
     SpaceRequestToJSON,
+} from './SpaceRequest';
+import {
     ZoneRequest,
     ZoneRequestFromJSON,
     ZoneRequestFromJSONTyped,
     ZoneRequestToJSON,
-} from './';
+} from './ZoneRequest';
 
 /**
  * Adds nested create feature
@@ -104,5 +106,4 @@ export function PatchedZoneRequestToJSON(value?: PatchedZoneRequest | null): any
         'color': value.color,
     };
 }
-
 

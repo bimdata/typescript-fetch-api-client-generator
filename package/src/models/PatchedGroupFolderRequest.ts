@@ -18,7 +18,7 @@ import {
     FolderPermissionEnumFromJSON,
     FolderPermissionEnumFromJSONTyped,
     FolderPermissionEnumToJSON,
-} from './';
+} from './FolderPermissionEnum';
 
 /**
  * 
@@ -31,7 +31,7 @@ export interface PatchedGroupFolderRequest {
      * @type {FolderPermissionEnum}
      * @memberof PatchedGroupFolderRequest
      */
-    permission?: FolderPermissionEnum;
+    permission?: FolderPermissionEnum | null;
 }
 
 export function PatchedGroupFolderRequestFromJSON(json: any): PatchedGroupFolderRequest {
@@ -60,5 +60,4 @@ export function PatchedGroupFolderRequestToJSON(value?: PatchedGroupFolderReques
         'permission': FolderPermissionEnumToJSON(value.permission),
     };
 }
-
 

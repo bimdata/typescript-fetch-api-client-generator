@@ -18,15 +18,19 @@ import {
     CloudRoleFromJSON,
     CloudRoleFromJSONTyped,
     CloudRoleToJSON,
+} from './CloudRole';
+import {
     Organization,
     OrganizationFromJSON,
     OrganizationFromJSONTyped,
     OrganizationToJSON,
+} from './Organization';
+import {
     ProjectRole,
     ProjectRoleFromJSON,
     ProjectRoleFromJSONTyped,
     ProjectRoleToJSON,
-} from './';
+} from './ProjectRole';
 
 /**
  * 
@@ -155,5 +159,4 @@ export function SelfUserToJSON(value?: SelfUser | null): any {
         'provider_sub': value.providerSub,
     };
 }
-
 

@@ -70,4 +70,3 @@ export function DirectionToJSON(value?: Direction | null): any {
     };
 }
 
-

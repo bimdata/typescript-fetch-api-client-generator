@@ -18,11 +18,13 @@ import {
     CommentFromJSON,
     CommentFromJSONTyped,
     CommentToJSON,
+} from './Comment';
+import {
     Viewpoint,
     ViewpointFromJSON,
     ViewpointFromJSONTyped,
     ViewpointToJSON,
-} from './';
+} from './Viewpoint';
 
 /**
  * 
@@ -231,5 +233,4 @@ export function FullTopicToJSON(value?: FullTopic | null): any {
         'project': value.project,
     };
 }
-
 

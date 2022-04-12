@@ -18,7 +18,7 @@ import {
     UnitFromJSON,
     UnitFromJSONTyped,
     UnitToJSON,
-} from './';
+} from './Unit';
 
 /**
  * Adds nested create feature
@@ -99,5 +99,4 @@ export function PropertyDefinitionToJSON(value?: PropertyDefinition | null): any
         'value_type': value.valueType,
     };
 }
-
 

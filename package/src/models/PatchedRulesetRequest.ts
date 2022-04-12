@@ -18,11 +18,13 @@ import {
     RuleRequestFromJSON,
     RuleRequestFromJSONTyped,
     RuleRequestToJSON,
+} from './RuleRequest';
+import {
     RulesetRequest,
     RulesetRequestFromJSON,
     RulesetRequestFromJSONTyped,
     RulesetRequestToJSON,
-} from './';
+} from './RulesetRequest';
 
 /**
  * Adds nested create feature
@@ -96,5 +98,4 @@ export function PatchedRulesetRequestToJSON(value?: PatchedRulesetRequest | null
         'rulesets': value.rulesets === undefined ? undefined : ((value.rulesets as Array<any>).map(RulesetRequestToJSON)),
     };
 }
-
 

@@ -18,7 +18,7 @@ import {
     ModelSourceEnumFromJSON,
     ModelSourceEnumFromJSONTyped,
     ModelSourceEnumToJSON,
-} from './';
+} from './ModelSourceEnum';
 
 /**
  * 
@@ -79,13 +79,13 @@ export interface PatchedDocumentRequest {
      * @type {ModelSourceEnum}
      * @memberof PatchedDocumentRequest
      */
-    modelSource?: ModelSourceEnum;
+    modelSource?: ModelSourceEnum | null;
     /**
      * DEPRECATED: Use 'model_source' instead. Define the model.source field if the upload is a Model (IFC, PDF, DWG...)
      * @type {ModelSourceEnum}
      * @memberof PatchedDocumentRequest
      */
-    ifcSource?: ModelSourceEnum;
+    ifcSource?: ModelSourceEnum | null;
 }
 
 export function PatchedDocumentRequestFromJSON(json: any): PatchedDocumentRequest {
@@ -132,5 +132,4 @@ export function PatchedDocumentRequestToJSON(value?: PatchedDocumentRequest | nu
         'ifc_source': ModelSourceEnumToJSON(value.ifcSource),
     };
 }
-
 

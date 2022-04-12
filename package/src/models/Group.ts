@@ -18,7 +18,7 @@ import {
     UserProjectFromJSON,
     UserProjectFromJSONTyped,
     UserProjectToJSON,
-} from './';
+} from './UserProject';
 
 /**
  * 
@@ -82,5 +82,4 @@ export function GroupToJSON(value?: Group | null): any {
         'color': value.color,
     };
 }
-
 

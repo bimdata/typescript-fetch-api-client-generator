@@ -70,4 +70,3 @@ export function PatchedSpaceRequestToJSON(value?: PatchedSpaceRequest | null): a
     };
 }
 
-

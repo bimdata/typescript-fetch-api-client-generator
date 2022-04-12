@@ -62,4 +62,3 @@ export function VisaCommentRequestToJSON(value?: VisaCommentRequest | null): any
     };
 }
 
-

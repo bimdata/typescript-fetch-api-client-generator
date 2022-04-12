@@ -18,7 +18,7 @@ import {
     ComponentRequestFromJSON,
     ComponentRequestFromJSONTyped,
     ComponentRequestToJSON,
-} from './';
+} from './ComponentRequest';
 
 /**
  * Adds nested create feature
@@ -68,5 +68,4 @@ export function ColoringRequestToJSON(value?: ColoringRequest | null): any {
         'components': ((value.components as Array<any>).map(ComponentRequestToJSON)),
     };
 }
-
 

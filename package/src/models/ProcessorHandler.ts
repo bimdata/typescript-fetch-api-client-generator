@@ -18,7 +18,7 @@ import {
     ModelStatusEnumFromJSON,
     ModelStatusEnumFromJSONTyped,
     ModelStatusEnumToJSON,
-} from './';
+} from './ModelStatusEnum';
 
 /**
  * 
@@ -82,5 +82,4 @@ export function ProcessorHandlerToJSON(value?: ProcessorHandler | null): any {
         'detail_message': value.detailMessage,
     };
 }
-
 

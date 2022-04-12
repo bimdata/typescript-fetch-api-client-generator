@@ -18,7 +18,7 @@ import {
     ProjectStatusEnumFromJSON,
     ProjectStatusEnumFromJSONTyped,
     ProjectStatusEnumToJSON,
-} from './';
+} from './ProjectStatusEnum';
 
 /**
  * 
@@ -84,5 +84,4 @@ export function ProjectRequestToJSON(value?: ProjectRequest | null): any {
         'parent_id': value.parentId,
     };
 }
-
 

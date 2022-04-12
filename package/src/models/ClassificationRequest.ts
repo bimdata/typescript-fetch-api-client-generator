@@ -70,4 +70,3 @@ export function ClassificationRequestToJSON(value?: ClassificationRequest | null
     };
 }
 
-

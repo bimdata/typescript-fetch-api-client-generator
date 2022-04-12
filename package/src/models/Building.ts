@@ -18,7 +18,7 @@ import {
     ModelWithPositioningPlanFromJSON,
     ModelWithPositioningPlanFromJSONTyped,
     ModelWithPositioningPlanToJSON,
-} from './';
+} from './ModelWithPositioningPlan';
 
 /**
  * 
@@ -80,5 +80,4 @@ export function BuildingToJSON(value?: Building | null): any {
         
     };
 }
-
 

@@ -70,4 +70,3 @@ export function SpaceRequestToJSON(value?: SpaceRequest | null): any {
     };
 }
 
-

@@ -18,15 +18,19 @@ import {
     MarketplaceAppImageFromJSON,
     MarketplaceAppImageFromJSONTyped,
     MarketplaceAppImageToJSON,
+} from './MarketplaceAppImage';
+import {
     PublicOrganization,
     PublicOrganizationFromJSON,
     PublicOrganizationFromJSONTyped,
     PublicOrganizationToJSON,
+} from './PublicOrganization';
+import {
     User,
     UserFromJSON,
     UserFromJSONTyped,
     UserToJSON,
-} from './';
+} from './User';
 
 /**
  * 
@@ -81,7 +85,7 @@ export interface MarketplaceApp {
      * @type {User}
      * @memberof MarketplaceApp
      */
-    readonly creator: User;
+    readonly creator: User | null;
     /**
      * 
      * @type {Array<string>}
@@ -123,7 +127,7 @@ export interface MarketplaceApp {
      * @type {PublicOrganization}
      * @memberof MarketplaceApp
      */
-    readonly organization: PublicOrganization;
+    readonly organization: PublicOrganization | null;
 }
 
 export function MarketplaceAppFromJSON(json: any): MarketplaceApp {
@@ -175,5 +179,4 @@ export function MarketplaceAppToJSON(value?: MarketplaceApp | null): any {
         'logo': value.logo,
     };
 }
-
 

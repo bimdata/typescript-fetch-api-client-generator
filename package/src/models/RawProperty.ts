@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    AnyType,
-    AnyTypeFromJSON,
-    AnyTypeFromJSONTyped,
-    AnyTypeToJSON,
-} from './';
-
 /**
  * 
  * @export
@@ -34,10 +27,10 @@ export interface RawProperty {
     readonly id: number;
     /**
      * 
-     * @type {{ [key: string]: AnyType; }}
+     * @type {{ [key: string]: any; }}
      * @memberof RawProperty
      */
-    value?: { [key: string]: AnyType; } | null;
+    value?: { [key: string]: any; } | null;
     /**
      * 
      * @type {number}
@@ -57,7 +50,7 @@ export function RawPropertyFromJSONTyped(json: any, ignoreDiscriminator: boolean
     return {
         
         'id': json['id'],
-        'value': !exists(json, 'value') ? undefined : (json['value'] === null ? null : mapValues(json['value'], AnyTypeFromJSON)),
+        'value': !exists(json, 'value') ? undefined : json['value'],
         'defId': json['def_id'],
     };
 }
@@ -71,9 +64,8 @@ export function RawPropertyToJSON(value?: RawProperty | null): any {
     }
     return {
         
-        'value': value.value === undefined ? undefined : (value.value === null ? null : mapValues(value.value, AnyTypeToJSON)),
+        'value': value.value,
         'def_id': value.defId,
     };
 }
-
 

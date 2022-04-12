@@ -18,7 +18,7 @@ import {
     FolderPermissionEnumFromJSON,
     FolderPermissionEnumFromJSONTyped,
     FolderPermissionEnumToJSON,
-} from './';
+} from './FolderPermissionEnum';
 
 /**
  * 
@@ -43,7 +43,7 @@ export interface FolderRequest {
      * @type {FolderPermissionEnum}
      * @memberof FolderRequest
      */
-    defaultPermission?: FolderPermissionEnum;
+    defaultPermission?: FolderPermissionEnum | null;
 }
 
 export function FolderRequestFromJSON(json: any): FolderRequest {
@@ -76,5 +76,4 @@ export function FolderRequestToJSON(value?: FolderRequest | null): any {
         'default_permission': FolderPermissionEnumToJSON(value.defaultPermission),
     };
 }
-
 

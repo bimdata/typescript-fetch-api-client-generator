@@ -18,7 +18,7 @@ import {
     PropertySetFromJSON,
     PropertySetFromJSONTyped,
     PropertySetToJSON,
-} from './';
+} from './PropertySet';
 
 /**
  * 
@@ -88,5 +88,4 @@ export function MaterialToJSON(value?: Material | null): any {
         'property_sets': ((value.propertySets as Array<any>).map(PropertySetToJSON)),
     };
 }
-
 

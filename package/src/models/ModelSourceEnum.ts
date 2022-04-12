@@ -18,11 +18,11 @@
  * @enum {string}
  */
 export enum ModelSourceEnum {
-    UPLOAD = 'UPLOAD',
-    SPLIT = 'SPLIT',
-    MERGE = 'MERGE',
-    EXPORT = 'EXPORT',
-    OPTIMIZED = 'OPTIMIZED'
+    Upload = 'UPLOAD',
+    Split = 'SPLIT',
+    Merge = 'MERGE',
+    Export = 'EXPORT',
+    Optimized = 'OPTIMIZED'
 }
 
 export function ModelSourceEnumFromJSON(json: any): ModelSourceEnum {

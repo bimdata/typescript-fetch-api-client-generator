@@ -1374,7 +1374,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Model errors are warnings and errors during model process. They alert about missing elements or malformed files  Required scopes: ifc:write, model:write
      * Add errors to model
      */
-    async addIfcErrorsDeprecatedRaw(requestParameters: AddIfcErrorsDeprecatedRequest): Promise<runtime.ApiResponse<ModelErrors>> {
+    async addIfcErrorsDeprecatedRaw(requestParameters: AddIfcErrorsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelErrors>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addIfcErrorsDeprecated.');
         }
@@ -1387,7 +1387,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling addIfcErrorsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1399,11 +1399,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1416,7 +1417,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: ModelErrorsRequestToJSON(requestParameters.modelErrorsRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelErrorsFromJSON(jsonValue));
     }
@@ -1425,8 +1426,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Model errors are warnings and errors during model process. They alert about missing elements or malformed files  Required scopes: ifc:write, model:write
      * Add errors to model
      */
-    async addIfcErrorsDeprecated(cloudPk: number, id: number, projectPk: number, modelErrorsRequest?: ModelErrorsRequest): Promise<ModelErrors> {
-        const response = await this.addIfcErrorsDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, modelErrorsRequest: modelErrorsRequest });
+    async addIfcErrorsDeprecated(cloudPk: number, id: number, projectPk: number, modelErrorsRequest?: ModelErrorsRequest, initOverrides?: RequestInit): Promise<ModelErrors> {
+        const response = await this.addIfcErrorsDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, modelErrorsRequest: modelErrorsRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1434,7 +1435,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete relation between filtered classifications (eg. /classifications?name=untec) and all mode\'s elements. No classification will be deleted on this endpoint, only the relation between model\'s elements and their classification.  Required scopes: ifc:write, model:write
      * Remove all classifications from model\'s elements
      */
-    async bulkDeleteIfcClassificationsDeprecatedRaw(requestParameters: BulkDeleteIfcClassificationsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteIfcClassificationsDeprecatedRaw(requestParameters: BulkDeleteIfcClassificationsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcClassificationsDeprecated.');
         }
@@ -1447,7 +1448,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcClassificationsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1457,11 +1458,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1473,7 +1475,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1482,15 +1484,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete relation between filtered classifications (eg. /classifications?name=untec) and all mode\'s elements. No classification will be deleted on this endpoint, only the relation between model\'s elements and their classification.  Required scopes: ifc:write, model:write
      * Remove all classifications from model\'s elements
      */
-    async bulkDeleteIfcClassificationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.bulkDeleteIfcClassificationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async bulkDeleteIfcClassificationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteIfcClassificationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many Property of a model
      */
-    async bulkDeleteIfcPropertiesDeprecatedRaw(requestParameters: BulkDeleteIfcPropertiesDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteIfcPropertiesDeprecatedRaw(requestParameters: BulkDeleteIfcPropertiesDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcPropertiesDeprecated.');
         }
@@ -1503,7 +1505,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcPropertiesDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1513,11 +1515,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1529,7 +1532,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1538,15 +1541,15 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many Property of a model
      */
-    async bulkDeleteIfcPropertiesDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.bulkDeleteIfcPropertiesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async bulkDeleteIfcPropertiesDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteIfcPropertiesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many PropertyDefinitions of a model
      */
-    async bulkDeleteIfcPropertyDefinitionsDeprecatedRaw(requestParameters: BulkDeleteIfcPropertyDefinitionsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteIfcPropertyDefinitionsDeprecatedRaw(requestParameters: BulkDeleteIfcPropertyDefinitionsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcPropertyDefinitionsDeprecated.');
         }
@@ -1559,7 +1562,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcPropertyDefinitionsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1569,11 +1572,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1585,7 +1589,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1594,15 +1598,15 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many PropertyDefinitions of a model
      */
-    async bulkDeleteIfcPropertyDefinitionsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.bulkDeleteIfcPropertyDefinitionsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async bulkDeleteIfcPropertyDefinitionsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteIfcPropertyDefinitionsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many Units of a model
      */
-    async bulkDeleteIfcUnitsDeprecatedRaw(requestParameters: BulkDeleteIfcUnitsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeleteIfcUnitsDeprecatedRaw(requestParameters: BulkDeleteIfcUnitsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteIfcUnitsDeprecated.');
         }
@@ -1615,7 +1619,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteIfcUnitsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1625,11 +1629,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1641,7 +1646,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1650,15 +1655,15 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many Units of a model
      */
-    async bulkDeleteIfcUnitsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.bulkDeleteIfcUnitsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async bulkDeleteIfcUnitsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteIfcUnitsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many PropertySet of a model
      */
-    async bulkDeletePropertySetDeprecatedRaw(requestParameters: BulkDeletePropertySetDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkDeletePropertySetDeprecatedRaw(requestParameters: BulkDeletePropertySetDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeletePropertySetDeprecated.');
         }
@@ -1671,7 +1676,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeletePropertySetDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1681,11 +1686,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1697,7 +1703,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1706,15 +1712,15 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many PropertySet of a model
      */
-    async bulkDeletePropertySetDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.bulkDeletePropertySetDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async bulkDeletePropertySetDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeletePropertySetDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update many elements at once (only changing fields may be defined)
      */
-    async bulkFullUpdateElementsDeprecatedRaw(requestParameters: BulkFullUpdateElementsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async bulkFullUpdateElementsDeprecatedRaw(requestParameters: BulkFullUpdateElementsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateElementsDeprecated.');
         }
@@ -1731,7 +1737,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('elementRequest','Required parameter requestParameters.elementRequest was null or undefined when calling bulkFullUpdateElementsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.classification !== undefined) {
             queryParameters['classification'] = requestParameters.classification;
@@ -1755,11 +1761,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1772,7 +1779,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.elementRequest.map(ElementRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementFromJSON));
     }
@@ -1781,8 +1788,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update many elements at once (only changing fields may be defined)
      */
-    async bulkFullUpdateElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementRequest: Array<ElementRequest>, classification?: string, classificationNotation?: string, type?: string): Promise<Array<Element>> {
-        const response = await this.bulkFullUpdateElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementRequest: elementRequest, classification: classification, classificationNotation: classificationNotation, type: type });
+    async bulkFullUpdateElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementRequest: Array<ElementRequest>, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.bulkFullUpdateElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementRequest: elementRequest, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -1790,7 +1797,7 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update some fields of many properties of a model
      */
-    async bulkFullUpdateIfcPropertyDeprecatedRaw(requestParameters: BulkFullUpdateIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async bulkFullUpdateIfcPropertyDeprecatedRaw(requestParameters: BulkFullUpdateIfcPropertyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateIfcPropertyDeprecated.');
         }
@@ -1807,7 +1814,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertyRequest','Required parameter requestParameters.propertyRequest was null or undefined when calling bulkFullUpdateIfcPropertyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1819,11 +1826,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1836,7 +1844,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.propertyRequest.map(PropertyRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyFromJSON));
     }
@@ -1845,8 +1853,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update some fields of many properties of a model
      */
-    async bulkFullUpdateIfcPropertyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, propertyRequest: Array<PropertyRequest>): Promise<Array<Property>> {
-        const response = await this.bulkFullUpdateIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, propertyRequest: propertyRequest });
+    async bulkFullUpdateIfcPropertyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, propertyRequest: Array<PropertyRequest>, initOverrides?: RequestInit): Promise<Array<Property>> {
+        const response = await this.bulkFullUpdateIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, propertyRequest: propertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1854,7 +1862,7 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove many classifications from an element
      */
-    async bulkRemoveClassificationsOfElementDeprecatedRaw(requestParameters: BulkRemoveClassificationsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkRemoveClassificationsOfElementDeprecatedRaw(requestParameters: BulkRemoveClassificationsOfElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveClassificationsOfElementDeprecated.');
         }
@@ -1871,7 +1879,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveClassificationsOfElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1881,11 +1889,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1897,7 +1906,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1906,15 +1915,15 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove many classifications from an element
      */
-    async bulkRemoveClassificationsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number): Promise<void> {
-        await this.bulkRemoveClassificationsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk });
+    async bulkRemoveClassificationsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkRemoveClassificationsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove many documents from an element
      */
-    async bulkRemoveDocumentsOfElementDeprecatedRaw(requestParameters: BulkRemoveDocumentsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkRemoveDocumentsOfElementDeprecatedRaw(requestParameters: BulkRemoveDocumentsOfElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveDocumentsOfElementDeprecated.');
         }
@@ -1931,7 +1940,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveDocumentsOfElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1941,11 +1950,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1957,7 +1967,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1966,15 +1976,15 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove many documents from an element
      */
-    async bulkRemoveDocumentsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number): Promise<void> {
-        await this.bulkRemoveDocumentsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk });
+    async bulkRemoveDocumentsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkRemoveDocumentsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove the classifications from all elements
      */
-    async bulkRemoveElementsFromClassificationDeprecatedRaw(requestParameters: BulkRemoveElementsFromClassificationDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async bulkRemoveElementsFromClassificationDeprecatedRaw(requestParameters: BulkRemoveElementsFromClassificationDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveElementsFromClassificationDeprecated.');
         }
@@ -1991,7 +2001,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveElementsFromClassificationDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2001,11 +2011,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2017,7 +2028,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2026,15 +2037,15 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove the classifications from all elements
      */
-    async bulkRemoveElementsFromClassificationDeprecated(cloudPk: number, ifcPk: number, modelClassificationPk: number, projectPk: number): Promise<void> {
-        await this.bulkRemoveElementsFromClassificationDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, modelClassificationPk: modelClassificationPk, projectPk: projectPk });
+    async bulkRemoveElementsFromClassificationDeprecated(cloudPk: number, ifcPk: number, modelClassificationPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkRemoveElementsFromClassificationDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, modelClassificationPk: modelClassificationPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update many elements at once (all field must be defined)
      */
-    async bulkUpdateElementsDeprecatedRaw(requestParameters: BulkUpdateElementsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async bulkUpdateElementsDeprecatedRaw(requestParameters: BulkUpdateElementsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateElementsDeprecated.');
         }
@@ -2051,7 +2062,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('elementRequest','Required parameter requestParameters.elementRequest was null or undefined when calling bulkUpdateElementsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.classification !== undefined) {
             queryParameters['classification'] = requestParameters.classification;
@@ -2075,11 +2086,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2092,7 +2104,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.elementRequest.map(ElementRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementFromJSON));
     }
@@ -2101,8 +2113,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update many elements at once (all field must be defined)
      */
-    async bulkUpdateElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementRequest: Array<ElementRequest>, classification?: string, classificationNotation?: string, type?: string): Promise<Array<Element>> {
-        const response = await this.bulkUpdateElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementRequest: elementRequest, classification: classification, classificationNotation: classificationNotation, type: type });
+    async bulkUpdateElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementRequest: Array<ElementRequest>, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.bulkUpdateElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementRequest: elementRequest, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -2110,7 +2122,7 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors 
      * Update all fields of many properties of a model
      */
-    async bulkUpdateIfcPropertyDeprecatedRaw(requestParameters: BulkUpdateIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async bulkUpdateIfcPropertyDeprecatedRaw(requestParameters: BulkUpdateIfcPropertyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateIfcPropertyDeprecated.');
         }
@@ -2127,7 +2139,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertyRequest','Required parameter requestParameters.propertyRequest was null or undefined when calling bulkUpdateIfcPropertyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2139,11 +2151,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2156,7 +2169,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.propertyRequest.map(PropertyRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyFromJSON));
     }
@@ -2165,8 +2178,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors 
      * Update all fields of many properties of a model
      */
-    async bulkUpdateIfcPropertyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, propertyRequest: Array<PropertyRequest>): Promise<Array<Property>> {
-        const response = await this.bulkUpdateIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, propertyRequest: propertyRequest });
+    async bulkUpdateIfcPropertyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, propertyRequest: Array<PropertyRequest>, initOverrides?: RequestInit): Promise<Array<Property>> {
+        const response = await this.bulkUpdateIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, propertyRequest: propertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2174,7 +2187,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Tokens are read_only by default and are valid 1 day  Required scopes: ifc:token_manage, model:token_manage
      * Create a token for this model
      */
-    async createAccessTokenDeprecatedRaw(requestParameters: CreateAccessTokenDeprecatedRequest): Promise<runtime.ApiResponse<IfcAccessToken>> {
+    async createAccessTokenDeprecatedRaw(requestParameters: CreateAccessTokenDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcAccessToken>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createAccessTokenDeprecated.');
         }
@@ -2187,7 +2200,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createAccessTokenDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2199,11 +2212,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2216,7 +2230,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: IfcAccessTokenRequestToJSON(requestParameters.ifcAccessTokenRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcAccessTokenFromJSON(jsonValue));
     }
@@ -2225,8 +2239,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Tokens are read_only by default and are valid 1 day  Required scopes: ifc:token_manage, model:token_manage
      * Create a token for this model
      */
-    async createAccessTokenDeprecated(cloudPk: number, ifcPk: number, projectPk: number, ifcAccessTokenRequest?: IfcAccessTokenRequest): Promise<IfcAccessToken> {
-        const response = await this.createAccessTokenDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, ifcAccessTokenRequest: ifcAccessTokenRequest });
+    async createAccessTokenDeprecated(cloudPk: number, ifcPk: number, projectPk: number, ifcAccessTokenRequest?: IfcAccessTokenRequest, initOverrides?: RequestInit): Promise<IfcAccessToken> {
+        const response = await this.createAccessTokenDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, ifcAccessTokenRequest: ifcAccessTokenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2234,7 +2248,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a building of a model.  Required scopes: ifc:write, model:write
      * Create a building of a model
      */
-    async createBuildingDeprecatedRaw(requestParameters: CreateBuildingDeprecatedRequest): Promise<runtime.ApiResponse<Building>> {
+    async createBuildingDeprecatedRaw(requestParameters: CreateBuildingDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Building>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createBuildingDeprecated.');
         }
@@ -2247,7 +2261,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createBuildingDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2257,11 +2271,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2273,7 +2288,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
     }
@@ -2282,8 +2297,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a building of a model.  Required scopes: ifc:write, model:write
      * Create a building of a model
      */
-    async createBuildingDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Building> {
-        const response = await this.createBuildingDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async createBuildingDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.createBuildingDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -2291,7 +2306,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a building. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a building
      */
-    async createBuildingPlanDeprecatedRaw(requestParameters: CreateBuildingPlanDeprecatedRequest): Promise<runtime.ApiResponse<Building>> {
+    async createBuildingPlanDeprecatedRaw(requestParameters: CreateBuildingPlanDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Building>> {
         if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
             throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling createBuildingPlanDeprecated.');
         }
@@ -2308,7 +2323,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createBuildingPlanDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2318,11 +2333,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2334,7 +2350,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
     }
@@ -2343,8 +2359,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a building. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a building
      */
-    async createBuildingPlanDeprecated(buildingUuid: string, cloudPk: number, ifcPk: number, projectPk: number): Promise<Building> {
-        const response = await this.createBuildingPlanDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async createBuildingPlanDeprecated(buildingUuid: string, cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.createBuildingPlanDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -2352,7 +2368,7 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Create a checker to a model
      */
-    async createCheckerDeprecatedRaw(requestParameters: CreateCheckerDeprecatedRequest): Promise<runtime.ApiResponse<IfcChecker>> {
+    async createCheckerDeprecatedRaw(requestParameters: CreateCheckerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createCheckerDeprecated.');
         }
@@ -2365,7 +2381,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createCheckerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2377,11 +2393,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2394,7 +2411,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: IfcCheckerRequestToJSON(requestParameters.ifcCheckerRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
     }
@@ -2403,8 +2420,8 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Create a checker to a model
      */
-    async createCheckerDeprecated(cloudPk: number, ifcPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest): Promise<IfcChecker> {
-        const response = await this.createCheckerDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest });
+    async createCheckerDeprecated(cloudPk: number, ifcPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
+        const response = await this.createCheckerDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2412,7 +2429,7 @@ export class IfcApi extends runtime.BaseAPI {
      * TCreate a CheckerResult  Required scopes: check:write
      * Create a CheckerResult
      */
-    async createCheckerResultDeprecatedRaw(requestParameters: CreateCheckerResultDeprecatedRequest): Promise<runtime.ApiResponse<CheckerResult>> {
+    async createCheckerResultDeprecatedRaw(requestParameters: CreateCheckerResultDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling createCheckerResultDeprecated.');
         }
@@ -2429,7 +2446,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createCheckerResultDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2441,11 +2458,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2458,7 +2476,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: CheckerResultRequestToJSON(requestParameters.checkerResultRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
     }
@@ -2467,8 +2485,8 @@ export class IfcApi extends runtime.BaseAPI {
      * TCreate a CheckerResult  Required scopes: check:write
      * Create a CheckerResult
      */
-    async createCheckerResultDeprecated(checkerPk: number, cloudPk: number, ifcPk: number, projectPk: number, checkerResultRequest?: CheckerResultRequest): Promise<CheckerResult> {
-        const response = await this.createCheckerResultDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, checkerResultRequest: checkerResultRequest });
+    async createCheckerResultDeprecated(checkerPk: number, cloudPk: number, ifcPk: number, projectPk: number, checkerResultRequest?: CheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
+        const response = await this.createCheckerResultDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, checkerResultRequest: checkerResultRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2476,7 +2494,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create association between existing classification and existing element  Required scopes: ifc:write, model:write
      * Create association between existing classification and existing element
      */
-    async createClassificationElementRelationsDeprecatedRaw(requestParameters: CreateClassificationElementRelationsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async createClassificationElementRelationsDeprecatedRaw(requestParameters: CreateClassificationElementRelationsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassificationElementRelationsDeprecated.');
         }
@@ -2493,7 +2511,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('elementClassificationRelationRequest','Required parameter requestParameters.elementClassificationRelationRequest was null or undefined when calling createClassificationElementRelationsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2505,11 +2523,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2522,7 +2541,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.elementClassificationRelationRequest.map(ElementClassificationRelationRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2531,15 +2550,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Create association between existing classification and existing element  Required scopes: ifc:write, model:write
      * Create association between existing classification and existing element
      */
-    async createClassificationElementRelationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementClassificationRelationRequest: Array<ElementClassificationRelationRequest>): Promise<void> {
-        await this.createClassificationElementRelationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementClassificationRelationRequest: elementClassificationRelationRequest });
+    async createClassificationElementRelationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementClassificationRelationRequest: Array<ElementClassificationRelationRequest>, initOverrides?: RequestInit): Promise<void> {
+        await this.createClassificationElementRelationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementClassificationRelationRequest: elementClassificationRelationRequest }, initOverrides);
     }
 
     /**
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors If classification created already exists, it will just be added to item\'s classifications and will not be duplicated  Required scopes: ifc:write, model:write
      * Create one or many classifications to an element
      */
-    async createClassificationsOfElementDeprecatedRaw(requestParameters: CreateClassificationsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+    async createClassificationsOfElementDeprecatedRaw(requestParameters: CreateClassificationsOfElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassificationsOfElementDeprecated.');
         }
@@ -2560,7 +2579,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('classificationRequest','Required parameter requestParameters.classificationRequest was null or undefined when calling createClassificationsOfElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2572,11 +2591,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2589,7 +2609,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.classificationRequest.map(ClassificationRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ClassificationFromJSON));
     }
@@ -2598,8 +2618,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors If classification created already exists, it will just be added to item\'s classifications and will not be duplicated  Required scopes: ifc:write, model:write
      * Create one or many classifications to an element
      */
-    async createClassificationsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, classificationRequest: Array<ClassificationRequest>): Promise<Array<Classification>> {
-        const response = await this.createClassificationsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, classificationRequest: classificationRequest });
+    async createClassificationsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, classificationRequest: Array<ClassificationRequest>, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.createClassificationsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, classificationRequest: classificationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2607,7 +2627,7 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create an element in the model
      */
-    async createElementDeprecatedRaw(requestParameters: CreateElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async createElementDeprecatedRaw(requestParameters: CreateElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementDeprecated.');
         }
@@ -2624,7 +2644,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('elementRequest','Required parameter requestParameters.elementRequest was null or undefined when calling createElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.classification !== undefined) {
             queryParameters['classification'] = requestParameters.classification;
@@ -2648,11 +2668,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2665,7 +2686,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.elementRequest.map(ElementRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementFromJSON));
     }
@@ -2674,8 +2695,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create an element in the model
      */
-    async createElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementRequest: Array<ElementRequest>, classification?: string, classificationNotation?: string, type?: string): Promise<Array<Element>> {
-        const response = await this.createElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementRequest: elementRequest, classification: classification, classificationNotation: classificationNotation, type: type });
+    async createElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementRequest: Array<ElementRequest>, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.createElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementRequest: elementRequest, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -2683,7 +2704,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a PropertySets that will be automatically linked to the element  Required scopes: ifc:write, model:write
      * Create a PropertySets to an element
      */
-    async createElementPropertySetDeprecatedRaw(requestParameters: CreateElementPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<PropertySet>> {
+    async createElementPropertySetDeprecatedRaw(requestParameters: CreateElementPropertySetDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertySet>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetDeprecated.');
         }
@@ -2700,7 +2721,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2712,11 +2733,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2729,7 +2751,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PropertySetRequestToJSON(requestParameters.propertySetRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertySetFromJSON(jsonValue));
     }
@@ -2738,8 +2760,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a PropertySets that will be automatically linked to the element  Required scopes: ifc:write, model:write
      * Create a PropertySets to an element
      */
-    async createElementPropertySetDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertySetRequest?: PropertySetRequest): Promise<PropertySet> {
-        const response = await this.createElementPropertySetDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertySetRequest: propertySetRequest });
+    async createElementPropertySetDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertySetRequest?: PropertySetRequest, initOverrides?: RequestInit): Promise<PropertySet> {
+        const response = await this.createElementPropertySetDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertySetRequest: propertySetRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2747,7 +2769,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a Definition to a Property  Required scopes: ifc:write, model:write
      * Create a Definition to a Property
      */
-    async createElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters: CreateElementPropertySetPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+    async createElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters: CreateElementPropertySetPropertyDefinitionDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertyDefinition>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDefinitionDeprecated.');
         }
@@ -2772,7 +2794,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetPropertyDefinitionDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2784,11 +2806,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2801,7 +2824,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PropertyDefinitionRequestToJSON(requestParameters.propertyDefinitionRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
     }
@@ -2810,8 +2833,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a Definition to a Property  Required scopes: ifc:write, model:write
      * Create a Definition to a Property
      */
-    async createElementPropertySetPropertyDefinitionDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertyPk: number, propertysetPk: number, propertyDefinitionRequest?: PropertyDefinitionRequest): Promise<PropertyDefinition> {
-        const response = await this.createElementPropertySetPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk, propertyDefinitionRequest: propertyDefinitionRequest });
+    async createElementPropertySetPropertyDefinitionDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertyPk: number, propertysetPk: number, propertyDefinitionRequest?: PropertyDefinitionRequest, initOverrides?: RequestInit): Promise<PropertyDefinition> {
+        const response = await this.createElementPropertySetPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk, propertyDefinitionRequest: propertyDefinitionRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2819,7 +2842,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a Unit to a Definition  Required scopes: ifc:write, model:write
      * Create a Unit to a Definition
      */
-    async createElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters: CreateElementPropertySetPropertyDefinitionUnitDeprecatedRequest): Promise<runtime.ApiResponse<Unit>> {
+    async createElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters: CreateElementPropertySetPropertyDefinitionUnitDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Unit>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
@@ -2852,7 +2875,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('unitRequest','Required parameter requestParameters.unitRequest was null or undefined when calling createElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2864,11 +2887,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2881,7 +2905,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: UnitRequestToJSON(requestParameters.unitRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
     }
@@ -2890,8 +2914,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a Unit to a Definition  Required scopes: ifc:write, model:write
      * Create a Unit to a Definition
      */
-    async createElementPropertySetPropertyDefinitionUnitDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number, unitRequest: UnitRequest): Promise<Unit> {
-        const response = await this.createElementPropertySetPropertyDefinitionUnitDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk, unitRequest: unitRequest });
+    async createElementPropertySetPropertyDefinitionUnitDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number, unitRequest: UnitRequest, initOverrides?: RequestInit): Promise<Unit> {
+        const response = await this.createElementPropertySetPropertyDefinitionUnitDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk, unitRequest: unitRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2899,7 +2923,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a property to a PropertySet  Required scopes: ifc:write, model:write
      * Create a property to a PropertySet
      */
-    async createElementPropertySetPropertyDeprecatedRaw(requestParameters: CreateElementPropertySetPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
+    async createElementPropertySetPropertyDeprecatedRaw(requestParameters: CreateElementPropertySetPropertyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDeprecated.');
         }
@@ -2924,7 +2948,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertyRequest','Required parameter requestParameters.propertyRequest was null or undefined when calling createElementPropertySetPropertyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2936,11 +2960,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2953,7 +2978,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PropertyRequestToJSON(requestParameters.propertyRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
     }
@@ -2962,8 +2987,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a property to a PropertySet  Required scopes: ifc:write, model:write
      * Create a property to a PropertySet
      */
-    async createElementPropertySetPropertyDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertysetPk: number, propertyRequest: PropertyRequest): Promise<Property> {
-        const response = await this.createElementPropertySetPropertyDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk, propertyRequest: propertyRequest });
+    async createElementPropertySetPropertyDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertysetPk: number, propertyRequest: PropertyRequest, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.createElementPropertySetPropertyDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk, propertyRequest: propertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2971,7 +2996,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Make a PDF or Image file a Model to be used in BIMData services. If a model already exists, this route does nothing and returns a 201 with the model  Required scopes: ifc:write, model:write
      * Make a PDF or Image file a Model
      */
-    async createIfcDeprecatedRaw(requestParameters: CreateIfcDeprecatedRequest): Promise<runtime.ApiResponse<Model>> {
+    async createIfcDeprecatedRaw(requestParameters: CreateIfcDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcDeprecated.');
         }
@@ -2984,7 +3009,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('createModelRequest','Required parameter requestParameters.createModelRequest was null or undefined when calling createIfcDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2996,11 +3021,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3013,7 +3039,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: CreateModelRequestToJSON(requestParameters.createModelRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
     }
@@ -3022,8 +3048,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Make a PDF or Image file a Model to be used in BIMData services. If a model already exists, this route does nothing and returns a 201 with the model  Required scopes: ifc:write, model:write
      * Make a PDF or Image file a Model
      */
-    async createIfcDeprecated(cloudPk: number, projectPk: number, createModelRequest: CreateModelRequest): Promise<Model> {
-        const response = await this.createIfcDeprecatedRaw({ cloudPk: cloudPk, projectPk: projectPk, createModelRequest: createModelRequest });
+    async createIfcDeprecated(cloudPk: number, projectPk: number, createModelRequest: CreateModelRequest, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.createIfcDeprecatedRaw({ cloudPk: cloudPk, projectPk: projectPk, createModelRequest: createModelRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3031,7 +3057,7 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create a PropertyDefinition on the model
      */
-    async createIfcPropertyDefinitionDeprecatedRaw(requestParameters: CreateIfcPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
+    async createIfcPropertyDefinitionDeprecatedRaw(requestParameters: CreateIfcPropertyDefinitionDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcPropertyDefinitionDeprecated.');
         }
@@ -3048,7 +3074,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertyDefinitionRequest','Required parameter requestParameters.propertyDefinitionRequest was null or undefined when calling createIfcPropertyDefinitionDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3060,11 +3086,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3077,7 +3104,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.propertyDefinitionRequest.map(PropertyDefinitionRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyDefinitionFromJSON));
     }
@@ -3086,8 +3113,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create a PropertyDefinition on the model
      */
-    async createIfcPropertyDefinitionDeprecated(cloudPk: number, ifcPk: number, projectPk: number, propertyDefinitionRequest: Array<PropertyDefinitionRequest>): Promise<Array<PropertyDefinition>> {
-        const response = await this.createIfcPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, propertyDefinitionRequest: propertyDefinitionRequest });
+    async createIfcPropertyDefinitionDeprecated(cloudPk: number, ifcPk: number, projectPk: number, propertyDefinitionRequest: Array<PropertyDefinitionRequest>, initOverrides?: RequestInit): Promise<Array<PropertyDefinition>> {
+        const response = await this.createIfcPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, propertyDefinitionRequest: propertyDefinitionRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3095,7 +3122,7 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create a Unit on a model
      */
-    async createIfcUnitDeprecatedRaw(requestParameters: CreateIfcUnitDeprecatedRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
+    async createIfcUnitDeprecatedRaw(requestParameters: CreateIfcUnitDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Unit>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createIfcUnitDeprecated.');
         }
@@ -3112,7 +3139,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('unitRequest','Required parameter requestParameters.unitRequest was null or undefined when calling createIfcUnitDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3124,11 +3151,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3141,7 +3169,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.unitRequest.map(UnitRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UnitFromJSON));
     }
@@ -3150,8 +3178,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create a Unit on a model
      */
-    async createIfcUnitDeprecated(cloudPk: number, ifcPk: number, projectPk: number, unitRequest: Array<UnitRequest>): Promise<Array<Unit>> {
-        const response = await this.createIfcUnitDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, unitRequest: unitRequest });
+    async createIfcUnitDeprecated(cloudPk: number, ifcPk: number, projectPk: number, unitRequest: Array<UnitRequest>, initOverrides?: RequestInit): Promise<Array<Unit>> {
+        const response = await this.createIfcUnitDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, unitRequest: unitRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3159,7 +3187,7 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a layer in the model
      */
-    async createLayerDeprecatedRaw(requestParameters: CreateLayerDeprecatedRequest): Promise<runtime.ApiResponse<Layer>> {
+    async createLayerDeprecatedRaw(requestParameters: CreateLayerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Layer>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createLayerDeprecated.');
         }
@@ -3176,7 +3204,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('layerRequest','Required parameter requestParameters.layerRequest was null or undefined when calling createLayerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3188,11 +3216,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3205,7 +3234,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: LayerRequestToJSON(requestParameters.layerRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LayerFromJSON(jsonValue));
     }
@@ -3214,8 +3243,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a layer in the model
      */
-    async createLayerDeprecated(cloudPk: number, ifcPk: number, projectPk: number, layerRequest: LayerRequest): Promise<Layer> {
-        const response = await this.createLayerDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, layerRequest: layerRequest });
+    async createLayerDeprecated(cloudPk: number, ifcPk: number, projectPk: number, layerRequest: LayerRequest, initOverrides?: RequestInit): Promise<Layer> {
+        const response = await this.createLayerDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, layerRequest: layerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3223,7 +3252,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create an empty 3D Model to be used in BIMData services  Required scopes: ifc:write, model:write
      * Create an empty 3D Model
      */
-    async createMetaBuildingDeprecatedRaw(requestParameters: CreateMetaBuildingDeprecatedRequest): Promise<runtime.ApiResponse<Model>> {
+    async createMetaBuildingDeprecatedRaw(requestParameters: CreateMetaBuildingDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createMetaBuildingDeprecated.');
         }
@@ -3236,7 +3265,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('createBuildingByNameRequest','Required parameter requestParameters.createBuildingByNameRequest was null or undefined when calling createMetaBuildingDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3248,11 +3277,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3265,7 +3295,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: CreateBuildingByNameRequestToJSON(requestParameters.createBuildingByNameRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
     }
@@ -3274,8 +3304,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create an empty 3D Model to be used in BIMData services  Required scopes: ifc:write, model:write
      * Create an empty 3D Model
      */
-    async createMetaBuildingDeprecated(cloudPk: number, projectPk: number, createBuildingByNameRequest: CreateBuildingByNameRequest): Promise<Model> {
-        const response = await this.createMetaBuildingDeprecatedRaw({ cloudPk: cloudPk, projectPk: projectPk, createBuildingByNameRequest: createBuildingByNameRequest });
+    async createMetaBuildingDeprecated(cloudPk: number, projectPk: number, createBuildingByNameRequest: CreateBuildingByNameRequest, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.createMetaBuildingDeprecatedRaw({ cloudPk: cloudPk, projectPk: projectPk, createBuildingByNameRequest: createBuildingByNameRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3283,7 +3313,7 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create one or many PropertySet
      */
-    async createPropertySetDeprecatedRaw(requestParameters: CreatePropertySetDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertySet>>> {
+    async createPropertySetDeprecatedRaw(requestParameters: CreatePropertySetDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertySet>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createPropertySetDeprecated.');
         }
@@ -3300,7 +3330,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertySetRequest','Required parameter requestParameters.propertySetRequest was null or undefined when calling createPropertySetDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3312,11 +3342,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3329,7 +3360,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.propertySetRequest.map(PropertySetRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertySetFromJSON));
     }
@@ -3338,8 +3369,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create one or many PropertySet
      */
-    async createPropertySetDeprecated(cloudPk: number, ifcPk: number, projectPk: number, propertySetRequest: Array<PropertySetRequest>): Promise<Array<PropertySet>> {
-        const response = await this.createPropertySetDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, propertySetRequest: propertySetRequest });
+    async createPropertySetDeprecated(cloudPk: number, ifcPk: number, projectPk: number, propertySetRequest: Array<PropertySetRequest>, initOverrides?: RequestInit): Promise<Array<PropertySet>> {
+        const response = await this.createPropertySetDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, propertySetRequest: propertySetRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3347,7 +3378,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create association between PropertySet and element  Required scopes: ifc:write, model:write
      * Create association between PropertySet and element
      */
-    async createPropertySetElementRelationsDeprecatedRaw(requestParameters: CreatePropertySetElementRelationsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async createPropertySetElementRelationsDeprecatedRaw(requestParameters: CreatePropertySetElementRelationsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createPropertySetElementRelationsDeprecated.');
         }
@@ -3364,7 +3395,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('elementPropertySetRelationRequest','Required parameter requestParameters.elementPropertySetRelationRequest was null or undefined when calling createPropertySetElementRelationsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3376,11 +3407,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3393,7 +3425,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.elementPropertySetRelationRequest.map(ElementPropertySetRelationRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -3402,15 +3434,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Create association between PropertySet and element  Required scopes: ifc:write, model:write
      * Create association between PropertySet and element
      */
-    async createPropertySetElementRelationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementPropertySetRelationRequest: Array<ElementPropertySetRelationRequest>): Promise<void> {
-        await this.createPropertySetElementRelationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementPropertySetRelationRequest: elementPropertySetRelationRequest });
+    async createPropertySetElementRelationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, elementPropertySetRelationRequest: Array<ElementPropertySetRelationRequest>, initOverrides?: RequestInit): Promise<void> {
+        await this.createPropertySetElementRelationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, elementPropertySetRelationRequest: elementPropertySetRelationRequest }, initOverrides);
     }
 
     /**
      * Create many elements in an optimized format to reduce JSON size and avoid redudancy. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. You can use the same optimized structure to post multiple elements, property_sets, properties, definitions and units at once. For performance reasons, we do not check the validity of the json. If the json is malformed, an error 500 without more explaination may be returned instead of a 400.  Required scopes: ifc:write, model:write
      * Create elements in an optimized format
      */
-    async createRawElementsDeprecatedRaw(requestParameters: CreateRawElementsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async createRawElementsDeprecatedRaw(requestParameters: CreateRawElementsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createRawElementsDeprecated.');
         }
@@ -3427,7 +3459,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rawElementsRequest','Required parameter requestParameters.rawElementsRequest was null or undefined when calling createRawElementsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3439,11 +3471,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3456,7 +3489,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: RawElementsRequestToJSON(requestParameters.rawElementsRequest),
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -3465,15 +3498,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Create many elements in an optimized format to reduce JSON size and avoid redudancy. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. You can use the same optimized structure to post multiple elements, property_sets, properties, definitions and units at once. For performance reasons, we do not check the validity of the json. If the json is malformed, an error 500 without more explaination may be returned instead of a 400.  Required scopes: ifc:write, model:write
      * Create elements in an optimized format
      */
-    async createRawElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, rawElementsRequest: RawElementsRequest): Promise<void> {
-        await this.createRawElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, rawElementsRequest: rawElementsRequest });
+    async createRawElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, rawElementsRequest: RawElementsRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.createRawElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, rawElementsRequest: rawElementsRequest }, initOverrides);
     }
 
     /**
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a space in the model
      */
-    async createSpaceDeprecatedRaw(requestParameters: CreateSpaceDeprecatedRequest): Promise<runtime.ApiResponse<Array<Space>>> {
+    async createSpaceDeprecatedRaw(requestParameters: CreateSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Space>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createSpaceDeprecated.');
         }
@@ -3490,7 +3523,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('spaceRequest','Required parameter requestParameters.spaceRequest was null or undefined when calling createSpaceDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3502,11 +3535,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3519,7 +3553,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.spaceRequest.map(SpaceRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SpaceFromJSON));
     }
@@ -3528,8 +3562,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a space in the model
      */
-    async createSpaceDeprecated(cloudPk: number, ifcPk: number, projectPk: number, spaceRequest: Array<SpaceRequest>): Promise<Array<Space>> {
-        const response = await this.createSpaceDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, spaceRequest: spaceRequest });
+    async createSpaceDeprecated(cloudPk: number, ifcPk: number, projectPk: number, spaceRequest: Array<SpaceRequest>, initOverrides?: RequestInit): Promise<Array<Space>> {
+        const response = await this.createSpaceDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, spaceRequest: spaceRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3537,7 +3571,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a storey of a model.  Required scopes: ifc:write, model:write
      * Create a storey of a model
      */
-    async createStoreyDeprecatedRaw(requestParameters: CreateStoreyDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
+    async createStoreyDeprecatedRaw(requestParameters: CreateStoreyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createStoreyDeprecated.');
         }
@@ -3550,7 +3584,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createStoreyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3560,11 +3594,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3576,7 +3611,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
     }
@@ -3585,8 +3620,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a storey of a model.  Required scopes: ifc:write, model:write
      * Create a storey of a model
      */
-    async createStoreyDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Storey> {
-        const response = await this.createStoreyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async createStoreyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.createStoreyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3594,7 +3629,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a storey
      */
-    async createStoreyPlanDeprecatedRaw(requestParameters: CreateStoreyPlanDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
+    async createStoreyPlanDeprecatedRaw(requestParameters: CreateStoreyPlanDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createStoreyPlanDeprecated.');
         }
@@ -3611,7 +3646,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling createStoreyPlanDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3621,11 +3656,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3637,7 +3673,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
     }
@@ -3646,8 +3682,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a storey
      */
-    async createStoreyPlanDeprecated(cloudPk: number, ifcPk: number, projectPk: number, storeyUuid: string): Promise<Storey> {
-        const response = await this.createStoreyPlanDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid });
+    async createStoreyPlanDeprecated(cloudPk: number, ifcPk: number, projectPk: number, storeyUuid: string, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.createStoreyPlanDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid }, initOverrides);
         return await response.value();
     }
 
@@ -3655,7 +3691,7 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a system in the model
      */
-    async createSystemDeprecatedRaw(requestParameters: CreateSystemDeprecatedRequest): Promise<runtime.ApiResponse<System>> {
+    async createSystemDeprecatedRaw(requestParameters: CreateSystemDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<System>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createSystemDeprecated.');
         }
@@ -3672,7 +3708,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('systemRequest','Required parameter requestParameters.systemRequest was null or undefined when calling createSystemDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3684,11 +3720,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3701,7 +3738,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: SystemRequestToJSON(requestParameters.systemRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SystemFromJSON(jsonValue));
     }
@@ -3710,8 +3747,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a system in the model
      */
-    async createSystemDeprecated(cloudPk: number, ifcPk: number, projectPk: number, systemRequest: SystemRequest): Promise<System> {
-        const response = await this.createSystemDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, systemRequest: systemRequest });
+    async createSystemDeprecated(cloudPk: number, ifcPk: number, projectPk: number, systemRequest: SystemRequest, initOverrides?: RequestInit): Promise<System> {
+        const response = await this.createSystemDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, systemRequest: systemRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3719,7 +3756,7 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a zone in the model
      */
-    async createZoneDeprecatedRaw(requestParameters: CreateZoneDeprecatedRequest): Promise<runtime.ApiResponse<Array<Zone>>> {
+    async createZoneDeprecatedRaw(requestParameters: CreateZoneDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Zone>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createZoneDeprecated.');
         }
@@ -3736,7 +3773,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('zoneRequest','Required parameter requestParameters.zoneRequest was null or undefined when calling createZoneDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.color !== undefined) {
             queryParameters['color'] = requestParameters.color;
@@ -3752,11 +3789,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3769,7 +3807,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.zoneRequest.map(ZoneRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ZoneFromJSON));
     }
@@ -3778,8 +3816,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a zone in the model
      */
-    async createZoneDeprecated(cloudPk: number, ifcPk: number, projectPk: number, zoneRequest: Array<ZoneRequest>, color?: string): Promise<Array<Zone>> {
-        const response = await this.createZoneDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, zoneRequest: zoneRequest, color: color });
+    async createZoneDeprecated(cloudPk: number, ifcPk: number, projectPk: number, zoneRequest: Array<ZoneRequest>, color?: string, initOverrides?: RequestInit): Promise<Array<Zone>> {
+        const response = await this.createZoneDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, zoneRequest: zoneRequest, color: color }, initOverrides);
         return await response.value();
     }
 
@@ -3787,7 +3825,7 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a space in a zone
      */
-    async createZoneSpaceDeprecatedRaw(requestParameters: CreateZoneSpaceDeprecatedRequest): Promise<runtime.ApiResponse<ZoneSpace>> {
+    async createZoneSpaceDeprecatedRaw(requestParameters: CreateZoneSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ZoneSpace>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createZoneSpaceDeprecated.');
         }
@@ -3808,7 +3846,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('zoneSpaceRequest','Required parameter requestParameters.zoneSpaceRequest was null or undefined when calling createZoneSpaceDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3820,11 +3858,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3837,7 +3876,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: ZoneSpaceRequestToJSON(requestParameters.zoneSpaceRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ZoneSpaceFromJSON(jsonValue));
     }
@@ -3846,8 +3885,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a space in a zone
      */
-    async createZoneSpaceDeprecated(cloudPk: number, ifcPk: number, projectPk: number, zonePk: number, zoneSpaceRequest: ZoneSpaceRequest): Promise<ZoneSpace> {
-        const response = await this.createZoneSpaceDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk, zoneSpaceRequest: zoneSpaceRequest });
+    async createZoneSpaceDeprecated(cloudPk: number, ifcPk: number, projectPk: number, zonePk: number, zoneSpaceRequest: ZoneSpaceRequest, initOverrides?: RequestInit): Promise<ZoneSpace> {
+        const response = await this.createZoneSpaceDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk, zoneSpaceRequest: zoneSpaceRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3855,7 +3894,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Deleting a token will revoke it.  Required scopes: ifc:token_manage, model:token_manage
      * Delete a token
      */
-    async deleteAccessTokenDeprecatedRaw(requestParameters: DeleteAccessTokenDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteAccessTokenDeprecatedRaw(requestParameters: DeleteAccessTokenDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteAccessTokenDeprecated.');
         }
@@ -3872,7 +3911,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling deleteAccessTokenDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3882,11 +3921,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3898,7 +3938,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -3907,15 +3947,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Deleting a token will revoke it.  Required scopes: ifc:token_manage, model:token_manage
      * Delete a token
      */
-    async deleteAccessTokenDeprecated(cloudPk: number, ifcPk: number, projectPk: number, token: string): Promise<void> {
-        await this.deleteAccessTokenDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, token: token });
+    async deleteAccessTokenDeprecated(cloudPk: number, ifcPk: number, projectPk: number, token: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteAccessTokenDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, token: token }, initOverrides);
     }
 
     /**
      * Delete a building of a model  Required scopes: ifc:write, model:write
      * Delete a building of a model
      */
-    async deleteBuildingDeprecatedRaw(requestParameters: DeleteBuildingDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteBuildingDeprecatedRaw(requestParameters: DeleteBuildingDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteBuildingDeprecated.');
         }
@@ -3932,7 +3972,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteBuildingDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3942,11 +3982,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3958,7 +3999,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -3967,15 +4008,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a building of a model  Required scopes: ifc:write, model:write
      * Delete a building of a model
      */
-    async deleteBuildingDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<void> {
-        await this.deleteBuildingDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async deleteBuildingDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteBuildingDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
     }
 
     /**
      * Delete the relation between a 2d model and a building  Required scopes: ifc:write, model:write
      * Delete the relation between a 2d model and a building
      */
-    async deleteBuildingPlanDeprecatedRaw(requestParameters: DeleteBuildingPlanDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteBuildingPlanDeprecatedRaw(requestParameters: DeleteBuildingPlanDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
             throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling deleteBuildingPlanDeprecated.');
         }
@@ -3996,7 +4037,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteBuildingPlanDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4006,11 +4047,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4022,7 +4064,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4031,15 +4073,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete the relation between a 2d model and a building  Required scopes: ifc:write, model:write
      * Delete the relation between a 2d model and a building
      */
-    async deleteBuildingPlanDeprecated(buildingUuid: string, cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deleteBuildingPlanDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deleteBuildingPlanDeprecated(buildingUuid: string, cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteBuildingPlanDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Delete a checker of a model
      */
-    async deleteCheckerDeprecatedRaw(requestParameters: DeleteCheckerDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCheckerDeprecatedRaw(requestParameters: DeleteCheckerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteCheckerDeprecated.');
         }
@@ -4056,7 +4098,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteCheckerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4066,11 +4108,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4082,7 +4125,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4091,15 +4134,15 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Delete a checker of a model
      */
-    async deleteCheckerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deleteCheckerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deleteCheckerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a CheckerResult  Required scopes: check:write
      * Delete a CheckerResult
      */
-    async deleteCheckerResultDeprecatedRaw(requestParameters: DeleteCheckerResultDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCheckerResultDeprecatedRaw(requestParameters: DeleteCheckerResultDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling deleteCheckerResultDeprecated.');
         }
@@ -4120,7 +4163,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteCheckerResultDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4130,11 +4173,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4146,7 +4190,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4155,15 +4199,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a CheckerResult  Required scopes: check:write
      * Delete a CheckerResult
      */
-    async deleteCheckerResultDeprecated(checkerPk: number, cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deleteCheckerResultDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deleteCheckerResultDeprecated(checkerPk: number, cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerResultDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete an element of a model
      */
-    async deleteElementDeprecatedRaw(requestParameters: DeleteElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteElementDeprecatedRaw(requestParameters: DeleteElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteElementDeprecated.');
         }
@@ -4180,7 +4224,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4190,11 +4234,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4206,7 +4251,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4215,15 +4260,15 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete an element of a model
      */
-    async deleteElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<void> {
-        await this.deleteElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async deleteElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
     }
 
     /**
      * It will also delete the related document  Required scopes: ifc:write, model:write
      * Delete a model
      */
-    async deleteIfcDeprecatedRaw(requestParameters: DeleteIfcDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteIfcDeprecatedRaw(requestParameters: DeleteIfcDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcDeprecated.');
         }
@@ -4236,7 +4281,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4246,11 +4291,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4262,7 +4308,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4271,15 +4317,15 @@ export class IfcApi extends runtime.BaseAPI {
      * It will also delete the related document  Required scopes: ifc:write, model:write
      * Delete a model
      */
-    async deleteIfcDeprecated(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async deleteIfcDeprecated(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a PropertyDefinitions of a model  Required scopes: ifc:write, model:write
      * Delete a PropertyDefinitions of a model
      */
-    async deleteIfcPropertyDefinitionDeprecatedRaw(requestParameters: DeleteIfcPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteIfcPropertyDefinitionDeprecatedRaw(requestParameters: DeleteIfcPropertyDefinitionDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcPropertyDefinitionDeprecated.');
         }
@@ -4296,7 +4342,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcPropertyDefinitionDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4306,11 +4352,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4322,7 +4369,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4331,15 +4378,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a PropertyDefinitions of a model  Required scopes: ifc:write, model:write
      * Delete a PropertyDefinitions of a model
      */
-    async deleteIfcPropertyDefinitionDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deleteIfcPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deleteIfcPropertyDefinitionDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteIfcPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a Property of a model  Required scopes: ifc:write, model:write
      * Delete a Property of a model
      */
-    async deleteIfcPropertyDeprecatedRaw(requestParameters: DeleteIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteIfcPropertyDeprecatedRaw(requestParameters: DeleteIfcPropertyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcPropertyDeprecated.');
         }
@@ -4356,7 +4403,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcPropertyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4366,11 +4413,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4382,7 +4430,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4391,15 +4439,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a Property of a model  Required scopes: ifc:write, model:write
      * Delete a Property of a model
      */
-    async deleteIfcPropertyDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deleteIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deleteIfcPropertyDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a Unit of a model  Required scopes: ifc:write, model:write
      * Delete a Unit of a model
      */
-    async deleteIfcUnitDeprecatedRaw(requestParameters: DeleteIfcUnitDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteIfcUnitDeprecatedRaw(requestParameters: DeleteIfcUnitDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcUnitDeprecated.');
         }
@@ -4416,7 +4464,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcUnitDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4426,11 +4474,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4442,7 +4491,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4451,15 +4500,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a Unit of a model  Required scopes: ifc:write, model:write
      * Delete a Unit of a model
      */
-    async deleteIfcUnitDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deleteIfcUnitDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deleteIfcUnitDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteIfcUnitDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete the Model without deleting the related document  Required scopes: ifc:write, model:write
      * Delete the Model without deleting the related document
      */
-    async deleteIfcWithoutDocDeprecatedRaw(requestParameters: DeleteIfcWithoutDocDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteIfcWithoutDocDeprecatedRaw(requestParameters: DeleteIfcWithoutDocDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteIfcWithoutDocDeprecated.');
         }
@@ -4472,7 +4521,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteIfcWithoutDocDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4482,11 +4531,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4498,7 +4548,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4507,15 +4557,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete the Model without deleting the related document  Required scopes: ifc:write, model:write
      * Delete the Model without deleting the related document
      */
-    async deleteIfcWithoutDocDeprecated(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteIfcWithoutDocDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async deleteIfcWithoutDocDeprecated(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteIfcWithoutDocDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * The IFC file will not be updated. The remaining layers are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a layer of a model
      */
-    async deleteLayerDeprecatedRaw(requestParameters: DeleteLayerDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteLayerDeprecatedRaw(requestParameters: DeleteLayerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteLayerDeprecated.');
         }
@@ -4532,7 +4582,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteLayerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4542,11 +4592,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4558,7 +4609,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4567,15 +4618,15 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining layers are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a layer of a model
      */
-    async deleteLayerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deleteLayerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deleteLayerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteLayerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a PropertySet of a model  Required scopes: ifc:write, model:write
      * Delete a PropertySet of a model
      */
-    async deletePropertySetDeprecatedRaw(requestParameters: DeletePropertySetDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deletePropertySetDeprecatedRaw(requestParameters: DeletePropertySetDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deletePropertySetDeprecated.');
         }
@@ -4592,7 +4643,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deletePropertySetDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4602,11 +4653,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4618,7 +4670,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4627,15 +4679,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a PropertySet of a model  Required scopes: ifc:write, model:write
      * Delete a PropertySet of a model
      */
-    async deletePropertySetDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deletePropertySetDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deletePropertySetDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deletePropertySetDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * It will not delete related zones. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a space
      */
-    async deleteSpaceDeprecatedRaw(requestParameters: DeleteSpaceDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteSpaceDeprecatedRaw(requestParameters: DeleteSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteSpaceDeprecated.');
         }
@@ -4652,7 +4704,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteSpaceDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4662,11 +4714,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4678,7 +4731,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4687,15 +4740,15 @@ export class IfcApi extends runtime.BaseAPI {
      * It will not delete related zones. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a space
      */
-    async deleteSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deleteSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deleteSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a storey of a model  Required scopes: ifc:write, model:write
      * Delete a storey of a model
      */
-    async deleteStoreyDeprecatedRaw(requestParameters: DeleteStoreyDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteStoreyDeprecatedRaw(requestParameters: DeleteStoreyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteStoreyDeprecated.');
         }
@@ -4712,7 +4765,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteStoreyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4722,11 +4775,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4738,7 +4792,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4747,15 +4801,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a storey of a model  Required scopes: ifc:write, model:write
      * Delete a storey of a model
      */
-    async deleteStoreyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<void> {
-        await this.deleteStoreyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async deleteStoreyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteStoreyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
     }
 
     /**
      * Delete the relation between a 2d model and a storey  Required scopes: ifc:write, model:write
      * Delete the relation between a 2d model and a storey
      */
-    async deleteStoreyPlanDeprecatedRaw(requestParameters: DeleteStoreyPlanDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteStoreyPlanDeprecatedRaw(requestParameters: DeleteStoreyPlanDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteStoreyPlanDeprecated.');
         }
@@ -4776,7 +4830,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling deleteStoreyPlanDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4786,11 +4840,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4802,7 +4857,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4811,15 +4866,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete the relation between a 2d model and a storey  Required scopes: ifc:write, model:write
      * Delete the relation between a 2d model and a storey
      */
-    async deleteStoreyPlanDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, storeyUuid: string): Promise<void> {
-        await this.deleteStoreyPlanDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid });
+    async deleteStoreyPlanDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, storeyUuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteStoreyPlanDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid }, initOverrides);
     }
 
     /**
      * The IFC file will not be updated. The remaining systems are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a system of a model
      */
-    async deleteSystemDeprecatedRaw(requestParameters: DeleteSystemDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteSystemDeprecatedRaw(requestParameters: DeleteSystemDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteSystemDeprecated.');
         }
@@ -4836,7 +4891,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteSystemDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4846,11 +4901,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4862,7 +4918,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4871,15 +4927,15 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining systems are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a system of a model
      */
-    async deleteSystemDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<void> {
-        await this.deleteSystemDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async deleteSystemDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteSystemDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
     }
 
     /**
      * The IFC file will not be updated. The remaining zones are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a zone of a model
      */
-    async deleteZoneDeprecatedRaw(requestParameters: DeleteZoneDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteZoneDeprecatedRaw(requestParameters: DeleteZoneDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteZoneDeprecated.');
         }
@@ -4896,7 +4952,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteZoneDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4906,11 +4962,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4922,7 +4979,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4931,15 +4988,15 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining zones are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a zone of a model
      */
-    async deleteZoneDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.deleteZoneDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async deleteZoneDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteZoneDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a space of a zone
      */
-    async deleteZoneSpaceDeprecatedRaw(requestParameters: DeleteZoneSpaceDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteZoneSpaceDeprecatedRaw(requestParameters: DeleteZoneSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteZoneSpaceDeprecated.');
         }
@@ -4960,7 +5017,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling deleteZoneSpaceDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4970,11 +5027,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4986,7 +5044,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4995,15 +5053,15 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a space of a zone
      */
-    async deleteZoneSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, zonePk: number): Promise<void> {
-        await this.deleteZoneSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk });
+    async deleteZoneSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, zonePk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteZoneSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk }, initOverrides);
     }
 
     /**
      * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result  Required scopes: ifc:write, model:write
      * Export IFC
      */
-    async exportIfcDeprecatedRaw(requestParameters: ExportIfcDeprecatedRequest): Promise<runtime.ApiResponse<IfcExport>> {
+    async exportIfcDeprecatedRaw(requestParameters: ExportIfcDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcExport>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling exportIfcDeprecated.');
         }
@@ -5020,7 +5078,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('ifcExportRequest','Required parameter requestParameters.ifcExportRequest was null or undefined when calling exportIfcDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5032,11 +5090,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5049,7 +5108,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: IfcExportRequestToJSON(requestParameters.ifcExportRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcExportFromJSON(jsonValue));
     }
@@ -5058,8 +5117,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result  Required scopes: ifc:write, model:write
      * Export IFC
      */
-    async exportIfcDeprecated(cloudPk: number, id: number, projectPk: number, ifcExportRequest: IfcExportRequest): Promise<IfcExport> {
-        const response = await this.exportIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, ifcExportRequest: ifcExportRequest });
+    async exportIfcDeprecated(cloudPk: number, id: number, projectPk: number, ifcExportRequest: IfcExportRequest, initOverrides?: RequestInit): Promise<IfcExport> {
+        const response = await this.exportIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, ifcExportRequest: ifcExportRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5067,7 +5126,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update all fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update all fields of an element
      */
-    async fullUpdateElementDeprecatedRaw(requestParameters: FullUpdateElementDeprecatedRequest): Promise<runtime.ApiResponse<Element>> {
+    async fullUpdateElementDeprecatedRaw(requestParameters: FullUpdateElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Element>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateElementDeprecated.');
         }
@@ -5088,7 +5147,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('elementRequest','Required parameter requestParameters.elementRequest was null or undefined when calling fullUpdateElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5100,11 +5159,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5117,7 +5177,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: ElementRequestToJSON(requestParameters.elementRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ElementFromJSON(jsonValue));
     }
@@ -5126,8 +5186,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update all fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update all fields of an element
      */
-    async fullUpdateElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, elementRequest: ElementRequest): Promise<Element> {
-        const response = await this.fullUpdateElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid, elementRequest: elementRequest });
+    async fullUpdateElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, elementRequest: ElementRequest, initOverrides?: RequestInit): Promise<Element> {
+        const response = await this.fullUpdateElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid, elementRequest: elementRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5135,7 +5195,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one token created for this model  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve one token created for this model
      */
-    async getAccessTokenDeprecatedRaw(requestParameters: GetAccessTokenDeprecatedRequest): Promise<runtime.ApiResponse<IfcAccessToken>> {
+    async getAccessTokenDeprecatedRaw(requestParameters: GetAccessTokenDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcAccessToken>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getAccessTokenDeprecated.');
         }
@@ -5152,7 +5212,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling getAccessTokenDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5162,11 +5222,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5178,7 +5239,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcAccessTokenFromJSON(jsonValue));
     }
@@ -5187,8 +5248,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one token created for this model  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve one token created for this model
      */
-    async getAccessTokenDeprecated(cloudPk: number, ifcPk: number, projectPk: number, token: string): Promise<IfcAccessToken> {
-        const response = await this.getAccessTokenDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, token: token });
+    async getAccessTokenDeprecated(cloudPk: number, ifcPk: number, projectPk: number, token: string, initOverrides?: RequestInit): Promise<IfcAccessToken> {
+        const response = await this.getAccessTokenDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, token: token }, initOverrides);
         return await response.value();
     }
 
@@ -5196,7 +5257,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all tokens created for this model  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve all tokens created for this model
      */
-    async getAccessTokensDeprecatedRaw(requestParameters: GetAccessTokensDeprecatedRequest): Promise<runtime.ApiResponse<Array<IfcAccessToken>>> {
+    async getAccessTokensDeprecatedRaw(requestParameters: GetAccessTokensDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<IfcAccessToken>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getAccessTokensDeprecated.');
         }
@@ -5209,7 +5270,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getAccessTokensDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5219,11 +5280,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5235,7 +5297,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(IfcAccessTokenFromJSON));
     }
@@ -5244,8 +5306,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all tokens created for this model  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve all tokens created for this model
      */
-    async getAccessTokensDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<IfcAccessToken>> {
-        const response = await this.getAccessTokensDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getAccessTokensDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<IfcAccessToken>> {
+        const response = await this.getAccessTokensDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5253,7 +5315,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a building of a model  Required scopes: ifc:read, model:read
      * Retrieve a building of a model
      */
-    async getBuildingDeprecatedRaw(requestParameters: GetBuildingDeprecatedRequest): Promise<runtime.ApiResponse<Building>> {
+    async getBuildingDeprecatedRaw(requestParameters: GetBuildingDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Building>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getBuildingDeprecated.');
         }
@@ -5270,7 +5332,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getBuildingDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5280,11 +5342,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5296,7 +5359,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
     }
@@ -5305,8 +5368,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a building of a model  Required scopes: ifc:read, model:read
      * Retrieve a building of a model
      */
-    async getBuildingDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<Building> {
-        const response = await this.getBuildingDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async getBuildingDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.getBuildingDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -5314,7 +5377,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve the postioning of the plan in the building  Required scopes: ifc:read, model:read
      * Retrieve the postioning of the plan in the building
      */
-    async getBuildingPlanPositioningDeprecatedRaw(requestParameters: GetBuildingPlanPositioningDeprecatedRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
+    async getBuildingPlanPositioningDeprecatedRaw(requestParameters: GetBuildingPlanPositioningDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PositioningPlan>> {
         if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
             throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling getBuildingPlanPositioningDeprecated.');
         }
@@ -5335,7 +5398,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getBuildingPlanPositioningDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5345,11 +5408,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5361,7 +5425,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PositioningPlanFromJSON(jsonValue));
     }
@@ -5370,8 +5434,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve the postioning of the plan in the building  Required scopes: ifc:read, model:read
      * Retrieve the postioning of the plan in the building
      */
-    async getBuildingPlanPositioningDeprecated(buildingUuid: string, cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<PositioningPlan> {
-        const response = await this.getBuildingPlanPositioningDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getBuildingPlanPositioningDeprecated(buildingUuid: string, cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<PositioningPlan> {
+        const response = await this.getBuildingPlanPositioningDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5379,7 +5443,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all buildings of a model.  Required scopes: ifc:read, model:read
      * Retrieve all buildings of a model
      */
-    async getBuildingsDeprecatedRaw(requestParameters: GetBuildingsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Building>>> {
+    async getBuildingsDeprecatedRaw(requestParameters: GetBuildingsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Building>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getBuildingsDeprecated.');
         }
@@ -5392,7 +5456,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getBuildingsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5402,11 +5466,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5418,7 +5483,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(BuildingFromJSON));
     }
@@ -5427,8 +5492,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all buildings of a model.  Required scopes: ifc:read, model:read
      * Retrieve all buildings of a model
      */
-    async getBuildingsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<Building>> {
-        const response = await this.getBuildingsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getBuildingsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Building>> {
+        const response = await this.getBuildingsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5436,7 +5501,7 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve a checker of a model
      */
-    async getCheckerDeprecatedRaw(requestParameters: GetCheckerDeprecatedRequest): Promise<runtime.ApiResponse<IfcChecker>> {
+    async getCheckerDeprecatedRaw(requestParameters: GetCheckerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckerDeprecated.');
         }
@@ -5453,7 +5518,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5463,11 +5528,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5479,7 +5545,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
     }
@@ -5488,8 +5554,8 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve a checker of a model
      */
-    async getCheckerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<IfcChecker> {
-        const response = await this.getCheckerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getCheckerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<IfcChecker> {
+        const response = await this.getCheckerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5497,7 +5563,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one CheckerResult  Required scopes: check:read
      * Retrieve one CheckerResult
      */
-    async getCheckerResultDeprecatedRaw(requestParameters: GetCheckerResultDeprecatedRequest): Promise<runtime.ApiResponse<CheckerResult>> {
+    async getCheckerResultDeprecatedRaw(requestParameters: GetCheckerResultDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling getCheckerResultDeprecated.');
         }
@@ -5518,7 +5584,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerResultDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5528,11 +5594,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5544,7 +5611,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
     }
@@ -5553,8 +5620,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one CheckerResult  Required scopes: check:read
      * Retrieve one CheckerResult
      */
-    async getCheckerResultDeprecated(checkerPk: number, cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<CheckerResult> {
-        const response = await this.getCheckerResultDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getCheckerResultDeprecated(checkerPk: number, cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<CheckerResult> {
+        const response = await this.getCheckerResultDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5562,7 +5629,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all CheckerResults  Required scopes: check:read
      * Retrieve all CheckerResults
      */
-    async getCheckerResultsDeprecatedRaw(requestParameters: GetCheckerResultsDeprecatedRequest): Promise<runtime.ApiResponse<Array<CheckerResult>>> {
+    async getCheckerResultsDeprecatedRaw(requestParameters: GetCheckerResultsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<CheckerResult>>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling getCheckerResultsDeprecated.');
         }
@@ -5579,7 +5646,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerResultsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5589,11 +5656,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5605,7 +5673,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CheckerResultFromJSON));
     }
@@ -5614,8 +5682,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all CheckerResults  Required scopes: check:read
      * Retrieve all CheckerResults
      */
-    async getCheckerResultsDeprecated(checkerPk: number, cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<CheckerResult>> {
-        const response = await this.getCheckerResultsDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getCheckerResultsDeprecated(checkerPk: number, cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<CheckerResult>> {
+        const response = await this.getCheckerResultsDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5623,7 +5691,7 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve all checkers of a model
      */
-    async getCheckersDeprecatedRaw(requestParameters: GetCheckersDeprecatedRequest): Promise<runtime.ApiResponse<Array<IfcChecker>>> {
+    async getCheckersDeprecatedRaw(requestParameters: GetCheckersDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<IfcChecker>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckersDeprecated.');
         }
@@ -5636,7 +5704,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckersDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5646,11 +5714,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5662,7 +5731,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(IfcCheckerFromJSON));
     }
@@ -5671,8 +5740,8 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve all checkers of a model
      */
-    async getCheckersDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<IfcChecker>> {
-        const response = await this.getCheckersDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getCheckersDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<IfcChecker>> {
+        const response = await this.getCheckersDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5680,7 +5749,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all classifications of an element  Required scopes: ifc:read, model:read
      * Retrieve all classifications of an element
      */
-    async getClassificationsOfElementDeprecatedRaw(requestParameters: GetClassificationsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+    async getClassificationsOfElementDeprecatedRaw(requestParameters: GetClassificationsOfElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getClassificationsOfElementDeprecated.');
         }
@@ -5697,7 +5766,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getClassificationsOfElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5707,11 +5776,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5723,7 +5793,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ClassificationFromJSON));
     }
@@ -5732,8 +5802,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all classifications of an element  Required scopes: ifc:read, model:read
      * Retrieve all classifications of an element
      */
-    async getClassificationsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number): Promise<Array<Classification>> {
-        const response = await this.getClassificationsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk });
+    async getClassificationsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.getClassificationsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5741,7 +5811,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all documents of an element  Required scopes: ifc:read, model:read
      * Retrieve all documents of an element
      */
-    async getDocumentsOfElementDeprecatedRaw(requestParameters: GetDocumentsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Document>>> {
+    async getDocumentsOfElementDeprecatedRaw(requestParameters: GetDocumentsOfElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocumentsOfElementDeprecated.');
         }
@@ -5758,7 +5828,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocumentsOfElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5768,11 +5838,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5784,7 +5855,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
     }
@@ -5793,8 +5864,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all documents of an element  Required scopes: ifc:read, model:read
      * Retrieve all documents of an element
      */
-    async getDocumentsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number): Promise<Array<Document>> {
-        const response = await this.getDocumentsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk });
+    async getDocumentsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5802,7 +5873,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve an element of a model  Required scopes: ifc:read, model:read
      * Retrieve an element of a model
      */
-    async getElementDeprecatedRaw(requestParameters: GetElementDeprecatedRequest): Promise<runtime.ApiResponse<Element>> {
+    async getElementDeprecatedRaw(requestParameters: GetElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Element>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementDeprecated.');
         }
@@ -5819,7 +5890,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5829,11 +5900,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5845,7 +5917,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ElementFromJSON(jsonValue));
     }
@@ -5854,8 +5926,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve an element of a model  Required scopes: ifc:read, model:read
      * Retrieve an element of a model
      */
-    async getElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<Element> {
-        const response = await this.getElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async getElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Element> {
+        const response = await this.getElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -5863,7 +5935,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all documents linked to any element with the list of uuids  Required scopes: ifc:read, model:read
      * Retrieve all documents linked to any element
      */
-    async getElementLinkedDocumentsDeprecatedRaw(requestParameters: GetElementLinkedDocumentsDeprecatedRequest): Promise<runtime.ApiResponse<Array<DocumentWithElementList>>> {
+    async getElementLinkedDocumentsDeprecatedRaw(requestParameters: GetElementLinkedDocumentsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<DocumentWithElementList>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementLinkedDocumentsDeprecated.');
         }
@@ -5876,7 +5948,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementLinkedDocumentsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.classification !== undefined) {
             queryParameters['classification'] = requestParameters.classification;
@@ -5898,11 +5970,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5914,7 +5987,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentWithElementListFromJSON));
     }
@@ -5923,8 +5996,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all documents linked to any element with the list of uuids  Required scopes: ifc:read, model:read
      * Retrieve all documents linked to any element
      */
-    async getElementLinkedDocumentsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, classification?: string, classificationNotation?: string, type?: string): Promise<Array<DocumentWithElementList>> {
-        const response = await this.getElementLinkedDocumentsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, classification: classification, classificationNotation: classificationNotation, type: type });
+    async getElementLinkedDocumentsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<DocumentWithElementList>> {
+        const response = await this.getElementLinkedDocumentsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -5932,7 +6005,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a PropertySet of an element  Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of an element
      */
-    async getElementPropertySetDeprecatedRaw(requestParameters: GetElementPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<PropertySet>> {
+    async getElementPropertySetDeprecatedRaw(requestParameters: GetElementPropertySetDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertySet>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetDeprecated.');
         }
@@ -5953,7 +6026,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5963,11 +6036,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5979,7 +6053,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertySetFromJSON(jsonValue));
     }
@@ -5988,8 +6062,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a PropertySet of an element  Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of an element
      */
-    async getElementPropertySetDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number): Promise<PropertySet> {
-        const response = await this.getElementPropertySetDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getElementPropertySetDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<PropertySet> {
+        const response = await this.getElementPropertySetDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5997,7 +6071,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all Properties of a PropertySet  Required scopes: ifc:read, model:read
      * Retrieve all Properties of a PropertySet
      */
-    async getElementPropertySetPropertiesDeprecatedRaw(requestParameters: GetElementPropertySetPropertiesDeprecatedRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async getElementPropertySetPropertiesDeprecatedRaw(requestParameters: GetElementPropertySetPropertiesDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertiesDeprecated.');
         }
@@ -6018,7 +6092,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertiesDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6028,11 +6102,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6044,7 +6119,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyFromJSON));
     }
@@ -6053,8 +6128,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all Properties of a PropertySet  Required scopes: ifc:read, model:read
      * Retrieve all Properties of a PropertySet
      */
-    async getElementPropertySetPropertiesDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertysetPk: number): Promise<Array<Property>> {
-        const response = await this.getElementPropertySetPropertiesDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk });
+    async getElementPropertySetPropertiesDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Array<Property>> {
+        const response = await this.getElementPropertySetPropertiesDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk }, initOverrides);
         return await response.value();
     }
 
@@ -6062,7 +6137,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Definition of a Property  Required scopes: ifc:read, model:read
      * Retrieve a Definition of a Property
      */
-    async getElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+    async getElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertyDefinition>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionDeprecated.');
         }
@@ -6091,7 +6166,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6101,11 +6176,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6117,7 +6193,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
     }
@@ -6126,8 +6202,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Definition of a Property  Required scopes: ifc:read, model:read
      * Retrieve a Definition of a Property
      */
-    async getElementPropertySetPropertyDefinitionDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertyPk: number, propertysetPk: number): Promise<PropertyDefinition> {
-        const response = await this.getElementPropertySetPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk });
+    async getElementPropertySetPropertyDefinitionDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertyPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<PropertyDefinition> {
+        const response = await this.getElementPropertySetPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk }, initOverrides);
         return await response.value();
     }
 
@@ -6135,7 +6211,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Unit of a Definition  Required scopes: ifc:read, model:read
      * Retrieve a Unit of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitDeprecatedRequest): Promise<runtime.ApiResponse<Unit>> {
+    async getElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Unit>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
@@ -6168,7 +6244,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6178,11 +6254,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6194,7 +6271,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
     }
@@ -6203,8 +6280,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Unit of a Definition  Required scopes: ifc:read, model:read
      * Retrieve a Unit of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnitDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number): Promise<Unit> {
-        const response = await this.getElementPropertySetPropertyDefinitionUnitDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk });
+    async getElementPropertySetPropertyDefinitionUnitDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Unit> {
+        const response = await this.getElementPropertySetPropertyDefinitionUnitDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk }, initOverrides);
         return await response.value();
     }
 
@@ -6212,7 +6289,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all Units of a Definition  Required scopes: ifc:read, model:read
      * Retrieve all Units of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnitsDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
+    async getElementPropertySetPropertyDefinitionUnitsDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Unit>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitsDeprecated.');
         }
@@ -6241,7 +6318,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnitsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6251,11 +6328,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6267,7 +6345,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UnitFromJSON));
     }
@@ -6276,8 +6354,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all Units of a Definition  Required scopes: ifc:read, model:read
      * Retrieve all Units of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnitsDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number): Promise<Array<Unit>> {
-        const response = await this.getElementPropertySetPropertyDefinitionUnitsDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk });
+    async getElementPropertySetPropertyDefinitionUnitsDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Array<Unit>> {
+        const response = await this.getElementPropertySetPropertyDefinitionUnitsDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk }, initOverrides);
         return await response.value();
     }
 
@@ -6285,7 +6363,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all Definitions of a PropertySet  Required scopes: ifc:read, model:read
      * Retrieve all Definitions of a PropertySet
      */
-    async getElementPropertySetPropertyDefinitionsDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionsDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
+    async getElementPropertySetPropertyDefinitionsDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDefinitionsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionsDeprecated.');
         }
@@ -6310,7 +6388,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6320,11 +6398,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6336,7 +6415,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyDefinitionFromJSON));
     }
@@ -6345,8 +6424,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all Definitions of a PropertySet  Required scopes: ifc:read, model:read
      * Retrieve all Definitions of a PropertySet
      */
-    async getElementPropertySetPropertyDefinitionsDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertyPk: number, propertysetPk: number): Promise<Array<PropertyDefinition>> {
-        const response = await this.getElementPropertySetPropertyDefinitionsDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk });
+    async getElementPropertySetPropertyDefinitionsDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, propertyPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Array<PropertyDefinition>> {
+        const response = await this.getElementPropertySetPropertyDefinitionsDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk }, initOverrides);
         return await response.value();
     }
 
@@ -6354,7 +6433,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Property of a PropertySet  Required scopes: ifc:read, model:read
      * Retrieve a Property of a PropertySet
      */
-    async getElementPropertySetPropertyDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
+    async getElementPropertySetPropertyDeprecatedRaw(requestParameters: GetElementPropertySetPropertyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDeprecated.');
         }
@@ -6379,7 +6458,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6389,11 +6468,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6405,7 +6485,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
     }
@@ -6414,8 +6494,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Property of a PropertySet  Required scopes: ifc:read, model:read
      * Retrieve a Property of a PropertySet
      */
-    async getElementPropertySetPropertyDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertysetPk: number): Promise<Property> {
-        const response = await this.getElementPropertySetPropertyDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk });
+    async getElementPropertySetPropertyDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.getElementPropertySetPropertyDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk }, initOverrides);
         return await response.value();
     }
 
@@ -6423,7 +6503,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of an element  Required scopes: ifc:read, model:read
      * Retrieve all PropertySets of an element
      */
-    async getElementPropertySetsDeprecatedRaw(requestParameters: GetElementPropertySetsDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertySet>>> {
+    async getElementPropertySetsDeprecatedRaw(requestParameters: GetElementPropertySetsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertySet>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetsDeprecated.');
         }
@@ -6440,7 +6520,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6450,11 +6530,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6466,7 +6547,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertySetFromJSON));
     }
@@ -6475,8 +6556,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of an element  Required scopes: ifc:read, model:read
      * Retrieve all PropertySets of an element
      */
-    async getElementPropertySetsDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number): Promise<Array<PropertySet>> {
-        const response = await this.getElementPropertySetsDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk });
+    async getElementPropertySetsDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<PropertySet>> {
+        const response = await this.getElementPropertySetsDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -6484,7 +6565,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see getRawElements  Required scopes: ifc:read, model:read
      * Retrieve all elements of a model
      */
-    async getElementsDeprecatedRaw(requestParameters: GetElementsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async getElementsDeprecatedRaw(requestParameters: GetElementsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementsDeprecated.');
         }
@@ -6497,7 +6578,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.classification !== undefined) {
             queryParameters['classification'] = requestParameters.classification;
@@ -6519,11 +6600,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6535,7 +6617,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementFromJSON));
     }
@@ -6544,8 +6626,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see getRawElements  Required scopes: ifc:read, model:read
      * Retrieve all elements of a model
      */
-    async getElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, classification?: string, classificationNotation?: string, type?: string): Promise<Array<Element>> {
-        const response = await this.getElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, classification: classification, classificationNotation: classificationNotation, type: type });
+    async getElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.getElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -6553,7 +6635,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all elements with the classification  Required scopes: ifc:read, model:read
      * Retrieve all elements with the classification
      */
-    async getElementsFromClassificationDeprecatedRaw(requestParameters: GetElementsFromClassificationDeprecatedRequest): Promise<runtime.ApiResponse<Array<Element>>> {
+    async getElementsFromClassificationDeprecatedRaw(requestParameters: GetElementsFromClassificationDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementsFromClassificationDeprecated.');
         }
@@ -6570,7 +6652,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementsFromClassificationDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6580,11 +6662,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6596,7 +6679,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementFromJSON));
     }
@@ -6605,8 +6688,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all elements with the classification  Required scopes: ifc:read, model:read
      * Retrieve all elements with the classification
      */
-    async getElementsFromClassificationDeprecated(cloudPk: number, ifcPk: number, modelClassificationPk: number, projectPk: number): Promise<Array<Element>> {
-        const response = await this.getElementsFromClassificationDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, modelClassificationPk: modelClassificationPk, projectPk: projectPk });
+    async getElementsFromClassificationDeprecated(cloudPk: number, ifcPk: number, modelClassificationPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.getElementsFromClassificationDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, modelClassificationPk: modelClassificationPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -6614,7 +6697,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all classifications in a model  Required scopes: ifc:read, model:read
      * Retrieve all classifications in a model
      */
-    async getIfcClassificationsDeprecatedRaw(requestParameters: GetIfcClassificationsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+    async getIfcClassificationsDeprecatedRaw(requestParameters: GetIfcClassificationsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcClassificationsDeprecated.');
         }
@@ -6627,7 +6710,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcClassificationsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6637,11 +6720,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6653,7 +6737,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ClassificationFromJSON));
     }
@@ -6662,8 +6746,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all classifications in a model  Required scopes: ifc:read, model:read
      * Retrieve all classifications in a model
      */
-    async getIfcClassificationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<Classification>> {
-        const response = await this.getIfcClassificationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getIfcClassificationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.getIfcClassificationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -6671,7 +6755,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one model  Required scopes: ifc:read, model:read
      * Retrieve one model
      */
-    async getIfcDeprecatedRaw(requestParameters: GetIfcDeprecatedRequest): Promise<runtime.ApiResponse<Model>> {
+    async getIfcDeprecatedRaw(requestParameters: GetIfcDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcDeprecated.');
         }
@@ -6684,7 +6768,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6694,11 +6778,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6710,7 +6795,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
     }
@@ -6719,8 +6804,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one model  Required scopes: ifc:read, model:read
      * Retrieve one model
      */
-    async getIfcDeprecated(cloudPk: number, id: number, projectPk: number): Promise<Model> {
-        const response = await this.getIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async getIfcDeprecated(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.getIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -6728,7 +6813,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a material of a model  Required scopes: ifc:read, model:read
      * Retrieve a material of a model
      */
-    async getIfcMaterialDeprecatedRaw(requestParameters: GetIfcMaterialDeprecatedRequest): Promise<runtime.ApiResponse<Material>> {
+    async getIfcMaterialDeprecatedRaw(requestParameters: GetIfcMaterialDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Material>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterialDeprecated.');
         }
@@ -6745,7 +6830,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterialDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6755,11 +6840,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6771,7 +6857,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => MaterialFromJSON(jsonValue));
     }
@@ -6780,8 +6866,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a material of a model  Required scopes: ifc:read, model:read
      * Retrieve a material of a model
      */
-    async getIfcMaterialDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<Material> {
-        const response = await this.getIfcMaterialDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getIfcMaterialDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Material> {
+        const response = await this.getIfcMaterialDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -6789,7 +6875,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all materials of a model.  Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getIfcMaterialsDeprecatedRaw(requestParameters: GetIfcMaterialsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Material>>> {
+    async getIfcMaterialsDeprecatedRaw(requestParameters: GetIfcMaterialsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Material>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcMaterialsDeprecated.');
         }
@@ -6802,7 +6888,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcMaterialsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6812,11 +6898,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6828,7 +6915,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MaterialFromJSON));
     }
@@ -6837,8 +6924,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all materials of a model.  Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getIfcMaterialsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<Material>> {
-        const response = await this.getIfcMaterialsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getIfcMaterialsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Material>> {
+        const response = await this.getIfcMaterialsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -6846,7 +6933,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of a model  Required scopes: ifc:read, model:read
      * Retrieve all Properties of a model
      */
-    async getIfcPropertiesDeprecatedRaw(requestParameters: GetIfcPropertiesDeprecatedRequest): Promise<runtime.ApiResponse<Array<Property>>> {
+    async getIfcPropertiesDeprecatedRaw(requestParameters: GetIfcPropertiesDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Property>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertiesDeprecated.');
         }
@@ -6859,7 +6946,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertiesDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6869,11 +6956,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6885,7 +6973,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyFromJSON));
     }
@@ -6894,8 +6982,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of a model  Required scopes: ifc:read, model:read
      * Retrieve all Properties of a model
      */
-    async getIfcPropertiesDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<Property>> {
-        const response = await this.getIfcPropertiesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getIfcPropertiesDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Property>> {
+        const response = await this.getIfcPropertiesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -6903,7 +6991,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a PropertyDefinition of a model  Required scopes: ifc:read, model:read
      * Retrieve a PropertyDefinition of a model
      */
-    async getIfcPropertyDefinitionDeprecatedRaw(requestParameters: GetIfcPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+    async getIfcPropertyDefinitionDeprecatedRaw(requestParameters: GetIfcPropertyDefinitionDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertyDefinition>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDefinitionDeprecated.');
         }
@@ -6920,7 +7008,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDefinitionDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6930,11 +7018,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -6946,7 +7035,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
     }
@@ -6955,8 +7044,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a PropertyDefinition of a model  Required scopes: ifc:read, model:read
      * Retrieve a PropertyDefinition of a model
      */
-    async getIfcPropertyDefinitionDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<PropertyDefinition> {
-        const response = await this.getIfcPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getIfcPropertyDefinitionDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<PropertyDefinition> {
+        const response = await this.getIfcPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -6964,7 +7053,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all PropertyDefinitions of a model  Required scopes: ifc:read, model:read
      * Retrieve all PropertyDefinitions of a model
      */
-    async getIfcPropertyDefinitionsDeprecatedRaw(requestParameters: GetIfcPropertyDefinitionsDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
+    async getIfcPropertyDefinitionsDeprecatedRaw(requestParameters: GetIfcPropertyDefinitionsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDefinitionsDeprecated.');
         }
@@ -6977,7 +7066,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDefinitionsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -6987,11 +7076,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7003,7 +7093,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyDefinitionFromJSON));
     }
@@ -7012,8 +7102,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all PropertyDefinitions of a model  Required scopes: ifc:read, model:read
      * Retrieve all PropertyDefinitions of a model
      */
-    async getIfcPropertyDefinitionsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<PropertyDefinition>> {
-        const response = await this.getIfcPropertyDefinitionsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getIfcPropertyDefinitionsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<PropertyDefinition>> {
+        const response = await this.getIfcPropertyDefinitionsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7021,7 +7111,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Property of a model  Required scopes: ifc:read, model:read
      * Retrieve a Property of a model
      */
-    async getIfcPropertyDeprecatedRaw(requestParameters: GetIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
+    async getIfcPropertyDeprecatedRaw(requestParameters: GetIfcPropertyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcPropertyDeprecated.');
         }
@@ -7038,7 +7128,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcPropertyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7048,11 +7138,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7064,7 +7155,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
     }
@@ -7073,8 +7164,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Property of a model  Required scopes: ifc:read, model:read
      * Retrieve a Property of a model
      */
-    async getIfcPropertyDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<Property> {
-        const response = await this.getIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getIfcPropertyDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.getIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7082,7 +7173,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Unit of a model  Required scopes: ifc:read, model:read
      * Retrieve a Unit of a model
      */
-    async getIfcUnitDeprecatedRaw(requestParameters: GetIfcUnitDeprecatedRequest): Promise<runtime.ApiResponse<Unit>> {
+    async getIfcUnitDeprecatedRaw(requestParameters: GetIfcUnitDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Unit>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcUnitDeprecated.');
         }
@@ -7099,7 +7190,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcUnitDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7109,11 +7200,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7125,7 +7217,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
     }
@@ -7134,8 +7226,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a Unit of a model  Required scopes: ifc:read, model:read
      * Retrieve a Unit of a model
      */
-    async getIfcUnitDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<Unit> {
-        const response = await this.getIfcUnitDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getIfcUnitDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Unit> {
+        const response = await this.getIfcUnitDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7143,7 +7235,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all Units of a model  Required scopes: ifc:read, model:read
      * Retrieve all Units of a model
      */
-    async getIfcUnitsDeprecatedRaw(requestParameters: GetIfcUnitsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Unit>>> {
+    async getIfcUnitsDeprecatedRaw(requestParameters: GetIfcUnitsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Unit>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcUnitsDeprecated.');
         }
@@ -7156,7 +7248,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcUnitsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7166,11 +7258,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7182,7 +7275,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UnitFromJSON));
     }
@@ -7191,8 +7284,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all Units of a model  Required scopes: ifc:read, model:read
      * Retrieve all Units of a model
      */
-    async getIfcUnitsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<Unit>> {
-        const response = await this.getIfcUnitsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getIfcUnitsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Unit>> {
+        const response = await this.getIfcUnitsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7200,7 +7293,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all models. The field `type` allows you to discriminate which kind of model it is.  Required scopes: ifc:read, model:read
      * Retrieve all models
      */
-    async getIfcsDeprecatedRaw(requestParameters: GetIfcsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Model>>> {
+    async getIfcsDeprecatedRaw(requestParameters: GetIfcsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Model>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getIfcsDeprecated.');
         }
@@ -7209,7 +7302,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getIfcsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.source !== undefined) {
             queryParameters['source'] = requestParameters.source;
@@ -7231,11 +7324,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7247,7 +7341,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ModelFromJSON));
     }
@@ -7256,8 +7350,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all models. The field `type` allows you to discriminate which kind of model it is.  Required scopes: ifc:read, model:read
      * Retrieve all models
      */
-    async getIfcsDeprecated(cloudPk: number, projectPk: number, source?: GetIfcsDeprecatedSourceEnum, status?: Array<GetIfcsDeprecatedStatusEnum>, type?: Array<GetIfcsDeprecatedTypeEnum>): Promise<Array<Model>> {
-        const response = await this.getIfcsDeprecatedRaw({ cloudPk: cloudPk, projectPk: projectPk, source: source, status: status, type: type });
+    async getIfcsDeprecated(cloudPk: number, projectPk: number, source?: GetIfcsDeprecatedSourceEnum, status?: Array<GetIfcsDeprecatedStatusEnum>, type?: Array<GetIfcsDeprecatedTypeEnum>, initOverrides?: RequestInit): Promise<Array<Model>> {
+        const response = await this.getIfcsDeprecatedRaw({ cloudPk: cloudPk, projectPk: projectPk, source: source, status: status, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -7265,7 +7359,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a layer of a model  Required scopes: ifc:read, model:read
      * Retrieve a layer of a model
      */
-    async getLayerDeprecatedRaw(requestParameters: GetLayerDeprecatedRequest): Promise<runtime.ApiResponse<Layer>> {
+    async getLayerDeprecatedRaw(requestParameters: GetLayerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Layer>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getLayerDeprecated.');
         }
@@ -7282,7 +7376,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getLayerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7292,11 +7386,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7308,7 +7403,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LayerFromJSON(jsonValue));
     }
@@ -7317,8 +7412,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a layer of a model  Required scopes: ifc:read, model:read
      * Retrieve a layer of a model
      */
-    async getLayerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<Layer> {
-        const response = await this.getLayerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getLayerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Layer> {
+        const response = await this.getLayerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7326,7 +7421,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all layers of a model.  Required scopes: ifc:read, model:read
      * Retrieve all layers of a model
      */
-    async getLayersDeprecatedRaw(requestParameters: GetLayersDeprecatedRequest): Promise<runtime.ApiResponse<Array<Layer>>> {
+    async getLayersDeprecatedRaw(requestParameters: GetLayersDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Layer>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getLayersDeprecated.');
         }
@@ -7339,7 +7434,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getLayersDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7349,11 +7444,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7365,7 +7461,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LayerFromJSON));
     }
@@ -7374,8 +7470,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all layers of a model.  Required scopes: ifc:read, model:read
      * Retrieve all layers of a model
      */
-    async getLayersDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<Layer>> {
-        const response = await this.getLayersDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getLayersDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Layer>> {
+        const response = await this.getLayersDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7383,7 +7479,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a material of a model  Required scopes: ifc:read, model:read
      * Retrieve a material of a model
      */
-    async getMaterialDeprecatedRaw(requestParameters: GetMaterialDeprecatedRequest): Promise<runtime.ApiResponse<Material>> {
+    async getMaterialDeprecatedRaw(requestParameters: GetMaterialDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Material>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterialDeprecated.');
         }
@@ -7404,7 +7500,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterialDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7414,11 +7510,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7430,7 +7527,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => MaterialFromJSON(jsonValue));
     }
@@ -7439,8 +7536,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a material of a model  Required scopes: ifc:read, model:read
      * Retrieve a material of a model
      */
-    async getMaterialDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number): Promise<Material> {
-        const response = await this.getMaterialDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getMaterialDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Material> {
+        const response = await this.getMaterialDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7448,7 +7545,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all materials of a model.  Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getMaterialsDeprecatedRaw(requestParameters: GetMaterialsDeprecatedRequest): Promise<runtime.ApiResponse<Array<Material>>> {
+    async getMaterialsDeprecatedRaw(requestParameters: GetMaterialsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Material>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterialsDeprecated.');
         }
@@ -7465,7 +7562,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterialsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7475,11 +7572,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7491,7 +7589,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MaterialFromJSON));
     }
@@ -7500,8 +7598,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all materials of a model.  Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getMaterialsDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number): Promise<Array<Material>> {
-        const response = await this.getMaterialsDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk });
+    async getMaterialsDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Material>> {
+        const response = await this.getMaterialsDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7509,7 +7607,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a processor handler  Required scopes: ifc:read, model:read
      * Retrieve a processor handler
      */
-    async getProcessorHandlerDeprecatedRaw(requestParameters: GetProcessorHandlerDeprecatedRequest): Promise<runtime.ApiResponse<ProcessorHandler>> {
+    async getProcessorHandlerDeprecatedRaw(requestParameters: GetProcessorHandlerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProcessorHandler>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProcessorHandlerDeprecated.');
         }
@@ -7526,7 +7624,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProcessorHandlerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7536,11 +7634,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7552,7 +7651,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProcessorHandlerFromJSON(jsonValue));
     }
@@ -7561,8 +7660,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a processor handler  Required scopes: ifc:read, model:read
      * Retrieve a processor handler
      */
-    async getProcessorHandlerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<ProcessorHandler> {
-        const response = await this.getProcessorHandlerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getProcessorHandlerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<ProcessorHandler> {
+        const response = await this.getProcessorHandlerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7570,7 +7669,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Get all processor handlers  Required scopes: ifc:read, model:read
      * Get all processor handlers
      */
-    async getProcessorHandlersDeprecatedRaw(requestParameters: GetProcessorHandlersDeprecatedRequest): Promise<runtime.ApiResponse<Array<ProcessorHandler>>> {
+    async getProcessorHandlersDeprecatedRaw(requestParameters: GetProcessorHandlersDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProcessorHandler>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProcessorHandlersDeprecated.');
         }
@@ -7583,7 +7682,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProcessorHandlersDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7593,11 +7692,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7609,7 +7709,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProcessorHandlerFromJSON));
     }
@@ -7618,8 +7718,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Get all processor handlers  Required scopes: ifc:read, model:read
      * Get all processor handlers
      */
-    async getProcessorHandlersDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<ProcessorHandler>> {
-        const response = await this.getProcessorHandlersDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getProcessorHandlersDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<ProcessorHandler>> {
+        const response = await this.getProcessorHandlersDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7627,7 +7727,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a PropertySet of a model  Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of a model
      */
-    async getPropertySetDeprecatedRaw(requestParameters: GetPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<PropertySet>> {
+    async getPropertySetDeprecatedRaw(requestParameters: GetPropertySetDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertySet>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPropertySetDeprecated.');
         }
@@ -7644,7 +7744,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPropertySetDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7654,11 +7754,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7670,7 +7771,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertySetFromJSON(jsonValue));
     }
@@ -7679,8 +7780,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a PropertySet of a model  Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of a model
      */
-    async getPropertySetDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<PropertySet> {
-        const response = await this.getPropertySetDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getPropertySetDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<PropertySet> {
+        const response = await this.getPropertySetDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7688,7 +7789,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of a model  Required scopes: ifc:read, model:read
      * Retrieve all PropertySets of a model
      */
-    async getPropertySetsDeprecatedRaw(requestParameters: GetPropertySetsDeprecatedRequest): Promise<runtime.ApiResponse<Array<PropertySet>>> {
+    async getPropertySetsDeprecatedRaw(requestParameters: GetPropertySetsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertySet>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPropertySetsDeprecated.');
         }
@@ -7701,7 +7802,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPropertySetsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7711,11 +7812,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7727,7 +7829,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertySetFromJSON));
     }
@@ -7736,8 +7838,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of a model  Required scopes: ifc:read, model:read
      * Retrieve all PropertySets of a model
      */
-    async getPropertySetsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<PropertySet>> {
-        const response = await this.getPropertySetsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getPropertySetsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<PropertySet>> {
+        const response = await this.getPropertySetsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7745,7 +7847,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Instead of a nested representation, this route respond with a flat structure and indices pointing to related object. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read, model:read
      * Retrieve all elements in a optimized format
      */
-    async getRawElementsDeprecatedRaw(requestParameters: GetRawElementsDeprecatedRequest): Promise<runtime.ApiResponse<RawElements>> {
+    async getRawElementsDeprecatedRaw(requestParameters: GetRawElementsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<RawElements>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRawElementsDeprecated.');
         }
@@ -7758,7 +7860,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRawElementsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7768,11 +7870,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7784,7 +7887,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RawElementsFromJSON(jsonValue));
     }
@@ -7793,8 +7896,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Instead of a nested representation, this route respond with a flat structure and indices pointing to related object. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read, model:read
      * Retrieve all elements in a optimized format
      */
-    async getRawElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<RawElements> {
-        const response = await this.getRawElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getRawElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<RawElements> {
+        const response = await this.getRawElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7802,7 +7905,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve an element of a model with a simple value representation  Required scopes: ifc:read, model:read
      * Retrieve an element of a model with a simple value representation
      */
-    async getSimpleElementDeprecatedRaw(requestParameters: GetSimpleElementDeprecatedRequest): Promise<runtime.ApiResponse<SimpleElement>> {
+    async getSimpleElementDeprecatedRaw(requestParameters: GetSimpleElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<SimpleElement>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSimpleElementDeprecated.');
         }
@@ -7819,7 +7922,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getSimpleElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7829,11 +7932,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7845,7 +7949,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SimpleElementFromJSON(jsonValue));
     }
@@ -7854,8 +7958,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve an element of a model with a simple value representation  Required scopes: ifc:read, model:read
      * Retrieve an element of a model with a simple value representation
      */
-    async getSimpleElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<SimpleElement> {
-        const response = await this.getSimpleElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async getSimpleElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<SimpleElement> {
+        const response = await this.getSimpleElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -7863,7 +7967,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all elements of a model with a simple value representation  Required scopes: ifc:read, model:read
      * Retrieve all elements of a model with a simple value representation
      */
-    async getSimpleElementsDeprecatedRaw(requestParameters: GetSimpleElementsDeprecatedRequest): Promise<runtime.ApiResponse<SimpleElement>> {
+    async getSimpleElementsDeprecatedRaw(requestParameters: GetSimpleElementsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<SimpleElement>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSimpleElementsDeprecated.');
         }
@@ -7876,7 +7980,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSimpleElementsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7886,11 +7990,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7902,7 +8007,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SimpleElementFromJSON(jsonValue));
     }
@@ -7911,8 +8016,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all elements of a model with a simple value representation  Required scopes: ifc:read, model:read
      * Retrieve all elements of a model with a simple value representation
      */
-    async getSimpleElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<SimpleElement> {
-        const response = await this.getSimpleElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getSimpleElementsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<SimpleElement> {
+        const response = await this.getSimpleElementsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7920,7 +8025,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one space of the model  Required scopes: ifc:read, model:read
      * Retrieve one space of the model
      */
-    async getSpaceDeprecatedRaw(requestParameters: GetSpaceDeprecatedRequest): Promise<runtime.ApiResponse<Space>> {
+    async getSpaceDeprecatedRaw(requestParameters: GetSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Space>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSpaceDeprecated.');
         }
@@ -7937,7 +8042,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSpaceDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -7947,11 +8052,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7963,7 +8069,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SpaceFromJSON(jsonValue));
     }
@@ -7972,8 +8078,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one space of the model  Required scopes: ifc:read, model:read
      * Retrieve one space of the model
      */
-    async getSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<Space> {
-        const response = await this.getSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Space> {
+        const response = await this.getSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -7981,7 +8087,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all spaces of the model  Required scopes: ifc:read, model:read
      * Retrieve all spaces of the model
      */
-    async getSpacesDeprecatedRaw(requestParameters: GetSpacesDeprecatedRequest): Promise<runtime.ApiResponse<Array<Space>>> {
+    async getSpacesDeprecatedRaw(requestParameters: GetSpacesDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Space>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSpacesDeprecated.');
         }
@@ -7994,7 +8100,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSpacesDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8004,11 +8110,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8020,7 +8127,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SpaceFromJSON));
     }
@@ -8029,8 +8136,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all spaces of the model  Required scopes: ifc:read, model:read
      * Retrieve all spaces of the model
      */
-    async getSpacesDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<Space>> {
-        const response = await this.getSpacesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getSpacesDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Space>> {
+        const response = await this.getSpacesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -8038,7 +8145,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a storey of a model  Required scopes: ifc:read, model:read
      * Retrieve a storey of a model
      */
-    async getStoreyDeprecatedRaw(requestParameters: GetStoreyDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
+    async getStoreyDeprecatedRaw(requestParameters: GetStoreyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getStoreyDeprecated.');
         }
@@ -8055,7 +8162,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getStoreyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8065,11 +8172,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8081,7 +8189,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
     }
@@ -8090,8 +8198,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a storey of a model  Required scopes: ifc:read, model:read
      * Retrieve a storey of a model
      */
-    async getStoreyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<Storey> {
-        const response = await this.getStoreyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async getStoreyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.getStoreyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -8099,7 +8207,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve the postioning of the plan in the storey  Required scopes: ifc:read, model:read
      * Retrieve the postioning of the plan in the storey
      */
-    async getStoreyPlanPositioningDeprecatedRaw(requestParameters: GetStoreyPlanPositioningDeprecatedRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
+    async getStoreyPlanPositioningDeprecatedRaw(requestParameters: GetStoreyPlanPositioningDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PositioningPlan>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getStoreyPlanPositioningDeprecated.');
         }
@@ -8120,7 +8228,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling getStoreyPlanPositioningDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8130,11 +8238,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8146,7 +8255,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PositioningPlanFromJSON(jsonValue));
     }
@@ -8155,8 +8264,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve the postioning of the plan in the storey  Required scopes: ifc:read, model:read
      * Retrieve the postioning of the plan in the storey
      */
-    async getStoreyPlanPositioningDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, storeyUuid: string): Promise<PositioningPlan> {
-        const response = await this.getStoreyPlanPositioningDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid });
+    async getStoreyPlanPositioningDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, storeyUuid: string, initOverrides?: RequestInit): Promise<PositioningPlan> {
+        const response = await this.getStoreyPlanPositioningDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid }, initOverrides);
         return await response.value();
     }
 
@@ -8164,7 +8273,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all storeys of a model.  Required scopes: ifc:read, model:read
      * Retrieve all storeys of a model
      */
-    async getStoreysDeprecatedRaw(requestParameters: GetStoreysDeprecatedRequest): Promise<runtime.ApiResponse<Array<Storey>>> {
+    async getStoreysDeprecatedRaw(requestParameters: GetStoreysDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Storey>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getStoreysDeprecated.');
         }
@@ -8177,7 +8286,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getStoreysDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8187,11 +8296,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8203,7 +8313,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StoreyFromJSON));
     }
@@ -8212,8 +8322,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all storeys of a model.  Required scopes: ifc:read, model:read
      * Retrieve all storeys of a model
      */
-    async getStoreysDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<Storey>> {
-        const response = await this.getStoreysDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getStoreysDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Storey>> {
+        const response = await this.getStoreysDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -8221,7 +8331,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a system of a model  Required scopes: ifc:read, model:read
      * Retrieve a system of a model
      */
-    async getSystemDeprecatedRaw(requestParameters: GetSystemDeprecatedRequest): Promise<runtime.ApiResponse<System>> {
+    async getSystemDeprecatedRaw(requestParameters: GetSystemDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<System>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSystemDeprecated.');
         }
@@ -8238,7 +8348,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling getSystemDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8248,11 +8358,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8264,7 +8375,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SystemFromJSON(jsonValue));
     }
@@ -8273,8 +8384,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve a system of a model  Required scopes: ifc:read, model:read
      * Retrieve a system of a model
      */
-    async getSystemDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<System> {
-        const response = await this.getSystemDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async getSystemDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<System> {
+        const response = await this.getSystemDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -8282,7 +8393,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all systems of a model.  Required scopes: ifc:read, model:read
      * Retrieve all systems of a model
      */
-    async getSystemsDeprecatedRaw(requestParameters: GetSystemsDeprecatedRequest): Promise<runtime.ApiResponse<Array<System>>> {
+    async getSystemsDeprecatedRaw(requestParameters: GetSystemsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<System>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSystemsDeprecated.');
         }
@@ -8295,7 +8406,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSystemsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8305,11 +8416,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8321,7 +8433,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SystemFromJSON));
     }
@@ -8330,8 +8442,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all systems of a model.  Required scopes: ifc:read, model:read
      * Retrieve all systems of a model
      */
-    async getSystemsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<System>> {
-        const response = await this.getSystemsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async getSystemsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<System>> {
+        const response = await this.getSystemsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -8339,7 +8451,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one zone of a model  Required scopes: ifc:read, model:read
      * Retrieve one zone of a model
      */
-    async getZoneDeprecatedRaw(requestParameters: GetZoneDeprecatedRequest): Promise<runtime.ApiResponse<Zone>> {
+    async getZoneDeprecatedRaw(requestParameters: GetZoneDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Zone>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneDeprecated.');
         }
@@ -8356,7 +8468,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZoneDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8366,11 +8478,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8382,7 +8495,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ZoneFromJSON(jsonValue));
     }
@@ -8391,8 +8504,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one zone of a model  Required scopes: ifc:read, model:read
      * Retrieve one zone of a model
      */
-    async getZoneDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number): Promise<Zone> {
-        const response = await this.getZoneDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async getZoneDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Zone> {
+        const response = await this.getZoneDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -8400,7 +8513,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one space of a zone  Required scopes: ifc:read, model:read
      * Retrieve one space of a zone
      */
-    async getZoneSpaceDeprecatedRaw(requestParameters: GetZoneSpaceDeprecatedRequest): Promise<runtime.ApiResponse<ZoneSpace>> {
+    async getZoneSpaceDeprecatedRaw(requestParameters: GetZoneSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ZoneSpace>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneSpaceDeprecated.');
         }
@@ -8421,7 +8534,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling getZoneSpaceDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8431,11 +8544,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8447,7 +8561,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ZoneSpaceFromJSON(jsonValue));
     }
@@ -8456,8 +8570,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve one space of a zone  Required scopes: ifc:read, model:read
      * Retrieve one space of a zone
      */
-    async getZoneSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, zonePk: number): Promise<ZoneSpace> {
-        const response = await this.getZoneSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk });
+    async getZoneSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, zonePk: number, initOverrides?: RequestInit): Promise<ZoneSpace> {
+        const response = await this.getZoneSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk }, initOverrides);
         return await response.value();
     }
 
@@ -8465,7 +8579,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all spaces of a zone  Required scopes: ifc:read, model:read
      * Retrieve all spaces of a zone
      */
-    async getZoneSpacesDeprecatedRaw(requestParameters: GetZoneSpacesDeprecatedRequest): Promise<runtime.ApiResponse<Array<ZoneSpace>>> {
+    async getZoneSpacesDeprecatedRaw(requestParameters: GetZoneSpacesDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ZoneSpace>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneSpacesDeprecated.');
         }
@@ -8482,7 +8596,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling getZoneSpacesDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8492,11 +8606,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8508,7 +8623,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ZoneSpaceFromJSON));
     }
@@ -8517,8 +8632,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve all spaces of a zone  Required scopes: ifc:read, model:read
      * Retrieve all spaces of a zone
      */
-    async getZoneSpacesDeprecated(cloudPk: number, ifcPk: number, projectPk: number, zonePk: number): Promise<Array<ZoneSpace>> {
-        const response = await this.getZoneSpacesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk });
+    async getZoneSpacesDeprecated(cloudPk: number, ifcPk: number, projectPk: number, zonePk: number, initOverrides?: RequestInit): Promise<Array<ZoneSpace>> {
+        const response = await this.getZoneSpacesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk }, initOverrides);
         return await response.value();
     }
 
@@ -8526,7 +8641,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve parent zones of a model. Children zones we\'ll be in the \'zones\' field  Required scopes: ifc:read, model:read
      * Retrieve zones of a model
      */
-    async getZonesDeprecatedRaw(requestParameters: GetZonesDeprecatedRequest): Promise<runtime.ApiResponse<Array<Zone>>> {
+    async getZonesDeprecatedRaw(requestParameters: GetZonesDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Zone>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZonesDeprecated.');
         }
@@ -8539,7 +8654,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZonesDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.color !== undefined) {
             queryParameters['color'] = requestParameters.color;
@@ -8553,11 +8668,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8569,7 +8685,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ZoneFromJSON));
     }
@@ -8578,8 +8694,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Retrieve parent zones of a model. Children zones we\'ll be in the \'zones\' field  Required scopes: ifc:read, model:read
      * Retrieve zones of a model
      */
-    async getZonesDeprecated(cloudPk: number, ifcPk: number, projectPk: number, color?: string): Promise<Array<Zone>> {
-        const response = await this.getZonesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, color: color });
+    async getZonesDeprecated(cloudPk: number, ifcPk: number, projectPk: number, color?: string, initOverrides?: RequestInit): Promise<Array<Zone>> {
+        const response = await this.getZonesDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, color: color }, initOverrides);
         return await response.value();
     }
 
@@ -8587,7 +8703,7 @@ export class IfcApi extends runtime.BaseAPI {
      * A nex check will be played with the current state of elements, properties, etc.  Required scopes: check:write, ifc:read
      * Launch a new check on the model
      */
-    async launchNewCheckDeprecatedRaw(requestParameters: LaunchNewCheckDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async launchNewCheckDeprecatedRaw(requestParameters: LaunchNewCheckDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling launchNewCheckDeprecated.');
         }
@@ -8604,7 +8720,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling launchNewCheckDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8616,11 +8732,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8633,7 +8750,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: IfcCheckerRequestToJSON(requestParameters.ifcCheckerRequest),
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -8642,15 +8759,15 @@ export class IfcApi extends runtime.BaseAPI {
      * A nex check will be played with the current state of elements, properties, etc.  Required scopes: check:write, ifc:read
      * Launch a new check on the model
      */
-    async launchNewCheckDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest): Promise<void> {
-        await this.launchNewCheckDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest });
+    async launchNewCheckDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.launchNewCheckDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest }, initOverrides);
     }
 
     /**
      *  Bulk relation create available. You can either post an id or a list of ids. Is you post a list, the response will be a list (in the same order) of created relation or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Link one or many documents to an element
      */
-    async linkDocumentsOfElementDeprecatedRaw(requestParameters: LinkDocumentsOfElementDeprecatedRequest): Promise<runtime.ApiResponse<Array<Document>>> {
+    async linkDocumentsOfElementDeprecatedRaw(requestParameters: LinkDocumentsOfElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling linkDocumentsOfElementDeprecated.');
         }
@@ -8667,7 +8784,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling linkDocumentsOfElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8677,11 +8794,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8693,7 +8811,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
     }
@@ -8702,8 +8820,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk relation create available. You can either post an id or a list of ids. Is you post a list, the response will be a list (in the same order) of created relation or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Link one or many documents to an element
      */
-    async linkDocumentsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number): Promise<Array<Document>> {
-        const response = await this.linkDocumentsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk });
+    async linkDocumentsOfElementDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.linkDocumentsOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -8711,7 +8829,7 @@ export class IfcApi extends runtime.BaseAPI {
      * List all associations between classifications and elements  Required scopes: ifc:read, model:read
      * List all associations between classifications and elements
      */
-    async listClassificationElementRelationsDeprecatedRaw(requestParameters: ListClassificationElementRelationsDeprecatedRequest): Promise<runtime.ApiResponse<Array<ElementClassificationRelation>>> {
+    async listClassificationElementRelationsDeprecatedRaw(requestParameters: ListClassificationElementRelationsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ElementClassificationRelation>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling listClassificationElementRelationsDeprecated.');
         }
@@ -8724,7 +8842,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling listClassificationElementRelationsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8734,11 +8852,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8750,7 +8869,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementClassificationRelationFromJSON));
     }
@@ -8759,8 +8878,8 @@ export class IfcApi extends runtime.BaseAPI {
      * List all associations between classifications and elements  Required scopes: ifc:read, model:read
      * List all associations between classifications and elements
      */
-    async listClassificationElementRelationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number): Promise<Array<ElementClassificationRelation>> {
-        const response = await this.listClassificationElementRelationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk });
+    async listClassificationElementRelationsDeprecated(cloudPk: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<ElementClassificationRelation>> {
+        const response = await this.listClassificationElementRelationsDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -8768,7 +8887,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Only works for IFC files. Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list  Required scopes: ifc:write, model:write
      * Merge IFC files
      */
-    async mergeIfcsDeprecatedRaw(requestParameters: MergeIfcsDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async mergeIfcsDeprecatedRaw(requestParameters: MergeIfcsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling mergeIfcsDeprecated.');
         }
@@ -8781,7 +8900,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('ifcMergeRequest','Required parameter requestParameters.ifcMergeRequest was null or undefined when calling mergeIfcsDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8793,11 +8912,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8810,7 +8930,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: IfcMergeRequestToJSON(requestParameters.ifcMergeRequest),
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -8819,15 +8939,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Only works for IFC files. Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list  Required scopes: ifc:write, model:write
      * Merge IFC files
      */
-    async mergeIfcsDeprecated(cloudPk: number, projectPk: number, ifcMergeRequest: IfcMergeRequest): Promise<void> {
-        await this.mergeIfcsDeprecatedRaw({ cloudPk: cloudPk, projectPk: projectPk, ifcMergeRequest: ifcMergeRequest });
+    async mergeIfcsDeprecated(cloudPk: number, projectPk: number, ifcMergeRequest: IfcMergeRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.mergeIfcsDeprecatedRaw({ cloudPk: cloudPk, projectPk: projectPk, ifcMergeRequest: ifcMergeRequest }, initOverrides);
     }
 
     /**
      * Only works for IFC files. Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC  Required scopes: ifc:write, model:write
      * Optimize the IFC
      */
-    async optimizeIfcDeprecatedRaw(requestParameters: OptimizeIfcDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async optimizeIfcDeprecatedRaw(requestParameters: OptimizeIfcDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling optimizeIfcDeprecated.');
         }
@@ -8840,7 +8960,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling optimizeIfcDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8852,11 +8972,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8869,7 +8990,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: IfcOptimizeRequestToJSON(requestParameters.ifcOptimizeRequest),
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -8878,15 +8999,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Only works for IFC files. Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC  Required scopes: ifc:write, model:write
      * Optimize the IFC
      */
-    async optimizeIfcDeprecated(cloudPk: number, id: number, projectPk: number, ifcOptimizeRequest?: IfcOptimizeRequest): Promise<void> {
-        await this.optimizeIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, ifcOptimizeRequest: ifcOptimizeRequest });
+    async optimizeIfcDeprecated(cloudPk: number, id: number, projectPk: number, ifcOptimizeRequest?: IfcOptimizeRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.optimizeIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, ifcOptimizeRequest: ifcOptimizeRequest }, initOverrides);
     }
 
     /**
      * Remove all property sets from element. Property Sets will not be deleted, just detached from element  Required scopes: ifc:write, model:write
      * Remove all property sets from element
      */
-    async removeAllElementPropertySetDeprecatedRaw(requestParameters: RemoveAllElementPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async removeAllElementPropertySetDeprecatedRaw(requestParameters: RemoveAllElementPropertySetDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeAllElementPropertySetDeprecated.');
         }
@@ -8903,7 +9024,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeAllElementPropertySetDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8913,11 +9034,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8929,7 +9051,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -8938,15 +9060,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Remove all property sets from element. Property Sets will not be deleted, just detached from element  Required scopes: ifc:write, model:write
      * Remove all property sets from element
      */
-    async removeAllElementPropertySetDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number): Promise<void> {
-        await this.removeAllElementPropertySetDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk });
+    async removeAllElementPropertySetDeprecated(cloudPk: number, elementUuid: string, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeAllElementPropertySetDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * The classification will not be deleted  Required scopes: ifc:write, model:write
      * Remove a classification from an element
      */
-    async removeClassificationOfElementDeprecatedRaw(requestParameters: RemoveClassificationOfElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async removeClassificationOfElementDeprecatedRaw(requestParameters: RemoveClassificationOfElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeClassificationOfElementDeprecated.');
         }
@@ -8967,7 +9089,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeClassificationOfElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -8977,11 +9099,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -8993,7 +9116,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -9002,15 +9125,15 @@ export class IfcApi extends runtime.BaseAPI {
      * The classification will not be deleted  Required scopes: ifc:write, model:write
      * Remove a classification from an element
      */
-    async removeClassificationOfElementDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.removeClassificationOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async removeClassificationOfElementDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeClassificationOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * The document will not be deleted  Required scopes: ifc:write, model:write
      * Remove a documents from an element
      */
-    async removeDocumentOfElementDeprecatedRaw(requestParameters: RemoveDocumentOfElementDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async removeDocumentOfElementDeprecatedRaw(requestParameters: RemoveDocumentOfElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeDocumentOfElementDeprecated.');
         }
@@ -9031,7 +9154,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeDocumentOfElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9041,11 +9164,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9057,7 +9181,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -9066,15 +9190,15 @@ export class IfcApi extends runtime.BaseAPI {
      * The document will not be deleted  Required scopes: ifc:write, model:write
      * Remove a documents from an element
      */
-    async removeDocumentOfElementDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.removeDocumentOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async removeDocumentOfElementDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeDocumentOfElementDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete the relation between the element and the property set. Does not delete any object  Required scopes: ifc:write, model:write
      * Remove a PropertySet from an element
      */
-    async removeElementPropertySetDeprecatedRaw(requestParameters: RemoveElementPropertySetDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementPropertySetDeprecatedRaw(requestParameters: RemoveElementPropertySetDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetDeprecated.');
         }
@@ -9095,7 +9219,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9105,11 +9229,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9121,7 +9246,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -9130,15 +9255,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete the relation between the element and the property set. Does not delete any object  Required scopes: ifc:write, model:write
      * Remove a PropertySet from an element
      */
-    async removeElementPropertySetDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number): Promise<void> {
-        await this.removeElementPropertySetDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk });
+    async removeElementPropertySetDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a Definition to a Property  Required scopes: ifc:write, model:write
      * Delete a Definition to a Property
      */
-    async removeElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementPropertySetPropertyDefinitionDeprecatedRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDefinitionDeprecated.');
         }
@@ -9167,7 +9292,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDefinitionDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9177,11 +9302,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9193,7 +9319,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -9202,15 +9328,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a Definition to a Property  Required scopes: ifc:write, model:write
      * Delete a Definition to a Property
      */
-    async removeElementPropertySetPropertyDefinitionDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertyPk: number, propertysetPk: number): Promise<void> {
-        await this.removeElementPropertySetPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk });
+    async removeElementPropertySetPropertyDefinitionDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertyPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk }, initOverrides);
     }
 
     /**
      * Remove a Unit from a Definition  Required scopes: ifc:write, model:write
      * Remove a Unit from a Definition
      */
-    async removeElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionUnitDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementPropertySetPropertyDefinitionUnitDeprecatedRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionUnitDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
@@ -9243,7 +9369,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9253,11 +9379,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9269,7 +9396,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -9278,15 +9405,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Remove a Unit from a Definition  Required scopes: ifc:write, model:write
      * Remove a Unit from a Definition
      */
-    async removeElementPropertySetPropertyDefinitionUnitDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number): Promise<void> {
-        await this.removeElementPropertySetPropertyDefinitionUnitDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk });
+    async removeElementPropertySetPropertyDefinitionUnitDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetPropertyDefinitionUnitDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk }, initOverrides);
     }
 
     /**
      * Remove a property from a PropertySet  Required scopes: ifc:write, model:write
      * Remove a property from a PropertySet
      */
-    async removeElementPropertySetPropertyDeprecatedRaw(requestParameters: RemoveElementPropertySetPropertyDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementPropertySetPropertyDeprecatedRaw(requestParameters: RemoveElementPropertySetPropertyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
         }
@@ -9311,7 +9438,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9321,11 +9448,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9337,7 +9465,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -9346,15 +9474,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Remove a property from a PropertySet  Required scopes: ifc:write, model:write
      * Remove a property from a PropertySet
      */
-    async removeElementPropertySetPropertyDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertysetPk: number): Promise<void> {
-        await this.removeElementPropertySetPropertyDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk });
+    async removeElementPropertySetPropertyDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetPropertyDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk }, initOverrides);
     }
 
     /**
      * Remove the classification from all elements. No element nor classification will be deleted  Required scopes: ifc:write, model:write
      * Remove the classification from all elements
      */
-    async removeElementsFromClassificationDeprecatedRaw(requestParameters: RemoveElementsFromClassificationDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async removeElementsFromClassificationDeprecatedRaw(requestParameters: RemoveElementsFromClassificationDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementsFromClassificationDeprecated.');
         }
@@ -9375,7 +9503,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling removeElementsFromClassificationDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9385,11 +9513,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9401,7 +9530,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -9410,15 +9539,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Remove the classification from all elements. No element nor classification will be deleted  Required scopes: ifc:write, model:write
      * Remove the classification from all elements
      */
-    async removeElementsFromClassificationDeprecated(cloudPk: number, ifcPk: number, modelClassificationPk: number, projectPk: number, uuid: string): Promise<void> {
-        await this.removeElementsFromClassificationDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, modelClassificationPk: modelClassificationPk, projectPk: projectPk, uuid: uuid });
+    async removeElementsFromClassificationDeprecated(cloudPk: number, ifcPk: number, modelClassificationPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementsFromClassificationDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, modelClassificationPk: modelClassificationPk, projectPk: projectPk, uuid: uuid }, initOverrides);
     }
 
     /**
      * Reprocess the model. All data that are not in the original model files will be lost  Required scopes: ifc:write, model:write
      * Reprocess Model file
      */
-    async reprocessIfcDeprecatedRaw(requestParameters: ReprocessIfcDeprecatedRequest): Promise<runtime.ApiResponse<void>> {
+    async reprocessIfcDeprecatedRaw(requestParameters: ReprocessIfcDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling reprocessIfcDeprecated.');
         }
@@ -9431,7 +9560,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling reprocessIfcDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9441,11 +9570,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9457,7 +9587,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -9466,15 +9596,15 @@ export class IfcApi extends runtime.BaseAPI {
      * Reprocess the model. All data that are not in the original model files will be lost  Required scopes: ifc:write, model:write
      * Reprocess Model file
      */
-    async reprocessIfcDeprecated(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.reprocessIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async reprocessIfcDeprecated(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.reprocessIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * You can update the expiration date or the read_only field  Required scopes: ifc:token_manage, model:token_manage
      * Update some fields of a token
      */
-    async updateAccessTokenDeprecatedRaw(requestParameters: UpdateAccessTokenDeprecatedRequest): Promise<runtime.ApiResponse<IfcAccessToken>> {
+    async updateAccessTokenDeprecatedRaw(requestParameters: UpdateAccessTokenDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcAccessToken>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateAccessTokenDeprecated.');
         }
@@ -9491,7 +9621,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling updateAccessTokenDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9503,11 +9633,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9520,7 +9651,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedIfcAccessTokenRequestToJSON(requestParameters.patchedIfcAccessTokenRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcAccessTokenFromJSON(jsonValue));
     }
@@ -9529,8 +9660,8 @@ export class IfcApi extends runtime.BaseAPI {
      * You can update the expiration date or the read_only field  Required scopes: ifc:token_manage, model:token_manage
      * Update some fields of a token
      */
-    async updateAccessTokenDeprecated(cloudPk: number, ifcPk: number, projectPk: number, token: string, patchedIfcAccessTokenRequest?: PatchedIfcAccessTokenRequest): Promise<IfcAccessToken> {
-        const response = await this.updateAccessTokenDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, token: token, patchedIfcAccessTokenRequest: patchedIfcAccessTokenRequest });
+    async updateAccessTokenDeprecated(cloudPk: number, ifcPk: number, projectPk: number, token: string, patchedIfcAccessTokenRequest?: PatchedIfcAccessTokenRequest, initOverrides?: RequestInit): Promise<IfcAccessToken> {
+        const response = await this.updateAccessTokenDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, token: token, patchedIfcAccessTokenRequest: patchedIfcAccessTokenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9538,7 +9669,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a building  Required scopes: ifc:write, model:write
      * Update some fields of a building
      */
-    async updateBuildingDeprecatedRaw(requestParameters: UpdateBuildingDeprecatedRequest): Promise<runtime.ApiResponse<Building>> {
+    async updateBuildingDeprecatedRaw(requestParameters: UpdateBuildingDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Building>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateBuildingDeprecated.');
         }
@@ -9555,7 +9686,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling updateBuildingDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9565,11 +9696,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9581,7 +9713,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
     }
@@ -9590,8 +9722,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a building  Required scopes: ifc:write, model:write
      * Update some fields of a building
      */
-    async updateBuildingDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<Building> {
-        const response = await this.updateBuildingDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async updateBuildingDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.updateBuildingDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -9599,7 +9731,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update the postioning of the plan in the building  Required scopes: ifc:write, model:write
      * Update the postioning of the plan in the building
      */
-    async updateBuildingPlanPositioningDeprecatedRaw(requestParameters: UpdateBuildingPlanPositioningDeprecatedRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
+    async updateBuildingPlanPositioningDeprecatedRaw(requestParameters: UpdateBuildingPlanPositioningDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PositioningPlan>> {
         if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
             throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling updateBuildingPlanPositioningDeprecated.');
         }
@@ -9620,7 +9752,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateBuildingPlanPositioningDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9632,11 +9764,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9649,7 +9782,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedPositioningPlanRequestToJSON(requestParameters.patchedPositioningPlanRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PositioningPlanFromJSON(jsonValue));
     }
@@ -9658,8 +9791,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update the postioning of the plan in the building  Required scopes: ifc:write, model:write
      * Update the postioning of the plan in the building
      */
-    async updateBuildingPlanPositioningDeprecated(buildingUuid: string, cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedPositioningPlanRequest?: PatchedPositioningPlanRequest): Promise<PositioningPlan> {
-        const response = await this.updateBuildingPlanPositioningDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedPositioningPlanRequest: patchedPositioningPlanRequest });
+    async updateBuildingPlanPositioningDeprecated(buildingUuid: string, cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedPositioningPlanRequest?: PatchedPositioningPlanRequest, initOverrides?: RequestInit): Promise<PositioningPlan> {
+        const response = await this.updateBuildingPlanPositioningDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedPositioningPlanRequest: patchedPositioningPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9667,7 +9800,7 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Update some fields of a checker of a model
      */
-    async updateCheckerDeprecatedRaw(requestParameters: UpdateCheckerDeprecatedRequest): Promise<runtime.ApiResponse<IfcChecker>> {
+    async updateCheckerDeprecatedRaw(requestParameters: UpdateCheckerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateCheckerDeprecated.');
         }
@@ -9684,7 +9817,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateCheckerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9696,11 +9829,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9713,7 +9847,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedIfcCheckerRequestToJSON(requestParameters.patchedIfcCheckerRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
     }
@@ -9722,8 +9856,8 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Update some fields of a checker of a model
      */
-    async updateCheckerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedIfcCheckerRequest?: PatchedIfcCheckerRequest): Promise<IfcChecker> {
-        const response = await this.updateCheckerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedIfcCheckerRequest: patchedIfcCheckerRequest });
+    async updateCheckerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedIfcCheckerRequest?: PatchedIfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
+        const response = await this.updateCheckerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedIfcCheckerRequest: patchedIfcCheckerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9731,7 +9865,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a CheckerResult  Required scopes: check:write
      * Update some fields of a CheckerResult
      */
-    async updateCheckerResultDeprecatedRaw(requestParameters: UpdateCheckerResultDeprecatedRequest): Promise<runtime.ApiResponse<CheckerResult>> {
+    async updateCheckerResultDeprecatedRaw(requestParameters: UpdateCheckerResultDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling updateCheckerResultDeprecated.');
         }
@@ -9752,7 +9886,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateCheckerResultDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9764,11 +9898,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9781,7 +9916,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedCheckerResultRequestToJSON(requestParameters.patchedCheckerResultRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
     }
@@ -9790,8 +9925,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a CheckerResult  Required scopes: check:write
      * Update some fields of a CheckerResult
      */
-    async updateCheckerResultDeprecated(checkerPk: number, cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedCheckerResultRequest?: PatchedCheckerResultRequest): Promise<CheckerResult> {
-        const response = await this.updateCheckerResultDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedCheckerResultRequest: patchedCheckerResultRequest });
+    async updateCheckerResultDeprecated(checkerPk: number, cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedCheckerResultRequest?: PatchedCheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
+        const response = await this.updateCheckerResultDeprecatedRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedCheckerResultRequest: patchedCheckerResultRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9799,7 +9934,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of an element
      */
-    async updateElementDeprecatedRaw(requestParameters: UpdateElementDeprecatedRequest): Promise<runtime.ApiResponse<Element>> {
+    async updateElementDeprecatedRaw(requestParameters: UpdateElementDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Element>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateElementDeprecated.');
         }
@@ -9816,7 +9951,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling updateElementDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9828,11 +9963,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9845,7 +9981,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedElementRequestToJSON(requestParameters.patchedElementRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ElementFromJSON(jsonValue));
     }
@@ -9854,8 +9990,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of an element
      */
-    async updateElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, patchedElementRequest?: PatchedElementRequest): Promise<Element> {
-        const response = await this.updateElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid, patchedElementRequest: patchedElementRequest });
+    async updateElementDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, patchedElementRequest?: PatchedElementRequest, initOverrides?: RequestInit): Promise<Element> {
+        const response = await this.updateElementDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid, patchedElementRequest: patchedElementRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9863,7 +9999,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update a property value from an element. If the element is the only one to have this property, the property will be update in place. If many elements share this property, a new property will be created to replace the property for this element. Keeping the property for all other elements. If you want to update the property of all elements, see updateIfcProperty  Required scopes: ifc:write, model:write
      * Update a property from an element
      */
-    async updateElementPropertySetPropertyDeprecatedRaw(requestParameters: UpdateElementPropertySetPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
+    async updateElementPropertySetPropertyDeprecatedRaw(requestParameters: UpdateElementPropertySetPropertyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateElementPropertySetPropertyDeprecated.');
         }
@@ -9888,7 +10024,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling updateElementPropertySetPropertyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9900,11 +10036,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9917,7 +10054,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedPropertyRequestToJSON(requestParameters.patchedPropertyRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
     }
@@ -9926,8 +10063,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update a property value from an element. If the element is the only one to have this property, the property will be update in place. If many elements share this property, a new property will be created to replace the property for this element. Keeping the property for all other elements. If you want to update the property of all elements, see updateIfcProperty  Required scopes: ifc:write, model:write
      * Update a property from an element
      */
-    async updateElementPropertySetPropertyDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertysetPk: number, patchedPropertyRequest?: PatchedPropertyRequest): Promise<Property> {
-        const response = await this.updateElementPropertySetPropertyDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk, patchedPropertyRequest: patchedPropertyRequest });
+    async updateElementPropertySetPropertyDeprecated(cloudPk: number, elementUuid: string, id: number, ifcPk: number, projectPk: number, propertysetPk: number, patchedPropertyRequest?: PatchedPropertyRequest, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.updateElementPropertySetPropertyDeprecatedRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, ifcPk: ifcPk, projectPk: projectPk, propertysetPk: propertysetPk, patchedPropertyRequest: patchedPropertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9935,7 +10072,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a model  Required scopes: ifc:write, model:write
      * Update some fields of a model
      */
-    async updateIfcDeprecatedRaw(requestParameters: UpdateIfcDeprecatedRequest): Promise<runtime.ApiResponse<Model>> {
+    async updateIfcDeprecatedRaw(requestParameters: UpdateIfcDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcDeprecated.');
         }
@@ -9948,7 +10085,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -9960,11 +10097,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -9977,7 +10115,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedModelRequestToJSON(requestParameters.patchedModelRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
     }
@@ -9986,8 +10124,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a model  Required scopes: ifc:write, model:write
      * Update some fields of a model
      */
-    async updateIfcDeprecated(cloudPk: number, id: number, projectPk: number, patchedModelRequest?: PatchedModelRequest): Promise<Model> {
-        const response = await this.updateIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedModelRequest: patchedModelRequest });
+    async updateIfcDeprecated(cloudPk: number, id: number, projectPk: number, patchedModelRequest?: PatchedModelRequest, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.updateIfcDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedModelRequest: patchedModelRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9995,7 +10133,7 @@ export class IfcApi extends runtime.BaseAPI {
      * This route does not accept JSON, only files as x-www-form-urlencoded  Required scopes: ifc:write, model:write
      * Update models file (gltf, svg, structure, etc)
      */
-    async updateIfcFilesDeprecatedRaw(requestParameters: UpdateIfcFilesDeprecatedRequest): Promise<runtime.ApiResponse<ModelFiles>> {
+    async updateIfcFilesDeprecatedRaw(requestParameters: UpdateIfcFilesDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelFiles>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcFilesDeprecated.');
         }
@@ -10008,7 +10146,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcFilesDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10018,11 +10156,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10098,7 +10237,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: formParams,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelFilesFromJSON(jsonValue));
     }
@@ -10107,8 +10246,8 @@ export class IfcApi extends runtime.BaseAPI {
      * This route does not accept JSON, only files as x-www-form-urlencoded  Required scopes: ifc:write, model:write
      * Update models file (gltf, svg, structure, etc)
      */
-    async updateIfcFilesDeprecated(cloudPk: number, id: number, projectPk: number, structureFile?: Blob | null, systemsFile?: Blob | null, mapFile?: Blob | null, gltfFile?: Blob | null, gltfWithOpeningsFile?: Blob | null, bvhTreeFile?: Blob | null, viewer360File?: Blob | null, xktFile?: Blob | null): Promise<ModelFiles> {
-        const response = await this.updateIfcFilesDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, structureFile: structureFile, systemsFile: systemsFile, mapFile: mapFile, gltfFile: gltfFile, gltfWithOpeningsFile: gltfWithOpeningsFile, bvhTreeFile: bvhTreeFile, viewer360File: viewer360File, xktFile: xktFile });
+    async updateIfcFilesDeprecated(cloudPk: number, id: number, projectPk: number, structureFile?: Blob | null, systemsFile?: Blob | null, mapFile?: Blob | null, gltfFile?: Blob | null, gltfWithOpeningsFile?: Blob | null, bvhTreeFile?: Blob | null, viewer360File?: Blob | null, xktFile?: Blob | null, initOverrides?: RequestInit): Promise<ModelFiles> {
+        const response = await this.updateIfcFilesDeprecatedRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, structureFile: structureFile, systemsFile: systemsFile, mapFile: mapFile, gltfFile: gltfFile, gltfWithOpeningsFile: gltfWithOpeningsFile, bvhTreeFile: bvhTreeFile, viewer360File: viewer360File, xktFile: xktFile }, initOverrides);
         return await response.value();
     }
 
@@ -10116,7 +10255,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of many PropertyDefinitions of a model  Required scopes: ifc:write, model:write
      * Update some fields of many PropertyDefinitions of a model
      */
-    async updateIfcPropertyDefinitionDeprecatedRaw(requestParameters: UpdateIfcPropertyDefinitionDeprecatedRequest): Promise<runtime.ApiResponse<PropertyDefinition>> {
+    async updateIfcPropertyDefinitionDeprecatedRaw(requestParameters: UpdateIfcPropertyDefinitionDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertyDefinition>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcPropertyDefinitionDeprecated.');
         }
@@ -10133,7 +10272,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcPropertyDefinitionDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10145,11 +10284,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10162,7 +10302,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedPropertyDefinitionRequestToJSON(requestParameters.patchedPropertyDefinitionRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
     }
@@ -10171,8 +10311,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of many PropertyDefinitions of a model  Required scopes: ifc:write, model:write
      * Update some fields of many PropertyDefinitions of a model
      */
-    async updateIfcPropertyDefinitionDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedPropertyDefinitionRequest?: PatchedPropertyDefinitionRequest): Promise<PropertyDefinition> {
-        const response = await this.updateIfcPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedPropertyDefinitionRequest: patchedPropertyDefinitionRequest });
+    async updateIfcPropertyDefinitionDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedPropertyDefinitionRequest?: PatchedPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<PropertyDefinition> {
+        const response = await this.updateIfcPropertyDefinitionDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedPropertyDefinitionRequest: patchedPropertyDefinitionRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10180,7 +10320,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a Property  Required scopes: ifc:write, model:write
      * Update some fields of a Property
      */
-    async updateIfcPropertyDeprecatedRaw(requestParameters: UpdateIfcPropertyDeprecatedRequest): Promise<runtime.ApiResponse<Property>> {
+    async updateIfcPropertyDeprecatedRaw(requestParameters: UpdateIfcPropertyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcPropertyDeprecated.');
         }
@@ -10197,7 +10337,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcPropertyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10209,11 +10349,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10226,7 +10367,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedPropertyRequestToJSON(requestParameters.patchedPropertyRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
     }
@@ -10235,8 +10376,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a Property  Required scopes: ifc:write, model:write
      * Update some fields of a Property
      */
-    async updateIfcPropertyDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedPropertyRequest?: PatchedPropertyRequest): Promise<Property> {
-        const response = await this.updateIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedPropertyRequest: patchedPropertyRequest });
+    async updateIfcPropertyDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedPropertyRequest?: PatchedPropertyRequest, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.updateIfcPropertyDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedPropertyRequest: patchedPropertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10244,7 +10385,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a Unit of a model  Required scopes: ifc:write, model:write
      * Update some fields of a Unit of a model
      */
-    async updateIfcUnitDeprecatedRaw(requestParameters: UpdateIfcUnitDeprecatedRequest): Promise<runtime.ApiResponse<Unit>> {
+    async updateIfcUnitDeprecatedRaw(requestParameters: UpdateIfcUnitDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Unit>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateIfcUnitDeprecated.');
         }
@@ -10261,7 +10402,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateIfcUnitDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10273,11 +10414,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10290,7 +10432,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedUnitRequestToJSON(requestParameters.patchedUnitRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
     }
@@ -10299,8 +10441,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a Unit of a model  Required scopes: ifc:write, model:write
      * Update some fields of a Unit of a model
      */
-    async updateIfcUnitDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedUnitRequest?: PatchedUnitRequest): Promise<Unit> {
-        const response = await this.updateIfcUnitDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedUnitRequest: patchedUnitRequest });
+    async updateIfcUnitDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedUnitRequest?: PatchedUnitRequest, initOverrides?: RequestInit): Promise<Unit> {
+        const response = await this.updateIfcUnitDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedUnitRequest: patchedUnitRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10308,7 +10450,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a layer. The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a layer
      */
-    async updateLayerDeprecatedRaw(requestParameters: UpdateLayerDeprecatedRequest): Promise<runtime.ApiResponse<Layer>> {
+    async updateLayerDeprecatedRaw(requestParameters: UpdateLayerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Layer>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateLayerDeprecated.');
         }
@@ -10325,7 +10467,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateLayerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10337,11 +10479,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10354,7 +10497,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedLayerRequestToJSON(requestParameters.patchedLayerRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LayerFromJSON(jsonValue));
     }
@@ -10363,8 +10506,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a layer. The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a layer
      */
-    async updateLayerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedLayerRequest?: PatchedLayerRequest): Promise<Layer> {
-        const response = await this.updateLayerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedLayerRequest: patchedLayerRequest });
+    async updateLayerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedLayerRequest?: PatchedLayerRequest, initOverrides?: RequestInit): Promise<Layer> {
+        const response = await this.updateLayerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedLayerRequest: patchedLayerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10372,7 +10515,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update order of all plan of a building  Required scopes: ifc:write, model:write
      * Update order of all plan of a building
      */
-    async updateOrderBuildingPlanDeprecatedRaw(requestParameters: UpdateOrderBuildingPlanDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
+    async updateOrderBuildingPlanDeprecatedRaw(requestParameters: UpdateOrderBuildingPlanDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
             throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling updateOrderBuildingPlanDeprecated.');
         }
@@ -10393,7 +10536,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('requestBody','Required parameter requestParameters.requestBody was null or undefined when calling updateOrderBuildingPlanDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10405,11 +10548,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10422,7 +10566,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.requestBody,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
     }
@@ -10431,8 +10575,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update order of all plan of a building  Required scopes: ifc:write, model:write
      * Update order of all plan of a building
      */
-    async updateOrderBuildingPlanDeprecated(buildingUuid: string, cloudPk: number, ifcPk: number, projectPk: number, requestBody: Array<number>): Promise<Storey> {
-        const response = await this.updateOrderBuildingPlanDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, requestBody: requestBody });
+    async updateOrderBuildingPlanDeprecated(buildingUuid: string, cloudPk: number, ifcPk: number, projectPk: number, requestBody: Array<number>, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.updateOrderBuildingPlanDeprecatedRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, requestBody: requestBody }, initOverrides);
         return await response.value();
     }
 
@@ -10440,7 +10584,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update order of all plan of a storey  Required scopes: ifc:write, model:write
      * Update order of all plan of a storey
      */
-    async updateOrderStoreyPlanDeprecatedRaw(requestParameters: UpdateOrderStoreyPlanDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
+    async updateOrderStoreyPlanDeprecatedRaw(requestParameters: UpdateOrderStoreyPlanDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateOrderStoreyPlanDeprecated.');
         }
@@ -10461,7 +10605,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('requestBody','Required parameter requestParameters.requestBody was null or undefined when calling updateOrderStoreyPlanDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10473,11 +10617,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10490,7 +10635,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.requestBody,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
     }
@@ -10499,8 +10644,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update order of all plan of a storey  Required scopes: ifc:write, model:write
      * Update order of all plan of a storey
      */
-    async updateOrderStoreyPlanDeprecated(cloudPk: number, ifcPk: number, projectPk: number, storeyUuid: string, requestBody: Array<number>): Promise<Storey> {
-        const response = await this.updateOrderStoreyPlanDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid, requestBody: requestBody });
+    async updateOrderStoreyPlanDeprecated(cloudPk: number, ifcPk: number, projectPk: number, storeyUuid: string, requestBody: Array<number>, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.updateOrderStoreyPlanDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid, requestBody: requestBody }, initOverrides);
         return await response.value();
     }
 
@@ -10508,7 +10653,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update order of all storey of a model  Required scopes: ifc:write, model:write
      * Update order of all storey of a model
      */
-    async updateOrderStoreysDeprecatedRaw(requestParameters: UpdateOrderStoreysDeprecatedRequest): Promise<runtime.ApiResponse<Array<Storey>>> {
+    async updateOrderStoreysDeprecatedRaw(requestParameters: UpdateOrderStoreysDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Storey>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateOrderStoreysDeprecated.');
         }
@@ -10525,7 +10670,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('requestBody','Required parameter requestParameters.requestBody was null or undefined when calling updateOrderStoreysDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10537,11 +10682,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10554,7 +10700,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.requestBody,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StoreyFromJSON));
     }
@@ -10563,8 +10709,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update order of all storey of a model  Required scopes: ifc:write, model:write
      * Update order of all storey of a model
      */
-    async updateOrderStoreysDeprecated(cloudPk: number, ifcPk: number, projectPk: number, requestBody: Array<string>): Promise<Array<Storey>> {
-        const response = await this.updateOrderStoreysDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, requestBody: requestBody });
+    async updateOrderStoreysDeprecated(cloudPk: number, ifcPk: number, projectPk: number, requestBody: Array<string>, initOverrides?: RequestInit): Promise<Array<Storey>> {
+        const response = await this.updateOrderStoreysDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, requestBody: requestBody }, initOverrides);
         return await response.value();
     }
 
@@ -10572,7 +10718,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update the status of a processor handler  Required scopes: ifc:write, model:write
      * Update the status of a processor handler
      */
-    async updateProcessorHandlerDeprecatedRaw(requestParameters: UpdateProcessorHandlerDeprecatedRequest): Promise<runtime.ApiResponse<ProcessorHandler>> {
+    async updateProcessorHandlerDeprecatedRaw(requestParameters: UpdateProcessorHandlerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProcessorHandler>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProcessorHandlerDeprecated.');
         }
@@ -10589,7 +10735,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateProcessorHandlerDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10601,11 +10747,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10618,7 +10765,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedProcessorHandlerRequestToJSON(requestParameters.patchedProcessorHandlerRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProcessorHandlerFromJSON(jsonValue));
     }
@@ -10627,8 +10774,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update the status of a processor handler  Required scopes: ifc:write, model:write
      * Update the status of a processor handler
      */
-    async updateProcessorHandlerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedProcessorHandlerRequest?: PatchedProcessorHandlerRequest): Promise<ProcessorHandler> {
-        const response = await this.updateProcessorHandlerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedProcessorHandlerRequest: patchedProcessorHandlerRequest });
+    async updateProcessorHandlerDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedProcessorHandlerRequest?: PatchedProcessorHandlerRequest, initOverrides?: RequestInit): Promise<ProcessorHandler> {
+        const response = await this.updateProcessorHandlerDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedProcessorHandlerRequest: patchedProcessorHandlerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10636,7 +10783,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a PropertySet  Required scopes: ifc:write, model:write
      * Update some fields of a PropertySet
      */
-    async updatePropertySetDeprecatedRaw(requestParameters: UpdatePropertySetDeprecatedRequest): Promise<runtime.ApiResponse<PropertySet>> {
+    async updatePropertySetDeprecatedRaw(requestParameters: UpdatePropertySetDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertySet>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updatePropertySetDeprecated.');
         }
@@ -10653,7 +10800,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updatePropertySetDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10665,11 +10812,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10682,7 +10830,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedPropertySetRequestToJSON(requestParameters.patchedPropertySetRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertySetFromJSON(jsonValue));
     }
@@ -10691,8 +10839,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a PropertySet  Required scopes: ifc:write, model:write
      * Update some fields of a PropertySet
      */
-    async updatePropertySetDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedPropertySetRequest?: PatchedPropertySetRequest): Promise<PropertySet> {
-        const response = await this.updatePropertySetDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedPropertySetRequest: patchedPropertySetRequest });
+    async updatePropertySetDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedPropertySetRequest?: PatchedPropertySetRequest, initOverrides?: RequestInit): Promise<PropertySet> {
+        const response = await this.updatePropertySetDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedPropertySetRequest: patchedPropertySetRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10700,7 +10848,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateSpaceDeprecatedRaw(requestParameters: UpdateSpaceDeprecatedRequest): Promise<runtime.ApiResponse<Space>> {
+    async updateSpaceDeprecatedRaw(requestParameters: UpdateSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Space>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateSpaceDeprecated.');
         }
@@ -10717,7 +10865,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateSpaceDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10729,11 +10877,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10746,7 +10895,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedSpaceRequestToJSON(requestParameters.patchedSpaceRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SpaceFromJSON(jsonValue));
     }
@@ -10755,8 +10904,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedSpaceRequest?: PatchedSpaceRequest): Promise<Space> {
-        const response = await this.updateSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedSpaceRequest: patchedSpaceRequest });
+    async updateSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedSpaceRequest?: PatchedSpaceRequest, initOverrides?: RequestInit): Promise<Space> {
+        const response = await this.updateSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedSpaceRequest: patchedSpaceRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10764,7 +10913,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a storey  Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStoreyDeprecatedRaw(requestParameters: UpdateStoreyDeprecatedRequest): Promise<runtime.ApiResponse<Storey>> {
+    async updateStoreyDeprecatedRaw(requestParameters: UpdateStoreyDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateStoreyDeprecated.');
         }
@@ -10781,7 +10930,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling updateStoreyDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10791,11 +10940,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10807,7 +10957,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
     }
@@ -10816,8 +10966,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a storey  Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStoreyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string): Promise<Storey> {
-        const response = await this.updateStoreyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid });
+    async updateStoreyDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.updateStoreyDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -10825,7 +10975,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update the postioning of the plan in the storey  Required scopes: ifc:write, model:write
      * Update the postioning of the plan in the storey
      */
-    async updateStoreyPlanPositioningDeprecatedRaw(requestParameters: UpdateStoreyPlanPositioningDeprecatedRequest): Promise<runtime.ApiResponse<PositioningPlan>> {
+    async updateStoreyPlanPositioningDeprecatedRaw(requestParameters: UpdateStoreyPlanPositioningDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PositioningPlan>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateStoreyPlanPositioningDeprecated.');
         }
@@ -10846,7 +10996,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling updateStoreyPlanPositioningDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10858,11 +11008,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10875,7 +11026,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedPositioningPlanRequestToJSON(requestParameters.patchedPositioningPlanRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PositioningPlanFromJSON(jsonValue));
     }
@@ -10884,8 +11035,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update the postioning of the plan in the storey  Required scopes: ifc:write, model:write
      * Update the postioning of the plan in the storey
      */
-    async updateStoreyPlanPositioningDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, storeyUuid: string, patchedPositioningPlanRequest?: PatchedPositioningPlanRequest): Promise<PositioningPlan> {
-        const response = await this.updateStoreyPlanPositioningDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid, patchedPositioningPlanRequest: patchedPositioningPlanRequest });
+    async updateStoreyPlanPositioningDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, storeyUuid: string, patchedPositioningPlanRequest?: PatchedPositioningPlanRequest, initOverrides?: RequestInit): Promise<PositioningPlan> {
+        const response = await this.updateStoreyPlanPositioningDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, storeyUuid: storeyUuid, patchedPositioningPlanRequest: patchedPositioningPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10893,7 +11044,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a system. The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a system
      */
-    async updateSystemDeprecatedRaw(requestParameters: UpdateSystemDeprecatedRequest): Promise<runtime.ApiResponse<System>> {
+    async updateSystemDeprecatedRaw(requestParameters: UpdateSystemDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<System>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateSystemDeprecated.');
         }
@@ -10910,7 +11061,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling updateSystemDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10922,11 +11073,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10939,7 +11091,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedSystemRequestToJSON(requestParameters.patchedSystemRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SystemFromJSON(jsonValue));
     }
@@ -10948,8 +11100,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a system. The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a system
      */
-    async updateSystemDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, patchedSystemRequest?: PatchedSystemRequest): Promise<System> {
-        const response = await this.updateSystemDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid, patchedSystemRequest: patchedSystemRequest });
+    async updateSystemDeprecated(cloudPk: number, ifcPk: number, projectPk: number, uuid: string, patchedSystemRequest?: PatchedSystemRequest, initOverrides?: RequestInit): Promise<System> {
+        const response = await this.updateSystemDeprecatedRaw({ cloudPk: cloudPk, ifcPk: ifcPk, projectPk: projectPk, uuid: uuid, patchedSystemRequest: patchedSystemRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10957,7 +11109,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a zone. The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a zone
      */
-    async updateZoneDeprecatedRaw(requestParameters: UpdateZoneDeprecatedRequest): Promise<runtime.ApiResponse<Zone>> {
+    async updateZoneDeprecatedRaw(requestParameters: UpdateZoneDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Zone>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateZoneDeprecated.');
         }
@@ -10974,7 +11126,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateZoneDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -10986,11 +11138,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -11003,7 +11156,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedZoneRequestToJSON(requestParameters.patchedZoneRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ZoneFromJSON(jsonValue));
     }
@@ -11012,8 +11165,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a zone. The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a zone
      */
-    async updateZoneDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedZoneRequest?: PatchedZoneRequest): Promise<Zone> {
-        const response = await this.updateZoneDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedZoneRequest: patchedZoneRequest });
+    async updateZoneDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, patchedZoneRequest?: PatchedZoneRequest, initOverrides?: RequestInit): Promise<Zone> {
+        const response = await this.updateZoneDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, patchedZoneRequest: patchedZoneRequest }, initOverrides);
         return await response.value();
     }
 
@@ -11021,7 +11174,7 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateZoneSpaceDeprecatedRaw(requestParameters: UpdateZoneSpaceDeprecatedRequest): Promise<runtime.ApiResponse<ZoneSpace>> {
+    async updateZoneSpaceDeprecatedRaw(requestParameters: UpdateZoneSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ZoneSpace>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateZoneSpaceDeprecated.');
         }
@@ -11042,7 +11195,7 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling updateZoneSpaceDeprecated.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -11054,11 +11207,12 @@ export class IfcApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -11071,7 +11225,7 @@ export class IfcApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedZoneSpaceRequestToJSON(requestParameters.patchedZoneSpaceRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ZoneSpaceFromJSON(jsonValue));
     }
@@ -11080,8 +11234,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateZoneSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, zonePk: number, patchedZoneSpaceRequest?: PatchedZoneSpaceRequest): Promise<ZoneSpace> {
-        const response = await this.updateZoneSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk, patchedZoneSpaceRequest: patchedZoneSpaceRequest });
+    async updateZoneSpaceDeprecated(cloudPk: number, id: number, ifcPk: number, projectPk: number, zonePk: number, patchedZoneSpaceRequest?: PatchedZoneSpaceRequest, initOverrides?: RequestInit): Promise<ZoneSpace> {
+        const response = await this.updateZoneSpaceDeprecatedRaw({ cloudPk: cloudPk, id: id, ifcPk: ifcPk, projectPk: projectPk, zonePk: zonePk, patchedZoneSpaceRequest: patchedZoneSpaceRequest }, initOverrides);
         return await response.value();
     }
 
@@ -11092,11 +11246,11 @@ export class IfcApi extends runtime.BaseAPI {
     * @enum {string}
     */
 export enum GetIfcsDeprecatedSourceEnum {
-    EXPORT = 'EXPORT',
-    MERGE = 'MERGE',
-    OPTIMIZED = 'OPTIMIZED',
-    SPLIT = 'SPLIT',
-    UPLOAD = 'UPLOAD'
+    Export = 'EXPORT',
+    Merge = 'MERGE',
+    Optimized = 'OPTIMIZED',
+    Split = 'SPLIT',
+    Upload = 'UPLOAD'
 }
 /**
     * @export
@@ -11116,15 +11270,15 @@ export enum GetIfcsDeprecatedStatusEnum {
     * @enum {string}
     */
 export enum GetIfcsDeprecatedTypeEnum {
-    BFX = 'BFX',
-    DAE = 'DAE',
-    DWG = 'DWG',
-    DXF = 'DXF',
-    GLTF = 'GLTF',
-    IFC = 'IFC',
-    JPEG = 'JPEG',
-    METABUILDING = 'METABUILDING',
-    OBJ = 'OBJ',
-    PDF = 'PDF',
-    PNG = 'PNG'
+    Bfx = 'BFX',
+    Dae = 'DAE',
+    Dwg = 'DWG',
+    Dxf = 'DXF',
+    Gltf = 'GLTF',
+    Ifc = 'IFC',
+    Jpeg = 'JPEG',
+    Metabuilding = 'METABUILDING',
+    Obj = 'OBJ',
+    Pdf = 'PDF',
+    Png = 'PNG'
 }

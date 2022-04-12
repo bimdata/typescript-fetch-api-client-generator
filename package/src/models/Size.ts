@@ -18,11 +18,13 @@ import {
     CloudRoleEnumFromJSON,
     CloudRoleEnumFromJSONTyped,
     CloudRoleEnumToJSON,
+} from './CloudRoleEnum';
+import {
     ManagedByEnum,
     ManagedByEnumFromJSON,
     ManagedByEnumFromJSONTyped,
     ManagedByEnumToJSON,
-} from './';
+} from './ManagedByEnum';
 
 /**
  * 
@@ -135,5 +137,4 @@ export function SizeToJSON(value?: Size | null): any {
         'role': CloudRoleEnumToJSON(value.role),
     };
 }
-
 

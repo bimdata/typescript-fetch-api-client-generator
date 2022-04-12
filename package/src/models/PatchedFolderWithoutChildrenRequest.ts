@@ -18,7 +18,7 @@ import {
     FolderPermissionEnumFromJSON,
     FolderPermissionEnumFromJSONTyped,
     FolderPermissionEnumToJSON,
-} from './';
+} from './FolderPermissionEnum';
 
 /**
  * 
@@ -43,7 +43,7 @@ export interface PatchedFolderWithoutChildrenRequest {
      * @type {FolderPermissionEnum}
      * @memberof PatchedFolderWithoutChildrenRequest
      */
-    defaultPermission?: FolderPermissionEnum;
+    defaultPermission?: FolderPermissionEnum | null;
 }
 
 export function PatchedFolderWithoutChildrenRequestFromJSON(json: any): PatchedFolderWithoutChildrenRequest {
@@ -76,5 +76,4 @@ export function PatchedFolderWithoutChildrenRequestToJSON(value?: PatchedFolderW
         'default_permission': FolderPermissionEnumToJSON(value.defaultPermission),
     };
 }
-
 

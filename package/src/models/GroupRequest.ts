@@ -62,4 +62,3 @@ export function GroupRequestToJSON(value?: GroupRequest | null): any {
     };
 }
 
-

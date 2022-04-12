@@ -18,7 +18,7 @@ import {
     CheckerStatusEnumFromJSON,
     CheckerStatusEnumFromJSONTyped,
     CheckerStatusEnumToJSON,
-} from './';
+} from './CheckerStatusEnum';
 
 /**
  * 
@@ -97,5 +97,4 @@ export function CheckerResultToJSON(value?: CheckerResult | null): any {
         'collisions': value.collisions,
     };
 }
-
 

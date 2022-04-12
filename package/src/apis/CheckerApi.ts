@@ -313,7 +313,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Create a checker to a model
      */
-    async createCheckerRaw(requestParameters: CreateCheckerRequest): Promise<runtime.ApiResponse<IfcChecker>> {
+    async createCheckerRaw(requestParameters: CreateCheckerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createChecker.');
         }
@@ -326,7 +326,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createChecker.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -338,11 +338,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -355,7 +356,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: IfcCheckerRequestToJSON(requestParameters.ifcCheckerRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
     }
@@ -364,8 +365,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Create a checker to a model
      */
-    async createChecker(cloudPk: number, modelPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest): Promise<IfcChecker> {
-        const response = await this.createCheckerRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest });
+    async createChecker(cloudPk: number, modelPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
+        const response = await this.createCheckerRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -373,7 +374,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a CheckerResult  Required scopes: check:write
      * Create a CheckerResult
      */
-    async createCheckerResultRaw(requestParameters: CreateCheckerResultRequest): Promise<runtime.ApiResponse<CheckerResult>> {
+    async createCheckerResultRaw(requestParameters: CreateCheckerResultRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling createCheckerResult.');
         }
@@ -390,7 +391,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createCheckerResult.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -402,11 +403,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -419,7 +421,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: CheckerResultRequestToJSON(requestParameters.checkerResultRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
     }
@@ -428,8 +430,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a CheckerResult  Required scopes: check:write
      * Create a CheckerResult
      */
-    async createCheckerResult(checkerPk: number, cloudPk: number, modelPk: number, projectPk: number, checkerResultRequest?: CheckerResultRequest): Promise<CheckerResult> {
-        const response = await this.createCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, checkerResultRequest: checkerResultRequest });
+    async createCheckerResult(checkerPk: number, cloudPk: number, modelPk: number, projectPk: number, checkerResultRequest?: CheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
+        const response = await this.createCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, checkerResultRequest: checkerResultRequest }, initOverrides);
         return await response.value();
     }
 
@@ -437,7 +439,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a Checkplan  Required scopes: check:write
      * Create a Checkplan
      */
-    async createCheckplanRaw(requestParameters: CreateCheckplanRequest): Promise<runtime.ApiResponse<CheckPlan>> {
+    async createCheckplanRaw(requestParameters: CreateCheckplanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckPlan>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createCheckplan.');
         }
@@ -450,7 +452,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('checkPlanRequest','Required parameter requestParameters.checkPlanRequest was null or undefined when calling createCheckplan.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -462,11 +464,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -479,7 +482,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: CheckPlanRequestToJSON(requestParameters.checkPlanRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckPlanFromJSON(jsonValue));
     }
@@ -488,8 +491,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a Checkplan  Required scopes: check:write
      * Create a Checkplan
      */
-    async createCheckplan(cloudPk: number, projectPk: number, checkPlanRequest: CheckPlanRequest): Promise<CheckPlan> {
-        const response = await this.createCheckplanRaw({ cloudPk: cloudPk, projectPk: projectPk, checkPlanRequest: checkPlanRequest });
+    async createCheckplan(cloudPk: number, projectPk: number, checkPlanRequest: CheckPlanRequest, initOverrides?: RequestInit): Promise<CheckPlan> {
+        const response = await this.createCheckplanRaw({ cloudPk: cloudPk, projectPk: projectPk, checkPlanRequest: checkPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -497,7 +500,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a Rule  Required scopes: check:write
      * Create a Rule
      */
-    async createRuleRaw(requestParameters: CreateRuleRequest): Promise<runtime.ApiResponse<Rule>> {
+    async createRuleRaw(requestParameters: CreateRuleRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Rule>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling createRule.');
         }
@@ -518,7 +521,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('ruleRequest','Required parameter requestParameters.ruleRequest was null or undefined when calling createRule.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -530,11 +533,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -547,7 +551,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: RuleRequestToJSON(requestParameters.ruleRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleFromJSON(jsonValue));
     }
@@ -556,8 +560,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a Rule  Required scopes: check:write
      * Create a Rule
      */
-    async createRule(checkPlanPk: number, cloudPk: number, projectPk: number, rulesetPk: number, ruleRequest: RuleRequest): Promise<Rule> {
-        const response = await this.createRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulesetPk: rulesetPk, ruleRequest: ruleRequest });
+    async createRule(checkPlanPk: number, cloudPk: number, projectPk: number, rulesetPk: number, ruleRequest: RuleRequest, initOverrides?: RequestInit): Promise<Rule> {
+        const response = await this.createRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulesetPk: rulesetPk, ruleRequest: ruleRequest }, initOverrides);
         return await response.value();
     }
 
@@ -565,7 +569,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a RuleComponent  Required scopes: check:write
      * Create a RuleComponent
      */
-    async createRuleComponentRaw(requestParameters: CreateRuleComponentRequest): Promise<runtime.ApiResponse<RuleComponent>> {
+    async createRuleComponentRaw(requestParameters: CreateRuleComponentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<RuleComponent>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling createRuleComponent.');
         }
@@ -586,7 +590,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling createRuleComponent.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -598,11 +602,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -615,7 +620,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: RuleComponentRequestToJSON(requestParameters.ruleComponentRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleComponentFromJSON(jsonValue));
     }
@@ -624,8 +629,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a RuleComponent  Required scopes: check:write
      * Create a RuleComponent
      */
-    async createRuleComponent(checkPlanPk: number, cloudPk: number, projectPk: number, rulePk: number, rulesetPk: number, ruleComponentRequest?: RuleComponentRequest): Promise<RuleComponent> {
-        const response = await this.createRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk, ruleComponentRequest: ruleComponentRequest });
+    async createRuleComponent(checkPlanPk: number, cloudPk: number, projectPk: number, rulePk: number, rulesetPk: number, ruleComponentRequest?: RuleComponentRequest, initOverrides?: RequestInit): Promise<RuleComponent> {
+        const response = await this.createRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk, ruleComponentRequest: ruleComponentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -633,7 +638,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a Ruleset  Required scopes: check:write
      * Create a Ruleset
      */
-    async createRulesetRaw(requestParameters: CreateRulesetRequest): Promise<runtime.ApiResponse<Ruleset>> {
+    async createRulesetRaw(requestParameters: CreateRulesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Ruleset>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling createRuleset.');
         }
@@ -650,7 +655,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetRequest','Required parameter requestParameters.rulesetRequest was null or undefined when calling createRuleset.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -662,11 +667,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -679,7 +685,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: RulesetRequestToJSON(requestParameters.rulesetRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RulesetFromJSON(jsonValue));
     }
@@ -688,8 +694,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a Ruleset  Required scopes: check:write
      * Create a Ruleset
      */
-    async createRuleset(checkPlanPk: number, cloudPk: number, projectPk: number, rulesetRequest: RulesetRequest): Promise<Ruleset> {
-        const response = await this.createRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulesetRequest: rulesetRequest });
+    async createRuleset(checkPlanPk: number, cloudPk: number, projectPk: number, rulesetRequest: RulesetRequest, initOverrides?: RequestInit): Promise<Ruleset> {
+        const response = await this.createRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulesetRequest: rulesetRequest }, initOverrides);
         return await response.value();
     }
 
@@ -697,7 +703,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Delete a checker of a model
      */
-    async deleteCheckerRaw(requestParameters: DeleteCheckerRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCheckerRaw(requestParameters: DeleteCheckerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteChecker.');
         }
@@ -714,7 +720,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteChecker.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -724,11 +730,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -740,7 +747,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -749,15 +756,15 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Delete a checker of a model
      */
-    async deleteChecker(cloudPk: number, id: number, modelPk: number, projectPk: number): Promise<void> {
-        await this.deleteCheckerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk });
+    async deleteChecker(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a CheckerResult  Required scopes: check:write
      * Delete a CheckerResult
      */
-    async deleteCheckerResultRaw(requestParameters: DeleteCheckerResultRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCheckerResultRaw(requestParameters: DeleteCheckerResultRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling deleteCheckerResult.');
         }
@@ -778,7 +785,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteCheckerResult.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -788,11 +795,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -804,7 +812,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -813,15 +821,15 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a CheckerResult  Required scopes: check:write
      * Delete a CheckerResult
      */
-    async deleteCheckerResult(checkerPk: number, cloudPk: number, id: number, modelPk: number, projectPk: number): Promise<void> {
-        await this.deleteCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk });
+    async deleteCheckerResult(checkerPk: number, cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a Checkplan  Required scopes: check:write
      * Delete a Checkplan
      */
-    async deleteCheckplanRaw(requestParameters: DeleteCheckplanRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCheckplanRaw(requestParameters: DeleteCheckplanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteCheckplan.');
         }
@@ -834,7 +842,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteCheckplan.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -844,11 +852,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -860,7 +869,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -869,15 +878,15 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Checkplan  Required scopes: check:write
      * Delete a Checkplan
      */
-    async deleteCheckplan(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteCheckplanRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async deleteCheckplan(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckplanRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a Rule  Required scopes: check:write
      * Delete a Rule
      */
-    async deleteRuleRaw(requestParameters: DeleteRuleRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteRuleRaw(requestParameters: DeleteRuleRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling deleteRule.');
         }
@@ -898,7 +907,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling deleteRule.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -908,11 +917,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -924,7 +934,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -933,15 +943,15 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Rule  Required scopes: check:write
      * Delete a Rule
      */
-    async deleteRule(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulesetPk: number): Promise<void> {
-        await this.deleteRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulesetPk: rulesetPk });
+    async deleteRule(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulesetPk: rulesetPk }, initOverrides);
     }
 
     /**
      * Delete a RuleComponent  Required scopes: check:write
      * Delete a RuleComponent
      */
-    async deleteRuleComponentRaw(requestParameters: DeleteRuleComponentRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteRuleComponentRaw(requestParameters: DeleteRuleComponentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling deleteRuleComponent.');
         }
@@ -966,7 +976,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling deleteRuleComponent.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -976,11 +986,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -992,7 +1003,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1001,15 +1012,15 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a RuleComponent  Required scopes: check:write
      * Delete a RuleComponent
      */
-    async deleteRuleComponent(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulePk: number, rulesetPk: number): Promise<void> {
-        await this.deleteRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk });
+    async deleteRuleComponent(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulePk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk }, initOverrides);
     }
 
     /**
      * Delete a Ruleset  Required scopes: check:write
      * Delete a Ruleset
      */
-    async deleteRulesetRaw(requestParameters: DeleteRulesetRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteRulesetRaw(requestParameters: DeleteRulesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling deleteRuleset.');
         }
@@ -1026,7 +1037,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteRuleset.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1036,11 +1047,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1052,7 +1064,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1061,15 +1073,15 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Ruleset  Required scopes: check:write
      * Delete a Ruleset
      */
-    async deleteRuleset(checkPlanPk: number, cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async deleteRuleset(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve a checker of a model
      */
-    async getCheckerRaw(requestParameters: GetCheckerRequest): Promise<runtime.ApiResponse<IfcChecker>> {
+    async getCheckerRaw(requestParameters: GetCheckerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getChecker.');
         }
@@ -1086,7 +1098,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getChecker.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1096,11 +1108,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1112,7 +1125,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
     }
@@ -1121,8 +1134,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve a checker of a model
      */
-    async getChecker(cloudPk: number, id: number, modelPk: number, projectPk: number): Promise<IfcChecker> {
-        const response = await this.getCheckerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk });
+    async getChecker(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<IfcChecker> {
+        const response = await this.getCheckerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -1130,7 +1143,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one CheckerResult  Required scopes: check:read
      * Retrieve one CheckerResult
      */
-    async getCheckerResultRaw(requestParameters: GetCheckerResultRequest): Promise<runtime.ApiResponse<CheckerResult>> {
+    async getCheckerResultRaw(requestParameters: GetCheckerResultRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling getCheckerResult.');
         }
@@ -1151,7 +1164,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerResult.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1161,11 +1174,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1177,7 +1191,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
     }
@@ -1186,8 +1200,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one CheckerResult  Required scopes: check:read
      * Retrieve one CheckerResult
      */
-    async getCheckerResult(checkerPk: number, cloudPk: number, id: number, modelPk: number, projectPk: number): Promise<CheckerResult> {
-        const response = await this.getCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk });
+    async getCheckerResult(checkerPk: number, cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<CheckerResult> {
+        const response = await this.getCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -1195,7 +1209,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all CheckerResults  Required scopes: check:read
      * Retrieve all CheckerResults
      */
-    async getCheckerResultsRaw(requestParameters: GetCheckerResultsRequest): Promise<runtime.ApiResponse<Array<CheckerResult>>> {
+    async getCheckerResultsRaw(requestParameters: GetCheckerResultsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<CheckerResult>>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling getCheckerResults.');
         }
@@ -1212,7 +1226,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerResults.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1222,11 +1236,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1238,7 +1253,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CheckerResultFromJSON));
     }
@@ -1247,8 +1262,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all CheckerResults  Required scopes: check:read
      * Retrieve all CheckerResults
      */
-    async getCheckerResults(checkerPk: number, cloudPk: number, modelPk: number, projectPk: number): Promise<Array<CheckerResult>> {
-        const response = await this.getCheckerResultsRaw({ checkerPk: checkerPk, cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk });
+    async getCheckerResults(checkerPk: number, cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<CheckerResult>> {
+        const response = await this.getCheckerResultsRaw({ checkerPk: checkerPk, cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -1256,7 +1271,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve all checkers of a model
      */
-    async getCheckersRaw(requestParameters: GetCheckersRequest): Promise<runtime.ApiResponse<Array<IfcChecker>>> {
+    async getCheckersRaw(requestParameters: GetCheckersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<IfcChecker>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckers.');
         }
@@ -1269,7 +1284,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckers.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1279,11 +1294,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1295,7 +1311,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(IfcCheckerFromJSON));
     }
@@ -1304,8 +1320,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve all checkers of a model
      */
-    async getCheckers(cloudPk: number, modelPk: number, projectPk: number): Promise<Array<IfcChecker>> {
-        const response = await this.getCheckersRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk });
+    async getCheckers(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<IfcChecker>> {
+        const response = await this.getCheckersRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -1313,7 +1329,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Checkplan  Required scopes: check:read
      * Retrieve one Checkplan
      */
-    async getCheckplanRaw(requestParameters: GetCheckplanRequest): Promise<runtime.ApiResponse<CheckPlan>> {
+    async getCheckplanRaw(requestParameters: GetCheckplanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckPlan>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckplan.');
         }
@@ -1326,7 +1342,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckplan.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1336,11 +1352,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1352,7 +1369,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckPlanFromJSON(jsonValue));
     }
@@ -1361,8 +1378,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Checkplan  Required scopes: check:read
      * Retrieve one Checkplan
      */
-    async getCheckplan(cloudPk: number, id: number, projectPk: number): Promise<CheckPlan> {
-        const response = await this.getCheckplanRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async getCheckplan(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<CheckPlan> {
+        const response = await this.getCheckplanRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -1370,7 +1387,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Checkplans  Required scopes: check:read
      * Retrieve all Checkplans
      */
-    async getCheckplansRaw(requestParameters: GetCheckplansRequest): Promise<runtime.ApiResponse<Array<CheckPlan>>> {
+    async getCheckplansRaw(requestParameters: GetCheckplansRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<CheckPlan>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckplans.');
         }
@@ -1379,7 +1396,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckplans.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1389,11 +1406,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1405,7 +1423,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CheckPlanFromJSON));
     }
@@ -1414,8 +1432,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Checkplans  Required scopes: check:read
      * Retrieve all Checkplans
      */
-    async getCheckplans(cloudPk: number, projectPk: number): Promise<Array<CheckPlan>> {
-        const response = await this.getCheckplansRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getCheckplans(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<CheckPlan>> {
+        const response = await this.getCheckplansRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -1423,7 +1441,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Rule  Required scopes: check:read
      * Retrieve one Rule
      */
-    async getRuleRaw(requestParameters: GetRuleRequest): Promise<runtime.ApiResponse<Rule>> {
+    async getRuleRaw(requestParameters: GetRuleRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Rule>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRule.');
         }
@@ -1444,7 +1462,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling getRule.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1454,11 +1472,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1470,7 +1489,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleFromJSON(jsonValue));
     }
@@ -1479,8 +1498,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Rule  Required scopes: check:read
      * Retrieve one Rule
      */
-    async getRule(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulesetPk: number): Promise<Rule> {
-        const response = await this.getRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulesetPk: rulesetPk });
+    async getRule(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<Rule> {
+        const response = await this.getRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulesetPk: rulesetPk }, initOverrides);
         return await response.value();
     }
 
@@ -1488,7 +1507,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one RuleComponent  Required scopes: check:read
      * Retrieve one RuleComponent
      */
-    async getRuleComponentRaw(requestParameters: GetRuleComponentRequest): Promise<runtime.ApiResponse<RuleComponent>> {
+    async getRuleComponentRaw(requestParameters: GetRuleComponentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<RuleComponent>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRuleComponent.');
         }
@@ -1513,7 +1532,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling getRuleComponent.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1523,11 +1542,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1539,7 +1559,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleComponentFromJSON(jsonValue));
     }
@@ -1548,8 +1568,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one RuleComponent  Required scopes: check:read
      * Retrieve one RuleComponent
      */
-    async getRuleComponent(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulePk: number, rulesetPk: number): Promise<RuleComponent> {
-        const response = await this.getRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk });
+    async getRuleComponent(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulePk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<RuleComponent> {
+        const response = await this.getRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk }, initOverrides);
         return await response.value();
     }
 
@@ -1557,7 +1577,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all RuleComponents  Required scopes: check:read
      * Retrieve all RuleComponents
      */
-    async getRuleComponentsRaw(requestParameters: GetRuleComponentsRequest): Promise<runtime.ApiResponse<Array<RuleComponent>>> {
+    async getRuleComponentsRaw(requestParameters: GetRuleComponentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<RuleComponent>>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRuleComponents.');
         }
@@ -1578,7 +1598,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling getRuleComponents.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1588,11 +1608,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1604,7 +1625,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(RuleComponentFromJSON));
     }
@@ -1613,8 +1634,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all RuleComponents  Required scopes: check:read
      * Retrieve all RuleComponents
      */
-    async getRuleComponents(checkPlanPk: number, cloudPk: number, projectPk: number, rulePk: number, rulesetPk: number): Promise<Array<RuleComponent>> {
-        const response = await this.getRuleComponentsRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk });
+    async getRuleComponents(checkPlanPk: number, cloudPk: number, projectPk: number, rulePk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<Array<RuleComponent>> {
+        const response = await this.getRuleComponentsRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk }, initOverrides);
         return await response.value();
     }
 
@@ -1622,7 +1643,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Rules  Required scopes: check:read
      * Retrieve all Rules
      */
-    async getRulesRaw(requestParameters: GetRulesRequest): Promise<runtime.ApiResponse<Array<Rule>>> {
+    async getRulesRaw(requestParameters: GetRulesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Rule>>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRules.');
         }
@@ -1639,7 +1660,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling getRules.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1649,11 +1670,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1665,7 +1687,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(RuleFromJSON));
     }
@@ -1674,8 +1696,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Rules  Required scopes: check:read
      * Retrieve all Rules
      */
-    async getRules(checkPlanPk: number, cloudPk: number, projectPk: number, rulesetPk: number): Promise<Array<Rule>> {
-        const response = await this.getRulesRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulesetPk: rulesetPk });
+    async getRules(checkPlanPk: number, cloudPk: number, projectPk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<Array<Rule>> {
+        const response = await this.getRulesRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulesetPk: rulesetPk }, initOverrides);
         return await response.value();
     }
 
@@ -1683,7 +1705,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Ruleset  Required scopes: check:read
      * Retrieve one Ruleset
      */
-    async getRulesetRaw(requestParameters: GetRulesetRequest): Promise<runtime.ApiResponse<Ruleset>> {
+    async getRulesetRaw(requestParameters: GetRulesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Ruleset>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRuleset.');
         }
@@ -1700,7 +1722,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRuleset.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1710,11 +1732,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1726,7 +1749,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RulesetFromJSON(jsonValue));
     }
@@ -1735,8 +1758,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Ruleset  Required scopes: check:read
      * Retrieve one Ruleset
      */
-    async getRuleset(checkPlanPk: number, cloudPk: number, id: number, projectPk: number): Promise<Ruleset> {
-        const response = await this.getRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async getRuleset(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Ruleset> {
+        const response = await this.getRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -1744,7 +1767,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Rulesets  Required scopes: check:read
      * Retrieve all Rulesets
      */
-    async getRulesetsRaw(requestParameters: GetRulesetsRequest): Promise<runtime.ApiResponse<Array<Ruleset>>> {
+    async getRulesetsRaw(requestParameters: GetRulesetsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Ruleset>>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRulesets.');
         }
@@ -1757,7 +1780,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRulesets.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1767,11 +1790,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1783,7 +1807,7 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(RulesetFromJSON));
     }
@@ -1792,8 +1816,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Rulesets  Required scopes: check:read
      * Retrieve all Rulesets
      */
-    async getRulesets(checkPlanPk: number, cloudPk: number, projectPk: number): Promise<Array<Ruleset>> {
-        const response = await this.getRulesetsRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk });
+    async getRulesets(checkPlanPk: number, cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Ruleset>> {
+        const response = await this.getRulesetsRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -1801,7 +1825,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * A nex check will be played with the current state of elements, properties, etc.  Required scopes: check:write, ifc:read
      * Launch a new check on the model
      */
-    async launchNewCheckRaw(requestParameters: LaunchNewCheckRequest): Promise<runtime.ApiResponse<void>> {
+    async launchNewCheckRaw(requestParameters: LaunchNewCheckRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling launchNewCheck.');
         }
@@ -1818,7 +1842,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling launchNewCheck.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1830,11 +1854,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1847,7 +1872,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: IfcCheckerRequestToJSON(requestParameters.ifcCheckerRequest),
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1856,15 +1881,15 @@ export class CheckerApi extends runtime.BaseAPI {
      * A nex check will be played with the current state of elements, properties, etc.  Required scopes: check:write, ifc:read
      * Launch a new check on the model
      */
-    async launchNewCheck(cloudPk: number, id: number, modelPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest): Promise<void> {
-        await this.launchNewCheckRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest });
+    async launchNewCheck(cloudPk: number, id: number, modelPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.launchNewCheckRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest }, initOverrides);
     }
 
     /**
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Update some fields of a checker of a model
      */
-    async updateCheckerRaw(requestParameters: UpdateCheckerRequest): Promise<runtime.ApiResponse<IfcChecker>> {
+    async updateCheckerRaw(requestParameters: UpdateCheckerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateChecker.');
         }
@@ -1881,7 +1906,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateChecker.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1893,11 +1918,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1910,7 +1936,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedIfcCheckerRequestToJSON(requestParameters.patchedIfcCheckerRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
     }
@@ -1919,8 +1945,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Update some fields of a checker of a model
      */
-    async updateChecker(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedIfcCheckerRequest?: PatchedIfcCheckerRequest): Promise<IfcChecker> {
-        const response = await this.updateCheckerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedIfcCheckerRequest: patchedIfcCheckerRequest });
+    async updateChecker(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedIfcCheckerRequest?: PatchedIfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
+        const response = await this.updateCheckerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedIfcCheckerRequest: patchedIfcCheckerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1928,7 +1954,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a CheckerResult  Required scopes: check:write
      * Update some fields of a CheckerResult
      */
-    async updateCheckerResultRaw(requestParameters: UpdateCheckerResultRequest): Promise<runtime.ApiResponse<CheckerResult>> {
+    async updateCheckerResultRaw(requestParameters: UpdateCheckerResultRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
         if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
             throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling updateCheckerResult.');
         }
@@ -1949,7 +1975,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateCheckerResult.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1961,11 +1987,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1978,7 +2005,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedCheckerResultRequestToJSON(requestParameters.patchedCheckerResultRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
     }
@@ -1987,8 +2014,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a CheckerResult  Required scopes: check:write
      * Update some fields of a CheckerResult
      */
-    async updateCheckerResult(checkerPk: number, cloudPk: number, id: number, modelPk: number, projectPk: number, patchedCheckerResultRequest?: PatchedCheckerResultRequest): Promise<CheckerResult> {
-        const response = await this.updateCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedCheckerResultRequest: patchedCheckerResultRequest });
+    async updateCheckerResult(checkerPk: number, cloudPk: number, id: number, modelPk: number, projectPk: number, patchedCheckerResultRequest?: PatchedCheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
+        const response = await this.updateCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedCheckerResultRequest: patchedCheckerResultRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1996,7 +2023,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Checkplan  Required scopes: check:write
      * Update some fields of a Checkplan
      */
-    async updateCheckplanRaw(requestParameters: UpdateCheckplanRequest): Promise<runtime.ApiResponse<CheckPlan>> {
+    async updateCheckplanRaw(requestParameters: UpdateCheckplanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckPlan>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateCheckplan.');
         }
@@ -2009,7 +2036,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateCheckplan.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2021,11 +2048,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2038,7 +2066,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedCheckPlanRequestToJSON(requestParameters.patchedCheckPlanRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckPlanFromJSON(jsonValue));
     }
@@ -2047,8 +2075,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Checkplan  Required scopes: check:write
      * Update some fields of a Checkplan
      */
-    async updateCheckplan(cloudPk: number, id: number, projectPk: number, patchedCheckPlanRequest?: PatchedCheckPlanRequest): Promise<CheckPlan> {
-        const response = await this.updateCheckplanRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedCheckPlanRequest: patchedCheckPlanRequest });
+    async updateCheckplan(cloudPk: number, id: number, projectPk: number, patchedCheckPlanRequest?: PatchedCheckPlanRequest, initOverrides?: RequestInit): Promise<CheckPlan> {
+        const response = await this.updateCheckplanRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedCheckPlanRequest: patchedCheckPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2056,7 +2084,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Rule  Required scopes: check:write
      * Update some fields of a Rule
      */
-    async updateRuleRaw(requestParameters: UpdateRuleRequest): Promise<runtime.ApiResponse<Rule>> {
+    async updateRuleRaw(requestParameters: UpdateRuleRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Rule>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling updateRule.');
         }
@@ -2077,7 +2105,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling updateRule.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2089,11 +2117,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2106,7 +2135,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedRuleRequestToJSON(requestParameters.patchedRuleRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleFromJSON(jsonValue));
     }
@@ -2115,8 +2144,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Rule  Required scopes: check:write
      * Update some fields of a Rule
      */
-    async updateRule(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulesetPk: number, patchedRuleRequest?: PatchedRuleRequest): Promise<Rule> {
-        const response = await this.updateRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulesetPk: rulesetPk, patchedRuleRequest: patchedRuleRequest });
+    async updateRule(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulesetPk: number, patchedRuleRequest?: PatchedRuleRequest, initOverrides?: RequestInit): Promise<Rule> {
+        const response = await this.updateRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulesetPk: rulesetPk, patchedRuleRequest: patchedRuleRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2124,7 +2153,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a RuleComponent  Required scopes: check:write
      * Update some fields of a RuleComponent
      */
-    async updateRuleComponentRaw(requestParameters: UpdateRuleComponentRequest): Promise<runtime.ApiResponse<RuleComponent>> {
+    async updateRuleComponentRaw(requestParameters: UpdateRuleComponentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<RuleComponent>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling updateRuleComponent.');
         }
@@ -2149,7 +2178,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling updateRuleComponent.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2161,11 +2190,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2178,7 +2208,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedRuleComponentRequestToJSON(requestParameters.patchedRuleComponentRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleComponentFromJSON(jsonValue));
     }
@@ -2187,8 +2217,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a RuleComponent  Required scopes: check:write
      * Update some fields of a RuleComponent
      */
-    async updateRuleComponent(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulePk: number, rulesetPk: number, patchedRuleComponentRequest?: PatchedRuleComponentRequest): Promise<RuleComponent> {
-        const response = await this.updateRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk, patchedRuleComponentRequest: patchedRuleComponentRequest });
+    async updateRuleComponent(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulePk: number, rulesetPk: number, patchedRuleComponentRequest?: PatchedRuleComponentRequest, initOverrides?: RequestInit): Promise<RuleComponent> {
+        const response = await this.updateRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk, patchedRuleComponentRequest: patchedRuleComponentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2196,7 +2226,7 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Ruleset  Required scopes: check:write
      * Update some fields of a Ruleset
      */
-    async updateRulesetRaw(requestParameters: UpdateRulesetRequest): Promise<runtime.ApiResponse<Ruleset>> {
+    async updateRulesetRaw(requestParameters: UpdateRulesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Ruleset>> {
         if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
             throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling updateRuleset.');
         }
@@ -2213,7 +2243,7 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateRuleset.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2225,11 +2255,12 @@ export class CheckerApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2242,7 +2273,7 @@ export class CheckerApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedRulesetRequestToJSON(requestParameters.patchedRulesetRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RulesetFromJSON(jsonValue));
     }
@@ -2251,8 +2282,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Ruleset  Required scopes: check:write
      * Update some fields of a Ruleset
      */
-    async updateRuleset(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, patchedRulesetRequest?: PatchedRulesetRequest): Promise<Ruleset> {
-        const response = await this.updateRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, patchedRulesetRequest: patchedRulesetRequest });
+    async updateRuleset(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, patchedRulesetRequest?: PatchedRulesetRequest, initOverrides?: RequestInit): Promise<Ruleset> {
+        const response = await this.updateRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, patchedRulesetRequest: patchedRulesetRequest }, initOverrides);
         return await response.value();
     }
 

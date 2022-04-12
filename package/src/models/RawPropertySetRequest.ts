@@ -18,7 +18,7 @@ import {
     RawPropertyRequestFromJSON,
     RawPropertyRequestFromJSONTyped,
     RawPropertyRequestToJSON,
-} from './';
+} from './RawPropertyRequest';
 
 /**
  * 
@@ -84,5 +84,4 @@ export function RawPropertySetRequestToJSON(value?: RawPropertySetRequest | null
         'properties': ((value.properties as Array<any>).map(RawPropertyRequestToJSON)),
     };
 }
-
 

@@ -18,7 +18,7 @@ import {
     PointFromJSON,
     PointFromJSONTyped,
     PointToJSON,
-} from './';
+} from './Point';
 
 /**
  * Adds nested create feature
@@ -68,5 +68,4 @@ export function LineToJSON(value?: Line | null): any {
         'start_point': PointToJSON(value.startPoint),
     };
 }
-
 

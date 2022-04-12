@@ -18,19 +18,25 @@ import {
     DocumentFromJSON,
     DocumentFromJSONTyped,
     DocumentToJSON,
+} from './Document';
+import {
     ModelSourceEnum,
     ModelSourceEnumFromJSON,
     ModelSourceEnumFromJSONTyped,
     ModelSourceEnumToJSON,
+} from './ModelSourceEnum';
+import {
     ModelTypeEnum,
     ModelTypeEnumFromJSON,
     ModelTypeEnumFromJSONTyped,
     ModelTypeEnumToJSON,
+} from './ModelTypeEnum';
+import {
     User,
     UserFromJSON,
     UserFromJSONTyped,
     UserToJSON,
-} from './';
+} from './User';
 
 /**
  * 
@@ -55,13 +61,13 @@ export interface Model {
      * @type {ModelTypeEnum}
      * @memberof Model
      */
-    readonly type: ModelTypeEnum;
+    readonly type: ModelTypeEnum | null;
     /**
      * 
      * @type {User}
      * @memberof Model
      */
-    readonly creator: User;
+    readonly creator: User | null;
     /**
      * 
      * @type {string}
@@ -97,7 +103,7 @@ export interface Model {
      * @type {Document}
      * @memberof Model
      */
-    readonly document: Document;
+    readonly document: Document | null;
     /**
      * 
      * @type {string}
@@ -255,5 +261,4 @@ export function ModelToJSON(value?: Model | null): any {
         'recommanded_2d_angle': value.recommanded2dAngle,
     };
 }
-
 

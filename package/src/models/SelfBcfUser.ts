@@ -83,4 +83,3 @@ export function SelfBcfUserToJSON(value?: SelfBcfUser | null): any {
     };
 }
 
-

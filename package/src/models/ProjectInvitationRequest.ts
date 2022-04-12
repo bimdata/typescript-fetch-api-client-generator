@@ -18,7 +18,7 @@ import {
     ProjectRoleEnumFromJSON,
     ProjectRoleEnumFromJSONTyped,
     ProjectRoleEnumToJSON,
-} from './';
+} from './ProjectRoleEnum';
 
 /**
  * 
@@ -76,5 +76,4 @@ export function ProjectInvitationRequestToJSON(value?: ProjectInvitationRequest 
         'role': ProjectRoleEnumToJSON(value.role),
     };
 }
-
 

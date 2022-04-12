@@ -93,4 +93,3 @@ export function RawDefinitionToJSON(value?: RawDefinition | null): any {
     };
 }
 
-

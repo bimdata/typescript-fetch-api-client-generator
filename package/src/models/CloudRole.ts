@@ -18,7 +18,7 @@ import {
     CloudRoleEnumFromJSON,
     CloudRoleEnumFromJSONTyped,
     CloudRoleEnumToJSON,
-} from './';
+} from './CloudRoleEnum';
 
 /**
  * 
@@ -37,7 +37,7 @@ export interface CloudRole {
      * @type {CloudRoleEnum}
      * @memberof CloudRole
      */
-    role?: CloudRoleEnum;
+    role?: CloudRoleEnum | null;
 }
 
 export function CloudRoleFromJSON(json: any): CloudRole {
@@ -68,5 +68,4 @@ export function CloudRoleToJSON(value?: CloudRole | null): any {
         'role': CloudRoleEnumToJSON(value.role),
     };
 }
-
 

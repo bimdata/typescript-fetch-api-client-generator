@@ -68,4 +68,3 @@ export function BcfProjectToJSON(value?: BcfProject | null): any {
     };
 }
 
-

@@ -93,4 +93,3 @@ export function RawMaterialToJSON(value?: RawMaterial | null): any {
     };
 }
 
-

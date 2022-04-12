@@ -18,7 +18,7 @@ import {
     ProjectRoleEnumFromJSON,
     ProjectRoleEnumFromJSONTyped,
     ProjectRoleEnumToJSON,
-} from './';
+} from './ProjectRoleEnum';
 
 /**
  * 
@@ -37,7 +37,7 @@ export interface ProjectRole {
      * @type {ProjectRoleEnum}
      * @memberof ProjectRole
      */
-    role?: ProjectRoleEnum;
+    role?: ProjectRoleEnum | null;
 }
 
 export function ProjectRoleFromJSON(json: any): ProjectRole {
@@ -68,5 +68,4 @@ export function ProjectRoleToJSON(value?: ProjectRole | null): any {
         'role': ProjectRoleEnumToJSON(value.role),
     };
 }
-
 

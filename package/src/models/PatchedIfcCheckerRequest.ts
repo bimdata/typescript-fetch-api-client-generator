@@ -62,4 +62,3 @@ export function PatchedIfcCheckerRequestToJSON(value?: PatchedIfcCheckerRequest 
     };
 }
 
-

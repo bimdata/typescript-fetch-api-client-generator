@@ -18,35 +18,49 @@ import {
     RawClassificationRequestFromJSON,
     RawClassificationRequestFromJSONTyped,
     RawClassificationRequestToJSON,
+} from './RawClassificationRequest';
+import {
     RawDefinitionRequest,
     RawDefinitionRequestFromJSON,
     RawDefinitionRequestFromJSONTyped,
     RawDefinitionRequestToJSON,
+} from './RawDefinitionRequest';
+import {
     RawElementRequest,
     RawElementRequestFromJSON,
     RawElementRequestFromJSONTyped,
     RawElementRequestToJSON,
+} from './RawElementRequest';
+import {
     RawLayerRequest,
     RawLayerRequestFromJSON,
     RawLayerRequestFromJSONTyped,
     RawLayerRequestToJSON,
+} from './RawLayerRequest';
+import {
     RawMaterialListRequest,
     RawMaterialListRequestFromJSON,
     RawMaterialListRequestFromJSONTyped,
     RawMaterialListRequestToJSON,
+} from './RawMaterialListRequest';
+import {
     RawPropertySetRequest,
     RawPropertySetRequestFromJSON,
     RawPropertySetRequestFromJSONTyped,
     RawPropertySetRequestToJSON,
+} from './RawPropertySetRequest';
+import {
     RawSystemRequest,
     RawSystemRequestFromJSON,
     RawSystemRequestFromJSONTyped,
     RawSystemRequestToJSON,
+} from './RawSystemRequest';
+import {
     RawUnitRequest,
     RawUnitRequestFromJSON,
     RawUnitRequestFromJSONTyped,
     RawUnitRequestToJSON,
-} from './';
+} from './RawUnitRequest';
 
 /**
  * 
@@ -144,5 +158,4 @@ export function RawElementsRequestToJSON(value?: RawElementsRequest | null): any
         'elements': ((value.elements as Array<any>).map(RawElementRequestToJSON)),
     };
 }
-
 

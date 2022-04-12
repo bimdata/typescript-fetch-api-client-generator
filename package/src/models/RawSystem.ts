@@ -78,4 +78,3 @@ export function RawSystemToJSON(value?: RawSystem | null): any {
     };
 }
 
-

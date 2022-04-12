@@ -18,11 +18,13 @@ import {
     CloudFromJSON,
     CloudFromJSONTyped,
     CloudToJSON,
+} from './Cloud';
+import {
     ProjectStatusEnum,
     ProjectStatusEnumFromJSON,
     ProjectStatusEnumFromJSONTyped,
     ProjectStatusEnumToJSON,
-} from './';
+} from './ProjectStatusEnum';
 
 /**
  * 
@@ -53,7 +55,7 @@ export interface Project {
      * @type {Cloud}
      * @memberof Project
      */
-    readonly cloud: Cloud;
+    readonly cloud: Cloud | null;
     /**
      * 
      * @type {ProjectStatusEnum}
@@ -123,5 +125,4 @@ export function ProjectToJSON(value?: Project | null): any {
         'parent_id': value.parentId,
     };
 }
-
 

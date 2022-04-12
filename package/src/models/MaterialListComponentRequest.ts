@@ -18,7 +18,7 @@ import {
     MaterialRequestFromJSON,
     MaterialRequestFromJSONTyped,
     MaterialRequestToJSON,
-} from './';
+} from './MaterialRequest';
 
 /**
  * 
@@ -60,5 +60,4 @@ export function MaterialListComponentRequestToJSON(value?: MaterialListComponent
         'material': MaterialRequestToJSON(value.material),
     };
 }
-
 

@@ -18,19 +18,19 @@ import {
     CloudRoleEnumFromJSON,
     CloudRoleEnumFromJSONTyped,
     CloudRoleEnumToJSON,
+} from './CloudRoleEnum';
+import {
     InvitationStatusEnum,
     InvitationStatusEnumFromJSON,
     InvitationStatusEnumFromJSONTyped,
     InvitationStatusEnumToJSON,
-    NullEnum,
-    NullEnumFromJSON,
-    NullEnumFromJSONTyped,
-    NullEnumToJSON,
-    ProjectRoleEnum,
-    ProjectRoleEnumFromJSON,
-    ProjectRoleEnumFromJSONTyped,
-    ProjectRoleEnumToJSON,
-} from './';
+} from './InvitationStatusEnum';
+import {
+    ProjectRoleEnum | NullEnum,
+    ProjectRoleEnum | NullEnumFromJSON,
+    ProjectRoleEnum | NullEnumFromJSONTyped,
+    ProjectRoleEnum | NullEnumToJSON,
+} from './ProjectRoleEnum | NullEnum';
 
 /**
  * 
@@ -67,7 +67,7 @@ export interface Invitation {
      * @type {CloudRoleEnum}
      * @memberof Invitation
      */
-    cloudRole: CloudRoleEnum;
+    cloudRole: CloudRoleEnum | null;
     /**
      * 
      * @type {string}
@@ -95,7 +95,7 @@ export interface Invitation {
      * @type {InvitationStatusEnum}
      * @memberof Invitation
      */
-    status?: InvitationStatusEnum;
+    status?: InvitationStatusEnum | null;
     /**
      * OIDC sub of the sender. The original sub from the provider is used instead of the broker sub
      * @type {string}
@@ -146,5 +146,4 @@ export function InvitationToJSON(value?: Invitation | null): any {
         'sender_provider_sub': value.senderProviderSub,
     };
 }
-
 

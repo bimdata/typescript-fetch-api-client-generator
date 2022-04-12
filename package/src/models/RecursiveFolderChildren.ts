@@ -18,31 +18,37 @@ import {
     FolderGroupPermissionFromJSON,
     FolderGroupPermissionFromJSONTyped,
     FolderGroupPermissionToJSON,
+} from './FolderGroupPermission';
+import {
     FolderPermissionEnum,
     FolderPermissionEnumFromJSON,
     FolderPermissionEnumFromJSONTyped,
     FolderPermissionEnumToJSON,
-    ModelTypeEnum,
-    ModelTypeEnumFromJSON,
-    ModelTypeEnumFromJSONTyped,
-    ModelTypeEnumToJSON,
+} from './FolderPermissionEnum';
+import {
+    ModelTypeEnum | NullEnum,
+    ModelTypeEnum | NullEnumFromJSON,
+    ModelTypeEnum | NullEnumFromJSONTyped,
+    ModelTypeEnum | NullEnumToJSON,
+} from './ModelTypeEnum | NullEnum';
+import {
     NatureEnum,
     NatureEnumFromJSON,
     NatureEnumFromJSONTyped,
     NatureEnumToJSON,
-    NullEnum,
-    NullEnumFromJSON,
-    NullEnumFromJSONTyped,
-    NullEnumToJSON,
+} from './NatureEnum';
+import {
     RecursiveFolderChildrenTypeEnum,
     RecursiveFolderChildrenTypeEnumFromJSON,
     RecursiveFolderChildrenTypeEnumFromJSONTyped,
     RecursiveFolderChildrenTypeEnumToJSON,
+} from './RecursiveFolderChildrenTypeEnum';
+import {
     User,
     UserFromJSON,
     UserFromJSONTyped,
     UserToJSON,
-} from './';
+} from './User';
 
 /**
  * 
@@ -79,13 +85,13 @@ export interface RecursiveFolderChildren {
      * @type {RecursiveFolderChildrenTypeEnum}
      * @memberof RecursiveFolderChildren
      */
-    readonly type: RecursiveFolderChildrenTypeEnum;
+    readonly type: RecursiveFolderChildrenTypeEnum | null;
     /**
      * Values can be 'Folder', 'Document' or 'Model'. It is usefull to parse the tree and discriminate folders and files
      * @type {NatureEnum}
      * @memberof RecursiveFolderChildren
      */
-    readonly nature: NatureEnum;
+    readonly nature: NatureEnum | null;
     /**
      * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, DAE, BFX
      * @type {ModelTypeEnum | NullEnum}
@@ -157,13 +163,13 @@ export interface RecursiveFolderChildren {
      * @type {FolderPermissionEnum}
      * @memberof RecursiveFolderChildren
      */
-    readonly defaultPermission: FolderPermissionEnum;
+    readonly defaultPermission: FolderPermissionEnum | null;
     /**
      * Aggregate of group user permissions and folder default permission
      * @type {FolderPermissionEnum}
      * @memberof RecursiveFolderChildren
      */
-    readonly userPermission: FolderPermissionEnum;
+    readonly userPermission: FolderPermissionEnum | null;
     /**
      * 
      * @type {Array<RecursiveFolderChildren>}
@@ -228,5 +234,4 @@ export function RecursiveFolderChildrenToJSON(value?: RecursiveFolderChildren | 
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(RecursiveFolderChildrenToJSON)),
     };
 }
-
 

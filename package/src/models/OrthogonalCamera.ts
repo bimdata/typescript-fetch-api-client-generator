@@ -18,11 +18,13 @@ import {
     DirectionFromJSON,
     DirectionFromJSONTyped,
     DirectionToJSON,
+} from './Direction';
+import {
     Point,
     PointFromJSON,
     PointFromJSONTyped,
     PointToJSON,
-} from './';
+} from './Point';
 
 /**
  * Adds nested create feature
@@ -88,5 +90,4 @@ export function OrthogonalCameraToJSON(value?: OrthogonalCamera | null): any {
         'camera_view_point': PointToJSON(value.cameraViewPoint),
     };
 }
-
 

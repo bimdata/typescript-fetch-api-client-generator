@@ -70,4 +70,3 @@ export function RawClassificationRequestToJSON(value?: RawClassificationRequest 
     };
 }
 
-

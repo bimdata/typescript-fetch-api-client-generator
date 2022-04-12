@@ -60,4 +60,3 @@ export function ProjectSizeToJSON(value?: ProjectSize | null): any {
     };
 }
 
-

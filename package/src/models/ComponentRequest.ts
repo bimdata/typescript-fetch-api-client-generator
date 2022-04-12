@@ -70,4 +70,3 @@ export function ComponentRequestToJSON(value?: ComponentRequest | null): any {
     };
 }
 
-

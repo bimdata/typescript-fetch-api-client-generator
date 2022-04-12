@@ -54,4 +54,3 @@ export function PatchedBcfProjectRequestToJSON(value?: PatchedBcfProjectRequest 
     };
 }
 
-

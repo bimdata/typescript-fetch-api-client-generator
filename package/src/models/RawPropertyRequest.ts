@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    AnyType,
-    AnyTypeFromJSON,
-    AnyTypeFromJSONTyped,
-    AnyTypeToJSON,
-} from './';
-
 /**
  * 
  * @export
@@ -28,10 +21,10 @@ import {
 export interface RawPropertyRequest {
     /**
      * 
-     * @type {{ [key: string]: AnyType; }}
+     * @type {{ [key: string]: any; }}
      * @memberof RawPropertyRequest
      */
-    value?: { [key: string]: AnyType; } | null;
+    value?: { [key: string]: any; } | null;
     /**
      * 
      * @type {number}
@@ -50,7 +43,7 @@ export function RawPropertyRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'value': !exists(json, 'value') ? undefined : (json['value'] === null ? null : mapValues(json['value'], AnyTypeFromJSON)),
+        'value': !exists(json, 'value') ? undefined : json['value'],
         'defId': json['def_id'],
     };
 }
@@ -64,9 +57,8 @@ export function RawPropertyRequestToJSON(value?: RawPropertyRequest | null): any
     }
     return {
         
-        'value': value.value === undefined ? undefined : (value.value === null ? null : mapValues(value.value, AnyTypeToJSON)),
+        'value': value.value,
         'def_id': value.defId,
     };
 }
-
 

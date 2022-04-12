@@ -18,7 +18,7 @@ import {
     RuleRequestFromJSON,
     RuleRequestFromJSONTyped,
     RuleRequestToJSON,
-} from './';
+} from './RuleRequest';
 
 /**
  * Adds nested create feature
@@ -92,5 +92,4 @@ export function RulesetRequestToJSON(value?: RulesetRequest | null): any {
         'rulesets': value.rulesets === undefined ? undefined : ((value.rulesets as Array<any>).map(RulesetRequestToJSON)),
     };
 }
-
 

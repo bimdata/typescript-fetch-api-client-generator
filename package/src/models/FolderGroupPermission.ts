@@ -18,11 +18,13 @@ import {
     FolderPermissionEnumFromJSON,
     FolderPermissionEnumFromJSONTyped,
     FolderPermissionEnumToJSON,
+} from './FolderPermissionEnum';
+import {
     Group,
     GroupFromJSON,
     GroupFromJSONTyped,
     GroupToJSON,
-} from './';
+} from './Group';
 
 /**
  * 
@@ -41,7 +43,7 @@ export interface FolderGroupPermission {
      * @type {FolderPermissionEnum}
      * @memberof FolderGroupPermission
      */
-    permission?: FolderPermissionEnum;
+    permission?: FolderPermissionEnum | null;
 }
 
 export function FolderGroupPermissionFromJSON(json: any): FolderGroupPermission {
@@ -72,5 +74,4 @@ export function FolderGroupPermissionToJSON(value?: FolderGroupPermission | null
         'permission': FolderPermissionEnumToJSON(value.permission),
     };
 }
-
 

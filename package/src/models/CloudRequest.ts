@@ -70,4 +70,3 @@ export function CloudRequestToJSON(value?: CloudRequest | null): any {
     };
 }
 
-

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 export * from './BcfProject';
 export * from './BcfProjectRequest';
 export * from './Building';
@@ -30,7 +32,6 @@ export * from './DetailedExtensions';
 export * from './Direction';
 export * from './DirectionRequest';
 export * from './Document';
-export * from './DocumentRequest';
 export * from './DocumentWithElementList';
 export * from './Element';
 export * from './ElementClassificationRelation';
@@ -113,7 +114,6 @@ export * from './PatchedIfcAccessTokenRequest';
 export * from './PatchedIfcCheckerRequest';
 export * from './PatchedLabelRequest';
 export * from './PatchedLayerRequest';
-export * from './PatchedModelFilesRequest';
 export * from './PatchedModelRequest';
 export * from './PatchedPositioningPlanRequest';
 export * from './PatchedPriorityRequest';

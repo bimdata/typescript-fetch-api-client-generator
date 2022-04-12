@@ -70,4 +70,3 @@ export function WebHookRequestToJSON(value?: WebHookRequest | null): any {
     };
 }
 
-

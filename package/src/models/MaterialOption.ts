@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    AnyType,
-    AnyTypeFromJSON,
-    AnyTypeFromJSONTyped,
-    AnyTypeToJSON,
-} from './';
-
 /**
  * 
  * @export
@@ -40,10 +33,10 @@ export interface MaterialOption {
     readonly thickness: number | null;
     /**
      * 
-     * @type {Array<{ [key: string]: AnyType; }>}
+     * @type {Array<{ [key: string]: any; }>}
      * @memberof MaterialOption
      */
-    readonly listComponents: Array<{ [key: string]: AnyType; }>;
+    readonly listComponents: Array<{ [key: string]: any; }>;
 }
 
 export function MaterialOptionFromJSON(json: any): MaterialOption {
@@ -73,5 +66,4 @@ export function MaterialOptionToJSON(value?: MaterialOption | null): any {
         
     };
 }
-
 

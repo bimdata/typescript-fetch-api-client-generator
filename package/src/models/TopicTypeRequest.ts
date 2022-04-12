@@ -62,4 +62,3 @@ export function TopicTypeRequestToJSON(value?: TopicTypeRequest | null): any {
     };
 }
 
-

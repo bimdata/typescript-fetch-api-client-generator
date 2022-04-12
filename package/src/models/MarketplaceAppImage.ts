@@ -68,4 +68,3 @@ export function MarketplaceAppImageToJSON(value?: MarketplaceAppImage | null): a
     };
 }
 
-

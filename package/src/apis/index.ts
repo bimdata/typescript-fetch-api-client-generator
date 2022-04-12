@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 export * from './BcfApi';
 export * from './CheckerApi';
 export * from './CollaborationApi';

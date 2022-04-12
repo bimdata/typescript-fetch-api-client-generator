@@ -18,7 +18,7 @@ import {
     ModelSourceEnumFromJSON,
     ModelSourceEnumFromJSONTyped,
     ModelSourceEnumToJSON,
-} from './';
+} from './ModelSourceEnum';
 
 /**
  * 
@@ -124,5 +124,4 @@ export function ModelRequestToJSON(value?: ModelRequest | null): any {
         'recommanded_2d_angle': value.recommanded2dAngle,
     };
 }
-
 

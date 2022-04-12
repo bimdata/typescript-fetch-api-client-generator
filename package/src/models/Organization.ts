@@ -90,4 +90,3 @@ export function OrganizationToJSON(value?: Organization | null): any {
     };
 }
 
-

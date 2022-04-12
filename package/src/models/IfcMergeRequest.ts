@@ -70,4 +70,3 @@ export function IfcMergeRequestToJSON(value?: IfcMergeRequest | null): any {
     };
 }
 
-

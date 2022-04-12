@@ -425,7 +425,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a comment  Required scopes: bcf:write
      * Create a comment
      */
-    async createCommentRaw(requestParameters: CreateCommentRequest): Promise<runtime.ApiResponse<Comment>> {
+    async createCommentRaw(requestParameters: CreateCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Comment>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createComment.');
         }
@@ -434,7 +434,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling createComment.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -446,11 +446,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -463,7 +464,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: CommentRequestToJSON(requestParameters.commentRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CommentFromJSON(jsonValue));
     }
@@ -472,8 +473,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a comment  Required scopes: bcf:write
      * Create a comment
      */
-    async createComment(projectsPk: number, topicsGuid: string, commentRequest?: CommentRequest): Promise<Comment> {
-        const response = await this.createCommentRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, commentRequest: commentRequest });
+    async createComment(projectsPk: number, topicsGuid: string, commentRequest?: CommentRequest, initOverrides?: RequestInit): Promise<Comment> {
+        const response = await this.createCommentRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, commentRequest: commentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -481,7 +482,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Label available for the project  Required scopes: bcf:write
      * Create a Label
      */
-    async createExtensionLabelRaw(requestParameters: CreateExtensionLabelRequest): Promise<runtime.ApiResponse<Label>> {
+    async createExtensionLabelRaw(requestParameters: CreateExtensionLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Label>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionLabel.');
         }
@@ -490,7 +491,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('labelRequest','Required parameter requestParameters.labelRequest was null or undefined when calling createExtensionLabel.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -502,11 +503,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -519,7 +521,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: LabelRequestToJSON(requestParameters.labelRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LabelFromJSON(jsonValue));
     }
@@ -528,8 +530,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Label available for the project  Required scopes: bcf:write
      * Create a Label
      */
-    async createExtensionLabel(projectsPk: number, labelRequest: LabelRequest): Promise<Label> {
-        const response = await this.createExtensionLabelRaw({ projectsPk: projectsPk, labelRequest: labelRequest });
+    async createExtensionLabel(projectsPk: number, labelRequest: LabelRequest, initOverrides?: RequestInit): Promise<Label> {
+        const response = await this.createExtensionLabelRaw({ projectsPk: projectsPk, labelRequest: labelRequest }, initOverrides);
         return await response.value();
     }
 
@@ -537,7 +539,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Priority available for the project  Required scopes: bcf:write
      * Create a Priority
      */
-    async createExtensionPriorityRaw(requestParameters: CreateExtensionPriorityRequest): Promise<runtime.ApiResponse<Priority>> {
+    async createExtensionPriorityRaw(requestParameters: CreateExtensionPriorityRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Priority>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionPriority.');
         }
@@ -546,7 +548,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('priorityRequest','Required parameter requestParameters.priorityRequest was null or undefined when calling createExtensionPriority.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -558,11 +560,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -575,7 +578,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PriorityRequestToJSON(requestParameters.priorityRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PriorityFromJSON(jsonValue));
     }
@@ -584,8 +587,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Priority available for the project  Required scopes: bcf:write
      * Create a Priority
      */
-    async createExtensionPriority(projectsPk: number, priorityRequest: PriorityRequest): Promise<Priority> {
-        const response = await this.createExtensionPriorityRaw({ projectsPk: projectsPk, priorityRequest: priorityRequest });
+    async createExtensionPriority(projectsPk: number, priorityRequest: PriorityRequest, initOverrides?: RequestInit): Promise<Priority> {
+        const response = await this.createExtensionPriorityRaw({ projectsPk: projectsPk, priorityRequest: priorityRequest }, initOverrides);
         return await response.value();
     }
 
@@ -593,7 +596,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Stage available for the project  Required scopes: bcf:write
      * Create a Stage
      */
-    async createExtensionStageRaw(requestParameters: CreateExtensionStageRequest): Promise<runtime.ApiResponse<Stage>> {
+    async createExtensionStageRaw(requestParameters: CreateExtensionStageRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Stage>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionStage.');
         }
@@ -602,7 +605,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('stageRequest','Required parameter requestParameters.stageRequest was null or undefined when calling createExtensionStage.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -614,11 +617,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -631,7 +635,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: StageRequestToJSON(requestParameters.stageRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StageFromJSON(jsonValue));
     }
@@ -640,8 +644,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Stage available for the project  Required scopes: bcf:write
      * Create a Stage
      */
-    async createExtensionStage(projectsPk: number, stageRequest: StageRequest): Promise<Stage> {
-        const response = await this.createExtensionStageRaw({ projectsPk: projectsPk, stageRequest: stageRequest });
+    async createExtensionStage(projectsPk: number, stageRequest: StageRequest, initOverrides?: RequestInit): Promise<Stage> {
+        const response = await this.createExtensionStageRaw({ projectsPk: projectsPk, stageRequest: stageRequest }, initOverrides);
         return await response.value();
     }
 
@@ -649,7 +653,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a TopicStatus available for the project  Required scopes: bcf:write
      * Create a TopicStatus
      */
-    async createExtensionStatusRaw(requestParameters: CreateExtensionStatusRequest): Promise<runtime.ApiResponse<TopicStatus>> {
+    async createExtensionStatusRaw(requestParameters: CreateExtensionStatusRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<TopicStatus>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionStatus.');
         }
@@ -658,7 +662,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicStatusRequest','Required parameter requestParameters.topicStatusRequest was null or undefined when calling createExtensionStatus.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -670,11 +674,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -687,7 +692,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: TopicStatusRequestToJSON(requestParameters.topicStatusRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicStatusFromJSON(jsonValue));
     }
@@ -696,8 +701,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a TopicStatus available for the project  Required scopes: bcf:write
      * Create a TopicStatus
      */
-    async createExtensionStatus(projectsPk: number, topicStatusRequest: TopicStatusRequest): Promise<TopicStatus> {
-        const response = await this.createExtensionStatusRaw({ projectsPk: projectsPk, topicStatusRequest: topicStatusRequest });
+    async createExtensionStatus(projectsPk: number, topicStatusRequest: TopicStatusRequest, initOverrides?: RequestInit): Promise<TopicStatus> {
+        const response = await this.createExtensionStatusRaw({ projectsPk: projectsPk, topicStatusRequest: topicStatusRequest }, initOverrides);
         return await response.value();
     }
 
@@ -705,7 +710,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a TopicType available for the project  Required scopes: bcf:write
      * Create a TopicType
      */
-    async createExtensionTypeRaw(requestParameters: CreateExtensionTypeRequest): Promise<runtime.ApiResponse<TopicType>> {
+    async createExtensionTypeRaw(requestParameters: CreateExtensionTypeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<TopicType>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionType.');
         }
@@ -714,7 +719,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicTypeRequest','Required parameter requestParameters.topicTypeRequest was null or undefined when calling createExtensionType.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -726,11 +731,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -743,7 +749,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: TopicTypeRequestToJSON(requestParameters.topicTypeRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicTypeFromJSON(jsonValue));
     }
@@ -752,8 +758,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a TopicType available for the project  Required scopes: bcf:write
      * Create a TopicType
      */
-    async createExtensionType(projectsPk: number, topicTypeRequest: TopicTypeRequest): Promise<TopicType> {
-        const response = await this.createExtensionTypeRaw({ projectsPk: projectsPk, topicTypeRequest: topicTypeRequest });
+    async createExtensionType(projectsPk: number, topicTypeRequest: TopicTypeRequest, initOverrides?: RequestInit): Promise<TopicType> {
+        const response = await this.createExtensionTypeRaw({ projectsPk: projectsPk, topicTypeRequest: topicTypeRequest }, initOverrides);
         return await response.value();
     }
 
@@ -761,7 +767,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. You can send a topic, viewpoints and comments in a single call  Required scopes: bcf:write
      * Create a Topic with viewpoints and comments
      */
-    async createFullTopicRaw(requestParameters: CreateFullTopicRequest): Promise<runtime.ApiResponse<FullTopic>> {
+    async createFullTopicRaw(requestParameters: CreateFullTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FullTopic>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createFullTopic.');
         }
@@ -770,7 +776,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('fullTopicRequest','Required parameter requestParameters.fullTopicRequest was null or undefined when calling createFullTopic.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -786,11 +792,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -803,7 +810,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: FullTopicRequestToJSON(requestParameters.fullTopicRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FullTopicFromJSON(jsonValue));
     }
@@ -812,8 +819,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. You can send a topic, viewpoints and comments in a single call  Required scopes: bcf:write
      * Create a Topic with viewpoints and comments
      */
-    async createFullTopic(projectsPk: number, fullTopicRequest: FullTopicRequest, imgFormat?: CreateFullTopicImgFormatEnum): Promise<FullTopic> {
-        const response = await this.createFullTopicRaw({ projectsPk: projectsPk, fullTopicRequest: fullTopicRequest, imgFormat: imgFormat });
+    async createFullTopic(projectsPk: number, fullTopicRequest: FullTopicRequest, imgFormat?: CreateFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
+        const response = await this.createFullTopicRaw({ projectsPk: projectsPk, fullTopicRequest: fullTopicRequest, imgFormat: imgFormat }, initOverrides);
         return await response.value();
     }
 
@@ -821,7 +828,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a topic  Required scopes: bcf:write
      * Create a topic
      */
-    async createTopicRaw(requestParameters: CreateTopicRequest): Promise<runtime.ApiResponse<Topic>> {
+    async createTopicRaw(requestParameters: CreateTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Topic>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createTopic.');
         }
@@ -830,7 +837,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicRequest','Required parameter requestParameters.topicRequest was null or undefined when calling createTopic.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -842,11 +849,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -859,7 +867,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: TopicRequestToJSON(requestParameters.topicRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicFromJSON(jsonValue));
     }
@@ -868,8 +876,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a topic  Required scopes: bcf:write
      * Create a topic
      */
-    async createTopic(projectsPk: number, topicRequest: TopicRequest): Promise<Topic> {
-        const response = await this.createTopicRaw({ projectsPk: projectsPk, topicRequest: topicRequest });
+    async createTopic(projectsPk: number, topicRequest: TopicRequest, initOverrides?: RequestInit): Promise<Topic> {
+        const response = await this.createTopicRaw({ projectsPk: projectsPk, topicRequest: topicRequest }, initOverrides);
         return await response.value();
     }
 
@@ -877,7 +885,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a Viewpoint  Required scopes: bcf:write
      * Create a Viewpoint
      */
-    async createViewpointRaw(requestParameters: CreateViewpointRequest): Promise<runtime.ApiResponse<Viewpoint>> {
+    async createViewpointRaw(requestParameters: CreateViewpointRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Viewpoint>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createViewpoint.');
         }
@@ -886,7 +894,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling createViewpoint.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -902,11 +910,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -919,7 +928,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: ViewpointRequestToJSON(requestParameters.viewpointRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ViewpointFromJSON(jsonValue));
     }
@@ -928,8 +937,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a Viewpoint  Required scopes: bcf:write
      * Create a Viewpoint
      */
-    async createViewpoint(projectsPk: number, topicsGuid: string, imgFormat?: CreateViewpointImgFormatEnum, viewpointRequest?: ViewpointRequest): Promise<Viewpoint> {
-        const response = await this.createViewpointRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat, viewpointRequest: viewpointRequest });
+    async createViewpoint(projectsPk: number, topicsGuid: string, imgFormat?: CreateViewpointImgFormatEnum, viewpointRequest?: ViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
+        const response = await this.createViewpointRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat, viewpointRequest: viewpointRequest }, initOverrides);
         return await response.value();
     }
 
@@ -937,7 +946,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Delete a comment  Required scopes: bcf:write
      * Delete a comment
      */
-    async deleteCommentRaw(requestParameters: DeleteCommentRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCommentRaw(requestParameters: DeleteCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling deleteComment.');
         }
@@ -950,7 +959,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling deleteComment.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -960,11 +969,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -976,7 +986,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -985,15 +995,15 @@ export class BcfApi extends runtime.BaseAPI {
      * Delete a comment  Required scopes: bcf:write
      * Delete a comment
      */
-    async deleteComment(guid: string, projectsPk: number, topicsGuid: string): Promise<void> {
-        await this.deleteCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid });
+    async deleteComment(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
     }
 
     /**
      * This is not a standard route. Delete a Label. Topics using this label won\'t be deleted   Required scopes: bcf:write
      * Delete a Label
      */
-    async deleteExtensionLabelRaw(requestParameters: DeleteExtensionLabelRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteExtensionLabelRaw(requestParameters: DeleteExtensionLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionLabel.');
         }
@@ -1002,7 +1012,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionLabel.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1012,11 +1022,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1028,7 +1039,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1037,15 +1048,15 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Label. Topics using this label won\'t be deleted   Required scopes: bcf:write
      * Delete a Label
      */
-    async deleteExtensionLabel(id: number, projectsPk: number): Promise<void> {
-        await this.deleteExtensionLabelRaw({ id: id, projectsPk: projectsPk });
+    async deleteExtensionLabel(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionLabelRaw({ id: id, projectsPk: projectsPk }, initOverrides);
     }
 
     /**
      * This is not a standard route. Delete a Priority. Topics using this priority won\'t be deleted   Required scopes: bcf:write
      * Delete a Priority
      */
-    async deleteExtensionPriorityRaw(requestParameters: DeleteExtensionPriorityRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteExtensionPriorityRaw(requestParameters: DeleteExtensionPriorityRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionPriority.');
         }
@@ -1054,7 +1065,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionPriority.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1064,11 +1075,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1080,7 +1092,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1089,15 +1101,15 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Priority. Topics using this priority won\'t be deleted   Required scopes: bcf:write
      * Delete a Priority
      */
-    async deleteExtensionPriority(id: number, projectsPk: number): Promise<void> {
-        await this.deleteExtensionPriorityRaw({ id: id, projectsPk: projectsPk });
+    async deleteExtensionPriority(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionPriorityRaw({ id: id, projectsPk: projectsPk }, initOverrides);
     }
 
     /**
      * This is not a standard route. Delete a Stage. Topics using this stage won\'t be deleted   Required scopes: bcf:write
      * Delete a Stage
      */
-    async deleteExtensionStageRaw(requestParameters: DeleteExtensionStageRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteExtensionStageRaw(requestParameters: DeleteExtensionStageRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionStage.');
         }
@@ -1106,7 +1118,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionStage.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1116,11 +1128,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1132,7 +1145,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1141,15 +1154,15 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Stage. Topics using this stage won\'t be deleted   Required scopes: bcf:write
      * Delete a Stage
      */
-    async deleteExtensionStage(id: number, projectsPk: number): Promise<void> {
-        await this.deleteExtensionStageRaw({ id: id, projectsPk: projectsPk });
+    async deleteExtensionStage(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionStageRaw({ id: id, projectsPk: projectsPk }, initOverrides);
     }
 
     /**
      * This is not a standard route. Delete a TopicStatus. Topics using this status won\'t be deleted   Required scopes: bcf:write
      * Delete a TopicStatus
      */
-    async deleteExtensionStatusRaw(requestParameters: DeleteExtensionStatusRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteExtensionStatusRaw(requestParameters: DeleteExtensionStatusRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionStatus.');
         }
@@ -1158,7 +1171,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionStatus.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1168,11 +1181,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1184,7 +1198,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1193,15 +1207,15 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a TopicStatus. Topics using this status won\'t be deleted   Required scopes: bcf:write
      * Delete a TopicStatus
      */
-    async deleteExtensionStatus(id: number, projectsPk: number): Promise<void> {
-        await this.deleteExtensionStatusRaw({ id: id, projectsPk: projectsPk });
+    async deleteExtensionStatus(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionStatusRaw({ id: id, projectsPk: projectsPk }, initOverrides);
     }
 
     /**
      * This is not a standard route. Delete a TopicType. Topics using this type won\'t be deleted  Required scopes: bcf:write
      * Delete a TopicType
      */
-    async deleteExtensionTypeRaw(requestParameters: DeleteExtensionTypeRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteExtensionTypeRaw(requestParameters: DeleteExtensionTypeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionType.');
         }
@@ -1210,7 +1224,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionType.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1220,11 +1234,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1236,7 +1251,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1245,15 +1260,15 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a TopicType. Topics using this type won\'t be deleted  Required scopes: bcf:write
      * Delete a TopicType
      */
-    async deleteExtensionType(id: number, projectsPk: number): Promise<void> {
-        await this.deleteExtensionTypeRaw({ id: id, projectsPk: projectsPk });
+    async deleteExtensionType(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionTypeRaw({ id: id, projectsPk: projectsPk }, initOverrides);
     }
 
     /**
      * Delete a topic  Required scopes: bcf:write
      * Delete a topic
      */
-    async deleteTopicRaw(requestParameters: DeleteTopicRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteTopicRaw(requestParameters: DeleteTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling deleteTopic.');
         }
@@ -1262,7 +1277,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteTopic.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1272,11 +1287,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1288,7 +1304,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1297,15 +1313,15 @@ export class BcfApi extends runtime.BaseAPI {
      * Delete a topic  Required scopes: bcf:write
      * Delete a topic
      */
-    async deleteTopic(guid: string, projectsPk: number): Promise<void> {
-        await this.deleteTopicRaw({ guid: guid, projectsPk: projectsPk });
+    async deleteTopic(guid: string, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteTopicRaw({ guid: guid, projectsPk: projectsPk }, initOverrides);
     }
 
     /**
      * This is not a standard route. Delete a Viewpoint  Required scopes: bcf:write
      * Delete a Viewpoint
      */
-    async deleteViewpointRaw(requestParameters: DeleteViewpointRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteViewpointRaw(requestParameters: DeleteViewpointRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling deleteViewpoint.');
         }
@@ -1318,7 +1334,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling deleteViewpoint.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -1332,11 +1348,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1348,7 +1365,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1357,20 +1374,20 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Viewpoint  Required scopes: bcf:write
      * Delete a Viewpoint
      */
-    async deleteViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: DeleteViewpointImgFormatEnum): Promise<void> {
-        await this.deleteViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat });
+    async deleteViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: DeleteViewpointImgFormatEnum, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat }, initOverrides);
     }
 
     /**
      * This is not a standard route. Export project\'s topics in bcf-xml format  Required scopes: bcf:read
      * Export project\'s topics in bcf-xml format
      */
-    async downloadBcfExportRaw(requestParameters: DownloadBcfExportRequest): Promise<runtime.ApiResponse<Blob>> {
+    async downloadBcfExportRaw(requestParameters: DownloadBcfExportRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling downloadBcfExport.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.format !== undefined) {
             queryParameters['format'] = requestParameters.format;
@@ -1388,11 +1405,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1404,7 +1422,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.BlobApiResponse(response);
     }
@@ -1413,8 +1431,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Export project\'s topics in bcf-xml format  Required scopes: bcf:read
      * Export project\'s topics in bcf-xml format
      */
-    async downloadBcfExport(id: number, format?: string, topics?: string): Promise<Blob> {
-        const response = await this.downloadBcfExportRaw({ id: id, format: format, topics: topics });
+    async downloadBcfExport(id: number, format?: string, topics?: string, initOverrides?: RequestInit): Promise<Blob> {
+        const response = await this.downloadBcfExportRaw({ id: id, format: format, topics: topics }, initOverrides);
         return await response.value();
     }
 
@@ -1422,7 +1440,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a BCF project  Required scopes: bcf:write
      * Update all fields of a BCF project
      */
-    async fullUpdateBcfProjectRaw(requestParameters: FullUpdateBcfProjectRequest): Promise<runtime.ApiResponse<BcfProject>> {
+    async fullUpdateBcfProjectRaw(requestParameters: FullUpdateBcfProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<BcfProject>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling fullUpdateBcfProject.');
         }
@@ -1431,7 +1449,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('bcfProjectRequest','Required parameter requestParameters.bcfProjectRequest was null or undefined when calling fullUpdateBcfProject.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1443,11 +1461,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1460,7 +1479,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: BcfProjectRequestToJSON(requestParameters.bcfProjectRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BcfProjectFromJSON(jsonValue));
     }
@@ -1469,8 +1488,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a BCF project  Required scopes: bcf:write
      * Update all fields of a BCF project
      */
-    async fullUpdateBcfProject(id: number, bcfProjectRequest: BcfProjectRequest): Promise<BcfProject> {
-        const response = await this.fullUpdateBcfProjectRaw({ id: id, bcfProjectRequest: bcfProjectRequest });
+    async fullUpdateBcfProject(id: number, bcfProjectRequest: BcfProjectRequest, initOverrides?: RequestInit): Promise<BcfProject> {
+        const response = await this.fullUpdateBcfProjectRaw({ id: id, bcfProjectRequest: bcfProjectRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1478,7 +1497,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a comment  Required scopes: bcf:write
      * Update all fields of a comment
      */
-    async fullUpdateCommentRaw(requestParameters: FullUpdateCommentRequest): Promise<runtime.ApiResponse<Comment>> {
+    async fullUpdateCommentRaw(requestParameters: FullUpdateCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Comment>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateComment.');
         }
@@ -1491,7 +1510,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling fullUpdateComment.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1503,11 +1522,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1520,7 +1540,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: CommentRequestToJSON(requestParameters.commentRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CommentFromJSON(jsonValue));
     }
@@ -1529,8 +1549,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a comment  Required scopes: bcf:write
      * Update all fields of a comment
      */
-    async fullUpdateComment(guid: string, projectsPk: number, topicsGuid: string, commentRequest?: CommentRequest): Promise<Comment> {
-        const response = await this.fullUpdateCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, commentRequest: commentRequest });
+    async fullUpdateComment(guid: string, projectsPk: number, topicsGuid: string, commentRequest?: CommentRequest, initOverrides?: RequestInit): Promise<Comment> {
+        const response = await this.fullUpdateCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, commentRequest: commentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1538,7 +1558,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. You can update topic, viewpoints and comment is a signle call  Required scopes: bcf:write
      * Update all fields of a topic
      */
-    async fullUpdateFullTopicRaw(requestParameters: FullUpdateFullTopicRequest): Promise<runtime.ApiResponse<FullTopic>> {
+    async fullUpdateFullTopicRaw(requestParameters: FullUpdateFullTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FullTopic>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateFullTopic.');
         }
@@ -1551,7 +1571,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('fullTopicRequest','Required parameter requestParameters.fullTopicRequest was null or undefined when calling fullUpdateFullTopic.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -1567,11 +1587,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1584,7 +1605,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: FullTopicRequestToJSON(requestParameters.fullTopicRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FullTopicFromJSON(jsonValue));
     }
@@ -1593,8 +1614,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. You can update topic, viewpoints and comment is a signle call  Required scopes: bcf:write
      * Update all fields of a topic
      */
-    async fullUpdateFullTopic(guid: string, projectsPk: number, fullTopicRequest: FullTopicRequest, imgFormat?: FullUpdateFullTopicImgFormatEnum): Promise<FullTopic> {
-        const response = await this.fullUpdateFullTopicRaw({ guid: guid, projectsPk: projectsPk, fullTopicRequest: fullTopicRequest, imgFormat: imgFormat });
+    async fullUpdateFullTopic(guid: string, projectsPk: number, fullTopicRequest: FullTopicRequest, imgFormat?: FullUpdateFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
+        const response = await this.fullUpdateFullTopicRaw({ guid: guid, projectsPk: projectsPk, fullTopicRequest: fullTopicRequest, imgFormat: imgFormat }, initOverrides);
         return await response.value();
     }
 
@@ -1602,7 +1623,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a topic  Required scopes: bcf:write
      * Update all fields of a topic
      */
-    async fullUpdateTopicRaw(requestParameters: FullUpdateTopicRequest): Promise<runtime.ApiResponse<Topic>> {
+    async fullUpdateTopicRaw(requestParameters: FullUpdateTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Topic>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateTopic.');
         }
@@ -1615,7 +1636,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicRequest','Required parameter requestParameters.topicRequest was null or undefined when calling fullUpdateTopic.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1627,11 +1648,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1644,7 +1666,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: TopicRequestToJSON(requestParameters.topicRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicFromJSON(jsonValue));
     }
@@ -1653,8 +1675,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a topic  Required scopes: bcf:write
      * Update all fields of a topic
      */
-    async fullUpdateTopic(guid: string, projectsPk: number, topicRequest: TopicRequest): Promise<Topic> {
-        const response = await this.fullUpdateTopicRaw({ guid: guid, projectsPk: projectsPk, topicRequest: topicRequest });
+    async fullUpdateTopic(guid: string, projectsPk: number, topicRequest: TopicRequest, initOverrides?: RequestInit): Promise<Topic> {
+        const response = await this.fullUpdateTopicRaw({ guid: guid, projectsPk: projectsPk, topicRequest: topicRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1662,7 +1684,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update all fields of a Viewpoint  Required scopes: bcf:write
      * Update all fields of a Viewpoint
      */
-    async fullUpdateViewpointRaw(requestParameters: FullUpdateViewpointRequest): Promise<runtime.ApiResponse<Viewpoint>> {
+    async fullUpdateViewpointRaw(requestParameters: FullUpdateViewpointRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Viewpoint>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateViewpoint.');
         }
@@ -1675,7 +1697,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling fullUpdateViewpoint.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -1691,11 +1713,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1708,7 +1731,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: ViewpointRequestToJSON(requestParameters.viewpointRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ViewpointFromJSON(jsonValue));
     }
@@ -1717,8 +1740,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update all fields of a Viewpoint  Required scopes: bcf:write
      * Update all fields of a Viewpoint
      */
-    async fullUpdateViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: FullUpdateViewpointImgFormatEnum, viewpointRequest?: ViewpointRequest): Promise<Viewpoint> {
-        const response = await this.fullUpdateViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat, viewpointRequest: viewpointRequest });
+    async fullUpdateViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: FullUpdateViewpointImgFormatEnum, viewpointRequest?: ViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
+        const response = await this.fullUpdateViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat, viewpointRequest: viewpointRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1726,12 +1749,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a BCF project  Required scopes: bcf:read
      * Retrieve a BCF project
      */
-    async getBcfProjectRaw(requestParameters: GetBcfProjectRequest): Promise<runtime.ApiResponse<BcfProject>> {
+    async getBcfProjectRaw(requestParameters: GetBcfProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<BcfProject>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getBcfProject.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1741,11 +1764,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1757,7 +1781,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BcfProjectFromJSON(jsonValue));
     }
@@ -1766,8 +1790,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a BCF project  Required scopes: bcf:read
      * Retrieve a BCF project
      */
-    async getBcfProject(id: number): Promise<BcfProject> {
-        const response = await this.getBcfProjectRaw({ id: id });
+    async getBcfProject(id: number, initOverrides?: RequestInit): Promise<BcfProject> {
+        const response = await this.getBcfProjectRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
@@ -1775,8 +1799,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all BCF projects  Required scopes: bcf:read
      * Retrieve all BCF projects
      */
-    async getBcfProjectsRaw(): Promise<runtime.ApiResponse<Array<BcfProject>>> {
-        const queryParameters: runtime.HTTPQuery = {};
+    async getBcfProjectsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<BcfProject>>> {
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1786,11 +1810,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1802,7 +1827,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(BcfProjectFromJSON));
     }
@@ -1811,8 +1836,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all BCF projects  Required scopes: bcf:read
      * Retrieve all BCF projects
      */
-    async getBcfProjects(): Promise<Array<BcfProject>> {
-        const response = await this.getBcfProjectsRaw();
+    async getBcfProjects(initOverrides?: RequestInit): Promise<Array<BcfProject>> {
+        const response = await this.getBcfProjectsRaw(initOverrides);
         return await response.value();
     }
 
@@ -1820,7 +1845,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all colorings of a viewpoint  Required scopes: bcf:read
      * Retrieve all colorings of a viewpoint
      */
-    async getColoringsRaw(requestParameters: GetColoringsRequest): Promise<runtime.ApiResponse<Array<Coloring>>> {
+    async getColoringsRaw(requestParameters: GetColoringsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Coloring>>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getColorings.');
         }
@@ -1833,7 +1858,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getColorings.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1843,11 +1868,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1859,7 +1885,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ColoringFromJSON));
     }
@@ -1868,8 +1894,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all colorings of a viewpoint  Required scopes: bcf:read
      * Retrieve all colorings of a viewpoint
      */
-    async getColorings(guid: string, projectsPk: number, topicsGuid: string): Promise<Array<Coloring>> {
-        const response = await this.getColoringsRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid });
+    async getColorings(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Array<Coloring>> {
+        const response = await this.getColoringsRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
         return await response.value();
     }
 
@@ -1877,7 +1903,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a comment  Required scopes: bcf:read
      * Retrieve a comment
      */
-    async getCommentRaw(requestParameters: GetCommentRequest): Promise<runtime.ApiResponse<Comment>> {
+    async getCommentRaw(requestParameters: GetCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Comment>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getComment.');
         }
@@ -1890,7 +1916,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getComment.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1900,11 +1926,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1916,7 +1943,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CommentFromJSON(jsonValue));
     }
@@ -1925,8 +1952,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a comment  Required scopes: bcf:read
      * Retrieve a comment
      */
-    async getComment(guid: string, projectsPk: number, topicsGuid: string): Promise<Comment> {
-        const response = await this.getCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid });
+    async getComment(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Comment> {
+        const response = await this.getCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
         return await response.value();
     }
 
@@ -1934,7 +1961,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all comments  Required scopes: bcf:read
      * Retrieve all comments
      */
-    async getCommentsRaw(requestParameters: GetCommentsRequest): Promise<runtime.ApiResponse<Array<Comment>>> {
+    async getCommentsRaw(requestParameters: GetCommentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Comment>>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getComments.');
         }
@@ -1943,7 +1970,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getComments.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1953,11 +1980,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1969,7 +1997,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CommentFromJSON));
     }
@@ -1978,8 +2006,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all comments  Required scopes: bcf:read
      * Retrieve all comments
      */
-    async getComments(projectsPk: number, topicsGuid: string): Promise<Array<Comment>> {
-        const response = await this.getCommentsRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid });
+    async getComments(projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Array<Comment>> {
+        const response = await this.getCommentsRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
         return await response.value();
     }
 
@@ -1987,12 +2015,12 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Retrieve project detailed extensions  Required scopes: bcf:read
      * Retrieve project detailed extensions
      */
-    async getDetailedExtensionsRaw(requestParameters: GetDetailedExtensionsRequest): Promise<runtime.ApiResponse<DetailedExtensions>> {
+    async getDetailedExtensionsRaw(requestParameters: GetDetailedExtensionsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<DetailedExtensions>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getDetailedExtensions.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2002,11 +2030,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2018,7 +2047,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DetailedExtensionsFromJSON(jsonValue));
     }
@@ -2027,8 +2056,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Retrieve project detailed extensions  Required scopes: bcf:read
      * Retrieve project detailed extensions
      */
-    async getDetailedExtensions(id: number): Promise<DetailedExtensions> {
-        const response = await this.getDetailedExtensionsRaw({ id: id });
+    async getDetailedExtensions(id: number, initOverrides?: RequestInit): Promise<DetailedExtensions> {
+        const response = await this.getDetailedExtensionsRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
@@ -2036,12 +2065,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve project extensions  Required scopes: bcf:read
      * Retrieve project extensions
      */
-    async getExtensionsRaw(requestParameters: GetExtensionsRequest): Promise<runtime.ApiResponse<Extensions>> {
+    async getExtensionsRaw(requestParameters: GetExtensionsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Extensions>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getExtensions.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2051,11 +2080,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2067,7 +2097,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ExtensionsFromJSON(jsonValue));
     }
@@ -2076,8 +2106,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve project extensions  Required scopes: bcf:read
      * Retrieve project extensions
      */
-    async getExtensions(id: number): Promise<Extensions> {
-        const response = await this.getExtensionsRaw({ id: id });
+    async getExtensions(id: number, initOverrides?: RequestInit): Promise<Extensions> {
+        const response = await this.getExtensionsRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
@@ -2085,7 +2115,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It responds with a topic, its viewpoints and its comments  Required scopes: bcf:read
      * Retrieve a full topic
      */
-    async getFullTopicRaw(requestParameters: GetFullTopicRequest): Promise<runtime.ApiResponse<FullTopic>> {
+    async getFullTopicRaw(requestParameters: GetFullTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FullTopic>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getFullTopic.');
         }
@@ -2094,7 +2124,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getFullTopic.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -2108,11 +2138,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2124,7 +2155,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FullTopicFromJSON(jsonValue));
     }
@@ -2133,8 +2164,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It responds with a topic, its viewpoints and its comments  Required scopes: bcf:read
      * Retrieve a full topic
      */
-    async getFullTopic(guid: string, projectsPk: number, imgFormat?: GetFullTopicImgFormatEnum): Promise<FullTopic> {
-        const response = await this.getFullTopicRaw({ guid: guid, projectsPk: projectsPk, imgFormat: imgFormat });
+    async getFullTopic(guid: string, projectsPk: number, imgFormat?: GetFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
+        const response = await this.getFullTopicRaw({ guid: guid, projectsPk: projectsPk, imgFormat: imgFormat }, initOverrides);
         return await response.value();
     }
 
@@ -2142,12 +2173,12 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It responds with all topics, their viewpoints and their comments  Required scopes: bcf:read
      * Retrieve all full topics
      */
-    async getFullTopicsRaw(requestParameters: GetFullTopicsRequest): Promise<runtime.ApiResponse<Array<FullTopic>>> {
+    async getFullTopicsRaw(requestParameters: GetFullTopicsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<FullTopic>>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getFullTopics.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.format !== undefined) {
             queryParameters['format'] = requestParameters.format;
@@ -2173,11 +2204,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2189,7 +2221,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FullTopicFromJSON));
     }
@@ -2198,8 +2230,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It responds with all topics, their viewpoints and their comments  Required scopes: bcf:read
      * Retrieve all full topics
      */
-    async getFullTopics(projectsPk: number, format?: string, ifcs?: Array<number>, imgFormat?: GetFullTopicsImgFormatEnum, models?: Array<number>): Promise<Array<FullTopic>> {
-        const response = await this.getFullTopicsRaw({ projectsPk: projectsPk, format: format, ifcs: ifcs, imgFormat: imgFormat, models: models });
+    async getFullTopics(projectsPk: number, format?: string, ifcs?: Array<number>, imgFormat?: GetFullTopicsImgFormatEnum, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<FullTopic>> {
+        const response = await this.getFullTopicsRaw({ projectsPk: projectsPk, format: format, ifcs: ifcs, imgFormat: imgFormat, models: models }, initOverrides);
         return await response.value();
     }
 
@@ -2207,7 +2239,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all selections of a viewpoint  Required scopes: bcf:read
      * Retrieve all selections of a viewpoint
      */
-    async getSelectionsRaw(requestParameters: GetSelectionsRequest): Promise<runtime.ApiResponse<Array<Component>>> {
+    async getSelectionsRaw(requestParameters: GetSelectionsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Component>>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getSelections.');
         }
@@ -2220,7 +2252,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getSelections.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2230,11 +2262,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2246,7 +2279,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ComponentFromJSON));
     }
@@ -2255,8 +2288,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all selections of a viewpoint  Required scopes: bcf:read
      * Retrieve all selections of a viewpoint
      */
-    async getSelections(guid: string, projectsPk: number, topicsGuid: string): Promise<Array<Component>> {
-        const response = await this.getSelectionsRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid });
+    async getSelections(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Array<Component>> {
+        const response = await this.getSelectionsRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
         return await response.value();
     }
 
@@ -2264,7 +2297,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve the viewpoint\' snapshot  Required scopes: bcf:read
      * Retrieve the viewpoint\' snapshot
      */
-    async getSnapshotRaw(requestParameters: GetSnapshotRequest): Promise<runtime.ApiResponse<Blob>> {
+    async getSnapshotRaw(requestParameters: GetSnapshotRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getSnapshot.');
         }
@@ -2277,7 +2310,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getSnapshot.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2287,11 +2320,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2303,7 +2337,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.BlobApiResponse(response);
     }
@@ -2312,8 +2346,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve the viewpoint\' snapshot  Required scopes: bcf:read
      * Retrieve the viewpoint\' snapshot
      */
-    async getSnapshot(guid: string, projectsPk: number, topicsGuid: string): Promise<Blob> {
-        const response = await this.getSnapshotRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid });
+    async getSnapshot(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Blob> {
+        const response = await this.getSnapshotRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
         return await response.value();
     }
 
@@ -2321,7 +2355,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a topic  Required scopes: bcf:read
      * Retrieve a topic
      */
-    async getTopicRaw(requestParameters: GetTopicRequest): Promise<runtime.ApiResponse<Topic>> {
+    async getTopicRaw(requestParameters: GetTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Topic>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getTopic.');
         }
@@ -2330,7 +2364,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getTopic.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2340,11 +2374,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2356,7 +2391,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicFromJSON(jsonValue));
     }
@@ -2365,8 +2400,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a topic  Required scopes: bcf:read
      * Retrieve a topic
      */
-    async getTopic(guid: string, projectsPk: number): Promise<Topic> {
-        const response = await this.getTopicRaw({ guid: guid, projectsPk: projectsPk });
+    async getTopic(guid: string, projectsPk: number, initOverrides?: RequestInit): Promise<Topic> {
+        const response = await this.getTopicRaw({ guid: guid, projectsPk: projectsPk }, initOverrides);
         return await response.value();
     }
 
@@ -2374,7 +2409,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It returns all viewpoints of the topic that are not attached to a comment.  Required scopes: bcf:read
      * Retrieve all viewpoints attached to the topic
      */
-    async getTopicViewpointsRaw(requestParameters: GetTopicViewpointsRequest): Promise<runtime.ApiResponse<Array<Viewpoint>>> {
+    async getTopicViewpointsRaw(requestParameters: GetTopicViewpointsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Viewpoint>>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getTopicViewpoints.');
         }
@@ -2383,7 +2418,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getTopicViewpoints.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -2397,11 +2432,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2413,7 +2449,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ViewpointFromJSON));
     }
@@ -2422,8 +2458,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It returns all viewpoints of the topic that are not attached to a comment.  Required scopes: bcf:read
      * Retrieve all viewpoints attached to the topic
      */
-    async getTopicViewpoints(projectsPk: number, topicsGuid: string, imgFormat?: GetTopicViewpointsImgFormatEnum): Promise<Array<Viewpoint>> {
-        const response = await this.getTopicViewpointsRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat });
+    async getTopicViewpoints(projectsPk: number, topicsGuid: string, imgFormat?: GetTopicViewpointsImgFormatEnum, initOverrides?: RequestInit): Promise<Array<Viewpoint>> {
+        const response = await this.getTopicViewpointsRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat }, initOverrides);
         return await response.value();
     }
 
@@ -2431,12 +2467,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all topics  Required scopes: bcf:read
      * Retrieve all topics
      */
-    async getTopicsRaw(requestParameters: GetTopicsRequest): Promise<runtime.ApiResponse<Array<Topic>>> {
+    async getTopicsRaw(requestParameters: GetTopicsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Topic>>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getTopics.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.format !== undefined) {
             queryParameters['format'] = requestParameters.format;
@@ -2458,11 +2494,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2474,7 +2511,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TopicFromJSON));
     }
@@ -2483,8 +2520,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all topics  Required scopes: bcf:read
      * Retrieve all topics
      */
-    async getTopics(projectsPk: number, format?: string, ifcs?: Array<number>, models?: Array<number>): Promise<Array<Topic>> {
-        const response = await this.getTopicsRaw({ projectsPk: projectsPk, format: format, ifcs: ifcs, models: models });
+    async getTopics(projectsPk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<Topic>> {
+        const response = await this.getTopicsRaw({ projectsPk: projectsPk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
 
@@ -2492,8 +2529,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Get current user info. If request comes from an App, the response is always:{    \"id\": None,    \"name\": None,    \"is_client\": True,}  Required scopes: bcf:read
      * Get current user info
      */
-    async getUserRaw(): Promise<runtime.ApiResponse<SelfBcfUser>> {
-        const queryParameters: runtime.HTTPQuery = {};
+    async getUserRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<SelfBcfUser>> {
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2503,11 +2540,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2519,7 +2557,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SelfBcfUserFromJSON(jsonValue));
     }
@@ -2528,8 +2566,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Get current user info. If request comes from an App, the response is always:{    \"id\": None,    \"name\": None,    \"is_client\": True,}  Required scopes: bcf:read
      * Get current user info
      */
-    async getUser(): Promise<SelfBcfUser> {
-        const response = await this.getUserRaw();
+    async getUser(initOverrides?: RequestInit): Promise<SelfBcfUser> {
+        const response = await this.getUserRaw(initOverrides);
         return await response.value();
     }
 
@@ -2537,7 +2575,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a Viewpoint  Required scopes: bcf:read
      * Retrieve a Viewpoint
      */
-    async getViewpointRaw(requestParameters: GetViewpointRequest): Promise<runtime.ApiResponse<Viewpoint>> {
+    async getViewpointRaw(requestParameters: GetViewpointRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Viewpoint>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getViewpoint.');
         }
@@ -2550,7 +2588,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getViewpoint.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -2564,11 +2602,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2580,7 +2619,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ViewpointFromJSON(jsonValue));
     }
@@ -2589,8 +2628,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a Viewpoint  Required scopes: bcf:read
      * Retrieve a Viewpoint
      */
-    async getViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: GetViewpointImgFormatEnum): Promise<Viewpoint> {
-        const response = await this.getViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat });
+    async getViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: GetViewpointImgFormatEnum, initOverrides?: RequestInit): Promise<Viewpoint> {
+        const response = await this.getViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat }, initOverrides);
         return await response.value();
     }
 
@@ -2598,7 +2637,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all Viewpoints of a topic  Required scopes: bcf:read
      * Retrieve all Viewpoints of a topic
      */
-    async getViewpointsRaw(requestParameters: GetViewpointsRequest): Promise<runtime.ApiResponse<Array<Viewpoint>>> {
+    async getViewpointsRaw(requestParameters: GetViewpointsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Viewpoint>>> {
         if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getViewpoints.');
         }
@@ -2607,7 +2646,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getViewpoints.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -2621,11 +2660,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2637,7 +2677,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ViewpointFromJSON));
     }
@@ -2646,8 +2686,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all Viewpoints of a topic  Required scopes: bcf:read
      * Retrieve all Viewpoints of a topic
      */
-    async getViewpoints(projectsPk: number, topicsGuid: string, imgFormat?: GetViewpointsImgFormatEnum): Promise<Array<Viewpoint>> {
-        const response = await this.getViewpointsRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat });
+    async getViewpoints(projectsPk: number, topicsGuid: string, imgFormat?: GetViewpointsImgFormatEnum, initOverrides?: RequestInit): Promise<Array<Viewpoint>> {
+        const response = await this.getViewpointsRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat }, initOverrides);
         return await response.value();
     }
 
@@ -2655,7 +2695,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all visibilities of a viewpoint  Required scopes: bcf:read
      * Retrieve all visibilities of a viewpoint
      */
-    async getVisibilitiesRaw(requestParameters: GetVisibilitiesRequest): Promise<runtime.ApiResponse<Visibility>> {
+    async getVisibilitiesRaw(requestParameters: GetVisibilitiesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visibility>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getVisibilities.');
         }
@@ -2668,7 +2708,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getVisibilities.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2678,11 +2718,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2694,7 +2735,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisibilityFromJSON(jsonValue));
     }
@@ -2703,8 +2744,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all visibilities of a viewpoint  Required scopes: bcf:read
      * Retrieve all visibilities of a viewpoint
      */
-    async getVisibilities(guid: string, projectsPk: number, topicsGuid: string): Promise<Visibility> {
-        const response = await this.getVisibilitiesRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid });
+    async getVisibilities(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Visibility> {
+        const response = await this.getVisibilitiesRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
         return await response.value();
     }
 
@@ -2712,7 +2753,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Import bcf-xml format into this project. If there are guid conflict, an error will be raised. If there are index conflicts, indexes of the imported file will be overriden with a new index. Author and assigned_to fields will be linked to existing users in the project. If no matching user are found, fields will be emptied. Only BCF 2.1 is supported  Required scopes: bcf:write
      * Import bcf-xml format into this project
      */
-    async importBcfRaw(requestParameters: ImportBcfRequest): Promise<runtime.ApiResponse<void>> {
+    async importBcfRaw(requestParameters: ImportBcfRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling importBcf.');
         }
@@ -2721,7 +2762,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('name','Required parameter requestParameters.name was null or undefined when calling importBcf.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2731,11 +2772,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2767,7 +2809,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: formParams,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2776,20 +2818,20 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Import bcf-xml format into this project. If there are guid conflict, an error will be raised. If there are index conflicts, indexes of the imported file will be overriden with a new index. Author and assigned_to fields will be linked to existing users in the project. If no matching user are found, fields will be emptied. Only BCF 2.1 is supported  Required scopes: bcf:write
      * Import bcf-xml format into this project
      */
-    async importBcf(id: number, name: string): Promise<void> {
-        await this.importBcfRaw({ id: id, name: name });
+    async importBcf(id: number, name: string, initOverrides?: RequestInit): Promise<void> {
+        await this.importBcfRaw({ id: id, name: name }, initOverrides);
     }
 
     /**
      * Update some fields of a BCF project  Required scopes: bcf:write
      * Update some fields of a BCF project
      */
-    async updateBcfProjectRaw(requestParameters: UpdateBcfProjectRequest): Promise<runtime.ApiResponse<BcfProject>> {
+    async updateBcfProjectRaw(requestParameters: UpdateBcfProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<BcfProject>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateBcfProject.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2801,11 +2843,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2818,7 +2861,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedBcfProjectRequestToJSON(requestParameters.patchedBcfProjectRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BcfProjectFromJSON(jsonValue));
     }
@@ -2827,8 +2870,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update some fields of a BCF project  Required scopes: bcf:write
      * Update some fields of a BCF project
      */
-    async updateBcfProject(id: number, patchedBcfProjectRequest?: PatchedBcfProjectRequest): Promise<BcfProject> {
-        const response = await this.updateBcfProjectRaw({ id: id, patchedBcfProjectRequest: patchedBcfProjectRequest });
+    async updateBcfProject(id: number, patchedBcfProjectRequest?: PatchedBcfProjectRequest, initOverrides?: RequestInit): Promise<BcfProject> {
+        const response = await this.updateBcfProjectRaw({ id: id, patchedBcfProjectRequest: patchedBcfProjectRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2836,7 +2879,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Update some fields of a comment  Required scopes: bcf:write
      * Update some fields of a comment
      */
-    async updateCommentRaw(requestParameters: UpdateCommentRequest): Promise<runtime.ApiResponse<Comment>> {
+    async updateCommentRaw(requestParameters: UpdateCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Comment>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updateComment.');
         }
@@ -2849,7 +2892,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling updateComment.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2861,11 +2904,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2878,7 +2922,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedCommentRequestToJSON(requestParameters.patchedCommentRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CommentFromJSON(jsonValue));
     }
@@ -2887,8 +2931,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update some fields of a comment  Required scopes: bcf:write
      * Update some fields of a comment
      */
-    async updateComment(guid: string, projectsPk: number, topicsGuid: string, patchedCommentRequest?: PatchedCommentRequest): Promise<Comment> {
-        const response = await this.updateCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, patchedCommentRequest: patchedCommentRequest });
+    async updateComment(guid: string, projectsPk: number, topicsGuid: string, patchedCommentRequest?: PatchedCommentRequest, initOverrides?: RequestInit): Promise<Comment> {
+        const response = await this.updateCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, patchedCommentRequest: patchedCommentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2896,7 +2940,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Label. All topics using this label will be updated  Required scopes: bcf:write
      * Update a Label
      */
-    async updateExtensionLabelRaw(requestParameters: UpdateExtensionLabelRequest): Promise<runtime.ApiResponse<Label>> {
+    async updateExtensionLabelRaw(requestParameters: UpdateExtensionLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Label>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionLabel.');
         }
@@ -2905,7 +2949,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionLabel.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2917,11 +2961,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2934,7 +2979,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedLabelRequestToJSON(requestParameters.patchedLabelRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LabelFromJSON(jsonValue));
     }
@@ -2943,8 +2988,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Label. All topics using this label will be updated  Required scopes: bcf:write
      * Update a Label
      */
-    async updateExtensionLabel(id: number, projectsPk: number, patchedLabelRequest?: PatchedLabelRequest): Promise<Label> {
-        const response = await this.updateExtensionLabelRaw({ id: id, projectsPk: projectsPk, patchedLabelRequest: patchedLabelRequest });
+    async updateExtensionLabel(id: number, projectsPk: number, patchedLabelRequest?: PatchedLabelRequest, initOverrides?: RequestInit): Promise<Label> {
+        const response = await this.updateExtensionLabelRaw({ id: id, projectsPk: projectsPk, patchedLabelRequest: patchedLabelRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2952,7 +2997,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Priority. All topics using this priority will be updated  Required scopes: bcf:write
      * Update a Priority
      */
-    async updateExtensionPriorityRaw(requestParameters: UpdateExtensionPriorityRequest): Promise<runtime.ApiResponse<Priority>> {
+    async updateExtensionPriorityRaw(requestParameters: UpdateExtensionPriorityRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Priority>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionPriority.');
         }
@@ -2961,7 +3006,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionPriority.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2973,11 +3018,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2990,7 +3036,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedPriorityRequestToJSON(requestParameters.patchedPriorityRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PriorityFromJSON(jsonValue));
     }
@@ -2999,8 +3045,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Priority. All topics using this priority will be updated  Required scopes: bcf:write
      * Update a Priority
      */
-    async updateExtensionPriority(id: number, projectsPk: number, patchedPriorityRequest?: PatchedPriorityRequest): Promise<Priority> {
-        const response = await this.updateExtensionPriorityRaw({ id: id, projectsPk: projectsPk, patchedPriorityRequest: patchedPriorityRequest });
+    async updateExtensionPriority(id: number, projectsPk: number, patchedPriorityRequest?: PatchedPriorityRequest, initOverrides?: RequestInit): Promise<Priority> {
+        const response = await this.updateExtensionPriorityRaw({ id: id, projectsPk: projectsPk, patchedPriorityRequest: patchedPriorityRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3008,7 +3054,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Stage. All topics using this stage will be updated  Required scopes: bcf:write
      * Update a Stage
      */
-    async updateExtensionStageRaw(requestParameters: UpdateExtensionStageRequest): Promise<runtime.ApiResponse<Stage>> {
+    async updateExtensionStageRaw(requestParameters: UpdateExtensionStageRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Stage>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionStage.');
         }
@@ -3017,7 +3063,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionStage.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3029,11 +3075,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3046,7 +3093,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedStageRequestToJSON(requestParameters.patchedStageRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StageFromJSON(jsonValue));
     }
@@ -3055,8 +3102,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Stage. All topics using this stage will be updated  Required scopes: bcf:write
      * Update a Stage
      */
-    async updateExtensionStage(id: number, projectsPk: number, patchedStageRequest?: PatchedStageRequest): Promise<Stage> {
-        const response = await this.updateExtensionStageRaw({ id: id, projectsPk: projectsPk, patchedStageRequest: patchedStageRequest });
+    async updateExtensionStage(id: number, projectsPk: number, patchedStageRequest?: PatchedStageRequest, initOverrides?: RequestInit): Promise<Stage> {
+        const response = await this.updateExtensionStageRaw({ id: id, projectsPk: projectsPk, patchedStageRequest: patchedStageRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3064,7 +3111,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a TopicStatus. All topics using this status will be updated  Required scopes: bcf:write
      * Update a TopicStatus
      */
-    async updateExtensionStatusRaw(requestParameters: UpdateExtensionStatusRequest): Promise<runtime.ApiResponse<TopicStatus>> {
+    async updateExtensionStatusRaw(requestParameters: UpdateExtensionStatusRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<TopicStatus>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionStatus.');
         }
@@ -3073,7 +3120,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionStatus.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3085,11 +3132,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3102,7 +3150,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedTopicStatusRequestToJSON(requestParameters.patchedTopicStatusRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicStatusFromJSON(jsonValue));
     }
@@ -3111,8 +3159,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a TopicStatus. All topics using this status will be updated  Required scopes: bcf:write
      * Update a TopicStatus
      */
-    async updateExtensionStatus(id: number, projectsPk: number, patchedTopicStatusRequest?: PatchedTopicStatusRequest): Promise<TopicStatus> {
-        const response = await this.updateExtensionStatusRaw({ id: id, projectsPk: projectsPk, patchedTopicStatusRequest: patchedTopicStatusRequest });
+    async updateExtensionStatus(id: number, projectsPk: number, patchedTopicStatusRequest?: PatchedTopicStatusRequest, initOverrides?: RequestInit): Promise<TopicStatus> {
+        const response = await this.updateExtensionStatusRaw({ id: id, projectsPk: projectsPk, patchedTopicStatusRequest: patchedTopicStatusRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3120,7 +3168,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a TopicType. All topics using this type will be updated  Required scopes: bcf:write
      * Update a TopicType
      */
-    async updateExtensionTypeRaw(requestParameters: UpdateExtensionTypeRequest): Promise<runtime.ApiResponse<TopicType>> {
+    async updateExtensionTypeRaw(requestParameters: UpdateExtensionTypeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<TopicType>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionType.');
         }
@@ -3129,7 +3177,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionType.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3141,11 +3189,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3158,7 +3207,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedTopicTypeRequestToJSON(requestParameters.patchedTopicTypeRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicTypeFromJSON(jsonValue));
     }
@@ -3167,8 +3216,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a TopicType. All topics using this type will be updated  Required scopes: bcf:write
      * Update a TopicType
      */
-    async updateExtensionType(id: number, projectsPk: number, patchedTopicTypeRequest?: PatchedTopicTypeRequest): Promise<TopicType> {
-        const response = await this.updateExtensionTypeRaw({ id: id, projectsPk: projectsPk, patchedTopicTypeRequest: patchedTopicTypeRequest });
+    async updateExtensionType(id: number, projectsPk: number, patchedTopicTypeRequest?: PatchedTopicTypeRequest, initOverrides?: RequestInit): Promise<TopicType> {
+        const response = await this.updateExtensionTypeRaw({ id: id, projectsPk: projectsPk, patchedTopicTypeRequest: patchedTopicTypeRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3176,7 +3225,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. You can update topic, viewpoints and comment is a signle call  Required scopes: bcf:write
      * Update some fields of a topic
      */
-    async updateFullTopicRaw(requestParameters: UpdateFullTopicRequest): Promise<runtime.ApiResponse<FullTopic>> {
+    async updateFullTopicRaw(requestParameters: UpdateFullTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FullTopic>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updateFullTopic.');
         }
@@ -3185,7 +3234,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateFullTopic.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -3201,11 +3250,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3218,7 +3268,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedFullTopicRequestToJSON(requestParameters.patchedFullTopicRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FullTopicFromJSON(jsonValue));
     }
@@ -3227,8 +3277,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. You can update topic, viewpoints and comment is a signle call  Required scopes: bcf:write
      * Update some fields of a topic
      */
-    async updateFullTopic(guid: string, projectsPk: number, imgFormat?: UpdateFullTopicImgFormatEnum, patchedFullTopicRequest?: PatchedFullTopicRequest): Promise<FullTopic> {
-        const response = await this.updateFullTopicRaw({ guid: guid, projectsPk: projectsPk, imgFormat: imgFormat, patchedFullTopicRequest: patchedFullTopicRequest });
+    async updateFullTopic(guid: string, projectsPk: number, imgFormat?: UpdateFullTopicImgFormatEnum, patchedFullTopicRequest?: PatchedFullTopicRequest, initOverrides?: RequestInit): Promise<FullTopic> {
+        const response = await this.updateFullTopicRaw({ guid: guid, projectsPk: projectsPk, imgFormat: imgFormat, patchedFullTopicRequest: patchedFullTopicRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3236,7 +3286,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Update some fields of a topic  Required scopes: bcf:write
      * Update some fields of a topic
      */
-    async updateTopicRaw(requestParameters: UpdateTopicRequest): Promise<runtime.ApiResponse<Topic>> {
+    async updateTopicRaw(requestParameters: UpdateTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Topic>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updateTopic.');
         }
@@ -3245,7 +3295,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateTopic.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3257,11 +3307,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3274,7 +3325,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedTopicRequestToJSON(requestParameters.patchedTopicRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicFromJSON(jsonValue));
     }
@@ -3283,8 +3334,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update some fields of a topic  Required scopes: bcf:write
      * Update some fields of a topic
      */
-    async updateTopic(guid: string, projectsPk: number, patchedTopicRequest?: PatchedTopicRequest): Promise<Topic> {
-        const response = await this.updateTopicRaw({ guid: guid, projectsPk: projectsPk, patchedTopicRequest: patchedTopicRequest });
+    async updateTopic(guid: string, projectsPk: number, patchedTopicRequest?: PatchedTopicRequest, initOverrides?: RequestInit): Promise<Topic> {
+        const response = await this.updateTopicRaw({ guid: guid, projectsPk: projectsPk, patchedTopicRequest: patchedTopicRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3292,7 +3343,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update some fields of a Viewpoint  Required scopes: bcf:write
      * Update some fields of a Viewpoint
      */
-    async updateViewpointRaw(requestParameters: UpdateViewpointRequest): Promise<runtime.ApiResponse<Viewpoint>> {
+    async updateViewpointRaw(requestParameters: UpdateViewpointRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Viewpoint>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updateViewpoint.');
         }
@@ -3305,7 +3356,7 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling updateViewpoint.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.imgFormat !== undefined) {
             queryParameters['img_format'] = requestParameters.imgFormat;
@@ -3321,11 +3372,12 @@ export class BcfApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3338,7 +3390,7 @@ export class BcfApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedViewpointRequestToJSON(requestParameters.patchedViewpointRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ViewpointFromJSON(jsonValue));
     }
@@ -3347,8 +3399,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update some fields of a Viewpoint  Required scopes: bcf:write
      * Update some fields of a Viewpoint
      */
-    async updateViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: UpdateViewpointImgFormatEnum, patchedViewpointRequest?: PatchedViewpointRequest): Promise<Viewpoint> {
-        const response = await this.updateViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat, patchedViewpointRequest: patchedViewpointRequest });
+    async updateViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: UpdateViewpointImgFormatEnum, patchedViewpointRequest?: PatchedViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
+        const response = await this.updateViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat, patchedViewpointRequest: patchedViewpointRequest }, initOverrides);
         return await response.value();
     }
 

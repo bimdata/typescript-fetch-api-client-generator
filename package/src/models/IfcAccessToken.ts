@@ -69,4 +69,3 @@ export function IfcAccessTokenToJSON(value?: IfcAccessToken | null): any {
     };
 }
 
-

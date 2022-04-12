@@ -70,4 +70,3 @@ export function PatchedPriorityRequestToJSON(value?: PatchedPriorityRequest | nu
     };
 }
 
-

@@ -110,4 +110,3 @@ export function CommentRequestToJSON(value?: CommentRequest | null): any {
     };
 }
 
-

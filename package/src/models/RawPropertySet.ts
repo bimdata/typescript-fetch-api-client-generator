@@ -18,7 +18,7 @@ import {
     RawPropertyFromJSON,
     RawPropertyFromJSONTyped,
     RawPropertyToJSON,
-} from './';
+} from './RawProperty';
 
 /**
  * 
@@ -91,5 +91,4 @@ export function RawPropertySetToJSON(value?: RawPropertySet | null): any {
         'properties': ((value.properties as Array<any>).map(RawPropertyToJSON)),
     };
 }
-
 

@@ -70,4 +70,3 @@ export function RawLayerRequestToJSON(value?: RawLayerRequest | null): any {
     };
 }
 
-

@@ -18,7 +18,7 @@ import {
     UnitRequestFromJSON,
     UnitRequestFromJSONTyped,
     UnitRequestToJSON,
-} from './';
+} from './UnitRequest';
 
 /**
  * Adds nested create feature
@@ -92,5 +92,4 @@ export function PatchedPropertyDefinitionRequestToJSON(value?: PatchedPropertyDe
         'value_type': value.valueType,
     };
 }
-
 

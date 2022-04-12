@@ -69,4 +69,3 @@ export function StageToJSON(value?: Stage | null): any {
     };
 }
 
-

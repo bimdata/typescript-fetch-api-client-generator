@@ -62,4 +62,3 @@ export function FeatureToJSON(value?: Feature | null): any {
     };
 }
 
-

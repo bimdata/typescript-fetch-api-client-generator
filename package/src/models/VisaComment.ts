@@ -18,7 +18,7 @@ import {
     UserProjectFromJSON,
     UserProjectFromJSONTyped,
     UserProjectToJSON,
-} from './';
+} from './UserProject';
 
 /**
  * 
@@ -37,7 +37,7 @@ export interface VisaComment {
      * @type {UserProject}
      * @memberof VisaComment
      */
-    readonly author: UserProject;
+    readonly author: UserProject | null;
     /**
      * 
      * @type {number}
@@ -95,5 +95,4 @@ export function VisaCommentToJSON(value?: VisaComment | null): any {
         'content': value.content,
     };
 }
-
 

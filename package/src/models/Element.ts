@@ -18,19 +18,25 @@ import {
     ClassificationFromJSON,
     ClassificationFromJSONTyped,
     ClassificationToJSON,
+} from './Classification';
+import {
     LayerElement,
     LayerElementFromJSON,
     LayerElementFromJSONTyped,
     LayerElementToJSON,
+} from './LayerElement';
+import {
     MaterialListComponent,
     MaterialListComponentFromJSON,
     MaterialListComponentFromJSONTyped,
     MaterialListComponentToJSON,
+} from './MaterialListComponent';
+import {
     PropertySet,
     PropertySetFromJSON,
     PropertySetFromJSONTyped,
     PropertySetToJSON,
-} from './';
+} from './PropertySet';
 
 /**
  * Adds nested create feature
@@ -126,5 +132,4 @@ export function ElementToJSON(value?: Element | null): any {
         'layers': value.layers === undefined ? undefined : ((value.layers as Array<any>).map(LayerElementToJSON)),
     };
 }
-
 

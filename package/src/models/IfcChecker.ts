@@ -18,19 +18,25 @@ import {
     CheckPlanFromJSON,
     CheckPlanFromJSONTyped,
     CheckPlanToJSON,
+} from './CheckPlan';
+import {
     CheckerResult,
     CheckerResultFromJSON,
     CheckerResultFromJSONTyped,
     CheckerResultToJSON,
+} from './CheckerResult';
+import {
     Model,
     ModelFromJSON,
     ModelFromJSONTyped,
     ModelToJSON,
+} from './Model';
+import {
     User,
     UserFromJSON,
     UserFromJSONTyped,
     UserToJSON,
-} from './';
+} from './User';
 
 /**
  * 
@@ -49,13 +55,13 @@ export interface IfcChecker {
      * @type {Model}
      * @memberof IfcChecker
      */
-    readonly ifc: Model;
+    readonly ifc: Model | null;
     /**
      * 
      * @type {User}
      * @memberof IfcChecker
      */
-    readonly creator: User;
+    readonly creator: User | null;
     /**
      * 
      * @type {string}
@@ -85,7 +91,7 @@ export interface IfcChecker {
      * @type {CheckPlan}
      * @memberof IfcChecker
      */
-    readonly checkplan: CheckPlan;
+    readonly checkplan: CheckPlan | null;
 }
 
 export function IfcCheckerFromJSON(json: any): IfcChecker {
@@ -121,5 +127,4 @@ export function IfcCheckerToJSON(value?: IfcChecker | null): any {
         'name': value.name,
     };
 }
-
 

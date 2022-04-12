@@ -18,7 +18,7 @@ import {
     ComponentFromJSON,
     ComponentFromJSONTyped,
     ComponentToJSON,
-} from './';
+} from './Component';
 
 /**
  * Adds nested create feature
@@ -68,5 +68,4 @@ export function ColoringToJSON(value?: Coloring | null): any {
         'components': ((value.components as Array<any>).map(ComponentToJSON)),
     };
 }
-
 

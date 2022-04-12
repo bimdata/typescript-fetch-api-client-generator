@@ -18,7 +18,7 @@ import {
     PropertyFromJSON,
     PropertyFromJSONTyped,
     PropertyToJSON,
-} from './';
+} from './Property';
 
 /**
  * Adds nested create feature
@@ -105,5 +105,4 @@ export function PropertySetToJSON(value?: PropertySet | null): any {
         'properties': value.properties === undefined ? undefined : ((value.properties as Array<any>).map(PropertyToJSON)),
     };
 }
-
 

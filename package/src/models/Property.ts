@@ -14,15 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    AnyType,
-    AnyTypeFromJSON,
-    AnyTypeFromJSONTyped,
-    AnyTypeToJSON,
     PropertyDefinition,
     PropertyDefinitionFromJSON,
     PropertyDefinitionFromJSONTyped,
     PropertyDefinitionToJSON,
-} from './';
+} from './PropertyDefinition';
 
 /**
  * Adds nested create feature
@@ -44,10 +40,10 @@ export interface Property {
     definition: PropertyDefinition;
     /**
      * 
-     * @type {{ [key: string]: AnyType; }}
+     * @type {{ [key: string]: any; }}
      * @memberof Property
      */
-    value?: { [key: string]: AnyType; } | null;
+    value?: { [key: string]: any; } | null;
     /**
      * This field is useful when you update a property and the  API is rebuilding a new property set to avoid an update on many elements. It gives you the new pset id
      * @type {number}
@@ -80,7 +76,7 @@ export function PropertyFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         
         'id': json['id'],
         'definition': PropertyDefinitionFromJSON(json['definition']),
-        'value': !exists(json, 'value') ? undefined : (json['value'] === null ? null : mapValues(json['value'], AnyTypeFromJSON)),
+        'value': !exists(json, 'value') ? undefined : json['value'],
         'propertySetId': json['property_set_id'],
         'createdAt': (new Date(json['created_at'])),
         'updatedAt': (new Date(json['updated_at'])),
@@ -97,8 +93,7 @@ export function PropertyToJSON(value?: Property | null): any {
     return {
         
         'definition': PropertyDefinitionToJSON(value.definition),
-        'value': value.value === undefined ? undefined : (value.value === null ? null : mapValues(value.value, AnyTypeToJSON)),
+        'value': value.value,
     };
 }
-
 

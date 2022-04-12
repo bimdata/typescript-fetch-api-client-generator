@@ -18,7 +18,7 @@ import {
     DocumentFromJSON,
     DocumentFromJSONTyped,
     DocumentToJSON,
-} from './';
+} from './Document';
 
 /**
  * 
@@ -31,7 +31,7 @@ export interface DocumentWithElementList {
      * @type {Document}
      * @memberof DocumentWithElementList
      */
-    readonly document: Document;
+    readonly document: Document | null;
     /**
      * 
      * @type {Array<string>}
@@ -66,5 +66,4 @@ export function DocumentWithElementListToJSON(value?: DocumentWithElementList | 
         
     };
 }
-
 

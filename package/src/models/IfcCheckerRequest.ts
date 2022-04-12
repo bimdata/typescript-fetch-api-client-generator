@@ -62,4 +62,3 @@ export function IfcCheckerRequestToJSON(value?: IfcCheckerRequest | null): any {
     };
 }
 
-

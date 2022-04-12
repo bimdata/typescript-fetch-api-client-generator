@@ -18,7 +18,7 @@ import {
     CloudRoleEnumFromJSON,
     CloudRoleEnumFromJSONTyped,
     CloudRoleEnumToJSON,
-} from './';
+} from './CloudRoleEnum';
 
 /**
  * 
@@ -31,7 +31,7 @@ export interface PatchedUserCloudUpdateRequest {
      * @type {CloudRoleEnum}
      * @memberof PatchedUserCloudUpdateRequest
      */
-    role?: CloudRoleEnum;
+    role?: CloudRoleEnum | null;
 }
 
 export function PatchedUserCloudUpdateRequestFromJSON(json: any): PatchedUserCloudUpdateRequest {
@@ -60,5 +60,4 @@ export function PatchedUserCloudUpdateRequestToJSON(value?: PatchedUserCloudUpda
         'role': CloudRoleEnumToJSON(value.role),
     };
 }
-
 

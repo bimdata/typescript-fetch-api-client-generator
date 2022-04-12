@@ -18,11 +18,13 @@ import {
     MaterialFromJSON,
     MaterialFromJSONTyped,
     MaterialToJSON,
+} from './Material';
+import {
     MaterialOption,
     MaterialOptionFromJSON,
     MaterialOptionFromJSONTyped,
     MaterialOptionToJSON,
-} from './';
+} from './MaterialOption';
 
 /**
  * 
@@ -72,5 +74,4 @@ export function MaterialListComponentToJSON(value?: MaterialListComponent | null
         'option': MaterialOptionToJSON(value.option),
     };
 }
-
 

@@ -18,7 +18,7 @@ import {
     RulesetRequestFromJSON,
     RulesetRequestFromJSONTyped,
     RulesetRequestToJSON,
-} from './';
+} from './RulesetRequest';
 
 /**
  * Adds nested create feature
@@ -76,5 +76,4 @@ export function PatchedCheckPlanRequestToJSON(value?: PatchedCheckPlanRequest | 
         'rulesets': value.rulesets === undefined ? undefined : ((value.rulesets as Array<any>).map(RulesetRequestToJSON)),
     };
 }
-
 

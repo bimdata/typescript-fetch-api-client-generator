@@ -77,4 +77,3 @@ export function TopicStatusToJSON(value?: TopicStatus | null): any {
     };
 }
 
-

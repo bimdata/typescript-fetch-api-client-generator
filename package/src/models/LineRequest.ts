@@ -18,7 +18,7 @@ import {
     PointRequestFromJSON,
     PointRequestFromJSONTyped,
     PointRequestToJSON,
-} from './';
+} from './PointRequest';
 
 /**
  * Adds nested create feature
@@ -68,5 +68,4 @@ export function LineRequestToJSON(value?: LineRequest | null): any {
         'start_point': PointRequestToJSON(value.startPoint),
     };
 }
-
 

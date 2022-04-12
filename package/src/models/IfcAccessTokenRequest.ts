@@ -62,4 +62,3 @@ export function IfcAccessTokenRequestToJSON(value?: IfcAccessTokenRequest | null
     };
 }
 
-

@@ -18,11 +18,13 @@ import {
     RuleComponentRequestFromJSON,
     RuleComponentRequestFromJSONTyped,
     RuleComponentRequestToJSON,
+} from './RuleComponentRequest';
+import {
     RuleRequest,
     RuleRequestFromJSON,
     RuleRequestFromJSONTyped,
     RuleRequestToJSON,
-} from './';
+} from './RuleRequest';
 
 /**
  * Adds nested create feature
@@ -88,5 +90,4 @@ export function PatchedRuleRequestToJSON(value?: PatchedRuleRequest | null): any
         'on': RuleRequestToJSON(value.on),
     };
 }
-
 

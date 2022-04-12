@@ -18,11 +18,13 @@ import {
     ComponentFromJSON,
     ComponentFromJSONTyped,
     ComponentToJSON,
+} from './Component';
+import {
     ViewSetupHints,
     ViewSetupHintsFromJSON,
     ViewSetupHintsFromJSONTyped,
     ViewSetupHintsToJSON,
-} from './';
+} from './ViewSetupHints';
 
 /**
  * Adds nested create feature
@@ -80,5 +82,4 @@ export function VisibilityToJSON(value?: Visibility | null): any {
         'view_setup_hints': ViewSetupHintsToJSON(value.viewSetupHints),
     };
 }
-
 

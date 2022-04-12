@@ -62,4 +62,3 @@ export function CloudInvitationRequestToJSON(value?: CloudInvitationRequest | nu
     };
 }
 
-

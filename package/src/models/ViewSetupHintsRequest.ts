@@ -70,4 +70,3 @@ export function ViewSetupHintsRequestToJSON(value?: ViewSetupHintsRequest | null
     };
 }
 
-

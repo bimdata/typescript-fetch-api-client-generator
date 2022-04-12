@@ -18,15 +18,19 @@ import {
     RawMaterialListComponentsRequestFromJSON,
     RawMaterialListComponentsRequestFromJSONTyped,
     RawMaterialListComponentsRequestToJSON,
+} from './RawMaterialListComponentsRequest';
+import {
     RawMaterialOptionsRequest,
     RawMaterialOptionsRequestFromJSON,
     RawMaterialOptionsRequestFromJSONTyped,
     RawMaterialOptionsRequestToJSON,
+} from './RawMaterialOptionsRequest';
+import {
     RawMaterialRequest,
     RawMaterialRequestFromJSON,
     RawMaterialRequestFromJSONTyped,
     RawMaterialRequestToJSON,
-} from './';
+} from './RawMaterialRequest';
 
 /**
  * 
@@ -84,5 +88,4 @@ export function RawMaterialListRequestToJSON(value?: RawMaterialListRequest | nu
         'options': value.options === undefined ? undefined : (value.options === null ? null : (value.options as Array<any>).map(RawMaterialOptionsRequestToJSON)),
     };
 }
-
 

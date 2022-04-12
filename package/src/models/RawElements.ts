@@ -18,35 +18,49 @@ import {
     RawClassificationFromJSON,
     RawClassificationFromJSONTyped,
     RawClassificationToJSON,
+} from './RawClassification';
+import {
     RawDefinition,
     RawDefinitionFromJSON,
     RawDefinitionFromJSONTyped,
     RawDefinitionToJSON,
+} from './RawDefinition';
+import {
     RawElement,
     RawElementFromJSON,
     RawElementFromJSONTyped,
     RawElementToJSON,
+} from './RawElement';
+import {
     RawLayer,
     RawLayerFromJSON,
     RawLayerFromJSONTyped,
     RawLayerToJSON,
+} from './RawLayer';
+import {
     RawMaterialList,
     RawMaterialListFromJSON,
     RawMaterialListFromJSONTyped,
     RawMaterialListToJSON,
+} from './RawMaterialList';
+import {
     RawPropertySet,
     RawPropertySetFromJSON,
     RawPropertySetFromJSONTyped,
     RawPropertySetToJSON,
+} from './RawPropertySet';
+import {
     RawSystem,
     RawSystemFromJSON,
     RawSystemFromJSONTyped,
     RawSystemToJSON,
+} from './RawSystem';
+import {
     RawUnit,
     RawUnitFromJSON,
     RawUnitFromJSONTyped,
     RawUnitToJSON,
-} from './';
+} from './RawUnit';
 
 /**
  * 
@@ -144,5 +158,4 @@ export function RawElementsToJSON(value?: RawElements | null): any {
         'elements': ((value.elements as Array<any>).map(RawElementToJSON)),
     };
 }
-
 

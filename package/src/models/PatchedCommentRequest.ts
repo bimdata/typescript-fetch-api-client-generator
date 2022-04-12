@@ -110,4 +110,3 @@ export function PatchedCommentRequestToJSON(value?: PatchedCommentRequest | null
     };
 }
 
-

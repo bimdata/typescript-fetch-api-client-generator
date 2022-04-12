@@ -18,11 +18,13 @@ import {
     DirectionRequestFromJSON,
     DirectionRequestFromJSONTyped,
     DirectionRequestToJSON,
+} from './DirectionRequest';
+import {
     PointRequest,
     PointRequestFromJSON,
     PointRequestFromJSONTyped,
     PointRequestToJSON,
-} from './';
+} from './PointRequest';
 
 /**
  * Adds nested create feature
@@ -88,5 +90,4 @@ export function OrthogonalCameraRequestToJSON(value?: OrthogonalCameraRequest | 
         'camera_view_point': PointRequestToJSON(value.cameraViewPoint),
     };
 }
-
 

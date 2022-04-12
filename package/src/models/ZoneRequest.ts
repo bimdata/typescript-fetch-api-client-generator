@@ -18,7 +18,7 @@ import {
     SpaceRequestFromJSON,
     SpaceRequestFromJSONTyped,
     SpaceRequestToJSON,
-} from './';
+} from './SpaceRequest';
 
 /**
  * Adds nested create feature
@@ -100,5 +100,4 @@ export function ZoneRequestToJSON(value?: ZoneRequest | null): any {
         'color': value.color,
     };
 }
-
 

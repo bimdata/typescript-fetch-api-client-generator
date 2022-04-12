@@ -18,15 +18,19 @@ import {
     ColoringRequestFromJSON,
     ColoringRequestFromJSONTyped,
     ColoringRequestToJSON,
+} from './ColoringRequest';
+import {
     ComponentRequest,
     ComponentRequestFromJSON,
     ComponentRequestFromJSONTyped,
     ComponentRequestToJSON,
+} from './ComponentRequest';
+import {
     VisibilityRequest,
     VisibilityRequestFromJSON,
     VisibilityRequestFromJSONTyped,
     VisibilityRequestToJSON,
-} from './';
+} from './VisibilityRequest';
 
 /**
  * Adds nested create feature
@@ -84,5 +88,4 @@ export function ComponentsParentRequestToJSON(value?: ComponentsParentRequest | 
         'selection': value.selection === undefined ? undefined : ((value.selection as Array<any>).map(ComponentRequestToJSON)),
     };
 }
-
 

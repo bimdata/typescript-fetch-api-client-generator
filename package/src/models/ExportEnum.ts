@@ -18,9 +18,9 @@
  * @enum {string}
  */
 export enum ExportEnum {
-    ORIGINAL = 'ORIGINAL',
-    UPDATED = 'UPDATED',
-    NONE = 'NONE'
+    Original = 'ORIGINAL',
+    Updated = 'UPDATED',
+    None = 'NONE'
 }
 
 export function ExportEnumFromJSON(json: any): ExportEnum {

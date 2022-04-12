@@ -98,4 +98,3 @@ export function SpaceToJSON(value?: Space | null): any {
     };
 }
 
-

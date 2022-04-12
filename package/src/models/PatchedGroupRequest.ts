@@ -62,4 +62,3 @@ export function PatchedGroupRequestToJSON(value?: PatchedGroupRequest | null): a
     };
 }
 
-

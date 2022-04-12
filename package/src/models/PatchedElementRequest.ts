@@ -18,15 +18,19 @@ import {
     ClassificationRequestFromJSON,
     ClassificationRequestFromJSONTyped,
     ClassificationRequestToJSON,
+} from './ClassificationRequest';
+import {
     LayerElementRequest,
     LayerElementRequestFromJSON,
     LayerElementRequestFromJSONTyped,
     LayerElementRequestToJSON,
+} from './LayerElementRequest';
+import {
     PropertySetRequest,
     PropertySetRequestFromJSON,
     PropertySetRequestFromJSONTyped,
     PropertySetRequestToJSON,
-} from './';
+} from './PropertySetRequest';
 
 /**
  * Adds nested create feature
@@ -108,5 +112,4 @@ export function PatchedElementRequestToJSON(value?: PatchedElementRequest | null
         'layers': value.layers === undefined ? undefined : ((value.layers as Array<any>).map(LayerElementRequestToJSON)),
     };
 }
-
 

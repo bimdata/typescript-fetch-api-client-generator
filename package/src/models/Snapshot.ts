@@ -62,4 +62,3 @@ export function SnapshotToJSON(value?: Snapshot | null): any {
     };
 }
 
-

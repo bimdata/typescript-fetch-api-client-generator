@@ -18,11 +18,13 @@ import {
     CommentRequestFromJSON,
     CommentRequestFromJSONTyped,
     CommentRequestToJSON,
+} from './CommentRequest';
+import {
     ViewpointRequest,
     ViewpointRequestFromJSON,
     ViewpointRequestFromJSONTyped,
     ViewpointRequestToJSON,
-} from './';
+} from './ViewpointRequest';
 
 /**
  * 
@@ -224,5 +226,4 @@ export function FullTopicRequestToJSON(value?: FullTopicRequest | null): any {
         'project': value.project,
     };
 }
-
 

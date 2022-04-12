@@ -18,17 +18,17 @@
  * @enum {string}
  */
 export enum ModelTypeEnum {
-    IFC = 'IFC',
-    DWG = 'DWG',
-    DXF = 'DXF',
-    GLTF = 'GLTF',
-    PDF = 'PDF',
-    JPEG = 'JPEG',
-    PNG = 'PNG',
-    OBJ = 'OBJ',
-    DAE = 'DAE',
-    BFX = 'BFX',
-    METABUILDING = 'METABUILDING'
+    Ifc = 'IFC',
+    Dwg = 'DWG',
+    Dxf = 'DXF',
+    Gltf = 'GLTF',
+    Pdf = 'PDF',
+    Jpeg = 'JPEG',
+    Png = 'PNG',
+    Obj = 'OBJ',
+    Dae = 'DAE',
+    Bfx = 'BFX',
+    Metabuilding = 'METABUILDING'
 }
 
 export function ModelTypeEnumFromJSON(json: any): ModelTypeEnum {

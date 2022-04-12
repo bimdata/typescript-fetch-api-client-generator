@@ -45,12 +45,12 @@ export class SsoApi extends runtime.BaseAPI {
      * If the user already exists, s·he is added to the cloud and projet. If not, we wait their first connection to add them.  Required scopes: org:manage
      * Accept an invitation
      */
-    async acceptInvitationRaw(requestParameters: AcceptInvitationRequest): Promise<runtime.ApiResponse<void>> {
+    async acceptInvitationRaw(requestParameters: AcceptInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling acceptInvitation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -60,11 +60,12 @@ export class SsoApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -76,7 +77,7 @@ export class SsoApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -85,16 +86,16 @@ export class SsoApi extends runtime.BaseAPI {
      * If the user already exists, s·he is added to the cloud and projet. If not, we wait their first connection to add them.  Required scopes: org:manage
      * Accept an invitation
      */
-    async acceptInvitation(id: number): Promise<void> {
-        await this.acceptInvitationRaw({ id: id });
+    async acceptInvitation(id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.acceptInvitationRaw({ id: id }, initOverrides);
     }
 
     /**
      * Delete the user and all clouds where the user is alone
      * Delete user from BIMData
      */
-    async deleteUserRaw(): Promise<runtime.ApiResponse<void>> {
-        const queryParameters: runtime.HTTPQuery = {};
+    async deleteUserRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -104,11 +105,12 @@ export class SsoApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -120,7 +122,7 @@ export class SsoApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -129,20 +131,20 @@ export class SsoApi extends runtime.BaseAPI {
      * Delete the user and all clouds where the user is alone
      * Delete user from BIMData
      */
-    async deleteUser(): Promise<void> {
-        await this.deleteUserRaw();
+    async deleteUser(initOverrides?: RequestInit): Promise<void> {
+        await this.deleteUserRaw(initOverrides);
     }
 
     /**
      * The invitation status change to DENIED and the user is not added to the cloud. You can accept an invitation previously denied  Required scopes: org:manage
      * Deny an invitation
      */
-    async denyInvitationRaw(requestParameters: DenyInvitationRequest): Promise<runtime.ApiResponse<void>> {
+    async denyInvitationRaw(requestParameters: DenyInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling denyInvitation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -152,11 +154,12 @@ export class SsoApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -168,7 +171,7 @@ export class SsoApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -177,20 +180,20 @@ export class SsoApi extends runtime.BaseAPI {
      * The invitation status change to DENIED and the user is not added to the cloud. You can accept an invitation previously denied  Required scopes: org:manage
      * Deny an invitation
      */
-    async denyInvitation(id: number): Promise<void> {
-        await this.denyInvitationRaw({ id: id });
+    async denyInvitation(id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.denyInvitationRaw({ id: id }, initOverrides);
     }
 
     /**
      * Retrieve all invitations of your identity provider  Required scopes: org:manage
      * Retrieve an invitation
      */
-    async getInvitationRaw(requestParameters: GetInvitationRequest): Promise<runtime.ApiResponse<Invitation>> {
+    async getInvitationRaw(requestParameters: GetInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Invitation>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getInvitation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -200,11 +203,12 @@ export class SsoApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -216,7 +220,7 @@ export class SsoApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => InvitationFromJSON(jsonValue));
     }
@@ -225,8 +229,8 @@ export class SsoApi extends runtime.BaseAPI {
      * Retrieve all invitations of your identity provider  Required scopes: org:manage
      * Retrieve an invitation
      */
-    async getInvitation(id: number): Promise<Invitation> {
-        const response = await this.getInvitationRaw({ id: id });
+    async getInvitation(id: number, initOverrides?: RequestInit): Promise<Invitation> {
+        const response = await this.getInvitationRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
@@ -234,8 +238,8 @@ export class SsoApi extends runtime.BaseAPI {
      * Retrieve all invitations of your identity provider  Required scopes: org:manage
      * Retrieve all invitations
      */
-    async getInvitationsRaw(requestParameters: GetInvitationsRequest): Promise<runtime.ApiResponse<Array<Invitation>>> {
-        const queryParameters: runtime.HTTPQuery = {};
+    async getInvitationsRaw(requestParameters: GetInvitationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Invitation>>> {
+        const queryParameters: any = {};
 
         if (requestParameters.status !== undefined) {
             queryParameters['status'] = requestParameters.status;
@@ -249,11 +253,12 @@ export class SsoApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -265,7 +270,7 @@ export class SsoApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InvitationFromJSON));
     }
@@ -274,8 +279,8 @@ export class SsoApi extends runtime.BaseAPI {
      * Retrieve all invitations of your identity provider  Required scopes: org:manage
      * Retrieve all invitations
      */
-    async getInvitations(status?: GetInvitationsStatusEnum): Promise<Array<Invitation>> {
-        const response = await this.getInvitationsRaw({ status: status });
+    async getInvitations(status?: GetInvitationsStatusEnum, initOverrides?: RequestInit): Promise<Array<Invitation>> {
+        const response = await this.getInvitationsRaw({ status: status }, initOverrides);
         return await response.value();
     }
 

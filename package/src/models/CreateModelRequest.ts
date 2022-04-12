@@ -54,4 +54,3 @@ export function CreateModelRequestToJSON(value?: CreateModelRequest | null): any
     };
 }
 
-

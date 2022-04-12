@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    AnyType,
-    AnyTypeFromJSON,
-    AnyTypeFromJSONTyped,
-    AnyTypeToJSON,
-} from './';
-
 /**
  * Adds nested create feature
  * @export
@@ -70,10 +63,10 @@ export interface UnitRequest {
     conversionBaseunit?: UnitRequest;
     /**
      * List of constitutive unit elements by id with corresponding exponent (ex: [meterID/1, secondID/-1] for velocity)
-     * @type {{ [key: string]: AnyType; }}
+     * @type {{ [key: string]: any; }}
      * @memberof UnitRequest
      */
-    elements?: { [key: string]: AnyType; } | null;
+    elements?: { [key: string]: any; } | null;
     /**
      * 
      * @type {boolean}
@@ -99,7 +92,7 @@ export function UnitRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'dimensions': !exists(json, 'dimensions') ? undefined : json['dimensions'],
         'conversionFactor': !exists(json, 'conversion_factor') ? undefined : json['conversion_factor'],
         'conversionBaseunit': !exists(json, 'conversion_baseunit') ? undefined : UnitRequestFromJSON(json['conversion_baseunit']),
-        'elements': !exists(json, 'elements') ? undefined : (json['elements'] === null ? null : mapValues(json['elements'], AnyTypeFromJSON)),
+        'elements': !exists(json, 'elements') ? undefined : json['elements'],
         'isDefault': !exists(json, 'is_default') ? undefined : json['is_default'],
     };
 }
@@ -120,9 +113,8 @@ export function UnitRequestToJSON(value?: UnitRequest | null): any {
         'dimensions': value.dimensions,
         'conversion_factor': value.conversionFactor,
         'conversion_baseunit': UnitRequestToJSON(value.conversionBaseunit),
-        'elements': value.elements === undefined ? undefined : (value.elements === null ? null : mapValues(value.elements, AnyTypeToJSON)),
+        'elements': value.elements,
         'is_default': value.isDefault,
     };
 }
-
 

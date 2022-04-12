@@ -18,7 +18,7 @@ import {
     UnitRequestFromJSON,
     UnitRequestFromJSONTyped,
     UnitRequestToJSON,
-} from './';
+} from './UnitRequest';
 
 /**
  * Adds nested create feature
@@ -92,5 +92,4 @@ export function PropertyDefinitionRequestToJSON(value?: PropertyDefinitionReques
         'value_type': value.valueType,
     };
 }
-
 

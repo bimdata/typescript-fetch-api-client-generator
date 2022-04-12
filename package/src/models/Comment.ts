@@ -116,4 +116,3 @@ export function CommentToJSON(value?: Comment | null): any {
     };
 }
 
-

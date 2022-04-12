@@ -18,23 +18,31 @@ import {
     DocumentFromJSON,
     DocumentFromJSONTyped,
     DocumentToJSON,
+} from './Document';
+import {
     UserProject,
     UserProjectFromJSON,
     UserProjectFromJSONTyped,
     UserProjectToJSON,
+} from './UserProject';
+import {
     VisaComment,
     VisaCommentFromJSON,
     VisaCommentFromJSONTyped,
     VisaCommentToJSON,
+} from './VisaComment';
+import {
     VisaStatusEnum,
     VisaStatusEnumFromJSON,
     VisaStatusEnumFromJSONTyped,
     VisaStatusEnumToJSON,
+} from './VisaStatusEnum';
+import {
     VisaValidation,
     VisaValidationFromJSON,
     VisaValidationFromJSONTyped,
     VisaValidationToJSON,
-} from './';
+} from './VisaValidation';
 
 /**
  * 
@@ -65,13 +73,13 @@ export interface Visa {
      * @type {UserProject}
      * @memberof Visa
      */
-    readonly creator: UserProject;
+    readonly creator: UserProject | null;
     /**
      * 
      * @type {VisaStatusEnum}
      * @memberof Visa
      */
-    readonly status: VisaStatusEnum;
+    readonly status: VisaStatusEnum | null;
     /**
      * Description of the visa
      * @type {string}
@@ -83,7 +91,7 @@ export interface Visa {
      * @type {Document}
      * @memberof Visa
      */
-    readonly document: Document;
+    readonly document: Document | null;
     /**
      * 
      * @type {Array<VisaComment>}
@@ -147,5 +155,4 @@ export function VisaToJSON(value?: Visa | null): any {
         'deadline': value.deadline === undefined ? undefined : (value.deadline === null ? null : value.deadline.toISOString().substr(0,10)),
     };
 }
-
 

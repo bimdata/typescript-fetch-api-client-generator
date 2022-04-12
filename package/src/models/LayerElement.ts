@@ -77,4 +77,3 @@ export function LayerElementToJSON(value?: LayerElement | null): any {
     };
 }
 
-

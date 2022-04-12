@@ -18,11 +18,13 @@ import {
     UserProjectFromJSON,
     UserProjectFromJSONTyped,
     UserProjectToJSON,
+} from './UserProject';
+import {
     VisaValidationStatusEnum,
     VisaValidationStatusEnumFromJSON,
     VisaValidationStatusEnumFromJSONTyped,
     VisaValidationStatusEnumToJSON,
-} from './';
+} from './VisaValidationStatusEnum';
 
 /**
  * 
@@ -47,13 +49,13 @@ export interface VisaValidation {
      * @type {UserProject}
      * @memberof VisaValidation
      */
-    readonly validator: UserProject;
+    readonly validator: UserProject | null;
     /**
      * 
      * @type {VisaValidationStatusEnum}
      * @memberof VisaValidation
      */
-    readonly status: VisaValidationStatusEnum;
+    readonly status: VisaValidationStatusEnum | null;
     /**
      * Return True if validator has commented the visa
      * @type {boolean}
@@ -105,5 +107,4 @@ export function VisaValidationToJSON(value?: VisaValidation | null): any {
         
     };
 }
-
 

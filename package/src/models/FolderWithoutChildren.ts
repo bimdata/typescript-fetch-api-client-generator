@@ -18,15 +18,19 @@ import {
     FolderGroupPermissionFromJSON,
     FolderGroupPermissionFromJSONTyped,
     FolderGroupPermissionToJSON,
+} from './FolderGroupPermission';
+import {
     FolderPermissionEnum,
     FolderPermissionEnumFromJSON,
     FolderPermissionEnumFromJSONTyped,
     FolderPermissionEnumToJSON,
+} from './FolderPermissionEnum';
+import {
     User,
     UserFromJSON,
     UserFromJSONTyped,
     UserToJSON,
-} from './';
+} from './User';
 
 /**
  * 
@@ -81,7 +85,7 @@ export interface FolderWithoutChildren {
      * @type {User}
      * @memberof FolderWithoutChildren
      */
-    readonly createdBy: User;
+    readonly createdBy: User | null;
     /**
      * 
      * @type {Array<FolderGroupPermission>}
@@ -93,13 +97,13 @@ export interface FolderWithoutChildren {
      * @type {FolderPermissionEnum}
      * @memberof FolderWithoutChildren
      */
-    defaultPermission?: FolderPermissionEnum;
+    defaultPermission?: FolderPermissionEnum | null;
     /**
      * Aggregate of group user permissions and folder default permission
      * @type {FolderPermissionEnum}
      * @memberof FolderWithoutChildren
      */
-    readonly userPermission: FolderPermissionEnum;
+    readonly userPermission: FolderPermissionEnum | null;
 }
 
 export function FolderWithoutChildrenFromJSON(json: any): FolderWithoutChildren {
@@ -140,5 +144,4 @@ export function FolderWithoutChildrenToJSON(value?: FolderWithoutChildren | null
         'default_permission': FolderPermissionEnumToJSON(value.defaultPermission),
     };
 }
-
 

@@ -18,7 +18,7 @@ import {
     FolderPermissionEnumFromJSON,
     FolderPermissionEnumFromJSONTyped,
     FolderPermissionEnumToJSON,
-} from './';
+} from './FolderPermissionEnum';
 
 /**
  * 
@@ -115,7 +115,7 @@ export interface Document {
      * @type {FolderPermissionEnum}
      * @memberof Document
      */
-    readonly userPermission: FolderPermissionEnum;
+    readonly userPermission: FolderPermissionEnum | null;
 }
 
 export function DocumentFromJSON(json: any): Document {
@@ -165,5 +165,4 @@ export function DocumentToJSON(value?: Document | null): any {
         'size': value.size,
     };
 }
-
 

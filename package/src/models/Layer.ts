@@ -85,4 +85,3 @@ export function LayerToJSON(value?: Layer | null): any {
     };
 }
 
-

@@ -18,7 +18,7 @@ import {
     ExportEnumFromJSON,
     ExportEnumFromJSONTyped,
     ExportEnumToJSON,
-} from './';
+} from './ExportEnum';
 
 /**
  * 
@@ -31,49 +31,49 @@ export interface IfcExport {
      * @type {ExportEnum}
      * @memberof IfcExport
      */
-    classifications?: ExportEnum;
+    classifications?: ExportEnum | null;
     /**
      * Exported IFC will include zones from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include zones(NONE)
      * @type {ExportEnum}
      * @memberof IfcExport
      */
-    zones?: ExportEnum;
+    zones?: ExportEnum | null;
     /**
      * Exported IFC will include properties from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include properties(NONE)
      * @type {ExportEnum}
      * @memberof IfcExport
      */
-    properties?: ExportEnum;
+    properties?: ExportEnum | null;
     /**
      * Exported IFC will include systems from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include systems(NONE)
      * @type {ExportEnum}
      * @memberof IfcExport
      */
-    systems?: ExportEnum;
+    systems?: ExportEnum | null;
     /**
      * Exported IFC will include layers from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include layers(NONE)
      * @type {ExportEnum}
      * @memberof IfcExport
      */
-    layers?: ExportEnum;
+    layers?: ExportEnum | null;
     /**
      * Exported IFC will include materials from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include materials(NONE)
      * @type {ExportEnum}
      * @memberof IfcExport
      */
-    materials?: ExportEnum;
+    materials?: ExportEnum | null;
     /**
      * Exported IFC will include attributes from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include attributes(NONE)
      * @type {ExportEnum}
      * @memberof IfcExport
      */
-    attributes?: ExportEnum;
+    attributes?: ExportEnum | null;
     /**
      * Exported IFC will include the structure from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include structure(NONE)
      * @type {ExportEnum}
      * @memberof IfcExport
      */
-    structure?: ExportEnum;
+    structure?: ExportEnum | null;
     /**
      * Exported IFC will only have those elements. If omitted, all elements will be exported
      * @type {Array<string>}
@@ -132,5 +132,4 @@ export function IfcExportToJSON(value?: IfcExport | null): any {
         'file_name': value.fileName,
     };
 }
-
 

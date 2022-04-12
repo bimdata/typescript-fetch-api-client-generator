@@ -54,4 +54,3 @@ export function CreateBuildingByNameRequestToJSON(value?: CreateBuildingByNameRe
     };
 }
 
-

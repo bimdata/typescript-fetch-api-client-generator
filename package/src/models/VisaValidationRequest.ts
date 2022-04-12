@@ -54,4 +54,3 @@ export function VisaValidationRequestToJSON(value?: VisaValidationRequest | null
     };
 }
 
-

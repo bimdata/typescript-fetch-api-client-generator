@@ -18,11 +18,13 @@ import {
     DirectionFromJSON,
     DirectionFromJSONTyped,
     DirectionToJSON,
+} from './Direction';
+import {
     Point,
     PointFromJSON,
     PointFromJSONTyped,
     PointToJSON,
-} from './';
+} from './Point';
 
 /**
  * Adds nested create feature
@@ -72,5 +74,4 @@ export function ClippingPlaneToJSON(value?: ClippingPlane | null): any {
         'direction': DirectionToJSON(value.direction),
     };
 }
-
 

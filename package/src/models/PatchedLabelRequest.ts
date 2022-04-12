@@ -62,4 +62,3 @@ export function PatchedLabelRequestToJSON(value?: PatchedLabelRequest | null): a
     };
 }
 
-

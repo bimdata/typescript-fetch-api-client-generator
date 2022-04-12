@@ -229,8 +229,8 @@ export interface CreateDocumentRequest {
     fileName?: string;
     description?: string | null;
     size?: number | null;
-    modelSource?: ModelSourceEnum;
-    ifcSource?: ModelSourceEnum;
+    modelSource?: ModelSourceEnum | null;
+    ifcSource?: ModelSourceEnum | null;
 }
 
 export interface CreateFolderRequest {
@@ -699,7 +699,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Accept a validation  Required scopes: document:write
      * Accept a validation
      */
-    async acceptValidationRaw(requestParameters: AcceptValidationRequest): Promise<runtime.ApiResponse<void>> {
+    async acceptValidationRaw(requestParameters: AcceptValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling acceptValidation.');
         }
@@ -720,7 +720,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling acceptValidation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -730,11 +730,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -746,7 +747,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -755,15 +756,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Accept a validation  Required scopes: document:write
      * Accept a validation
      */
-    async acceptValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number): Promise<void> {
-        await this.acceptValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk });
+    async acceptValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.acceptValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
     }
 
     /**
      * Add a userproject to a group. Must be an admin of the project  Required scopes: org:manage
      * Add a user to a group
      */
-    async addGroupMemberRaw(requestParameters: AddGroupMemberRequest): Promise<runtime.ApiResponse<UserProject>> {
+    async addGroupMemberRaw(requestParameters: AddGroupMemberRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<UserProject>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addGroupMember.');
         }
@@ -780,7 +781,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('userProjectIdRequest','Required parameter requestParameters.userProjectIdRequest was null or undefined when calling addGroupMember.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -792,11 +793,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -809,7 +811,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: UserProjectIdRequestToJSON(requestParameters.userProjectIdRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProjectFromJSON(jsonValue));
     }
@@ -818,8 +820,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a userproject to a group. Must be an admin of the project  Required scopes: org:manage
      * Add a user to a group
      */
-    async addGroupMember(cloudPk: number, groupPk: number, projectPk: number, userProjectIdRequest: UserProjectIdRequest): Promise<UserProject> {
-        const response = await this.addGroupMemberRaw({ cloudPk: cloudPk, groupPk: groupPk, projectPk: projectPk, userProjectIdRequest: userProjectIdRequest });
+    async addGroupMember(cloudPk: number, groupPk: number, projectPk: number, userProjectIdRequest: UserProjectIdRequest, initOverrides?: RequestInit): Promise<UserProject> {
+        const response = await this.addGroupMemberRaw({ cloudPk: cloudPk, groupPk: groupPk, projectPk: projectPk, userProjectIdRequest: userProjectIdRequest }, initOverrides);
         return await response.value();
     }
 
@@ -827,7 +829,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Cancel a pending invitation  Required scopes: org:manage
      * Cancel a pending invitation
      */
-    async cancelCloudUserInvitationRaw(requestParameters: CancelCloudUserInvitationRequest): Promise<runtime.ApiResponse<void>> {
+    async cancelCloudUserInvitationRaw(requestParameters: CancelCloudUserInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling cancelCloudUserInvitation.');
         }
@@ -836,7 +838,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling cancelCloudUserInvitation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -846,11 +848,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -862,7 +865,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -871,15 +874,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Cancel a pending invitation  Required scopes: org:manage
      * Cancel a pending invitation
      */
-    async cancelCloudUserInvitation(cloudPk: number, id: number): Promise<void> {
-        await this.cancelCloudUserInvitationRaw({ cloudPk: cloudPk, id: id });
+    async cancelCloudUserInvitation(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.cancelCloudUserInvitationRaw({ cloudPk: cloudPk, id: id }, initOverrides);
     }
 
     /**
      * Cancel a pending invitation  Required scopes: org:manage
      * Cancel a pending invitation
      */
-    async cancelProjectUserInvitationRaw(requestParameters: CancelProjectUserInvitationRequest): Promise<runtime.ApiResponse<void>> {
+    async cancelProjectUserInvitationRaw(requestParameters: CancelProjectUserInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling cancelProjectUserInvitation.');
         }
@@ -892,7 +895,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling cancelProjectUserInvitation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -902,11 +905,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -918,7 +922,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -927,20 +931,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Cancel a pending invitation  Required scopes: org:manage
      * Cancel a pending invitation
      */
-    async cancelProjectUserInvitation(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.cancelProjectUserInvitationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async cancelProjectUserInvitation(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.cancelProjectUserInvitationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Return code 200 if the cloud has access to the marketplace app
      * Check app access from cloud
      */
-    async checkAccessRaw(requestParameters: CheckAccessRequest): Promise<runtime.ApiResponse<void>> {
+    async checkAccessRaw(requestParameters: CheckAccessRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling checkAccess.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -950,11 +954,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -966,7 +971,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -975,15 +980,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Return code 200 if the cloud has access to the marketplace app
      * Check app access from cloud
      */
-    async checkAccess(id: number): Promise<void> {
-        await this.checkAccessRaw({ id: id });
+    async checkAccess(id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.checkAccessRaw({ id: id }, initOverrides);
     }
 
     /**
      * Close a visa of a document  Required scopes: document:write
      * Close a visa of a document
      */
-    async closeVisaRaw(requestParameters: CloseVisaRequest): Promise<runtime.ApiResponse<void>> {
+    async closeVisaRaw(requestParameters: CloseVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling closeVisa.');
         }
@@ -1000,7 +1005,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling closeVisa.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1010,11 +1015,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1026,7 +1032,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1035,15 +1041,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Close a visa of a document  Required scopes: document:write
      * Close a visa of a document
      */
-    async closeVisa(cloudPk: number, documentPk: number, id: number, projectPk: number): Promise<void> {
-        await this.closeVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk });
+    async closeVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.closeVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  If created classification already exists, it will not be duplicated and the previous one will be returned. You also can add a \'classification\' filter on this endpoint. By ex: /classification?name=\'untec\'. The name is case sensitive  Required scopes: ifc:write, model:write
      * Create a classification
      */
-    async createClassificationRaw(requestParameters: CreateClassificationRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+    async createClassificationRaw(requestParameters: CreateClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassification.');
         }
@@ -1056,7 +1062,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('classificationRequest','Required parameter requestParameters.classificationRequest was null or undefined when calling createClassification.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1068,11 +1074,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1085,7 +1092,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: requestParameters.classificationRequest.map(ClassificationRequestToJSON),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ClassificationFromJSON));
     }
@@ -1094,8 +1101,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  If created classification already exists, it will not be duplicated and the previous one will be returned. You also can add a \'classification\' filter on this endpoint. By ex: /classification?name=\'untec\'. The name is case sensitive  Required scopes: ifc:write, model:write
      * Create a classification
      */
-    async createClassification(cloudPk: number, projectPk: number, classificationRequest: Array<ClassificationRequest>): Promise<Array<Classification>> {
-        const response = await this.createClassificationRaw({ cloudPk: cloudPk, projectPk: projectPk, classificationRequest: classificationRequest });
+    async createClassification(cloudPk: number, projectPk: number, classificationRequest: Array<ClassificationRequest>, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.createClassificationRaw({ cloudPk: cloudPk, projectPk: projectPk, classificationRequest: classificationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1103,12 +1110,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a cloud  Required scopes: cloud:manage
      * Create a cloud
      */
-    async createCloudRaw(requestParameters: CreateCloudRequest): Promise<runtime.ApiResponse<Cloud>> {
+    async createCloudRaw(requestParameters: CreateCloudRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Cloud>> {
         if (requestParameters.cloudRequest === null || requestParameters.cloudRequest === undefined) {
             throw new runtime.RequiredError('cloudRequest','Required parameter requestParameters.cloudRequest was null or undefined when calling createCloud.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1120,11 +1127,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1137,7 +1145,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: CloudRequestToJSON(requestParameters.cloudRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CloudFromJSON(jsonValue));
     }
@@ -1146,8 +1154,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a cloud  Required scopes: cloud:manage
      * Create a cloud
      */
-    async createCloud(cloudRequest: CloudRequest): Promise<Cloud> {
-        const response = await this.createCloudRaw({ cloudRequest: cloudRequest });
+    async createCloud(cloudRequest: CloudRequest, initOverrides?: RequestInit): Promise<Cloud> {
+        const response = await this.createCloudRaw({ cloudRequest: cloudRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1155,7 +1163,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      *  Create a DMS structure of folder Format request :     [{         \"name\": :name:         \"parent_id\": :parent_id:                      # optionnal         \"default_permission\": :default_permission:    # optionnal         \"children\": [{                                # optionnal             \"name\": :name:,             \"children\": []         }]     }],                   Required scopes: org:manage
      * Create a complete DMS tree
      */
-    async createDMSTreeRaw(requestParameters: CreateDMSTreeRequest): Promise<runtime.ApiResponse<void>> {
+    async createDMSTreeRaw(requestParameters: CreateDMSTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createDMSTree.');
         }
@@ -1168,7 +1176,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('folderRequest','Required parameter requestParameters.folderRequest was null or undefined when calling createDMSTree.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1180,11 +1188,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1197,7 +1206,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: FolderRequestToJSON(requestParameters.folderRequest),
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1206,20 +1215,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      *  Create a DMS structure of folder Format request :     [{         \"name\": :name:         \"parent_id\": :parent_id:                      # optionnal         \"default_permission\": :default_permission:    # optionnal         \"children\": [{                                # optionnal             \"name\": :name:,             \"children\": []         }]     }],                   Required scopes: org:manage
      * Create a complete DMS tree
      */
-    async createDMSTree(cloudPk: number, id: number, folderRequest: FolderRequest): Promise<void> {
-        await this.createDMSTreeRaw({ cloudPk: cloudPk, id: id, folderRequest: folderRequest });
+    async createDMSTree(cloudPk: number, id: number, folderRequest: FolderRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.createDMSTreeRaw({ cloudPk: cloudPk, id: id, folderRequest: folderRequest }, initOverrides);
     }
 
     /**
      * Create a project name \'Demo\' with an already processed model in it  Required scopes: cloud:manage
      * Create a Demo project in a cloud
      */
-    async createDemoRaw(requestParameters: CreateDemoRequest): Promise<runtime.ApiResponse<Project>> {
+    async createDemoRaw(requestParameters: CreateDemoRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Project>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createDemo.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1229,11 +1238,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1245,7 +1255,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectFromJSON(jsonValue));
     }
@@ -1254,8 +1264,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a project name \'Demo\' with an already processed model in it  Required scopes: cloud:manage
      * Create a Demo project in a cloud
      */
-    async createDemo(id: number): Promise<Project> {
-        const response = await this.createDemoRaw({ id: id });
+    async createDemo(id: number, initOverrides?: RequestInit): Promise<Project> {
+        const response = await this.createDemoRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
@@ -1263,7 +1273,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * RCreate a document. If the document is an IFC, an IFC model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocumentRaw(requestParameters: CreateDocumentRequest): Promise<runtime.ApiResponse<void>> {
+    async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createDocument.');
         }
@@ -1280,7 +1290,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('file','Required parameter requestParameters.file was null or undefined when calling createDocument.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1290,11 +1300,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1351,12 +1362,12 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         if (requestParameters.modelSource !== undefined) {
-            formParams.append('model_source', requestParameters.modelSource as any);
-        }
+            formParams.append('model_source', new Blob([JSON.stringify(ModelSourceEnumToJSON(requestParameters.modelSource))], { type: "application/json", }));
+                    }
 
         if (requestParameters.ifcSource !== undefined) {
-            formParams.append('ifc_source', requestParameters.ifcSource as any);
-        }
+            formParams.append('ifc_source', new Blob([JSON.stringify(ModelSourceEnumToJSON(requestParameters.ifcSource))], { type: "application/json", }));
+                    }
 
         const response = await this.request({
             path: `/cloud/{cloud_pk}/project/{project_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
@@ -1364,7 +1375,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: formParams,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1373,15 +1384,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * RCreate a document. If the document is an IFC, an IFC model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parent?: number | null, parentId?: number | null, creator?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: ModelSourceEnum, ifcSource?: ModelSourceEnum): Promise<void> {
-        await this.createDocumentRaw({ cloudPk: cloudPk, projectPk: projectPk, name: name, file: file, parent: parent, parentId: parentId, creator: creator, fileName: fileName, description: description, size: size, modelSource: modelSource, ifcSource: ifcSource });
+    async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parent?: number | null, parentId?: number | null, creator?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: ModelSourceEnum | null, ifcSource?: ModelSourceEnum | null, initOverrides?: RequestInit): Promise<void> {
+        await this.createDocumentRaw({ cloudPk: cloudPk, projectPk: projectPk, name: name, file: file, parent: parent, parentId: parentId, creator: creator, fileName: fileName, description: description, size: size, modelSource: modelSource, ifcSource: ifcSource }, initOverrides);
     }
 
     /**
      * If the created folder have no parent, it will be put as a child of the default root folder of the project  Required scopes: document:write
      * Create a folder
      */
-    async createFolderRaw(requestParameters: CreateFolderRequest): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
+    async createFolderRaw(requestParameters: CreateFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createFolder.');
         }
@@ -1394,7 +1405,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('folderWithoutChildrenRequest','Required parameter requestParameters.folderWithoutChildrenRequest was null or undefined when calling createFolder.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1406,11 +1417,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1423,7 +1435,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: FolderWithoutChildrenRequestToJSON(requestParameters.folderWithoutChildrenRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FolderWithoutChildrenFromJSON(jsonValue));
     }
@@ -1432,8 +1444,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * If the created folder have no parent, it will be put as a child of the default root folder of the project  Required scopes: document:write
      * Create a folder
      */
-    async createFolder(cloudPk: number, projectPk: number, folderWithoutChildrenRequest: FolderWithoutChildrenRequest): Promise<FolderWithoutChildren> {
-        const response = await this.createFolderRaw({ cloudPk: cloudPk, projectPk: projectPk, folderWithoutChildrenRequest: folderWithoutChildrenRequest });
+    async createFolder(cloudPk: number, projectPk: number, folderWithoutChildrenRequest: FolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
+        const response = await this.createFolderRaw({ cloudPk: cloudPk, projectPk: projectPk, folderWithoutChildrenRequest: folderWithoutChildrenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1441,7 +1453,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a group. Must be an admin of the project  Required scopes: org:manage
      * Create a group
      */
-    async createManageGroupRaw(requestParameters: CreateManageGroupRequest): Promise<runtime.ApiResponse<Group>> {
+    async createManageGroupRaw(requestParameters: CreateManageGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Group>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createManageGroup.');
         }
@@ -1454,7 +1466,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('groupRequest','Required parameter requestParameters.groupRequest was null or undefined when calling createManageGroup.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1466,11 +1478,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1483,7 +1496,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: GroupRequestToJSON(requestParameters.groupRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => GroupFromJSON(jsonValue));
     }
@@ -1492,8 +1505,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a group. Must be an admin of the project  Required scopes: org:manage
      * Create a group
      */
-    async createManageGroup(cloudPk: number, projectPk: number, groupRequest: GroupRequest): Promise<Group> {
-        const response = await this.createManageGroupRaw({ cloudPk: cloudPk, projectPk: projectPk, groupRequest: groupRequest });
+    async createManageGroup(cloudPk: number, projectPk: number, groupRequest: GroupRequest, initOverrides?: RequestInit): Promise<Group> {
+        const response = await this.createManageGroupRaw({ cloudPk: cloudPk, projectPk: projectPk, groupRequest: groupRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1501,7 +1514,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a project  Required scopes: org:manage
      * Create a project
      */
-    async createProjectRaw(requestParameters: CreateProjectRequest): Promise<runtime.ApiResponse<Project>> {
+    async createProjectRaw(requestParameters: CreateProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Project>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createProject.');
         }
@@ -1510,7 +1523,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectRequest','Required parameter requestParameters.projectRequest was null or undefined when calling createProject.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1522,11 +1535,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1539,7 +1553,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: ProjectRequestToJSON(requestParameters.projectRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectFromJSON(jsonValue));
     }
@@ -1548,8 +1562,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a project  Required scopes: org:manage
      * Create a project
      */
-    async createProject(cloudPk: number, projectRequest: ProjectRequest): Promise<Project> {
-        const response = await this.createProjectRaw({ cloudPk: cloudPk, projectRequest: projectRequest });
+    async createProject(cloudPk: number, projectRequest: ProjectRequest, initOverrides?: RequestInit): Promise<Project> {
+        const response = await this.createProjectRaw({ cloudPk: cloudPk, projectRequest: projectRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1557,7 +1571,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Tokens are valid 1 day by default  Required scopes: org:manage
      * Create a token for this project
      */
-    async createProjectAccessTokenRaw(requestParameters: CreateProjectAccessTokenRequest): Promise<runtime.ApiResponse<ProjectAccessToken>> {
+    async createProjectAccessTokenRaw(requestParameters: CreateProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectAccessToken>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createProjectAccessToken.');
         }
@@ -1570,7 +1584,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectAccessTokenRequest','Required parameter requestParameters.projectAccessTokenRequest was null or undefined when calling createProjectAccessToken.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1582,11 +1596,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1599,7 +1614,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: ProjectAccessTokenRequestToJSON(requestParameters.projectAccessTokenRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectAccessTokenFromJSON(jsonValue));
     }
@@ -1608,8 +1623,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Tokens are valid 1 day by default  Required scopes: org:manage
      * Create a token for this project
      */
-    async createProjectAccessToken(cloudPk: number, projectPk: number, projectAccessTokenRequest: ProjectAccessTokenRequest): Promise<ProjectAccessToken> {
-        const response = await this.createProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, projectAccessTokenRequest: projectAccessTokenRequest });
+    async createProjectAccessToken(cloudPk: number, projectPk: number, projectAccessTokenRequest: ProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
+        const response = await this.createProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, projectAccessTokenRequest: projectAccessTokenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1617,7 +1632,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a validation to a visa  Required scopes: document:write
      * Add a validation to a visa
      */
-    async createValidationRaw(requestParameters: CreateValidationRequest): Promise<runtime.ApiResponse<VisaValidation>> {
+    async createValidationRaw(requestParameters: CreateValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaValidation>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createValidation.');
         }
@@ -1638,7 +1653,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaValidationRequest','Required parameter requestParameters.visaValidationRequest was null or undefined when calling createValidation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1650,11 +1665,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1667,7 +1683,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: VisaValidationRequestToJSON(requestParameters.visaValidationRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaValidationFromJSON(jsonValue));
     }
@@ -1676,8 +1692,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a validation to a visa  Required scopes: document:write
      * Add a validation to a visa
      */
-    async createValidation(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, visaValidationRequest: VisaValidationRequest): Promise<VisaValidation> {
-        const response = await this.createValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk, visaValidationRequest: visaValidationRequest });
+    async createValidation(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, visaValidationRequest: VisaValidationRequest, initOverrides?: RequestInit): Promise<VisaValidation> {
+        const response = await this.createValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk, visaValidationRequest: visaValidationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1685,7 +1701,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a visa  Required scopes: document:write
      * Create a visa
      */
-    async createVisaRaw(requestParameters: CreateVisaRequest): Promise<runtime.ApiResponse<Visa>> {
+    async createVisaRaw(requestParameters: CreateVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visa>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createVisa.');
         }
@@ -1698,7 +1714,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createVisa.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1710,11 +1726,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1727,7 +1744,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: VisaRequestToJSON(requestParameters.visaRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaFromJSON(jsonValue));
     }
@@ -1736,8 +1753,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a visa  Required scopes: document:write
      * Create a visa
      */
-    async createVisa(cloudPk: number, documentPk: number, projectPk: number, visaRequest?: VisaRequest): Promise<Visa> {
-        const response = await this.createVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaRequest: visaRequest });
+    async createVisa(cloudPk: number, documentPk: number, projectPk: number, visaRequest?: VisaRequest, initOverrides?: RequestInit): Promise<Visa> {
+        const response = await this.createVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaRequest: visaRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1745,7 +1762,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a comment  Required scopes: document:write
      * Add a comment
      */
-    async createVisaCommentRaw(requestParameters: CreateVisaCommentRequest): Promise<runtime.ApiResponse<VisaComment>> {
+    async createVisaCommentRaw(requestParameters: CreateVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaComment>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createVisaComment.');
         }
@@ -1762,7 +1779,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling createVisaComment.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1774,11 +1791,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1791,7 +1809,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: VisaCommentRequestToJSON(requestParameters.visaCommentRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaCommentFromJSON(jsonValue));
     }
@@ -1800,8 +1818,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a comment  Required scopes: document:write
      * Add a comment
      */
-    async createVisaComment(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, visaCommentRequest?: VisaCommentRequest): Promise<VisaComment> {
-        const response = await this.createVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk, visaCommentRequest: visaCommentRequest });
+    async createVisaComment(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, visaCommentRequest?: VisaCommentRequest, initOverrides?: RequestInit): Promise<VisaComment> {
+        const response = await this.createVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk, visaCommentRequest: visaCommentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1809,7 +1827,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * All elements having this classification will lose it  Required scopes: ifc:write, model:write
      * Delete a classification
      */
-    async deleteClassificationRaw(requestParameters: DeleteClassificationRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteClassificationRaw(requestParameters: DeleteClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteClassification.');
         }
@@ -1822,7 +1840,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteClassification.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1832,11 +1850,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1848,7 +1867,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1857,20 +1876,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * All elements having this classification will lose it  Required scopes: ifc:write, model:write
      * Delete a classification
      */
-    async deleteClassification(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteClassificationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async deleteClassification(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteClassificationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a cloud  Required scopes: cloud:manage
      * Delete a cloud
      */
-    async deleteCloudRaw(requestParameters: DeleteCloudRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCloudRaw(requestParameters: DeleteCloudRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCloud.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1880,11 +1899,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1896,7 +1916,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1905,15 +1925,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a cloud  Required scopes: cloud:manage
      * Delete a cloud
      */
-    async deleteCloud(id: number): Promise<void> {
-        await this.deleteCloudRaw({ id: id });
+    async deleteCloud(id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCloudRaw({ id: id }, initOverrides);
     }
 
     /**
      * The user will also be removed from all the projects of the cloud  Required scopes: cloud:manage
      * Remove a user from a cloud
      */
-    async deleteCloudUserRaw(requestParameters: DeleteCloudUserRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteCloudUserRaw(requestParameters: DeleteCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteCloudUser.');
         }
@@ -1922,7 +1942,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCloudUser.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1932,11 +1952,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -1948,7 +1969,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -1957,15 +1978,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * The user will also be removed from all the projects of the cloud  Required scopes: cloud:manage
      * Remove a user from a cloud
      */
-    async deleteCloudUser(cloudPk: number, id: number): Promise<void> {
-        await this.deleteCloudUserRaw({ cloudPk: cloudPk, id: id });
+    async deleteCloudUser(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCloudUserRaw({ cloudPk: cloudPk, id: id }, initOverrides);
     }
 
     /**
      * Delete the document  Required scopes: document:write
      * Delete the document
      */
-    async deleteDocumentRaw(requestParameters: DeleteDocumentRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteDocumentRaw(requestParameters: DeleteDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteDocument.');
         }
@@ -1978,7 +1999,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteDocument.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1988,11 +2009,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2004,7 +2026,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2013,15 +2035,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete the document  Required scopes: document:write
      * Delete the document
      */
-    async deleteDocument(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async deleteDocument(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * All files and subfolders will be deleted too. If folder is a project\'s root folder, only children are deleted  Required scopes: document:write
      * Delete a folder
      */
-    async deleteFolderRaw(requestParameters: DeleteFolderRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteFolderRaw(requestParameters: DeleteFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteFolder.');
         }
@@ -2034,7 +2056,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteFolder.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2044,11 +2066,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2060,7 +2083,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2069,15 +2092,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * All files and subfolders will be deleted too. If folder is a project\'s root folder, only children are deleted  Required scopes: document:write
      * Delete a folder
      */
-    async deleteFolder(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteFolderRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async deleteFolder(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteFolderRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a userproject from a group. Id is the userproject_id. Must be an admin of the project.  Required scopes: org:manage
      * Delete a user from a group
      */
-    async deleteGroupMemberRaw(requestParameters: DeleteGroupMemberRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteGroupMemberRaw(requestParameters: DeleteGroupMemberRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteGroupMember.');
         }
@@ -2094,7 +2117,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteGroupMember.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2104,11 +2127,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2120,7 +2144,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2129,15 +2153,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a userproject from a group. Id is the userproject_id. Must be an admin of the project.  Required scopes: org:manage
      * Delete a user from a group
      */
-    async deleteGroupMember(cloudPk: number, groupPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteGroupMemberRaw({ cloudPk: cloudPk, groupPk: groupPk, id: id, projectPk: projectPk });
+    async deleteGroupMember(cloudPk: number, groupPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteGroupMemberRaw({ cloudPk: cloudPk, groupPk: groupPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Delete a group. Must be an admin of the project  Required scopes: org:manage
      * Delete a group
      */
-    async deleteManageGroupRaw(requestParameters: DeleteManageGroupRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteManageGroupRaw(requestParameters: DeleteManageGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteManageGroup.');
         }
@@ -2150,7 +2174,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteManageGroup.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2160,11 +2184,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2176,7 +2201,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2185,15 +2210,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a group. Must be an admin of the project  Required scopes: org:manage
      * Delete a group
      */
-    async deleteManageGroup(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteManageGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async deleteManageGroup(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteManageGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * It can take a long time to respond because we may need to delete all properties of all elements of all models in the project  Required scopes: org:manage
      * Delete a project
      */
-    async deleteProjectRaw(requestParameters: DeleteProjectRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteProjectRaw(requestParameters: DeleteProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteProject.');
         }
@@ -2202,7 +2227,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteProject.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2212,11 +2237,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2228,7 +2254,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2237,15 +2263,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * It can take a long time to respond because we may need to delete all properties of all elements of all models in the project  Required scopes: org:manage
      * Delete a project
      */
-    async deleteProject(cloudPk: number, id: number): Promise<void> {
-        await this.deleteProjectRaw({ cloudPk: cloudPk, id: id });
+    async deleteProject(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteProjectRaw({ cloudPk: cloudPk, id: id }, initOverrides);
     }
 
     /**
      * Deleting a token will revoke it  Required scopes: org:manage
      * Delete a token
      */
-    async deleteProjectAccessTokenRaw(requestParameters: DeleteProjectAccessTokenRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteProjectAccessTokenRaw(requestParameters: DeleteProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteProjectAccessToken.');
         }
@@ -2258,7 +2284,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling deleteProjectAccessToken.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2268,11 +2294,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2284,7 +2311,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2293,15 +2320,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Deleting a token will revoke it  Required scopes: org:manage
      * Delete a token
      */
-    async deleteProjectAccessToken(cloudPk: number, projectPk: number, token: string): Promise<void> {
-        await this.deleteProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, token: token });
+    async deleteProjectAccessToken(cloudPk: number, projectPk: number, token: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, token: token }, initOverrides);
     }
 
     /**
      * Remove a user from a project  Required scopes: cloud:manage
      * Remove a user from a project
      */
-    async deleteProjectUserRaw(requestParameters: DeleteProjectUserRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteProjectUserRaw(requestParameters: DeleteProjectUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteProjectUser.');
         }
@@ -2314,7 +2341,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteProjectUser.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2324,11 +2351,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2340,7 +2368,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2349,15 +2377,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a user from a project  Required scopes: cloud:manage
      * Remove a user from a project
      */
-    async deleteProjectUser(cloudPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteProjectUserRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async deleteProjectUser(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteProjectUserRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Remove a validation  Required scopes: document:write
      * Remove a validation
      */
-    async deleteValidationRaw(requestParameters: DeleteValidationRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteValidationRaw(requestParameters: DeleteValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteValidation.');
         }
@@ -2378,7 +2406,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling deleteValidation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2388,11 +2416,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2404,7 +2433,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2413,15 +2442,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a validation  Required scopes: document:write
      * Remove a validation
      */
-    async deleteValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number): Promise<void> {
-        await this.deleteValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk });
+    async deleteValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
     }
 
     /**
      * Remove a visa  Required scopes: document:write
      * Remove a visa
      */
-    async deleteVisaRaw(requestParameters: DeleteVisaRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteVisaRaw(requestParameters: DeleteVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteVisa.');
         }
@@ -2438,7 +2467,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteVisa.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2448,11 +2477,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2464,7 +2494,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2473,15 +2503,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a visa  Required scopes: document:write
      * Remove a visa
      */
-    async deleteVisa(cloudPk: number, documentPk: number, id: number, projectPk: number): Promise<void> {
-        await this.deleteVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk });
+    async deleteVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Remove a comment  Required scopes: document:write
      * Remove a comment
      */
-    async deleteVisaCommentRaw(requestParameters: DeleteVisaCommentRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteVisaCommentRaw(requestParameters: DeleteVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteVisaComment.');
         }
@@ -2502,7 +2532,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling deleteVisaComment.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2512,11 +2542,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2528,7 +2559,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2537,15 +2568,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a comment  Required scopes: document:write
      * Remove a comment
      */
-    async deleteVisaComment(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number): Promise<void> {
-        await this.deleteVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk });
+    async deleteVisaComment(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
     }
 
     /**
      * Deny a validation  Required scopes: document:write
      * Deny a validation
      */
-    async denyValidationRaw(requestParameters: DenyValidationRequest): Promise<runtime.ApiResponse<void>> {
+    async denyValidationRaw(requestParameters: DenyValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling denyValidation.');
         }
@@ -2566,7 +2597,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling denyValidation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2576,11 +2607,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2592,7 +2624,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -2601,15 +2633,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Deny a validation  Required scopes: document:write
      * Deny a validation
      */
-    async denyValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number): Promise<void> {
-        await this.denyValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk });
+    async denyValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.denyValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
     }
 
     /**
      * Retrieve a classification  Required scopes: ifc:read, model:read
      * Retrieve a classification
      */
-    async getClassificationRaw(requestParameters: GetClassificationRequest): Promise<runtime.ApiResponse<Classification>> {
+    async getClassificationRaw(requestParameters: GetClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Classification>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getClassification.');
         }
@@ -2622,7 +2654,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getClassification.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2632,11 +2664,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2648,7 +2681,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ClassificationFromJSON(jsonValue));
     }
@@ -2657,8 +2690,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a classification  Required scopes: ifc:read, model:read
      * Retrieve a classification
      */
-    async getClassification(cloudPk: number, id: number, projectPk: number): Promise<Classification> {
-        const response = await this.getClassificationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async getClassification(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Classification> {
+        const response = await this.getClassificationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -2666,7 +2699,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all classifications of all models in the project  Required scopes: ifc:read, model:read
      * Retrieve all classifications
      */
-    async getClassificationsRaw(requestParameters: GetClassificationsRequest): Promise<runtime.ApiResponse<Array<Classification>>> {
+    async getClassificationsRaw(requestParameters: GetClassificationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getClassifications.');
         }
@@ -2675,7 +2708,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getClassifications.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2685,11 +2718,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2701,7 +2735,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ClassificationFromJSON));
     }
@@ -2710,8 +2744,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all classifications of all models in the project  Required scopes: ifc:read, model:read
      * Retrieve all classifications
      */
-    async getClassifications(cloudPk: number, projectPk: number): Promise<Array<Classification>> {
-        const response = await this.getClassificationsRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getClassifications(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.getClassificationsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -2719,12 +2753,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve one cloud
      * Retrieve one cloud
      */
-    async getCloudRaw(requestParameters: GetCloudRequest): Promise<runtime.ApiResponse<Cloud>> {
+    async getCloudRaw(requestParameters: GetCloudRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Cloud>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCloud.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2734,11 +2768,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2750,7 +2785,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CloudFromJSON(jsonValue));
     }
@@ -2759,8 +2794,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve one cloud
      * Retrieve one cloud
      */
-    async getCloud(id: number): Promise<Cloud> {
-        const response = await this.getCloudRaw({ id: id });
+    async getCloud(id: number, initOverrides?: RequestInit): Promise<Cloud> {
+        const response = await this.getCloudRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
@@ -2768,12 +2803,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns app\'s invitations only  Required scopes: org:manage
      * Retrieve all pending invitations in the cloud
      */
-    async getCloudInvitationsRaw(requestParameters: GetCloudInvitationsRequest): Promise<runtime.ApiResponse<Array<CloudInvitation>>> {
+    async getCloudInvitationsRaw(requestParameters: GetCloudInvitationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<CloudInvitation>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCloudInvitations.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2783,11 +2818,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2799,7 +2835,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CloudInvitationFromJSON));
     }
@@ -2808,8 +2844,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns app\'s invitations only  Required scopes: org:manage
      * Retrieve all pending invitations in the cloud
      */
-    async getCloudInvitations(cloudPk: number): Promise<Array<CloudInvitation>> {
-        const response = await this.getCloudInvitationsRaw({ cloudPk: cloudPk });
+    async getCloudInvitations(cloudPk: number, initOverrides?: RequestInit): Promise<Array<CloudInvitation>> {
+        const response = await this.getCloudInvitationsRaw({ cloudPk: cloudPk }, initOverrides);
         return await response.value();
     }
 
@@ -2817,12 +2853,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      *  Returns the sizes of the cloud in Bytes. The response fields depends on the role of the user. If the user is an admin, all field will be returned. If the user is a standard user, only `remaining_total_size` and `remaining_smart_data_size` will be set. If the call is made from an API access, role admin (100) will be returned and all fields will be set. The fields `managed by` indicate if the subscription for this cloud is an API subscription or a BIMData Platform subscription. If the cloud is managed by an API plan, the remaining sizes will take others organizations\'s clouds size into account
      * Get size of the cloud
      */
-    async getCloudSizeRaw(requestParameters: GetCloudSizeRequest): Promise<runtime.ApiResponse<Size>> {
+    async getCloudSizeRaw(requestParameters: GetCloudSizeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Size>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCloudSize.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2832,11 +2868,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2848,7 +2885,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SizeFromJSON(jsonValue));
     }
@@ -2857,8 +2894,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      *  Returns the sizes of the cloud in Bytes. The response fields depends on the role of the user. If the user is an admin, all field will be returned. If the user is a standard user, only `remaining_total_size` and `remaining_smart_data_size` will be set. If the call is made from an API access, role admin (100) will be returned and all fields will be set. The fields `managed by` indicate if the subscription for this cloud is an API subscription or a BIMData Platform subscription. If the cloud is managed by an API plan, the remaining sizes will take others organizations\'s clouds size into account
      * Get size of the cloud
      */
-    async getCloudSize(id: number): Promise<Size> {
-        const response = await this.getCloudSizeRaw({ id: id });
+    async getCloudSize(id: number, initOverrides?: RequestInit): Promise<Size> {
+        const response = await this.getCloudSizeRaw({ id: id }, initOverrides);
         return await response.value();
     }
 
@@ -2866,7 +2903,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Only administrators can see a cloud member  Required scopes: cloud:read
      * Retrieve a user in a cloud
      */
-    async getCloudUserRaw(requestParameters: GetCloudUserRequest): Promise<runtime.ApiResponse<User>> {
+    async getCloudUserRaw(requestParameters: GetCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<User>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCloudUser.');
         }
@@ -2875,7 +2912,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCloudUser.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2885,11 +2922,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2901,7 +2939,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
     }
@@ -2910,8 +2948,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Only administrators can see a cloud member  Required scopes: cloud:read
      * Retrieve a user in a cloud
      */
-    async getCloudUser(cloudPk: number, id: number): Promise<User> {
-        const response = await this.getCloudUserRaw({ cloudPk: cloudPk, id: id });
+    async getCloudUser(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<User> {
+        const response = await this.getCloudUserRaw({ cloudPk: cloudPk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -2919,12 +2957,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Only administrators can see cloud members.  Required scopes: cloud:read
      * Retrieve all users in a cloud, or a list with a filter by email
      */
-    async getCloudUsersRaw(requestParameters: GetCloudUsersRequest): Promise<runtime.ApiResponse<Array<User>>> {
+    async getCloudUsersRaw(requestParameters: GetCloudUsersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<User>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCloudUsers.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.email !== undefined) {
             queryParameters['email'] = requestParameters.email;
@@ -2950,11 +2988,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2966,7 +3005,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserFromJSON));
     }
@@ -2975,8 +3014,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Only administrators can see cloud members.  Required scopes: cloud:read
      * Retrieve all users in a cloud, or a list with a filter by email
      */
-    async getCloudUsers(cloudPk: number, email?: string, emailContains?: string, emailEndswith?: string, emailStartswith?: string): Promise<Array<User>> {
-        const response = await this.getCloudUsersRaw({ cloudPk: cloudPk, email: email, emailContains: emailContains, emailEndswith: emailEndswith, emailStartswith: emailStartswith });
+    async getCloudUsers(cloudPk: number, email?: string, emailContains?: string, emailEndswith?: string, emailStartswith?: string, initOverrides?: RequestInit): Promise<Array<User>> {
+        const response = await this.getCloudUsersRaw({ cloudPk: cloudPk, email: email, emailContains: emailContains, emailEndswith: emailEndswith, emailStartswith: emailStartswith }, initOverrides);
         return await response.value();
     }
 
@@ -2984,8 +3023,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns user\'s (or app\'s) clouds only
      * Retrieve all clouds
      */
-    async getCloudsRaw(): Promise<runtime.ApiResponse<Array<Cloud>>> {
-        const queryParameters: runtime.HTTPQuery = {};
+    async getCloudsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Cloud>>> {
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -2995,11 +3034,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3011,7 +3051,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CloudFromJSON));
     }
@@ -3020,8 +3060,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns user\'s (or app\'s) clouds only
      * Retrieve all clouds
      */
-    async getClouds(): Promise<Array<Cloud>> {
-        const response = await this.getCloudsRaw();
+    async getClouds(initOverrides?: RequestInit): Promise<Array<Cloud>> {
+        const response = await this.getCloudsRaw(initOverrides);
         return await response.value();
     }
 
@@ -3029,7 +3069,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a document in the project  Required scopes: document:read
      * Retrieve a document
      */
-    async getDocumentRaw(requestParameters: GetDocumentRequest): Promise<runtime.ApiResponse<Document>> {
+    async getDocumentRaw(requestParameters: GetDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocument.');
         }
@@ -3042,7 +3082,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocument.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3052,11 +3092,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3068,7 +3109,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DocumentFromJSON(jsonValue));
     }
@@ -3077,8 +3118,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a document in the project  Required scopes: document:read
      * Retrieve a document
      */
-    async getDocument(cloudPk: number, id: number, projectPk: number): Promise<Document> {
-        const response = await this.getDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async getDocument(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.getDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3086,7 +3127,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all documents in the project  Required scopes: document:read
      * Retrieve all documents
      */
-    async getDocumentsRaw(requestParameters: GetDocumentsRequest): Promise<runtime.ApiResponse<Array<Document>>> {
+    async getDocumentsRaw(requestParameters: GetDocumentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocuments.');
         }
@@ -3095,7 +3136,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocuments.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3105,11 +3146,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3121,7 +3163,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
     }
@@ -3130,8 +3172,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all documents in the project  Required scopes: document:read
      * Retrieve all documents
      */
-    async getDocuments(cloudPk: number, projectPk: number): Promise<Array<Document>> {
-        const response = await this.getDocumentsRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getDocuments(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3139,7 +3181,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a folder  Required scopes: document:read
      * Retrieve a folder
      */
-    async getFolderRaw(requestParameters: GetFolderRequest): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
+    async getFolderRaw(requestParameters: GetFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getFolder.');
         }
@@ -3152,7 +3194,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getFolder.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3162,11 +3204,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3178,7 +3221,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FolderWithoutChildrenFromJSON(jsonValue));
     }
@@ -3187,8 +3230,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a folder  Required scopes: document:read
      * Retrieve a folder
      */
-    async getFolder(cloudPk: number, id: number, projectPk: number): Promise<FolderWithoutChildren> {
-        const response = await this.getFolderRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async getFolder(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
+        const response = await this.getFolderRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3196,7 +3239,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all users in a project with the permission on the folder  Required scopes: document:read
      * Retrieve all users in a project with the permission on the folder
      */
-    async getFolderProjectUsersRaw(requestParameters: GetFolderProjectUsersRequest): Promise<runtime.ApiResponse<Array<FolderUserProject>>> {
+    async getFolderProjectUsersRaw(requestParameters: GetFolderProjectUsersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<FolderUserProject>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getFolderProjectUsers.');
         }
@@ -3209,7 +3252,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getFolderProjectUsers.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3219,11 +3262,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3235,7 +3279,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FolderUserProjectFromJSON));
     }
@@ -3244,8 +3288,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all users in a project with the permission on the folder  Required scopes: document:read
      * Retrieve all users in a project with the permission on the folder
      */
-    async getFolderProjectUsers(cloudPk: number, folderPk: number, projectPk: number): Promise<Array<FolderUserProject>> {
-        const response = await this.getFolderProjectUsersRaw({ cloudPk: cloudPk, folderPk: folderPk, projectPk: projectPk });
+    async getFolderProjectUsers(cloudPk: number, folderPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<FolderUserProject>> {
+        const response = await this.getFolderProjectUsersRaw({ cloudPk: cloudPk, folderPk: folderPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3253,7 +3297,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all folders in the project. This is an array of folder. If you want to get the tree of all folders, see getProjectTree  Required scopes: document:read
      * Retrieve all folders
      */
-    async getFoldersRaw(requestParameters: GetFoldersRequest): Promise<runtime.ApiResponse<Array<FolderWithoutChildren>>> {
+    async getFoldersRaw(requestParameters: GetFoldersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<FolderWithoutChildren>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getFolders.');
         }
@@ -3262,7 +3306,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getFolders.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3272,11 +3316,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3288,7 +3333,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FolderWithoutChildrenFromJSON));
     }
@@ -3297,8 +3342,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all folders in the project. This is an array of folder. If you want to get the tree of all folders, see getProjectTree  Required scopes: document:read
      * Retrieve all folders
      */
-    async getFolders(cloudPk: number, projectPk: number): Promise<Array<FolderWithoutChildren>> {
-        const response = await this.getFoldersRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getFolders(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<FolderWithoutChildren>> {
+        const response = await this.getFoldersRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3306,7 +3351,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a group to which the user belongs  Required scopes: document:read
      * Retrieve a group
      */
-    async getGroupRaw(requestParameters: GetGroupRequest): Promise<runtime.ApiResponse<Group>> {
+    async getGroupRaw(requestParameters: GetGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Group>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getGroup.');
         }
@@ -3319,7 +3364,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getGroup.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3329,11 +3374,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3345,7 +3391,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => GroupFromJSON(jsonValue));
     }
@@ -3354,8 +3400,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a group to which the user belongs  Required scopes: document:read
      * Retrieve a group
      */
-    async getGroup(cloudPk: number, id: number, projectPk: number): Promise<Group> {
-        const response = await this.getGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async getGroup(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Group> {
+        const response = await this.getGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3363,7 +3409,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieves all groups to which the user belongs  Required scopes: document:read
      * Retrieve all groups
      */
-    async getGroupsRaw(requestParameters: GetGroupsRequest): Promise<runtime.ApiResponse<Array<Group>>> {
+    async getGroupsRaw(requestParameters: GetGroupsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Group>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getGroups.');
         }
@@ -3372,7 +3418,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getGroups.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3382,11 +3428,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3398,7 +3445,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(GroupFromJSON));
     }
@@ -3407,8 +3454,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieves all groups to which the user belongs  Required scopes: document:read
      * Retrieve all groups
      */
-    async getGroups(cloudPk: number, projectPk: number): Promise<Array<Group>> {
-        const response = await this.getGroupsRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getGroups(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Group>> {
+        const response = await this.getGroupsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3416,7 +3463,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a group. Must be an admin of the project  Required scopes: org:manage
      * Retrieve a group
      */
-    async getManageGroupRaw(requestParameters: GetManageGroupRequest): Promise<runtime.ApiResponse<Group>> {
+    async getManageGroupRaw(requestParameters: GetManageGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Group>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getManageGroup.');
         }
@@ -3429,7 +3476,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getManageGroup.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3439,11 +3486,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3455,7 +3503,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => GroupFromJSON(jsonValue));
     }
@@ -3464,8 +3512,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a group. Must be an admin of the project  Required scopes: org:manage
      * Retrieve a group
      */
-    async getManageGroup(cloudPk: number, id: number, projectPk: number): Promise<Group> {
-        const response = await this.getManageGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk });
+    async getManageGroup(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Group> {
+        const response = await this.getManageGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3473,7 +3521,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all groups in the project. Must be an admin of the project  Required scopes: org:manage
      * Retrieve all groups
      */
-    async getManageGroupsRaw(requestParameters: GetManageGroupsRequest): Promise<runtime.ApiResponse<Array<Group>>> {
+    async getManageGroupsRaw(requestParameters: GetManageGroupsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Group>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getManageGroups.');
         }
@@ -3482,7 +3530,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getManageGroups.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3492,11 +3540,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3508,7 +3557,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(GroupFromJSON));
     }
@@ -3517,8 +3566,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all groups in the project. Must be an admin of the project  Required scopes: org:manage
      * Retrieve all groups
      */
-    async getManageGroups(cloudPk: number, projectPk: number): Promise<Array<Group>> {
-        const response = await this.getManageGroupsRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getManageGroups(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Group>> {
+        const response = await this.getManageGroupsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3526,7 +3575,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a project
      * Retrieve a project
      */
-    async getProjectRaw(requestParameters: GetProjectRequest): Promise<runtime.ApiResponse<ProjectWithChildren>> {
+    async getProjectRaw(requestParameters: GetProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectWithChildren>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProject.');
         }
@@ -3535,7 +3584,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProject.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3545,11 +3594,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3561,7 +3611,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectWithChildrenFromJSON(jsonValue));
     }
@@ -3570,8 +3620,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a project
      * Retrieve a project
      */
-    async getProject(cloudPk: number, id: number): Promise<ProjectWithChildren> {
-        const response = await this.getProjectRaw({ cloudPk: cloudPk, id: id });
+    async getProject(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<ProjectWithChildren> {
+        const response = await this.getProjectRaw({ cloudPk: cloudPk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -3579,7 +3629,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve one token created for this project  Required scopes: org:manage
      * Retrieve one token created for this project
      */
-    async getProjectAccessTokenRaw(requestParameters: GetProjectAccessTokenRequest): Promise<runtime.ApiResponse<ProjectAccessToken>> {
+    async getProjectAccessTokenRaw(requestParameters: GetProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectAccessToken>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectAccessToken.');
         }
@@ -3592,7 +3642,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling getProjectAccessToken.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3602,11 +3652,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3618,7 +3669,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectAccessTokenFromJSON(jsonValue));
     }
@@ -3627,8 +3678,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve one token created for this project  Required scopes: org:manage
      * Retrieve one token created for this project
      */
-    async getProjectAccessToken(cloudPk: number, projectPk: number, token: string): Promise<ProjectAccessToken> {
-        const response = await this.getProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, token: token });
+    async getProjectAccessToken(cloudPk: number, projectPk: number, token: string, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
+        const response = await this.getProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, token: token }, initOverrides);
         return await response.value();
     }
 
@@ -3636,7 +3687,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all tokens created for this project  Required scopes: org:manage
      * Retrieve all tokens created for this project
      */
-    async getProjectAccessTokensRaw(requestParameters: GetProjectAccessTokensRequest): Promise<runtime.ApiResponse<Array<ProjectAccessToken>>> {
+    async getProjectAccessTokensRaw(requestParameters: GetProjectAccessTokensRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectAccessToken>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectAccessTokens.');
         }
@@ -3645,7 +3696,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectAccessTokens.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3655,11 +3706,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3671,7 +3723,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProjectAccessTokenFromJSON));
     }
@@ -3680,8 +3732,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all tokens created for this project  Required scopes: org:manage
      * Retrieve all tokens created for this project
      */
-    async getProjectAccessTokens(cloudPk: number, projectPk: number): Promise<Array<ProjectAccessToken>> {
-        const response = await this.getProjectAccessTokensRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getProjectAccessTokens(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<ProjectAccessToken>> {
+        const response = await this.getProjectAccessTokensRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3689,7 +3741,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas created by user in a project  Required scopes: document:read
      * List visas created by user
      */
-    async getProjectCreatorVisasRaw(requestParameters: GetProjectCreatorVisasRequest): Promise<runtime.ApiResponse<Array<Visa>>> {
+    async getProjectCreatorVisasRaw(requestParameters: GetProjectCreatorVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Visa>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectCreatorVisas.');
         }
@@ -3698,7 +3750,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectCreatorVisas.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3708,11 +3760,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3724,7 +3777,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaFromJSON));
     }
@@ -3733,8 +3786,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas created by user in a project  Required scopes: document:read
      * List visas created by user
      */
-    async getProjectCreatorVisas(cloudPk: number, projectPk: number): Promise<Array<Visa>> {
-        const response = await this.getProjectCreatorVisasRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getProjectCreatorVisas(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
+        const response = await this.getProjectCreatorVisasRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3742,7 +3795,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete DMS tree (all folders and all documents in the project)
      * Retrieve the complete DMS tree
      */
-    async getProjectDMSTreeRaw(requestParameters: GetProjectDMSTreeRequest): Promise<runtime.ApiResponse<Folder>> {
+    async getProjectDMSTreeRaw(requestParameters: GetProjectDMSTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Folder>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectDMSTree.');
         }
@@ -3751,7 +3804,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProjectDMSTree.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3761,11 +3814,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3777,7 +3831,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FolderFromJSON(jsonValue));
     }
@@ -3786,8 +3840,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete DMS tree (all folders and all documents in the project)
      * Retrieve the complete DMS tree
      */
-    async getProjectDMSTree(cloudPk: number, id: number): Promise<Folder> {
-        const response = await this.getProjectDMSTreeRaw({ cloudPk: cloudPk, id: id });
+    async getProjectDMSTree(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<Folder> {
+        const response = await this.getProjectDMSTreeRaw({ cloudPk: cloudPk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -3795,7 +3849,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns app\'s invitations only  Required scopes: org:manage
      * Retrieve all pending invitations in the project
      */
-    async getProjectInvitationsRaw(requestParameters: GetProjectInvitationsRequest): Promise<runtime.ApiResponse<Array<ProjectInvitation>>> {
+    async getProjectInvitationsRaw(requestParameters: GetProjectInvitationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectInvitation>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectInvitations.');
         }
@@ -3804,7 +3858,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectInvitations.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3814,11 +3868,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3830,7 +3885,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProjectInvitationFromJSON));
     }
@@ -3839,8 +3894,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns app\'s invitations only  Required scopes: org:manage
      * Retrieve all pending invitations in the project
      */
-    async getProjectInvitations(cloudPk: number, projectPk: number): Promise<Array<ProjectInvitation>> {
-        const response = await this.getProjectInvitationsRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getProjectInvitations(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<ProjectInvitation>> {
+        const response = await this.getProjectInvitationsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -3848,7 +3903,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns the size of the project in Bytes
      * Get size of all model files in the project
      */
-    async getProjectSizeRaw(requestParameters: GetProjectSizeRequest): Promise<runtime.ApiResponse<ProjectSize>> {
+    async getProjectSizeRaw(requestParameters: GetProjectSizeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectSize>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectSize.');
         }
@@ -3857,7 +3912,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProjectSize.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3867,11 +3922,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3883,7 +3939,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectSizeFromJSON(jsonValue));
     }
@@ -3892,8 +3948,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns the size of the project in Bytes
      * Get size of all model files in the project
      */
-    async getProjectSize(cloudPk: number, id: number): Promise<ProjectSize> {
-        const response = await this.getProjectSizeRaw({ cloudPk: cloudPk, id: id });
+    async getProjectSize(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<ProjectSize> {
+        const response = await this.getProjectSizeRaw({ cloudPk: cloudPk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -3901,12 +3957,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete projects tree of the cloud
      * Retrieve the complete projects tree of the cloud
      */
-    async getProjectSubTreeRaw(requestParameters: GetProjectSubTreeRequest): Promise<runtime.ApiResponse<Array<ProjectWithChildren>>> {
+    async getProjectSubTreeRaw(requestParameters: GetProjectSubTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectWithChildren>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectSubTree.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3916,11 +3972,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3932,7 +3989,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProjectWithChildrenFromJSON));
     }
@@ -3941,8 +3998,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete projects tree of the cloud
      * Retrieve the complete projects tree of the cloud
      */
-    async getProjectSubTree(cloudPk: number): Promise<Array<ProjectWithChildren>> {
-        const response = await this.getProjectSubTreeRaw({ cloudPk: cloudPk });
+    async getProjectSubTree(cloudPk: number, initOverrides?: RequestInit): Promise<Array<ProjectWithChildren>> {
+        const response = await this.getProjectSubTreeRaw({ cloudPk: cloudPk }, initOverrides);
         return await response.value();
     }
 
@@ -3950,7 +4007,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete DMS tree (all folders and all documents in the project). DEPRECATED: renamed to getProjectDMSTree
      * Retrieve the complete DMS tree
      */
-    async getProjectTreeRaw(requestParameters: GetProjectTreeRequest): Promise<runtime.ApiResponse<Folder>> {
+    async getProjectTreeRaw(requestParameters: GetProjectTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Folder>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectTree.');
         }
@@ -3959,7 +4016,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProjectTree.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3969,11 +4026,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -3985,7 +4043,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FolderFromJSON(jsonValue));
     }
@@ -3994,8 +4052,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete DMS tree (all folders and all documents in the project). DEPRECATED: renamed to getProjectDMSTree
      * Retrieve the complete DMS tree
      */
-    async getProjectTree(cloudPk: number, id: number): Promise<Folder> {
-        const response = await this.getProjectTreeRaw({ cloudPk: cloudPk, id: id });
+    async getProjectTree(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<Folder> {
+        const response = await this.getProjectTreeRaw({ cloudPk: cloudPk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -4003,7 +4061,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Each member of a project can see other members of the project  Required scopes: cloud:read, bcf:read
      * Retrieve all users in a project, or a list with a filter by email
      */
-    async getProjectUsersRaw(requestParameters: GetProjectUsersRequest): Promise<runtime.ApiResponse<Array<UserProject>>> {
+    async getProjectUsersRaw(requestParameters: GetProjectUsersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<UserProject>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectUsers.');
         }
@@ -4012,7 +4070,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectUsers.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         if (requestParameters.email !== undefined) {
             queryParameters['email'] = requestParameters.email;
@@ -4038,11 +4096,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4054,7 +4113,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserProjectFromJSON));
     }
@@ -4063,8 +4122,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Each member of a project can see other members of the project  Required scopes: cloud:read, bcf:read
      * Retrieve all users in a project, or a list with a filter by email
      */
-    async getProjectUsers(cloudPk: number, projectPk: number, email?: string, emailContains?: string, emailEndswith?: string, emailStartswith?: string): Promise<Array<UserProject>> {
-        const response = await this.getProjectUsersRaw({ cloudPk: cloudPk, projectPk: projectPk, email: email, emailContains: emailContains, emailEndswith: emailEndswith, emailStartswith: emailStartswith });
+    async getProjectUsers(cloudPk: number, projectPk: number, email?: string, emailContains?: string, emailEndswith?: string, emailStartswith?: string, initOverrides?: RequestInit): Promise<Array<UserProject>> {
+        const response = await this.getProjectUsersRaw({ cloudPk: cloudPk, projectPk: projectPk, email: email, emailContains: emailContains, emailEndswith: emailEndswith, emailStartswith: emailStartswith }, initOverrides);
         return await response.value();
     }
 
@@ -4072,7 +4131,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas where user is a validator in a project  Required scopes: document:read
      * List visas where user is a validator
      */
-    async getProjectValidatorVisasRaw(requestParameters: GetProjectValidatorVisasRequest): Promise<runtime.ApiResponse<Array<Visa>>> {
+    async getProjectValidatorVisasRaw(requestParameters: GetProjectValidatorVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Visa>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectValidatorVisas.');
         }
@@ -4081,7 +4140,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectValidatorVisas.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4091,11 +4150,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4107,7 +4167,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaFromJSON));
     }
@@ -4116,8 +4176,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas where user is a validator in a project  Required scopes: document:read
      * List visas where user is a validator
      */
-    async getProjectValidatorVisas(cloudPk: number, projectPk: number): Promise<Array<Visa>> {
-        const response = await this.getProjectValidatorVisasRaw({ cloudPk: cloudPk, projectPk: projectPk });
+    async getProjectValidatorVisas(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
+        const response = await this.getProjectValidatorVisasRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -4125,12 +4185,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all projects of the cloud. All project are shown at the same level. see #getProjectSubTree
      * Retrieve all projects
      */
-    async getProjectsRaw(requestParameters: GetProjectsRequest): Promise<runtime.ApiResponse<Array<Project>>> {
+    async getProjectsRaw(requestParameters: GetProjectsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Project>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjects.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4140,11 +4200,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4156,7 +4217,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProjectFromJSON));
     }
@@ -4165,8 +4226,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all projects of the cloud. All project are shown at the same level. see #getProjectSubTree
      * Retrieve all projects
      */
-    async getProjects(cloudPk: number): Promise<Array<Project>> {
-        const response = await this.getProjectsRaw({ cloudPk: cloudPk });
+    async getProjects(cloudPk: number, initOverrides?: RequestInit): Promise<Array<Project>> {
+        const response = await this.getProjectsRaw({ cloudPk: cloudPk }, initOverrides);
         return await response.value();
     }
 
@@ -4174,8 +4235,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List user\'s projects of all clouds  Required scopes: user:read
      * List current user\'s projects
      */
-    async getSelfProjectsRaw(): Promise<runtime.ApiResponse<Array<Project>>> {
-        const queryParameters: runtime.HTTPQuery = {};
+    async getSelfProjectsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Project>>> {
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4185,11 +4246,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4201,7 +4263,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProjectFromJSON));
     }
@@ -4210,8 +4272,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List user\'s projects of all clouds  Required scopes: user:read
      * List current user\'s projects
      */
-    async getSelfProjects(): Promise<Array<Project>> {
-        const response = await this.getSelfProjectsRaw();
+    async getSelfProjects(initOverrides?: RequestInit): Promise<Array<Project>> {
+        const response = await this.getSelfProjectsRaw(initOverrides);
         return await response.value();
     }
 
@@ -4219,8 +4281,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Get info about the current user  Required scopes: user:read
      * Get info about the current user
      */
-    async getSelfUserRaw(): Promise<runtime.ApiResponse<SelfUser>> {
-        const queryParameters: runtime.HTTPQuery = {};
+    async getSelfUserRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<SelfUser>> {
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4230,11 +4292,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4246,7 +4309,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SelfUserFromJSON(jsonValue));
     }
@@ -4255,8 +4318,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Get info about the current user  Required scopes: user:read
      * Get info about the current user
      */
-    async getSelfUser(): Promise<SelfUser> {
-        const response = await this.getSelfUserRaw();
+    async getSelfUser(initOverrides?: RequestInit): Promise<SelfUser> {
+        const response = await this.getSelfUserRaw(initOverrides);
         return await response.value();
     }
 
@@ -4264,7 +4327,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a validation to a visa  Required scopes: document:read
      * Retrieve a validation to a visa
      */
-    async getValidationRaw(requestParameters: GetValidationRequest): Promise<runtime.ApiResponse<VisaValidation>> {
+    async getValidationRaw(requestParameters: GetValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaValidation>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getValidation.');
         }
@@ -4285,7 +4348,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getValidation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4295,11 +4358,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4311,7 +4375,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaValidationFromJSON(jsonValue));
     }
@@ -4320,8 +4384,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a validation to a visa  Required scopes: document:read
      * Retrieve a validation to a visa
      */
-    async getValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number): Promise<VisaValidation> {
-        const response = await this.getValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk });
+    async getValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<VisaValidation> {
+        const response = await this.getValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
         return await response.value();
     }
 
@@ -4329,7 +4393,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all validations to a visa  Required scopes: document:read
      * List all validations to a visa
      */
-    async getValidationsRaw(requestParameters: GetValidationsRequest): Promise<runtime.ApiResponse<Array<VisaValidation>>> {
+    async getValidationsRaw(requestParameters: GetValidationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<VisaValidation>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getValidations.');
         }
@@ -4346,7 +4410,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getValidations.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4356,11 +4420,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4372,7 +4437,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaValidationFromJSON));
     }
@@ -4381,8 +4446,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all validations to a visa  Required scopes: document:read
      * List all validations to a visa
      */
-    async getValidations(cloudPk: number, documentPk: number, projectPk: number, visaPk: number): Promise<Array<VisaValidation>> {
-        const response = await this.getValidationsRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk });
+    async getValidations(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<Array<VisaValidation>> {
+        const response = await this.getValidationsRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk }, initOverrides);
         return await response.value();
     }
 
@@ -4390,7 +4455,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a unique visa of a document  Required scopes: document:read
      * Retrieve a visa of a document
      */
-    async getVisaRaw(requestParameters: GetVisaRequest): Promise<runtime.ApiResponse<Visa>> {
+    async getVisaRaw(requestParameters: GetVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visa>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisa.');
         }
@@ -4407,7 +4472,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisa.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4417,11 +4482,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4433,7 +4499,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaFromJSON(jsonValue));
     }
@@ -4442,8 +4508,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a unique visa of a document  Required scopes: document:read
      * Retrieve a visa of a document
      */
-    async getVisa(cloudPk: number, documentPk: number, id: number, projectPk: number): Promise<Visa> {
-        const response = await this.getVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk });
+    async getVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Visa> {
+        const response = await this.getVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -4451,7 +4517,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a comment  Required scopes: document:read
      * Retrieve a comment
      */
-    async getVisaCommentRaw(requestParameters: GetVisaCommentRequest): Promise<runtime.ApiResponse<VisaComment>> {
+    async getVisaCommentRaw(requestParameters: GetVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaComment>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisaComment.');
         }
@@ -4472,7 +4538,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getVisaComment.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4482,11 +4548,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4498,7 +4565,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaCommentFromJSON(jsonValue));
     }
@@ -4507,8 +4574,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a comment  Required scopes: document:read
      * Retrieve a comment
      */
-    async getVisaComment(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number): Promise<VisaComment> {
-        const response = await this.getVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk });
+    async getVisaComment(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<VisaComment> {
+        const response = await this.getVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
         return await response.value();
     }
 
@@ -4516,7 +4583,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all comment of a visa  Required scopes: document:read
      * List all comment of a visa
      */
-    async getVisaCommentsRaw(requestParameters: GetVisaCommentsRequest): Promise<runtime.ApiResponse<Array<VisaComment>>> {
+    async getVisaCommentsRaw(requestParameters: GetVisaCommentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<VisaComment>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisaComments.');
         }
@@ -4533,7 +4600,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getVisaComments.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4543,11 +4610,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4559,7 +4627,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaCommentFromJSON));
     }
@@ -4568,8 +4636,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all comment of a visa  Required scopes: document:read
      * List all comment of a visa
      */
-    async getVisaComments(cloudPk: number, documentPk: number, projectPk: number, visaPk: number): Promise<Array<VisaComment>> {
-        const response = await this.getVisaCommentsRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk });
+    async getVisaComments(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<Array<VisaComment>> {
+        const response = await this.getVisaCommentsRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk }, initOverrides);
         return await response.value();
     }
 
@@ -4577,7 +4645,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all visas of a document  Required scopes: document:read
      * List all visas of a document
      */
-    async getVisasRaw(requestParameters: GetVisasRequest): Promise<runtime.ApiResponse<Array<Visa>>> {
+    async getVisasRaw(requestParameters: GetVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Visa>>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisas.');
         }
@@ -4590,7 +4658,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisas.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4600,11 +4668,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4616,7 +4685,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaFromJSON));
     }
@@ -4625,8 +4694,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all visas of a document  Required scopes: document:read
      * List all visas of a document
      */
-    async getVisas(cloudPk: number, documentPk: number, projectPk: number): Promise<Array<Visa>> {
-        const response = await this.getVisasRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk });
+    async getVisas(cloudPk: number, documentPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
+        const response = await this.getVisasRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -4634,7 +4703,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Invite cloud administrators only. To invite in a project, see inviteProjectUser. You can\'t invite a user already in the cloud. Create multiple invitations of the same email in the same cloud will generate multiple invitation emails but not multiple invitation object  Required scopes: org:manage
      * Invite a cloud administrator
      */
-    async inviteCloudUserRaw(requestParameters: InviteCloudUserRequest): Promise<runtime.ApiResponse<CloudInvitation>> {
+    async inviteCloudUserRaw(requestParameters: InviteCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CloudInvitation>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling inviteCloudUser.');
         }
@@ -4643,7 +4712,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('cloudInvitationRequest','Required parameter requestParameters.cloudInvitationRequest was null or undefined when calling inviteCloudUser.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4655,11 +4724,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4672,7 +4742,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: CloudInvitationRequestToJSON(requestParameters.cloudInvitationRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CloudInvitationFromJSON(jsonValue));
     }
@@ -4681,8 +4751,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Invite cloud administrators only. To invite in a project, see inviteProjectUser. You can\'t invite a user already in the cloud. Create multiple invitations of the same email in the same cloud will generate multiple invitation emails but not multiple invitation object  Required scopes: org:manage
      * Invite a cloud administrator
      */
-    async inviteCloudUser(cloudPk: number, cloudInvitationRequest: CloudInvitationRequest): Promise<CloudInvitation> {
-        const response = await this.inviteCloudUserRaw({ cloudPk: cloudPk, cloudInvitationRequest: cloudInvitationRequest });
+    async inviteCloudUser(cloudPk: number, cloudInvitationRequest: CloudInvitationRequest, initOverrides?: RequestInit): Promise<CloudInvitation> {
+        const response = await this.inviteCloudUserRaw({ cloudPk: cloudPk, cloudInvitationRequest: cloudInvitationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -4690,7 +4760,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Invite a project member. If the user is not already a cloud member, they will also be invited in the cloud with USER role.  Required scopes: org:manage
      * Invite a project member
      */
-    async inviteProjectUserRaw(requestParameters: InviteProjectUserRequest): Promise<runtime.ApiResponse<ProjectInvitation>> {
+    async inviteProjectUserRaw(requestParameters: InviteProjectUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectInvitation>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling inviteProjectUser.');
         }
@@ -4703,7 +4773,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectInvitationRequest','Required parameter requestParameters.projectInvitationRequest was null or undefined when calling inviteProjectUser.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4715,11 +4785,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4732,7 +4803,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: ProjectInvitationRequestToJSON(requestParameters.projectInvitationRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectInvitationFromJSON(jsonValue));
     }
@@ -4741,8 +4812,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Invite a project member. If the user is not already a cloud member, they will also be invited in the cloud with USER role.  Required scopes: org:manage
      * Invite a project member
      */
-    async inviteProjectUser(cloudPk: number, projectPk: number, projectInvitationRequest: ProjectInvitationRequest): Promise<ProjectInvitation> {
-        const response = await this.inviteProjectUserRaw({ cloudPk: cloudPk, projectPk: projectPk, projectInvitationRequest: projectInvitationRequest });
+    async inviteProjectUser(cloudPk: number, projectPk: number, projectInvitationRequest: ProjectInvitationRequest, initOverrides?: RequestInit): Promise<ProjectInvitation> {
+        const response = await this.inviteProjectUserRaw({ cloudPk: cloudPk, projectPk: projectPk, projectInvitationRequest: projectInvitationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -4750,7 +4821,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Leave the project. Only authenticated users (no app) can call this route.  Required scopes: org:manage
      * Leave the project
      */
-    async leaveProjectRaw(requestParameters: LeaveProjectRequest): Promise<runtime.ApiResponse<void>> {
+    async leaveProjectRaw(requestParameters: LeaveProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling leaveProject.');
         }
@@ -4759,7 +4830,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling leaveProject.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4769,11 +4840,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4785,7 +4857,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4794,15 +4866,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Leave the project. Only authenticated users (no app) can call this route.  Required scopes: org:manage
      * Leave the project
      */
-    async leaveProject(cloudPk: number, id: number): Promise<void> {
-        await this.leaveProjectRaw({ cloudPk: cloudPk, id: id });
+    async leaveProject(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.leaveProjectRaw({ cloudPk: cloudPk, id: id }, initOverrides);
     }
 
     /**
      * Pause a visa of a document  Required scopes: document:write
      * Pause a visa of a document
      */
-    async pauseVisaRaw(requestParameters: PauseVisaRequest): Promise<runtime.ApiResponse<void>> {
+    async pauseVisaRaw(requestParameters: PauseVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling pauseVisa.');
         }
@@ -4819,7 +4891,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling pauseVisa.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4829,11 +4901,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4845,7 +4918,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4854,15 +4927,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Pause a visa of a document  Required scopes: document:write
      * Pause a visa of a document
      */
-    async pauseVisa(cloudPk: number, documentPk: number, id: number, projectPk: number): Promise<void> {
-        await this.pauseVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk });
+    async pauseVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.pauseVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Reset a validation if the validation has been accepted or rejected  Required scopes: document:write
      * Reset a validation
      */
-    async resetValidationRaw(requestParameters: ResetValidationRequest): Promise<runtime.ApiResponse<void>> {
+    async resetValidationRaw(requestParameters: ResetValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling resetValidation.');
         }
@@ -4883,7 +4956,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling resetValidation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4893,11 +4966,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4909,7 +4983,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4918,15 +4992,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Reset a validation if the validation has been accepted or rejected  Required scopes: document:write
      * Reset a validation
      */
-    async resetValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number): Promise<void> {
-        await this.resetValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk });
+    async resetValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.resetValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
     }
 
     /**
      * Resume a visa of a document after a pause  Required scopes: document:write
      * Resume a visa of a document
      */
-    async resumeVisaRaw(requestParameters: ResumeVisaRequest): Promise<runtime.ApiResponse<void>> {
+    async resumeVisaRaw(requestParameters: ResumeVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling resumeVisa.');
         }
@@ -4943,7 +5017,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling resumeVisa.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -4953,11 +5027,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4969,7 +5044,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-        });
+        }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
@@ -4978,15 +5053,15 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Resume a visa of a document after a pause  Required scopes: document:write
      * Resume a visa of a document
      */
-    async resumeVisa(cloudPk: number, documentPk: number, id: number, projectPk: number): Promise<void> {
-        await this.resumeVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk });
+    async resumeVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.resumeVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
      * Update some fields of a classification  Required scopes: ifc:write, model:write
      * Update some fields of a classification
      */
-    async updateClassificationRaw(requestParameters: UpdateClassificationRequest): Promise<runtime.ApiResponse<Classification>> {
+    async updateClassificationRaw(requestParameters: UpdateClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Classification>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateClassification.');
         }
@@ -4999,7 +5074,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateClassification.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5011,11 +5086,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5028,7 +5104,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedClassificationRequestToJSON(requestParameters.patchedClassificationRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ClassificationFromJSON(jsonValue));
     }
@@ -5037,8 +5113,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a classification  Required scopes: ifc:write, model:write
      * Update some fields of a classification
      */
-    async updateClassification(cloudPk: number, id: number, projectPk: number, patchedClassificationRequest?: PatchedClassificationRequest): Promise<Classification> {
-        const response = await this.updateClassificationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedClassificationRequest: patchedClassificationRequest });
+    async updateClassification(cloudPk: number, id: number, projectPk: number, patchedClassificationRequest?: PatchedClassificationRequest, initOverrides?: RequestInit): Promise<Classification> {
+        const response = await this.updateClassificationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedClassificationRequest: patchedClassificationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5046,12 +5122,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a cloud  Required scopes: cloud:manage
      * Update some fields of a cloud
      */
-    async updateCloudRaw(requestParameters: UpdateCloudRequest): Promise<runtime.ApiResponse<Cloud>> {
+    async updateCloudRaw(requestParameters: UpdateCloudRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Cloud>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCloud.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5063,11 +5139,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5080,7 +5157,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedCloudRequestToJSON(requestParameters.patchedCloudRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CloudFromJSON(jsonValue));
     }
@@ -5089,8 +5166,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a cloud  Required scopes: cloud:manage
      * Update some fields of a cloud
      */
-    async updateCloud(id: number, patchedCloudRequest?: PatchedCloudRequest): Promise<Cloud> {
-        const response = await this.updateCloudRaw({ id: id, patchedCloudRequest: patchedCloudRequest });
+    async updateCloud(id: number, patchedCloudRequest?: PatchedCloudRequest, initOverrides?: RequestInit): Promise<Cloud> {
+        const response = await this.updateCloudRaw({ id: id, patchedCloudRequest: patchedCloudRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5098,7 +5175,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Change the user role in the cloud  Required scopes: cloud:manage
      * Change the user role in the cloud
      */
-    async updateCloudUserRaw(requestParameters: UpdateCloudUserRequest): Promise<runtime.ApiResponse<User>> {
+    async updateCloudUserRaw(requestParameters: UpdateCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<User>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateCloudUser.');
         }
@@ -5107,7 +5184,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCloudUser.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5119,11 +5196,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5136,7 +5214,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedUserCloudUpdateRequestToJSON(requestParameters.patchedUserCloudUpdateRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
     }
@@ -5145,8 +5223,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Change the user role in the cloud  Required scopes: cloud:manage
      * Change the user role in the cloud
      */
-    async updateCloudUser(cloudPk: number, id: number, patchedUserCloudUpdateRequest?: PatchedUserCloudUpdateRequest): Promise<User> {
-        const response = await this.updateCloudUserRaw({ cloudPk: cloudPk, id: id, patchedUserCloudUpdateRequest: patchedUserCloudUpdateRequest });
+    async updateCloudUser(cloudPk: number, id: number, patchedUserCloudUpdateRequest?: PatchedUserCloudUpdateRequest, initOverrides?: RequestInit): Promise<User> {
+        const response = await this.updateCloudUserRaw({ cloudPk: cloudPk, id: id, patchedUserCloudUpdateRequest: patchedUserCloudUpdateRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5154,7 +5232,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of the document  Required scopes: document:write
      * Update some fields of the document
      */
-    async updateDocumentRaw(requestParameters: UpdateDocumentRequest): Promise<runtime.ApiResponse<Document>> {
+    async updateDocumentRaw(requestParameters: UpdateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateDocument.');
         }
@@ -5167,7 +5245,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateDocument.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5179,11 +5257,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5196,7 +5275,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedDocumentRequestToJSON(requestParameters.patchedDocumentRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DocumentFromJSON(jsonValue));
     }
@@ -5205,8 +5284,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of the document  Required scopes: document:write
      * Update some fields of the document
      */
-    async updateDocument(cloudPk: number, id: number, projectPk: number, patchedDocumentRequest?: PatchedDocumentRequest): Promise<Document> {
-        const response = await this.updateDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedDocumentRequest: patchedDocumentRequest });
+    async updateDocument(cloudPk: number, id: number, projectPk: number, patchedDocumentRequest?: PatchedDocumentRequest, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.updateDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedDocumentRequest: patchedDocumentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5214,7 +5293,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a folder. Only project admins can update the `default_permission` field  Required scopes: document:write
      * Update some fields of a folder
      */
-    async updateFolderRaw(requestParameters: UpdateFolderRequest): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
+    async updateFolderRaw(requestParameters: UpdateFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateFolder.');
         }
@@ -5227,7 +5306,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateFolder.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5239,11 +5318,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5256,7 +5336,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedFolderWithoutChildrenRequestToJSON(requestParameters.patchedFolderWithoutChildrenRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FolderWithoutChildrenFromJSON(jsonValue));
     }
@@ -5265,8 +5345,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a folder. Only project admins can update the `default_permission` field  Required scopes: document:write
      * Update some fields of a folder
      */
-    async updateFolder(cloudPk: number, id: number, projectPk: number, patchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest): Promise<FolderWithoutChildren> {
-        const response = await this.updateFolderRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedFolderWithoutChildrenRequest: patchedFolderWithoutChildrenRequest });
+    async updateFolder(cloudPk: number, id: number, projectPk: number, patchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
+        const response = await this.updateFolderRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedFolderWithoutChildrenRequest: patchedFolderWithoutChildrenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5274,7 +5354,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update the permission of a group on a folder.             0: ACCESS_DENIED,             50: READ_ONLY,             100: READ_WRTIE               Required scopes: org:manage
      * Update the permission of a group on a folder
      */
-    async updateGroupFolderRaw(requestParameters: UpdateGroupFolderRequest): Promise<runtime.ApiResponse<GroupFolder>> {
+    async updateGroupFolderRaw(requestParameters: UpdateGroupFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<GroupFolder>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateGroupFolder.');
         }
@@ -5291,7 +5371,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateGroupFolder.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5303,11 +5383,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5320,7 +5401,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedGroupFolderRequestToJSON(requestParameters.patchedGroupFolderRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => GroupFolderFromJSON(jsonValue));
     }
@@ -5329,8 +5410,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update the permission of a group on a folder.             0: ACCESS_DENIED,             50: READ_ONLY,             100: READ_WRTIE               Required scopes: org:manage
      * Update the permission of a group on a folder
      */
-    async updateGroupFolder(cloudPk: number, folderPk: number, id: number, projectPk: number, patchedGroupFolderRequest?: PatchedGroupFolderRequest): Promise<GroupFolder> {
-        const response = await this.updateGroupFolderRaw({ cloudPk: cloudPk, folderPk: folderPk, id: id, projectPk: projectPk, patchedGroupFolderRequest: patchedGroupFolderRequest });
+    async updateGroupFolder(cloudPk: number, folderPk: number, id: number, projectPk: number, patchedGroupFolderRequest?: PatchedGroupFolderRequest, initOverrides?: RequestInit): Promise<GroupFolder> {
+        const response = await this.updateGroupFolderRaw({ cloudPk: cloudPk, folderPk: folderPk, id: id, projectPk: projectPk, patchedGroupFolderRequest: patchedGroupFolderRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5338,7 +5419,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a group. Must be an admin of the project  Required scopes: org:manage
      * Update some fields of a group
      */
-    async updateManageGroupRaw(requestParameters: UpdateManageGroupRequest): Promise<runtime.ApiResponse<Group>> {
+    async updateManageGroupRaw(requestParameters: UpdateManageGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Group>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateManageGroup.');
         }
@@ -5351,7 +5432,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateManageGroup.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5363,11 +5444,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5380,7 +5462,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedGroupRequestToJSON(requestParameters.patchedGroupRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => GroupFromJSON(jsonValue));
     }
@@ -5389,8 +5471,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a group. Must be an admin of the project  Required scopes: org:manage
      * Update some fields of a group
      */
-    async updateManageGroup(cloudPk: number, id: number, projectPk: number, patchedGroupRequest?: PatchedGroupRequest): Promise<Group> {
-        const response = await this.updateManageGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedGroupRequest: patchedGroupRequest });
+    async updateManageGroup(cloudPk: number, id: number, projectPk: number, patchedGroupRequest?: PatchedGroupRequest, initOverrides?: RequestInit): Promise<Group> {
+        const response = await this.updateManageGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedGroupRequest: patchedGroupRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5398,7 +5480,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a project  Required scopes: org:manage
      * Update some fields of a project
      */
-    async updateProjectRaw(requestParameters: UpdateProjectRequest): Promise<runtime.ApiResponse<Project>> {
+    async updateProjectRaw(requestParameters: UpdateProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Project>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProject.');
         }
@@ -5407,7 +5489,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateProject.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5419,11 +5501,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5436,7 +5519,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedProjectRequestToJSON(requestParameters.patchedProjectRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectFromJSON(jsonValue));
     }
@@ -5445,8 +5528,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a project  Required scopes: org:manage
      * Update some fields of a project
      */
-    async updateProject(cloudPk: number, id: number, patchedProjectRequest?: PatchedProjectRequest): Promise<Project> {
-        const response = await this.updateProjectRaw({ cloudPk: cloudPk, id: id, patchedProjectRequest: patchedProjectRequest });
+    async updateProject(cloudPk: number, id: number, patchedProjectRequest?: PatchedProjectRequest, initOverrides?: RequestInit): Promise<Project> {
+        const response = await this.updateProjectRaw({ cloudPk: cloudPk, id: id, patchedProjectRequest: patchedProjectRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5454,7 +5537,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * You can update the expiration date field  Required scopes: org:manage
      * Update some fields of a token
      */
-    async updateProjectAccessTokenRaw(requestParameters: UpdateProjectAccessTokenRequest): Promise<runtime.ApiResponse<ProjectAccessToken>> {
+    async updateProjectAccessTokenRaw(requestParameters: UpdateProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectAccessToken>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProjectAccessToken.');
         }
@@ -5467,7 +5550,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling updateProjectAccessToken.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5479,11 +5562,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5496,7 +5580,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedProjectAccessTokenRequestToJSON(requestParameters.patchedProjectAccessTokenRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectAccessTokenFromJSON(jsonValue));
     }
@@ -5505,8 +5589,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * You can update the expiration date field  Required scopes: org:manage
      * Update some fields of a token
      */
-    async updateProjectAccessToken(cloudPk: number, projectPk: number, token: string, patchedProjectAccessTokenRequest?: PatchedProjectAccessTokenRequest): Promise<ProjectAccessToken> {
-        const response = await this.updateProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, token: token, patchedProjectAccessTokenRequest: patchedProjectAccessTokenRequest });
+    async updateProjectAccessToken(cloudPk: number, projectPk: number, token: string, patchedProjectAccessTokenRequest?: PatchedProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
+        const response = await this.updateProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, token: token, patchedProjectAccessTokenRequest: patchedProjectAccessTokenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5514,7 +5598,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Change the user role in the cloud  Required scopes: cloud:manage
      * Change the user role in the cloud
      */
-    async updateProjectUserRaw(requestParameters: UpdateProjectUserRequest): Promise<runtime.ApiResponse<UserProject>> {
+    async updateProjectUserRaw(requestParameters: UpdateProjectUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<UserProject>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProjectUser.');
         }
@@ -5527,7 +5611,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateProjectUser.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5539,11 +5623,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5556,7 +5641,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedUserProjectUpdateRequestToJSON(requestParameters.patchedUserProjectUpdateRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProjectFromJSON(jsonValue));
     }
@@ -5565,8 +5650,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Change the user role in the cloud  Required scopes: cloud:manage
      * Change the user role in the cloud
      */
-    async updateProjectUser(cloudPk: number, id: number, projectPk: number, patchedUserProjectUpdateRequest?: PatchedUserProjectUpdateRequest): Promise<UserProject> {
-        const response = await this.updateProjectUserRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedUserProjectUpdateRequest: patchedUserProjectUpdateRequest });
+    async updateProjectUser(cloudPk: number, id: number, projectPk: number, patchedUserProjectUpdateRequest?: PatchedUserProjectUpdateRequest, initOverrides?: RequestInit): Promise<UserProject> {
+        const response = await this.updateProjectUserRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedUserProjectUpdateRequest: patchedUserProjectUpdateRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5574,7 +5659,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update the validator of validation. This route is only useful for an App  Required scopes: document:write
      * Update the validator of validation
      */
-    async updateValidationRaw(requestParameters: UpdateValidationRequest): Promise<runtime.ApiResponse<VisaValidation>> {
+    async updateValidationRaw(requestParameters: UpdateValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaValidation>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateValidation.');
         }
@@ -5595,7 +5680,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling updateValidation.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5607,11 +5692,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5624,7 +5710,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedVisaValidationRequestToJSON(requestParameters.patchedVisaValidationRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaValidationFromJSON(jsonValue));
     }
@@ -5633,8 +5719,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update the validator of validation. This route is only useful for an App  Required scopes: document:write
      * Update the validator of validation
      */
-    async updateValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, patchedVisaValidationRequest?: PatchedVisaValidationRequest): Promise<VisaValidation> {
-        const response = await this.updateValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk, patchedVisaValidationRequest: patchedVisaValidationRequest });
+    async updateValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, patchedVisaValidationRequest?: PatchedVisaValidationRequest, initOverrides?: RequestInit): Promise<VisaValidation> {
+        const response = await this.updateValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk, patchedVisaValidationRequest: patchedVisaValidationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5642,7 +5728,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a visa  Required scopes: document:write
      * Update some fields of a visa
      */
-    async updateVisaRaw(requestParameters: UpdateVisaRequest): Promise<runtime.ApiResponse<Visa>> {
+    async updateVisaRaw(requestParameters: UpdateVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visa>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateVisa.');
         }
@@ -5659,7 +5745,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateVisa.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5671,11 +5757,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5688,7 +5775,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedVisaRequestToJSON(requestParameters.patchedVisaRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaFromJSON(jsonValue));
     }
@@ -5697,8 +5784,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a visa  Required scopes: document:write
      * Update some fields of a visa
      */
-    async updateVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, patchedVisaRequest?: PatchedVisaRequest): Promise<Visa> {
-        const response = await this.updateVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, patchedVisaRequest: patchedVisaRequest });
+    async updateVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, patchedVisaRequest?: PatchedVisaRequest, initOverrides?: RequestInit): Promise<Visa> {
+        const response = await this.updateVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, patchedVisaRequest: patchedVisaRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5706,7 +5793,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a comment  Required scopes: document:write
      * Update some fields of a comment
      */
-    async updateVisaCommentRaw(requestParameters: UpdateVisaCommentRequest): Promise<runtime.ApiResponse<VisaComment>> {
+    async updateVisaCommentRaw(requestParameters: UpdateVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaComment>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateVisaComment.');
         }
@@ -5727,7 +5814,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling updateVisaComment.');
         }
 
-        const queryParameters: runtime.HTTPQuery = {};
+        const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -5739,11 +5826,12 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("BIMData_Connect", []);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
         }
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5756,7 +5844,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
             body: PatchedVisaCommentRequestToJSON(requestParameters.patchedVisaCommentRequest),
-        });
+        }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaCommentFromJSON(jsonValue));
     }
@@ -5765,8 +5853,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a comment  Required scopes: document:write
      * Update some fields of a comment
      */
-    async updateVisaComment(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, patchedVisaCommentRequest?: PatchedVisaCommentRequest): Promise<VisaComment> {
-        const response = await this.updateVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk, patchedVisaCommentRequest: patchedVisaCommentRequest });
+    async updateVisaComment(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, patchedVisaCommentRequest?: PatchedVisaCommentRequest, initOverrides?: RequestInit): Promise<VisaComment> {
+        const response = await this.updateVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk, patchedVisaCommentRequest: patchedVisaCommentRequest }, initOverrides);
         return await response.value();
     }
 

@@ -86,4 +86,3 @@ export function RawDefinitionRequestToJSON(value?: RawDefinitionRequest | null):
     };
 }
 
-

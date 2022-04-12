@@ -18,23 +18,31 @@ import {
     LabelFromJSON,
     LabelFromJSONTyped,
     LabelToJSON,
+} from './Label';
+import {
     Priority,
     PriorityFromJSON,
     PriorityFromJSONTyped,
     PriorityToJSON,
+} from './Priority';
+import {
     Stage,
     StageFromJSON,
     StageFromJSONTyped,
     StageToJSON,
+} from './Stage';
+import {
     TopicStatus,
     TopicStatusFromJSON,
     TopicStatusFromJSONTyped,
     TopicStatusToJSON,
+} from './TopicStatus';
+import {
     TopicType,
     TopicTypeFromJSON,
     TopicTypeFromJSONTyped,
     TopicTypeToJSON,
-} from './';
+} from './TopicType';
 
 /**
  * 
@@ -108,5 +116,4 @@ export function DetailedExtensionsToJSON(value?: DetailedExtensions | null): any
         'stages': value.stages === undefined ? undefined : ((value.stages as Array<any>).map(StageToJSON)),
     };
 }
-
 

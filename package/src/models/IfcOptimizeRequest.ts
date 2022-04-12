@@ -54,4 +54,3 @@ export function IfcOptimizeRequestToJSON(value?: IfcOptimizeRequest | null): any
     };
 }
 
-

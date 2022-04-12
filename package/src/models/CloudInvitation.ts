@@ -18,7 +18,7 @@ import {
     CloudRoleEnumFromJSON,
     CloudRoleEnumFromJSONTyped,
     CloudRoleEnumToJSON,
-} from './';
+} from './CloudRoleEnum';
 
 /**
  * 
@@ -49,7 +49,7 @@ export interface CloudInvitation {
      * @type {CloudRoleEnum}
      * @memberof CloudInvitation
      */
-    readonly role: CloudRoleEnum;
+    readonly role: CloudRoleEnum | null;
 }
 
 export function CloudInvitationFromJSON(json: any): CloudInvitation {
@@ -82,5 +82,4 @@ export function CloudInvitationToJSON(value?: CloudInvitation | null): any {
         'redirect_uri': value.redirectUri,
     };
 }
-
 

@@ -18,7 +18,7 @@ import {
     SpaceFromJSON,
     SpaceFromJSONTyped,
     SpaceToJSON,
-} from './';
+} from './Space';
 
 /**
  * Adds nested create feature
@@ -121,5 +121,4 @@ export function ZoneToJSON(value?: Zone | null): any {
         'color': value.color,
     };
 }
-
 

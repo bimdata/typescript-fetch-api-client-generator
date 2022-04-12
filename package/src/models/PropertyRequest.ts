@@ -14,15 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    AnyType,
-    AnyTypeFromJSON,
-    AnyTypeFromJSONTyped,
-    AnyTypeToJSON,
     PropertyDefinitionRequest,
     PropertyDefinitionRequestFromJSON,
     PropertyDefinitionRequestFromJSONTyped,
     PropertyDefinitionRequestToJSON,
-} from './';
+} from './PropertyDefinitionRequest';
 
 /**
  * Adds nested create feature
@@ -38,10 +34,10 @@ export interface PropertyRequest {
     definition: PropertyDefinitionRequest;
     /**
      * 
-     * @type {{ [key: string]: AnyType; }}
+     * @type {{ [key: string]: any; }}
      * @memberof PropertyRequest
      */
-    value?: { [key: string]: AnyType; } | null;
+    value?: { [key: string]: any; } | null;
 }
 
 export function PropertyRequestFromJSON(json: any): PropertyRequest {
@@ -55,7 +51,7 @@ export function PropertyRequestFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'definition': PropertyDefinitionRequestFromJSON(json['definition']),
-        'value': !exists(json, 'value') ? undefined : (json['value'] === null ? null : mapValues(json['value'], AnyTypeFromJSON)),
+        'value': !exists(json, 'value') ? undefined : json['value'],
     };
 }
 
@@ -69,8 +65,7 @@ export function PropertyRequestToJSON(value?: PropertyRequest | null): any {
     return {
         
         'definition': PropertyDefinitionRequestToJSON(value.definition),
-        'value': value.value === undefined ? undefined : (value.value === null ? null : mapValues(value.value, AnyTypeToJSON)),
+        'value': value.value,
     };
 }
-
 

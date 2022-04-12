@@ -62,4 +62,3 @@ export function PublicOrganizationRequestToJSON(value?: PublicOrganizationReques
     };
 }
 
-
