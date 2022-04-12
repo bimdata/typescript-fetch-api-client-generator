@@ -15,7 +15,6 @@ src/models/CheckPlan.ts
 src/models/CheckPlanRequest.ts
 src/models/CheckerResult.ts
 src/models/CheckerResultRequest.ts
-src/models/CheckerStatusEnum.ts
 src/models/Classification.ts
 src/models/ClassificationRequest.ts
 src/models/ClippingPlane.ts
@@ -25,7 +24,6 @@ src/models/CloudInvitation.ts
 src/models/CloudInvitationRequest.ts
 src/models/CloudRequest.ts
 src/models/CloudRole.ts
-src/models/CloudRoleEnum.ts
 src/models/Coloring.ts
 src/models/ColoringRequest.ts
 src/models/Comment.ts
@@ -46,14 +44,12 @@ src/models/ElementClassificationRelation.ts
 src/models/ElementClassificationRelationRequest.ts
 src/models/ElementPropertySetRelationRequest.ts
 src/models/ElementRequest.ts
-src/models/ExportEnum.ts
 src/models/Extensions.ts
 src/models/Feature.ts
 src/models/FeatureRequest.ts
 src/models/Folder.ts
 src/models/FolderGroupPermission.ts
 src/models/FolderGroupPermissionRequest.ts
-src/models/FolderPermissionEnum.ts
 src/models/FolderRequest.ts
 src/models/FolderUserProject.ts
 src/models/FolderWithoutChildren.ts
@@ -72,7 +68,6 @@ src/models/IfcExportRequest.ts
 src/models/IfcMergeRequest.ts
 src/models/IfcOptimizeRequest.ts
 src/models/Invitation.ts
-src/models/InvitationStatusEnum.ts
 src/models/Label.ts
 src/models/LabelRequest.ts
 src/models/Layer.ts
@@ -81,7 +76,6 @@ src/models/LayerElementRequest.ts
 src/models/LayerRequest.ts
 src/models/Line.ts
 src/models/LineRequest.ts
-src/models/ManagedByEnum.ts
 src/models/MarketplaceApp.ts
 src/models/MarketplaceAppImage.ts
 src/models/MarketplaceAppImageRequest.ts
@@ -96,12 +90,7 @@ src/models/ModelErrors.ts
 src/models/ModelErrorsRequest.ts
 src/models/ModelFiles.ts
 src/models/ModelRequest.ts
-src/models/ModelSourceEnum.ts
-src/models/ModelStatusEnum.ts
-src/models/ModelTypeEnum.ts
 src/models/ModelWithPositioningPlan.ts
-src/models/NatureEnum.ts
-src/models/NullEnum.ts
 src/models/Organization.ts
 src/models/OrganizationRequest.ts
 src/models/OrthogonalCamera.ts
@@ -165,9 +154,7 @@ src/models/ProjectInvitation.ts
 src/models/ProjectInvitationRequest.ts
 src/models/ProjectRequest.ts
 src/models/ProjectRole.ts
-src/models/ProjectRoleEnum.ts
 src/models/ProjectSize.ts
-src/models/ProjectStatusEnum.ts
 src/models/ProjectWithChildren.ts
 src/models/Property.ts
 src/models/PropertyDefinition.ts
@@ -205,7 +192,6 @@ src/models/RawUnit.ts
 src/models/RawUnitRequest.ts
 src/models/RecursiveFolderChildren.ts
 src/models/RecursiveFolderChildrenRequest.ts
-src/models/RecursiveFolderChildrenTypeEnum.ts
 src/models/Rule.ts
 src/models/RuleComponent.ts
 src/models/RuleComponentRequest.ts
@@ -244,10 +230,8 @@ src/models/Visa.ts
 src/models/VisaComment.ts
 src/models/VisaCommentRequest.ts
 src/models/VisaRequest.ts
-src/models/VisaStatusEnum.ts
 src/models/VisaValidation.ts
 src/models/VisaValidationRequest.ts
-src/models/VisaValidationStatusEnum.ts
 src/models/Visibility.ts
 src/models/VisibilityRequest.ts
 src/models/WebHook.ts
