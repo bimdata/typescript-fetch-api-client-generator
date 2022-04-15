@@ -84,6 +84,9 @@ import {
     PatchedProjectRequest,
     PatchedProjectRequestFromJSON,
     PatchedProjectRequestToJSON,
+    PatchedTagRequest,
+    PatchedTagRequestFromJSON,
+    PatchedTagRequestToJSON,
     PatchedUserCloudUpdateRequest,
     PatchedUserCloudUpdateRequestFromJSON,
     PatchedUserCloudUpdateRequestToJSON,
@@ -129,6 +132,15 @@ import {
     Size,
     SizeFromJSON,
     SizeToJSON,
+    Tag,
+    TagFromJSON,
+    TagToJSON,
+    TagIdRequest,
+    TagIdRequestFromJSON,
+    TagIdRequestToJSON,
+    TagRequest,
+    TagRequestFromJSON,
+    TagRequestToJSON,
     User,
     UserFromJSON,
     UserToJSON,
@@ -164,6 +176,13 @@ export interface AcceptValidationRequest {
     id: number;
     projectPk: number;
     visaPk: number;
+}
+
+export interface AddDocumentTagRequest {
+    cloudPk: number;
+    documentPk: number;
+    projectPk: number;
+    tagIdRequest: TagIdRequest;
 }
 
 export interface AddGroupMemberRequest {
@@ -253,6 +272,12 @@ export interface CreateProjectAccessTokenRequest {
     projectAccessTokenRequest: ProjectAccessTokenRequest;
 }
 
+export interface CreateTagRequest {
+    cloudPk: number;
+    projectPk: number;
+    tagRequest: TagRequest;
+}
+
 export interface CreateValidationRequest {
     cloudPk: number;
     documentPk: number;
@@ -297,6 +322,13 @@ export interface DeleteDocumentRequest {
     projectPk: number;
 }
 
+export interface DeleteDocumentTagRequest {
+    cloudPk: number;
+    documentPk: number;
+    id: number;
+    projectPk: number;
+}
+
 export interface DeleteFolderRequest {
     cloudPk: number;
     id: number;
@@ -328,6 +360,12 @@ export interface DeleteProjectAccessTokenRequest {
 }
 
 export interface DeleteProjectUserRequest {
+    cloudPk: number;
+    id: number;
+    projectPk: number;
+}
+
+export interface DeleteTagRequest {
     cloudPk: number;
     id: number;
     projectPk: number;
@@ -513,6 +551,17 @@ export interface GetProjectsRequest {
     cloudPk: number;
 }
 
+export interface GetTagRequest {
+    cloudPk: number;
+    id: number;
+    projectPk: number;
+}
+
+export interface GetTagsRequest {
+    cloudPk: number;
+    projectPk: number;
+}
+
 export interface GetValidationRequest {
     cloudPk: number;
     documentPk: number;
@@ -661,6 +710,13 @@ export interface UpdateProjectUserRequest {
     patchedUserProjectUpdateRequest?: PatchedUserProjectUpdateRequest;
 }
 
+export interface UpdateTagRequest {
+    cloudPk: number;
+    id: number;
+    projectPk: number;
+    patchedTagRequest?: PatchedTagRequest;
+}
+
 export interface UpdateValidationRequest {
     cloudPk: number;
     documentPk: number;
@@ -755,6 +811,71 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async acceptValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
         await this.acceptValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    }
+
+    /**
+     * Add a tag to a document  Required scopes: document:write
+     * Add a tag to a document
+     */
+    async addDocumentTagRaw(requestParameters: AddDocumentTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addDocumentTag.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling addDocumentTag.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling addDocumentTag.');
+        }
+
+        if (requestParameters.tagIdRequest === null || requestParameters.tagIdRequest === undefined) {
+            throw new runtime.RequiredError('tagIdRequest','Required parameter requestParameters.tagIdRequest was null or undefined when calling addDocumentTag.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/tag`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TagIdRequestToJSON(requestParameters.tagIdRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentFromJSON(jsonValue));
+    }
+
+    /**
+     * Add a tag to a document  Required scopes: document:write
+     * Add a tag to a document
+     */
+    async addDocumentTag(cloudPk: number, documentPk: number, projectPk: number, tagIdRequest: TagIdRequest, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.addDocumentTagRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, tagIdRequest: tagIdRequest }, initOverrides);
+        return await response.value();
     }
 
     /**
@@ -1626,6 +1747,67 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create a tag  Required scopes: org:manage
+     * Create a tag
+     */
+    async createTagRaw(requestParameters: CreateTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Tag>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createTag.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createTag.');
+        }
+
+        if (requestParameters.tagRequest === null || requestParameters.tagRequest === undefined) {
+            throw new runtime.RequiredError('tagRequest','Required parameter requestParameters.tagRequest was null or undefined when calling createTag.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TagRequestToJSON(requestParameters.tagRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TagFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a tag  Required scopes: org:manage
+     * Create a tag
+     */
+    async createTag(cloudPk: number, projectPk: number, tagRequest: TagRequest, initOverrides?: RequestInit): Promise<Tag> {
+        const response = await this.createTagRaw({ cloudPk: cloudPk, projectPk: projectPk, tagRequest: tagRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Add a validation to a visa  Required scopes: document:write
      * Add a validation to a visa
      */
@@ -2037,6 +2219,67 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * Delete a tag from a document  Required scopes: document:write
+     * Delete a tag from a document
+     */
+    async deleteDocumentTagRaw(requestParameters: DeleteDocumentTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteDocumentTag.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteDocumentTag.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteDocumentTag.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteDocumentTag.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a tag from a document  Required scopes: document:write
+     * Delete a tag from a document
+     */
+    async deleteDocumentTag(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteDocumentTagRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+    }
+
+    /**
      * All files and subfolders will be deleted too. If folder is a project\'s root folder, only children are deleted  Required scopes: document:write
      * Delete a folder
      */
@@ -2376,6 +2619,63 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async deleteProjectUser(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
         await this.deleteProjectUserRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    }
+
+    /**
+     * Delete the tag  Required scopes: org:manage
+     * Delete the tag
+     */
+    async deleteTagRaw(requestParameters: DeleteTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteTag.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTag.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteTag.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete the tag  Required scopes: org:manage
+     * Delete the tag
+     */
+    async deleteTag(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteTagRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
@@ -4321,6 +4621,118 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve a tag in the project  Required scopes: org:manage
+     * Retrieve a tag
+     */
+    async getTagRaw(requestParameters: GetTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Tag>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getTag.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTag.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getTag.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TagFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a tag in the project  Required scopes: org:manage
+     * Retrieve a tag
+     */
+    async getTag(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Tag> {
+        const response = await this.getTagRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all tags in the project  Required scopes: org:manage
+     * Retrieve all tags
+     */
+    async getTagsRaw(requestParameters: GetTagsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Tag>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getTags.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getTags.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TagFromJSON));
+    }
+
+    /**
+     * Retrieve all tags in the project  Required scopes: org:manage
+     * Retrieve all tags
+     */
+    async getTags(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Tag>> {
+        const response = await this.getTagsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve a validation to a visa  Required scopes: document:read
      * Retrieve a validation to a visa
      */
@@ -5649,6 +6061,67 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async updateProjectUser(cloudPk: number, id: number, projectPk: number, patchedUserProjectUpdateRequest?: PatchedUserProjectUpdateRequest, initOverrides?: RequestInit): Promise<UserProject> {
         const response = await this.updateProjectUserRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedUserProjectUpdateRequest: patchedUserProjectUpdateRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of the tag  Required scopes: org:manage
+     * Update some fields of the tag
+     */
+    async updateTagRaw(requestParameters: UpdateTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Tag>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateTag.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateTag.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateTag.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedTagRequestToJSON(requestParameters.patchedTagRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TagFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of the tag  Required scopes: org:manage
+     * Update some fields of the tag
+     */
+    async updateTag(cloudPk: number, id: number, projectPk: number, patchedTagRequest?: PatchedTagRequest, initOverrides?: RequestInit): Promise<Tag> {
+        const response = await this.updateTagRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedTagRequest: patchedTagRequest }, initOverrides);
         return await response.value();
     }
 

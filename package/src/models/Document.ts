@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    Tag,
+    TagFromJSON,
+    TagFromJSONTyped,
+    TagToJSON,
+} from './Tag';
+
 /**
  * 
  * @export
@@ -80,6 +87,12 @@ export interface Document {
      */
     size?: number | null;
     /**
+     * 
+     * @type {Array<Tag>}
+     * @memberof Document
+     */
+    readonly tags: Array<Tag>;
+    /**
      * Creation date
      * @type {Date}
      * @memberof Document
@@ -141,6 +154,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'description': !exists(json, 'description') ? undefined : json['description'],
         'file': json['file'],
         'size': !exists(json, 'size') ? undefined : json['size'],
+        'tags': ((json['tags'] as Array<any>).map(TagFromJSON)),
         'createdAt': (new Date(json['created_at'])),
         'updatedAt': (new Date(json['updated_at'])),
         'modelId': json['model_id'],

@@ -126,6 +126,7 @@ src/models/PatchedRulesetRequest.ts
 src/models/PatchedSpaceRequest.ts
 src/models/PatchedStageRequest.ts
 src/models/PatchedSystemRequest.ts
+src/models/PatchedTagRequest.ts
 src/models/PatchedTopicRequest.ts
 src/models/PatchedTopicStatusRequest.ts
 src/models/PatchedTopicTypeRequest.ts
@@ -211,6 +212,9 @@ src/models/StageRequest.ts
 src/models/Storey.ts
 src/models/System.ts
 src/models/SystemRequest.ts
+src/models/Tag.ts
+src/models/TagIdRequest.ts
+src/models/TagRequest.ts
 src/models/Topic.ts
 src/models/TopicRequest.ts
 src/models/TopicStatus.ts
