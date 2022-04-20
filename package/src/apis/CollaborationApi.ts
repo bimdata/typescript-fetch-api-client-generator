@@ -1391,7 +1391,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * RCreate a document. If the document is an IFC, an IFC model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
             throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createDocument.');
         }
@@ -1495,15 +1495,16 @@ export class CollaborationApi extends runtime.BaseAPI {
             body: formParams,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentFromJSON(jsonValue));
     }
 
     /**
      * RCreate a document. If the document is an IFC, an IFC model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parent?: number | null, parentId?: number | null, creator?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: CreateDocumentModelSourceEnum, ifcSource?: CreateDocumentIfcSourceEnum, initOverrides?: RequestInit): Promise<void> {
-        await this.createDocumentRaw({ cloudPk: cloudPk, projectPk: projectPk, name: name, file: file, parent: parent, parentId: parentId, creator: creator, fileName: fileName, description: description, size: size, modelSource: modelSource, ifcSource: ifcSource }, initOverrides);
+    async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parent?: number | null, parentId?: number | null, creator?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: CreateDocumentModelSourceEnum, ifcSource?: CreateDocumentIfcSourceEnum, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.createDocumentRaw({ cloudPk: cloudPk, projectPk: projectPk, name: name, file: file, parent: parent, parentId: parentId, creator: creator, fileName: fileName, description: description, size: size, modelSource: modelSource, ifcSource: ifcSource }, initOverrides);
+        return await response.value();
     }
 
     /**
