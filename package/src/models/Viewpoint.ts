@@ -104,6 +104,12 @@ export interface Viewpoint {
      * @memberof Viewpoint
      */
     components?: ComponentsParent | null;
+    /**
+     * Non standard field. Pins is a list of points representing annotation positions
+     * @type {Array<Array<number>>}
+     * @memberof Viewpoint
+     */
+    pins?: Array<Array<number>> | null;
 }
 
 export function ViewpointFromJSON(json: any): Viewpoint {
@@ -124,6 +130,7 @@ export function ViewpointFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'clippingPlanes': !exists(json, 'clipping_planes') ? undefined : (json['clipping_planes'] === null ? null : (json['clipping_planes'] as Array<any>).map(ClippingPlaneFromJSON)),
         'snapshot': !exists(json, 'snapshot') ? undefined : SnapshotFromJSON(json['snapshot']),
         'components': !exists(json, 'components') ? undefined : ComponentsParentFromJSON(json['components']),
+        'pins': !exists(json, 'pins') ? undefined : json['pins'],
     };
 }
 
@@ -144,6 +151,7 @@ export function ViewpointToJSON(value?: Viewpoint | null): any {
         'clipping_planes': value.clippingPlanes === undefined ? undefined : (value.clippingPlanes === null ? null : (value.clippingPlanes as Array<any>).map(ClippingPlaneToJSON)),
         'snapshot': SnapshotToJSON(value.snapshot),
         'components': ComponentsParentToJSON(value.components),
+        'pins': value.pins,
     };
 }
 

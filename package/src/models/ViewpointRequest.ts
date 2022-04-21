@@ -105,6 +105,12 @@ export interface ViewpointRequest {
      */
     components?: ComponentsParentRequest | null;
     /**
+     * Non standard field. Pins is a list of points representing annotation positions
+     * @type {Array<Array<number>>}
+     * @memberof ViewpointRequest
+     */
+    pins?: Array<Array<number>> | null;
+    /**
      * Only used when using POST on the full-topic route to bind viewpoint with comment
      * @type {number}
      * @memberof ViewpointRequest
@@ -130,6 +136,7 @@ export function ViewpointRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'clippingPlanes': !exists(json, 'clipping_planes') ? undefined : (json['clipping_planes'] === null ? null : (json['clipping_planes'] as Array<any>).map(ClippingPlaneRequestFromJSON)),
         'snapshot': !exists(json, 'snapshot') ? undefined : SnapshotRequestFromJSON(json['snapshot']),
         'components': !exists(json, 'components') ? undefined : ComponentsParentRequestFromJSON(json['components']),
+        'pins': !exists(json, 'pins') ? undefined : json['pins'],
         'tempId': !exists(json, 'temp_id') ? undefined : json['temp_id'],
     };
 }
@@ -151,6 +158,7 @@ export function ViewpointRequestToJSON(value?: ViewpointRequest | null): any {
         'clipping_planes': value.clippingPlanes === undefined ? undefined : (value.clippingPlanes === null ? null : (value.clippingPlanes as Array<any>).map(ClippingPlaneRequestToJSON)),
         'snapshot': SnapshotRequestToJSON(value.snapshot),
         'components': ComponentsParentRequestToJSON(value.components),
+        'pins': value.pins,
         'temp_id': value.tempId,
     };
 }
