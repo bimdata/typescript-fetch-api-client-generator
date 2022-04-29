@@ -27,12 +27,6 @@ export interface RecursiveFolderChildrenRequest {
     id: number;
     /**
      * 
-     * @type {number}
-     * @memberof RecursiveFolderChildrenRequest
-     */
-    parentId: number;
-    /**
-     * 
      * @type {string}
      * @memberof RecursiveFolderChildrenRequest
      */
@@ -92,7 +86,6 @@ export function RecursiveFolderChildrenRequestFromJSONTyped(json: any, ignoreDis
     return {
         
         'id': json['id'],
-        'parentId': json['parent_id'],
         'name': json['name'],
         'createdAt': (new Date(json['created_at'])),
         'updatedAt': (new Date(json['updated_at'])),
@@ -114,7 +107,6 @@ export function RecursiveFolderChildrenRequestToJSON(value?: RecursiveFolderChil
     return {
         
         'id': value.id,
-        'parent_id': value.parentId,
         'name': value.name,
         'created_at': (value.createdAt.toISOString()),
         'updated_at': (value.updatedAt.toISOString()),

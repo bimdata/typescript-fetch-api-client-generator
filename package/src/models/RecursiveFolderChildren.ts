@@ -43,7 +43,7 @@ export interface RecursiveFolderChildren {
      * @type {number}
      * @memberof RecursiveFolderChildren
      */
-    parentId: number;
+    readonly parentId: number | null;
     /**
      * 
      * @type {User}
@@ -247,7 +247,6 @@ export function RecursiveFolderChildrenToJSON(value?: RecursiveFolderChildren | 
     return {
         
         'id': value.id,
-        'parent_id': value.parentId,
         'created_by': UserToJSON(value.createdBy),
         'creator': UserToJSON(value.creator),
         'name': value.name,

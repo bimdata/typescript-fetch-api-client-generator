@@ -24,12 +24,6 @@ export interface PatchedDocumentRequest {
      * @type {number}
      * @memberof PatchedDocumentRequest
      */
-    parent?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PatchedDocumentRequest
-     */
     parentId?: number | null;
     /**
      * 
@@ -79,6 +73,12 @@ export interface PatchedDocumentRequest {
      * @memberof PatchedDocumentRequest
      */
     ifcSource?: PatchedDocumentRequestIfcSourceEnum;
+    /**
+     * Old document version to replace. Only for create
+     * @type {number}
+     * @memberof PatchedDocumentRequest
+     */
+    successorOf?: number;
 }
 
 /**
@@ -113,7 +113,6 @@ export function PatchedDocumentRequestFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'parent': !exists(json, 'parent') ? undefined : json['parent'],
         'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'creator': !exists(json, 'creator') ? undefined : json['creator'],
         'name': !exists(json, 'name') ? undefined : json['name'],
@@ -123,6 +122,7 @@ export function PatchedDocumentRequestFromJSONTyped(json: any, ignoreDiscriminat
         'size': !exists(json, 'size') ? undefined : json['size'],
         'modelSource': !exists(json, 'model_source') ? undefined : json['model_source'],
         'ifcSource': !exists(json, 'ifc_source') ? undefined : json['ifc_source'],
+        'successorOf': !exists(json, 'successor_of') ? undefined : json['successor_of'],
     };
 }
 
@@ -135,7 +135,6 @@ export function PatchedDocumentRequestToJSON(value?: PatchedDocumentRequest | nu
     }
     return {
         
-        'parent': value.parent,
         'parent_id': value.parentId,
         'creator': value.creator,
         'name': value.name,
@@ -145,6 +144,7 @@ export function PatchedDocumentRequestToJSON(value?: PatchedDocumentRequest | nu
         'size': value.size,
         'model_source': value.modelSource,
         'ifc_source': value.ifcSource,
+        'successor_of': value.successorOf,
     };
 }
 

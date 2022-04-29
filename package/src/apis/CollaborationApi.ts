@@ -239,7 +239,6 @@ export interface CreateDocumentRequest {
     projectPk: number;
     name: string;
     file: Blob;
-    parent?: number | null;
     parentId?: number | null;
     creator?: number | null;
     fileName?: string;
@@ -247,6 +246,7 @@ export interface CreateDocumentRequest {
     size?: number | null;
     modelSource?: CreateDocumentModelSourceEnum;
     ifcSource?: CreateDocumentIfcSourceEnum;
+    successorOf?: number;
 }
 
 export interface CreateFolderRequest {
@@ -318,6 +318,13 @@ export interface DeleteCloudUserRequest {
 
 export interface DeleteDocumentRequest {
     cloudPk: number;
+    id: number;
+    projectPk: number;
+}
+
+export interface DeleteDocumentHistoryRequest {
+    cloudPk: number;
+    documentPk: number;
     id: number;
     projectPk: number;
 }
@@ -402,6 +409,13 @@ export interface DenyValidationRequest {
     visaPk: number;
 }
 
+export interface ExitVersionDocumentHistoryRequest {
+    cloudPk: number;
+    documentPk: number;
+    id: number;
+    projectPk: number;
+}
+
 export interface GetClassificationRequest {
     cloudPk: number;
     id: number;
@@ -440,6 +454,19 @@ export interface GetCloudUsersRequest {
 
 export interface GetDocumentRequest {
     cloudPk: number;
+    id: number;
+    projectPk: number;
+}
+
+export interface GetDocumentHistoriesRequest {
+    cloudPk: number;
+    documentPk: number;
+    projectPk: number;
+}
+
+export interface GetDocumentHistoryRequest {
+    cloudPk: number;
+    documentPk: number;
     id: number;
     projectPk: number;
 }
@@ -619,6 +646,13 @@ export interface InviteProjectUserRequest {
 export interface LeaveProjectRequest {
     cloudPk: number;
     id: number;
+}
+
+export interface MakeHeadVersionDocumentHistoryRequest {
+    cloudPk: number;
+    documentPk: number;
+    id: number;
+    projectPk: number;
 }
 
 export interface PauseVisaRequest {
@@ -1447,10 +1481,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             formParams = new URLSearchParams();
         }
 
-        if (requestParameters.parent !== undefined) {
-            formParams.append('parent', requestParameters.parent as any);
-        }
-
         if (requestParameters.parentId !== undefined) {
             formParams.append('parent_id', requestParameters.parentId as any);
         }
@@ -1487,6 +1517,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             formParams.append('ifc_source', requestParameters.ifcSource as any);
         }
 
+        if (requestParameters.successorOf !== undefined) {
+            formParams.append('successor_of', requestParameters.successorOf as any);
+        }
+
         const response = await this.request({
             path: `/cloud/{cloud_pk}/project/{project_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
             method: 'POST',
@@ -1502,8 +1536,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * RCreate a document. If the document is an IFC, an IFC model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parent?: number | null, parentId?: number | null, creator?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: CreateDocumentModelSourceEnum, ifcSource?: CreateDocumentIfcSourceEnum, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.createDocumentRaw({ cloudPk: cloudPk, projectPk: projectPk, name: name, file: file, parent: parent, parentId: parentId, creator: creator, fileName: fileName, description: description, size: size, modelSource: modelSource, ifcSource: ifcSource }, initOverrides);
+    async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parentId?: number | null, creator?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: CreateDocumentModelSourceEnum, ifcSource?: CreateDocumentIfcSourceEnum, successorOf?: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.createDocumentRaw({ cloudPk: cloudPk, projectPk: projectPk, name: name, file: file, parentId: parentId, creator: creator, fileName: fileName, description: description, size: size, modelSource: modelSource, ifcSource: ifcSource, successorOf: successorOf }, initOverrides);
         return await response.value();
     }
 
@@ -2217,6 +2251,67 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async deleteDocument(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
         await this.deleteDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    }
+
+    /**
+     * Delete the document  Required scopes: document:write
+     * Delete the document
+     */
+    async deleteDocumentHistoryRaw(requestParameters: DeleteDocumentHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteDocumentHistory.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteDocumentHistory.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteDocumentHistory.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteDocumentHistory.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete the document  Required scopes: document:write
+     * Delete the document
+     */
+    async deleteDocumentHistory(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteDocumentHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
     }
 
     /**
@@ -2936,6 +3031,68 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * This will create a new independent document in the same folder  Required scopes: document:write
+     * Exit of the history version
+     */
+    async exitVersionDocumentHistoryRaw(requestParameters: ExitVersionDocumentHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling exitVersionDocumentHistory.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling exitVersionDocumentHistory.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling exitVersionDocumentHistory.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling exitVersionDocumentHistory.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/{id}/exit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentFromJSON(jsonValue));
+    }
+
+    /**
+     * This will create a new independent document in the same folder  Required scopes: document:write
+     * Exit of the history version
+     */
+    async exitVersionDocumentHistory(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.exitVersionDocumentHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve a classification  Required scopes: ifc:read, model:read
      * Retrieve a classification
      */
@@ -3418,6 +3575,126 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getDocument(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Document> {
         const response = await this.getDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all documents from the header document history  Required scopes: document:read
+     * Retrieve all document histories
+     */
+    async getDocumentHistoriesRaw(requestParameters: GetDocumentHistoriesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocumentHistories.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getDocumentHistories.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocumentHistories.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
+    }
+
+    /**
+     * Retrieve all documents from the header document history  Required scopes: document:read
+     * Retrieve all document histories
+     */
+    async getDocumentHistories(cloudPk: number, documentPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentHistoriesRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a document from the header document history  Required scopes: document:read
+     * Retrieve a document
+     */
+    async getDocumentHistoryRaw(requestParameters: GetDocumentHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocumentHistory.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getDocumentHistory.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getDocumentHistory.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocumentHistory.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a document from the header document history  Required scopes: document:read
+     * Retrieve a document
+     */
+    async getDocumentHistory(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.getDocumentHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
         return await response.value();
     }
 
@@ -5278,6 +5555,68 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async leaveProject(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
         await this.leaveProjectRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    }
+
+    /**
+     * The actual head version will be defined as the previous version  Required scopes: document:write
+     * Make the head of the version
+     */
+    async makeHeadVersionDocumentHistoryRaw(requestParameters: MakeHeadVersionDocumentHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling makeHeadVersionDocumentHistory.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling makeHeadVersionDocumentHistory.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling makeHeadVersionDocumentHistory.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling makeHeadVersionDocumentHistory.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/{id}/head-version`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentFromJSON(jsonValue));
+    }
+
+    /**
+     * The actual head version will be defined as the previous version  Required scopes: document:write
+     * Make the head of the version
+     */
+    async makeHeadVersionDocumentHistory(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.makeHeadVersionDocumentHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+        return await response.value();
     }
 
     /**
