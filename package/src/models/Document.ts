@@ -14,12 +14,6 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Folder,
-    FolderFromJSON,
-    FolderFromJSONTyped,
-    FolderToJSON,
-} from './Folder';
-import {
     Tag,
     TagFromJSON,
     TagFromJSONTyped,
@@ -38,12 +32,6 @@ export interface Document {
      * @memberof Document
      */
     readonly id: number;
-    /**
-     * 
-     * @type {Folder}
-     * @memberof Document
-     */
-    readonly parent: Folder | null;
     /**
      * 
      * @type {number}
@@ -151,7 +139,6 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     return {
         
         'id': json['id'],
-        'parent': FolderFromJSON(json['parent']),
         'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'creator': !exists(json, 'creator') ? undefined : json['creator'],
         'project': json['project'],
