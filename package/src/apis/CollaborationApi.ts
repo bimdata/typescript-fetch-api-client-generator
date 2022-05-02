@@ -240,7 +240,6 @@ export interface CreateDocumentRequest {
     name: string;
     file: Blob;
     parentId?: number | null;
-    creator?: number | null;
     fileName?: string;
     description?: string | null;
     size?: number | null;
@@ -1485,10 +1484,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             formParams.append('parent_id', requestParameters.parentId as any);
         }
 
-        if (requestParameters.creator !== undefined) {
-            formParams.append('creator', requestParameters.creator as any);
-        }
-
         if (requestParameters.name !== undefined) {
             formParams.append('name', requestParameters.name as any);
         }
@@ -1536,8 +1531,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * RCreate a document. If the document is an IFC, an IFC model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parentId?: number | null, creator?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: CreateDocumentModelSourceEnum, ifcSource?: CreateDocumentIfcSourceEnum, successorOf?: number, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.createDocumentRaw({ cloudPk: cloudPk, projectPk: projectPk, name: name, file: file, parentId: parentId, creator: creator, fileName: fileName, description: description, size: size, modelSource: modelSource, ifcSource: ifcSource, successorOf: successorOf }, initOverrides);
+    async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parentId?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: CreateDocumentModelSourceEnum, ifcSource?: CreateDocumentIfcSourceEnum, successorOf?: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.createDocumentRaw({ cloudPk: cloudPk, projectPk: projectPk, name: name, file: file, parentId: parentId, fileName: fileName, description: description, size: size, modelSource: modelSource, ifcSource: ifcSource, successorOf: successorOf }, initOverrides);
         return await response.value();
     }
 

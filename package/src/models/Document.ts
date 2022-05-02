@@ -19,6 +19,12 @@ import {
     TagFromJSONTyped,
     TagToJSON,
 } from './Tag';
+import {
+    User,
+    UserFromJSON,
+    UserFromJSONTyped,
+    UserToJSON,
+} from './User';
 
 /**
  * 
@@ -40,10 +46,10 @@ export interface Document {
     parentId?: number | null;
     /**
      * 
-     * @type {number}
+     * @type {User}
      * @memberof Document
      */
-    creator?: number | null;
+    readonly createdBy: User | null;
     /**
      * 
      * @type {number}
@@ -140,7 +146,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         
         'id': json['id'],
         'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'creator': !exists(json, 'creator') ? undefined : json['creator'],
+        'createdBy': UserFromJSON(json['created_by']),
         'project': json['project'],
         'name': json['name'],
         'fileName': !exists(json, 'file_name') ? undefined : json['file_name'],
@@ -166,7 +172,6 @@ export function DocumentToJSON(value?: Document | null): any {
     return {
         
         'parent_id': value.parentId,
-        'creator': value.creator,
         'name': value.name,
         'file_name': value.fileName,
         'description': value.description,

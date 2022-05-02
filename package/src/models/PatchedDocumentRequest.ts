@@ -26,12 +26,6 @@ export interface PatchedDocumentRequest {
      */
     parentId?: number | null;
     /**
-     * 
-     * @type {number}
-     * @memberof PatchedDocumentRequest
-     */
-    creator?: number | null;
-    /**
      * Shown name of the file
      * @type {string}
      * @memberof PatchedDocumentRequest
@@ -114,7 +108,6 @@ export function PatchedDocumentRequestFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'creator': !exists(json, 'creator') ? undefined : json['creator'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'fileName': !exists(json, 'file_name') ? undefined : json['file_name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
@@ -136,7 +129,6 @@ export function PatchedDocumentRequestToJSON(value?: PatchedDocumentRequest | nu
     return {
         
         'parent_id': value.parentId,
-        'creator': value.creator,
         'name': value.name,
         'file_name': value.fileName,
         'description': value.description,
