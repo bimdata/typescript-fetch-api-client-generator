@@ -111,6 +111,12 @@ export interface Document {
      */
     readonly modelId: number | null;
     /**
+     * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, DAE, BFX
+     * @type {string}
+     * @memberof Document
+     */
+    readonly modelType: DocumentModelTypeEnum;
+    /**
      * DEPRECATED: Use 'model_id' instead.
      * @type {number}
      * @memberof Document
@@ -125,6 +131,22 @@ export interface Document {
 }
 
 /**
+* @export
+* @enum {string}
+*/
+export enum DocumentModelTypeEnum {
+    Ifc = 'IFC',
+    Dwg = 'DWG',
+    Dxf = 'DXF',
+    Gltf = 'GLTF',
+    Pdf = 'PDF',
+    Jpeg = 'JPEG',
+    Png = 'PNG',
+    Obj = 'OBJ',
+    Dae = 'DAE',
+    Bfx = 'BFX',
+    Null = 'null'
+}/**
 * @export
 * @enum {string}
 */
@@ -157,6 +179,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'createdAt': (new Date(json['created_at'])),
         'updatedAt': (new Date(json['updated_at'])),
         'modelId': json['model_id'],
+        'modelType': json['model_type'],
         'ifcId': json['ifc_id'],
         'userPermission': json['user_permission'],
     };
