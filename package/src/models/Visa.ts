@@ -64,6 +64,12 @@ export interface Visa {
     readonly creator: UserProject | null;
     /**
      * 
+     * @type {number}
+     * @memberof Visa
+     */
+    readonly documentId: number;
+    /**
+     * 
      * @type {string}
      * @memberof Visa
      */
@@ -124,6 +130,7 @@ export function VisaFromJSONTyped(json: any, ignoreDiscriminator: boolean): Visa
         'validations': ((json['validations'] as Array<any>).map(VisaValidationFromJSON)),
         'validationsInError': json['validations_in_error'],
         'creator': UserProjectFromJSON(json['creator']),
+        'documentId': json['document_id'],
         'status': json['status'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'comments': ((json['comments'] as Array<any>).map(VisaCommentFromJSON)),
