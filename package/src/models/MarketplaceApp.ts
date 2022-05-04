@@ -118,6 +118,12 @@ export interface MarketplaceApp {
     logo?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof MarketplaceApp
+     */
+    file?: string | null;
+    /**
+     * 
      * @type {Array<MarketplaceAppImage>}
      * @memberof MarketplaceApp
      */
@@ -153,6 +159,7 @@ export function MarketplaceAppFromJSONTyped(json: any, ignoreDiscriminator: bool
         'isPublic': !exists(json, 'is_public') ? undefined : json['is_public'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
+        'file': !exists(json, 'file') ? undefined : json['file'],
         'images': ((json['images'] as Array<any>).map(MarketplaceAppImageFromJSON)),
         'organization': PublicOrganizationFromJSON(json['organization']),
     };
@@ -177,6 +184,7 @@ export function MarketplaceAppToJSON(value?: MarketplaceApp | null): any {
         'is_public': value.isPublic,
         'tags': value.tags,
         'logo': value.logo,
+        'file': value.file,
     };
 }
 

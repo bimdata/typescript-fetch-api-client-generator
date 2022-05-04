@@ -25,6 +25,12 @@ import {
     UserFromJSONTyped,
     UserToJSON,
 } from './User';
+import {
+    Visa,
+    VisaFromJSON,
+    VisaFromJSONTyped,
+    VisaToJSON,
+} from './Visa';
 
 /**
  * 
@@ -92,6 +98,12 @@ export interface Document {
      * @memberof Document
      */
     readonly tags: Array<Tag>;
+    /**
+     * 
+     * @type {Array<Visa>}
+     * @memberof Document
+     */
+    readonly visas: Array<Visa>;
     /**
      * Creation date
      * @type {Date}
@@ -176,6 +188,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'file': json['file'],
         'size': !exists(json, 'size') ? undefined : json['size'],
         'tags': ((json['tags'] as Array<any>).map(TagFromJSON)),
+        'visas': ((json['visas'] as Array<any>).map(VisaFromJSON)),
         'createdAt': (new Date(json['created_at'])),
         'updatedAt': (new Date(json['updated_at'])),
         'modelId': json['model_id'],

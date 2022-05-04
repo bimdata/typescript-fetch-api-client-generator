@@ -85,6 +85,12 @@ export interface MarketplaceAppRequest {
      * @memberof MarketplaceAppRequest
      */
     logo?: Blob | null;
+    /**
+     * 
+     * @type {Blob}
+     * @memberof MarketplaceAppRequest
+     */
+    file?: Blob | null;
 }
 
 export function MarketplaceAppRequestFromJSON(json: any): MarketplaceAppRequest {
@@ -108,6 +114,7 @@ export function MarketplaceAppRequestFromJSONTyped(json: any, ignoreDiscriminato
         'isPublic': !exists(json, 'is_public') ? undefined : json['is_public'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
+        'file': !exists(json, 'file') ? undefined : json['file'],
     };
 }
 
@@ -131,6 +138,7 @@ export function MarketplaceAppRequestToJSON(value?: MarketplaceAppRequest | null
         'is_public': value.isPublic,
         'tags': value.tags,
         'logo': value.logo,
+        'file': value.file,
     };
 }
 

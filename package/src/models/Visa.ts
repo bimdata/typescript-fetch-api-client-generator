@@ -14,12 +14,6 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Document,
-    DocumentFromJSON,
-    DocumentFromJSONTyped,
-    DocumentToJSON,
-} from './Document';
-import {
     UserProject,
     UserProjectFromJSON,
     UserProjectFromJSONTyped,
@@ -82,12 +76,6 @@ export interface Visa {
     description?: string | null;
     /**
      * 
-     * @type {Document}
-     * @memberof Visa
-     */
-    readonly document: Document | null;
-    /**
-     * 
      * @type {Array<VisaComment>}
      * @memberof Visa
      */
@@ -138,7 +126,6 @@ export function VisaFromJSONTyped(json: any, ignoreDiscriminator: boolean): Visa
         'creator': UserProjectFromJSON(json['creator']),
         'status': json['status'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'document': DocumentFromJSON(json['document']),
         'comments': ((json['comments'] as Array<any>).map(VisaCommentFromJSON)),
         'deadline': !exists(json, 'deadline') ? undefined : (json['deadline'] === null ? null : new Date(json['deadline'])),
         'createdAt': (new Date(json['created_at'])),
