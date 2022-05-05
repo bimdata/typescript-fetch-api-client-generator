@@ -300,7 +300,7 @@ export interface CreateVisaCommentRequest {
     visaCommentRequest?: VisaCommentRequest;
 }
 
-export interface DeleteAllHistoryRequest {
+export interface DeleteAllDocumentHistoryRequest {
     cloudPk: number;
     documentPk: number;
     projectPk: number;
@@ -2039,20 +2039,20 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete all document history  Required scopes: document:write
+     * Delete the document from the head version and all its history  Required scopes: document:write
      * Delete all document history
      */
-    async deleteAllHistoryRaw(requestParameters: DeleteAllHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async deleteAllDocumentHistoryRaw(requestParameters: DeleteAllDocumentHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteAllHistory.');
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteAllDocumentHistory.');
         }
 
         if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteAllHistory.');
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteAllDocumentHistory.');
         }
 
         if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteAllHistory.');
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteAllDocumentHistory.');
         }
 
         const queryParameters: any = {};
@@ -2088,11 +2088,11 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete all document history  Required scopes: document:write
+     * Delete the document from the head version and all its history  Required scopes: document:write
      * Delete all document history
      */
-    async deleteAllHistory(cloudPk: number, documentPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteAllHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk }, initOverrides);
+    async deleteAllDocumentHistory(cloudPk: number, documentPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteAllDocumentHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
