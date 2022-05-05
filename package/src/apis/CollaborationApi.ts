@@ -300,6 +300,12 @@ export interface CreateVisaCommentRequest {
     visaCommentRequest?: VisaCommentRequest;
 }
 
+export interface DeleteAllHistoryRequest {
+    cloudPk: number;
+    documentPk: number;
+    projectPk: number;
+}
+
 export interface DeleteClassificationRequest {
     cloudPk: number;
     id: number;
@@ -2030,6 +2036,63 @@ export class CollaborationApi extends runtime.BaseAPI {
     async createVisaComment(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, visaCommentRequest?: VisaCommentRequest, initOverrides?: RequestInit): Promise<VisaComment> {
         const response = await this.createVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk, visaCommentRequest: visaCommentRequest }, initOverrides);
         return await response.value();
+    }
+
+    /**
+     * Delete all document history  Required scopes: document:write
+     * Delete all document history
+     */
+    async deleteAllHistoryRaw(requestParameters: DeleteAllHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
+            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteAllHistory.');
+        }
+
+        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
+            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteAllHistory.');
+        }
+
+        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
+            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteAllHistory.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/delete`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete all document history  Required scopes: document:write
+     * Delete all document history
+     */
+    async deleteAllHistory(cloudPk: number, documentPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteAllHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk }, initOverrides);
     }
 
     /**
