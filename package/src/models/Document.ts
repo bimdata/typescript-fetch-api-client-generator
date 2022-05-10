@@ -140,6 +140,12 @@ export interface Document {
      * @memberof Document
      */
     readonly userPermission: DocumentUserPermissionEnum;
+    /**
+     * Document is a head of version or is owned by another document
+     * @type {boolean}
+     * @memberof Document
+     */
+    readonly isHeadVersion: boolean;
 }
 
 /**
@@ -195,6 +201,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'modelType': json['model_type'],
         'ifcId': json['ifc_id'],
         'userPermission': json['user_permission'],
+        'isHeadVersion': json['is_head_version'],
     };
 }
 
