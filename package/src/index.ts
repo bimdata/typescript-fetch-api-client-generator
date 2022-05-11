@@ -15,7 +15,9 @@ export function makeBIMDataApiClient(config) {
     set config(value) {
       this._accessToken = value.accessToken;
       this._config = new Configuration({
-        basePath: value.apiUrl,
+        // basePath is renamed to make the makeBIMDataApiClient signature more readable
+        basePath: value.basePath || value.apiUrl,
+        credentials: value.credentials,
         headers: {
           Authorization: `Bearer ${value.accessToken}`
         }
@@ -31,7 +33,7 @@ export function makeBIMDataApiClient(config) {
     },
     set accessToken(value) {
       this.config = {
-        apiUrl: this._config.basePath,
+        ...this._config.configuration,
         accessToken: value
       };
     },
