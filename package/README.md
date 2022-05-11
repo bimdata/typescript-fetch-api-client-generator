@@ -19,6 +19,9 @@ BIMData API and what's possible to do with it, please refer to [the documentatio
 In order to perform calls to the API you'll need to create an API client with a configuration object.
 The snippet below shows an example of how to do it.
 
+The `credentials` argument is optional and adds this option to the fetch method.
+If it is not set, the default option for fetch will be used.
+
 ```javascript
 import { makeBIMDataApiClient } from '@bimdata/typescript-fetch-api-client';
 
