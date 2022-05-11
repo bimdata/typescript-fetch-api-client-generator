@@ -22,7 +22,7 @@ The snippet below shows an example of how to do it.
 ```javascript
 import { makeBIMDataApiClient } from '@bimdata/typescript-fetch-api-client';
 
-const apiClient = makeBIMDataApiClient({ apiUrl, accessToken });
+const apiClient = makeBIMDataApiClient({ apiUrl, accessToken, credentials });
 
 apiClient.collaborationApi.getClouds().then(
   clouds => console.log('Here is the list of clouds: ', clouds)
