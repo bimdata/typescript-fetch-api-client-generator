@@ -103,7 +103,7 @@ export interface MarketplaceApp {
      * @type {boolean}
      * @memberof MarketplaceApp
      */
-    isPublic?: boolean;
+    readonly isPublic: boolean;
     /**
      * 
      * @type {Array<string>}
@@ -156,7 +156,7 @@ export function MarketplaceAppFromJSONTyped(json: any, ignoreDiscriminator: bool
         'creator': UserFromJSON(json['creator']),
         'scopes': json['scopes'],
         'settingsUrl': !exists(json, 'settings_url') ? undefined : json['settings_url'],
-        'isPublic': !exists(json, 'is_public') ? undefined : json['is_public'],
+        'isPublic': json['is_public'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'file': !exists(json, 'file') ? undefined : json['file'],
@@ -181,7 +181,6 @@ export function MarketplaceAppToJSON(value?: MarketplaceApp | null): any {
         'post_activation_redirect_uri': value.postActivationRedirectUri,
         'viewer_plugins_urls': value.viewerPluginsUrls,
         'settings_url': value.settingsUrl,
-        'is_public': value.isPublic,
         'tags': value.tags,
         'logo': value.logo,
         'file': value.file,

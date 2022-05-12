@@ -69,12 +69,6 @@ export interface MarketplaceAppRequest {
     settingsUrl?: string | null;
     /**
      * 
-     * @type {boolean}
-     * @memberof MarketplaceAppRequest
-     */
-    isPublic?: boolean;
-    /**
-     * 
      * @type {Array<string>}
      * @memberof MarketplaceAppRequest
      */
@@ -111,7 +105,6 @@ export function MarketplaceAppRequestFromJSONTyped(json: any, ignoreDiscriminato
         'viewerPluginsUrls': !exists(json, 'viewer_plugins_urls') ? undefined : json['viewer_plugins_urls'],
         'webhookSecret': !exists(json, 'webhook_secret') ? undefined : json['webhook_secret'],
         'settingsUrl': !exists(json, 'settings_url') ? undefined : json['settings_url'],
-        'isPublic': !exists(json, 'is_public') ? undefined : json['is_public'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'file': !exists(json, 'file') ? undefined : json['file'],
@@ -135,7 +128,6 @@ export function MarketplaceAppRequestToJSON(value?: MarketplaceAppRequest | null
         'viewer_plugins_urls': value.viewerPluginsUrls,
         'webhook_secret': value.webhookSecret,
         'settings_url': value.settingsUrl,
-        'is_public': value.isPublic,
         'tags': value.tags,
         'logo': value.logo,
         'file': value.file,

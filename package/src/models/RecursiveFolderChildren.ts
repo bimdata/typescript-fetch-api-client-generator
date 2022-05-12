@@ -14,11 +14,23 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    Document,
+    DocumentFromJSON,
+    DocumentFromJSONTyped,
+    DocumentToJSON,
+} from './Document';
+import {
     FolderGroupPermission,
     FolderGroupPermissionFromJSON,
     FolderGroupPermissionFromJSONTyped,
     FolderGroupPermissionToJSON,
 } from './FolderGroupPermission';
+import {
+    Tag,
+    TagFromJSON,
+    TagFromJSONTyped,
+    TagToJSON,
+} from './Tag';
 import {
     User,
     UserFromJSON,
@@ -147,6 +159,18 @@ export interface RecursiveFolderChildren {
      */
     readonly userPermission: RecursiveFolderChildrenUserPermissionEnum;
     /**
+     * History of a document
+     * @type {Array<Document>}
+     * @memberof RecursiveFolderChildren
+     */
+    readonly history: Array<Document> | null;
+    /**
+     * Tags of a document
+     * @type {Array<Tag>}
+     * @memberof RecursiveFolderChildren
+     */
+    readonly tags: Array<Tag> | null;
+    /**
      * 
      * @type {Array<RecursiveFolderChildren>}
      * @memberof RecursiveFolderChildren
@@ -233,6 +257,8 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
         'groupsPermissions': (json['groups_permissions'] === null ? null : (json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
         'defaultPermission': json['default_permission'],
         'userPermission': json['user_permission'],
+        'history': (json['history'] === null ? null : (json['history'] as Array<any>).map(DocumentFromJSON)),
+        'tags': (json['tags'] === null ? null : (json['tags'] as Array<any>).map(TagFromJSON)),
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),
     };
 }
