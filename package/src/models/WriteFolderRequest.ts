@@ -16,44 +16,50 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface FolderRequest
+ * @interface WriteFolderRequest
  */
-export interface FolderRequest {
+export interface WriteFolderRequest {
     /**
      * 
      * @type {number}
-     * @memberof FolderRequest
+     * @memberof WriteFolderRequest
      */
     parentId?: number | null;
     /**
      * Name of the folder
      * @type {string}
-     * @memberof FolderRequest
+     * @memberof WriteFolderRequest
      */
     name: string;
     /**
      * Permission for a Folder
      * @type {number}
-     * @memberof FolderRequest
+     * @memberof WriteFolderRequest
      */
-    defaultPermission?: FolderRequestDefaultPermissionEnum;
+    defaultPermission?: WriteFolderRequestDefaultPermissionEnum;
+    /**
+     * 
+     * @type {Array<WriteFolderRequest>}
+     * @memberof WriteFolderRequest
+     */
+    children?: Array<WriteFolderRequest> | null;
 }
 
 /**
 * @export
 * @enum {string}
 */
-export enum FolderRequestDefaultPermissionEnum {
+export enum WriteFolderRequestDefaultPermissionEnum {
     NUMBER_1 = 1,
     NUMBER_50 = 50,
     NUMBER_100 = 100
 }
 
-export function FolderRequestFromJSON(json: any): FolderRequest {
-    return FolderRequestFromJSONTyped(json, false);
+export function WriteFolderRequestFromJSON(json: any): WriteFolderRequest {
+    return WriteFolderRequestFromJSONTyped(json, false);
 }
 
-export function FolderRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): FolderRequest {
+export function WriteFolderRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): WriteFolderRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -62,10 +68,11 @@ export function FolderRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
         'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': json['name'],
         'defaultPermission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderRequestFromJSON)),
     };
 }
 
-export function FolderRequestToJSON(value?: FolderRequest | null): any {
+export function WriteFolderRequestToJSON(value?: WriteFolderRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -77,6 +84,7 @@ export function FolderRequestToJSON(value?: FolderRequest | null): any {
         'parent_id': value.parentId,
         'name': value.name,
         'default_permission': value.defaultPermission,
+        'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(WriteFolderRequestToJSON)),
     };
 }
 

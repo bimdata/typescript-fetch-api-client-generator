@@ -39,9 +39,6 @@ import {
     Folder,
     FolderFromJSON,
     FolderToJSON,
-    FolderRequest,
-    FolderRequestFromJSON,
-    FolderRequestToJSON,
     FolderUserProject,
     FolderUserProjectFromJSON,
     FolderUserProjectToJSON,
@@ -168,6 +165,9 @@ import {
     VisaValidationRequest,
     VisaValidationRequestFromJSON,
     VisaValidationRequestToJSON,
+    WriteFolderRequest,
+    WriteFolderRequestFromJSON,
+    WriteFolderRequestToJSON,
 } from '../models';
 
 export interface AcceptValidationRequest {
@@ -227,7 +227,7 @@ export interface CreateCloudRequest {
 export interface CreateDMSTreeRequest {
     cloudPk: number;
     id: number;
-    folderRequest: FolderRequest;
+    writeFolderRequest: WriteFolderRequest;
 }
 
 export interface CreateDemoRequest {
@@ -1303,7 +1303,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Create a DMS structure of folder Format request :     [{         \"name\": :name:         \"parent_id\": :parent_id:                      # optionnal         \"default_permission\": :default_permission:    # optionnal         \"children\": [{                                # optionnal             \"name\": :name:,             \"children\": []         }]     }],                   Required scopes: org:manage
+     *  Create a DMS structure of folder Format request : ``` [{     \"name\": :name:     \"parent_id\": :parent_id:                      # optionnal     \"default_permission\": :default_permission:    # optionnal     \"children\": [{                                # optionnal         \"name\": :name:,         \"children\": []     }] }], ```                   Required scopes: org:manage
      * Create a complete DMS tree
      */
     async createDMSTreeRaw(requestParameters: CreateDMSTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -1315,8 +1315,8 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createDMSTree.');
         }
 
-        if (requestParameters.folderRequest === null || requestParameters.folderRequest === undefined) {
-            throw new runtime.RequiredError('folderRequest','Required parameter requestParameters.folderRequest was null or undefined when calling createDMSTree.');
+        if (requestParameters.writeFolderRequest === null || requestParameters.writeFolderRequest === undefined) {
+            throw new runtime.RequiredError('writeFolderRequest','Required parameter requestParameters.writeFolderRequest was null or undefined when calling createDMSTree.');
         }
 
         const queryParameters: any = {};
@@ -1348,18 +1348,18 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: FolderRequestToJSON(requestParameters.folderRequest),
+            body: WriteFolderRequestToJSON(requestParameters.writeFolderRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     *  Create a DMS structure of folder Format request :     [{         \"name\": :name:         \"parent_id\": :parent_id:                      # optionnal         \"default_permission\": :default_permission:    # optionnal         \"children\": [{                                # optionnal             \"name\": :name:,             \"children\": []         }]     }],                   Required scopes: org:manage
+     *  Create a DMS structure of folder Format request : ``` [{     \"name\": :name:     \"parent_id\": :parent_id:                      # optionnal     \"default_permission\": :default_permission:    # optionnal     \"children\": [{                                # optionnal         \"name\": :name:,         \"children\": []     }] }], ```                   Required scopes: org:manage
      * Create a complete DMS tree
      */
-    async createDMSTree(cloudPk: number, id: number, folderRequest: FolderRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.createDMSTreeRaw({ cloudPk: cloudPk, id: id, folderRequest: folderRequest }, initOverrides);
+    async createDMSTree(cloudPk: number, id: number, writeFolderRequest: WriteFolderRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.createDMSTreeRaw({ cloudPk: cloudPk, id: id, writeFolderRequest: writeFolderRequest }, initOverrides);
     }
 
     /**
@@ -1413,7 +1413,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DXF\', \'GLTF\', \'OBJ\', \'IFC\', \'DAE\', \'BFX\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DAE\', \'GLTF\', \'IFC\', \'DXF\', \'DWG\', \'OBJ\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1520,7 +1520,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DXF\', \'GLTF\', \'OBJ\', \'IFC\', \'DAE\', \'BFX\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DAE\', \'GLTF\', \'IFC\', \'DXF\', \'DWG\', \'OBJ\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parentId?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: CreateDocumentModelSourceEnum, ifcSource?: CreateDocumentIfcSourceEnum, successorOf?: number, initOverrides?: RequestInit): Promise<Document> {

@@ -50,7 +50,6 @@ src/models/FeatureRequest.ts
 src/models/Folder.ts
 src/models/FolderGroupPermission.ts
 src/models/FolderGroupPermissionRequest.ts
-src/models/FolderRequest.ts
 src/models/FolderUserProject.ts
 src/models/FolderWithoutChildren.ts
 src/models/FolderWithoutChildrenRequest.ts
@@ -192,7 +191,6 @@ src/models/RawSystemRequest.ts
 src/models/RawUnit.ts
 src/models/RawUnitRequest.ts
 src/models/RecursiveFolderChildren.ts
-src/models/RecursiveFolderChildrenRequest.ts
 src/models/Rule.ts
 src/models/RuleComponent.ts
 src/models/RuleComponentRequest.ts
@@ -240,6 +238,7 @@ src/models/Visibility.ts
 src/models/VisibilityRequest.ts
 src/models/WebHook.ts
 src/models/WebHookRequest.ts
+src/models/WriteFolderRequest.ts
 src/models/Zone.ts
 src/models/ZoneRequest.ts
 src/models/ZoneSpace.ts
