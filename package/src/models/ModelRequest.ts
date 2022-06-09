@@ -30,12 +30,6 @@ export interface ModelRequest {
      * @type {string}
      * @memberof ModelRequest
      */
-    status: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelRequest
-     */
     source?: ModelRequestSourceEnum;
     /**
      * [x,y,z] array of the position of the local_placement in world coordinates
@@ -98,7 +92,6 @@ export function ModelRequestFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'status': json['status'],
         'source': !exists(json, 'source') ? undefined : json['source'],
         'worldPosition': !exists(json, 'world_position') ? undefined : json['world_position'],
         'sizeRatio': !exists(json, 'size_ratio') ? undefined : json['size_ratio'],
@@ -119,7 +112,6 @@ export function ModelRequestToJSON(value?: ModelRequest | null): any {
     return {
         
         'name': value.name,
-        'status': value.status,
         'source': value.source,
         'world_position': value.worldPosition,
         'size_ratio': value.sizeRatio,

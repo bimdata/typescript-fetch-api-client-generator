@@ -61,7 +61,7 @@ export interface Model {
      * @type {string}
      * @memberof Model
      */
-    status: string;
+    readonly status: string;
     /**
      * 
      * @type {string}
@@ -267,7 +267,6 @@ export function ModelToJSON(value?: Model | null): any {
     return {
         
         'name': value.name,
-        'status': value.status,
         'source': value.source,
         'world_position': value.worldPosition,
         'size_ratio': value.sizeRatio,

@@ -1413,7 +1413,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DAE\', \'GLTF\', \'IFC\', \'DXF\', \'DWG\', \'OBJ\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'DWG\', \'IFC\', \'DAE\', \'OBJ\', \'GLTF\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1520,7 +1520,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DAE\', \'GLTF\', \'IFC\', \'DXF\', \'DWG\', \'OBJ\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'DWG\', \'IFC\', \'DAE\', \'OBJ\', \'GLTF\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parentId?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: CreateDocumentModelSourceEnum, ifcSource?: CreateDocumentIfcSourceEnum, successorOf?: number, initOverrides?: RequestInit): Promise<Document> {

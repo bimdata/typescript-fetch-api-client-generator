@@ -70,6 +70,12 @@ export interface Viewpoint {
     guid?: string;
     /**
      * 
+     * @type {string}
+     * @memberof Viewpoint
+     */
+    authoringView?: string;
+    /**
+     * 
      * @type {OrthogonalCamera}
      * @memberof Viewpoint
      */
@@ -124,6 +130,7 @@ export function ViewpointFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         
         'index': !exists(json, 'index') ? undefined : json['index'],
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
+        'authoringView': !exists(json, 'authoring_view') ? undefined : json['authoring_view'],
         'orthogonalCamera': !exists(json, 'orthogonal_camera') ? undefined : OrthogonalCameraFromJSON(json['orthogonal_camera']),
         'perspectiveCamera': !exists(json, 'perspective_camera') ? undefined : PerspectiveCameraFromJSON(json['perspective_camera']),
         'lines': !exists(json, 'lines') ? undefined : (json['lines'] === null ? null : (json['lines'] as Array<any>).map(LineFromJSON)),
@@ -145,6 +152,7 @@ export function ViewpointToJSON(value?: Viewpoint | null): any {
         
         'index': value.index,
         'guid': value.guid,
+        'authoring_view': value.authoringView,
         'orthogonal_camera': OrthogonalCameraToJSON(value.orthogonalCamera),
         'perspective_camera': PerspectiveCameraToJSON(value.perspectiveCamera),
         'lines': value.lines === undefined ? undefined : (value.lines === null ? null : (value.lines as Array<any>).map(LineToJSON)),

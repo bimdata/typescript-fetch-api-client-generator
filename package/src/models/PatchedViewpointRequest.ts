@@ -70,6 +70,12 @@ export interface PatchedViewpointRequest {
     guid?: string;
     /**
      * 
+     * @type {string}
+     * @memberof PatchedViewpointRequest
+     */
+    authoringView?: string;
+    /**
+     * 
      * @type {OrthogonalCameraRequest}
      * @memberof PatchedViewpointRequest
      */
@@ -130,6 +136,7 @@ export function PatchedViewpointRequestFromJSONTyped(json: any, ignoreDiscrimina
         
         'index': !exists(json, 'index') ? undefined : json['index'],
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
+        'authoringView': !exists(json, 'authoring_view') ? undefined : json['authoring_view'],
         'orthogonalCamera': !exists(json, 'orthogonal_camera') ? undefined : OrthogonalCameraRequestFromJSON(json['orthogonal_camera']),
         'perspectiveCamera': !exists(json, 'perspective_camera') ? undefined : PerspectiveCameraRequestFromJSON(json['perspective_camera']),
         'lines': !exists(json, 'lines') ? undefined : (json['lines'] === null ? null : (json['lines'] as Array<any>).map(LineRequestFromJSON)),
@@ -152,6 +159,7 @@ export function PatchedViewpointRequestToJSON(value?: PatchedViewpointRequest | 
         
         'index': value.index,
         'guid': value.guid,
+        'authoring_view': value.authoringView,
         'orthogonal_camera': OrthogonalCameraRequestToJSON(value.orthogonalCamera),
         'perspective_camera': PerspectiveCameraRequestToJSON(value.perspectiveCamera),
         'lines': value.lines === undefined ? undefined : (value.lines === null ? null : (value.lines as Array<any>).map(LineRequestToJSON)),
