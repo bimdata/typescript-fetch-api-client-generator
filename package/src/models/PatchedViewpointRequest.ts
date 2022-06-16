@@ -44,6 +44,12 @@ import {
     PerspectiveCameraRequestToJSON,
 } from './PerspectiveCameraRequest';
 import {
+    PinRequest,
+    PinRequestFromJSON,
+    PinRequestFromJSONTyped,
+    PinRequestToJSON,
+} from './PinRequest';
+import {
     SnapshotRequest,
     SnapshotRequestFromJSON,
     SnapshotRequestFromJSONTyped,
@@ -111,11 +117,11 @@ export interface PatchedViewpointRequest {
      */
     components?: ComponentsParentRequest | null;
     /**
-     * Non standard field. Pins is a list of points representing annotation positions
-     * @type {Array<Array<number>>}
+     * Non standard field. Pins (or markers/annotations) are points of interest
+     * @type {Array<PinRequest>}
      * @memberof PatchedViewpointRequest
      */
-    pins?: Array<Array<number>> | null;
+    pins?: Array<PinRequest> | null;
     /**
      * Only used when using POST on the full-topic route to bind viewpoint with comment
      * @type {number}
@@ -143,7 +149,7 @@ export function PatchedViewpointRequestFromJSONTyped(json: any, ignoreDiscrimina
         'clippingPlanes': !exists(json, 'clipping_planes') ? undefined : (json['clipping_planes'] === null ? null : (json['clipping_planes'] as Array<any>).map(ClippingPlaneRequestFromJSON)),
         'snapshot': !exists(json, 'snapshot') ? undefined : SnapshotRequestFromJSON(json['snapshot']),
         'components': !exists(json, 'components') ? undefined : ComponentsParentRequestFromJSON(json['components']),
-        'pins': !exists(json, 'pins') ? undefined : json['pins'],
+        'pins': !exists(json, 'pins') ? undefined : (json['pins'] === null ? null : (json['pins'] as Array<any>).map(PinRequestFromJSON)),
         'tempId': !exists(json, 'temp_id') ? undefined : json['temp_id'],
     };
 }
@@ -166,7 +172,7 @@ export function PatchedViewpointRequestToJSON(value?: PatchedViewpointRequest | 
         'clipping_planes': value.clippingPlanes === undefined ? undefined : (value.clippingPlanes === null ? null : (value.clippingPlanes as Array<any>).map(ClippingPlaneRequestToJSON)),
         'snapshot': SnapshotRequestToJSON(value.snapshot),
         'components': ComponentsParentRequestToJSON(value.components),
-        'pins': value.pins,
+        'pins': value.pins === undefined ? undefined : (value.pins === null ? null : (value.pins as Array<any>).map(PinRequestToJSON)),
         'temp_id': value.tempId,
     };
 }

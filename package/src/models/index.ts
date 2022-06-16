@@ -133,6 +133,8 @@ export * from './PatchedZoneRequest';
 export * from './PatchedZoneSpaceRequest';
 export * from './PerspectiveCamera';
 export * from './PerspectiveCameraRequest';
+export * from './Pin';
+export * from './PinRequest';
 export * from './Point';
 export * from './PointRequest';
 export * from './PositioningPlan';

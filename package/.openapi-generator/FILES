@@ -141,6 +141,8 @@ src/models/PatchedZoneRequest.ts
 src/models/PatchedZoneSpaceRequest.ts
 src/models/PerspectiveCamera.ts
 src/models/PerspectiveCameraRequest.ts
+src/models/Pin.ts
+src/models/PinRequest.ts
 src/models/Point.ts
 src/models/PointRequest.ts
 src/models/PositioningPlan.ts

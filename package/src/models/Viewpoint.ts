@@ -44,6 +44,12 @@ import {
     PerspectiveCameraToJSON,
 } from './PerspectiveCamera';
 import {
+    Pin,
+    PinFromJSON,
+    PinFromJSONTyped,
+    PinToJSON,
+} from './Pin';
+import {
     Snapshot,
     SnapshotFromJSON,
     SnapshotFromJSONTyped,
@@ -111,11 +117,11 @@ export interface Viewpoint {
      */
     components?: ComponentsParent | null;
     /**
-     * Non standard field. Pins is a list of points representing annotation positions
-     * @type {Array<Array<number>>}
+     * Non standard field. Pins (or markers/annotations) are points of interest
+     * @type {Array<Pin>}
      * @memberof Viewpoint
      */
-    pins?: Array<Array<number>> | null;
+    pins?: Array<Pin> | null;
 }
 
 export function ViewpointFromJSON(json: any): Viewpoint {
@@ -137,7 +143,7 @@ export function ViewpointFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'clippingPlanes': !exists(json, 'clipping_planes') ? undefined : (json['clipping_planes'] === null ? null : (json['clipping_planes'] as Array<any>).map(ClippingPlaneFromJSON)),
         'snapshot': !exists(json, 'snapshot') ? undefined : SnapshotFromJSON(json['snapshot']),
         'components': !exists(json, 'components') ? undefined : ComponentsParentFromJSON(json['components']),
-        'pins': !exists(json, 'pins') ? undefined : json['pins'],
+        'pins': !exists(json, 'pins') ? undefined : (json['pins'] === null ? null : (json['pins'] as Array<any>).map(PinFromJSON)),
     };
 }
 
@@ -159,7 +165,7 @@ export function ViewpointToJSON(value?: Viewpoint | null): any {
         'clipping_planes': value.clippingPlanes === undefined ? undefined : (value.clippingPlanes === null ? null : (value.clippingPlanes as Array<any>).map(ClippingPlaneToJSON)),
         'snapshot': SnapshotToJSON(value.snapshot),
         'components': ComponentsParentToJSON(value.components),
-        'pins': value.pins,
+        'pins': value.pins === undefined ? undefined : (value.pins === null ? null : (value.pins as Array<any>).map(PinToJSON)),
     };
 }
 
