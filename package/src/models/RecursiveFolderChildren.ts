@@ -109,19 +109,19 @@ export interface RecursiveFolderChildren {
      * @type {string}
      * @memberof RecursiveFolderChildren
      */
-    fileName?: string;
+    fileName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof RecursiveFolderChildren
      */
-    description?: string;
+    description?: string | null;
     /**
      * 
      * @type {number}
      * @memberof RecursiveFolderChildren
      */
-    size?: number;
+    size?: number | null;
     /**
      * 
      * @type {number}
@@ -139,7 +139,7 @@ export interface RecursiveFolderChildren {
      * @type {string}
      * @memberof RecursiveFolderChildren
      */
-    file?: string;
+    file?: string | null;
     /**
      * Groups permissions of folder
      * @type {Array<FolderGroupPermission>}
