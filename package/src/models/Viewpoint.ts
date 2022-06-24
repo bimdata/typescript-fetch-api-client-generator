@@ -75,11 +75,17 @@ export interface Viewpoint {
      */
     guid?: string;
     /**
-     * 
+     * Name of the system in which the viewpoint is originated
      * @type {string}
      * @memberof Viewpoint
      */
-    authoringView?: string;
+    originatingSystem?: string | null;
+    /**
+     * System specific identifier of the viewpoint in the originating BIM tool
+     * @type {string}
+     * @memberof Viewpoint
+     */
+    authoringToolId?: string | null;
     /**
      * 
      * @type {OrthogonalCamera}
@@ -136,7 +142,8 @@ export function ViewpointFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         
         'index': !exists(json, 'index') ? undefined : json['index'],
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
-        'authoringView': !exists(json, 'authoring_view') ? undefined : json['authoring_view'],
+        'originatingSystem': !exists(json, 'originating_system') ? undefined : json['originating_system'],
+        'authoringToolId': !exists(json, 'authoring_tool_id') ? undefined : json['authoring_tool_id'],
         'orthogonalCamera': !exists(json, 'orthogonal_camera') ? undefined : OrthogonalCameraFromJSON(json['orthogonal_camera']),
         'perspectiveCamera': !exists(json, 'perspective_camera') ? undefined : PerspectiveCameraFromJSON(json['perspective_camera']),
         'lines': !exists(json, 'lines') ? undefined : (json['lines'] === null ? null : (json['lines'] as Array<any>).map(LineFromJSON)),
@@ -158,7 +165,8 @@ export function ViewpointToJSON(value?: Viewpoint | null): any {
         
         'index': value.index,
         'guid': value.guid,
-        'authoring_view': value.authoringView,
+        'originating_system': value.originatingSystem,
+        'authoring_tool_id': value.authoringToolId,
         'orthogonal_camera': OrthogonalCameraToJSON(value.orthogonalCamera),
         'perspective_camera': PerspectiveCameraToJSON(value.perspectiveCamera),
         'lines': value.lines === undefined ? undefined : (value.lines === null ? null : (value.lines as Array<any>).map(LineToJSON)),

@@ -75,11 +75,17 @@ export interface ViewpointRequest {
      */
     guid?: string;
     /**
-     * 
+     * Name of the system in which the viewpoint is originated
      * @type {string}
      * @memberof ViewpointRequest
      */
-    authoringView?: string;
+    originatingSystem?: string | null;
+    /**
+     * System specific identifier of the viewpoint in the originating BIM tool
+     * @type {string}
+     * @memberof ViewpointRequest
+     */
+    authoringToolId?: string | null;
     /**
      * 
      * @type {OrthogonalCameraRequest}
@@ -142,7 +148,8 @@ export function ViewpointRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         
         'index': !exists(json, 'index') ? undefined : json['index'],
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
-        'authoringView': !exists(json, 'authoring_view') ? undefined : json['authoring_view'],
+        'originatingSystem': !exists(json, 'originating_system') ? undefined : json['originating_system'],
+        'authoringToolId': !exists(json, 'authoring_tool_id') ? undefined : json['authoring_tool_id'],
         'orthogonalCamera': !exists(json, 'orthogonal_camera') ? undefined : OrthogonalCameraRequestFromJSON(json['orthogonal_camera']),
         'perspectiveCamera': !exists(json, 'perspective_camera') ? undefined : PerspectiveCameraRequestFromJSON(json['perspective_camera']),
         'lines': !exists(json, 'lines') ? undefined : (json['lines'] === null ? null : (json['lines'] as Array<any>).map(LineRequestFromJSON)),
@@ -165,7 +172,8 @@ export function ViewpointRequestToJSON(value?: ViewpointRequest | null): any {
         
         'index': value.index,
         'guid': value.guid,
-        'authoring_view': value.authoringView,
+        'originating_system': value.originatingSystem,
+        'authoring_tool_id': value.authoringToolId,
         'orthogonal_camera': OrthogonalCameraRequestToJSON(value.orthogonalCamera),
         'perspective_camera': PerspectiveCameraRequestToJSON(value.perspectiveCamera),
         'lines': value.lines === undefined ? undefined : (value.lines === null ? null : (value.lines as Array<any>).map(LineRequestToJSON)),
