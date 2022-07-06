@@ -48,25 +48,25 @@ export interface CommentRequest {
      * @type {string}
      * @memberof CommentRequest
      */
-    viewpointGuid?: string | null;
+    viewpoint_guid?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CommentRequest
      */
-    replyToCommentGuid?: string | null;
+    reply_to_comment_guid?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CommentRequest
      */
-    modifiedAuthor?: string | null;
+    modified_author?: string | null;
     /**
      * Only used when using POST on the full-topic route to bind viewpoint with comment
      * @type {number}
      * @memberof CommentRequest
      */
-    viewpointTempId?: number;
+    viewpoint_temp_id?: number;
 }
 
 export function CommentRequestFromJSON(json: any): CommentRequest {
@@ -83,10 +83,10 @@ export function CommentRequestFromJSONTyped(json: any, ignoreDiscriminator: bool
         'date': !exists(json, 'date') ? undefined : (new Date(json['date'])),
         'author': !exists(json, 'author') ? undefined : json['author'],
         'comment': !exists(json, 'comment') ? undefined : json['comment'],
-        'viewpointGuid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
-        'replyToCommentGuid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
-        'modifiedAuthor': !exists(json, 'modified_author') ? undefined : json['modified_author'],
-        'viewpointTempId': !exists(json, 'viewpoint_temp_id') ? undefined : json['viewpoint_temp_id'],
+        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
+        'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
+        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
+        'viewpoint_temp_id': !exists(json, 'viewpoint_temp_id') ? undefined : json['viewpoint_temp_id'],
     };
 }
 
@@ -103,10 +103,10 @@ export function CommentRequestToJSON(value?: CommentRequest | null): any {
         'date': value.date === undefined ? undefined : (value.date.toISOString()),
         'author': value.author,
         'comment': value.comment,
-        'viewpoint_guid': value.viewpointGuid,
-        'reply_to_comment_guid': value.replyToCommentGuid,
-        'modified_author': value.modifiedAuthor,
-        'viewpoint_temp_id': value.viewpointTempId,
+        'viewpoint_guid': value.viewpoint_guid,
+        'reply_to_comment_guid': value.reply_to_comment_guid,
+        'modified_author': value.modified_author,
+        'viewpoint_temp_id': value.viewpoint_temp_id,
     };
 }
 

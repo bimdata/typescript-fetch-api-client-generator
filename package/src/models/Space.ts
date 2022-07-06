@@ -48,19 +48,19 @@ export interface Space {
      * @type {Array<number>}
      * @memberof Space
      */
-    readonly zoneSet: Array<number>;
+    readonly zone_set: Array<number>;
     /**
      * 
      * @type {Date}
      * @memberof Space
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof Space
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
 }
 
 export function SpaceFromJSON(json: any): Space {
@@ -77,9 +77,9 @@ export function SpaceFromJSONTyped(json: any, ignoreDiscriminator: boolean): Spa
         'name': !exists(json, 'name') ? undefined : json['name'],
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': json['uuid'],
-        'zoneSet': json['zone_set'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'zone_set': json['zone_set'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
     };
 }
 

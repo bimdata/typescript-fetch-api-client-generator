@@ -16,32 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface TagIdRequest
+ * @interface FolderTree
  */
-export interface TagIdRequest {
+export interface FolderTree {
     /**
      * 
-     * @type {number}
-     * @memberof TagIdRequest
+     * @type {Array<FolderTree>}
+     * @memberof FolderTree
      */
-    tag_id: number;
+    children: Array<FolderTree>;
+    /**
+     * 
+     * @type {string}
+     * @memberof FolderTree
+     */
+    name: string;
 }
 
-export function TagIdRequestFromJSON(json: any): TagIdRequest {
-    return TagIdRequestFromJSONTyped(json, false);
+export function FolderTreeFromJSON(json: any): FolderTree {
+    return FolderTreeFromJSONTyped(json, false);
 }
 
-export function TagIdRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): TagIdRequest {
+export function FolderTreeFromJSONTyped(json: any, ignoreDiscriminator: boolean): FolderTree {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'tag_id': json['tag_id'],
+        'children': ((json['children'] as Array<any>).map(FolderTreeFromJSON)),
+        'name': json['name'],
     };
 }
 
-export function TagIdRequestToJSON(value?: TagIdRequest | null): any {
+export function FolderTreeToJSON(value?: FolderTree | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -50,7 +57,8 @@ export function TagIdRequestToJSON(value?: TagIdRequest | null): any {
     }
     return {
         
-        'tag_id': value.tag_id,
+        'children': ((value.children as Array<any>).map(FolderTreeToJSON)),
+        'name': value.name,
     };
 }
 

@@ -30,7 +30,7 @@ export interface CloudInvitationRequest {
      * @type {string}
      * @memberof CloudInvitationRequest
      */
-    redirectUri: string;
+    redirect_uri: string;
 }
 
 export function CloudInvitationRequestFromJSON(json: any): CloudInvitationRequest {
@@ -44,7 +44,7 @@ export function CloudInvitationRequestFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'email': json['email'],
-        'redirectUri': json['redirect_uri'],
+        'redirect_uri': json['redirect_uri'],
     };
 }
 
@@ -58,7 +58,7 @@ export function CloudInvitationRequestToJSON(value?: CloudInvitationRequest | nu
     return {
         
         'email': value.email,
-        'redirect_uri': value.redirectUri,
+        'redirect_uri': value.redirect_uri,
     };
 }
 

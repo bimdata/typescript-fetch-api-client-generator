@@ -60,7 +60,7 @@ export interface RuleComponent {
      * @type {{ [key: string]: any; }}
      * @memberof RuleComponent
      */
-    ruleComponents?: { [key: string]: any; } | null;
+    rule_components?: { [key: string]: any; } | null;
 }
 
 export function RuleComponentFromJSON(json: any): RuleComponent {
@@ -79,7 +79,7 @@ export function RuleComponentFromJSONTyped(json: any, ignoreDiscriminator: boole
         'operator': !exists(json, 'operator') ? undefined : json['operator'],
         'params': !exists(json, 'params') ? undefined : json['params'],
         'condition': !exists(json, 'condition') ? undefined : json['condition'],
-        'ruleComponents': !exists(json, 'rule_components') ? undefined : json['rule_components'],
+        'rule_components': !exists(json, 'rule_components') ? undefined : json['rule_components'],
     };
 }
 
@@ -97,7 +97,7 @@ export function RuleComponentToJSON(value?: RuleComponent | null): any {
         'operator': value.operator,
         'params': value.params,
         'condition': value.condition,
-        'rule_components': value.ruleComponents,
+        'rule_components': value.rule_components,
     };
 }
 

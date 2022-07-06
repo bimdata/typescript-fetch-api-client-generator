@@ -48,13 +48,13 @@ export interface RawDefinition {
      * @type {string}
      * @memberof RawDefinition
      */
-    valueType?: string | null;
+    value_type?: string | null;
     /**
      * 
      * @type {number}
      * @memberof RawDefinition
      */
-    unitId?: number | null;
+    unit_id?: number | null;
 }
 
 export function RawDefinitionFromJSON(json: any): RawDefinition {
@@ -71,8 +71,8 @@ export function RawDefinitionFromJSONTyped(json: any, ignoreDiscriminator: boole
         'description': !exists(json, 'description') ? undefined : json['description'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'valueType': !exists(json, 'value_type') ? undefined : json['value_type'],
-        'unitId': !exists(json, 'unit_id') ? undefined : json['unit_id'],
+        'value_type': !exists(json, 'value_type') ? undefined : json['value_type'],
+        'unit_id': !exists(json, 'unit_id') ? undefined : json['unit_id'],
     };
 }
 
@@ -88,8 +88,8 @@ export function RawDefinitionToJSON(value?: RawDefinition | null): any {
         'description': value.description,
         'name': value.name,
         'type': value.type,
-        'value_type': value.valueType,
-        'unit_id': value.unitId,
+        'value_type': value.value_type,
+        'unit_id': value.unit_id,
     };
 }
 

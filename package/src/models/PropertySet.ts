@@ -61,13 +61,13 @@ export interface PropertySet {
      * @type {Date}
      * @memberof PropertySet
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof PropertySet
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
 }
 
 export function PropertySetFromJSON(json: any): PropertySet {
@@ -85,8 +85,8 @@ export function PropertySetFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'description': !exists(json, 'description') ? undefined : json['description'],
         'type': !exists(json, 'type') ? undefined : json['type'],
         'properties': !exists(json, 'properties') ? undefined : ((json['properties'] as Array<any>).map(PropertyFromJSON)),
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
     };
 }
 

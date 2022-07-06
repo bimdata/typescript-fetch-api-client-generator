@@ -37,7 +37,7 @@ export interface VisibilityRequest {
      * @type {boolean}
      * @memberof VisibilityRequest
      */
-    defaultVisibility?: boolean;
+    default_visibility?: boolean;
     /**
      * 
      * @type {Array<ComponentRequest>}
@@ -49,7 +49,7 @@ export interface VisibilityRequest {
      * @type {ViewSetupHintsRequest}
      * @memberof VisibilityRequest
      */
-    viewSetupHints: ViewSetupHintsRequest;
+    view_setup_hints: ViewSetupHintsRequest;
 }
 
 export function VisibilityRequestFromJSON(json: any): VisibilityRequest {
@@ -62,9 +62,9 @@ export function VisibilityRequestFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'defaultVisibility': !exists(json, 'default_visibility') ? undefined : json['default_visibility'],
+        'default_visibility': !exists(json, 'default_visibility') ? undefined : json['default_visibility'],
         'exceptions': !exists(json, 'exceptions') ? undefined : (json['exceptions'] === null ? null : (json['exceptions'] as Array<any>).map(ComponentRequestFromJSON)),
-        'viewSetupHints': ViewSetupHintsRequestFromJSON(json['view_setup_hints']),
+        'view_setup_hints': ViewSetupHintsRequestFromJSON(json['view_setup_hints']),
     };
 }
 
@@ -77,9 +77,9 @@ export function VisibilityRequestToJSON(value?: VisibilityRequest | null): any {
     }
     return {
         
-        'default_visibility': value.defaultVisibility,
+        'default_visibility': value.default_visibility,
         'exceptions': value.exceptions === undefined ? undefined : (value.exceptions === null ? null : (value.exceptions as Array<any>).map(ComponentRequestToJSON)),
-        'view_setup_hints': ViewSetupHintsRequestToJSON(value.viewSetupHints),
+        'view_setup_hints': ViewSetupHintsRequestToJSON(value.view_setup_hints),
     };
 }
 

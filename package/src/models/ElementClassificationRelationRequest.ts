@@ -24,13 +24,13 @@ export interface ElementClassificationRelationRequest {
      * @type {string}
      * @memberof ElementClassificationRelationRequest
      */
-    elementUuid: string;
+    element_uuid: string;
     /**
      * 
      * @type {number}
      * @memberof ElementClassificationRelationRequest
      */
-    classificationId: number;
+    classification_id: number;
 }
 
 export function ElementClassificationRelationRequestFromJSON(json: any): ElementClassificationRelationRequest {
@@ -43,8 +43,8 @@ export function ElementClassificationRelationRequestFromJSONTyped(json: any, ign
     }
     return {
         
-        'elementUuid': json['element_uuid'],
-        'classificationId': json['classification_id'],
+        'element_uuid': json['element_uuid'],
+        'classification_id': json['classification_id'],
     };
 }
 
@@ -57,8 +57,8 @@ export function ElementClassificationRelationRequestToJSON(value?: ElementClassi
     }
     return {
         
-        'element_uuid': value.elementUuid,
-        'classification_id': value.classificationId,
+        'element_uuid': value.element_uuid,
+        'classification_id': value.classification_id,
     };
 }
 

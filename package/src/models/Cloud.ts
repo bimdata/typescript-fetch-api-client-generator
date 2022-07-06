@@ -67,7 +67,7 @@ export interface Cloud {
      * @type {Array<MarketplaceApp>}
      * @memberof Cloud
      */
-    readonly marketplaceApps: Array<MarketplaceApp>;
+    readonly marketplace_apps: Array<MarketplaceApp>;
     /**
      * 
      * @type {Organization}
@@ -85,19 +85,19 @@ export interface Cloud {
      * @type {string}
      * @memberof Cloud
      */
-    readonly creatorApp: string;
+    readonly creator_app: string;
     /**
      * 
      * @type {boolean}
      * @memberof Cloud
      */
-    readonly isDefault: boolean;
+    readonly is_default: boolean;
     /**
      * Creation date
      * @type {Date}
      * @memberof Cloud
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {string}
@@ -109,7 +109,7 @@ export interface Cloud {
      * @type {Date}
      * @memberof Cloud
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
 }
 
 export function CloudFromJSON(json: any): Cloud {
@@ -125,14 +125,14 @@ export function CloudFromJSONTyped(json: any, ignoreDiscriminator: boolean): Clo
         'id': json['id'],
         'name': json['name'],
         'features': ((json['features'] as Array<any>).map(FeatureFromJSON)),
-        'marketplaceApps': ((json['marketplace_apps'] as Array<any>).map(MarketplaceAppFromJSON)),
+        'marketplace_apps': ((json['marketplace_apps'] as Array<any>).map(MarketplaceAppFromJSON)),
         'organization': OrganizationFromJSON(json['organization']),
         'creator': UserFromJSON(json['creator']),
-        'creatorApp': json['creator_app'],
-        'isDefault': json['is_default'],
-        'createdAt': (new Date(json['created_at'])),
+        'creator_app': json['creator_app'],
+        'is_default': json['is_default'],
+        'created_at': (new Date(json['created_at'])),
         'image': !exists(json, 'image') ? undefined : json['image'],
-        'updatedAt': (new Date(json['updated_at'])),
+        'updated_at': (new Date(json['updated_at'])),
     };
 }
 

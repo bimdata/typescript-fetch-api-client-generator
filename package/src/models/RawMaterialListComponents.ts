@@ -36,7 +36,7 @@ export interface RawMaterialListComponents {
      * @type {number}
      * @memberof RawMaterialListComponents
      */
-    materialOption?: number | null;
+    material_option?: number | null;
 }
 
 export function RawMaterialListComponentsFromJSON(json: any): RawMaterialListComponents {
@@ -51,7 +51,7 @@ export function RawMaterialListComponentsFromJSONTyped(json: any, ignoreDiscrimi
         
         'id': json['id'],
         'material': !exists(json, 'material') ? undefined : json['material'],
-        'materialOption': !exists(json, 'material_option') ? undefined : json['material_option'],
+        'material_option': !exists(json, 'material_option') ? undefined : json['material_option'],
     };
 }
 
@@ -65,7 +65,7 @@ export function RawMaterialListComponentsToJSON(value?: RawMaterialListComponent
     return {
         
         'material': value.material,
-        'material_option': value.materialOption,
+        'material_option': value.material_option,
     };
 }
 

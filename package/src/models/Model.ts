@@ -73,19 +73,19 @@ export interface Model {
      * @type {Date}
      * @memberof Model
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof Model
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {number}
      * @memberof Model
      */
-    readonly documentId: number | null;
+    readonly document_id: number | null;
     /**
      * 
      * @type {Document}
@@ -97,61 +97,61 @@ export interface Model {
      * @type {string}
      * @memberof Model
      */
-    readonly structureFile: string | null;
+    readonly structure_file: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly systemsFile: string | null;
+    readonly systems_file: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly mapFile: string | null;
+    readonly map_file: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly gltfFile: string | null;
+    readonly gltf_file: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly bvhTreeFile: string | null;
+    readonly bvh_tree_file: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly viewer360File: string | null;
+    readonly viewer_360_file: string | null;
     /**
      * 
      * @type {string}
      * @memberof Model
      */
-    readonly xktFile: string | null;
+    readonly xkt_file: string | null;
     /**
      * 
      * @type {number}
      * @memberof Model
      */
-    readonly projectId: number;
+    readonly project_id: number;
     /**
      * [x,y,z] array of the position of the local_placement in world coordinates
      * @type {Array<number>}
      * @memberof Model
      */
-    worldPosition?: Array<number> | null;
+    world_position?: Array<number> | null;
     /**
      * How many meters a unit represents
      * @type {number}
      * @memberof Model
      */
-    sizeRatio?: number | null;
+    size_ratio?: number | null;
     /**
      * List of errors that happened during IFC processing
      * @type {Array<string>}
@@ -181,13 +181,13 @@ export interface Model {
      * @type {Array<Array<number>>}
      * @memberof Model
      */
-    northVector?: Array<Array<number>> | null;
+    north_vector?: Array<Array<number>> | null;
     /**
      * This is the angle in clockwise degree to apply on the 2D to optimise the horizontality of objects. This field is only for information. Updating it won't impact the export.
      * @type {number}
      * @memberof Model
      */
-    recommanded2dAngle?: number | null;
+    recommanded_2d_angle?: number | null;
 }
 
 /**
@@ -234,26 +234,26 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'creator': UserFromJSON(json['creator']),
         'status': json['status'],
         'source': !exists(json, 'source') ? undefined : json['source'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
-        'documentId': json['document_id'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
+        'document_id': json['document_id'],
         'document': DocumentFromJSON(json['document']),
-        'structureFile': json['structure_file'],
-        'systemsFile': json['systems_file'],
-        'mapFile': json['map_file'],
-        'gltfFile': json['gltf_file'],
-        'bvhTreeFile': json['bvh_tree_file'],
-        'viewer360File': json['viewer_360_file'],
-        'xktFile': json['xkt_file'],
-        'projectId': json['project_id'],
-        'worldPosition': !exists(json, 'world_position') ? undefined : json['world_position'],
-        'sizeRatio': !exists(json, 'size_ratio') ? undefined : json['size_ratio'],
+        'structure_file': json['structure_file'],
+        'systems_file': json['systems_file'],
+        'map_file': json['map_file'],
+        'gltf_file': json['gltf_file'],
+        'bvh_tree_file': json['bvh_tree_file'],
+        'viewer_360_file': json['viewer_360_file'],
+        'xkt_file': json['xkt_file'],
+        'project_id': json['project_id'],
+        'world_position': !exists(json, 'world_position') ? undefined : json['world_position'],
+        'size_ratio': !exists(json, 'size_ratio') ? undefined : json['size_ratio'],
         'errors': json['errors'],
         'warnings': json['warnings'],
         'archived': !exists(json, 'archived') ? undefined : json['archived'],
         'version': !exists(json, 'version') ? undefined : json['version'],
-        'northVector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
-        'recommanded2dAngle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
+        'north_vector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
+        'recommanded_2d_angle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
     };
 }
 
@@ -268,12 +268,12 @@ export function ModelToJSON(value?: Model | null): any {
         
         'name': value.name,
         'source': value.source,
-        'world_position': value.worldPosition,
-        'size_ratio': value.sizeRatio,
+        'world_position': value.world_position,
+        'size_ratio': value.size_ratio,
         'archived': value.archived,
         'version': value.version,
-        'north_vector': value.northVector,
-        'recommanded_2d_angle': value.recommanded2dAngle,
+        'north_vector': value.north_vector,
+        'recommanded_2d_angle': value.recommanded_2d_angle,
     };
 }
 

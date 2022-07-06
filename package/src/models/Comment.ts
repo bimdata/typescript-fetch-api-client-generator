@@ -48,31 +48,31 @@ export interface Comment {
      * @type {string}
      * @memberof Comment
      */
-    viewpointGuid?: string | null;
+    viewpoint_guid?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Comment
      */
-    replyToCommentGuid?: string | null;
+    reply_to_comment_guid?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Comment
      */
-    readonly topicGuid: string;
+    readonly topic_guid: string;
     /**
      * 
      * @type {string}
      * @memberof Comment
      */
-    modifiedAuthor?: string | null;
+    modified_author?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof Comment
      */
-    readonly modifiedDate: Date;
+    readonly modified_date: Date;
 }
 
 export function CommentFromJSON(json: any): Comment {
@@ -89,11 +89,11 @@ export function CommentFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
         'date': !exists(json, 'date') ? undefined : (new Date(json['date'])),
         'author': !exists(json, 'author') ? undefined : json['author'],
         'comment': !exists(json, 'comment') ? undefined : json['comment'],
-        'viewpointGuid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
-        'replyToCommentGuid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
-        'topicGuid': json['topic_guid'],
-        'modifiedAuthor': !exists(json, 'modified_author') ? undefined : json['modified_author'],
-        'modifiedDate': (new Date(json['modified_date'])),
+        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
+        'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
+        'topic_guid': json['topic_guid'],
+        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
+        'modified_date': (new Date(json['modified_date'])),
     };
 }
 
@@ -110,9 +110,9 @@ export function CommentToJSON(value?: Comment | null): any {
         'date': value.date === undefined ? undefined : (value.date.toISOString()),
         'author': value.author,
         'comment': value.comment,
-        'viewpoint_guid': value.viewpointGuid,
-        'reply_to_comment_guid': value.replyToCommentGuid,
-        'modified_author': value.modifiedAuthor,
+        'viewpoint_guid': value.viewpoint_guid,
+        'reply_to_comment_guid': value.reply_to_comment_guid,
+        'modified_author': value.modified_author,
     };
 }
 

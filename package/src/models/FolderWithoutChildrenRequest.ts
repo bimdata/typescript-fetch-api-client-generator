@@ -24,7 +24,7 @@ export interface FolderWithoutChildrenRequest {
      * @type {number}
      * @memberof FolderWithoutChildrenRequest
      */
-    parentId?: number | null;
+    parent_id?: number | null;
     /**
      * Name of the folder
      * @type {string}
@@ -36,7 +36,7 @@ export interface FolderWithoutChildrenRequest {
      * @type {number}
      * @memberof FolderWithoutChildrenRequest
      */
-    defaultPermission?: FolderWithoutChildrenRequestDefaultPermissionEnum;
+    default_permission?: FolderWithoutChildrenRequestDefaultPermissionEnum;
 }
 
 /**
@@ -59,9 +59,9 @@ export function FolderWithoutChildrenRequestFromJSONTyped(json: any, ignoreDiscr
     }
     return {
         
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': json['name'],
-        'defaultPermission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
     };
 }
 
@@ -74,9 +74,9 @@ export function FolderWithoutChildrenRequestToJSON(value?: FolderWithoutChildren
     }
     return {
         
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
         'name': value.name,
-        'default_permission': value.defaultPermission,
+        'default_permission': value.default_permission,
     };
 }
 

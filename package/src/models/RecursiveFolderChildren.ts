@@ -55,13 +55,13 @@ export interface RecursiveFolderChildren {
      * @type {number}
      * @memberof RecursiveFolderChildren
      */
-    readonly parentId: number | null;
+    readonly parent_id: number | null;
     /**
      * 
      * @type {User}
      * @memberof RecursiveFolderChildren
      */
-    createdBy?: User | null;
+    created_by?: User | null;
     /**
      * 
      * @type {User}
@@ -85,7 +85,7 @@ export interface RecursiveFolderChildren {
      * @type {string}
      * @memberof RecursiveFolderChildren
      */
-    readonly modelType: RecursiveFolderChildrenModelTypeEnum;
+    readonly model_type: RecursiveFolderChildrenModelTypeEnum;
     /**
      * 
      * @type {string}
@@ -97,19 +97,19 @@ export interface RecursiveFolderChildren {
      * @type {Date}
      * @memberof RecursiveFolderChildren
      */
-    createdAt: Date;
+    created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof RecursiveFolderChildren
      */
-    updatedAt: Date;
+    updated_at: Date;
     /**
      * 
      * @type {string}
      * @memberof RecursiveFolderChildren
      */
-    fileName?: string | null;
+    file_name?: string | null;
     /**
      * 
      * @type {string}
@@ -127,13 +127,13 @@ export interface RecursiveFolderChildren {
      * @type {number}
      * @memberof RecursiveFolderChildren
      */
-    readonly modelId: number | null;
+    readonly model_id: number | null;
     /**
      * DEPRECATED: Use 'model_id' instead
      * @type {number}
      * @memberof RecursiveFolderChildren
      */
-    readonly ifcId: number | null;
+    readonly ifc_id: number | null;
     /**
      * 
      * @type {string}
@@ -145,19 +145,19 @@ export interface RecursiveFolderChildren {
      * @type {Array<FolderGroupPermission>}
      * @memberof RecursiveFolderChildren
      */
-    readonly groupsPermissions: Array<FolderGroupPermission> | null;
+    readonly groups_permissions: Array<FolderGroupPermission> | null;
     /**
      * Default permissions of folder
      * @type {number}
      * @memberof RecursiveFolderChildren
      */
-    readonly defaultPermission: RecursiveFolderChildrenDefaultPermissionEnum;
+    readonly default_permission: RecursiveFolderChildrenDefaultPermissionEnum;
     /**
      * Aggregate of group user permissions and folder default permission
      * @type {number}
      * @memberof RecursiveFolderChildren
      */
-    readonly userPermission: RecursiveFolderChildrenUserPermissionEnum;
+    readonly user_permission: RecursiveFolderChildrenUserPermissionEnum;
     /**
      * History of a document
      * @type {Array<Document>}
@@ -239,24 +239,24 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'id': json['id'],
-        'parentId': json['parent_id'],
-        'createdBy': !exists(json, 'created_by') ? undefined : UserFromJSON(json['created_by']),
+        'parent_id': json['parent_id'],
+        'created_by': !exists(json, 'created_by') ? undefined : UserFromJSON(json['created_by']),
         'creator': !exists(json, 'creator') ? undefined : UserFromJSON(json['creator']),
         'type': json['type'],
         'nature': json['nature'],
-        'modelType': json['model_type'],
+        'model_type': json['model_type'],
         'name': json['name'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
-        'fileName': !exists(json, 'file_name') ? undefined : json['file_name'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
+        'file_name': !exists(json, 'file_name') ? undefined : json['file_name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'size': !exists(json, 'size') ? undefined : json['size'],
-        'modelId': json['model_id'],
-        'ifcId': json['ifc_id'],
+        'model_id': json['model_id'],
+        'ifc_id': json['ifc_id'],
         'file': !exists(json, 'file') ? undefined : json['file'],
-        'groupsPermissions': (json['groups_permissions'] === null ? null : (json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
-        'defaultPermission': json['default_permission'],
-        'userPermission': json['user_permission'],
+        'groups_permissions': (json['groups_permissions'] === null ? null : (json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
+        'default_permission': json['default_permission'],
+        'user_permission': json['user_permission'],
         'history': (json['history'] === null ? null : (json['history'] as Array<any>).map(DocumentFromJSON)),
         'tags': (json['tags'] === null ? null : (json['tags'] as Array<any>).map(TagFromJSON)),
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),
@@ -273,12 +273,12 @@ export function RecursiveFolderChildrenToJSON(value?: RecursiveFolderChildren | 
     return {
         
         'id': value.id,
-        'created_by': UserToJSON(value.createdBy),
+        'created_by': UserToJSON(value.created_by),
         'creator': UserToJSON(value.creator),
         'name': value.name,
-        'created_at': (value.createdAt.toISOString()),
-        'updated_at': (value.updatedAt.toISOString()),
-        'file_name': value.fileName,
+        'created_at': (value.created_at.toISOString()),
+        'updated_at': (value.updated_at.toISOString()),
+        'file_name': value.file_name,
         'description': value.description,
         'size': value.size,
         'file': value.file,

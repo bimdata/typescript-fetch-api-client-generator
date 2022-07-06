@@ -24,7 +24,7 @@ export interface PatchedFolderWithoutChildrenRequest {
      * @type {number}
      * @memberof PatchedFolderWithoutChildrenRequest
      */
-    parentId?: number | null;
+    parent_id?: number | null;
     /**
      * Name of the folder
      * @type {string}
@@ -36,7 +36,7 @@ export interface PatchedFolderWithoutChildrenRequest {
      * @type {number}
      * @memberof PatchedFolderWithoutChildrenRequest
      */
-    defaultPermission?: PatchedFolderWithoutChildrenRequestDefaultPermissionEnum;
+    default_permission?: PatchedFolderWithoutChildrenRequestDefaultPermissionEnum;
 }
 
 /**
@@ -59,9 +59,9 @@ export function PatchedFolderWithoutChildrenRequestFromJSONTyped(json: any, igno
     }
     return {
         
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'defaultPermission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
     };
 }
 
@@ -74,9 +74,9 @@ export function PatchedFolderWithoutChildrenRequestToJSON(value?: PatchedFolderW
     }
     return {
         
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
         'name': value.name,
-        'default_permission': value.defaultPermission,
+        'default_permission': value.default_permission,
     };
 }
 

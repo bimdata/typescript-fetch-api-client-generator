@@ -50,6 +50,7 @@ src/models/FeatureRequest.ts
 src/models/Folder.ts
 src/models/FolderGroupPermission.ts
 src/models/FolderGroupPermissionRequest.ts
+src/models/FolderTree.ts
 src/models/FolderUserProject.ts
 src/models/FolderWithoutChildren.ts
 src/models/FolderWithoutChildrenRequest.ts
@@ -152,6 +153,7 @@ src/models/ProcessorHandler.ts
 src/models/Project.ts
 src/models/ProjectAccessToken.ts
 src/models/ProjectAccessTokenRequest.ts
+src/models/ProjectFolderTree.ts
 src/models/ProjectInvitation.ts
 src/models/ProjectInvitationRequest.ts
 src/models/ProjectRequest.ts

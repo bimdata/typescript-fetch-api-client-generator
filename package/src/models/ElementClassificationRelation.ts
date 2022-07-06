@@ -24,13 +24,13 @@ export interface ElementClassificationRelation {
      * @type {string}
      * @memberof ElementClassificationRelation
      */
-    elementUuid: string;
+    element_uuid: string;
     /**
      * 
      * @type {number}
      * @memberof ElementClassificationRelation
      */
-    classificationId: number;
+    classification_id: number;
 }
 
 export function ElementClassificationRelationFromJSON(json: any): ElementClassificationRelation {
@@ -43,8 +43,8 @@ export function ElementClassificationRelationFromJSONTyped(json: any, ignoreDisc
     }
     return {
         
-        'elementUuid': json['element_uuid'],
-        'classificationId': json['classification_id'],
+        'element_uuid': json['element_uuid'],
+        'classification_id': json['classification_id'],
     };
 }
 
@@ -57,8 +57,8 @@ export function ElementClassificationRelationToJSON(value?: ElementClassificatio
     }
     return {
         
-        'element_uuid': value.elementUuid,
-        'classification_id': value.classificationId,
+        'element_uuid': value.element_uuid,
+        'classification_id': value.classification_id,
     };
 }
 

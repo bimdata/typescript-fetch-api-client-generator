@@ -24,7 +24,7 @@ export interface RawMaterialRequest {
      * @type {number}
      * @memberof RawMaterialRequest
      */
-    stepId: number;
+    step_id: number;
     /**
      * 
      * @type {string}
@@ -61,7 +61,7 @@ export function RawMaterialRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'stepId': json['step_id'],
+        'step_id': json['step_id'],
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'category': !exists(json, 'category') ? undefined : json['category'],
@@ -78,7 +78,7 @@ export function RawMaterialRequestToJSON(value?: RawMaterialRequest | null): any
     }
     return {
         
-        'step_id': value.stepId,
+        'step_id': value.step_id,
         'name': value.name,
         'description': value.description,
         'category': value.category,

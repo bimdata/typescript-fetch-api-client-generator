@@ -49,7 +49,7 @@ export interface Building {
      * @type {number}
      * @memberof Building
      */
-    readonly plansUnreachableCount: number;
+    readonly plans_unreachable_count: number;
 }
 
 export function BuildingFromJSON(json: any): Building {
@@ -65,7 +65,7 @@ export function BuildingFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'uuid': json['uuid'],
         'name': json['name'],
         'plans': ((json['plans'] as Array<any>).map(ModelWithPositioningPlanFromJSON)),
-        'plansUnreachableCount': json['plans_unreachable_count'],
+        'plans_unreachable_count': json['plans_unreachable_count'],
     };
 }
 

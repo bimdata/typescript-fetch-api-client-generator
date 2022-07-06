@@ -24,19 +24,19 @@ export interface Extensions {
      * @type {Array<string>}
      * @memberof Extensions
      */
-    readonly topicType: Array<string>;
+    readonly topic_type: Array<string>;
     /**
      * 
      * @type {Array<string>}
      * @memberof Extensions
      */
-    readonly topicStatus: Array<string>;
+    readonly topic_status: Array<string>;
     /**
      * 
      * @type {Array<string>}
      * @memberof Extensions
      */
-    readonly topicLabel: Array<string>;
+    readonly topic_label: Array<string>;
     /**
      * 
      * @type {Array<string>}
@@ -54,19 +54,19 @@ export interface Extensions {
      * @type {Array<string>}
      * @memberof Extensions
      */
-    readonly userIdType: Array<string>;
+    readonly user_id_type: Array<string>;
     /**
      * Non standard field. Arrays of priorities and this array are in the same order.
      * @type {Array<string>}
      * @memberof Extensions
      */
-    priorityColors: Array<string>;
+    priority_colors: Array<string>;
     /**
      * Non standard field. Arrays of statuses and this array are in the same order.
      * @type {Array<string>}
      * @memberof Extensions
      */
-    topicStatusColors: Array<string>;
+    topic_status_colors: Array<string>;
 }
 
 export function ExtensionsFromJSON(json: any): Extensions {
@@ -79,14 +79,14 @@ export function ExtensionsFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
-        'topicType': json['topic_type'],
-        'topicStatus': json['topic_status'],
-        'topicLabel': json['topic_label'],
+        'topic_type': json['topic_type'],
+        'topic_status': json['topic_status'],
+        'topic_label': json['topic_label'],
         'priority': json['priority'],
         'stage': json['stage'],
-        'userIdType': json['user_id_type'],
-        'priorityColors': json['priority_colors'],
-        'topicStatusColors': json['topic_status_colors'],
+        'user_id_type': json['user_id_type'],
+        'priority_colors': json['priority_colors'],
+        'topic_status_colors': json['topic_status_colors'],
     };
 }
 
@@ -99,8 +99,8 @@ export function ExtensionsToJSON(value?: Extensions | null): any {
     }
     return {
         
-        'priority_colors': value.priorityColors,
-        'topic_status_colors': value.topicStatusColors,
+        'priority_colors': value.priority_colors,
+        'topic_status_colors': value.topic_status_colors,
     };
 }
 

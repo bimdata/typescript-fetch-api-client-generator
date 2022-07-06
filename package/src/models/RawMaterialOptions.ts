@@ -36,7 +36,7 @@ export interface RawMaterialOptions {
      * @type {Array<number>}
      * @memberof RawMaterialOptions
      */
-    materialList?: Array<number> | null;
+    material_list?: Array<number> | null;
 }
 
 export function RawMaterialOptionsFromJSON(json: any): RawMaterialOptions {
@@ -51,7 +51,7 @@ export function RawMaterialOptionsFromJSONTyped(json: any, ignoreDiscriminator: 
         
         'id': json['id'],
         'thickness': !exists(json, 'thickness') ? undefined : json['thickness'],
-        'materialList': !exists(json, 'material_list') ? undefined : json['material_list'],
+        'material_list': !exists(json, 'material_list') ? undefined : json['material_list'],
     };
 }
 
@@ -65,7 +65,7 @@ export function RawMaterialOptionsToJSON(value?: RawMaterialOptions | null): any
     return {
         
         'thickness': value.thickness,
-        'material_list': value.materialList,
+        'material_list': value.material_list,
     };
 }
 

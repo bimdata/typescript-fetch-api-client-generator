@@ -37,31 +37,31 @@ export interface PerspectiveCamera {
      * @type {number}
      * @memberof PerspectiveCamera
      */
-    fieldOfView: number;
+    field_of_view: number;
     /**
      * 
      * @type {Direction}
      * @memberof PerspectiveCamera
      */
-    cameraDirection: Direction;
+    camera_direction: Direction;
     /**
      * 
      * @type {Direction}
      * @memberof PerspectiveCamera
      */
-    cameraUpVector: Direction;
+    camera_up_vector: Direction;
     /**
      * 
      * @type {Point}
      * @memberof PerspectiveCamera
      */
-    cameraViewPoint: Point;
+    camera_view_point: Point;
     /**
      * 
      * @type {Direction}
      * @memberof PerspectiveCamera
      */
-    bimdataCameraDirection?: Direction;
+    bimdata_camera_direction?: Direction;
 }
 
 export function PerspectiveCameraFromJSON(json: any): PerspectiveCamera {
@@ -74,11 +74,11 @@ export function PerspectiveCameraFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'fieldOfView': json['field_of_view'],
-        'cameraDirection': DirectionFromJSON(json['camera_direction']),
-        'cameraUpVector': DirectionFromJSON(json['camera_up_vector']),
-        'cameraViewPoint': PointFromJSON(json['camera_view_point']),
-        'bimdataCameraDirection': !exists(json, 'bimdata_camera_direction') ? undefined : DirectionFromJSON(json['bimdata_camera_direction']),
+        'field_of_view': json['field_of_view'],
+        'camera_direction': DirectionFromJSON(json['camera_direction']),
+        'camera_up_vector': DirectionFromJSON(json['camera_up_vector']),
+        'camera_view_point': PointFromJSON(json['camera_view_point']),
+        'bimdata_camera_direction': !exists(json, 'bimdata_camera_direction') ? undefined : DirectionFromJSON(json['bimdata_camera_direction']),
     };
 }
 
@@ -91,11 +91,11 @@ export function PerspectiveCameraToJSON(value?: PerspectiveCamera | null): any {
     }
     return {
         
-        'field_of_view': value.fieldOfView,
-        'camera_direction': DirectionToJSON(value.cameraDirection),
-        'camera_up_vector': DirectionToJSON(value.cameraUpVector),
-        'camera_view_point': PointToJSON(value.cameraViewPoint),
-        'bimdata_camera_direction': DirectionToJSON(value.bimdataCameraDirection),
+        'field_of_view': value.field_of_view,
+        'camera_direction': DirectionToJSON(value.camera_direction),
+        'camera_up_vector': DirectionToJSON(value.camera_up_vector),
+        'camera_view_point': PointToJSON(value.camera_view_point),
+        'bimdata_camera_direction': DirectionToJSON(value.bimdata_camera_direction),
     };
 }
 

@@ -30,7 +30,7 @@ export interface RawPropertyRequest {
      * @type {number}
      * @memberof RawPropertyRequest
      */
-    defId: number;
+    def_id: number;
 }
 
 export function RawPropertyRequestFromJSON(json: any): RawPropertyRequest {
@@ -44,7 +44,7 @@ export function RawPropertyRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'value': !exists(json, 'value') ? undefined : json['value'],
-        'defId': json['def_id'],
+        'def_id': json['def_id'],
     };
 }
 
@@ -58,7 +58,7 @@ export function RawPropertyRequestToJSON(value?: RawPropertyRequest | null): any
     return {
         
         'value': value.value,
-        'def_id': value.defId,
+        'def_id': value.def_id,
     };
 }
 

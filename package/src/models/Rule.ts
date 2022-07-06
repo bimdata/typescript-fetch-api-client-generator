@@ -49,7 +49,7 @@ export interface Rule {
      * @type {Array<RuleComponent>}
      * @memberof Rule
      */
-    ruleComponents?: Array<RuleComponent>;
+    rule_components?: Array<RuleComponent>;
     /**
      * 
      * @type {Rule}
@@ -71,7 +71,7 @@ export function RuleFromJSONTyped(json: any, ignoreDiscriminator: boolean): Rule
         'id': json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'condition': json['condition'],
-        'ruleComponents': !exists(json, 'rule_components') ? undefined : ((json['rule_components'] as Array<any>).map(RuleComponentFromJSON)),
+        'rule_components': !exists(json, 'rule_components') ? undefined : ((json['rule_components'] as Array<any>).map(RuleComponentFromJSON)),
         'on': !exists(json, 'on') ? undefined : RuleFromJSON(json['on']),
     };
 }
@@ -87,7 +87,7 @@ export function RuleToJSON(value?: Rule | null): any {
         
         'name': value.name,
         'condition': value.condition,
-        'rule_components': value.ruleComponents === undefined ? undefined : ((value.ruleComponents as Array<any>).map(RuleComponentToJSON)),
+        'rule_components': value.rule_components === undefined ? undefined : ((value.rule_components as Array<any>).map(RuleComponentToJSON)),
         'on': RuleToJSON(value.on),
     };
 }

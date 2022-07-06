@@ -30,7 +30,7 @@ export interface RawMaterialOptionsRequest {
      * @type {Array<number>}
      * @memberof RawMaterialOptionsRequest
      */
-    materialList?: Array<number> | null;
+    material_list?: Array<number> | null;
 }
 
 export function RawMaterialOptionsRequestFromJSON(json: any): RawMaterialOptionsRequest {
@@ -44,7 +44,7 @@ export function RawMaterialOptionsRequestFromJSONTyped(json: any, ignoreDiscrimi
     return {
         
         'thickness': !exists(json, 'thickness') ? undefined : json['thickness'],
-        'materialList': !exists(json, 'material_list') ? undefined : json['material_list'],
+        'material_list': !exists(json, 'material_list') ? undefined : json['material_list'],
     };
 }
 
@@ -58,7 +58,7 @@ export function RawMaterialOptionsRequestToJSON(value?: RawMaterialOptionsReques
     return {
         
         'thickness': value.thickness,
-        'material_list': value.materialList,
+        'material_list': value.material_list,
     };
 }
 

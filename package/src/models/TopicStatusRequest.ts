@@ -24,7 +24,7 @@ export interface TopicStatusRequest {
      * @type {string}
      * @memberof TopicStatusRequest
      */
-    topicStatus: string;
+    topic_status: string;
     /**
      * 
      * @type {string}
@@ -49,7 +49,7 @@ export function TopicStatusRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'topicStatus': json['topic_status'],
+        'topic_status': json['topic_status'],
         'color': !exists(json, 'color') ? undefined : json['color'],
         'project': !exists(json, 'project') ? undefined : json['project'],
     };
@@ -64,7 +64,7 @@ export function TopicStatusRequestToJSON(value?: TopicStatusRequest | null): any
     }
     return {
         
-        'topic_status': value.topicStatus,
+        'topic_status': value.topic_status,
         'color': value.color,
         'project': value.project,
     };

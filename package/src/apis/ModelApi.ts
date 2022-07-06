@@ -201,1067 +201,1067 @@ import {
 } from '../models';
 
 export interface AddModelErrorsRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    modelErrorsRequest?: ModelErrorsRequest;
+    project_pk: number;
+    ModelErrorsRequest?: ModelErrorsRequest;
 }
 
 export interface BulkDeleteModelClassificationsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface BulkDeleteModelPropertiesRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface BulkDeleteModelPropertyDefinitionsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface BulkDeleteModelUnitsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface BulkDeletePropertySetRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface BulkFullUpdateElementsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    elementRequest: Array<ElementRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    ElementRequest: Array<ElementRequest>;
     classification?: string;
-    classificationNotation?: string;
+    classification__notation?: string;
     type?: string;
 }
 
 export interface BulkFullUpdateModelPropertyRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    propertyRequest: Array<PropertyRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    PropertyRequest: Array<PropertyRequest>;
 }
 
 export interface BulkRemoveClassificationsOfElementRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface BulkRemoveDocumentsOfElementRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface BulkRemoveElementsFromClassificationRequest {
-    cloudPk: number;
-    modelClassificationPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_classification_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface BulkUpdateElementsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    elementRequest: Array<ElementRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    ElementRequest: Array<ElementRequest>;
     classification?: string;
-    classificationNotation?: string;
+    classification__notation?: string;
     type?: string;
 }
 
 export interface BulkUpdateModelPropertyRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    propertyRequest: Array<PropertyRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    PropertyRequest: Array<PropertyRequest>;
 }
 
 export interface CreateAccessTokenRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    ifcAccessTokenRequest?: IfcAccessTokenRequest;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    IfcAccessTokenRequest?: IfcAccessTokenRequest;
 }
 
 export interface CreateBuildingRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface CreateBuildingPlanRequest {
-    buildingUuid: string;
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    building_uuid: string;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface CreateClassificationElementRelationsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    elementClassificationRelationRequest: Array<ElementClassificationRelationRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    ElementClassificationRelationRequest: Array<ElementClassificationRelationRequest>;
 }
 
 export interface CreateClassificationsOfElementRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
-    classificationRequest: Array<ClassificationRequest>;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
+    ClassificationRequest: Array<ClassificationRequest>;
 }
 
 export interface CreateElementRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    elementRequest: Array<ElementRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    ElementRequest: Array<ElementRequest>;
     classification?: string;
-    classificationNotation?: string;
+    classification__notation?: string;
     type?: string;
 }
 
 export interface CreateElementPropertySetRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
-    propertySetRequest?: PropertySetRequest;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
+    PropertySetRequest?: PropertySetRequest;
 }
 
 export interface CreateElementPropertySetPropertyRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
-    propertysetPk: number;
-    propertyRequest: PropertyRequest;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
+    propertyset_pk: number;
+    PropertyRequest: PropertyRequest;
 }
 
 export interface CreateElementPropertySetPropertyDefinitionRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
-    propertyPk: number;
-    propertysetPk: number;
-    propertyDefinitionRequest?: PropertyDefinitionRequest;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
+    property_pk: number;
+    propertyset_pk: number;
+    PropertyDefinitionRequest?: PropertyDefinitionRequest;
 }
 
 export interface CreateElementPropertySetPropertyDefinitionUnitRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
-    propertyPk: number;
-    propertydefinitionPk: number;
-    propertysetPk: number;
-    unitRequest: UnitRequest;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
+    property_pk: number;
+    propertydefinition_pk: number;
+    propertyset_pk: number;
+    UnitRequest: UnitRequest;
 }
 
 export interface CreateLayerRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    layerRequest: LayerRequest;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    LayerRequest: LayerRequest;
 }
 
 export interface CreateMetaBuildingRequest {
-    cloudPk: number;
-    projectPk: number;
-    createBuildingByNameRequest: CreateBuildingByNameRequest;
+    cloud_pk: number;
+    project_pk: number;
+    CreateBuildingByNameRequest: CreateBuildingByNameRequest;
 }
 
 export interface CreateModelOperationRequest {
-    cloudPk: number;
-    projectPk: number;
-    createModelRequest: CreateModelRequest;
+    cloud_pk: number;
+    project_pk: number;
+    CreateModelRequest: CreateModelRequest;
 }
 
 export interface CreateModelPropertyDefinitionRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    propertyDefinitionRequest: Array<PropertyDefinitionRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    PropertyDefinitionRequest: Array<PropertyDefinitionRequest>;
 }
 
 export interface CreateModelUnitRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    unitRequest: Array<UnitRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    UnitRequest: Array<UnitRequest>;
 }
 
 export interface CreatePropertySetRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    propertySetRequest: Array<PropertySetRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    PropertySetRequest: Array<PropertySetRequest>;
 }
 
 export interface CreatePropertySetElementRelationsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    elementPropertySetRelationRequest: Array<ElementPropertySetRelationRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    ElementPropertySetRelationRequest: Array<ElementPropertySetRelationRequest>;
 }
 
 export interface CreateRawElementsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    rawElementsRequest: RawElementsRequest;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    RawElementsRequest: RawElementsRequest;
 }
 
 export interface CreateSpaceRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    spaceRequest: Array<SpaceRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    SpaceRequest: Array<SpaceRequest>;
 }
 
 export interface CreateStoreyRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface CreateStoreyPlanRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    storeyUuid: string;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    storey_uuid: string;
 }
 
 export interface CreateSystemRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    systemRequest: SystemRequest;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    SystemRequest: SystemRequest;
 }
 
 export interface CreateZoneRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    zoneRequest: Array<ZoneRequest>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    ZoneRequest: Array<ZoneRequest>;
     color?: string;
 }
 
 export interface CreateZoneSpaceRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    zonePk: number;
-    zoneSpaceRequest: ZoneSpaceRequest;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    zone_pk: number;
+    ZoneSpaceRequest: ZoneSpaceRequest;
 }
 
 export interface DeleteAccessTokenRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     token: string;
 }
 
 export interface DeleteBuildingRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface DeleteBuildingPlanRequest {
-    buildingUuid: string;
-    cloudPk: number;
+    building_uuid: string;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteElementRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface DeleteLayerRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteModelRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteModelPropertyRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteModelPropertyDefinitionRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteModelUnitRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteModelWithoutDocRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeletePropertySetRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteSpaceRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteStoreyRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface DeleteStoreyPlanRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    storeyUuid: string;
+    model_pk: number;
+    project_pk: number;
+    storey_uuid: string;
 }
 
 export interface DeleteSystemRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface DeleteZoneRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteZoneSpaceRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    zonePk: number;
+    model_pk: number;
+    project_pk: number;
+    zone_pk: number;
 }
 
 export interface ExportIfcRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    ifcExportRequest: IfcExportRequest;
+    project_pk: number;
+    IfcExportRequest: IfcExportRequest;
 }
 
 export interface FullUpdateElementRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
-    elementRequest: ElementRequest;
+    ElementRequest: ElementRequest;
 }
 
 export interface GetAccessTokenRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     token: string;
 }
 
 export interface GetAccessTokensRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetBuildingRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface GetBuildingPlanPositioningRequest {
-    buildingUuid: string;
-    cloudPk: number;
+    building_uuid: string;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetBuildingsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetClassificationsOfElementRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetDocumentsOfElementRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetElementRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface GetElementLinkedDocumentsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     classification?: string;
-    classificationNotation?: string;
+    classification__notation?: string;
     type?: string;
 }
 
 export interface GetElementPropertySetRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetElementPropertySetPropertiesRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
-    propertysetPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
+    propertyset_pk: number;
 }
 
 export interface GetElementPropertySetPropertyRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    propertysetPk: number;
+    model_pk: number;
+    project_pk: number;
+    propertyset_pk: number;
 }
 
 export interface GetElementPropertySetPropertyDefinitionRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    propertyPk: number;
-    propertysetPk: number;
+    model_pk: number;
+    project_pk: number;
+    property_pk: number;
+    propertyset_pk: number;
 }
 
 export interface GetElementPropertySetPropertyDefinitionUnitRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    propertyPk: number;
-    propertydefinitionPk: number;
-    propertysetPk: number;
+    model_pk: number;
+    project_pk: number;
+    property_pk: number;
+    propertydefinition_pk: number;
+    propertyset_pk: number;
 }
 
 export interface GetElementPropertySetPropertyDefinitionUnitsRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
-    propertyPk: number;
-    propertydefinitionPk: number;
-    propertysetPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
+    property_pk: number;
+    propertydefinition_pk: number;
+    propertyset_pk: number;
 }
 
 export interface GetElementPropertySetPropertyDefinitionsRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
-    propertyPk: number;
-    propertysetPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
+    property_pk: number;
+    propertyset_pk: number;
 }
 
 export interface GetElementPropertySetsRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetElementsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     classification?: string;
-    classificationNotation?: string;
+    classification__notation?: string;
     type?: string;
 }
 
 export interface GetElementsFromClassificationRequest {
-    cloudPk: number;
-    modelClassificationPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_classification_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetLayerRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetLayersRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetMaterialRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetMaterialsRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetModelClassificationsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelMaterialRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelMaterialsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelPropertiesRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelPropertyRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelPropertyDefinitionRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelPropertyDefinitionsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelUnitRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelUnitsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetModelsRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
     source?: GetModelsSourceEnum;
     status?: Array<GetModelsStatusEnum>;
     type?: Array<GetModelsTypeEnum>;
 }
 
 export interface GetProcessorHandlerRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetProcessorHandlersRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetPropertySetRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetPropertySetsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetRawElementsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetSimpleElementRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface GetSimpleElementsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetSpaceRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetSpacesRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetStoreyRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface GetStoreyPlanPositioningRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    storeyUuid: string;
+    model_pk: number;
+    project_pk: number;
+    storey_uuid: string;
 }
 
 export interface GetStoreysRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetSystemRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface GetSystemsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetZoneRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetZoneSpaceRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    zonePk: number;
+    model_pk: number;
+    project_pk: number;
+    zone_pk: number;
 }
 
 export interface GetZoneSpacesRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    zonePk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    zone_pk: number;
 }
 
 export interface GetZonesRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     color?: string;
 }
 
 export interface LinkDocumentsOfElementRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface ListClassificationElementRelationsRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface MergeIfcsRequest {
-    cloudPk: number;
-    projectPk: number;
-    ifcMergeRequest: IfcMergeRequest;
+    cloud_pk: number;
+    project_pk: number;
+    IfcMergeRequest: IfcMergeRequest;
 }
 
 export interface OptimizeIfcRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    ifcOptimizeRequest?: IfcOptimizeRequest;
+    project_pk: number;
+    IfcOptimizeRequest?: IfcOptimizeRequest;
 }
 
 export interface RemoveAllElementPropertySetRequest {
-    cloudPk: number;
-    elementUuid: string;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    element_uuid: string;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface RemoveClassificationOfElementRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface RemoveDocumentOfElementRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface RemoveElementPropertySetRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface RemoveElementPropertySetPropertyRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    propertysetPk: number;
+    model_pk: number;
+    project_pk: number;
+    propertyset_pk: number;
 }
 
 export interface RemoveElementPropertySetPropertyDefinitionRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    propertyPk: number;
-    propertysetPk: number;
+    model_pk: number;
+    project_pk: number;
+    property_pk: number;
+    propertyset_pk: number;
 }
 
 export interface RemoveElementPropertySetPropertyDefinitionUnitRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    propertyPk: number;
-    propertydefinitionPk: number;
-    propertysetPk: number;
+    model_pk: number;
+    project_pk: number;
+    property_pk: number;
+    propertydefinition_pk: number;
+    propertyset_pk: number;
 }
 
 export interface RemoveElementsFromClassificationRequest {
-    cloudPk: number;
-    modelClassificationPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_classification_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface ReprocessModelRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface UpdateAccessTokenRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     token: string;
-    patchedIfcAccessTokenRequest?: PatchedIfcAccessTokenRequest;
+    PatchedIfcAccessTokenRequest?: PatchedIfcAccessTokenRequest;
 }
 
 export interface UpdateBuildingRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface UpdateBuildingPlanPositioningRequest {
-    buildingUuid: string;
-    cloudPk: number;
+    building_uuid: string;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedPositioningPlanRequest?: PatchedPositioningPlanRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest;
 }
 
 export interface UpdateElementRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
-    patchedElementRequest?: PatchedElementRequest;
+    PatchedElementRequest?: PatchedElementRequest;
 }
 
 export interface UpdateElementPropertySetPropertyRequest {
-    cloudPk: number;
-    elementUuid: string;
+    cloud_pk: number;
+    element_uuid: string;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    propertysetPk: number;
-    patchedPropertyRequest?: PatchedPropertyRequest;
+    model_pk: number;
+    project_pk: number;
+    propertyset_pk: number;
+    PatchedPropertyRequest?: PatchedPropertyRequest;
 }
 
 export interface UpdateLayerRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedLayerRequest?: PatchedLayerRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedLayerRequest?: PatchedLayerRequest;
 }
 
 export interface UpdateModelRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    patchedModelRequest?: PatchedModelRequest;
+    project_pk: number;
+    PatchedModelRequest?: PatchedModelRequest;
 }
 
 export interface UpdateModelFilesRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    structureFile?: Blob | null;
-    systemsFile?: Blob | null;
-    mapFile?: Blob | null;
-    gltfFile?: Blob | null;
-    gltfWithOpeningsFile?: Blob | null;
-    bvhTreeFile?: Blob | null;
-    viewer360File?: Blob | null;
-    xktFile?: Blob | null;
+    project_pk: number;
+    structure_file?: Blob | null;
+    systems_file?: Blob | null;
+    map_file?: Blob | null;
+    gltf_file?: Blob | null;
+    gltf_with_openings_file?: Blob | null;
+    bvh_tree_file?: Blob | null;
+    viewer_360_file?: Blob | null;
+    xkt_file?: Blob | null;
 }
 
 export interface UpdateModelPropertyRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedPropertyRequest?: PatchedPropertyRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedPropertyRequest?: PatchedPropertyRequest;
 }
 
 export interface UpdateModelPropertyDefinitionRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedPropertyDefinitionRequest?: PatchedPropertyDefinitionRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedPropertyDefinitionRequest?: PatchedPropertyDefinitionRequest;
 }
 
 export interface UpdateModelUnitRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedUnitRequest?: PatchedUnitRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedUnitRequest?: PatchedUnitRequest;
 }
 
 export interface UpdateOrderBuildingPlanRequest {
-    buildingUuid: string;
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    requestBody: Array<number>;
+    building_uuid: string;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    request_body: Array<number>;
 }
 
 export interface UpdateOrderStoreyPlanRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    storeyUuid: string;
-    requestBody: Array<number>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    storey_uuid: string;
+    request_body: Array<number>;
 }
 
 export interface UpdateOrderStoreysRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    requestBody: Array<string>;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    request_body: Array<string>;
 }
 
 export interface UpdateProcessorHandlerRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedProcessorHandlerRequest?: PatchedProcessorHandlerRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedProcessorHandlerRequest?: PatchedProcessorHandlerRequest;
 }
 
 export interface UpdatePropertySetRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedPropertySetRequest?: PatchedPropertySetRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedPropertySetRequest?: PatchedPropertySetRequest;
 }
 
 export interface UpdateSpaceRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedSpaceRequest?: PatchedSpaceRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedSpaceRequest?: PatchedSpaceRequest;
 }
 
 export interface UpdateStoreyRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
 }
 
 export interface UpdateStoreyPlanPositioningRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    storeyUuid: string;
-    patchedPositioningPlanRequest?: PatchedPositioningPlanRequest;
+    model_pk: number;
+    project_pk: number;
+    storey_uuid: string;
+    PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest;
 }
 
 export interface UpdateSystemRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
     uuid: string;
-    patchedSystemRequest?: PatchedSystemRequest;
+    PatchedSystemRequest?: PatchedSystemRequest;
 }
 
 export interface UpdateZoneRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedZoneRequest?: PatchedZoneRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedZoneRequest?: PatchedZoneRequest;
 }
 
 export interface UpdateZoneSpaceRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    zonePk: number;
-    patchedZoneSpaceRequest?: PatchedZoneSpaceRequest;
+    model_pk: number;
+    project_pk: number;
+    zone_pk: number;
+    PatchedZoneSpaceRequest?: PatchedZoneSpaceRequest;
 }
 
 /**
@@ -1274,16 +1274,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Add errors to model
      */
     async addModelErrorsRaw(requestParameters: AddModelErrorsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelErrors>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addModelErrors.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling addModelErrors.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling addModelErrors.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling addModelErrors.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling addModelErrors.');
         }
 
         const queryParameters: any = {};
@@ -1311,11 +1311,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/errors`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/errors`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ModelErrorsRequestToJSON(requestParameters.modelErrorsRequest),
+            body: ModelErrorsRequestToJSON(requestParameters.ModelErrorsRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelErrorsFromJSON(jsonValue));
@@ -1325,8 +1325,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Model errors are warnings and errors during model process. They alert about missing elements or malformed files  Required scopes: ifc:write, model:write
      * Add errors to model
      */
-    async addModelErrors(cloudPk: number, id: number, projectPk: number, modelErrorsRequest?: ModelErrorsRequest, initOverrides?: RequestInit): Promise<ModelErrors> {
-        const response = await this.addModelErrorsRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, modelErrorsRequest: modelErrorsRequest }, initOverrides);
+    async addModelErrors(cloud_pk: number, id: number, project_pk: number, ModelErrorsRequest?: ModelErrorsRequest, initOverrides?: RequestInit): Promise<ModelErrors> {
+        const response = await this.addModelErrorsRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, ModelErrorsRequest: ModelErrorsRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1335,16 +1335,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove all classifications from model\'s elements
      */
     async bulkDeleteModelClassificationsRaw(requestParameters: BulkDeleteModelClassificationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteModelClassifications.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkDeleteModelClassifications.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteModelClassifications.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkDeleteModelClassifications.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteModelClassifications.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteModelClassifications.');
         }
 
         const queryParameters: any = {};
@@ -1370,7 +1370,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification/list_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification/list_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1383,8 +1383,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete relation between filtered classifications (eg. /classifications?name=untec) and all mode\'s elements. No classification will be deleted on this endpoint, only the relation between model\'s elements and their classification.  Required scopes: ifc:write, model:write
      * Remove all classifications from model\'s elements
      */
-    async bulkDeleteModelClassifications(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeleteModelClassificationsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async bulkDeleteModelClassifications(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteModelClassificationsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1392,16 +1392,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete many Property of a model
      */
     async bulkDeleteModelPropertiesRaw(requestParameters: BulkDeleteModelPropertiesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteModelProperties.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkDeleteModelProperties.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteModelProperties.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkDeleteModelProperties.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteModelProperties.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteModelProperties.');
         }
 
         const queryParameters: any = {};
@@ -1427,7 +1427,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1440,8 +1440,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many Property of a model
      */
-    async bulkDeleteModelProperties(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeleteModelPropertiesRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async bulkDeleteModelProperties(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteModelPropertiesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1449,16 +1449,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete many PropertyDefinitions of a model
      */
     async bulkDeleteModelPropertyDefinitionsRaw(requestParameters: BulkDeleteModelPropertyDefinitionsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteModelPropertyDefinitions.');
         }
 
         const queryParameters: any = {};
@@ -1484,7 +1484,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1497,8 +1497,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many PropertyDefinitions of a model
      */
-    async bulkDeleteModelPropertyDefinitions(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeleteModelPropertyDefinitionsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async bulkDeleteModelPropertyDefinitions(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteModelPropertyDefinitionsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1506,16 +1506,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete many Units of a model
      */
     async bulkDeleteModelUnitsRaw(requestParameters: BulkDeleteModelUnitsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeleteModelUnits.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkDeleteModelUnits.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeleteModelUnits.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkDeleteModelUnits.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeleteModelUnits.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteModelUnits.');
         }
 
         const queryParameters: any = {};
@@ -1541,7 +1541,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1554,8 +1554,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many Units of a model
      */
-    async bulkDeleteModelUnits(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeleteModelUnitsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async bulkDeleteModelUnits(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteModelUnitsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1563,16 +1563,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete many PropertySet of a model
      */
     async bulkDeletePropertySetRaw(requestParameters: BulkDeletePropertySetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkDeletePropertySet.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkDeletePropertySet.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkDeletePropertySet.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkDeletePropertySet.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkDeletePropertySet.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeletePropertySet.');
         }
 
         const queryParameters: any = {};
@@ -1598,7 +1598,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1611,8 +1611,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many PropertySet of a model
      */
-    async bulkDeletePropertySet(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeletePropertySetRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async bulkDeletePropertySet(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeletePropertySetRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1620,20 +1620,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update many elements at once (only changing fields may be defined)
      */
     async bulkFullUpdateElementsRaw(requestParameters: BulkFullUpdateElementsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateElements.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkFullUpdateElements.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkFullUpdateElements.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkFullUpdateElements.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkFullUpdateElements.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkFullUpdateElements.');
         }
 
-        if (requestParameters.elementRequest === null || requestParameters.elementRequest === undefined) {
-            throw new runtime.RequiredError('elementRequest','Required parameter requestParameters.elementRequest was null or undefined when calling bulkFullUpdateElements.');
+        if (requestParameters.ElementRequest === null || requestParameters.ElementRequest === undefined) {
+            throw new runtime.RequiredError('ElementRequest','Required parameter requestParameters.ElementRequest was null or undefined when calling bulkFullUpdateElements.');
         }
 
         const queryParameters: any = {};
@@ -1642,8 +1642,8 @@ export class ModelApi extends runtime.BaseAPI {
             queryParameters['classification'] = requestParameters.classification;
         }
 
-        if (requestParameters.classificationNotation !== undefined) {
-            queryParameters['classification__notation'] = requestParameters.classificationNotation;
+        if (requestParameters.classification__notation !== undefined) {
+            queryParameters['classification__notation'] = requestParameters.classification__notation;
         }
 
         if (requestParameters.type !== undefined) {
@@ -1673,11 +1673,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/bulk_update`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/bulk_update`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.elementRequest.map(ElementRequestToJSON),
+            body: requestParameters.ElementRequest.map(ElementRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementFromJSON));
@@ -1687,8 +1687,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update many elements at once (only changing fields may be defined)
      */
-    async bulkFullUpdateElements(cloudPk: number, modelPk: number, projectPk: number, elementRequest: Array<ElementRequest>, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
-        const response = await this.bulkFullUpdateElementsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, elementRequest: elementRequest, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
+    async bulkFullUpdateElements(cloud_pk: number, model_pk: number, project_pk: number, ElementRequest: Array<ElementRequest>, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.bulkFullUpdateElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementRequest: ElementRequest, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -1697,20 +1697,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of many properties of a model
      */
     async bulkFullUpdateModelPropertyRaw(requestParameters: BulkFullUpdateModelPropertyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Property>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkFullUpdateModelProperty.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkFullUpdateModelProperty.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkFullUpdateModelProperty.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkFullUpdateModelProperty.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkFullUpdateModelProperty.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkFullUpdateModelProperty.');
         }
 
-        if (requestParameters.propertyRequest === null || requestParameters.propertyRequest === undefined) {
-            throw new runtime.RequiredError('propertyRequest','Required parameter requestParameters.propertyRequest was null or undefined when calling bulkFullUpdateModelProperty.');
+        if (requestParameters.PropertyRequest === null || requestParameters.PropertyRequest === undefined) {
+            throw new runtime.RequiredError('PropertyRequest','Required parameter requestParameters.PropertyRequest was null or undefined when calling bulkFullUpdateModelProperty.');
         }
 
         const queryParameters: any = {};
@@ -1738,11 +1738,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/bulk_update`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/bulk_update`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.propertyRequest.map(PropertyRequestToJSON),
+            body: requestParameters.PropertyRequest.map(PropertyRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyFromJSON));
@@ -1752,8 +1752,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update some fields of many properties of a model
      */
-    async bulkFullUpdateModelProperty(cloudPk: number, modelPk: number, projectPk: number, propertyRequest: Array<PropertyRequest>, initOverrides?: RequestInit): Promise<Array<Property>> {
-        const response = await this.bulkFullUpdateModelPropertyRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, propertyRequest: propertyRequest }, initOverrides);
+    async bulkFullUpdateModelProperty(cloud_pk: number, model_pk: number, project_pk: number, PropertyRequest: Array<PropertyRequest>, initOverrides?: RequestInit): Promise<Array<Property>> {
+        const response = await this.bulkFullUpdateModelPropertyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, PropertyRequest: PropertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1762,20 +1762,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove many classifications from an element
      */
     async bulkRemoveClassificationsOfElementRaw(requestParameters: BulkRemoveClassificationsOfElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveClassificationsOfElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkRemoveClassificationsOfElement.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling bulkRemoveClassificationsOfElement.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling bulkRemoveClassificationsOfElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkRemoveClassificationsOfElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkRemoveClassificationsOfElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveClassificationsOfElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkRemoveClassificationsOfElement.');
         }
 
         const queryParameters: any = {};
@@ -1801,7 +1801,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/classification/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/classification/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1814,8 +1814,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove many classifications from an element
      */
-    async bulkRemoveClassificationsOfElement(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkRemoveClassificationsOfElementRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async bulkRemoveClassificationsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkRemoveClassificationsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1823,20 +1823,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove many documents from an element
      */
     async bulkRemoveDocumentsOfElementRaw(requestParameters: BulkRemoveDocumentsOfElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveDocumentsOfElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkRemoveDocumentsOfElement.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling bulkRemoveDocumentsOfElement.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling bulkRemoveDocumentsOfElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkRemoveDocumentsOfElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkRemoveDocumentsOfElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveDocumentsOfElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkRemoveDocumentsOfElement.');
         }
 
         const queryParameters: any = {};
@@ -1862,7 +1862,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/documents/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/documents/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1875,8 +1875,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove many documents from an element
      */
-    async bulkRemoveDocumentsOfElement(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkRemoveDocumentsOfElementRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async bulkRemoveDocumentsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkRemoveDocumentsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1884,20 +1884,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove the classifications from all elements
      */
     async bulkRemoveElementsFromClassificationRaw(requestParameters: BulkRemoveElementsFromClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkRemoveElementsFromClassification.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkRemoveElementsFromClassification.');
         }
 
-        if (requestParameters.modelClassificationPk === null || requestParameters.modelClassificationPk === undefined) {
-            throw new runtime.RequiredError('modelClassificationPk','Required parameter requestParameters.modelClassificationPk was null or undefined when calling bulkRemoveElementsFromClassification.');
+        if (requestParameters.model_classification_pk === null || requestParameters.model_classification_pk === undefined) {
+            throw new runtime.RequiredError('model_classification_pk','Required parameter requestParameters.model_classification_pk was null or undefined when calling bulkRemoveElementsFromClassification.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkRemoveElementsFromClassification.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkRemoveElementsFromClassification.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkRemoveElementsFromClassification.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkRemoveElementsFromClassification.');
         }
 
         const queryParameters: any = {};
@@ -1923,7 +1923,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification/{model_classification_pk}/element/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_classification_pk"}}`, encodeURIComponent(String(requestParameters.modelClassificationPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification/{model_classification_pk}/element/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_classification_pk"}}`, encodeURIComponent(String(requestParameters.model_classification_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1936,8 +1936,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove the classifications from all elements
      */
-    async bulkRemoveElementsFromClassification(cloudPk: number, modelClassificationPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkRemoveElementsFromClassificationRaw({ cloudPk: cloudPk, modelClassificationPk: modelClassificationPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async bulkRemoveElementsFromClassification(cloud_pk: number, model_classification_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkRemoveElementsFromClassificationRaw({ cloud_pk: cloud_pk, model_classification_pk: model_classification_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1945,20 +1945,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update many elements at once (all field must be defined)
      */
     async bulkUpdateElementsRaw(requestParameters: BulkUpdateElementsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateElements.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkUpdateElements.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkUpdateElements.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkUpdateElements.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkUpdateElements.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkUpdateElements.');
         }
 
-        if (requestParameters.elementRequest === null || requestParameters.elementRequest === undefined) {
-            throw new runtime.RequiredError('elementRequest','Required parameter requestParameters.elementRequest was null or undefined when calling bulkUpdateElements.');
+        if (requestParameters.ElementRequest === null || requestParameters.ElementRequest === undefined) {
+            throw new runtime.RequiredError('ElementRequest','Required parameter requestParameters.ElementRequest was null or undefined when calling bulkUpdateElements.');
         }
 
         const queryParameters: any = {};
@@ -1967,8 +1967,8 @@ export class ModelApi extends runtime.BaseAPI {
             queryParameters['classification'] = requestParameters.classification;
         }
 
-        if (requestParameters.classificationNotation !== undefined) {
-            queryParameters['classification__notation'] = requestParameters.classificationNotation;
+        if (requestParameters.classification__notation !== undefined) {
+            queryParameters['classification__notation'] = requestParameters.classification__notation;
         }
 
         if (requestParameters.type !== undefined) {
@@ -1998,11 +1998,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/bulk_update`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/bulk_update`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.elementRequest.map(ElementRequestToJSON),
+            body: requestParameters.ElementRequest.map(ElementRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementFromJSON));
@@ -2012,8 +2012,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update many elements at once (all field must be defined)
      */
-    async bulkUpdateElements(cloudPk: number, modelPk: number, projectPk: number, elementRequest: Array<ElementRequest>, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
-        const response = await this.bulkUpdateElementsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, elementRequest: elementRequest, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
+    async bulkUpdateElements(cloud_pk: number, model_pk: number, project_pk: number, ElementRequest: Array<ElementRequest>, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.bulkUpdateElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementRequest: ElementRequest, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -2022,20 +2022,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update all fields of many properties of a model
      */
     async bulkUpdateModelPropertyRaw(requestParameters: BulkUpdateModelPropertyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Property>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling bulkUpdateModelProperty.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkUpdateModelProperty.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling bulkUpdateModelProperty.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling bulkUpdateModelProperty.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling bulkUpdateModelProperty.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkUpdateModelProperty.');
         }
 
-        if (requestParameters.propertyRequest === null || requestParameters.propertyRequest === undefined) {
-            throw new runtime.RequiredError('propertyRequest','Required parameter requestParameters.propertyRequest was null or undefined when calling bulkUpdateModelProperty.');
+        if (requestParameters.PropertyRequest === null || requestParameters.PropertyRequest === undefined) {
+            throw new runtime.RequiredError('PropertyRequest','Required parameter requestParameters.PropertyRequest was null or undefined when calling bulkUpdateModelProperty.');
         }
 
         const queryParameters: any = {};
@@ -2063,11 +2063,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/bulk_update`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/bulk_update`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.propertyRequest.map(PropertyRequestToJSON),
+            body: requestParameters.PropertyRequest.map(PropertyRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyFromJSON));
@@ -2077,8 +2077,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors 
      * Update all fields of many properties of a model
      */
-    async bulkUpdateModelProperty(cloudPk: number, modelPk: number, projectPk: number, propertyRequest: Array<PropertyRequest>, initOverrides?: RequestInit): Promise<Array<Property>> {
-        const response = await this.bulkUpdateModelPropertyRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, propertyRequest: propertyRequest }, initOverrides);
+    async bulkUpdateModelProperty(cloud_pk: number, model_pk: number, project_pk: number, PropertyRequest: Array<PropertyRequest>, initOverrides?: RequestInit): Promise<Array<Property>> {
+        const response = await this.bulkUpdateModelPropertyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, PropertyRequest: PropertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2087,16 +2087,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a token for this model
      */
     async createAccessTokenRaw(requestParameters: CreateAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcAccessToken>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createAccessToken.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createAccessToken.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createAccessToken.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createAccessToken.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createAccessToken.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createAccessToken.');
         }
 
         const queryParameters: any = {};
@@ -2124,11 +2124,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: IfcAccessTokenRequestToJSON(requestParameters.ifcAccessTokenRequest),
+            body: IfcAccessTokenRequestToJSON(requestParameters.IfcAccessTokenRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcAccessTokenFromJSON(jsonValue));
@@ -2138,8 +2138,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Tokens are read_only by default and are valid 1 day  Required scopes: ifc:token_manage, model:token_manage
      * Create a token for this model
      */
-    async createAccessToken(cloudPk: number, modelPk: number, projectPk: number, ifcAccessTokenRequest?: IfcAccessTokenRequest, initOverrides?: RequestInit): Promise<IfcAccessToken> {
-        const response = await this.createAccessTokenRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, ifcAccessTokenRequest: ifcAccessTokenRequest }, initOverrides);
+    async createAccessToken(cloud_pk: number, model_pk: number, project_pk: number, IfcAccessTokenRequest?: IfcAccessTokenRequest, initOverrides?: RequestInit): Promise<IfcAccessToken> {
+        const response = await this.createAccessTokenRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, IfcAccessTokenRequest: IfcAccessTokenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2148,16 +2148,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a building of a model
      */
     async createBuildingRaw(requestParameters: CreateBuildingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Building>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createBuilding.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createBuilding.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createBuilding.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createBuilding.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createBuilding.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createBuilding.');
         }
 
         const queryParameters: any = {};
@@ -2183,7 +2183,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -2196,8 +2196,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a building of a model.  Required scopes: ifc:write, model:write
      * Create a building of a model
      */
-    async createBuilding(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.createBuildingRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async createBuilding(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.createBuildingRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -2206,20 +2206,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a building
      */
     async createBuildingPlanRaw(requestParameters: CreateBuildingPlanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Building>> {
-        if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
-            throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling createBuildingPlan.');
+        if (requestParameters.building_uuid === null || requestParameters.building_uuid === undefined) {
+            throw new runtime.RequiredError('building_uuid','Required parameter requestParameters.building_uuid was null or undefined when calling createBuildingPlan.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createBuildingPlan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createBuildingPlan.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createBuildingPlan.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createBuildingPlan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createBuildingPlan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createBuildingPlan.');
         }
 
         const queryParameters: any = {};
@@ -2245,7 +2245,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/add`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.buildingUuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/add`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.building_uuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -2258,8 +2258,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a building. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a building
      */
-    async createBuildingPlan(buildingUuid: string, cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.createBuildingPlanRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async createBuildingPlan(building_uuid: string, cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.createBuildingPlanRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -2268,20 +2268,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create association between existing classification and existing element
      */
     async createClassificationElementRelationsRaw(requestParameters: CreateClassificationElementRelationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassificationElementRelations.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createClassificationElementRelations.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createClassificationElementRelations.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createClassificationElementRelations.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createClassificationElementRelations.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createClassificationElementRelations.');
         }
 
-        if (requestParameters.elementClassificationRelationRequest === null || requestParameters.elementClassificationRelationRequest === undefined) {
-            throw new runtime.RequiredError('elementClassificationRelationRequest','Required parameter requestParameters.elementClassificationRelationRequest was null or undefined when calling createClassificationElementRelations.');
+        if (requestParameters.ElementClassificationRelationRequest === null || requestParameters.ElementClassificationRelationRequest === undefined) {
+            throw new runtime.RequiredError('ElementClassificationRelationRequest','Required parameter requestParameters.ElementClassificationRelationRequest was null or undefined when calling createClassificationElementRelations.');
         }
 
         const queryParameters: any = {};
@@ -2309,11 +2309,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification-element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification-element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.elementClassificationRelationRequest.map(ElementClassificationRelationRequestToJSON),
+            body: requestParameters.ElementClassificationRelationRequest.map(ElementClassificationRelationRequestToJSON),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2323,8 +2323,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create association between existing classification and existing element  Required scopes: ifc:write, model:write
      * Create association between existing classification and existing element
      */
-    async createClassificationElementRelations(cloudPk: number, modelPk: number, projectPk: number, elementClassificationRelationRequest: Array<ElementClassificationRelationRequest>, initOverrides?: RequestInit): Promise<void> {
-        await this.createClassificationElementRelationsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, elementClassificationRelationRequest: elementClassificationRelationRequest }, initOverrides);
+    async createClassificationElementRelations(cloud_pk: number, model_pk: number, project_pk: number, ElementClassificationRelationRequest: Array<ElementClassificationRelationRequest>, initOverrides?: RequestInit): Promise<void> {
+        await this.createClassificationElementRelationsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementClassificationRelationRequest: ElementClassificationRelationRequest }, initOverrides);
     }
 
     /**
@@ -2332,24 +2332,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Create one or many classifications to an element
      */
     async createClassificationsOfElementRaw(requestParameters: CreateClassificationsOfElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassificationsOfElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createClassificationsOfElement.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createClassificationsOfElement.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling createClassificationsOfElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createClassificationsOfElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createClassificationsOfElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createClassificationsOfElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createClassificationsOfElement.');
         }
 
-        if (requestParameters.classificationRequest === null || requestParameters.classificationRequest === undefined) {
-            throw new runtime.RequiredError('classificationRequest','Required parameter requestParameters.classificationRequest was null or undefined when calling createClassificationsOfElement.');
+        if (requestParameters.ClassificationRequest === null || requestParameters.ClassificationRequest === undefined) {
+            throw new runtime.RequiredError('ClassificationRequest','Required parameter requestParameters.ClassificationRequest was null or undefined when calling createClassificationsOfElement.');
         }
 
         const queryParameters: any = {};
@@ -2377,11 +2377,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.classificationRequest.map(ClassificationRequestToJSON),
+            body: requestParameters.ClassificationRequest.map(ClassificationRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ClassificationFromJSON));
@@ -2391,8 +2391,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors If classification created already exists, it will just be added to item\'s classifications and will not be duplicated  Required scopes: ifc:write, model:write
      * Create one or many classifications to an element
      */
-    async createClassificationsOfElement(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, classificationRequest: Array<ClassificationRequest>, initOverrides?: RequestInit): Promise<Array<Classification>> {
-        const response = await this.createClassificationsOfElementRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk, classificationRequest: classificationRequest }, initOverrides);
+    async createClassificationsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, ClassificationRequest: Array<ClassificationRequest>, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.createClassificationsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, ClassificationRequest: ClassificationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2401,20 +2401,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create an element in the model
      */
     async createElementRaw(requestParameters: CreateElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createElement.');
         }
 
-        if (requestParameters.elementRequest === null || requestParameters.elementRequest === undefined) {
-            throw new runtime.RequiredError('elementRequest','Required parameter requestParameters.elementRequest was null or undefined when calling createElement.');
+        if (requestParameters.ElementRequest === null || requestParameters.ElementRequest === undefined) {
+            throw new runtime.RequiredError('ElementRequest','Required parameter requestParameters.ElementRequest was null or undefined when calling createElement.');
         }
 
         const queryParameters: any = {};
@@ -2423,8 +2423,8 @@ export class ModelApi extends runtime.BaseAPI {
             queryParameters['classification'] = requestParameters.classification;
         }
 
-        if (requestParameters.classificationNotation !== undefined) {
-            queryParameters['classification__notation'] = requestParameters.classificationNotation;
+        if (requestParameters.classification__notation !== undefined) {
+            queryParameters['classification__notation'] = requestParameters.classification__notation;
         }
 
         if (requestParameters.type !== undefined) {
@@ -2454,11 +2454,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.elementRequest.map(ElementRequestToJSON),
+            body: requestParameters.ElementRequest.map(ElementRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ElementFromJSON));
@@ -2468,8 +2468,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create an element in the model
      */
-    async createElement(cloudPk: number, modelPk: number, projectPk: number, elementRequest: Array<ElementRequest>, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
-        const response = await this.createElementRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, elementRequest: elementRequest, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
+    async createElement(cloud_pk: number, model_pk: number, project_pk: number, ElementRequest: Array<ElementRequest>, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.createElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementRequest: ElementRequest, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -2478,20 +2478,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a PropertySets to an element
      */
     async createElementPropertySetRaw(requestParameters: CreateElementPropertySetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertySet>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySet.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createElementPropertySet.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySet.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling createElementPropertySet.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createElementPropertySet.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createElementPropertySet.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySet.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createElementPropertySet.');
         }
 
         const queryParameters: any = {};
@@ -2519,11 +2519,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PropertySetRequestToJSON(requestParameters.propertySetRequest),
+            body: PropertySetRequestToJSON(requestParameters.PropertySetRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertySetFromJSON(jsonValue));
@@ -2533,8 +2533,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a PropertySets that will be automatically linked to the element  Required scopes: ifc:write, model:write
      * Create a PropertySets to an element
      */
-    async createElementPropertySet(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, propertySetRequest?: PropertySetRequest, initOverrides?: RequestInit): Promise<PropertySet> {
-        const response = await this.createElementPropertySetRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk, propertySetRequest: propertySetRequest }, initOverrides);
+    async createElementPropertySet(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, PropertySetRequest?: PropertySetRequest, initOverrides?: RequestInit): Promise<PropertySet> {
+        const response = await this.createElementPropertySetRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, PropertySetRequest: PropertySetRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2543,28 +2543,28 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a property to a PropertySet
      */
     async createElementPropertySetPropertyRaw(requestParameters: CreateElementPropertySetPropertyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetProperty.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createElementPropertySetProperty.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetProperty.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling createElementPropertySetProperty.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createElementPropertySetProperty.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createElementPropertySetProperty.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetProperty.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createElementPropertySetProperty.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetProperty.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling createElementPropertySetProperty.');
         }
 
-        if (requestParameters.propertyRequest === null || requestParameters.propertyRequest === undefined) {
-            throw new runtime.RequiredError('propertyRequest','Required parameter requestParameters.propertyRequest was null or undefined when calling createElementPropertySetProperty.');
+        if (requestParameters.PropertyRequest === null || requestParameters.PropertyRequest === undefined) {
+            throw new runtime.RequiredError('PropertyRequest','Required parameter requestParameters.PropertyRequest was null or undefined when calling createElementPropertySetProperty.');
         }
 
         const queryParameters: any = {};
@@ -2592,11 +2592,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PropertyRequestToJSON(requestParameters.propertyRequest),
+            body: PropertyRequestToJSON(requestParameters.PropertyRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
@@ -2606,8 +2606,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a property to a PropertySet  Required scopes: ifc:write, model:write
      * Create a property to a PropertySet
      */
-    async createElementPropertySetProperty(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, propertysetPk: number, propertyRequest: PropertyRequest, initOverrides?: RequestInit): Promise<Property> {
-        const response = await this.createElementPropertySetPropertyRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk, propertysetPk: propertysetPk, propertyRequest: propertyRequest }, initOverrides);
+    async createElementPropertySetProperty(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, propertyset_pk: number, PropertyRequest: PropertyRequest, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.createElementPropertySetPropertyRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, propertyset_pk: propertyset_pk, PropertyRequest: PropertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2616,28 +2616,28 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a Definition to a Property
      */
     async createElementPropertySetPropertyDefinitionRaw(requestParameters: CreateElementPropertySetPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertyDefinition>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetPropertyDefinition.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling createElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+        if (requestParameters.property_pk === null || requestParameters.property_pk === undefined) {
+            throw new runtime.RequiredError('property_pk','Required parameter requestParameters.property_pk was null or undefined when calling createElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetPropertyDefinition.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling createElementPropertySetPropertyDefinition.');
         }
 
         const queryParameters: any = {};
@@ -2665,11 +2665,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.propertyPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.property_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PropertyDefinitionRequestToJSON(requestParameters.propertyDefinitionRequest),
+            body: PropertyDefinitionRequestToJSON(requestParameters.PropertyDefinitionRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
@@ -2679,8 +2679,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a Definition to a Property  Required scopes: ifc:write, model:write
      * Create a Definition to a Property
      */
-    async createElementPropertySetPropertyDefinition(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, propertyPk: number, propertysetPk: number, propertyDefinitionRequest?: PropertyDefinitionRequest, initOverrides?: RequestInit): Promise<PropertyDefinition> {
-        const response = await this.createElementPropertySetPropertyDefinitionRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk, propertyDefinitionRequest: propertyDefinitionRequest }, initOverrides);
+    async createElementPropertySetPropertyDefinition(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, property_pk: number, propertyset_pk: number, PropertyDefinitionRequest?: PropertyDefinitionRequest, initOverrides?: RequestInit): Promise<PropertyDefinition> {
+        const response = await this.createElementPropertySetPropertyDefinitionRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, property_pk: property_pk, propertyset_pk: propertyset_pk, PropertyDefinitionRequest: PropertyDefinitionRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2689,36 +2689,36 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a Unit to a Definition
      */
     async createElementPropertySetPropertyDefinitionUnitRaw(requestParameters: CreateElementPropertySetPropertyDefinitionUnitRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Unit>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.property_pk === null || requestParameters.property_pk === undefined) {
+            throw new runtime.RequiredError('property_pk','Required parameter requestParameters.property_pk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.propertydefinitionPk === null || requestParameters.propertydefinitionPk === undefined) {
-            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.propertydefinition_pk === null || requestParameters.propertydefinition_pk === undefined) {
+            throw new runtime.RequiredError('propertydefinition_pk','Required parameter requestParameters.propertydefinition_pk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.unitRequest === null || requestParameters.unitRequest === undefined) {
-            throw new runtime.RequiredError('unitRequest','Required parameter requestParameters.unitRequest was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.UnitRequest === null || requestParameters.UnitRequest === undefined) {
+            throw new runtime.RequiredError('UnitRequest','Required parameter requestParameters.UnitRequest was null or undefined when calling createElementPropertySetPropertyDefinitionUnit.');
         }
 
         const queryParameters: any = {};
@@ -2746,11 +2746,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{propertydefinition_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.propertyPk))).replace(`{${"propertydefinition_pk"}}`, encodeURIComponent(String(requestParameters.propertydefinitionPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{propertydefinition_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.property_pk))).replace(`{${"propertydefinition_pk"}}`, encodeURIComponent(String(requestParameters.propertydefinition_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UnitRequestToJSON(requestParameters.unitRequest),
+            body: UnitRequestToJSON(requestParameters.UnitRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
@@ -2760,8 +2760,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a Unit to a Definition  Required scopes: ifc:write, model:write
      * Create a Unit to a Definition
      */
-    async createElementPropertySetPropertyDefinitionUnit(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number, unitRequest: UnitRequest, initOverrides?: RequestInit): Promise<Unit> {
-        const response = await this.createElementPropertySetPropertyDefinitionUnitRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk, unitRequest: unitRequest }, initOverrides);
+    async createElementPropertySetPropertyDefinitionUnit(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, property_pk: number, propertydefinition_pk: number, propertyset_pk: number, UnitRequest: UnitRequest, initOverrides?: RequestInit): Promise<Unit> {
+        const response = await this.createElementPropertySetPropertyDefinitionUnitRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, property_pk: property_pk, propertydefinition_pk: propertydefinition_pk, propertyset_pk: propertyset_pk, UnitRequest: UnitRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2770,20 +2770,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a layer in the model
      */
     async createLayerRaw(requestParameters: CreateLayerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Layer>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createLayer.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createLayer.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createLayer.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createLayer.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createLayer.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createLayer.');
         }
 
-        if (requestParameters.layerRequest === null || requestParameters.layerRequest === undefined) {
-            throw new runtime.RequiredError('layerRequest','Required parameter requestParameters.layerRequest was null or undefined when calling createLayer.');
+        if (requestParameters.LayerRequest === null || requestParameters.LayerRequest === undefined) {
+            throw new runtime.RequiredError('LayerRequest','Required parameter requestParameters.LayerRequest was null or undefined when calling createLayer.');
         }
 
         const queryParameters: any = {};
@@ -2811,11 +2811,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: LayerRequestToJSON(requestParameters.layerRequest),
+            body: LayerRequestToJSON(requestParameters.LayerRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LayerFromJSON(jsonValue));
@@ -2825,8 +2825,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a layer in the model
      */
-    async createLayer(cloudPk: number, modelPk: number, projectPk: number, layerRequest: LayerRequest, initOverrides?: RequestInit): Promise<Layer> {
-        const response = await this.createLayerRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, layerRequest: layerRequest }, initOverrides);
+    async createLayer(cloud_pk: number, model_pk: number, project_pk: number, LayerRequest: LayerRequest, initOverrides?: RequestInit): Promise<Layer> {
+        const response = await this.createLayerRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, LayerRequest: LayerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2835,16 +2835,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Create an empty 3D Model
      */
     async createMetaBuildingRaw(requestParameters: CreateMetaBuildingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createMetaBuilding.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createMetaBuilding.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createMetaBuilding.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createMetaBuilding.');
         }
 
-        if (requestParameters.createBuildingByNameRequest === null || requestParameters.createBuildingByNameRequest === undefined) {
-            throw new runtime.RequiredError('createBuildingByNameRequest','Required parameter requestParameters.createBuildingByNameRequest was null or undefined when calling createMetaBuilding.');
+        if (requestParameters.CreateBuildingByNameRequest === null || requestParameters.CreateBuildingByNameRequest === undefined) {
+            throw new runtime.RequiredError('CreateBuildingByNameRequest','Required parameter requestParameters.CreateBuildingByNameRequest was null or undefined when calling createMetaBuilding.');
         }
 
         const queryParameters: any = {};
@@ -2872,11 +2872,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/create-metabuilding`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/create-metabuilding`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateBuildingByNameRequestToJSON(requestParameters.createBuildingByNameRequest),
+            body: CreateBuildingByNameRequestToJSON(requestParameters.CreateBuildingByNameRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
@@ -2886,8 +2886,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create an empty 3D Model to be used in BIMData services  Required scopes: ifc:write, model:write
      * Create an empty 3D Model
      */
-    async createMetaBuilding(cloudPk: number, projectPk: number, createBuildingByNameRequest: CreateBuildingByNameRequest, initOverrides?: RequestInit): Promise<Model> {
-        const response = await this.createMetaBuildingRaw({ cloudPk: cloudPk, projectPk: projectPk, createBuildingByNameRequest: createBuildingByNameRequest }, initOverrides);
+    async createMetaBuilding(cloud_pk: number, project_pk: number, CreateBuildingByNameRequest: CreateBuildingByNameRequest, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.createMetaBuildingRaw({ cloud_pk: cloud_pk, project_pk: project_pk, CreateBuildingByNameRequest: CreateBuildingByNameRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2896,16 +2896,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Make a PDF or Image file a Model
      */
     async createModelRaw(requestParameters: CreateModelOperationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createModel.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createModel.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createModel.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createModel.');
         }
 
-        if (requestParameters.createModelRequest === null || requestParameters.createModelRequest === undefined) {
-            throw new runtime.RequiredError('createModelRequest','Required parameter requestParameters.createModelRequest was null or undefined when calling createModel.');
+        if (requestParameters.CreateModelRequest === null || requestParameters.CreateModelRequest === undefined) {
+            throw new runtime.RequiredError('CreateModelRequest','Required parameter requestParameters.CreateModelRequest was null or undefined when calling createModel.');
         }
 
         const queryParameters: any = {};
@@ -2933,11 +2933,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/create-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/create-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateModelRequestToJSON(requestParameters.createModelRequest),
+            body: CreateModelRequestToJSON(requestParameters.CreateModelRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
@@ -2947,8 +2947,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Make a PDF or Image file a Model to be used in BIMData services. If a model already exists, this route does nothing and returns a 201 with the model  Required scopes: ifc:write, model:write
      * Make a PDF or Image file a Model
      */
-    async createModel(cloudPk: number, projectPk: number, createModelRequest: CreateModelRequest, initOverrides?: RequestInit): Promise<Model> {
-        const response = await this.createModelRaw({ cloudPk: cloudPk, projectPk: projectPk, createModelRequest: createModelRequest }, initOverrides);
+    async createModel(cloud_pk: number, project_pk: number, CreateModelRequest: CreateModelRequest, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.createModelRaw({ cloud_pk: cloud_pk, project_pk: project_pk, CreateModelRequest: CreateModelRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2957,20 +2957,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a PropertyDefinition on the model
      */
     async createModelPropertyDefinitionRaw(requestParameters: CreateModelPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createModelPropertyDefinition.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createModelPropertyDefinition.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createModelPropertyDefinition.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createModelPropertyDefinition.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createModelPropertyDefinition.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createModelPropertyDefinition.');
         }
 
-        if (requestParameters.propertyDefinitionRequest === null || requestParameters.propertyDefinitionRequest === undefined) {
-            throw new runtime.RequiredError('propertyDefinitionRequest','Required parameter requestParameters.propertyDefinitionRequest was null or undefined when calling createModelPropertyDefinition.');
+        if (requestParameters.PropertyDefinitionRequest === null || requestParameters.PropertyDefinitionRequest === undefined) {
+            throw new runtime.RequiredError('PropertyDefinitionRequest','Required parameter requestParameters.PropertyDefinitionRequest was null or undefined when calling createModelPropertyDefinition.');
         }
 
         const queryParameters: any = {};
@@ -2998,11 +2998,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.propertyDefinitionRequest.map(PropertyDefinitionRequestToJSON),
+            body: requestParameters.PropertyDefinitionRequest.map(PropertyDefinitionRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyDefinitionFromJSON));
@@ -3012,8 +3012,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create a PropertyDefinition on the model
      */
-    async createModelPropertyDefinition(cloudPk: number, modelPk: number, projectPk: number, propertyDefinitionRequest: Array<PropertyDefinitionRequest>, initOverrides?: RequestInit): Promise<Array<PropertyDefinition>> {
-        const response = await this.createModelPropertyDefinitionRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, propertyDefinitionRequest: propertyDefinitionRequest }, initOverrides);
+    async createModelPropertyDefinition(cloud_pk: number, model_pk: number, project_pk: number, PropertyDefinitionRequest: Array<PropertyDefinitionRequest>, initOverrides?: RequestInit): Promise<Array<PropertyDefinition>> {
+        const response = await this.createModelPropertyDefinitionRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, PropertyDefinitionRequest: PropertyDefinitionRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3022,20 +3022,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a Unit on a model
      */
     async createModelUnitRaw(requestParameters: CreateModelUnitRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Unit>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createModelUnit.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createModelUnit.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createModelUnit.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createModelUnit.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createModelUnit.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createModelUnit.');
         }
 
-        if (requestParameters.unitRequest === null || requestParameters.unitRequest === undefined) {
-            throw new runtime.RequiredError('unitRequest','Required parameter requestParameters.unitRequest was null or undefined when calling createModelUnit.');
+        if (requestParameters.UnitRequest === null || requestParameters.UnitRequest === undefined) {
+            throw new runtime.RequiredError('UnitRequest','Required parameter requestParameters.UnitRequest was null or undefined when calling createModelUnit.');
         }
 
         const queryParameters: any = {};
@@ -3063,11 +3063,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.unitRequest.map(UnitRequestToJSON),
+            body: requestParameters.UnitRequest.map(UnitRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UnitFromJSON));
@@ -3077,8 +3077,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create a Unit on a model
      */
-    async createModelUnit(cloudPk: number, modelPk: number, projectPk: number, unitRequest: Array<UnitRequest>, initOverrides?: RequestInit): Promise<Array<Unit>> {
-        const response = await this.createModelUnitRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, unitRequest: unitRequest }, initOverrides);
+    async createModelUnit(cloud_pk: number, model_pk: number, project_pk: number, UnitRequest: Array<UnitRequest>, initOverrides?: RequestInit): Promise<Array<Unit>> {
+        const response = await this.createModelUnitRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, UnitRequest: UnitRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3087,20 +3087,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create one or many PropertySet
      */
     async createPropertySetRaw(requestParameters: CreatePropertySetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertySet>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createPropertySet.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createPropertySet.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createPropertySet.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createPropertySet.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createPropertySet.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createPropertySet.');
         }
 
-        if (requestParameters.propertySetRequest === null || requestParameters.propertySetRequest === undefined) {
-            throw new runtime.RequiredError('propertySetRequest','Required parameter requestParameters.propertySetRequest was null or undefined when calling createPropertySet.');
+        if (requestParameters.PropertySetRequest === null || requestParameters.PropertySetRequest === undefined) {
+            throw new runtime.RequiredError('PropertySetRequest','Required parameter requestParameters.PropertySetRequest was null or undefined when calling createPropertySet.');
         }
 
         const queryParameters: any = {};
@@ -3128,11 +3128,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.propertySetRequest.map(PropertySetRequestToJSON),
+            body: requestParameters.PropertySetRequest.map(PropertySetRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertySetFromJSON));
@@ -3142,8 +3142,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create one or many PropertySet
      */
-    async createPropertySet(cloudPk: number, modelPk: number, projectPk: number, propertySetRequest: Array<PropertySetRequest>, initOverrides?: RequestInit): Promise<Array<PropertySet>> {
-        const response = await this.createPropertySetRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, propertySetRequest: propertySetRequest }, initOverrides);
+    async createPropertySet(cloud_pk: number, model_pk: number, project_pk: number, PropertySetRequest: Array<PropertySetRequest>, initOverrides?: RequestInit): Promise<Array<PropertySet>> {
+        const response = await this.createPropertySetRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, PropertySetRequest: PropertySetRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3152,20 +3152,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create association between PropertySet and element
      */
     async createPropertySetElementRelationsRaw(requestParameters: CreatePropertySetElementRelationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createPropertySetElementRelations.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createPropertySetElementRelations.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createPropertySetElementRelations.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createPropertySetElementRelations.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createPropertySetElementRelations.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createPropertySetElementRelations.');
         }
 
-        if (requestParameters.elementPropertySetRelationRequest === null || requestParameters.elementPropertySetRelationRequest === undefined) {
-            throw new runtime.RequiredError('elementPropertySetRelationRequest','Required parameter requestParameters.elementPropertySetRelationRequest was null or undefined when calling createPropertySetElementRelations.');
+        if (requestParameters.ElementPropertySetRelationRequest === null || requestParameters.ElementPropertySetRelationRequest === undefined) {
+            throw new runtime.RequiredError('ElementPropertySetRelationRequest','Required parameter requestParameters.ElementPropertySetRelationRequest was null or undefined when calling createPropertySetElementRelations.');
         }
 
         const queryParameters: any = {};
@@ -3193,11 +3193,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset-element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset-element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.elementPropertySetRelationRequest.map(ElementPropertySetRelationRequestToJSON),
+            body: requestParameters.ElementPropertySetRelationRequest.map(ElementPropertySetRelationRequestToJSON),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -3207,8 +3207,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create association between PropertySet and element  Required scopes: ifc:write, model:write
      * Create association between PropertySet and element
      */
-    async createPropertySetElementRelations(cloudPk: number, modelPk: number, projectPk: number, elementPropertySetRelationRequest: Array<ElementPropertySetRelationRequest>, initOverrides?: RequestInit): Promise<void> {
-        await this.createPropertySetElementRelationsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, elementPropertySetRelationRequest: elementPropertySetRelationRequest }, initOverrides);
+    async createPropertySetElementRelations(cloud_pk: number, model_pk: number, project_pk: number, ElementPropertySetRelationRequest: Array<ElementPropertySetRelationRequest>, initOverrides?: RequestInit): Promise<void> {
+        await this.createPropertySetElementRelationsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementPropertySetRelationRequest: ElementPropertySetRelationRequest }, initOverrides);
     }
 
     /**
@@ -3216,20 +3216,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create elements in an optimized format
      */
     async createRawElementsRaw(requestParameters: CreateRawElementsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createRawElements.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createRawElements.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createRawElements.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createRawElements.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createRawElements.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createRawElements.');
         }
 
-        if (requestParameters.rawElementsRequest === null || requestParameters.rawElementsRequest === undefined) {
-            throw new runtime.RequiredError('rawElementsRequest','Required parameter requestParameters.rawElementsRequest was null or undefined when calling createRawElements.');
+        if (requestParameters.RawElementsRequest === null || requestParameters.RawElementsRequest === undefined) {
+            throw new runtime.RequiredError('RawElementsRequest','Required parameter requestParameters.RawElementsRequest was null or undefined when calling createRawElements.');
         }
 
         const queryParameters: any = {};
@@ -3257,11 +3257,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/raw`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/raw`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: RawElementsRequestToJSON(requestParameters.rawElementsRequest),
+            body: RawElementsRequestToJSON(requestParameters.RawElementsRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -3271,8 +3271,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create many elements in an optimized format to reduce JSON size and avoid redudancy. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. You can use the same optimized structure to post multiple elements, property_sets, properties, definitions and units at once. For performance reasons, we do not check the validity of the json. If the json is malformed, an error 500 without more explaination may be returned instead of a 400.  Required scopes: ifc:write, model:write
      * Create elements in an optimized format
      */
-    async createRawElements(cloudPk: number, modelPk: number, projectPk: number, rawElementsRequest: RawElementsRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.createRawElementsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, rawElementsRequest: rawElementsRequest }, initOverrides);
+    async createRawElements(cloud_pk: number, model_pk: number, project_pk: number, RawElementsRequest: RawElementsRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.createRawElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, RawElementsRequest: RawElementsRequest }, initOverrides);
     }
 
     /**
@@ -3280,20 +3280,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a space in the model
      */
     async createSpaceRaw(requestParameters: CreateSpaceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Space>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createSpace.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createSpace.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createSpace.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createSpace.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createSpace.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createSpace.');
         }
 
-        if (requestParameters.spaceRequest === null || requestParameters.spaceRequest === undefined) {
-            throw new runtime.RequiredError('spaceRequest','Required parameter requestParameters.spaceRequest was null or undefined when calling createSpace.');
+        if (requestParameters.SpaceRequest === null || requestParameters.SpaceRequest === undefined) {
+            throw new runtime.RequiredError('SpaceRequest','Required parameter requestParameters.SpaceRequest was null or undefined when calling createSpace.');
         }
 
         const queryParameters: any = {};
@@ -3321,11 +3321,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.spaceRequest.map(SpaceRequestToJSON),
+            body: requestParameters.SpaceRequest.map(SpaceRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SpaceFromJSON));
@@ -3335,8 +3335,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a space in the model
      */
-    async createSpace(cloudPk: number, modelPk: number, projectPk: number, spaceRequest: Array<SpaceRequest>, initOverrides?: RequestInit): Promise<Array<Space>> {
-        const response = await this.createSpaceRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, spaceRequest: spaceRequest }, initOverrides);
+    async createSpace(cloud_pk: number, model_pk: number, project_pk: number, SpaceRequest: Array<SpaceRequest>, initOverrides?: RequestInit): Promise<Array<Space>> {
+        const response = await this.createSpaceRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, SpaceRequest: SpaceRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3345,16 +3345,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a storey of a model
      */
     async createStoreyRaw(requestParameters: CreateStoreyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createStorey.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createStorey.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createStorey.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createStorey.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createStorey.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createStorey.');
         }
 
         const queryParameters: any = {};
@@ -3380,7 +3380,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -3393,8 +3393,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a storey of a model.  Required scopes: ifc:write, model:write
      * Create a storey of a model
      */
-    async createStorey(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.createStoreyRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async createStorey(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.createStoreyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3403,20 +3403,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a storey
      */
     async createStoreyPlanRaw(requestParameters: CreateStoreyPlanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createStoreyPlan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createStoreyPlan.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createStoreyPlan.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createStoreyPlan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createStoreyPlan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createStoreyPlan.');
         }
 
-        if (requestParameters.storeyUuid === null || requestParameters.storeyUuid === undefined) {
-            throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling createStoreyPlan.');
+        if (requestParameters.storey_uuid === null || requestParameters.storey_uuid === undefined) {
+            throw new runtime.RequiredError('storey_uuid','Required parameter requestParameters.storey_uuid was null or undefined when calling createStoreyPlan.');
         }
 
         const queryParameters: any = {};
@@ -3442,7 +3442,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/add`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storeyUuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/add`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storey_uuid))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -3455,8 +3455,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a storey
      */
-    async createStoreyPlan(cloudPk: number, modelPk: number, projectPk: number, storeyUuid: string, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.createStoreyPlanRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, storeyUuid: storeyUuid }, initOverrides);
+    async createStoreyPlan(cloud_pk: number, model_pk: number, project_pk: number, storey_uuid: string, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.createStoreyPlanRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, storey_uuid: storey_uuid }, initOverrides);
         return await response.value();
     }
 
@@ -3465,20 +3465,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a system in the model
      */
     async createSystemRaw(requestParameters: CreateSystemRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<System>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createSystem.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createSystem.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createSystem.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createSystem.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createSystem.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createSystem.');
         }
 
-        if (requestParameters.systemRequest === null || requestParameters.systemRequest === undefined) {
-            throw new runtime.RequiredError('systemRequest','Required parameter requestParameters.systemRequest was null or undefined when calling createSystem.');
+        if (requestParameters.SystemRequest === null || requestParameters.SystemRequest === undefined) {
+            throw new runtime.RequiredError('SystemRequest','Required parameter requestParameters.SystemRequest was null or undefined when calling createSystem.');
         }
 
         const queryParameters: any = {};
@@ -3506,11 +3506,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: SystemRequestToJSON(requestParameters.systemRequest),
+            body: SystemRequestToJSON(requestParameters.SystemRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SystemFromJSON(jsonValue));
@@ -3520,8 +3520,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a system in the model
      */
-    async createSystem(cloudPk: number, modelPk: number, projectPk: number, systemRequest: SystemRequest, initOverrides?: RequestInit): Promise<System> {
-        const response = await this.createSystemRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, systemRequest: systemRequest }, initOverrides);
+    async createSystem(cloud_pk: number, model_pk: number, project_pk: number, SystemRequest: SystemRequest, initOverrides?: RequestInit): Promise<System> {
+        const response = await this.createSystemRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, SystemRequest: SystemRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3530,20 +3530,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a zone in the model
      */
     async createZoneRaw(requestParameters: CreateZoneRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Zone>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createZone.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createZone.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createZone.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createZone.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createZone.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createZone.');
         }
 
-        if (requestParameters.zoneRequest === null || requestParameters.zoneRequest === undefined) {
-            throw new runtime.RequiredError('zoneRequest','Required parameter requestParameters.zoneRequest was null or undefined when calling createZone.');
+        if (requestParameters.ZoneRequest === null || requestParameters.ZoneRequest === undefined) {
+            throw new runtime.RequiredError('ZoneRequest','Required parameter requestParameters.ZoneRequest was null or undefined when calling createZone.');
         }
 
         const queryParameters: any = {};
@@ -3575,11 +3575,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.zoneRequest.map(ZoneRequestToJSON),
+            body: requestParameters.ZoneRequest.map(ZoneRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ZoneFromJSON));
@@ -3589,8 +3589,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a zone in the model
      */
-    async createZone(cloudPk: number, modelPk: number, projectPk: number, zoneRequest: Array<ZoneRequest>, color?: string, initOverrides?: RequestInit): Promise<Array<Zone>> {
-        const response = await this.createZoneRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, zoneRequest: zoneRequest, color: color }, initOverrides);
+    async createZone(cloud_pk: number, model_pk: number, project_pk: number, ZoneRequest: Array<ZoneRequest>, color?: string, initOverrides?: RequestInit): Promise<Array<Zone>> {
+        const response = await this.createZoneRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ZoneRequest: ZoneRequest, color: color }, initOverrides);
         return await response.value();
     }
 
@@ -3599,24 +3599,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a space in a zone
      */
     async createZoneSpaceRaw(requestParameters: CreateZoneSpaceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ZoneSpace>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createZoneSpace.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createZoneSpace.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createZoneSpace.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createZoneSpace.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createZoneSpace.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createZoneSpace.');
         }
 
-        if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling createZoneSpace.');
+        if (requestParameters.zone_pk === null || requestParameters.zone_pk === undefined) {
+            throw new runtime.RequiredError('zone_pk','Required parameter requestParameters.zone_pk was null or undefined when calling createZoneSpace.');
         }
 
-        if (requestParameters.zoneSpaceRequest === null || requestParameters.zoneSpaceRequest === undefined) {
-            throw new runtime.RequiredError('zoneSpaceRequest','Required parameter requestParameters.zoneSpaceRequest was null or undefined when calling createZoneSpace.');
+        if (requestParameters.ZoneSpaceRequest === null || requestParameters.ZoneSpaceRequest === undefined) {
+            throw new runtime.RequiredError('ZoneSpaceRequest','Required parameter requestParameters.ZoneSpaceRequest was null or undefined when calling createZoneSpace.');
         }
 
         const queryParameters: any = {};
@@ -3644,11 +3644,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zonePk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zone_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ZoneSpaceRequestToJSON(requestParameters.zoneSpaceRequest),
+            body: ZoneSpaceRequestToJSON(requestParameters.ZoneSpaceRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ZoneSpaceFromJSON(jsonValue));
@@ -3658,8 +3658,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a space in a zone
      */
-    async createZoneSpace(cloudPk: number, modelPk: number, projectPk: number, zonePk: number, zoneSpaceRequest: ZoneSpaceRequest, initOverrides?: RequestInit): Promise<ZoneSpace> {
-        const response = await this.createZoneSpaceRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, zonePk: zonePk, zoneSpaceRequest: zoneSpaceRequest }, initOverrides);
+    async createZoneSpace(cloud_pk: number, model_pk: number, project_pk: number, zone_pk: number, ZoneSpaceRequest: ZoneSpaceRequest, initOverrides?: RequestInit): Promise<ZoneSpace> {
+        const response = await this.createZoneSpaceRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, zone_pk: zone_pk, ZoneSpaceRequest: ZoneSpaceRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3668,16 +3668,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a token
      */
     async deleteAccessTokenRaw(requestParameters: DeleteAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteAccessToken.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteAccessToken.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteAccessToken.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteAccessToken.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteAccessToken.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteAccessToken.');
         }
 
         if (requestParameters.token === null || requestParameters.token === undefined) {
@@ -3707,7 +3707,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -3720,8 +3720,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Deleting a token will revoke it.  Required scopes: ifc:token_manage, model:token_manage
      * Delete a token
      */
-    async deleteAccessToken(cloudPk: number, modelPk: number, projectPk: number, token: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteAccessTokenRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, token: token }, initOverrides);
+    async deleteAccessToken(cloud_pk: number, model_pk: number, project_pk: number, token: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteAccessTokenRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, token: token }, initOverrides);
     }
 
     /**
@@ -3729,16 +3729,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a building of a model
      */
     async deleteBuildingRaw(requestParameters: DeleteBuildingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteBuilding.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteBuilding.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteBuilding.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteBuilding.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteBuilding.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteBuilding.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -3768,7 +3768,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -3781,8 +3781,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a building of a model  Required scopes: ifc:write, model:write
      * Delete a building of a model
      */
-    async deleteBuilding(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteBuildingRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async deleteBuilding(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteBuildingRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
     }
 
     /**
@@ -3790,24 +3790,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete the relation between a 2d model and a building
      */
     async deleteBuildingPlanRaw(requestParameters: DeleteBuildingPlanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
-            throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling deleteBuildingPlan.');
+        if (requestParameters.building_uuid === null || requestParameters.building_uuid === undefined) {
+            throw new runtime.RequiredError('building_uuid','Required parameter requestParameters.building_uuid was null or undefined when calling deleteBuildingPlan.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteBuildingPlan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteBuildingPlan.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteBuildingPlan.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteBuildingPlan.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteBuildingPlan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteBuildingPlan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteBuildingPlan.');
         }
 
         const queryParameters: any = {};
@@ -3833,7 +3833,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/{id}`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.buildingUuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/{id}`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.building_uuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -3846,8 +3846,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete the relation between a 2d model and a building  Required scopes: ifc:write, model:write
      * Delete the relation between a 2d model and a building
      */
-    async deleteBuildingPlan(buildingUuid: string, cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteBuildingPlanRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deleteBuildingPlan(building_uuid: string, cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteBuildingPlanRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -3855,16 +3855,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete an element of a model
      */
     async deleteElementRaw(requestParameters: DeleteElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteElement.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -3894,7 +3894,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -3907,8 +3907,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete an element of a model
      */
-    async deleteElement(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteElementRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async deleteElement(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
     }
 
     /**
@@ -3916,20 +3916,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a layer of a model
      */
     async deleteLayerRaw(requestParameters: DeleteLayerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteLayer.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteLayer.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteLayer.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteLayer.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteLayer.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteLayer.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteLayer.');
         }
 
         const queryParameters: any = {};
@@ -3955,7 +3955,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -3968,8 +3968,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining layers are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a layer of a model
      */
-    async deleteLayer(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteLayerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deleteLayer(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteLayerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -3977,16 +3977,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a model
      */
     async deleteModelRaw(requestParameters: DeleteModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModel.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteModel.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModel.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModel.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteModel.');
         }
 
         const queryParameters: any = {};
@@ -4012,7 +4012,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4025,8 +4025,8 @@ export class ModelApi extends runtime.BaseAPI {
      * It will also delete the related document  Required scopes: ifc:write, model:write
      * Delete a model
      */
-    async deleteModel(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteModelRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteModel(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteModelRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -4034,20 +4034,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a Property of a model
      */
     async deleteModelPropertyRaw(requestParameters: DeleteModelPropertyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModelProperty.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteModelProperty.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModelProperty.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteModelProperty.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteModelProperty.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModelProperty.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteModelProperty.');
         }
 
         const queryParameters: any = {};
@@ -4073,7 +4073,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4086,8 +4086,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a Property of a model  Required scopes: ifc:write, model:write
      * Delete a Property of a model
      */
-    async deleteModelProperty(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteModelPropertyRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deleteModelProperty(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteModelPropertyRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -4095,20 +4095,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a PropertyDefinitions of a model
      */
     async deleteModelPropertyDefinitionRaw(requestParameters: DeleteModelPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModelPropertyDefinition.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteModelPropertyDefinition.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModelPropertyDefinition.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteModelPropertyDefinition.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteModelPropertyDefinition.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModelPropertyDefinition.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteModelPropertyDefinition.');
         }
 
         const queryParameters: any = {};
@@ -4134,7 +4134,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4147,8 +4147,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a PropertyDefinitions of a model  Required scopes: ifc:write, model:write
      * Delete a PropertyDefinitions of a model
      */
-    async deleteModelPropertyDefinition(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteModelPropertyDefinitionRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deleteModelPropertyDefinition(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteModelPropertyDefinitionRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -4156,20 +4156,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a Unit of a model
      */
     async deleteModelUnitRaw(requestParameters: DeleteModelUnitRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModelUnit.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteModelUnit.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModelUnit.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteModelUnit.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteModelUnit.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModelUnit.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteModelUnit.');
         }
 
         const queryParameters: any = {};
@@ -4195,7 +4195,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4208,8 +4208,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a Unit of a model  Required scopes: ifc:write, model:write
      * Delete a Unit of a model
      */
-    async deleteModelUnit(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteModelUnitRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deleteModelUnit(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteModelUnitRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -4217,16 +4217,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete the Model without deleting the related document
      */
     async deleteModelWithoutDocRaw(requestParameters: DeleteModelWithoutDocRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteModelWithoutDoc.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteModelWithoutDoc.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteModelWithoutDoc.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteModelWithoutDoc.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteModelWithoutDoc.');
         }
 
         const queryParameters: any = {};
@@ -4252,7 +4252,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/delete-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/delete-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4265,8 +4265,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete the Model without deleting the related document  Required scopes: ifc:write, model:write
      * Delete the Model without deleting the related document
      */
-    async deleteModelWithoutDoc(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteModelWithoutDocRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteModelWithoutDoc(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteModelWithoutDocRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -4274,20 +4274,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a PropertySet of a model
      */
     async deletePropertySetRaw(requestParameters: DeletePropertySetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deletePropertySet.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deletePropertySet.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePropertySet.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deletePropertySet.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deletePropertySet.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deletePropertySet.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deletePropertySet.');
         }
 
         const queryParameters: any = {};
@@ -4313,7 +4313,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4326,8 +4326,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a PropertySet of a model  Required scopes: ifc:write, model:write
      * Delete a PropertySet of a model
      */
-    async deletePropertySet(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deletePropertySetRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deletePropertySet(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deletePropertySetRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -4335,20 +4335,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a space
      */
     async deleteSpaceRaw(requestParameters: DeleteSpaceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteSpace.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteSpace.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteSpace.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteSpace.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteSpace.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteSpace.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteSpace.');
         }
 
         const queryParameters: any = {};
@@ -4374,7 +4374,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4387,8 +4387,8 @@ export class ModelApi extends runtime.BaseAPI {
      * It will not delete related zones. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a space
      */
-    async deleteSpace(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteSpaceRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deleteSpace(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteSpaceRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -4396,16 +4396,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a storey of a model
      */
     async deleteStoreyRaw(requestParameters: DeleteStoreyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteStorey.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteStorey.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteStorey.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteStorey.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteStorey.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteStorey.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -4435,7 +4435,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4448,8 +4448,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a storey of a model  Required scopes: ifc:write, model:write
      * Delete a storey of a model
      */
-    async deleteStorey(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteStoreyRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async deleteStorey(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteStoreyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
     }
 
     /**
@@ -4457,24 +4457,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete the relation between a 2d model and a storey
      */
     async deleteStoreyPlanRaw(requestParameters: DeleteStoreyPlanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteStoreyPlan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteStoreyPlan.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteStoreyPlan.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteStoreyPlan.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteStoreyPlan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteStoreyPlan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteStoreyPlan.');
         }
 
-        if (requestParameters.storeyUuid === null || requestParameters.storeyUuid === undefined) {
-            throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling deleteStoreyPlan.');
+        if (requestParameters.storey_uuid === null || requestParameters.storey_uuid === undefined) {
+            throw new runtime.RequiredError('storey_uuid','Required parameter requestParameters.storey_uuid was null or undefined when calling deleteStoreyPlan.');
         }
 
         const queryParameters: any = {};
@@ -4500,7 +4500,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storeyUuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storey_uuid))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4513,8 +4513,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete the relation between a 2d model and a storey  Required scopes: ifc:write, model:write
      * Delete the relation between a 2d model and a storey
      */
-    async deleteStoreyPlan(cloudPk: number, id: number, modelPk: number, projectPk: number, storeyUuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteStoreyPlanRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, storeyUuid: storeyUuid }, initOverrides);
+    async deleteStoreyPlan(cloud_pk: number, id: number, model_pk: number, project_pk: number, storey_uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteStoreyPlanRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, storey_uuid: storey_uuid }, initOverrides);
     }
 
     /**
@@ -4522,16 +4522,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a system of a model
      */
     async deleteSystemRaw(requestParameters: DeleteSystemRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteSystem.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteSystem.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteSystem.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteSystem.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteSystem.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteSystem.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -4561,7 +4561,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4574,8 +4574,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining systems are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a system of a model
      */
-    async deleteSystem(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteSystemRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async deleteSystem(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteSystemRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
     }
 
     /**
@@ -4583,20 +4583,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a zone of a model
      */
     async deleteZoneRaw(requestParameters: DeleteZoneRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteZone.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteZone.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteZone.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteZone.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteZone.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteZone.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteZone.');
         }
 
         const queryParameters: any = {};
@@ -4622,7 +4622,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4635,8 +4635,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining zones are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a zone of a model
      */
-    async deleteZone(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteZoneRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deleteZone(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteZoneRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -4644,24 +4644,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a space of a zone
      */
     async deleteZoneSpaceRaw(requestParameters: DeleteZoneSpaceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteZoneSpace.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteZoneSpace.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteZoneSpace.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteZoneSpace.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteZoneSpace.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteZoneSpace.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteZoneSpace.');
         }
 
-        if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling deleteZoneSpace.');
+        if (requestParameters.zone_pk === null || requestParameters.zone_pk === undefined) {
+            throw new runtime.RequiredError('zone_pk','Required parameter requestParameters.zone_pk was null or undefined when calling deleteZoneSpace.');
         }
 
         const queryParameters: any = {};
@@ -4687,7 +4687,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zonePk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zone_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -4700,8 +4700,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a space of a zone
      */
-    async deleteZoneSpace(cloudPk: number, id: number, modelPk: number, projectPk: number, zonePk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteZoneSpaceRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, zonePk: zonePk }, initOverrides);
+    async deleteZoneSpace(cloud_pk: number, id: number, model_pk: number, project_pk: number, zone_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteZoneSpaceRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, zone_pk: zone_pk }, initOverrides);
     }
 
     /**
@@ -4709,20 +4709,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Export IFC
      */
     async exportIfcRaw(requestParameters: ExportIfcRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcExport>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling exportIfc.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling exportIfc.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling exportIfc.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling exportIfc.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling exportIfc.');
         }
 
-        if (requestParameters.ifcExportRequest === null || requestParameters.ifcExportRequest === undefined) {
-            throw new runtime.RequiredError('ifcExportRequest','Required parameter requestParameters.ifcExportRequest was null or undefined when calling exportIfc.');
+        if (requestParameters.IfcExportRequest === null || requestParameters.IfcExportRequest === undefined) {
+            throw new runtime.RequiredError('IfcExportRequest','Required parameter requestParameters.IfcExportRequest was null or undefined when calling exportIfc.');
         }
 
         const queryParameters: any = {};
@@ -4750,11 +4750,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/export`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/export`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: IfcExportRequestToJSON(requestParameters.ifcExportRequest),
+            body: IfcExportRequestToJSON(requestParameters.IfcExportRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcExportFromJSON(jsonValue));
@@ -4764,8 +4764,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result  Required scopes: ifc:write, model:write
      * Export IFC
      */
-    async exportIfc(cloudPk: number, id: number, projectPk: number, ifcExportRequest: IfcExportRequest, initOverrides?: RequestInit): Promise<IfcExport> {
-        const response = await this.exportIfcRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, ifcExportRequest: ifcExportRequest }, initOverrides);
+    async exportIfc(cloud_pk: number, id: number, project_pk: number, IfcExportRequest: IfcExportRequest, initOverrides?: RequestInit): Promise<IfcExport> {
+        const response = await this.exportIfcRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, IfcExportRequest: IfcExportRequest }, initOverrides);
         return await response.value();
     }
 
@@ -4774,24 +4774,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Update all fields of an element
      */
     async fullUpdateElementRaw(requestParameters: FullUpdateElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Element>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling fullUpdateElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling fullUpdateElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling fullUpdateElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling fullUpdateElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling fullUpdateElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling fullUpdateElement.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling fullUpdateElement.');
         }
 
-        if (requestParameters.elementRequest === null || requestParameters.elementRequest === undefined) {
-            throw new runtime.RequiredError('elementRequest','Required parameter requestParameters.elementRequest was null or undefined when calling fullUpdateElement.');
+        if (requestParameters.ElementRequest === null || requestParameters.ElementRequest === undefined) {
+            throw new runtime.RequiredError('ElementRequest','Required parameter requestParameters.ElementRequest was null or undefined when calling fullUpdateElement.');
         }
 
         const queryParameters: any = {};
@@ -4819,11 +4819,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: ElementRequestToJSON(requestParameters.elementRequest),
+            body: ElementRequestToJSON(requestParameters.ElementRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ElementFromJSON(jsonValue));
@@ -4833,8 +4833,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update all fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update all fields of an element
      */
-    async fullUpdateElement(cloudPk: number, modelPk: number, projectPk: number, uuid: string, elementRequest: ElementRequest, initOverrides?: RequestInit): Promise<Element> {
-        const response = await this.fullUpdateElementRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid, elementRequest: elementRequest }, initOverrides);
+    async fullUpdateElement(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, ElementRequest: ElementRequest, initOverrides?: RequestInit): Promise<Element> {
+        const response = await this.fullUpdateElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid, ElementRequest: ElementRequest }, initOverrides);
         return await response.value();
     }
 
@@ -4843,16 +4843,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one token created for this model
      */
     async getAccessTokenRaw(requestParameters: GetAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcAccessToken>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getAccessToken.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getAccessToken.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getAccessToken.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getAccessToken.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getAccessToken.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getAccessToken.');
         }
 
         if (requestParameters.token === null || requestParameters.token === undefined) {
@@ -4882,7 +4882,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4895,8 +4895,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one token created for this model  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve one token created for this model
      */
-    async getAccessToken(cloudPk: number, modelPk: number, projectPk: number, token: string, initOverrides?: RequestInit): Promise<IfcAccessToken> {
-        const response = await this.getAccessTokenRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, token: token }, initOverrides);
+    async getAccessToken(cloud_pk: number, model_pk: number, project_pk: number, token: string, initOverrides?: RequestInit): Promise<IfcAccessToken> {
+        const response = await this.getAccessTokenRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, token: token }, initOverrides);
         return await response.value();
     }
 
@@ -4905,16 +4905,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all tokens created for this model
      */
     async getAccessTokensRaw(requestParameters: GetAccessTokensRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<IfcAccessToken>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getAccessTokens.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getAccessTokens.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getAccessTokens.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getAccessTokens.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getAccessTokens.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getAccessTokens.');
         }
 
         const queryParameters: any = {};
@@ -4940,7 +4940,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4953,8 +4953,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all tokens created for this model  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve all tokens created for this model
      */
-    async getAccessTokens(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<IfcAccessToken>> {
-        const response = await this.getAccessTokensRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getAccessTokens(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<IfcAccessToken>> {
+        const response = await this.getAccessTokensRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4963,16 +4963,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a building of a model
      */
     async getBuildingRaw(requestParameters: GetBuildingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Building>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getBuilding.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getBuilding.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getBuilding.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getBuilding.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getBuilding.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getBuilding.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -5002,7 +5002,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5015,8 +5015,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a building of a model  Required scopes: ifc:read, model:read
      * Retrieve a building of a model
      */
-    async getBuilding(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.getBuildingRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async getBuilding(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.getBuildingRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -5025,24 +5025,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve the postioning of the plan in the building
      */
     async getBuildingPlanPositioningRaw(requestParameters: GetBuildingPlanPositioningRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PositioningPlan>> {
-        if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
-            throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling getBuildingPlanPositioning.');
+        if (requestParameters.building_uuid === null || requestParameters.building_uuid === undefined) {
+            throw new runtime.RequiredError('building_uuid','Required parameter requestParameters.building_uuid was null or undefined when calling getBuildingPlanPositioning.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getBuildingPlanPositioning.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getBuildingPlanPositioning.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getBuildingPlanPositioning.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getBuildingPlanPositioning.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getBuildingPlanPositioning.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getBuildingPlanPositioning.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getBuildingPlanPositioning.');
         }
 
         const queryParameters: any = {};
@@ -5068,7 +5068,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/{id}/positioning`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.buildingUuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/{id}/positioning`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.building_uuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5081,8 +5081,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve the postioning of the plan in the building  Required scopes: ifc:read, model:read
      * Retrieve the postioning of the plan in the building
      */
-    async getBuildingPlanPositioning(buildingUuid: string, cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<PositioningPlan> {
-        const response = await this.getBuildingPlanPositioningRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getBuildingPlanPositioning(building_uuid: string, cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<PositioningPlan> {
+        const response = await this.getBuildingPlanPositioningRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5091,16 +5091,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all buildings of a model
      */
     async getBuildingsRaw(requestParameters: GetBuildingsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Building>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getBuildings.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getBuildings.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getBuildings.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getBuildings.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getBuildings.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getBuildings.');
         }
 
         const queryParameters: any = {};
@@ -5126,7 +5126,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5139,8 +5139,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all buildings of a model.  Required scopes: ifc:read, model:read
      * Retrieve all buildings of a model
      */
-    async getBuildings(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Building>> {
-        const response = await this.getBuildingsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getBuildings(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Building>> {
+        const response = await this.getBuildingsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5149,20 +5149,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all classifications of an element
      */
     async getClassificationsOfElementRaw(requestParameters: GetClassificationsOfElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getClassificationsOfElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getClassificationsOfElement.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getClassificationsOfElement.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getClassificationsOfElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getClassificationsOfElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getClassificationsOfElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getClassificationsOfElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getClassificationsOfElement.');
         }
 
         const queryParameters: any = {};
@@ -5188,7 +5188,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5201,8 +5201,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all classifications of an element  Required scopes: ifc:read, model:read
      * Retrieve all classifications of an element
      */
-    async getClassificationsOfElement(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Classification>> {
-        const response = await this.getClassificationsOfElementRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getClassificationsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.getClassificationsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5211,20 +5211,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all documents of an element
      */
     async getDocumentsOfElementRaw(requestParameters: GetDocumentsOfElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocumentsOfElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getDocumentsOfElement.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getDocumentsOfElement.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getDocumentsOfElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getDocumentsOfElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getDocumentsOfElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocumentsOfElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getDocumentsOfElement.');
         }
 
         const queryParameters: any = {};
@@ -5250,7 +5250,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/documents`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/documents`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5263,8 +5263,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all documents of an element  Required scopes: ifc:read, model:read
      * Retrieve all documents of an element
      */
-    async getDocumentsOfElement(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getDocumentsOfElementRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getDocumentsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5273,16 +5273,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve an element of a model
      */
     async getElementRaw(requestParameters: GetElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Element>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElement.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -5312,7 +5312,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5325,8 +5325,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve an element of a model  Required scopes: ifc:read, model:read
      * Retrieve an element of a model
      */
-    async getElement(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Element> {
-        const response = await this.getElementRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async getElement(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Element> {
+        const response = await this.getElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -5335,16 +5335,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all documents linked to any element
      */
     async getElementLinkedDocumentsRaw(requestParameters: GetElementLinkedDocumentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<DocumentWithElementList>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementLinkedDocuments.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementLinkedDocuments.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementLinkedDocuments.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementLinkedDocuments.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementLinkedDocuments.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementLinkedDocuments.');
         }
 
         const queryParameters: any = {};
@@ -5353,8 +5353,8 @@ export class ModelApi extends runtime.BaseAPI {
             queryParameters['classification'] = requestParameters.classification;
         }
 
-        if (requestParameters.classificationNotation !== undefined) {
-            queryParameters['classification__notation'] = requestParameters.classificationNotation;
+        if (requestParameters.classification__notation !== undefined) {
+            queryParameters['classification__notation'] = requestParameters.classification__notation;
         }
 
         if (requestParameters.type !== undefined) {
@@ -5382,7 +5382,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/documents`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/documents`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5395,8 +5395,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all documents linked to any element with the list of uuids  Required scopes: ifc:read, model:read
      * Retrieve all documents linked to any element
      */
-    async getElementLinkedDocuments(cloudPk: number, modelPk: number, projectPk: number, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<DocumentWithElementList>> {
-        const response = await this.getElementLinkedDocumentsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
+    async getElementLinkedDocuments(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<DocumentWithElementList>> {
+        const response = await this.getElementLinkedDocumentsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -5405,24 +5405,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a PropertySet of an element
      */
     async getElementPropertySetRaw(requestParameters: GetElementPropertySetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertySet>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySet.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementPropertySet.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySet.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getElementPropertySet.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySet.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementPropertySet.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementPropertySet.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySet.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementPropertySet.');
         }
 
         const queryParameters: any = {};
@@ -5448,7 +5448,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5461,8 +5461,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a PropertySet of an element  Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of an element
      */
-    async getElementPropertySet(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<PropertySet> {
-        const response = await this.getElementPropertySetRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getElementPropertySet(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<PropertySet> {
+        const response = await this.getElementPropertySetRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5471,24 +5471,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all Properties of a PropertySet
      */
     async getElementPropertySetPropertiesRaw(requestParameters: GetElementPropertySetPropertiesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Property>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetProperties.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementPropertySetProperties.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetProperties.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getElementPropertySetProperties.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementPropertySetProperties.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementPropertySetProperties.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetProperties.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementPropertySetProperties.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetProperties.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling getElementPropertySetProperties.');
         }
 
         const queryParameters: any = {};
@@ -5514,7 +5514,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5527,8 +5527,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all Properties of a PropertySet  Required scopes: ifc:read, model:read
      * Retrieve all Properties of a PropertySet
      */
-    async getElementPropertySetProperties(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Array<Property>> {
-        const response = await this.getElementPropertySetPropertiesRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk, propertysetPk: propertysetPk }, initOverrides);
+    async getElementPropertySetProperties(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<Array<Property>> {
+        const response = await this.getElementPropertySetPropertiesRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, propertyset_pk: propertyset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5537,28 +5537,28 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Property of a PropertySet
      */
     async getElementPropertySetPropertyRaw(requestParameters: GetElementPropertySetPropertyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetProperty.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementPropertySetProperty.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetProperty.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getElementPropertySetProperty.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetProperty.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementPropertySetProperty.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementPropertySetProperty.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetProperty.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementPropertySetProperty.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetProperty.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling getElementPropertySetProperty.');
         }
 
         const queryParameters: any = {};
@@ -5584,7 +5584,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5597,8 +5597,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Property of a PropertySet  Required scopes: ifc:read, model:read
      * Retrieve a Property of a PropertySet
      */
-    async getElementPropertySetProperty(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Property> {
-        const response = await this.getElementPropertySetPropertyRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk, propertysetPk: propertysetPk }, initOverrides);
+    async getElementPropertySetProperty(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.getElementPropertySetPropertyRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk, propertyset_pk: propertyset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5607,32 +5607,32 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Definition of a Property
      */
     async getElementPropertySetPropertyDefinitionRaw(requestParameters: GetElementPropertySetPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertyDefinition>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinition.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getElementPropertySetPropertyDefinition.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+        if (requestParameters.property_pk === null || requestParameters.property_pk === undefined) {
+            throw new runtime.RequiredError('property_pk','Required parameter requestParameters.property_pk was null or undefined when calling getElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinition.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling getElementPropertySetPropertyDefinition.');
         }
 
         const queryParameters: any = {};
@@ -5658,7 +5658,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.propertyPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.property_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5671,8 +5671,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Definition of a Property  Required scopes: ifc:read, model:read
      * Retrieve a Definition of a Property
      */
-    async getElementPropertySetPropertyDefinition(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, propertyPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<PropertyDefinition> {
-        const response = await this.getElementPropertySetPropertyDefinitionRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk }, initOverrides);
+    async getElementPropertySetPropertyDefinition(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, property_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<PropertyDefinition> {
+        const response = await this.getElementPropertySetPropertyDefinitionRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk, property_pk: property_pk, propertyset_pk: propertyset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5681,36 +5681,36 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Unit of a Definition
      */
     async getElementPropertySetPropertyDefinitionUnitRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Unit>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.property_pk === null || requestParameters.property_pk === undefined) {
+            throw new runtime.RequiredError('property_pk','Required parameter requestParameters.property_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.propertydefinitionPk === null || requestParameters.propertydefinitionPk === undefined) {
-            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.propertydefinition_pk === null || requestParameters.propertydefinition_pk === undefined) {
+            throw new runtime.RequiredError('propertydefinition_pk','Required parameter requestParameters.propertydefinition_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnit.');
         }
 
         const queryParameters: any = {};
@@ -5736,7 +5736,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{propertydefinition_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.propertyPk))).replace(`{${"propertydefinition_pk"}}`, encodeURIComponent(String(requestParameters.propertydefinitionPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{propertydefinition_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.property_pk))).replace(`{${"propertydefinition_pk"}}`, encodeURIComponent(String(requestParameters.propertydefinition_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5749,8 +5749,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Unit of a Definition  Required scopes: ifc:read, model:read
      * Retrieve a Unit of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnit(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Unit> {
-        const response = await this.getElementPropertySetPropertyDefinitionUnitRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk }, initOverrides);
+    async getElementPropertySetPropertyDefinitionUnit(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, property_pk: number, propertydefinition_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<Unit> {
+        const response = await this.getElementPropertySetPropertyDefinitionUnitRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk, property_pk: property_pk, propertydefinition_pk: propertydefinition_pk, propertyset_pk: propertyset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5759,32 +5759,32 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all Units of a Definition
      */
     async getElementPropertySetPropertyDefinitionUnitsRaw(requestParameters: GetElementPropertySetPropertyDefinitionUnitsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Unit>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
         }
 
-        if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+        if (requestParameters.property_pk === null || requestParameters.property_pk === undefined) {
+            throw new runtime.RequiredError('property_pk','Required parameter requestParameters.property_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
         }
 
-        if (requestParameters.propertydefinitionPk === null || requestParameters.propertydefinitionPk === undefined) {
-            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+        if (requestParameters.propertydefinition_pk === null || requestParameters.propertydefinition_pk === undefined) {
+            throw new runtime.RequiredError('propertydefinition_pk','Required parameter requestParameters.propertydefinition_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling getElementPropertySetPropertyDefinitionUnits.');
         }
 
         const queryParameters: any = {};
@@ -5810,7 +5810,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{propertydefinition_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.propertyPk))).replace(`{${"propertydefinition_pk"}}`, encodeURIComponent(String(requestParameters.propertydefinitionPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{propertydefinition_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.property_pk))).replace(`{${"propertydefinition_pk"}}`, encodeURIComponent(String(requestParameters.propertydefinition_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5823,8 +5823,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all Units of a Definition  Required scopes: ifc:read, model:read
      * Retrieve all Units of a Definition
      */
-    async getElementPropertySetPropertyDefinitionUnits(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Array<Unit>> {
-        const response = await this.getElementPropertySetPropertyDefinitionUnitsRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk }, initOverrides);
+    async getElementPropertySetPropertyDefinitionUnits(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, property_pk: number, propertydefinition_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<Array<Unit>> {
+        const response = await this.getElementPropertySetPropertyDefinitionUnitsRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, property_pk: property_pk, propertydefinition_pk: propertydefinition_pk, propertyset_pk: propertyset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5833,28 +5833,28 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all Definitions of a PropertySet
      */
     async getElementPropertySetPropertyDefinitionsRaw(requestParameters: GetElementPropertySetPropertyDefinitionsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getElementPropertySetPropertyDefinitions.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
         }
 
-        if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+        if (requestParameters.property_pk === null || requestParameters.property_pk === undefined) {
+            throw new runtime.RequiredError('property_pk','Required parameter requestParameters.property_pk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling getElementPropertySetPropertyDefinitions.');
         }
 
         const queryParameters: any = {};
@@ -5880,7 +5880,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.propertyPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.property_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5893,8 +5893,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all Definitions of a PropertySet  Required scopes: ifc:read, model:read
      * Retrieve all Definitions of a PropertySet
      */
-    async getElementPropertySetPropertyDefinitions(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, propertyPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<Array<PropertyDefinition>> {
-        const response = await this.getElementPropertySetPropertyDefinitionsRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk }, initOverrides);
+    async getElementPropertySetPropertyDefinitions(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, property_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<Array<PropertyDefinition>> {
+        const response = await this.getElementPropertySetPropertyDefinitionsRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, property_pk: property_pk, propertyset_pk: propertyset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5903,20 +5903,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of an element
      */
     async getElementPropertySetsRaw(requestParameters: GetElementPropertySetsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertySet>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementPropertySets.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementPropertySets.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getElementPropertySets.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getElementPropertySets.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementPropertySets.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementPropertySets.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementPropertySets.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementPropertySets.');
         }
 
         const queryParameters: any = {};
@@ -5942,7 +5942,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5955,8 +5955,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of an element  Required scopes: ifc:read, model:read
      * Retrieve all PropertySets of an element
      */
-    async getElementPropertySets(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<PropertySet>> {
-        const response = await this.getElementPropertySetsRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getElementPropertySets(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<PropertySet>> {
+        const response = await this.getElementPropertySetsRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5965,16 +5965,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all elements of a model
      */
     async getElementsRaw(requestParameters: GetElementsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElements.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElements.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElements.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElements.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElements.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElements.');
         }
 
         const queryParameters: any = {};
@@ -5983,8 +5983,8 @@ export class ModelApi extends runtime.BaseAPI {
             queryParameters['classification'] = requestParameters.classification;
         }
 
-        if (requestParameters.classificationNotation !== undefined) {
-            queryParameters['classification__notation'] = requestParameters.classificationNotation;
+        if (requestParameters.classification__notation !== undefined) {
+            queryParameters['classification__notation'] = requestParameters.classification__notation;
         }
 
         if (requestParameters.type !== undefined) {
@@ -6012,7 +6012,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6025,8 +6025,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see getRawElements  Required scopes: ifc:read, model:read
      * Retrieve all elements of a model
      */
-    async getElements(cloudPk: number, modelPk: number, projectPk: number, classification?: string, classificationNotation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
-        const response = await this.getElementsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, classification: classification, classificationNotation: classificationNotation, type: type }, initOverrides);
+    async getElements(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.getElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -6035,20 +6035,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all elements with the classification
      */
     async getElementsFromClassificationRaw(requestParameters: GetElementsFromClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getElementsFromClassification.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getElementsFromClassification.');
         }
 
-        if (requestParameters.modelClassificationPk === null || requestParameters.modelClassificationPk === undefined) {
-            throw new runtime.RequiredError('modelClassificationPk','Required parameter requestParameters.modelClassificationPk was null or undefined when calling getElementsFromClassification.');
+        if (requestParameters.model_classification_pk === null || requestParameters.model_classification_pk === undefined) {
+            throw new runtime.RequiredError('model_classification_pk','Required parameter requestParameters.model_classification_pk was null or undefined when calling getElementsFromClassification.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getElementsFromClassification.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getElementsFromClassification.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getElementsFromClassification.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getElementsFromClassification.');
         }
 
         const queryParameters: any = {};
@@ -6074,7 +6074,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification/{model_classification_pk}/element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_classification_pk"}}`, encodeURIComponent(String(requestParameters.modelClassificationPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification/{model_classification_pk}/element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_classification_pk"}}`, encodeURIComponent(String(requestParameters.model_classification_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6087,8 +6087,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all elements with the classification  Required scopes: ifc:read, model:read
      * Retrieve all elements with the classification
      */
-    async getElementsFromClassification(cloudPk: number, modelClassificationPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Element>> {
-        const response = await this.getElementsFromClassificationRaw({ cloudPk: cloudPk, modelClassificationPk: modelClassificationPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getElementsFromClassification(cloud_pk: number, model_classification_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.getElementsFromClassificationRaw({ cloud_pk: cloud_pk, model_classification_pk: model_classification_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6097,20 +6097,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a layer of a model
      */
     async getLayerRaw(requestParameters: GetLayerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Layer>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getLayer.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getLayer.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getLayer.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getLayer.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getLayer.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getLayer.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getLayer.');
         }
 
         const queryParameters: any = {};
@@ -6136,7 +6136,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6149,8 +6149,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a layer of a model  Required scopes: ifc:read, model:read
      * Retrieve a layer of a model
      */
-    async getLayer(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Layer> {
-        const response = await this.getLayerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getLayer(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Layer> {
+        const response = await this.getLayerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6159,16 +6159,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all layers of a model
      */
     async getLayersRaw(requestParameters: GetLayersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Layer>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getLayers.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getLayers.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getLayers.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getLayers.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getLayers.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getLayers.');
         }
 
         const queryParameters: any = {};
@@ -6194,7 +6194,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6207,8 +6207,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all layers of a model.  Required scopes: ifc:read, model:read
      * Retrieve all layers of a model
      */
-    async getLayers(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Layer>> {
-        const response = await this.getLayersRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getLayers(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Layer>> {
+        const response = await this.getLayersRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6217,24 +6217,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a material of a model
      */
     async getMaterialRaw(requestParameters: GetMaterialRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Material>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterial.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getMaterial.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getMaterial.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getMaterial.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getMaterial.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getMaterial.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getMaterial.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterial.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getMaterial.');
         }
 
         const queryParameters: any = {};
@@ -6260,7 +6260,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/material/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/material/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6273,8 +6273,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a material of a model  Required scopes: ifc:read, model:read
      * Retrieve a material of a model
      */
-    async getMaterial(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Material> {
-        const response = await this.getMaterialRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getMaterial(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Material> {
+        const response = await this.getMaterialRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6283,20 +6283,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all materials of a model
      */
     async getMaterialsRaw(requestParameters: GetMaterialsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Material>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getMaterials.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getMaterials.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling getMaterials.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling getMaterials.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getMaterials.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getMaterials.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getMaterials.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getMaterials.');
         }
 
         const queryParameters: any = {};
@@ -6322,7 +6322,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/material`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/material`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6335,8 +6335,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all materials of a model.  Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getMaterials(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Material>> {
-        const response = await this.getMaterialsRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getMaterials(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Material>> {
+        const response = await this.getMaterialsRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6345,16 +6345,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one model
      */
     async getModelRaw(requestParameters: GetModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModel.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModel.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModel.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModel.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModel.');
         }
 
         const queryParameters: any = {};
@@ -6380,7 +6380,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6393,8 +6393,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one model  Required scopes: ifc:read, model:read
      * Retrieve one model
      */
-    async getModel(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Model> {
-        const response = await this.getModelRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async getModel(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.getModelRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6403,16 +6403,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all classifications in a model
      */
     async getModelClassificationsRaw(requestParameters: GetModelClassificationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelClassifications.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelClassifications.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelClassifications.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getModelClassifications.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelClassifications.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelClassifications.');
         }
 
         const queryParameters: any = {};
@@ -6438,7 +6438,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6451,8 +6451,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all classifications in a model  Required scopes: ifc:read, model:read
      * Retrieve all classifications in a model
      */
-    async getModelClassifications(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Classification>> {
-        const response = await this.getModelClassificationsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getModelClassifications(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.getModelClassificationsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6461,20 +6461,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a material of a model
      */
     async getModelMaterialRaw(requestParameters: GetModelMaterialRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Material>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelMaterial.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelMaterial.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModelMaterial.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelMaterial.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getModelMaterial.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelMaterial.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelMaterial.');
         }
 
         const queryParameters: any = {};
@@ -6500,7 +6500,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/material/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/material/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6513,8 +6513,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a material of a model  Required scopes: ifc:read, model:read
      * Retrieve a material of a model
      */
-    async getModelMaterial(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Material> {
-        const response = await this.getModelMaterialRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getModelMaterial(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Material> {
+        const response = await this.getModelMaterialRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6523,16 +6523,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all materials of a model
      */
     async getModelMaterialsRaw(requestParameters: GetModelMaterialsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Material>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelMaterials.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelMaterials.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelMaterials.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getModelMaterials.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelMaterials.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelMaterials.');
         }
 
         const queryParameters: any = {};
@@ -6558,7 +6558,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/material`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/material`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6571,8 +6571,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all materials of a model.  Required scopes: ifc:read, model:read
      * Retrieve all materials of a model
      */
-    async getModelMaterials(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Material>> {
-        const response = await this.getModelMaterialsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getModelMaterials(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Material>> {
+        const response = await this.getModelMaterialsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6581,16 +6581,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all Properties of a model
      */
     async getModelPropertiesRaw(requestParameters: GetModelPropertiesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Property>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelProperties.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelProperties.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelProperties.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getModelProperties.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelProperties.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelProperties.');
         }
 
         const queryParameters: any = {};
@@ -6616,7 +6616,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6629,8 +6629,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of a model  Required scopes: ifc:read, model:read
      * Retrieve all Properties of a model
      */
-    async getModelProperties(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Property>> {
-        const response = await this.getModelPropertiesRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getModelProperties(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Property>> {
+        const response = await this.getModelPropertiesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6639,20 +6639,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Property of a model
      */
     async getModelPropertyRaw(requestParameters: GetModelPropertyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelProperty.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelProperty.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModelProperty.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelProperty.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getModelProperty.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelProperty.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelProperty.');
         }
 
         const queryParameters: any = {};
@@ -6678,7 +6678,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6691,8 +6691,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Property of a model  Required scopes: ifc:read, model:read
      * Retrieve a Property of a model
      */
-    async getModelProperty(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Property> {
-        const response = await this.getModelPropertyRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getModelProperty(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.getModelPropertyRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6701,20 +6701,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a PropertyDefinition of a model
      */
     async getModelPropertyDefinitionRaw(requestParameters: GetModelPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertyDefinition>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelPropertyDefinition.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelPropertyDefinition.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModelPropertyDefinition.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelPropertyDefinition.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getModelPropertyDefinition.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelPropertyDefinition.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelPropertyDefinition.');
         }
 
         const queryParameters: any = {};
@@ -6740,7 +6740,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6753,8 +6753,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a PropertyDefinition of a model  Required scopes: ifc:read, model:read
      * Retrieve a PropertyDefinition of a model
      */
-    async getModelPropertyDefinition(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<PropertyDefinition> {
-        const response = await this.getModelPropertyDefinitionRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getModelPropertyDefinition(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<PropertyDefinition> {
+        const response = await this.getModelPropertyDefinitionRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6763,16 +6763,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all PropertyDefinitions of a model
      */
     async getModelPropertyDefinitionsRaw(requestParameters: GetModelPropertyDefinitionsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertyDefinition>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelPropertyDefinitions.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelPropertyDefinitions.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelPropertyDefinitions.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getModelPropertyDefinitions.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelPropertyDefinitions.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelPropertyDefinitions.');
         }
 
         const queryParameters: any = {};
@@ -6798,7 +6798,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6811,8 +6811,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all PropertyDefinitions of a model  Required scopes: ifc:read, model:read
      * Retrieve all PropertyDefinitions of a model
      */
-    async getModelPropertyDefinitions(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<PropertyDefinition>> {
-        const response = await this.getModelPropertyDefinitionsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getModelPropertyDefinitions(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<PropertyDefinition>> {
+        const response = await this.getModelPropertyDefinitionsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6821,20 +6821,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Unit of a model
      */
     async getModelUnitRaw(requestParameters: GetModelUnitRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Unit>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelUnit.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelUnit.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getModelUnit.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelUnit.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getModelUnit.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelUnit.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelUnit.');
         }
 
         const queryParameters: any = {};
@@ -6860,7 +6860,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6873,8 +6873,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a Unit of a model  Required scopes: ifc:read, model:read
      * Retrieve a Unit of a model
      */
-    async getModelUnit(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Unit> {
-        const response = await this.getModelUnitRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getModelUnit(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Unit> {
+        const response = await this.getModelUnitRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6883,16 +6883,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all Units of a model
      */
     async getModelUnitsRaw(requestParameters: GetModelUnitsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Unit>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModelUnits.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelUnits.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getModelUnits.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getModelUnits.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModelUnits.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelUnits.');
         }
 
         const queryParameters: any = {};
@@ -6918,7 +6918,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6931,8 +6931,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all Units of a model  Required scopes: ifc:read, model:read
      * Retrieve all Units of a model
      */
-    async getModelUnits(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Unit>> {
-        const response = await this.getModelUnitsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getModelUnits(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Unit>> {
+        const response = await this.getModelUnitsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6941,12 +6941,12 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all models
      */
     async getModelsRaw(requestParameters: GetModelsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Model>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getModels.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModels.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getModels.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModels.');
         }
 
         const queryParameters: any = {};
@@ -6984,7 +6984,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -6997,8 +6997,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all models. The field `type` allows you to discriminate which kind of model it is.  Required scopes: ifc:read, model:read
      * Retrieve all models
      */
-    async getModels(cloudPk: number, projectPk: number, source?: GetModelsSourceEnum, status?: Array<GetModelsStatusEnum>, type?: Array<GetModelsTypeEnum>, initOverrides?: RequestInit): Promise<Array<Model>> {
-        const response = await this.getModelsRaw({ cloudPk: cloudPk, projectPk: projectPk, source: source, status: status, type: type }, initOverrides);
+    async getModels(cloud_pk: number, project_pk: number, source?: GetModelsSourceEnum, status?: Array<GetModelsStatusEnum>, type?: Array<GetModelsTypeEnum>, initOverrides?: RequestInit): Promise<Array<Model>> {
+        const response = await this.getModelsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, source: source, status: status, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -7007,20 +7007,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a processor handler
      */
     async getProcessorHandlerRaw(requestParameters: GetProcessorHandlerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProcessorHandler>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProcessorHandler.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProcessorHandler.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProcessorHandler.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getProcessorHandler.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getProcessorHandler.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProcessorHandler.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProcessorHandler.');
         }
 
         const queryParameters: any = {};
@@ -7046,7 +7046,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/processorhandler/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/processorhandler/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7059,8 +7059,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a processor handler  Required scopes: ifc:read, model:read
      * Retrieve a processor handler
      */
-    async getProcessorHandler(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<ProcessorHandler> {
-        const response = await this.getProcessorHandlerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getProcessorHandler(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<ProcessorHandler> {
+        const response = await this.getProcessorHandlerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7069,16 +7069,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Get all processor handlers
      */
     async getProcessorHandlersRaw(requestParameters: GetProcessorHandlersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProcessorHandler>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProcessorHandlers.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProcessorHandlers.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getProcessorHandlers.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getProcessorHandlers.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProcessorHandlers.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProcessorHandlers.');
         }
 
         const queryParameters: any = {};
@@ -7104,7 +7104,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/processorhandler`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/processorhandler`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7117,8 +7117,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Get all processor handlers  Required scopes: ifc:read, model:read
      * Get all processor handlers
      */
-    async getProcessorHandlers(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<ProcessorHandler>> {
-        const response = await this.getProcessorHandlersRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getProcessorHandlers(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ProcessorHandler>> {
+        const response = await this.getProcessorHandlersRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7127,20 +7127,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a PropertySet of a model
      */
     async getPropertySetRaw(requestParameters: GetPropertySetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertySet>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPropertySet.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getPropertySet.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPropertySet.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getPropertySet.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getPropertySet.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPropertySet.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getPropertySet.');
         }
 
         const queryParameters: any = {};
@@ -7166,7 +7166,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7179,8 +7179,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a PropertySet of a model  Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of a model
      */
-    async getPropertySet(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<PropertySet> {
-        const response = await this.getPropertySetRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getPropertySet(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<PropertySet> {
+        const response = await this.getPropertySetRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7189,16 +7189,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of a model
      */
     async getPropertySetsRaw(requestParameters: GetPropertySetsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertySet>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getPropertySets.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getPropertySets.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getPropertySets.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getPropertySets.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getPropertySets.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getPropertySets.');
         }
 
         const queryParameters: any = {};
@@ -7224,7 +7224,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7237,8 +7237,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all PropertySets of a model  Required scopes: ifc:read, model:read
      * Retrieve all PropertySets of a model
      */
-    async getPropertySets(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<PropertySet>> {
-        const response = await this.getPropertySetsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getPropertySets(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<PropertySet>> {
+        const response = await this.getPropertySetsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7247,16 +7247,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all elements in a optimized format
      */
     async getRawElementsRaw(requestParameters: GetRawElementsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<RawElements>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRawElements.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getRawElements.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getRawElements.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getRawElements.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRawElements.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getRawElements.');
         }
 
         const queryParameters: any = {};
@@ -7282,7 +7282,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/raw`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/raw`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7295,8 +7295,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Instead of a nested representation, this route respond with a flat structure and indices pointing to related object. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read, model:read
      * Retrieve all elements in a optimized format
      */
-    async getRawElements(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<RawElements> {
-        const response = await this.getRawElementsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getRawElements(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<RawElements> {
+        const response = await this.getRawElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7305,16 +7305,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve an element of a model with a simple value representation
      */
     async getSimpleElementRaw(requestParameters: GetSimpleElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<SimpleElement>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSimpleElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getSimpleElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getSimpleElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getSimpleElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSimpleElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getSimpleElement.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -7344,7 +7344,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}/simple`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}/simple`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7357,8 +7357,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve an element of a model with a simple value representation  Required scopes: ifc:read, model:read
      * Retrieve an element of a model with a simple value representation
      */
-    async getSimpleElement(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<SimpleElement> {
-        const response = await this.getSimpleElementRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async getSimpleElement(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<SimpleElement> {
+        const response = await this.getSimpleElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -7367,16 +7367,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all elements of a model with a simple value representation
      */
     async getSimpleElementsRaw(requestParameters: GetSimpleElementsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<SimpleElement>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSimpleElements.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getSimpleElements.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getSimpleElements.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getSimpleElements.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSimpleElements.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getSimpleElements.');
         }
 
         const queryParameters: any = {};
@@ -7402,7 +7402,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/simple`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/simple`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7415,8 +7415,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all elements of a model with a simple value representation  Required scopes: ifc:read, model:read
      * Retrieve all elements of a model with a simple value representation
      */
-    async getSimpleElements(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<SimpleElement> {
-        const response = await this.getSimpleElementsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getSimpleElements(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<SimpleElement> {
+        const response = await this.getSimpleElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7425,20 +7425,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one space of the model
      */
     async getSpaceRaw(requestParameters: GetSpaceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Space>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSpace.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getSpace.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSpace.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getSpace.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getSpace.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSpace.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getSpace.');
         }
 
         const queryParameters: any = {};
@@ -7464,7 +7464,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7477,8 +7477,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one space of the model  Required scopes: ifc:read, model:read
      * Retrieve one space of the model
      */
-    async getSpace(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Space> {
-        const response = await this.getSpaceRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getSpace(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Space> {
+        const response = await this.getSpaceRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7487,16 +7487,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all spaces of the model
      */
     async getSpacesRaw(requestParameters: GetSpacesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Space>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSpaces.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getSpaces.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getSpaces.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getSpaces.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSpaces.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getSpaces.');
         }
 
         const queryParameters: any = {};
@@ -7522,7 +7522,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7535,8 +7535,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all spaces of the model  Required scopes: ifc:read, model:read
      * Retrieve all spaces of the model
      */
-    async getSpaces(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Space>> {
-        const response = await this.getSpacesRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getSpaces(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Space>> {
+        const response = await this.getSpacesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7545,16 +7545,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a storey of a model
      */
     async getStoreyRaw(requestParameters: GetStoreyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getStorey.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getStorey.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getStorey.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getStorey.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getStorey.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getStorey.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -7584,7 +7584,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7597,8 +7597,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a storey of a model  Required scopes: ifc:read, model:read
      * Retrieve a storey of a model
      */
-    async getStorey(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.getStoreyRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async getStorey(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.getStoreyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -7607,24 +7607,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve the postioning of the plan in the storey
      */
     async getStoreyPlanPositioningRaw(requestParameters: GetStoreyPlanPositioningRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PositioningPlan>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getStoreyPlanPositioning.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getStoreyPlanPositioning.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getStoreyPlanPositioning.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getStoreyPlanPositioning.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getStoreyPlanPositioning.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getStoreyPlanPositioning.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getStoreyPlanPositioning.');
         }
 
-        if (requestParameters.storeyUuid === null || requestParameters.storeyUuid === undefined) {
-            throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling getStoreyPlanPositioning.');
+        if (requestParameters.storey_uuid === null || requestParameters.storey_uuid === undefined) {
+            throw new runtime.RequiredError('storey_uuid','Required parameter requestParameters.storey_uuid was null or undefined when calling getStoreyPlanPositioning.');
         }
 
         const queryParameters: any = {};
@@ -7650,7 +7650,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/{id}/positioning`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storeyUuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/{id}/positioning`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storey_uuid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7663,8 +7663,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve the postioning of the plan in the storey  Required scopes: ifc:read, model:read
      * Retrieve the postioning of the plan in the storey
      */
-    async getStoreyPlanPositioning(cloudPk: number, id: number, modelPk: number, projectPk: number, storeyUuid: string, initOverrides?: RequestInit): Promise<PositioningPlan> {
-        const response = await this.getStoreyPlanPositioningRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, storeyUuid: storeyUuid }, initOverrides);
+    async getStoreyPlanPositioning(cloud_pk: number, id: number, model_pk: number, project_pk: number, storey_uuid: string, initOverrides?: RequestInit): Promise<PositioningPlan> {
+        const response = await this.getStoreyPlanPositioningRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, storey_uuid: storey_uuid }, initOverrides);
         return await response.value();
     }
 
@@ -7673,16 +7673,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all storeys of a model
      */
     async getStoreysRaw(requestParameters: GetStoreysRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Storey>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getStoreys.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getStoreys.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getStoreys.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getStoreys.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getStoreys.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getStoreys.');
         }
 
         const queryParameters: any = {};
@@ -7708,7 +7708,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7721,8 +7721,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all storeys of a model.  Required scopes: ifc:read, model:read
      * Retrieve all storeys of a model
      */
-    async getStoreys(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Storey>> {
-        const response = await this.getStoreysRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getStoreys(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Storey>> {
+        const response = await this.getStoreysRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7731,16 +7731,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a system of a model
      */
     async getSystemRaw(requestParameters: GetSystemRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<System>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSystem.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getSystem.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getSystem.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getSystem.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSystem.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getSystem.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -7770,7 +7770,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7783,8 +7783,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve a system of a model  Required scopes: ifc:read, model:read
      * Retrieve a system of a model
      */
-    async getSystem(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<System> {
-        const response = await this.getSystemRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async getSystem(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<System> {
+        const response = await this.getSystemRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -7793,16 +7793,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all systems of a model
      */
     async getSystemsRaw(requestParameters: GetSystemsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<System>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getSystems.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getSystems.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getSystems.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getSystems.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getSystems.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getSystems.');
         }
 
         const queryParameters: any = {};
@@ -7828,7 +7828,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7841,8 +7841,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all systems of a model.  Required scopes: ifc:read, model:read
      * Retrieve all systems of a model
      */
-    async getSystems(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<System>> {
-        const response = await this.getSystemsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getSystems(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<System>> {
+        const response = await this.getSystemsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7851,20 +7851,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one zone of a model
      */
     async getZoneRaw(requestParameters: GetZoneRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Zone>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZone.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getZone.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getZone.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getZone.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getZone.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZone.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getZone.');
         }
 
         const queryParameters: any = {};
@@ -7890,7 +7890,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7903,8 +7903,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one zone of a model  Required scopes: ifc:read, model:read
      * Retrieve one zone of a model
      */
-    async getZone(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Zone> {
-        const response = await this.getZoneRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getZone(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Zone> {
+        const response = await this.getZoneRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7913,24 +7913,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one space of a zone
      */
     async getZoneSpaceRaw(requestParameters: GetZoneSpaceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ZoneSpace>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneSpace.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getZoneSpace.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getZoneSpace.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getZoneSpace.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getZoneSpace.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZoneSpace.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getZoneSpace.');
         }
 
-        if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling getZoneSpace.');
+        if (requestParameters.zone_pk === null || requestParameters.zone_pk === undefined) {
+            throw new runtime.RequiredError('zone_pk','Required parameter requestParameters.zone_pk was null or undefined when calling getZoneSpace.');
         }
 
         const queryParameters: any = {};
@@ -7956,7 +7956,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zonePk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zone_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -7969,8 +7969,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one space of a zone  Required scopes: ifc:read, model:read
      * Retrieve one space of a zone
      */
-    async getZoneSpace(cloudPk: number, id: number, modelPk: number, projectPk: number, zonePk: number, initOverrides?: RequestInit): Promise<ZoneSpace> {
-        const response = await this.getZoneSpaceRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, zonePk: zonePk }, initOverrides);
+    async getZoneSpace(cloud_pk: number, id: number, model_pk: number, project_pk: number, zone_pk: number, initOverrides?: RequestInit): Promise<ZoneSpace> {
+        const response = await this.getZoneSpaceRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, zone_pk: zone_pk }, initOverrides);
         return await response.value();
     }
 
@@ -7979,20 +7979,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all spaces of a zone
      */
     async getZoneSpacesRaw(requestParameters: GetZoneSpacesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ZoneSpace>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZoneSpaces.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getZoneSpaces.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getZoneSpaces.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getZoneSpaces.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZoneSpaces.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getZoneSpaces.');
         }
 
-        if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling getZoneSpaces.');
+        if (requestParameters.zone_pk === null || requestParameters.zone_pk === undefined) {
+            throw new runtime.RequiredError('zone_pk','Required parameter requestParameters.zone_pk was null or undefined when calling getZoneSpaces.');
         }
 
         const queryParameters: any = {};
@@ -8018,7 +8018,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zonePk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zone_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -8031,8 +8031,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all spaces of a zone  Required scopes: ifc:read, model:read
      * Retrieve all spaces of a zone
      */
-    async getZoneSpaces(cloudPk: number, modelPk: number, projectPk: number, zonePk: number, initOverrides?: RequestInit): Promise<Array<ZoneSpace>> {
-        const response = await this.getZoneSpacesRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, zonePk: zonePk }, initOverrides);
+    async getZoneSpaces(cloud_pk: number, model_pk: number, project_pk: number, zone_pk: number, initOverrides?: RequestInit): Promise<Array<ZoneSpace>> {
+        const response = await this.getZoneSpacesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, zone_pk: zone_pk }, initOverrides);
         return await response.value();
     }
 
@@ -8041,16 +8041,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve zones of a model
      */
     async getZonesRaw(requestParameters: GetZonesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Zone>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getZones.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getZones.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getZones.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getZones.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getZones.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getZones.');
         }
 
         const queryParameters: any = {};
@@ -8080,7 +8080,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -8093,8 +8093,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve parent zones of a model. Children zones we\'ll be in the \'zones\' field  Required scopes: ifc:read, model:read
      * Retrieve zones of a model
      */
-    async getZones(cloudPk: number, modelPk: number, projectPk: number, color?: string, initOverrides?: RequestInit): Promise<Array<Zone>> {
-        const response = await this.getZonesRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, color: color }, initOverrides);
+    async getZones(cloud_pk: number, model_pk: number, project_pk: number, color?: string, initOverrides?: RequestInit): Promise<Array<Zone>> {
+        const response = await this.getZonesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, color: color }, initOverrides);
         return await response.value();
     }
 
@@ -8103,20 +8103,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Link one or many documents to an element
      */
     async linkDocumentsOfElementRaw(requestParameters: LinkDocumentsOfElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling linkDocumentsOfElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling linkDocumentsOfElement.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling linkDocumentsOfElement.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling linkDocumentsOfElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling linkDocumentsOfElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling linkDocumentsOfElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling linkDocumentsOfElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling linkDocumentsOfElement.');
         }
 
         const queryParameters: any = {};
@@ -8142,7 +8142,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/documents`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/documents`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -8155,8 +8155,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk relation create available. You can either post an id or a list of ids. Is you post a list, the response will be a list (in the same order) of created relation or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Link one or many documents to an element
      */
-    async linkDocumentsOfElement(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.linkDocumentsOfElementRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async linkDocumentsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.linkDocumentsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -8165,16 +8165,16 @@ export class ModelApi extends runtime.BaseAPI {
      * List all associations between classifications and elements
      */
     async listClassificationElementRelationsRaw(requestParameters: ListClassificationElementRelationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ElementClassificationRelation>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling listClassificationElementRelations.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling listClassificationElementRelations.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling listClassificationElementRelations.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling listClassificationElementRelations.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling listClassificationElementRelations.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling listClassificationElementRelations.');
         }
 
         const queryParameters: any = {};
@@ -8200,7 +8200,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification-element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification-element`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -8213,8 +8213,8 @@ export class ModelApi extends runtime.BaseAPI {
      * List all associations between classifications and elements  Required scopes: ifc:read, model:read
      * List all associations between classifications and elements
      */
-    async listClassificationElementRelations(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<ElementClassificationRelation>> {
-        const response = await this.listClassificationElementRelationsRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async listClassificationElementRelations(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ElementClassificationRelation>> {
+        const response = await this.listClassificationElementRelationsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -8223,16 +8223,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Merge IFC files
      */
     async mergeIfcsRaw(requestParameters: MergeIfcsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling mergeIfcs.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling mergeIfcs.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling mergeIfcs.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling mergeIfcs.');
         }
 
-        if (requestParameters.ifcMergeRequest === null || requestParameters.ifcMergeRequest === undefined) {
-            throw new runtime.RequiredError('ifcMergeRequest','Required parameter requestParameters.ifcMergeRequest was null or undefined when calling mergeIfcs.');
+        if (requestParameters.IfcMergeRequest === null || requestParameters.IfcMergeRequest === undefined) {
+            throw new runtime.RequiredError('IfcMergeRequest','Required parameter requestParameters.IfcMergeRequest was null or undefined when calling mergeIfcs.');
         }
 
         const queryParameters: any = {};
@@ -8260,11 +8260,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/merge`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/merge`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: IfcMergeRequestToJSON(requestParameters.ifcMergeRequest),
+            body: IfcMergeRequestToJSON(requestParameters.IfcMergeRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -8274,8 +8274,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Only works for IFC files. Merge IFC files. The merged IFC file will be put in the same folder that the first IFC of the list  Required scopes: ifc:write, model:write
      * Merge IFC files
      */
-    async mergeIfcs(cloudPk: number, projectPk: number, ifcMergeRequest: IfcMergeRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.mergeIfcsRaw({ cloudPk: cloudPk, projectPk: projectPk, ifcMergeRequest: ifcMergeRequest }, initOverrides);
+    async mergeIfcs(cloud_pk: number, project_pk: number, IfcMergeRequest: IfcMergeRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.mergeIfcsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, IfcMergeRequest: IfcMergeRequest }, initOverrides);
     }
 
     /**
@@ -8283,16 +8283,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Optimize the IFC
      */
     async optimizeIfcRaw(requestParameters: OptimizeIfcRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling optimizeIfc.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling optimizeIfc.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling optimizeIfc.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling optimizeIfc.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling optimizeIfc.');
         }
 
         const queryParameters: any = {};
@@ -8320,11 +8320,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/optimize`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/optimize`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: IfcOptimizeRequestToJSON(requestParameters.ifcOptimizeRequest),
+            body: IfcOptimizeRequestToJSON(requestParameters.IfcOptimizeRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -8334,8 +8334,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Only works for IFC files. Optimize the IFC. A new optimized IFC file will be put in the same folder that the original IFC  Required scopes: ifc:write, model:write
      * Optimize the IFC
      */
-    async optimizeIfc(cloudPk: number, id: number, projectPk: number, ifcOptimizeRequest?: IfcOptimizeRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.optimizeIfcRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, ifcOptimizeRequest: ifcOptimizeRequest }, initOverrides);
+    async optimizeIfc(cloud_pk: number, id: number, project_pk: number, IfcOptimizeRequest?: IfcOptimizeRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.optimizeIfcRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, IfcOptimizeRequest: IfcOptimizeRequest }, initOverrides);
     }
 
     /**
@@ -8343,20 +8343,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove all property sets from element
      */
     async removeAllElementPropertySetRaw(requestParameters: RemoveAllElementPropertySetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeAllElementPropertySet.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling removeAllElementPropertySet.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeAllElementPropertySet.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling removeAllElementPropertySet.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling removeAllElementPropertySet.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling removeAllElementPropertySet.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeAllElementPropertySet.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeAllElementPropertySet.');
         }
 
         const queryParameters: any = {};
@@ -8382,7 +8382,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/all`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/all`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -8395,8 +8395,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove all property sets from element. Property Sets will not be deleted, just detached from element  Required scopes: ifc:write, model:write
      * Remove all property sets from element
      */
-    async removeAllElementPropertySet(cloudPk: number, elementUuid: string, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeAllElementPropertySetRaw({ cloudPk: cloudPk, elementUuid: elementUuid, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async removeAllElementPropertySet(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeAllElementPropertySetRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -8404,24 +8404,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove a classification from an element
      */
     async removeClassificationOfElementRaw(requestParameters: RemoveClassificationOfElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeClassificationOfElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling removeClassificationOfElement.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeClassificationOfElement.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling removeClassificationOfElement.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeClassificationOfElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling removeClassificationOfElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling removeClassificationOfElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeClassificationOfElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeClassificationOfElement.');
         }
 
         const queryParameters: any = {};
@@ -8447,7 +8447,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/classification/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/classification/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -8460,8 +8460,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The classification will not be deleted  Required scopes: ifc:write, model:write
      * Remove a classification from an element
      */
-    async removeClassificationOfElement(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeClassificationOfElementRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async removeClassificationOfElement(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeClassificationOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -8469,24 +8469,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove a documents from an element
      */
     async removeDocumentOfElementRaw(requestParameters: RemoveDocumentOfElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeDocumentOfElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling removeDocumentOfElement.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeDocumentOfElement.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling removeDocumentOfElement.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeDocumentOfElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling removeDocumentOfElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling removeDocumentOfElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeDocumentOfElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeDocumentOfElement.');
         }
 
         const queryParameters: any = {};
@@ -8512,7 +8512,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/documents/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/documents/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -8525,8 +8525,8 @@ export class ModelApi extends runtime.BaseAPI {
      * The document will not be deleted  Required scopes: ifc:write, model:write
      * Remove a documents from an element
      */
-    async removeDocumentOfElement(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeDocumentOfElementRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async removeDocumentOfElement(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeDocumentOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -8534,24 +8534,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove a PropertySet from an element
      */
     async removeElementPropertySetRaw(requestParameters: RemoveElementPropertySetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySet.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling removeElementPropertySet.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySet.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling removeElementPropertySet.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySet.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling removeElementPropertySet.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling removeElementPropertySet.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySet.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeElementPropertySet.');
         }
 
         const queryParameters: any = {};
@@ -8577,7 +8577,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -8590,8 +8590,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete the relation between the element and the property set. Does not delete any object  Required scopes: ifc:write, model:write
      * Remove a PropertySet from an element
      */
-    async removeElementPropertySet(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementPropertySetRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async removeElementPropertySet(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -8599,28 +8599,28 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove a property from a PropertySet
      */
     async removeElementPropertySetPropertyRaw(requestParameters: RemoveElementPropertySetPropertyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetProperty.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling removeElementPropertySetProperty.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetProperty.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling removeElementPropertySetProperty.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetProperty.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling removeElementPropertySetProperty.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling removeElementPropertySetProperty.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetProperty.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeElementPropertySetProperty.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetProperty.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling removeElementPropertySetProperty.');
         }
 
         const queryParameters: any = {};
@@ -8646,7 +8646,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -8659,8 +8659,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove a property from a PropertySet  Required scopes: ifc:write, model:write
      * Remove a property from a PropertySet
      */
-    async removeElementPropertySetProperty(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementPropertySetPropertyRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk, propertysetPk: propertysetPk }, initOverrides);
+    async removeElementPropertySetProperty(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetPropertyRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk, propertyset_pk: propertyset_pk }, initOverrides);
     }
 
     /**
@@ -8668,32 +8668,32 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a Definition to a Property
      */
     async removeElementPropertySetPropertyDefinitionRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling removeElementPropertySetPropertyDefinition.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+        if (requestParameters.property_pk === null || requestParameters.property_pk === undefined) {
+            throw new runtime.RequiredError('property_pk','Required parameter requestParameters.property_pk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling removeElementPropertySetPropertyDefinition.');
         }
 
         const queryParameters: any = {};
@@ -8719,7 +8719,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.propertyPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.property_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -8732,8 +8732,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Delete a Definition to a Property  Required scopes: ifc:write, model:write
      * Delete a Definition to a Property
      */
-    async removeElementPropertySetPropertyDefinition(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, propertyPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementPropertySetPropertyDefinitionRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk, propertyPk: propertyPk, propertysetPk: propertysetPk }, initOverrides);
+    async removeElementPropertySetPropertyDefinition(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, property_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetPropertyDefinitionRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk, property_pk: property_pk, propertyset_pk: propertyset_pk }, initOverrides);
     }
 
     /**
@@ -8741,36 +8741,36 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove a Unit from a Definition
      */
     async removeElementPropertySetPropertyDefinitionUnitRaw(requestParameters: RemoveElementPropertySetPropertyDefinitionUnitRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.propertyPk === null || requestParameters.propertyPk === undefined) {
-            throw new runtime.RequiredError('propertyPk','Required parameter requestParameters.propertyPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.property_pk === null || requestParameters.property_pk === undefined) {
+            throw new runtime.RequiredError('property_pk','Required parameter requestParameters.property_pk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.propertydefinitionPk === null || requestParameters.propertydefinitionPk === undefined) {
-            throw new runtime.RequiredError('propertydefinitionPk','Required parameter requestParameters.propertydefinitionPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.propertydefinition_pk === null || requestParameters.propertydefinition_pk === undefined) {
+            throw new runtime.RequiredError('propertydefinition_pk','Required parameter requestParameters.propertydefinition_pk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnit.');
         }
 
         const queryParameters: any = {};
@@ -8796,7 +8796,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{propertydefinition_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.propertyPk))).replace(`{${"propertydefinition_pk"}}`, encodeURIComponent(String(requestParameters.propertydefinitionPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{property_pk}/propertydefinition/{propertydefinition_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"property_pk"}}`, encodeURIComponent(String(requestParameters.property_pk))).replace(`{${"propertydefinition_pk"}}`, encodeURIComponent(String(requestParameters.propertydefinition_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -8809,8 +8809,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove a Unit from a Definition  Required scopes: ifc:write, model:write
      * Remove a Unit from a Definition
      */
-    async removeElementPropertySetPropertyDefinitionUnit(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, propertyPk: number, propertydefinitionPk: number, propertysetPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementPropertySetPropertyDefinitionUnitRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk, propertyPk: propertyPk, propertydefinitionPk: propertydefinitionPk, propertysetPk: propertysetPk }, initOverrides);
+    async removeElementPropertySetPropertyDefinitionUnit(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, property_pk: number, propertydefinition_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetPropertyDefinitionUnitRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk, property_pk: property_pk, propertydefinition_pk: propertydefinition_pk, propertyset_pk: propertyset_pk }, initOverrides);
     }
 
     /**
@@ -8818,20 +8818,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove the classification from all elements
      */
     async removeElementsFromClassificationRaw(requestParameters: RemoveElementsFromClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling removeElementsFromClassification.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling removeElementsFromClassification.');
         }
 
-        if (requestParameters.modelClassificationPk === null || requestParameters.modelClassificationPk === undefined) {
-            throw new runtime.RequiredError('modelClassificationPk','Required parameter requestParameters.modelClassificationPk was null or undefined when calling removeElementsFromClassification.');
+        if (requestParameters.model_classification_pk === null || requestParameters.model_classification_pk === undefined) {
+            throw new runtime.RequiredError('model_classification_pk','Required parameter requestParameters.model_classification_pk was null or undefined when calling removeElementsFromClassification.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling removeElementsFromClassification.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling removeElementsFromClassification.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling removeElementsFromClassification.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeElementsFromClassification.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -8861,7 +8861,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification/{model_classification_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_classification_pk"}}`, encodeURIComponent(String(requestParameters.modelClassificationPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/classification/{model_classification_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_classification_pk"}}`, encodeURIComponent(String(requestParameters.model_classification_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -8874,8 +8874,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove the classification from all elements. No element nor classification will be deleted  Required scopes: ifc:write, model:write
      * Remove the classification from all elements
      */
-    async removeElementsFromClassification(cloudPk: number, modelClassificationPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementsFromClassificationRaw({ cloudPk: cloudPk, modelClassificationPk: modelClassificationPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async removeElementsFromClassification(cloud_pk: number, model_classification_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementsFromClassificationRaw({ cloud_pk: cloud_pk, model_classification_pk: model_classification_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
     }
 
     /**
@@ -8883,16 +8883,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Reprocess Model file
      */
     async reprocessModelRaw(requestParameters: ReprocessModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling reprocessModel.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling reprocessModel.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling reprocessModel.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling reprocessModel.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling reprocessModel.');
         }
 
         const queryParameters: any = {};
@@ -8918,7 +8918,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/reprocess`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/reprocess`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -8931,8 +8931,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Reprocess the model. All data that are not in the original model files will be lost  Required scopes: ifc:write, model:write
      * Reprocess Model file
      */
-    async reprocessModel(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.reprocessModelRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async reprocessModel(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.reprocessModelRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -8940,16 +8940,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a token
      */
     async updateAccessTokenRaw(requestParameters: UpdateAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcAccessToken>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateAccessToken.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateAccessToken.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateAccessToken.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateAccessToken.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateAccessToken.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateAccessToken.');
         }
 
         if (requestParameters.token === null || requestParameters.token === undefined) {
@@ -8981,11 +8981,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/access_token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedIfcAccessTokenRequestToJSON(requestParameters.patchedIfcAccessTokenRequest),
+            body: PatchedIfcAccessTokenRequestToJSON(requestParameters.PatchedIfcAccessTokenRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcAccessTokenFromJSON(jsonValue));
@@ -8995,8 +8995,8 @@ export class ModelApi extends runtime.BaseAPI {
      * You can update the expiration date or the read_only field  Required scopes: ifc:token_manage, model:token_manage
      * Update some fields of a token
      */
-    async updateAccessToken(cloudPk: number, modelPk: number, projectPk: number, token: string, patchedIfcAccessTokenRequest?: PatchedIfcAccessTokenRequest, initOverrides?: RequestInit): Promise<IfcAccessToken> {
-        const response = await this.updateAccessTokenRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, token: token, patchedIfcAccessTokenRequest: patchedIfcAccessTokenRequest }, initOverrides);
+    async updateAccessToken(cloud_pk: number, model_pk: number, project_pk: number, token: string, PatchedIfcAccessTokenRequest?: PatchedIfcAccessTokenRequest, initOverrides?: RequestInit): Promise<IfcAccessToken> {
+        const response = await this.updateAccessTokenRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, token: token, PatchedIfcAccessTokenRequest: PatchedIfcAccessTokenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9005,16 +9005,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a building
      */
     async updateBuildingRaw(requestParameters: UpdateBuildingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Building>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateBuilding.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateBuilding.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateBuilding.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateBuilding.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateBuilding.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateBuilding.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -9044,7 +9044,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -9057,8 +9057,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a building  Required scopes: ifc:write, model:write
      * Update some fields of a building
      */
-    async updateBuilding(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.updateBuildingRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async updateBuilding(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.updateBuildingRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -9067,24 +9067,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Update the postioning of the plan in the building
      */
     async updateBuildingPlanPositioningRaw(requestParameters: UpdateBuildingPlanPositioningRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PositioningPlan>> {
-        if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
-            throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling updateBuildingPlanPositioning.');
+        if (requestParameters.building_uuid === null || requestParameters.building_uuid === undefined) {
+            throw new runtime.RequiredError('building_uuid','Required parameter requestParameters.building_uuid was null or undefined when calling updateBuildingPlanPositioning.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateBuildingPlanPositioning.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateBuildingPlanPositioning.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateBuildingPlanPositioning.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateBuildingPlanPositioning.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateBuildingPlanPositioning.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateBuildingPlanPositioning.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateBuildingPlanPositioning.');
         }
 
         const queryParameters: any = {};
@@ -9112,11 +9112,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/{id}/positioning`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.buildingUuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/{id}/positioning`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.building_uuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedPositioningPlanRequestToJSON(requestParameters.patchedPositioningPlanRequest),
+            body: PatchedPositioningPlanRequestToJSON(requestParameters.PatchedPositioningPlanRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PositioningPlanFromJSON(jsonValue));
@@ -9126,8 +9126,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update the postioning of the plan in the building  Required scopes: ifc:write, model:write
      * Update the postioning of the plan in the building
      */
-    async updateBuildingPlanPositioning(buildingUuid: string, cloudPk: number, id: number, modelPk: number, projectPk: number, patchedPositioningPlanRequest?: PatchedPositioningPlanRequest, initOverrides?: RequestInit): Promise<PositioningPlan> {
-        const response = await this.updateBuildingPlanPositioningRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedPositioningPlanRequest: patchedPositioningPlanRequest }, initOverrides);
+    async updateBuildingPlanPositioning(building_uuid: string, cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest, initOverrides?: RequestInit): Promise<PositioningPlan> {
+        const response = await this.updateBuildingPlanPositioningRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedPositioningPlanRequest: PatchedPositioningPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9136,16 +9136,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of an element
      */
     async updateElementRaw(requestParameters: UpdateElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Element>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateElement.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateElement.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateElement.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateElement.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateElement.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateElement.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -9177,11 +9177,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedElementRequestToJSON(requestParameters.patchedElementRequest),
+            body: PatchedElementRequestToJSON(requestParameters.PatchedElementRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ElementFromJSON(jsonValue));
@@ -9191,8 +9191,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of an element. The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of an element
      */
-    async updateElement(cloudPk: number, modelPk: number, projectPk: number, uuid: string, patchedElementRequest?: PatchedElementRequest, initOverrides?: RequestInit): Promise<Element> {
-        const response = await this.updateElementRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid, patchedElementRequest: patchedElementRequest }, initOverrides);
+    async updateElement(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, PatchedElementRequest?: PatchedElementRequest, initOverrides?: RequestInit): Promise<Element> {
+        const response = await this.updateElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid, PatchedElementRequest: PatchedElementRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9201,28 +9201,28 @@ export class ModelApi extends runtime.BaseAPI {
      * Update a property from an element
      */
     async updateElementPropertySetPropertyRaw(requestParameters: UpdateElementPropertySetPropertyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateElementPropertySetProperty.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateElementPropertySetProperty.');
         }
 
-        if (requestParameters.elementUuid === null || requestParameters.elementUuid === undefined) {
-            throw new runtime.RequiredError('elementUuid','Required parameter requestParameters.elementUuid was null or undefined when calling updateElementPropertySetProperty.');
+        if (requestParameters.element_uuid === null || requestParameters.element_uuid === undefined) {
+            throw new runtime.RequiredError('element_uuid','Required parameter requestParameters.element_uuid was null or undefined when calling updateElementPropertySetProperty.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateElementPropertySetProperty.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateElementPropertySetProperty.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateElementPropertySetProperty.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateElementPropertySetProperty.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateElementPropertySetProperty.');
         }
 
-        if (requestParameters.propertysetPk === null || requestParameters.propertysetPk === undefined) {
-            throw new runtime.RequiredError('propertysetPk','Required parameter requestParameters.propertysetPk was null or undefined when calling updateElementPropertySetProperty.');
+        if (requestParameters.propertyset_pk === null || requestParameters.propertyset_pk === undefined) {
+            throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling updateElementPropertySetProperty.');
         }
 
         const queryParameters: any = {};
@@ -9250,11 +9250,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.elementUuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertysetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/{element_uuid}/propertyset/{propertyset_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"element_uuid"}}`, encodeURIComponent(String(requestParameters.element_uuid))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"propertyset_pk"}}`, encodeURIComponent(String(requestParameters.propertyset_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedPropertyRequestToJSON(requestParameters.patchedPropertyRequest),
+            body: PatchedPropertyRequestToJSON(requestParameters.PatchedPropertyRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
@@ -9264,8 +9264,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update a property value from an element. If the element is the only one to have this property, the property will be update in place. If many elements share this property, a new property will be created to replace the property for this element. Keeping the property for all other elements. If you want to update the property of all elements, see updateIfcProperty  Required scopes: ifc:write, model:write
      * Update a property from an element
      */
-    async updateElementPropertySetProperty(cloudPk: number, elementUuid: string, id: number, modelPk: number, projectPk: number, propertysetPk: number, patchedPropertyRequest?: PatchedPropertyRequest, initOverrides?: RequestInit): Promise<Property> {
-        const response = await this.updateElementPropertySetPropertyRaw({ cloudPk: cloudPk, elementUuid: elementUuid, id: id, modelPk: modelPk, projectPk: projectPk, propertysetPk: propertysetPk, patchedPropertyRequest: patchedPropertyRequest }, initOverrides);
+    async updateElementPropertySetProperty(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, propertyset_pk: number, PatchedPropertyRequest?: PatchedPropertyRequest, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.updateElementPropertySetPropertyRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk, propertyset_pk: propertyset_pk, PatchedPropertyRequest: PatchedPropertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9274,20 +9274,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a layer
      */
     async updateLayerRaw(requestParameters: UpdateLayerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Layer>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateLayer.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateLayer.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateLayer.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateLayer.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateLayer.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateLayer.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateLayer.');
         }
 
         const queryParameters: any = {};
@@ -9315,11 +9315,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/layer/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedLayerRequestToJSON(requestParameters.patchedLayerRequest),
+            body: PatchedLayerRequestToJSON(requestParameters.PatchedLayerRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LayerFromJSON(jsonValue));
@@ -9329,8 +9329,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a layer. The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a layer
      */
-    async updateLayer(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedLayerRequest?: PatchedLayerRequest, initOverrides?: RequestInit): Promise<Layer> {
-        const response = await this.updateLayerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedLayerRequest: patchedLayerRequest }, initOverrides);
+    async updateLayer(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedLayerRequest?: PatchedLayerRequest, initOverrides?: RequestInit): Promise<Layer> {
+        const response = await this.updateLayerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedLayerRequest: PatchedLayerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9339,16 +9339,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a model
      */
     async updateModelRaw(requestParameters: UpdateModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateModel.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateModel.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateModel.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateModel.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateModel.');
         }
 
         const queryParameters: any = {};
@@ -9376,11 +9376,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedModelRequestToJSON(requestParameters.patchedModelRequest),
+            body: PatchedModelRequestToJSON(requestParameters.PatchedModelRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
@@ -9390,8 +9390,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a model  Required scopes: ifc:write, model:write
      * Update some fields of a model
      */
-    async updateModel(cloudPk: number, id: number, projectPk: number, patchedModelRequest?: PatchedModelRequest, initOverrides?: RequestInit): Promise<Model> {
-        const response = await this.updateModelRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedModelRequest: patchedModelRequest }, initOverrides);
+    async updateModel(cloud_pk: number, id: number, project_pk: number, PatchedModelRequest?: PatchedModelRequest, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.updateModelRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedModelRequest: PatchedModelRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9400,16 +9400,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Update models file (gltf, svg, structure, etc)
      */
     async updateModelFilesRaw(requestParameters: UpdateModelFilesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelFiles>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateModelFiles.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateModelFiles.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateModelFiles.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateModelFiles.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateModelFiles.');
         }
 
         const queryParameters: any = {};
@@ -9465,40 +9465,40 @@ export class ModelApi extends runtime.BaseAPI {
             formParams = new URLSearchParams();
         }
 
-        if (requestParameters.structureFile !== undefined) {
-            formParams.append('structure_file', requestParameters.structureFile as any);
+        if (requestParameters.structure_file !== undefined) {
+            formParams.append('structure_file', requestParameters.structure_file as any);
         }
 
-        if (requestParameters.systemsFile !== undefined) {
-            formParams.append('systems_file', requestParameters.systemsFile as any);
+        if (requestParameters.systems_file !== undefined) {
+            formParams.append('systems_file', requestParameters.systems_file as any);
         }
 
-        if (requestParameters.mapFile !== undefined) {
-            formParams.append('map_file', requestParameters.mapFile as any);
+        if (requestParameters.map_file !== undefined) {
+            formParams.append('map_file', requestParameters.map_file as any);
         }
 
-        if (requestParameters.gltfFile !== undefined) {
-            formParams.append('gltf_file', requestParameters.gltfFile as any);
+        if (requestParameters.gltf_file !== undefined) {
+            formParams.append('gltf_file', requestParameters.gltf_file as any);
         }
 
-        if (requestParameters.gltfWithOpeningsFile !== undefined) {
-            formParams.append('gltf_with_openings_file', requestParameters.gltfWithOpeningsFile as any);
+        if (requestParameters.gltf_with_openings_file !== undefined) {
+            formParams.append('gltf_with_openings_file', requestParameters.gltf_with_openings_file as any);
         }
 
-        if (requestParameters.bvhTreeFile !== undefined) {
-            formParams.append('bvh_tree_file', requestParameters.bvhTreeFile as any);
+        if (requestParameters.bvh_tree_file !== undefined) {
+            formParams.append('bvh_tree_file', requestParameters.bvh_tree_file as any);
         }
 
-        if (requestParameters.viewer360File !== undefined) {
-            formParams.append('viewer_360_file', requestParameters.viewer360File as any);
+        if (requestParameters.viewer_360_file !== undefined) {
+            formParams.append('viewer_360_file', requestParameters.viewer_360_file as any);
         }
 
-        if (requestParameters.xktFile !== undefined) {
-            formParams.append('xkt_file', requestParameters.xktFile as any);
+        if (requestParameters.xkt_file !== undefined) {
+            formParams.append('xkt_file', requestParameters.xkt_file as any);
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/files`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/files`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -9512,8 +9512,8 @@ export class ModelApi extends runtime.BaseAPI {
      * This route does not accept JSON, only files as x-www-form-urlencoded  Required scopes: ifc:write, model:write
      * Update models file (gltf, svg, structure, etc)
      */
-    async updateModelFiles(cloudPk: number, id: number, projectPk: number, structureFile?: Blob | null, systemsFile?: Blob | null, mapFile?: Blob | null, gltfFile?: Blob | null, gltfWithOpeningsFile?: Blob | null, bvhTreeFile?: Blob | null, viewer360File?: Blob | null, xktFile?: Blob | null, initOverrides?: RequestInit): Promise<ModelFiles> {
-        const response = await this.updateModelFilesRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, structureFile: structureFile, systemsFile: systemsFile, mapFile: mapFile, gltfFile: gltfFile, gltfWithOpeningsFile: gltfWithOpeningsFile, bvhTreeFile: bvhTreeFile, viewer360File: viewer360File, xktFile: xktFile }, initOverrides);
+    async updateModelFiles(cloud_pk: number, id: number, project_pk: number, structure_file?: Blob | null, systems_file?: Blob | null, map_file?: Blob | null, gltf_file?: Blob | null, gltf_with_openings_file?: Blob | null, bvh_tree_file?: Blob | null, viewer_360_file?: Blob | null, xkt_file?: Blob | null, initOverrides?: RequestInit): Promise<ModelFiles> {
+        const response = await this.updateModelFilesRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, structure_file: structure_file, systems_file: systems_file, map_file: map_file, gltf_file: gltf_file, gltf_with_openings_file: gltf_with_openings_file, bvh_tree_file: bvh_tree_file, viewer_360_file: viewer_360_file, xkt_file: xkt_file }, initOverrides);
         return await response.value();
     }
 
@@ -9522,20 +9522,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a Property
      */
     async updateModelPropertyRaw(requestParameters: UpdateModelPropertyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Property>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateModelProperty.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateModelProperty.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateModelProperty.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateModelProperty.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateModelProperty.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateModelProperty.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateModelProperty.');
         }
 
         const queryParameters: any = {};
@@ -9563,11 +9563,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/property/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedPropertyRequestToJSON(requestParameters.patchedPropertyRequest),
+            body: PatchedPropertyRequestToJSON(requestParameters.PatchedPropertyRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
@@ -9577,8 +9577,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a Property  Required scopes: ifc:write, model:write
      * Update some fields of a Property
      */
-    async updateModelProperty(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedPropertyRequest?: PatchedPropertyRequest, initOverrides?: RequestInit): Promise<Property> {
-        const response = await this.updateModelPropertyRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedPropertyRequest: patchedPropertyRequest }, initOverrides);
+    async updateModelProperty(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedPropertyRequest?: PatchedPropertyRequest, initOverrides?: RequestInit): Promise<Property> {
+        const response = await this.updateModelPropertyRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedPropertyRequest: PatchedPropertyRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9587,20 +9587,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of many PropertyDefinitions of a model
      */
     async updateModelPropertyDefinitionRaw(requestParameters: UpdateModelPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertyDefinition>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateModelPropertyDefinition.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateModelPropertyDefinition.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateModelPropertyDefinition.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateModelPropertyDefinition.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateModelPropertyDefinition.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateModelPropertyDefinition.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateModelPropertyDefinition.');
         }
 
         const queryParameters: any = {};
@@ -9628,11 +9628,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertydefinition/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedPropertyDefinitionRequestToJSON(requestParameters.patchedPropertyDefinitionRequest),
+            body: PatchedPropertyDefinitionRequestToJSON(requestParameters.PatchedPropertyDefinitionRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDefinitionFromJSON(jsonValue));
@@ -9642,8 +9642,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of many PropertyDefinitions of a model  Required scopes: ifc:write, model:write
      * Update some fields of many PropertyDefinitions of a model
      */
-    async updateModelPropertyDefinition(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedPropertyDefinitionRequest?: PatchedPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<PropertyDefinition> {
-        const response = await this.updateModelPropertyDefinitionRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedPropertyDefinitionRequest: patchedPropertyDefinitionRequest }, initOverrides);
+    async updateModelPropertyDefinition(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedPropertyDefinitionRequest?: PatchedPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<PropertyDefinition> {
+        const response = await this.updateModelPropertyDefinitionRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedPropertyDefinitionRequest: PatchedPropertyDefinitionRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9652,20 +9652,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a Unit of a model
      */
     async updateModelUnitRaw(requestParameters: UpdateModelUnitRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Unit>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateModelUnit.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateModelUnit.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateModelUnit.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateModelUnit.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateModelUnit.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateModelUnit.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateModelUnit.');
         }
 
         const queryParameters: any = {};
@@ -9693,11 +9693,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/unit/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedUnitRequestToJSON(requestParameters.patchedUnitRequest),
+            body: PatchedUnitRequestToJSON(requestParameters.PatchedUnitRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UnitFromJSON(jsonValue));
@@ -9707,8 +9707,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a Unit of a model  Required scopes: ifc:write, model:write
      * Update some fields of a Unit of a model
      */
-    async updateModelUnit(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedUnitRequest?: PatchedUnitRequest, initOverrides?: RequestInit): Promise<Unit> {
-        const response = await this.updateModelUnitRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedUnitRequest: patchedUnitRequest }, initOverrides);
+    async updateModelUnit(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedUnitRequest?: PatchedUnitRequest, initOverrides?: RequestInit): Promise<Unit> {
+        const response = await this.updateModelUnitRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedUnitRequest: PatchedUnitRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9717,24 +9717,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Update order of all plan of a building
      */
     async updateOrderBuildingPlanRaw(requestParameters: UpdateOrderBuildingPlanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
-        if (requestParameters.buildingUuid === null || requestParameters.buildingUuid === undefined) {
-            throw new runtime.RequiredError('buildingUuid','Required parameter requestParameters.buildingUuid was null or undefined when calling updateOrderBuildingPlan.');
+        if (requestParameters.building_uuid === null || requestParameters.building_uuid === undefined) {
+            throw new runtime.RequiredError('building_uuid','Required parameter requestParameters.building_uuid was null or undefined when calling updateOrderBuildingPlan.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateOrderBuildingPlan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateOrderBuildingPlan.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateOrderBuildingPlan.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateOrderBuildingPlan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateOrderBuildingPlan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateOrderBuildingPlan.');
         }
 
-        if (requestParameters.requestBody === null || requestParameters.requestBody === undefined) {
-            throw new runtime.RequiredError('requestBody','Required parameter requestParameters.requestBody was null or undefined when calling updateOrderBuildingPlan.');
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling updateOrderBuildingPlan.');
         }
 
         const queryParameters: any = {};
@@ -9762,11 +9762,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/order`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.buildingUuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/building/{building_uuid}/plan/order`.replace(`{${"building_uuid"}}`, encodeURIComponent(String(requestParameters.building_uuid))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.requestBody,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -9776,8 +9776,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update order of all plan of a building  Required scopes: ifc:write, model:write
      * Update order of all plan of a building
      */
-    async updateOrderBuildingPlan(buildingUuid: string, cloudPk: number, modelPk: number, projectPk: number, requestBody: Array<number>, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.updateOrderBuildingPlanRaw({ buildingUuid: buildingUuid, cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, requestBody: requestBody }, initOverrides);
+    async updateOrderBuildingPlan(building_uuid: string, cloud_pk: number, model_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.updateOrderBuildingPlanRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
         return await response.value();
     }
 
@@ -9786,24 +9786,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Update order of all plan of a storey
      */
     async updateOrderStoreyPlanRaw(requestParameters: UpdateOrderStoreyPlanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateOrderStoreyPlan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateOrderStoreyPlan.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateOrderStoreyPlan.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateOrderStoreyPlan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateOrderStoreyPlan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateOrderStoreyPlan.');
         }
 
-        if (requestParameters.storeyUuid === null || requestParameters.storeyUuid === undefined) {
-            throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling updateOrderStoreyPlan.');
+        if (requestParameters.storey_uuid === null || requestParameters.storey_uuid === undefined) {
+            throw new runtime.RequiredError('storey_uuid','Required parameter requestParameters.storey_uuid was null or undefined when calling updateOrderStoreyPlan.');
         }
 
-        if (requestParameters.requestBody === null || requestParameters.requestBody === undefined) {
-            throw new runtime.RequiredError('requestBody','Required parameter requestParameters.requestBody was null or undefined when calling updateOrderStoreyPlan.');
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling updateOrderStoreyPlan.');
         }
 
         const queryParameters: any = {};
@@ -9831,11 +9831,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/order`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storeyUuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/order`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storey_uuid))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.requestBody,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -9845,8 +9845,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update order of all plan of a storey  Required scopes: ifc:write, model:write
      * Update order of all plan of a storey
      */
-    async updateOrderStoreyPlan(cloudPk: number, modelPk: number, projectPk: number, storeyUuid: string, requestBody: Array<number>, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.updateOrderStoreyPlanRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, storeyUuid: storeyUuid, requestBody: requestBody }, initOverrides);
+    async updateOrderStoreyPlan(cloud_pk: number, model_pk: number, project_pk: number, storey_uuid: string, request_body: Array<number>, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.updateOrderStoreyPlanRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, storey_uuid: storey_uuid, request_body: request_body }, initOverrides);
         return await response.value();
     }
 
@@ -9855,20 +9855,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update order of all storey of a model
      */
     async updateOrderStoreysRaw(requestParameters: UpdateOrderStoreysRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Storey>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateOrderStoreys.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateOrderStoreys.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateOrderStoreys.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateOrderStoreys.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateOrderStoreys.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateOrderStoreys.');
         }
 
-        if (requestParameters.requestBody === null || requestParameters.requestBody === undefined) {
-            throw new runtime.RequiredError('requestBody','Required parameter requestParameters.requestBody was null or undefined when calling updateOrderStoreys.');
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling updateOrderStoreys.');
         }
 
         const queryParameters: any = {};
@@ -9896,11 +9896,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/order`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/order`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.requestBody,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StoreyFromJSON));
@@ -9910,8 +9910,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update order of all storey of a model  Required scopes: ifc:write, model:write
      * Update order of all storey of a model
      */
-    async updateOrderStoreys(cloudPk: number, modelPk: number, projectPk: number, requestBody: Array<string>, initOverrides?: RequestInit): Promise<Array<Storey>> {
-        const response = await this.updateOrderStoreysRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, requestBody: requestBody }, initOverrides);
+    async updateOrderStoreys(cloud_pk: number, model_pk: number, project_pk: number, request_body: Array<string>, initOverrides?: RequestInit): Promise<Array<Storey>> {
+        const response = await this.updateOrderStoreysRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
         return await response.value();
     }
 
@@ -9920,20 +9920,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update the status of a processor handler
      */
     async updateProcessorHandlerRaw(requestParameters: UpdateProcessorHandlerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProcessorHandler>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProcessorHandler.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateProcessorHandler.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateProcessorHandler.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateProcessorHandler.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateProcessorHandler.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateProcessorHandler.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateProcessorHandler.');
         }
 
         const queryParameters: any = {};
@@ -9961,11 +9961,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/processorhandler/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/processorhandler/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedProcessorHandlerRequestToJSON(requestParameters.patchedProcessorHandlerRequest),
+            body: PatchedProcessorHandlerRequestToJSON(requestParameters.PatchedProcessorHandlerRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProcessorHandlerFromJSON(jsonValue));
@@ -9975,8 +9975,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update the status of a processor handler  Required scopes: ifc:write, model:write
      * Update the status of a processor handler
      */
-    async updateProcessorHandler(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedProcessorHandlerRequest?: PatchedProcessorHandlerRequest, initOverrides?: RequestInit): Promise<ProcessorHandler> {
-        const response = await this.updateProcessorHandlerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedProcessorHandlerRequest: patchedProcessorHandlerRequest }, initOverrides);
+    async updateProcessorHandler(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedProcessorHandlerRequest?: PatchedProcessorHandlerRequest, initOverrides?: RequestInit): Promise<ProcessorHandler> {
+        const response = await this.updateProcessorHandlerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedProcessorHandlerRequest: PatchedProcessorHandlerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9985,20 +9985,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a PropertySet
      */
     async updatePropertySetRaw(requestParameters: UpdatePropertySetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PropertySet>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updatePropertySet.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updatePropertySet.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePropertySet.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updatePropertySet.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updatePropertySet.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updatePropertySet.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updatePropertySet.');
         }
 
         const queryParameters: any = {};
@@ -10026,11 +10026,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/propertyset/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedPropertySetRequestToJSON(requestParameters.patchedPropertySetRequest),
+            body: PatchedPropertySetRequestToJSON(requestParameters.PatchedPropertySetRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PropertySetFromJSON(jsonValue));
@@ -10040,8 +10040,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a PropertySet  Required scopes: ifc:write, model:write
      * Update some fields of a PropertySet
      */
-    async updatePropertySet(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedPropertySetRequest?: PatchedPropertySetRequest, initOverrides?: RequestInit): Promise<PropertySet> {
-        const response = await this.updatePropertySetRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedPropertySetRequest: patchedPropertySetRequest }, initOverrides);
+    async updatePropertySet(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedPropertySetRequest?: PatchedPropertySetRequest, initOverrides?: RequestInit): Promise<PropertySet> {
+        const response = await this.updatePropertySetRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedPropertySetRequest: PatchedPropertySetRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10050,20 +10050,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a space
      */
     async updateSpaceRaw(requestParameters: UpdateSpaceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Space>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateSpace.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateSpace.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateSpace.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateSpace.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateSpace.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateSpace.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateSpace.');
         }
 
         const queryParameters: any = {};
@@ -10091,11 +10091,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedSpaceRequestToJSON(requestParameters.patchedSpaceRequest),
+            body: PatchedSpaceRequestToJSON(requestParameters.PatchedSpaceRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SpaceFromJSON(jsonValue));
@@ -10105,8 +10105,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateSpace(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedSpaceRequest?: PatchedSpaceRequest, initOverrides?: RequestInit): Promise<Space> {
-        const response = await this.updateSpaceRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedSpaceRequest: patchedSpaceRequest }, initOverrides);
+    async updateSpace(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedSpaceRequest?: PatchedSpaceRequest, initOverrides?: RequestInit): Promise<Space> {
+        const response = await this.updateSpaceRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedSpaceRequest: PatchedSpaceRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10115,16 +10115,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a storey
      */
     async updateStoreyRaw(requestParameters: UpdateStoreyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateStorey.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateStorey.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateStorey.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateStorey.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateStorey.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateStorey.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -10154,7 +10154,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -10167,8 +10167,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a storey  Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStorey(cloudPk: number, modelPk: number, projectPk: number, uuid: string, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.updateStoreyRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid }, initOverrides);
+    async updateStorey(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.updateStoreyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
         return await response.value();
     }
 
@@ -10177,24 +10177,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Update the postioning of the plan in the storey
      */
     async updateStoreyPlanPositioningRaw(requestParameters: UpdateStoreyPlanPositioningRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PositioningPlan>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateStoreyPlanPositioning.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateStoreyPlanPositioning.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateStoreyPlanPositioning.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateStoreyPlanPositioning.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateStoreyPlanPositioning.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateStoreyPlanPositioning.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateStoreyPlanPositioning.');
         }
 
-        if (requestParameters.storeyUuid === null || requestParameters.storeyUuid === undefined) {
-            throw new runtime.RequiredError('storeyUuid','Required parameter requestParameters.storeyUuid was null or undefined when calling updateStoreyPlanPositioning.');
+        if (requestParameters.storey_uuid === null || requestParameters.storey_uuid === undefined) {
+            throw new runtime.RequiredError('storey_uuid','Required parameter requestParameters.storey_uuid was null or undefined when calling updateStoreyPlanPositioning.');
         }
 
         const queryParameters: any = {};
@@ -10222,11 +10222,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/{id}/positioning`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storeyUuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/storey/{storey_uuid}/plan/{id}/positioning`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"storey_uuid"}}`, encodeURIComponent(String(requestParameters.storey_uuid))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedPositioningPlanRequestToJSON(requestParameters.patchedPositioningPlanRequest),
+            body: PatchedPositioningPlanRequestToJSON(requestParameters.PatchedPositioningPlanRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PositioningPlanFromJSON(jsonValue));
@@ -10236,8 +10236,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update the postioning of the plan in the storey  Required scopes: ifc:write, model:write
      * Update the postioning of the plan in the storey
      */
-    async updateStoreyPlanPositioning(cloudPk: number, id: number, modelPk: number, projectPk: number, storeyUuid: string, patchedPositioningPlanRequest?: PatchedPositioningPlanRequest, initOverrides?: RequestInit): Promise<PositioningPlan> {
-        const response = await this.updateStoreyPlanPositioningRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, storeyUuid: storeyUuid, patchedPositioningPlanRequest: patchedPositioningPlanRequest }, initOverrides);
+    async updateStoreyPlanPositioning(cloud_pk: number, id: number, model_pk: number, project_pk: number, storey_uuid: string, PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest, initOverrides?: RequestInit): Promise<PositioningPlan> {
+        const response = await this.updateStoreyPlanPositioningRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, storey_uuid: storey_uuid, PatchedPositioningPlanRequest: PatchedPositioningPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10246,16 +10246,16 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a system
      */
     async updateSystemRaw(requestParameters: UpdateSystemRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<System>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateSystem.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateSystem.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateSystem.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateSystem.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateSystem.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateSystem.');
         }
 
         if (requestParameters.uuid === null || requestParameters.uuid === undefined) {
@@ -10287,11 +10287,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/system/{uuid}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"uuid"}}`, encodeURIComponent(String(requestParameters.uuid))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedSystemRequestToJSON(requestParameters.patchedSystemRequest),
+            body: PatchedSystemRequestToJSON(requestParameters.PatchedSystemRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SystemFromJSON(jsonValue));
@@ -10301,8 +10301,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a system. The IFC file will not be updated. The created system will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a system
      */
-    async updateSystem(cloudPk: number, modelPk: number, projectPk: number, uuid: string, patchedSystemRequest?: PatchedSystemRequest, initOverrides?: RequestInit): Promise<System> {
-        const response = await this.updateSystemRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, uuid: uuid, patchedSystemRequest: patchedSystemRequest }, initOverrides);
+    async updateSystem(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, PatchedSystemRequest?: PatchedSystemRequest, initOverrides?: RequestInit): Promise<System> {
+        const response = await this.updateSystemRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid, PatchedSystemRequest: PatchedSystemRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10311,20 +10311,20 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a zone
      */
     async updateZoneRaw(requestParameters: UpdateZoneRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Zone>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateZone.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateZone.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateZone.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateZone.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateZone.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateZone.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateZone.');
         }
 
         const queryParameters: any = {};
@@ -10352,11 +10352,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedZoneRequestToJSON(requestParameters.patchedZoneRequest),
+            body: PatchedZoneRequestToJSON(requestParameters.PatchedZoneRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ZoneFromJSON(jsonValue));
@@ -10366,8 +10366,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a zone. The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a zone
      */
-    async updateZone(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedZoneRequest?: PatchedZoneRequest, initOverrides?: RequestInit): Promise<Zone> {
-        const response = await this.updateZoneRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedZoneRequest: patchedZoneRequest }, initOverrides);
+    async updateZone(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedZoneRequest?: PatchedZoneRequest, initOverrides?: RequestInit): Promise<Zone> {
+        const response = await this.updateZoneRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedZoneRequest: PatchedZoneRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10376,24 +10376,24 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a space
      */
     async updateZoneSpaceRaw(requestParameters: UpdateZoneSpaceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ZoneSpace>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateZoneSpace.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateZoneSpace.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateZoneSpace.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateZoneSpace.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateZoneSpace.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateZoneSpace.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateZoneSpace.');
         }
 
-        if (requestParameters.zonePk === null || requestParameters.zonePk === undefined) {
-            throw new runtime.RequiredError('zonePk','Required parameter requestParameters.zonePk was null or undefined when calling updateZoneSpace.');
+        if (requestParameters.zone_pk === null || requestParameters.zone_pk === undefined) {
+            throw new runtime.RequiredError('zone_pk','Required parameter requestParameters.zone_pk was null or undefined when calling updateZoneSpace.');
         }
 
         const queryParameters: any = {};
@@ -10421,11 +10421,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zonePk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/zone/{zone_pk}/space/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zone_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedZoneSpaceRequestToJSON(requestParameters.patchedZoneSpaceRequest),
+            body: PatchedZoneSpaceRequestToJSON(requestParameters.PatchedZoneSpaceRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ZoneSpaceFromJSON(jsonValue));
@@ -10435,8 +10435,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a space. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Update some fields of a space
      */
-    async updateZoneSpace(cloudPk: number, id: number, modelPk: number, projectPk: number, zonePk: number, patchedZoneSpaceRequest?: PatchedZoneSpaceRequest, initOverrides?: RequestInit): Promise<ZoneSpace> {
-        const response = await this.updateZoneSpaceRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, zonePk: zonePk, patchedZoneSpaceRequest: patchedZoneSpaceRequest }, initOverrides);
+    async updateZoneSpace(cloud_pk: number, id: number, model_pk: number, project_pk: number, zone_pk: number, PatchedZoneSpaceRequest?: PatchedZoneSpaceRequest, initOverrides?: RequestInit): Promise<ZoneSpace> {
+        const response = await this.updateZoneSpaceRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, zone_pk: zone_pk, PatchedZoneSpaceRequest: PatchedZoneSpaceRequest }, initOverrides);
         return await response.value();
     }
 

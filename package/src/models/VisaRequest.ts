@@ -24,7 +24,7 @@ export interface VisaRequest {
      * @type {number}
      * @memberof VisaRequest
      */
-    creatorId?: number;
+    creator_id?: number;
     /**
      * Description of the visa
      * @type {string}
@@ -49,7 +49,7 @@ export function VisaRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'creatorId': !exists(json, 'creator_id') ? undefined : json['creator_id'],
+        'creator_id': !exists(json, 'creator_id') ? undefined : json['creator_id'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'deadline': !exists(json, 'deadline') ? undefined : (json['deadline'] === null ? null : new Date(json['deadline'])),
     };
@@ -64,7 +64,7 @@ export function VisaRequestToJSON(value?: VisaRequest | null): any {
     }
     return {
         
-        'creator_id': value.creatorId,
+        'creator_id': value.creator_id,
         'description': value.description,
         'deadline': value.deadline === undefined ? undefined : (value.deadline === null ? null : value.deadline.toISOString().substr(0,10)),
     };

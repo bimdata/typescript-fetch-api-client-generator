@@ -55,7 +55,7 @@ export interface PatchedZoneRequest {
      * @type {number}
      * @memberof PatchedZoneRequest
      */
-    parentId?: number;
+    parent_id?: number;
     /**
      * 
      * @type {Array<SpaceRequest>}
@@ -83,7 +83,7 @@ export function PatchedZoneRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'name': !exists(json, 'name') ? undefined : json['name'],
         'uuid': !exists(json, 'uuid') ? undefined : json['uuid'],
         'zones': !exists(json, 'zones') ? undefined : ((json['zones'] as Array<any>).map(ZoneRequestFromJSON)),
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'spaces': !exists(json, 'spaces') ? undefined : ((json['spaces'] as Array<any>).map(SpaceRequestFromJSON)),
         'color': !exists(json, 'color') ? undefined : json['color'],
     };
@@ -101,7 +101,7 @@ export function PatchedZoneRequestToJSON(value?: PatchedZoneRequest | null): any
         'name': value.name,
         'uuid': value.uuid,
         'zones': value.zones === undefined ? undefined : ((value.zones as Array<any>).map(ZoneRequestToJSON)),
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
         'spaces': value.spaces === undefined ? undefined : ((value.spaces as Array<any>).map(SpaceRequestToJSON)),
         'color': value.color,
     };

@@ -42,7 +42,7 @@ export interface ProjectRequest {
      * @type {number}
      * @memberof ProjectRequest
      */
-    parentId?: number | null;
+    parent_id?: number | null;
 }
 
 /**
@@ -67,7 +67,7 @@ export function ProjectRequestFromJSONTyped(json: any, ignoreDiscriminator: bool
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'name': json['name'],
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
     };
 }
 
@@ -83,7 +83,7 @@ export function ProjectRequestToJSON(value?: ProjectRequest | null): any {
         'logo': value.logo,
         'name': value.name,
         'status': value.status,
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
     };
 }
 

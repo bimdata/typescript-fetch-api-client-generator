@@ -36,13 +36,13 @@ export interface PatchedModelRequest {
      * @type {Array<number>}
      * @memberof PatchedModelRequest
      */
-    worldPosition?: Array<number> | null;
+    world_position?: Array<number> | null;
     /**
      * How many meters a unit represents
      * @type {number}
      * @memberof PatchedModelRequest
      */
-    sizeRatio?: number | null;
+    size_ratio?: number | null;
     /**
      * 
      * @type {boolean}
@@ -60,13 +60,13 @@ export interface PatchedModelRequest {
      * @type {Array<Array<number>>}
      * @memberof PatchedModelRequest
      */
-    northVector?: Array<Array<number>> | null;
+    north_vector?: Array<Array<number>> | null;
     /**
      * This is the angle in clockwise degree to apply on the 2D to optimise the horizontality of objects. This field is only for information. Updating it won't impact the export.
      * @type {number}
      * @memberof PatchedModelRequest
      */
-    recommanded2dAngle?: number | null;
+    recommanded_2d_angle?: number | null;
 }
 
 /**
@@ -93,12 +93,12 @@ export function PatchedModelRequestFromJSONTyped(json: any, ignoreDiscriminator:
         
         'name': !exists(json, 'name') ? undefined : json['name'],
         'source': !exists(json, 'source') ? undefined : json['source'],
-        'worldPosition': !exists(json, 'world_position') ? undefined : json['world_position'],
-        'sizeRatio': !exists(json, 'size_ratio') ? undefined : json['size_ratio'],
+        'world_position': !exists(json, 'world_position') ? undefined : json['world_position'],
+        'size_ratio': !exists(json, 'size_ratio') ? undefined : json['size_ratio'],
         'archived': !exists(json, 'archived') ? undefined : json['archived'],
         'version': !exists(json, 'version') ? undefined : json['version'],
-        'northVector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
-        'recommanded2dAngle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
+        'north_vector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
+        'recommanded_2d_angle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
     };
 }
 
@@ -113,12 +113,12 @@ export function PatchedModelRequestToJSON(value?: PatchedModelRequest | null): a
         
         'name': value.name,
         'source': value.source,
-        'world_position': value.worldPosition,
-        'size_ratio': value.sizeRatio,
+        'world_position': value.world_position,
+        'size_ratio': value.size_ratio,
         'archived': value.archived,
         'version': value.version,
-        'north_vector': value.northVector,
-        'recommanded_2d_angle': value.recommanded2dAngle,
+        'north_vector': value.north_vector,
+        'recommanded_2d_angle': value.recommanded_2d_angle,
     };
 }
 

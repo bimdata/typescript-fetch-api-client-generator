@@ -30,43 +30,43 @@ export interface MarketplaceAppRequest {
      * @type {string}
      * @memberof MarketplaceAppRequest
      */
-    shortDescription: string;
+    short_description: string;
     /**
      * 
      * @type {string}
      * @memberof MarketplaceAppRequest
      */
-    longDescription: string;
+    long_description: string;
     /**
      * 
      * @type {string}
      * @memberof MarketplaceAppRequest
      */
-    activationWebhookUrl?: string | null;
+    activation_webhook_url?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MarketplaceAppRequest
      */
-    postActivationRedirectUri?: string | null;
+    post_activation_redirect_uri?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof MarketplaceAppRequest
      */
-    viewerPluginsUrls?: Array<string> | null;
+    viewer_plugins_urls?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof MarketplaceAppRequest
      */
-    webhookSecret?: string;
+    webhook_secret?: string;
     /**
      * this URL will be called with query params ?cloud_id=
      * @type {string}
      * @memberof MarketplaceAppRequest
      */
-    settingsUrl?: string | null;
+    settings_url?: string | null;
     /**
      * 
      * @type {Array<string>}
@@ -98,13 +98,13 @@ export function MarketplaceAppRequestFromJSONTyped(json: any, ignoreDiscriminato
     return {
         
         'name': json['name'],
-        'shortDescription': json['short_description'],
-        'longDescription': json['long_description'],
-        'activationWebhookUrl': !exists(json, 'activation_webhook_url') ? undefined : json['activation_webhook_url'],
-        'postActivationRedirectUri': !exists(json, 'post_activation_redirect_uri') ? undefined : json['post_activation_redirect_uri'],
-        'viewerPluginsUrls': !exists(json, 'viewer_plugins_urls') ? undefined : json['viewer_plugins_urls'],
-        'webhookSecret': !exists(json, 'webhook_secret') ? undefined : json['webhook_secret'],
-        'settingsUrl': !exists(json, 'settings_url') ? undefined : json['settings_url'],
+        'short_description': json['short_description'],
+        'long_description': json['long_description'],
+        'activation_webhook_url': !exists(json, 'activation_webhook_url') ? undefined : json['activation_webhook_url'],
+        'post_activation_redirect_uri': !exists(json, 'post_activation_redirect_uri') ? undefined : json['post_activation_redirect_uri'],
+        'viewer_plugins_urls': !exists(json, 'viewer_plugins_urls') ? undefined : json['viewer_plugins_urls'],
+        'webhook_secret': !exists(json, 'webhook_secret') ? undefined : json['webhook_secret'],
+        'settings_url': !exists(json, 'settings_url') ? undefined : json['settings_url'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'file': !exists(json, 'file') ? undefined : json['file'],
@@ -121,13 +121,13 @@ export function MarketplaceAppRequestToJSON(value?: MarketplaceAppRequest | null
     return {
         
         'name': value.name,
-        'short_description': value.shortDescription,
-        'long_description': value.longDescription,
-        'activation_webhook_url': value.activationWebhookUrl,
-        'post_activation_redirect_uri': value.postActivationRedirectUri,
-        'viewer_plugins_urls': value.viewerPluginsUrls,
-        'webhook_secret': value.webhookSecret,
-        'settings_url': value.settingsUrl,
+        'short_description': value.short_description,
+        'long_description': value.long_description,
+        'activation_webhook_url': value.activation_webhook_url,
+        'post_activation_redirect_uri': value.post_activation_redirect_uri,
+        'viewer_plugins_urls': value.viewer_plugins_urls,
+        'webhook_secret': value.webhook_secret,
+        'settings_url': value.settings_url,
         'tags': value.tags,
         'logo': value.logo,
         'file': value.file,

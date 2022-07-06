@@ -43,7 +43,7 @@ export interface RuleRequest {
      * @type {Array<RuleComponentRequest>}
      * @memberof RuleRequest
      */
-    ruleComponents?: Array<RuleComponentRequest>;
+    rule_components?: Array<RuleComponentRequest>;
     /**
      * 
      * @type {RuleRequest}
@@ -64,7 +64,7 @@ export function RuleRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'name': !exists(json, 'name') ? undefined : json['name'],
         'condition': json['condition'],
-        'ruleComponents': !exists(json, 'rule_components') ? undefined : ((json['rule_components'] as Array<any>).map(RuleComponentRequestFromJSON)),
+        'rule_components': !exists(json, 'rule_components') ? undefined : ((json['rule_components'] as Array<any>).map(RuleComponentRequestFromJSON)),
         'on': !exists(json, 'on') ? undefined : RuleRequestFromJSON(json['on']),
     };
 }
@@ -80,7 +80,7 @@ export function RuleRequestToJSON(value?: RuleRequest | null): any {
         
         'name': value.name,
         'condition': value.condition,
-        'rule_components': value.ruleComponents === undefined ? undefined : ((value.ruleComponents as Array<any>).map(RuleComponentRequestToJSON)),
+        'rule_components': value.rule_components === undefined ? undefined : ((value.rule_components as Array<any>).map(RuleComponentRequestToJSON)),
         'on': RuleRequestToJSON(value.on),
     };
 }

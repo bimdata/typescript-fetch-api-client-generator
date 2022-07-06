@@ -61,25 +61,25 @@ export interface Project {
      * @type {Date}
      * @memberof Project
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * Date of the last update
      * @type {Date}
      * @memberof Project
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {number}
      * @memberof Project
      */
-    parentId?: number | null;
+    parent_id?: number | null;
     /**
      * 
      * @type {number}
      * @memberof Project
      */
-    readonly rootFolderId: number | null;
+    readonly root_folder_id: number | null;
 }
 
 /**
@@ -106,10 +106,10 @@ export function ProjectFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'name': json['name'],
         'cloud': CloudFromJSON(json['cloud']),
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'rootFolderId': json['root_folder_id'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'root_folder_id': json['root_folder_id'],
     };
 }
 
@@ -125,7 +125,7 @@ export function ProjectToJSON(value?: Project | null): any {
         'logo': value.logo,
         'name': value.name,
         'status': value.status,
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
     };
 }
 

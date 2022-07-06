@@ -42,7 +42,7 @@ export interface RawSystemRequest {
      * @type {string}
      * @memberof RawSystemRequest
      */
-    objectType?: string | null;
+    object_type?: string | null;
 }
 
 export function RawSystemRequestFromJSON(json: any): RawSystemRequest {
@@ -58,7 +58,7 @@ export function RawSystemRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'uuid': json['uuid'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'objectType': !exists(json, 'object_type') ? undefined : json['object_type'],
+        'object_type': !exists(json, 'object_type') ? undefined : json['object_type'],
     };
 }
 
@@ -74,7 +74,7 @@ export function RawSystemRequestToJSON(value?: RawSystemRequest | null): any {
         'uuid': value.uuid,
         'name': value.name,
         'description': value.description,
-        'object_type': value.objectType,
+        'object_type': value.object_type,
     };
 }
 

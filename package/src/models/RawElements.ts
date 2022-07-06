@@ -85,7 +85,7 @@ export interface RawElements {
      * @type {Array<RawPropertySet>}
      * @memberof RawElements
      */
-    propertySets?: Array<RawPropertySet> | null;
+    property_sets?: Array<RawPropertySet> | null;
     /**
      * 
      * @type {Array<RawClassification>}
@@ -130,7 +130,7 @@ export function RawElementsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'units': !exists(json, 'units') ? undefined : (json['units'] === null ? null : (json['units'] as Array<any>).map(RawUnitFromJSON)),
         'definitions': !exists(json, 'definitions') ? undefined : (json['definitions'] === null ? null : (json['definitions'] as Array<any>).map(RawDefinitionFromJSON)),
-        'propertySets': !exists(json, 'property_sets') ? undefined : (json['property_sets'] === null ? null : (json['property_sets'] as Array<any>).map(RawPropertySetFromJSON)),
+        'property_sets': !exists(json, 'property_sets') ? undefined : (json['property_sets'] === null ? null : (json['property_sets'] as Array<any>).map(RawPropertySetFromJSON)),
         'classifications': !exists(json, 'classifications') ? undefined : (json['classifications'] === null ? null : (json['classifications'] as Array<any>).map(RawClassificationFromJSON)),
         'layers': !exists(json, 'layers') ? undefined : (json['layers'] === null ? null : (json['layers'] as Array<any>).map(RawLayerFromJSON)),
         'systems': !exists(json, 'systems') ? undefined : (json['systems'] === null ? null : (json['systems'] as Array<any>).map(RawSystemFromJSON)),
@@ -150,7 +150,7 @@ export function RawElementsToJSON(value?: RawElements | null): any {
         
         'units': value.units === undefined ? undefined : (value.units === null ? null : (value.units as Array<any>).map(RawUnitToJSON)),
         'definitions': value.definitions === undefined ? undefined : (value.definitions === null ? null : (value.definitions as Array<any>).map(RawDefinitionToJSON)),
-        'property_sets': value.propertySets === undefined ? undefined : (value.propertySets === null ? null : (value.propertySets as Array<any>).map(RawPropertySetToJSON)),
+        'property_sets': value.property_sets === undefined ? undefined : (value.property_sets === null ? null : (value.property_sets as Array<any>).map(RawPropertySetToJSON)),
         'classifications': value.classifications === undefined ? undefined : (value.classifications === null ? null : (value.classifications as Array<any>).map(RawClassificationToJSON)),
         'layers': value.layers === undefined ? undefined : (value.layers === null ? null : (value.layers as Array<any>).map(RawLayerToJSON)),
         'systems': value.systems === undefined ? undefined : (value.systems === null ? null : (value.systems as Array<any>).map(RawSystemToJSON)),

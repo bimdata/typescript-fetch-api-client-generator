@@ -30,13 +30,13 @@ export interface FolderUserProject {
      * @type {number}
      * @memberof FolderUserProject
      */
-    readonly userId: number | null;
+    readonly user_id: number | null;
     /**
      * 
      * @type {number}
      * @memberof FolderUserProject
      */
-    readonly invitationId: number | null;
+    readonly invitation_id: number | null;
     /**
      * 
      * @type {string}
@@ -60,7 +60,7 @@ export interface FolderUserProject {
      * @type {string}
      * @memberof FolderUserProject
      */
-    readonly profilePicture: string | null;
+    readonly profile_picture: string | null;
     /**
      * 
      * @type {number}
@@ -104,12 +104,12 @@ export function FolderUserProjectFromJSONTyped(json: any, ignoreDiscriminator: b
     return {
         
         'id': json['id'],
-        'userId': json['user_id'],
-        'invitationId': json['invitation_id'],
+        'user_id': json['user_id'],
+        'invitation_id': json['invitation_id'],
         'email': json['email'],
         'firstname': json['firstname'],
         'lastname': json['lastname'],
-        'profilePicture': json['profile_picture'],
+        'profile_picture': json['profile_picture'],
         'role': json['role'],
         'permission': json['permission'],
     };

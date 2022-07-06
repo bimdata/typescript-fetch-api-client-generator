@@ -55,31 +55,31 @@ export interface MarketplaceApp {
      * @type {string}
      * @memberof MarketplaceApp
      */
-    shortDescription: string;
+    short_description: string;
     /**
      * 
      * @type {string}
      * @memberof MarketplaceApp
      */
-    longDescription: string;
+    long_description: string;
     /**
      * 
      * @type {string}
      * @memberof MarketplaceApp
      */
-    activationWebhookUrl?: string | null;
+    activation_webhook_url?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MarketplaceApp
      */
-    postActivationRedirectUri?: string | null;
+    post_activation_redirect_uri?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof MarketplaceApp
      */
-    viewerPluginsUrls?: Array<string> | null;
+    viewer_plugins_urls?: Array<string> | null;
     /**
      * 
      * @type {User}
@@ -97,13 +97,13 @@ export interface MarketplaceApp {
      * @type {string}
      * @memberof MarketplaceApp
      */
-    settingsUrl?: string | null;
+    settings_url?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof MarketplaceApp
      */
-    readonly isPublic: boolean;
+    readonly is_public: boolean;
     /**
      * 
      * @type {Array<string>}
@@ -148,15 +148,15 @@ export function MarketplaceAppFromJSONTyped(json: any, ignoreDiscriminator: bool
         
         'id': json['id'],
         'name': json['name'],
-        'shortDescription': json['short_description'],
-        'longDescription': json['long_description'],
-        'activationWebhookUrl': !exists(json, 'activation_webhook_url') ? undefined : json['activation_webhook_url'],
-        'postActivationRedirectUri': !exists(json, 'post_activation_redirect_uri') ? undefined : json['post_activation_redirect_uri'],
-        'viewerPluginsUrls': !exists(json, 'viewer_plugins_urls') ? undefined : json['viewer_plugins_urls'],
+        'short_description': json['short_description'],
+        'long_description': json['long_description'],
+        'activation_webhook_url': !exists(json, 'activation_webhook_url') ? undefined : json['activation_webhook_url'],
+        'post_activation_redirect_uri': !exists(json, 'post_activation_redirect_uri') ? undefined : json['post_activation_redirect_uri'],
+        'viewer_plugins_urls': !exists(json, 'viewer_plugins_urls') ? undefined : json['viewer_plugins_urls'],
         'creator': UserFromJSON(json['creator']),
         'scopes': json['scopes'],
-        'settingsUrl': !exists(json, 'settings_url') ? undefined : json['settings_url'],
-        'isPublic': json['is_public'],
+        'settings_url': !exists(json, 'settings_url') ? undefined : json['settings_url'],
+        'is_public': json['is_public'],
         'tags': !exists(json, 'tags') ? undefined : json['tags'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'file': !exists(json, 'file') ? undefined : json['file'],
@@ -175,12 +175,12 @@ export function MarketplaceAppToJSON(value?: MarketplaceApp | null): any {
     return {
         
         'name': value.name,
-        'short_description': value.shortDescription,
-        'long_description': value.longDescription,
-        'activation_webhook_url': value.activationWebhookUrl,
-        'post_activation_redirect_uri': value.postActivationRedirectUri,
-        'viewer_plugins_urls': value.viewerPluginsUrls,
-        'settings_url': value.settingsUrl,
+        'short_description': value.short_description,
+        'long_description': value.long_description,
+        'activation_webhook_url': value.activation_webhook_url,
+        'post_activation_redirect_uri': value.post_activation_redirect_uri,
+        'viewer_plugins_urls': value.viewer_plugins_urls,
+        'settings_url': value.settings_url,
         'tags': value.tags,
         'logo': value.logo,
         'file': value.file,

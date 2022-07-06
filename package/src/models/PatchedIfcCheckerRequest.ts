@@ -30,7 +30,7 @@ export interface PatchedIfcCheckerRequest {
      * @type {number}
      * @memberof PatchedIfcCheckerRequest
      */
-    checkplanId?: number;
+    checkplan_id?: number;
 }
 
 export function PatchedIfcCheckerRequestFromJSON(json: any): PatchedIfcCheckerRequest {
@@ -44,7 +44,7 @@ export function PatchedIfcCheckerRequestFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'checkplanId': !exists(json, 'checkplan_id') ? undefined : json['checkplan_id'],
+        'checkplan_id': !exists(json, 'checkplan_id') ? undefined : json['checkplan_id'],
     };
 }
 
@@ -58,7 +58,7 @@ export function PatchedIfcCheckerRequestToJSON(value?: PatchedIfcCheckerRequest 
     return {
         
         'name': value.name,
-        'checkplan_id': value.checkplanId,
+        'checkplan_id': value.checkplan_id,
     };
 }
 

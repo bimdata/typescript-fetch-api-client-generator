@@ -54,7 +54,7 @@ export interface PatchedRuleComponentRequest {
      * @type {{ [key: string]: any; }}
      * @memberof PatchedRuleComponentRequest
      */
-    ruleComponents?: { [key: string]: any; } | null;
+    rule_components?: { [key: string]: any; } | null;
 }
 
 export function PatchedRuleComponentRequestFromJSON(json: any): PatchedRuleComponentRequest {
@@ -72,7 +72,7 @@ export function PatchedRuleComponentRequestFromJSONTyped(json: any, ignoreDiscri
         'operator': !exists(json, 'operator') ? undefined : json['operator'],
         'params': !exists(json, 'params') ? undefined : json['params'],
         'condition': !exists(json, 'condition') ? undefined : json['condition'],
-        'ruleComponents': !exists(json, 'rule_components') ? undefined : json['rule_components'],
+        'rule_components': !exists(json, 'rule_components') ? undefined : json['rule_components'],
     };
 }
 
@@ -90,7 +90,7 @@ export function PatchedRuleComponentRequestToJSON(value?: PatchedRuleComponentRe
         'operator': value.operator,
         'params': value.params,
         'condition': value.condition,
-        'rule_components': value.ruleComponents,
+        'rule_components': value.rule_components,
     };
 }
 

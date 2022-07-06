@@ -42,7 +42,7 @@ export interface RawSystem {
      * @type {string}
      * @memberof RawSystem
      */
-    objectType?: string | null;
+    object_type?: string | null;
 }
 
 export function RawSystemFromJSON(json: any): RawSystem {
@@ -58,7 +58,7 @@ export function RawSystemFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'uuid': json['uuid'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'objectType': !exists(json, 'object_type') ? undefined : json['object_type'],
+        'object_type': !exists(json, 'object_type') ? undefined : json['object_type'],
     };
 }
 
@@ -74,7 +74,7 @@ export function RawSystemToJSON(value?: RawSystem | null): any {
         'uuid': value.uuid,
         'name': value.name,
         'description': value.description,
-        'object_type': value.objectType,
+        'object_type': value.object_type,
     };
 }
 

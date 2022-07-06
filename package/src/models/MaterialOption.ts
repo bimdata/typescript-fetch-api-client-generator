@@ -36,7 +36,7 @@ export interface MaterialOption {
      * @type {Array<{ [key: string]: any; }>}
      * @memberof MaterialOption
      */
-    readonly listComponents: Array<{ [key: string]: any; }>;
+    readonly list_components: Array<{ [key: string]: any; }>;
 }
 
 export function MaterialOptionFromJSON(json: any): MaterialOption {
@@ -51,7 +51,7 @@ export function MaterialOptionFromJSONTyped(json: any, ignoreDiscriminator: bool
         
         'id': json['id'],
         'thickness': json['thickness'],
-        'listComponents': json['list_components'],
+        'list_components': json['list_components'],
     };
 }
 

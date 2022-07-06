@@ -24,19 +24,19 @@ export interface ViewSetupHints {
      * @type {boolean}
      * @memberof ViewSetupHints
      */
-    spacesVisible?: boolean;
+    spaces_visible?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof ViewSetupHints
      */
-    spaceBoundariesVisible?: boolean;
+    space_boundaries_visible?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof ViewSetupHints
      */
-    openingsVisible?: boolean;
+    openings_visible?: boolean;
 }
 
 export function ViewSetupHintsFromJSON(json: any): ViewSetupHints {
@@ -49,9 +49,9 @@ export function ViewSetupHintsFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
-        'spacesVisible': !exists(json, 'spaces_visible') ? undefined : json['spaces_visible'],
-        'spaceBoundariesVisible': !exists(json, 'space_boundaries_visible') ? undefined : json['space_boundaries_visible'],
-        'openingsVisible': !exists(json, 'openings_visible') ? undefined : json['openings_visible'],
+        'spaces_visible': !exists(json, 'spaces_visible') ? undefined : json['spaces_visible'],
+        'space_boundaries_visible': !exists(json, 'space_boundaries_visible') ? undefined : json['space_boundaries_visible'],
+        'openings_visible': !exists(json, 'openings_visible') ? undefined : json['openings_visible'],
     };
 }
 
@@ -64,9 +64,9 @@ export function ViewSetupHintsToJSON(value?: ViewSetupHints | null): any {
     }
     return {
         
-        'spaces_visible': value.spacesVisible,
-        'space_boundaries_visible': value.spaceBoundariesVisible,
-        'openings_visible': value.openingsVisible,
+        'spaces_visible': value.spaces_visible,
+        'space_boundaries_visible': value.space_boundaries_visible,
+        'openings_visible': value.openings_visible,
     };
 }
 

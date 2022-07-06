@@ -73,7 +73,7 @@ export interface Element {
      * @type {Array<PropertySet>}
      * @memberof Element
      */
-    propertySets?: Array<PropertySet>;
+    property_sets?: Array<PropertySet>;
     /**
      * 
      * @type {Array<Classification>}
@@ -85,7 +85,7 @@ export interface Element {
      * @type {Array<MaterialListComponent>}
      * @memberof Element
      */
-    readonly materialList: Array<MaterialListComponent>;
+    readonly material_list: Array<MaterialListComponent>;
     /**
      * 
      * @type {Array<LayerElement>}
@@ -108,9 +108,9 @@ export function ElementFromJSONTyped(json: any, ignoreDiscriminator: boolean): E
         'uuid': !exists(json, 'uuid') ? undefined : json['uuid'],
         'type': json['type'],
         'attributes': !exists(json, 'attributes') ? undefined : PropertySetFromJSON(json['attributes']),
-        'propertySets': !exists(json, 'property_sets') ? undefined : ((json['property_sets'] as Array<any>).map(PropertySetFromJSON)),
+        'property_sets': !exists(json, 'property_sets') ? undefined : ((json['property_sets'] as Array<any>).map(PropertySetFromJSON)),
         'classifications': !exists(json, 'classifications') ? undefined : ((json['classifications'] as Array<any>).map(ClassificationFromJSON)),
-        'materialList': ((json['material_list'] as Array<any>).map(MaterialListComponentFromJSON)),
+        'material_list': ((json['material_list'] as Array<any>).map(MaterialListComponentFromJSON)),
         'layers': !exists(json, 'layers') ? undefined : ((json['layers'] as Array<any>).map(LayerElementFromJSON)),
     };
 }
@@ -127,7 +127,7 @@ export function ElementToJSON(value?: Element | null): any {
         'uuid': value.uuid,
         'type': value.type,
         'attributes': PropertySetToJSON(value.attributes),
-        'property_sets': value.propertySets === undefined ? undefined : ((value.propertySets as Array<any>).map(PropertySetToJSON)),
+        'property_sets': value.property_sets === undefined ? undefined : ((value.property_sets as Array<any>).map(PropertySetToJSON)),
         'classifications': value.classifications === undefined ? undefined : ((value.classifications as Array<any>).map(ClassificationToJSON)),
         'layers': value.layers === undefined ? undefined : ((value.layers as Array<any>).map(LayerElementToJSON)),
     };

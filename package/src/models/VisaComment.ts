@@ -43,7 +43,7 @@ export interface VisaComment {
      * @type {number}
      * @memberof VisaComment
      */
-    readonly visaId: number;
+    readonly visa_id: number;
     /**
      * 
      * @type {string}
@@ -55,13 +55,13 @@ export interface VisaComment {
      * @type {Date}
      * @memberof VisaComment
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof VisaComment
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
 }
 
 export function VisaCommentFromJSON(json: any): VisaComment {
@@ -76,10 +76,10 @@ export function VisaCommentFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'id': json['id'],
         'author': UserProjectFromJSON(json['author']),
-        'visaId': json['visa_id'],
+        'visa_id': json['visa_id'],
         'content': !exists(json, 'content') ? undefined : json['content'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
     };
 }
 

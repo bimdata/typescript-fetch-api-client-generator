@@ -36,7 +36,7 @@ export interface SystemRequest {
      * @type {string}
      * @memberof SystemRequest
      */
-    objectType?: string | null;
+    object_type?: string | null;
     /**
      * 
      * @type {string}
@@ -63,7 +63,7 @@ export function SystemRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
         
         'uuid': !exists(json, 'uuid') ? undefined : json['uuid'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'objectType': !exists(json, 'object_type') ? undefined : json['object_type'],
+        'object_type': !exists(json, 'object_type') ? undefined : json['object_type'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'elements': json['elements'],
     };
@@ -80,7 +80,7 @@ export function SystemRequestToJSON(value?: SystemRequest | null): any {
         
         'uuid': value.uuid,
         'name': value.name,
-        'object_type': value.objectType,
+        'object_type': value.object_type,
         'description': value.description,
         'elements': value.elements,
     };

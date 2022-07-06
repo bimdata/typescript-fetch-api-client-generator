@@ -49,7 +49,7 @@ export interface Storey {
      * @type {number}
      * @memberof Storey
      */
-    readonly plansUnreachableCount: number;
+    readonly plans_unreachable_count: number;
 }
 
 export function StoreyFromJSON(json: any): Storey {
@@ -65,7 +65,7 @@ export function StoreyFromJSONTyped(json: any, ignoreDiscriminator: boolean): St
         'uuid': json['uuid'],
         'name': json['name'],
         'plans': ((json['plans'] as Array<any>).map(ModelWithPositioningPlanFromJSON)),
-        'plansUnreachableCount': json['plans_unreachable_count'],
+        'plans_unreachable_count': json['plans_unreachable_count'],
     };
 }
 

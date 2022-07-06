@@ -42,7 +42,7 @@ export interface Unit {
      * @type {string}
      * @memberof Unit
      */
-    unitType?: string | null;
+    unit_type?: string | null;
     /**
      * Litteral prefix for scale (ex: MILLI, KILO, etc..)
      * @type {string}
@@ -60,13 +60,13 @@ export interface Unit {
      * @type {number}
      * @memberof Unit
      */
-    conversionFactor?: number | null;
+    conversion_factor?: number | null;
     /**
      * 
      * @type {Unit}
      * @memberof Unit
      */
-    conversionBaseunit?: Unit;
+    conversion_baseunit?: Unit;
     /**
      * List of constitutive unit elements by id with corresponding exponent (ex: [meterID/1, secondID/-1] for velocity)
      * @type {{ [key: string]: any; }}
@@ -78,7 +78,7 @@ export interface Unit {
      * @type {boolean}
      * @memberof Unit
      */
-    isDefault?: boolean;
+    is_default?: boolean;
 }
 
 export function UnitFromJSON(json: any): Unit {
@@ -94,13 +94,13 @@ export function UnitFromJSONTyped(json: any, ignoreDiscriminator: boolean): Unit
         'id': json['id'],
         'type': json['type'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'unitType': !exists(json, 'unit_type') ? undefined : json['unit_type'],
+        'unit_type': !exists(json, 'unit_type') ? undefined : json['unit_type'],
         'prefix': !exists(json, 'prefix') ? undefined : json['prefix'],
         'dimensions': !exists(json, 'dimensions') ? undefined : json['dimensions'],
-        'conversionFactor': !exists(json, 'conversion_factor') ? undefined : json['conversion_factor'],
-        'conversionBaseunit': !exists(json, 'conversion_baseunit') ? undefined : UnitFromJSON(json['conversion_baseunit']),
+        'conversion_factor': !exists(json, 'conversion_factor') ? undefined : json['conversion_factor'],
+        'conversion_baseunit': !exists(json, 'conversion_baseunit') ? undefined : UnitFromJSON(json['conversion_baseunit']),
         'elements': !exists(json, 'elements') ? undefined : json['elements'],
-        'isDefault': !exists(json, 'is_default') ? undefined : json['is_default'],
+        'is_default': !exists(json, 'is_default') ? undefined : json['is_default'],
     };
 }
 
@@ -115,13 +115,13 @@ export function UnitToJSON(value?: Unit | null): any {
         
         'type': value.type,
         'name': value.name,
-        'unit_type': value.unitType,
+        'unit_type': value.unit_type,
         'prefix': value.prefix,
         'dimensions': value.dimensions,
-        'conversion_factor': value.conversionFactor,
-        'conversion_baseunit': UnitToJSON(value.conversionBaseunit),
+        'conversion_factor': value.conversion_factor,
+        'conversion_baseunit': UnitToJSON(value.conversion_baseunit),
         'elements': value.elements,
-        'is_default': value.isDefault,
+        'is_default': value.is_default,
     };
 }
 

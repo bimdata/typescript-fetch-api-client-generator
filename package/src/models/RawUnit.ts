@@ -42,7 +42,7 @@ export interface RawUnit {
      * @type {string}
      * @memberof RawUnit
      */
-    unitType?: string | null;
+    unit_type?: string | null;
     /**
      * 
      * @type {string}
@@ -60,7 +60,7 @@ export interface RawUnit {
      * @type {number}
      * @memberof RawUnit
      */
-    conversionFactor?: number | null;
+    conversion_factor?: number | null;
     /**
      * 
      * @type {Array<number>}
@@ -72,13 +72,13 @@ export interface RawUnit {
      * @type {number}
      * @memberof RawUnit
      */
-    conversionBaseunitIndex?: number | null;
+    conversion_baseunit_index?: number | null;
     /**
      * 
      * @type {boolean}
      * @memberof RawUnit
      */
-    isDefault?: boolean | null;
+    is_default?: boolean | null;
 }
 
 export function RawUnitFromJSON(json: any): RawUnit {
@@ -94,13 +94,13 @@ export function RawUnitFromJSONTyped(json: any, ignoreDiscriminator: boolean): R
         'id': json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'type': json['type'],
-        'unitType': !exists(json, 'unit_type') ? undefined : json['unit_type'],
+        'unit_type': !exists(json, 'unit_type') ? undefined : json['unit_type'],
         'prefix': !exists(json, 'prefix') ? undefined : json['prefix'],
         'elements': !exists(json, 'elements') ? undefined : json['elements'],
-        'conversionFactor': !exists(json, 'conversion_factor') ? undefined : json['conversion_factor'],
+        'conversion_factor': !exists(json, 'conversion_factor') ? undefined : json['conversion_factor'],
         'dimensions': !exists(json, 'dimensions') ? undefined : json['dimensions'],
-        'conversionBaseunitIndex': !exists(json, 'conversion_baseunit_index') ? undefined : json['conversion_baseunit_index'],
-        'isDefault': !exists(json, 'is_default') ? undefined : json['is_default'],
+        'conversion_baseunit_index': !exists(json, 'conversion_baseunit_index') ? undefined : json['conversion_baseunit_index'],
+        'is_default': !exists(json, 'is_default') ? undefined : json['is_default'],
     };
 }
 
@@ -115,13 +115,13 @@ export function RawUnitToJSON(value?: RawUnit | null): any {
         
         'name': value.name,
         'type': value.type,
-        'unit_type': value.unitType,
+        'unit_type': value.unit_type,
         'prefix': value.prefix,
         'elements': value.elements,
-        'conversion_factor': value.conversionFactor,
+        'conversion_factor': value.conversion_factor,
         'dimensions': value.dimensions,
-        'conversion_baseunit_index': value.conversionBaseunitIndex,
-        'is_default': value.isDefault,
+        'conversion_baseunit_index': value.conversion_baseunit_index,
+        'is_default': value.is_default,
     };
 }
 

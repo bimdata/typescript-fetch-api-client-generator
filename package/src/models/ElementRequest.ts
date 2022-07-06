@@ -61,7 +61,7 @@ export interface ElementRequest {
      * @type {Array<PropertySetRequest>}
      * @memberof ElementRequest
      */
-    propertySets?: Array<PropertySetRequest>;
+    property_sets?: Array<PropertySetRequest>;
     /**
      * 
      * @type {Array<ClassificationRequest>}
@@ -89,7 +89,7 @@ export function ElementRequestFromJSONTyped(json: any, ignoreDiscriminator: bool
         'uuid': !exists(json, 'uuid') ? undefined : json['uuid'],
         'type': json['type'],
         'attributes': !exists(json, 'attributes') ? undefined : PropertySetRequestFromJSON(json['attributes']),
-        'propertySets': !exists(json, 'property_sets') ? undefined : ((json['property_sets'] as Array<any>).map(PropertySetRequestFromJSON)),
+        'property_sets': !exists(json, 'property_sets') ? undefined : ((json['property_sets'] as Array<any>).map(PropertySetRequestFromJSON)),
         'classifications': !exists(json, 'classifications') ? undefined : ((json['classifications'] as Array<any>).map(ClassificationRequestFromJSON)),
         'layers': !exists(json, 'layers') ? undefined : ((json['layers'] as Array<any>).map(LayerElementRequestFromJSON)),
     };
@@ -107,7 +107,7 @@ export function ElementRequestToJSON(value?: ElementRequest | null): any {
         'uuid': value.uuid,
         'type': value.type,
         'attributes': PropertySetRequestToJSON(value.attributes),
-        'property_sets': value.propertySets === undefined ? undefined : ((value.propertySets as Array<any>).map(PropertySetRequestToJSON)),
+        'property_sets': value.property_sets === undefined ? undefined : ((value.property_sets as Array<any>).map(PropertySetRequestToJSON)),
         'classifications': value.classifications === undefined ? undefined : ((value.classifications as Array<any>).map(ClassificationRequestToJSON)),
         'layers': value.layers === undefined ? undefined : ((value.layers as Array<any>).map(LayerElementRequestToJSON)),
     };

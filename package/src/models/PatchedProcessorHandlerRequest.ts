@@ -30,7 +30,7 @@ export interface PatchedProcessorHandlerRequest {
      * @type {string}
      * @memberof PatchedProcessorHandlerRequest
      */
-    detailMessage?: string | null;
+    detail_message?: string | null;
 }
 
 /**
@@ -58,7 +58,7 @@ export function PatchedProcessorHandlerRequestFromJSONTyped(json: any, ignoreDis
     return {
         
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'detailMessage': !exists(json, 'detail_message') ? undefined : json['detail_message'],
+        'detail_message': !exists(json, 'detail_message') ? undefined : json['detail_message'],
     };
 }
 
@@ -72,7 +72,7 @@ export function PatchedProcessorHandlerRequestToJSON(value?: PatchedProcessorHan
     return {
         
         'status': value.status,
-        'detail_message': value.detailMessage,
+        'detail_message': value.detail_message,
     };
 }
 

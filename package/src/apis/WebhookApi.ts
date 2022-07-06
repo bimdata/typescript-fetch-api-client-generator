@@ -27,34 +27,34 @@ import {
 } from '../models';
 
 export interface CreateWebHookRequest {
-    cloudPk: number;
-    webHookRequest: WebHookRequest;
+    cloud_pk: number;
+    WebHookRequest: WebHookRequest;
 }
 
 export interface DeleteWebHookRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface GetWebHookRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface GetWebHooksRequest {
-    cloudPk: number;
+    cloud_pk: number;
 }
 
 export interface PingWebHookRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    webHookRequest: WebHookRequest;
+    WebHookRequest: WebHookRequest;
 }
 
 export interface UpdateWebHookRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    patchedWebHookRequest?: PatchedWebHookRequest;
+    PatchedWebHookRequest?: PatchedWebHookRequest;
 }
 
 /**
@@ -67,12 +67,12 @@ export class WebhookApi extends runtime.BaseAPI {
      * Create a new Webhook
      */
     async createWebHookRaw(requestParameters: CreateWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createWebHook.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createWebHook.');
         }
 
-        if (requestParameters.webHookRequest === null || requestParameters.webHookRequest === undefined) {
-            throw new runtime.RequiredError('webHookRequest','Required parameter requestParameters.webHookRequest was null or undefined when calling createWebHook.');
+        if (requestParameters.WebHookRequest === null || requestParameters.WebHookRequest === undefined) {
+            throw new runtime.RequiredError('WebHookRequest','Required parameter requestParameters.WebHookRequest was null or undefined when calling createWebHook.');
         }
 
         const queryParameters: any = {};
@@ -100,11 +100,11 @@ export class WebhookApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/webhook`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))),
+            path: `/cloud/{cloud_pk}/webhook`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: WebHookRequestToJSON(requestParameters.webHookRequest),
+            body: WebHookRequestToJSON(requestParameters.WebHookRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
@@ -114,8 +114,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Create a new Webhook  Required scopes: webhook:manage
      * Create a new Webhook
      */
-    async createWebHook(cloudPk: number, webHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
-        const response = await this.createWebHookRaw({ cloudPk: cloudPk, webHookRequest: webHookRequest }, initOverrides);
+    async createWebHook(cloud_pk: number, WebHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.createWebHookRaw({ cloud_pk: cloud_pk, WebHookRequest: WebHookRequest }, initOverrides);
         return await response.value();
     }
 
@@ -124,8 +124,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Delete a webhook
      */
     async deleteWebHookRaw(requestParameters: DeleteWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteWebHook.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteWebHook.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -155,7 +155,7 @@ export class WebhookApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -168,8 +168,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Delete a webhook  Required scopes: webhook:manage
      * Delete a webhook
      */
-    async deleteWebHook(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteWebHookRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async deleteWebHook(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteWebHookRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
     }
 
     /**
@@ -177,8 +177,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Retrieve one configured webhook
      */
     async getWebHookRaw(requestParameters: GetWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getWebHook.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getWebHook.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -208,7 +208,7 @@ export class WebhookApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -221,8 +221,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Retrieve one configured webhook  Required scopes: webhook:manage
      * Retrieve one configured webhook
      */
-    async getWebHook(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<WebHook> {
-        const response = await this.getWebHookRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async getWebHook(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.getWebHookRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -231,8 +231,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Retrieve all configured webhooks
      */
     async getWebHooksRaw(requestParameters: GetWebHooksRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<WebHook>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getWebHooks.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getWebHooks.');
         }
 
         const queryParameters: any = {};
@@ -258,7 +258,7 @@ export class WebhookApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/webhook`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))),
+            path: `/cloud/{cloud_pk}/webhook`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -271,8 +271,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Retrieve all configured webhooks  Required scopes: webhook:manage
      * Retrieve all configured webhooks
      */
-    async getWebHooks(cloudPk: number, initOverrides?: RequestInit): Promise<Array<WebHook>> {
-        const response = await this.getWebHooksRaw({ cloudPk: cloudPk }, initOverrides);
+    async getWebHooks(cloud_pk: number, initOverrides?: RequestInit): Promise<Array<WebHook>> {
+        const response = await this.getWebHooksRaw({ cloud_pk: cloud_pk }, initOverrides);
         return await response.value();
     }
 
@@ -281,16 +281,16 @@ export class WebhookApi extends runtime.BaseAPI {
      * Test a webhook
      */
     async pingWebHookRaw(requestParameters: PingWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling pingWebHook.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling pingWebHook.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling pingWebHook.');
         }
 
-        if (requestParameters.webHookRequest === null || requestParameters.webHookRequest === undefined) {
-            throw new runtime.RequiredError('webHookRequest','Required parameter requestParameters.webHookRequest was null or undefined when calling pingWebHook.');
+        if (requestParameters.WebHookRequest === null || requestParameters.WebHookRequest === undefined) {
+            throw new runtime.RequiredError('WebHookRequest','Required parameter requestParameters.WebHookRequest was null or undefined when calling pingWebHook.');
         }
 
         const queryParameters: any = {};
@@ -318,11 +318,11 @@ export class WebhookApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/webhook/{id}/ping`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/webhook/{id}/ping`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: WebHookRequestToJSON(requestParameters.webHookRequest),
+            body: WebHookRequestToJSON(requestParameters.WebHookRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
@@ -332,8 +332,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Trigger a Ping Event sending {\"ok\": true} to the webhook URL. Useful to test your app  Required scopes: webhook:manage
      * Test a webhook
      */
-    async pingWebHook(cloudPk: number, id: number, webHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
-        const response = await this.pingWebHookRaw({ cloudPk: cloudPk, id: id, webHookRequest: webHookRequest }, initOverrides);
+    async pingWebHook(cloud_pk: number, id: number, WebHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.pingWebHookRaw({ cloud_pk: cloud_pk, id: id, WebHookRequest: WebHookRequest }, initOverrides);
         return await response.value();
     }
 
@@ -342,8 +342,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Update some field of a webhook
      */
     async updateWebHookRaw(requestParameters: UpdateWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateWebHook.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateWebHook.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -375,11 +375,11 @@ export class WebhookApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedWebHookRequestToJSON(requestParameters.patchedWebHookRequest),
+            body: PatchedWebHookRequestToJSON(requestParameters.PatchedWebHookRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
@@ -389,8 +389,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Update some field of a webhook  Required scopes: webhook:manage
      * Update some field of a webhook
      */
-    async updateWebHook(cloudPk: number, id: number, patchedWebHookRequest?: PatchedWebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
-        const response = await this.updateWebHookRaw({ cloudPk: cloudPk, id: id, patchedWebHookRequest: patchedWebHookRequest }, initOverrides);
+    async updateWebHook(cloud_pk: number, id: number, PatchedWebHookRequest?: PatchedWebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.updateWebHookRaw({ cloud_pk: cloud_pk, id: id, PatchedWebHookRequest: PatchedWebHookRequest }, initOverrides);
         return await response.value();
     }
 

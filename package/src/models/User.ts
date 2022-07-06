@@ -48,25 +48,25 @@ export interface User {
      * @type {Date}
      * @memberof User
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof User
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {number}
      * @memberof User
      */
-    readonly cloudRole: number;
+    readonly cloud_role: number;
     /**
      * 
      * @type {number}
      * @memberof User
      */
-    readonly projectRole: number;
+    readonly project_role: number;
     /**
      * 
      * @type {string}
@@ -84,7 +84,7 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    readonly profilePicture: string | null;
+    readonly profile_picture: string | null;
 }
 
 export function UserFromJSON(json: any): User {
@@ -101,13 +101,13 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
         'email': json['email'],
         'firstname': json['firstname'],
         'lastname': json['lastname'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
-        'cloudRole': json['cloud_role'],
-        'projectRole': json['project_role'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
+        'cloud_role': json['cloud_role'],
+        'project_role': json['project_role'],
         'provider': json['provider'],
         'sub': json['sub'],
-        'profilePicture': json['profile_picture'],
+        'profile_picture': json['profile_picture'],
     };
 }
 

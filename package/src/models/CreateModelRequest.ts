@@ -24,7 +24,7 @@ export interface CreateModelRequest {
      * @type {number}
      * @memberof CreateModelRequest
      */
-    documentId: number;
+    document_id: number;
 }
 
 export function CreateModelRequestFromJSON(json: any): CreateModelRequest {
@@ -37,7 +37,7 @@ export function CreateModelRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'documentId': json['document_id'],
+        'document_id': json['document_id'],
     };
 }
 
@@ -50,7 +50,7 @@ export function CreateModelRequestToJSON(value?: CreateModelRequest | null): any
     }
     return {
         
-        'document_id': value.documentId,
+        'document_id': value.document_id,
     };
 }
 

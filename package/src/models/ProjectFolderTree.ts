@@ -13,42 +13,49 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    FolderTree,
+    FolderTreeFromJSON,
+    FolderTreeFromJSONTyped,
+    FolderTreeToJSON,
+} from './FolderTree';
+
 /**
  * 
  * @export
- * @interface ElementPropertySetRelationRequest
+ * @interface ProjectFolderTree
  */
-export interface ElementPropertySetRelationRequest {
+export interface ProjectFolderTree {
     /**
      * 
      * @type {string}
-     * @memberof ElementPropertySetRelationRequest
+     * @memberof ProjectFolderTree
      */
-    element_uuid: string;
+    name: string;
     /**
      * 
-     * @type {number}
-     * @memberof ElementPropertySetRelationRequest
+     * @type {Array<FolderTree>}
+     * @memberof ProjectFolderTree
      */
-    property_set_id: number;
+    folders: Array<FolderTree>;
 }
 
-export function ElementPropertySetRelationRequestFromJSON(json: any): ElementPropertySetRelationRequest {
-    return ElementPropertySetRelationRequestFromJSONTyped(json, false);
+export function ProjectFolderTreeFromJSON(json: any): ProjectFolderTree {
+    return ProjectFolderTreeFromJSONTyped(json, false);
 }
 
-export function ElementPropertySetRelationRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): ElementPropertySetRelationRequest {
+export function ProjectFolderTreeFromJSONTyped(json: any, ignoreDiscriminator: boolean): ProjectFolderTree {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'element_uuid': json['element_uuid'],
-        'property_set_id': json['property_set_id'],
+        'name': json['name'],
+        'folders': ((json['folders'] as Array<any>).map(FolderTreeFromJSON)),
     };
 }
 
-export function ElementPropertySetRelationRequestToJSON(value?: ElementPropertySetRelationRequest | null): any {
+export function ProjectFolderTreeToJSON(value?: ProjectFolderTree | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +64,8 @@ export function ElementPropertySetRelationRequestToJSON(value?: ElementPropertyS
     }
     return {
         
-        'element_uuid': value.element_uuid,
-        'property_set_id': value.property_set_id,
+        'name': value.name,
+        'folders': ((value.folders as Array<any>).map(FolderTreeToJSON)),
     };
 }
 

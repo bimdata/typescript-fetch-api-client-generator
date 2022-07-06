@@ -37,25 +37,25 @@ export interface OrthogonalCameraRequest {
      * @type {number}
      * @memberof OrthogonalCameraRequest
      */
-    viewToWorldScale: number;
+    view_to_world_scale: number;
     /**
      * 
      * @type {DirectionRequest}
      * @memberof OrthogonalCameraRequest
      */
-    cameraDirection: DirectionRequest;
+    camera_direction: DirectionRequest;
     /**
      * 
      * @type {DirectionRequest}
      * @memberof OrthogonalCameraRequest
      */
-    cameraUpVector: DirectionRequest;
+    camera_up_vector: DirectionRequest;
     /**
      * 
      * @type {PointRequest}
      * @memberof OrthogonalCameraRequest
      */
-    cameraViewPoint: PointRequest;
+    camera_view_point: PointRequest;
 }
 
 export function OrthogonalCameraRequestFromJSON(json: any): OrthogonalCameraRequest {
@@ -68,10 +68,10 @@ export function OrthogonalCameraRequestFromJSONTyped(json: any, ignoreDiscrimina
     }
     return {
         
-        'viewToWorldScale': json['view_to_world_scale'],
-        'cameraDirection': DirectionRequestFromJSON(json['camera_direction']),
-        'cameraUpVector': DirectionRequestFromJSON(json['camera_up_vector']),
-        'cameraViewPoint': PointRequestFromJSON(json['camera_view_point']),
+        'view_to_world_scale': json['view_to_world_scale'],
+        'camera_direction': DirectionRequestFromJSON(json['camera_direction']),
+        'camera_up_vector': DirectionRequestFromJSON(json['camera_up_vector']),
+        'camera_view_point': PointRequestFromJSON(json['camera_view_point']),
     };
 }
 
@@ -84,10 +84,10 @@ export function OrthogonalCameraRequestToJSON(value?: OrthogonalCameraRequest | 
     }
     return {
         
-        'view_to_world_scale': value.viewToWorldScale,
-        'camera_direction': DirectionRequestToJSON(value.cameraDirection),
-        'camera_up_vector': DirectionRequestToJSON(value.cameraUpVector),
-        'camera_view_point': PointRequestToJSON(value.cameraViewPoint),
+        'view_to_world_scale': value.view_to_world_scale,
+        'camera_direction': DirectionRequestToJSON(value.camera_direction),
+        'camera_up_vector': DirectionRequestToJSON(value.camera_up_vector),
+        'camera_view_point': PointRequestToJSON(value.camera_view_point),
     };
 }
 

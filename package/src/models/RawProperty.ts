@@ -36,7 +36,7 @@ export interface RawProperty {
      * @type {number}
      * @memberof RawProperty
      */
-    defId: number;
+    def_id: number;
 }
 
 export function RawPropertyFromJSON(json: any): RawProperty {
@@ -51,7 +51,7 @@ export function RawPropertyFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'id': json['id'],
         'value': !exists(json, 'value') ? undefined : json['value'],
-        'defId': json['def_id'],
+        'def_id': json['def_id'],
     };
 }
 
@@ -65,7 +65,7 @@ export function RawPropertyToJSON(value?: RawProperty | null): any {
     return {
         
         'value': value.value,
-        'def_id': value.defId,
+        'def_id': value.def_id,
     };
 }
 

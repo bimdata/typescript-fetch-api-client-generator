@@ -55,7 +55,7 @@ export interface Zone {
      * @type {number}
      * @memberof Zone
      */
-    parentId?: number;
+    parent_id?: number;
     /**
      * 
      * @type {Array<Space>}
@@ -67,13 +67,13 @@ export interface Zone {
      * @type {Date}
      * @memberof Zone
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof Zone
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {string}
@@ -96,10 +96,10 @@ export function ZoneFromJSONTyped(json: any, ignoreDiscriminator: boolean): Zone
         'name': !exists(json, 'name') ? undefined : json['name'],
         'uuid': json['uuid'],
         'zones': !exists(json, 'zones') ? undefined : ((json['zones'] as Array<any>).map(ZoneFromJSON)),
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'spaces': !exists(json, 'spaces') ? undefined : ((json['spaces'] as Array<any>).map(SpaceFromJSON)),
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
         'color': !exists(json, 'color') ? undefined : json['color'],
     };
 }
@@ -116,7 +116,7 @@ export function ZoneToJSON(value?: Zone | null): any {
         'name': value.name,
         'uuid': value.uuid,
         'zones': value.zones === undefined ? undefined : ((value.zones as Array<any>).map(ZoneToJSON)),
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
         'spaces': value.spaces === undefined ? undefined : ((value.spaces as Array<any>).map(SpaceToJSON)),
         'color': value.color,
     };

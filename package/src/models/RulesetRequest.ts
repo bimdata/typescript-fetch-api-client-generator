@@ -31,7 +31,7 @@ export interface RulesetRequest {
      * @type {number}
      * @memberof RulesetRequest
      */
-    parentRulesetId?: number | null;
+    parent_ruleset_id?: number | null;
     /**
      * 
      * @type {string}
@@ -68,7 +68,7 @@ export function RulesetRequestFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
-        'parentRulesetId': !exists(json, 'parent_ruleset_id') ? undefined : json['parent_ruleset_id'],
+        'parent_ruleset_id': !exists(json, 'parent_ruleset_id') ? undefined : json['parent_ruleset_id'],
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'rules': !exists(json, 'rules') ? undefined : ((json['rules'] as Array<any>).map(RuleRequestFromJSON)),
@@ -85,7 +85,7 @@ export function RulesetRequestToJSON(value?: RulesetRequest | null): any {
     }
     return {
         
-        'parent_ruleset_id': value.parentRulesetId,
+        'parent_ruleset_id': value.parent_ruleset_id,
         'name': value.name,
         'description': value.description,
         'rules': value.rules === undefined ? undefined : ((value.rules as Array<any>).map(RuleRequestToJSON)),

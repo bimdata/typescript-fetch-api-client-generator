@@ -37,31 +37,31 @@ export interface PerspectiveCameraRequest {
      * @type {number}
      * @memberof PerspectiveCameraRequest
      */
-    fieldOfView: number;
+    field_of_view: number;
     /**
      * 
      * @type {DirectionRequest}
      * @memberof PerspectiveCameraRequest
      */
-    cameraDirection: DirectionRequest;
+    camera_direction: DirectionRequest;
     /**
      * 
      * @type {DirectionRequest}
      * @memberof PerspectiveCameraRequest
      */
-    cameraUpVector: DirectionRequest;
+    camera_up_vector: DirectionRequest;
     /**
      * 
      * @type {PointRequest}
      * @memberof PerspectiveCameraRequest
      */
-    cameraViewPoint: PointRequest;
+    camera_view_point: PointRequest;
     /**
      * 
      * @type {DirectionRequest}
      * @memberof PerspectiveCameraRequest
      */
-    bimdataCameraDirection?: DirectionRequest;
+    bimdata_camera_direction?: DirectionRequest;
 }
 
 export function PerspectiveCameraRequestFromJSON(json: any): PerspectiveCameraRequest {
@@ -74,11 +74,11 @@ export function PerspectiveCameraRequestFromJSONTyped(json: any, ignoreDiscrimin
     }
     return {
         
-        'fieldOfView': json['field_of_view'],
-        'cameraDirection': DirectionRequestFromJSON(json['camera_direction']),
-        'cameraUpVector': DirectionRequestFromJSON(json['camera_up_vector']),
-        'cameraViewPoint': PointRequestFromJSON(json['camera_view_point']),
-        'bimdataCameraDirection': !exists(json, 'bimdata_camera_direction') ? undefined : DirectionRequestFromJSON(json['bimdata_camera_direction']),
+        'field_of_view': json['field_of_view'],
+        'camera_direction': DirectionRequestFromJSON(json['camera_direction']),
+        'camera_up_vector': DirectionRequestFromJSON(json['camera_up_vector']),
+        'camera_view_point': PointRequestFromJSON(json['camera_view_point']),
+        'bimdata_camera_direction': !exists(json, 'bimdata_camera_direction') ? undefined : DirectionRequestFromJSON(json['bimdata_camera_direction']),
     };
 }
 
@@ -91,11 +91,11 @@ export function PerspectiveCameraRequestToJSON(value?: PerspectiveCameraRequest 
     }
     return {
         
-        'field_of_view': value.fieldOfView,
-        'camera_direction': DirectionRequestToJSON(value.cameraDirection),
-        'camera_up_vector': DirectionRequestToJSON(value.cameraUpVector),
-        'camera_view_point': PointRequestToJSON(value.cameraViewPoint),
-        'bimdata_camera_direction': DirectionRequestToJSON(value.bimdataCameraDirection),
+        'field_of_view': value.field_of_view,
+        'camera_direction': DirectionRequestToJSON(value.camera_direction),
+        'camera_up_vector': DirectionRequestToJSON(value.camera_up_vector),
+        'camera_view_point': PointRequestToJSON(value.camera_view_point),
+        'bimdata_camera_direction': DirectionRequestToJSON(value.bimdata_camera_direction),
     };
 }
 

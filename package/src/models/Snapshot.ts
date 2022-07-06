@@ -24,13 +24,13 @@ export interface Snapshot {
      * @type {string}
      * @memberof Snapshot
      */
-    snapshotType: string;
+    snapshot_type: string;
     /**
      * 
      * @type {string}
      * @memberof Snapshot
      */
-    snapshotData: string;
+    snapshot_data: string;
 }
 
 export function SnapshotFromJSON(json: any): Snapshot {
@@ -43,8 +43,8 @@ export function SnapshotFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
-        'snapshotType': json['snapshot_type'],
-        'snapshotData': json['snapshot_data'],
+        'snapshot_type': json['snapshot_type'],
+        'snapshot_data': json['snapshot_data'],
     };
 }
 
@@ -57,8 +57,8 @@ export function SnapshotToJSON(value?: Snapshot | null): any {
     }
     return {
         
-        'snapshot_type': value.snapshotType,
-        'snapshot_data': value.snapshotData,
+        'snapshot_type': value.snapshot_type,
+        'snapshot_data': value.snapshot_data,
     };
 }
 

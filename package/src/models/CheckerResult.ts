@@ -48,13 +48,13 @@ export interface CheckerResult {
      * @type {Date}
      * @memberof CheckerResult
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof CheckerResult
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
 }
 
 /**
@@ -81,8 +81,8 @@ export function CheckerResultFromJSONTyped(json: any, ignoreDiscriminator: boole
         'status': !exists(json, 'status') ? undefined : json['status'],
         'result': !exists(json, 'result') ? undefined : json['result'],
         'collisions': !exists(json, 'collisions') ? undefined : json['collisions'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
     };
 }
 

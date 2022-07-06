@@ -61,7 +61,7 @@ export interface PropertyDefinition {
      * @type {string}
      * @memberof PropertyDefinition
      */
-    valueType?: string | null;
+    value_type?: string | null;
 }
 
 export function PropertyDefinitionFromJSON(json: any): PropertyDefinition {
@@ -79,7 +79,7 @@ export function PropertyDefinitionFromJSONTyped(json: any, ignoreDiscriminator: 
         'name': !exists(json, 'name') ? undefined : json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'valueType': !exists(json, 'value_type') ? undefined : json['value_type'],
+        'value_type': !exists(json, 'value_type') ? undefined : json['value_type'],
     };
 }
 
@@ -96,7 +96,7 @@ export function PropertyDefinitionToJSON(value?: PropertyDefinition | null): any
         'name': value.name,
         'description': value.description,
         'type': value.type,
-        'value_type': value.valueType,
+        'value_type': value.value_type,
     };
 }
 

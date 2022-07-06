@@ -30,13 +30,13 @@ export interface IfcAccessToken {
      * @type {boolean}
      * @memberof IfcAccessToken
      */
-    readOnly?: boolean;
+    read_only?: boolean;
     /**
      * 
      * @type {Date}
      * @memberof IfcAccessToken
      */
-    expiresAt?: Date;
+    expires_at?: Date;
 }
 
 export function IfcAccessTokenFromJSON(json: any): IfcAccessToken {
@@ -50,8 +50,8 @@ export function IfcAccessTokenFromJSONTyped(json: any, ignoreDiscriminator: bool
     return {
         
         'token': json['token'],
-        'readOnly': !exists(json, 'read_only') ? undefined : json['read_only'],
-        'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
+        'read_only': !exists(json, 'read_only') ? undefined : json['read_only'],
+        'expires_at': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
     };
 }
 
@@ -64,8 +64,8 @@ export function IfcAccessTokenToJSON(value?: IfcAccessToken | null): any {
     }
     return {
         
-        'read_only': value.readOnly,
-        'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
+        'read_only': value.read_only,
+        'expires_at': value.expires_at === undefined ? undefined : (value.expires_at.toISOString()),
     };
 }
 

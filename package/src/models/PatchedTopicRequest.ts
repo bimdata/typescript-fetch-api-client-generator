@@ -30,13 +30,13 @@ export interface PatchedTopicRequest {
      * @type {string}
      * @memberof PatchedTopicRequest
      */
-    topicType?: string | null;
+    topic_type?: string | null;
     /**
      * 
      * @type {string}
      * @memberof PatchedTopicRequest
      */
-    topicStatus?: string | null;
+    topic_status?: string | null;
     /**
      * 
      * @type {string}
@@ -60,31 +60,31 @@ export interface PatchedTopicRequest {
      * @type {Date}
      * @memberof PatchedTopicRequest
      */
-    creationDate?: Date;
+    creation_date?: Date;
     /**
      * 
      * @type {string}
      * @memberof PatchedTopicRequest
      */
-    creationAuthor?: string | null;
+    creation_author?: string | null;
     /**
      * 
      * @type {string}
      * @memberof PatchedTopicRequest
      */
-    modifiedAuthor?: string | null;
+    modified_author?: string | null;
     /**
      * 
      * @type {string}
      * @memberof PatchedTopicRequest
      */
-    assignedTo?: string | null;
+    assigned_to?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof PatchedTopicRequest
      */
-    referenceLinks?: Array<string> | null;
+    reference_links?: Array<string> | null;
     /**
      * 
      * @type {string}
@@ -102,7 +102,7 @@ export interface PatchedTopicRequest {
      * @type {Date}
      * @memberof PatchedTopicRequest
      */
-    dueDate?: Date | null;
+    due_date?: Date | null;
     /**
      * DEPRECATED: Use 'models' instead
      * @type {Array<number>}
@@ -146,19 +146,19 @@ export function PatchedTopicRequestFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
-        'topicType': !exists(json, 'topic_type') ? undefined : json['topic_type'],
-        'topicStatus': !exists(json, 'topic_status') ? undefined : json['topic_status'],
+        'topic_type': !exists(json, 'topic_type') ? undefined : json['topic_type'],
+        'topic_status': !exists(json, 'topic_status') ? undefined : json['topic_status'],
         'title': !exists(json, 'title') ? undefined : json['title'],
         'priority': !exists(json, 'priority') ? undefined : json['priority'],
         'labels': !exists(json, 'labels') ? undefined : json['labels'],
-        'creationDate': !exists(json, 'creation_date') ? undefined : (new Date(json['creation_date'])),
-        'creationAuthor': !exists(json, 'creation_author') ? undefined : json['creation_author'],
-        'modifiedAuthor': !exists(json, 'modified_author') ? undefined : json['modified_author'],
-        'assignedTo': !exists(json, 'assigned_to') ? undefined : json['assigned_to'],
-        'referenceLinks': !exists(json, 'reference_links') ? undefined : json['reference_links'],
+        'creation_date': !exists(json, 'creation_date') ? undefined : (new Date(json['creation_date'])),
+        'creation_author': !exists(json, 'creation_author') ? undefined : json['creation_author'],
+        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
+        'assigned_to': !exists(json, 'assigned_to') ? undefined : json['assigned_to'],
+        'reference_links': !exists(json, 'reference_links') ? undefined : json['reference_links'],
         'stage': !exists(json, 'stage') ? undefined : json['stage'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'dueDate': !exists(json, 'due_date') ? undefined : (json['due_date'] === null ? null : new Date(json['due_date'])),
+        'due_date': !exists(json, 'due_date') ? undefined : (json['due_date'] === null ? null : new Date(json['due_date'])),
         'ifcs': !exists(json, 'ifcs') ? undefined : json['ifcs'],
         'models': !exists(json, 'models') ? undefined : json['models'],
         'format': !exists(json, 'format') ? undefined : json['format'],
@@ -177,19 +177,19 @@ export function PatchedTopicRequestToJSON(value?: PatchedTopicRequest | null): a
     return {
         
         'guid': value.guid,
-        'topic_type': value.topicType,
-        'topic_status': value.topicStatus,
+        'topic_type': value.topic_type,
+        'topic_status': value.topic_status,
         'title': value.title,
         'priority': value.priority,
         'labels': value.labels,
-        'creation_date': value.creationDate === undefined ? undefined : (value.creationDate.toISOString()),
-        'creation_author': value.creationAuthor,
-        'modified_author': value.modifiedAuthor,
-        'assigned_to': value.assignedTo,
-        'reference_links': value.referenceLinks,
+        'creation_date': value.creation_date === undefined ? undefined : (value.creation_date.toISOString()),
+        'creation_author': value.creation_author,
+        'modified_author': value.modified_author,
+        'assigned_to': value.assigned_to,
+        'reference_links': value.reference_links,
         'stage': value.stage,
         'description': value.description,
-        'due_date': value.dueDate === undefined ? undefined : (value.dueDate === null ? null : value.dueDate.toISOString()),
+        'due_date': value.due_date === undefined ? undefined : (value.due_date === null ? null : value.due_date.toISOString()),
         'ifcs': value.ifcs,
         'models': value.models,
         'format': value.format,

@@ -24,19 +24,19 @@ export interface ComponentRequest {
      * @type {string}
      * @memberof ComponentRequest
      */
-    ifcGuid?: string | null;
+    ifc_guid?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ComponentRequest
      */
-    originatingSystem?: string | null;
+    originating_system?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ComponentRequest
      */
-    authoringToolId?: string | null;
+    authoring_tool_id?: string | null;
 }
 
 export function ComponentRequestFromJSON(json: any): ComponentRequest {
@@ -49,9 +49,9 @@ export function ComponentRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'ifcGuid': !exists(json, 'ifc_guid') ? undefined : json['ifc_guid'],
-        'originatingSystem': !exists(json, 'originating_system') ? undefined : json['originating_system'],
-        'authoringToolId': !exists(json, 'authoring_tool_id') ? undefined : json['authoring_tool_id'],
+        'ifc_guid': !exists(json, 'ifc_guid') ? undefined : json['ifc_guid'],
+        'originating_system': !exists(json, 'originating_system') ? undefined : json['originating_system'],
+        'authoring_tool_id': !exists(json, 'authoring_tool_id') ? undefined : json['authoring_tool_id'],
     };
 }
 
@@ -64,9 +64,9 @@ export function ComponentRequestToJSON(value?: ComponentRequest | null): any {
     }
     return {
         
-        'ifc_guid': value.ifcGuid,
-        'originating_system': value.originatingSystem,
-        'authoring_tool_id': value.authoringToolId,
+        'ifc_guid': value.ifc_guid,
+        'originating_system': value.originating_system,
+        'authoring_tool_id': value.authoring_tool_id,
     };
 }
 

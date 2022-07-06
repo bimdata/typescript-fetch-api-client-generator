@@ -37,25 +37,25 @@ export interface OrthogonalCamera {
      * @type {number}
      * @memberof OrthogonalCamera
      */
-    viewToWorldScale: number;
+    view_to_world_scale: number;
     /**
      * 
      * @type {Direction}
      * @memberof OrthogonalCamera
      */
-    cameraDirection: Direction;
+    camera_direction: Direction;
     /**
      * 
      * @type {Direction}
      * @memberof OrthogonalCamera
      */
-    cameraUpVector: Direction;
+    camera_up_vector: Direction;
     /**
      * 
      * @type {Point}
      * @memberof OrthogonalCamera
      */
-    cameraViewPoint: Point;
+    camera_view_point: Point;
 }
 
 export function OrthogonalCameraFromJSON(json: any): OrthogonalCamera {
@@ -68,10 +68,10 @@ export function OrthogonalCameraFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'viewToWorldScale': json['view_to_world_scale'],
-        'cameraDirection': DirectionFromJSON(json['camera_direction']),
-        'cameraUpVector': DirectionFromJSON(json['camera_up_vector']),
-        'cameraViewPoint': PointFromJSON(json['camera_view_point']),
+        'view_to_world_scale': json['view_to_world_scale'],
+        'camera_direction': DirectionFromJSON(json['camera_direction']),
+        'camera_up_vector': DirectionFromJSON(json['camera_up_vector']),
+        'camera_view_point': PointFromJSON(json['camera_view_point']),
     };
 }
 
@@ -84,10 +84,10 @@ export function OrthogonalCameraToJSON(value?: OrthogonalCamera | null): any {
     }
     return {
         
-        'view_to_world_scale': value.viewToWorldScale,
-        'camera_direction': DirectionToJSON(value.cameraDirection),
-        'camera_up_vector': DirectionToJSON(value.cameraUpVector),
-        'camera_view_point': PointToJSON(value.cameraViewPoint),
+        'view_to_world_scale': value.view_to_world_scale,
+        'camera_direction': DirectionToJSON(value.camera_direction),
+        'camera_up_vector': DirectionToJSON(value.camera_up_vector),
+        'camera_view_point': PointToJSON(value.camera_view_point),
     };
 }
 

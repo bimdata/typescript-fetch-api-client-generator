@@ -30,7 +30,7 @@ export interface PatchedCloudRequest {
      * @type {number}
      * @memberof PatchedCloudRequest
      */
-    organizationId?: number;
+    organization_id?: number;
     /**
      * 
      * @type {Blob}
@@ -50,7 +50,7 @@ export function PatchedCloudRequestFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'organizationId': !exists(json, 'organization_id') ? undefined : json['organization_id'],
+        'organization_id': !exists(json, 'organization_id') ? undefined : json['organization_id'],
         'image': !exists(json, 'image') ? undefined : json['image'],
     };
 }
@@ -65,7 +65,7 @@ export function PatchedCloudRequestToJSON(value?: PatchedCloudRequest | null): a
     return {
         
         'name': value.name,
-        'organization_id': value.organizationId,
+        'organization_id': value.organization_id,
         'image': value.image,
     };
 }

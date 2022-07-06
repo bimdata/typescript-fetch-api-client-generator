@@ -31,13 +31,13 @@ export interface LineRequest {
      * @type {PointRequest}
      * @memberof LineRequest
      */
-    endPoint: PointRequest;
+    end_point: PointRequest;
     /**
      * 
      * @type {PointRequest}
      * @memberof LineRequest
      */
-    startPoint: PointRequest;
+    start_point: PointRequest;
 }
 
 export function LineRequestFromJSON(json: any): LineRequest {
@@ -50,8 +50,8 @@ export function LineRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'endPoint': PointRequestFromJSON(json['end_point']),
-        'startPoint': PointRequestFromJSON(json['start_point']),
+        'end_point': PointRequestFromJSON(json['end_point']),
+        'start_point': PointRequestFromJSON(json['start_point']),
     };
 }
 
@@ -64,8 +64,8 @@ export function LineRequestToJSON(value?: LineRequest | null): any {
     }
     return {
         
-        'end_point': PointRequestToJSON(value.endPoint),
-        'start_point': PointRequestToJSON(value.startPoint),
+        'end_point': PointRequestToJSON(value.end_point),
+        'start_point': PointRequestToJSON(value.start_point),
     };
 }
 

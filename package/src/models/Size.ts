@@ -24,13 +24,13 @@ export interface Size {
      * @type {boolean}
      * @memberof Size
      */
-    readonly isUnsupervised: boolean;
+    readonly is_unsupervised: boolean;
     /**
      * 
      * @type {string}
      * @memberof Size
      */
-    managedBy: SizeManagedByEnum;
+    managed_by: SizeManagedByEnum;
     /**
      * 
      * @type {number}
@@ -42,49 +42,49 @@ export interface Size {
      * @type {number}
      * @memberof Size
      */
-    readonly totalSize: number | null;
+    readonly total_size: number | null;
     /**
      * 
      * @type {number}
      * @memberof Size
      */
-    readonly smartDataSize: number | null;
+    readonly smart_data_size: number | null;
     /**
      * 
      * @type {number}
      * @memberof Size
      */
-    readonly totalSizeAvailable: number | null;
+    readonly total_size_available: number | null;
     /**
      * 
      * @type {number}
      * @memberof Size
      */
-    readonly smartDataSizeAvailable: number | null;
+    readonly smart_data_size_available: number | null;
     /**
      * 
      * @type {number}
      * @memberof Size
      */
-    readonly remainingTotalSize: number | null;
+    readonly remaining_total_size: number | null;
     /**
      * 
      * @type {number}
      * @memberof Size
      */
-    readonly remainingSmartDataSize: number | null;
+    readonly remaining_smart_data_size: number | null;
     /**
      * 
      * @type {number}
      * @memberof Size
      */
-    readonly remainingTotalSizePercent: number | null;
+    readonly remaining_total_size_percent: number | null;
     /**
      * 
      * @type {number}
      * @memberof Size
      */
-    readonly remainingSmartDataSizePercent: number | null;
+    readonly remaining_smart_data_size_percent: number | null;
 }
 
 /**
@@ -113,17 +113,17 @@ export function SizeFromJSONTyped(json: any, ignoreDiscriminator: boolean): Size
     }
     return {
         
-        'isUnsupervised': json['is_unsupervised'],
-        'managedBy': json['managed_by'],
+        'is_unsupervised': json['is_unsupervised'],
+        'managed_by': json['managed_by'],
         'role': json['role'],
-        'totalSize': json['total_size'],
-        'smartDataSize': json['smart_data_size'],
-        'totalSizeAvailable': json['total_size_available'],
-        'smartDataSizeAvailable': json['smart_data_size_available'],
-        'remainingTotalSize': json['remaining_total_size'],
-        'remainingSmartDataSize': json['remaining_smart_data_size'],
-        'remainingTotalSizePercent': json['remaining_total_size_percent'],
-        'remainingSmartDataSizePercent': json['remaining_smart_data_size_percent'],
+        'total_size': json['total_size'],
+        'smart_data_size': json['smart_data_size'],
+        'total_size_available': json['total_size_available'],
+        'smart_data_size_available': json['smart_data_size_available'],
+        'remaining_total_size': json['remaining_total_size'],
+        'remaining_smart_data_size': json['remaining_smart_data_size'],
+        'remaining_total_size_percent': json['remaining_total_size_percent'],
+        'remaining_smart_data_size_percent': json['remaining_smart_data_size_percent'],
     };
 }
 
@@ -136,7 +136,7 @@ export function SizeToJSON(value?: Size | null): any {
     }
     return {
         
-        'managed_by': value.managedBy,
+        'managed_by': value.managed_by,
         'role': value.role,
     };
 }

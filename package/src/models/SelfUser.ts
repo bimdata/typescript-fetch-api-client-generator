@@ -67,13 +67,13 @@ export interface SelfUser {
      * @type {Date}
      * @memberof SelfUser
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof SelfUser
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {Array<Organization>}
@@ -103,7 +103,7 @@ export interface SelfUser {
      * @type {string}
      * @memberof SelfUser
      */
-    providerSub?: string | null;
+    provider_sub?: string | null;
     /**
      * sub from Keycloak
      * @type {string}
@@ -115,7 +115,7 @@ export interface SelfUser {
      * @type {string}
      * @memberof SelfUser
      */
-    readonly profilePicture: string | null;
+    readonly profile_picture: string | null;
 }
 
 export function SelfUserFromJSON(json: any): SelfUser {
@@ -132,15 +132,15 @@ export function SelfUserFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'email': json['email'],
         'firstname': json['firstname'],
         'lastname': json['lastname'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
         'organizations': ((json['organizations'] as Array<any>).map(OrganizationFromJSON)),
         'clouds': ((json['clouds'] as Array<any>).map(CloudRoleFromJSON)),
         'projects': ((json['projects'] as Array<any>).map(ProjectRoleFromJSON)),
         'provider': json['provider'],
-        'providerSub': !exists(json, 'provider_sub') ? undefined : json['provider_sub'],
+        'provider_sub': !exists(json, 'provider_sub') ? undefined : json['provider_sub'],
         'sub': json['sub'],
-        'profilePicture': json['profile_picture'],
+        'profile_picture': json['profile_picture'],
     };
 }
 
@@ -156,7 +156,7 @@ export function SelfUserToJSON(value?: SelfUser | null): any {
         'email': value.email,
         'firstname': value.firstname,
         'lastname': value.lastname,
-        'provider_sub': value.providerSub,
+        'provider_sub': value.provider_sub,
     };
 }
 

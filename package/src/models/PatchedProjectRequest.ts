@@ -42,7 +42,7 @@ export interface PatchedProjectRequest {
      * @type {number}
      * @memberof PatchedProjectRequest
      */
-    parentId?: number | null;
+    parent_id?: number | null;
 }
 
 /**
@@ -67,7 +67,7 @@ export function PatchedProjectRequestFromJSONTyped(json: any, ignoreDiscriminato
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
     };
 }
 
@@ -83,7 +83,7 @@ export function PatchedProjectRequestToJSON(value?: PatchedProjectRequest | null
         'logo': value.logo,
         'name': value.name,
         'status': value.status,
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
     };
 }
 

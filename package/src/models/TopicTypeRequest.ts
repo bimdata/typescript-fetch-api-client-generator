@@ -24,7 +24,7 @@ export interface TopicTypeRequest {
      * @type {string}
      * @memberof TopicTypeRequest
      */
-    topicType: string;
+    topic_type: string;
     /**
      * This field is automatically provided by the route, you don't need to provide it in the body
      * @type {number}
@@ -43,7 +43,7 @@ export function TopicTypeRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'topicType': json['topic_type'],
+        'topic_type': json['topic_type'],
         'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
@@ -57,7 +57,7 @@ export function TopicTypeRequestToJSON(value?: TopicTypeRequest | null): any {
     }
     return {
         
-        'topic_type': value.topicType,
+        'topic_type': value.topic_type,
         'project': value.project,
     };
 }

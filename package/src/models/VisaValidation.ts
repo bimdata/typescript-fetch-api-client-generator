@@ -37,7 +37,7 @@ export interface VisaValidation {
      * @type {number}
      * @memberof VisaValidation
      */
-    readonly visaId: number;
+    readonly visa_id: number;
     /**
      * 
      * @type {UserProject}
@@ -55,19 +55,19 @@ export interface VisaValidation {
      * @type {boolean}
      * @memberof VisaValidation
      */
-    readonly hasCommented: boolean;
+    readonly has_commented: boolean;
     /**
      * 
      * @type {Date}
      * @memberof VisaValidation
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof VisaValidation
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
 }
 
 /**
@@ -91,12 +91,12 @@ export function VisaValidationFromJSONTyped(json: any, ignoreDiscriminator: bool
     return {
         
         'id': json['id'],
-        'visaId': json['visa_id'],
+        'visa_id': json['visa_id'],
         'validator': UserProjectFromJSON(json['validator']),
         'status': json['status'],
-        'hasCommented': json['has_commented'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'has_commented': json['has_commented'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
     };
 }
 

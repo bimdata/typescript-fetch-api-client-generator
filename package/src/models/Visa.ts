@@ -55,7 +55,7 @@ export interface Visa {
      * @type {Array<number>}
      * @memberof Visa
      */
-    readonly validationsInError: Array<number>;
+    readonly validations_in_error: Array<number>;
     /**
      * 
      * @type {UserProject}
@@ -67,7 +67,7 @@ export interface Visa {
      * @type {number}
      * @memberof Visa
      */
-    readonly documentId: number;
+    readonly document_id: number;
     /**
      * 
      * @type {string}
@@ -97,13 +97,13 @@ export interface Visa {
      * @type {Date}
      * @memberof Visa
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof Visa
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
 }
 
 /**
@@ -128,15 +128,15 @@ export function VisaFromJSONTyped(json: any, ignoreDiscriminator: boolean): Visa
         
         'id': json['id'],
         'validations': ((json['validations'] as Array<any>).map(VisaValidationFromJSON)),
-        'validationsInError': json['validations_in_error'],
+        'validations_in_error': json['validations_in_error'],
         'creator': UserProjectFromJSON(json['creator']),
-        'documentId': json['document_id'],
+        'document_id': json['document_id'],
         'status': json['status'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'comments': ((json['comments'] as Array<any>).map(VisaCommentFromJSON)),
         'deadline': !exists(json, 'deadline') ? undefined : (json['deadline'] === null ? null : new Date(json['deadline'])),
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
     };
 }
 

@@ -126,95 +126,95 @@ import {
 } from '../models';
 
 export interface CreateCommentRequest {
-    projectsPk: number;
-    topicsGuid: string;
-    commentRequest?: CommentRequest;
+    projects_pk: number;
+    topics_guid: string;
+    CommentRequest?: CommentRequest;
 }
 
 export interface CreateExtensionLabelRequest {
-    projectsPk: number;
-    labelRequest: LabelRequest;
+    projects_pk: number;
+    LabelRequest: LabelRequest;
 }
 
 export interface CreateExtensionPriorityRequest {
-    projectsPk: number;
-    priorityRequest: PriorityRequest;
+    projects_pk: number;
+    PriorityRequest: PriorityRequest;
 }
 
 export interface CreateExtensionStageRequest {
-    projectsPk: number;
-    stageRequest: StageRequest;
+    projects_pk: number;
+    StageRequest: StageRequest;
 }
 
 export interface CreateExtensionStatusRequest {
-    projectsPk: number;
-    topicStatusRequest: TopicStatusRequest;
+    projects_pk: number;
+    TopicStatusRequest: TopicStatusRequest;
 }
 
 export interface CreateExtensionTypeRequest {
-    projectsPk: number;
-    topicTypeRequest: TopicTypeRequest;
+    projects_pk: number;
+    TopicTypeRequest: TopicTypeRequest;
 }
 
 export interface CreateFullTopicRequest {
-    projectsPk: number;
-    fullTopicRequest: FullTopicRequest;
-    imgFormat?: CreateFullTopicImgFormatEnum;
+    projects_pk: number;
+    FullTopicRequest: FullTopicRequest;
+    img_format?: CreateFullTopicImgFormatEnum;
 }
 
 export interface CreateTopicRequest {
-    projectsPk: number;
-    topicRequest: TopicRequest;
+    projects_pk: number;
+    TopicRequest: TopicRequest;
 }
 
 export interface CreateViewpointRequest {
-    projectsPk: number;
-    topicsGuid: string;
-    imgFormat?: CreateViewpointImgFormatEnum;
-    viewpointRequest?: ViewpointRequest;
+    projects_pk: number;
+    topics_guid: string;
+    img_format?: CreateViewpointImgFormatEnum;
+    ViewpointRequest?: ViewpointRequest;
 }
 
 export interface DeleteCommentRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
+    projects_pk: number;
+    topics_guid: string;
 }
 
 export interface DeleteExtensionLabelRequest {
     id: number;
-    projectsPk: number;
+    projects_pk: number;
 }
 
 export interface DeleteExtensionPriorityRequest {
     id: number;
-    projectsPk: number;
+    projects_pk: number;
 }
 
 export interface DeleteExtensionStageRequest {
     id: number;
-    projectsPk: number;
+    projects_pk: number;
 }
 
 export interface DeleteExtensionStatusRequest {
     id: number;
-    projectsPk: number;
+    projects_pk: number;
 }
 
 export interface DeleteExtensionTypeRequest {
     id: number;
-    projectsPk: number;
+    projects_pk: number;
 }
 
 export interface DeleteTopicRequest {
     guid: string;
-    projectsPk: number;
+    projects_pk: number;
 }
 
 export interface DeleteViewpointRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
-    imgFormat?: DeleteViewpointImgFormatEnum;
+    projects_pk: number;
+    topics_guid: string;
+    img_format?: DeleteViewpointImgFormatEnum;
 }
 
 export interface DownloadBcfExportRequest {
@@ -225,35 +225,35 @@ export interface DownloadBcfExportRequest {
 
 export interface FullUpdateBcfProjectRequest {
     id: number;
-    bcfProjectRequest: BcfProjectRequest;
+    BcfProjectRequest: BcfProjectRequest;
 }
 
 export interface FullUpdateCommentRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
-    commentRequest?: CommentRequest;
+    projects_pk: number;
+    topics_guid: string;
+    CommentRequest?: CommentRequest;
 }
 
 export interface FullUpdateFullTopicRequest {
     guid: string;
-    projectsPk: number;
-    fullTopicRequest: FullTopicRequest;
-    imgFormat?: FullUpdateFullTopicImgFormatEnum;
+    projects_pk: number;
+    FullTopicRequest: FullTopicRequest;
+    img_format?: FullUpdateFullTopicImgFormatEnum;
 }
 
 export interface FullUpdateTopicRequest {
     guid: string;
-    projectsPk: number;
-    topicRequest: TopicRequest;
+    projects_pk: number;
+    TopicRequest: TopicRequest;
 }
 
 export interface FullUpdateViewpointRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
-    imgFormat?: FullUpdateViewpointImgFormatEnum;
-    viewpointRequest?: ViewpointRequest;
+    projects_pk: number;
+    topics_guid: string;
+    img_format?: FullUpdateViewpointImgFormatEnum;
+    ViewpointRequest?: ViewpointRequest;
 }
 
 export interface GetBcfProjectRequest {
@@ -262,19 +262,19 @@ export interface GetBcfProjectRequest {
 
 export interface GetColoringsRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
+    projects_pk: number;
+    topics_guid: string;
 }
 
 export interface GetCommentRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
+    projects_pk: number;
+    topics_guid: string;
 }
 
 export interface GetCommentsRequest {
-    projectsPk: number;
-    topicsGuid: string;
+    projects_pk: number;
+    topics_guid: string;
 }
 
 export interface GetDetailedExtensionsRequest {
@@ -287,43 +287,43 @@ export interface GetExtensionsRequest {
 
 export interface GetFullTopicRequest {
     guid: string;
-    projectsPk: number;
-    imgFormat?: GetFullTopicImgFormatEnum;
+    projects_pk: number;
+    img_format?: GetFullTopicImgFormatEnum;
 }
 
 export interface GetFullTopicsRequest {
-    projectsPk: number;
+    projects_pk: number;
     format?: string;
     ifcs?: Array<number>;
-    imgFormat?: GetFullTopicsImgFormatEnum;
+    img_format?: GetFullTopicsImgFormatEnum;
     models?: Array<number>;
 }
 
 export interface GetSelectionsRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
+    projects_pk: number;
+    topics_guid: string;
 }
 
 export interface GetSnapshotRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
+    projects_pk: number;
+    topics_guid: string;
 }
 
 export interface GetTopicRequest {
     guid: string;
-    projectsPk: number;
+    projects_pk: number;
 }
 
 export interface GetTopicViewpointsRequest {
-    projectsPk: number;
-    topicsGuid: string;
-    imgFormat?: GetTopicViewpointsImgFormatEnum;
+    projects_pk: number;
+    topics_guid: string;
+    img_format?: GetTopicViewpointsImgFormatEnum;
 }
 
 export interface GetTopicsRequest {
-    projectsPk: number;
+    projects_pk: number;
     format?: string;
     ifcs?: Array<number>;
     models?: Array<number>;
@@ -331,21 +331,21 @@ export interface GetTopicsRequest {
 
 export interface GetViewpointRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
-    imgFormat?: GetViewpointImgFormatEnum;
+    projects_pk: number;
+    topics_guid: string;
+    img_format?: GetViewpointImgFormatEnum;
 }
 
 export interface GetViewpointsRequest {
-    projectsPk: number;
-    topicsGuid: string;
-    imgFormat?: GetViewpointsImgFormatEnum;
+    projects_pk: number;
+    topics_guid: string;
+    img_format?: GetViewpointsImgFormatEnum;
 }
 
 export interface GetVisibilitiesRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
+    projects_pk: number;
+    topics_guid: string;
 }
 
 export interface ImportBcfRequest {
@@ -355,65 +355,65 @@ export interface ImportBcfRequest {
 
 export interface UpdateBcfProjectRequest {
     id: number;
-    patchedBcfProjectRequest?: PatchedBcfProjectRequest;
+    PatchedBcfProjectRequest?: PatchedBcfProjectRequest;
 }
 
 export interface UpdateCommentRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
-    patchedCommentRequest?: PatchedCommentRequest;
+    projects_pk: number;
+    topics_guid: string;
+    PatchedCommentRequest?: PatchedCommentRequest;
 }
 
 export interface UpdateExtensionLabelRequest {
     id: number;
-    projectsPk: number;
-    patchedLabelRequest?: PatchedLabelRequest;
+    projects_pk: number;
+    PatchedLabelRequest?: PatchedLabelRequest;
 }
 
 export interface UpdateExtensionPriorityRequest {
     id: number;
-    projectsPk: number;
-    patchedPriorityRequest?: PatchedPriorityRequest;
+    projects_pk: number;
+    PatchedPriorityRequest?: PatchedPriorityRequest;
 }
 
 export interface UpdateExtensionStageRequest {
     id: number;
-    projectsPk: number;
-    patchedStageRequest?: PatchedStageRequest;
+    projects_pk: number;
+    PatchedStageRequest?: PatchedStageRequest;
 }
 
 export interface UpdateExtensionStatusRequest {
     id: number;
-    projectsPk: number;
-    patchedTopicStatusRequest?: PatchedTopicStatusRequest;
+    projects_pk: number;
+    PatchedTopicStatusRequest?: PatchedTopicStatusRequest;
 }
 
 export interface UpdateExtensionTypeRequest {
     id: number;
-    projectsPk: number;
-    patchedTopicTypeRequest?: PatchedTopicTypeRequest;
+    projects_pk: number;
+    PatchedTopicTypeRequest?: PatchedTopicTypeRequest;
 }
 
 export interface UpdateFullTopicRequest {
     guid: string;
-    projectsPk: number;
-    imgFormat?: UpdateFullTopicImgFormatEnum;
-    patchedFullTopicRequest?: PatchedFullTopicRequest;
+    projects_pk: number;
+    img_format?: UpdateFullTopicImgFormatEnum;
+    PatchedFullTopicRequest?: PatchedFullTopicRequest;
 }
 
 export interface UpdateTopicRequest {
     guid: string;
-    projectsPk: number;
-    patchedTopicRequest?: PatchedTopicRequest;
+    projects_pk: number;
+    PatchedTopicRequest?: PatchedTopicRequest;
 }
 
 export interface UpdateViewpointRequest {
     guid: string;
-    projectsPk: number;
-    topicsGuid: string;
-    imgFormat?: UpdateViewpointImgFormatEnum;
-    patchedViewpointRequest?: PatchedViewpointRequest;
+    projects_pk: number;
+    topics_guid: string;
+    img_format?: UpdateViewpointImgFormatEnum;
+    PatchedViewpointRequest?: PatchedViewpointRequest;
 }
 
 /**
@@ -426,12 +426,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a comment
      */
     async createCommentRaw(requestParameters: CreateCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Comment>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createComment.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createComment.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling createComment.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling createComment.');
         }
 
         const queryParameters: any = {};
@@ -459,11 +459,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CommentRequestToJSON(requestParameters.commentRequest),
+            body: CommentRequestToJSON(requestParameters.CommentRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CommentFromJSON(jsonValue));
@@ -473,8 +473,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a comment  Required scopes: bcf:write
      * Create a comment
      */
-    async createComment(projectsPk: number, topicsGuid: string, commentRequest?: CommentRequest, initOverrides?: RequestInit): Promise<Comment> {
-        const response = await this.createCommentRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, commentRequest: commentRequest }, initOverrides);
+    async createComment(projects_pk: number, topics_guid: string, CommentRequest?: CommentRequest, initOverrides?: RequestInit): Promise<Comment> {
+        const response = await this.createCommentRaw({ projects_pk: projects_pk, topics_guid: topics_guid, CommentRequest: CommentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -483,12 +483,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a Label
      */
     async createExtensionLabelRaw(requestParameters: CreateExtensionLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Label>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionLabel.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createExtensionLabel.');
         }
 
-        if (requestParameters.labelRequest === null || requestParameters.labelRequest === undefined) {
-            throw new runtime.RequiredError('labelRequest','Required parameter requestParameters.labelRequest was null or undefined when calling createExtensionLabel.');
+        if (requestParameters.LabelRequest === null || requestParameters.LabelRequest === undefined) {
+            throw new runtime.RequiredError('LabelRequest','Required parameter requestParameters.LabelRequest was null or undefined when calling createExtensionLabel.');
         }
 
         const queryParameters: any = {};
@@ -516,11 +516,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/label`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/label`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: LabelRequestToJSON(requestParameters.labelRequest),
+            body: LabelRequestToJSON(requestParameters.LabelRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LabelFromJSON(jsonValue));
@@ -530,8 +530,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Label available for the project  Required scopes: bcf:write
      * Create a Label
      */
-    async createExtensionLabel(projectsPk: number, labelRequest: LabelRequest, initOverrides?: RequestInit): Promise<Label> {
-        const response = await this.createExtensionLabelRaw({ projectsPk: projectsPk, labelRequest: labelRequest }, initOverrides);
+    async createExtensionLabel(projects_pk: number, LabelRequest: LabelRequest, initOverrides?: RequestInit): Promise<Label> {
+        const response = await this.createExtensionLabelRaw({ projects_pk: projects_pk, LabelRequest: LabelRequest }, initOverrides);
         return await response.value();
     }
 
@@ -540,12 +540,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a Priority
      */
     async createExtensionPriorityRaw(requestParameters: CreateExtensionPriorityRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Priority>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionPriority.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createExtensionPriority.');
         }
 
-        if (requestParameters.priorityRequest === null || requestParameters.priorityRequest === undefined) {
-            throw new runtime.RequiredError('priorityRequest','Required parameter requestParameters.priorityRequest was null or undefined when calling createExtensionPriority.');
+        if (requestParameters.PriorityRequest === null || requestParameters.PriorityRequest === undefined) {
+            throw new runtime.RequiredError('PriorityRequest','Required parameter requestParameters.PriorityRequest was null or undefined when calling createExtensionPriority.');
         }
 
         const queryParameters: any = {};
@@ -573,11 +573,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/priority`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/priority`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PriorityRequestToJSON(requestParameters.priorityRequest),
+            body: PriorityRequestToJSON(requestParameters.PriorityRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PriorityFromJSON(jsonValue));
@@ -587,8 +587,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Priority available for the project  Required scopes: bcf:write
      * Create a Priority
      */
-    async createExtensionPriority(projectsPk: number, priorityRequest: PriorityRequest, initOverrides?: RequestInit): Promise<Priority> {
-        const response = await this.createExtensionPriorityRaw({ projectsPk: projectsPk, priorityRequest: priorityRequest }, initOverrides);
+    async createExtensionPriority(projects_pk: number, PriorityRequest: PriorityRequest, initOverrides?: RequestInit): Promise<Priority> {
+        const response = await this.createExtensionPriorityRaw({ projects_pk: projects_pk, PriorityRequest: PriorityRequest }, initOverrides);
         return await response.value();
     }
 
@@ -597,12 +597,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a Stage
      */
     async createExtensionStageRaw(requestParameters: CreateExtensionStageRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Stage>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionStage.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createExtensionStage.');
         }
 
-        if (requestParameters.stageRequest === null || requestParameters.stageRequest === undefined) {
-            throw new runtime.RequiredError('stageRequest','Required parameter requestParameters.stageRequest was null or undefined when calling createExtensionStage.');
+        if (requestParameters.StageRequest === null || requestParameters.StageRequest === undefined) {
+            throw new runtime.RequiredError('StageRequest','Required parameter requestParameters.StageRequest was null or undefined when calling createExtensionStage.');
         }
 
         const queryParameters: any = {};
@@ -630,11 +630,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/stage`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/stage`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: StageRequestToJSON(requestParameters.stageRequest),
+            body: StageRequestToJSON(requestParameters.StageRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StageFromJSON(jsonValue));
@@ -644,8 +644,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Stage available for the project  Required scopes: bcf:write
      * Create a Stage
      */
-    async createExtensionStage(projectsPk: number, stageRequest: StageRequest, initOverrides?: RequestInit): Promise<Stage> {
-        const response = await this.createExtensionStageRaw({ projectsPk: projectsPk, stageRequest: stageRequest }, initOverrides);
+    async createExtensionStage(projects_pk: number, StageRequest: StageRequest, initOverrides?: RequestInit): Promise<Stage> {
+        const response = await this.createExtensionStageRaw({ projects_pk: projects_pk, StageRequest: StageRequest }, initOverrides);
         return await response.value();
     }
 
@@ -654,12 +654,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a TopicStatus
      */
     async createExtensionStatusRaw(requestParameters: CreateExtensionStatusRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<TopicStatus>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionStatus.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createExtensionStatus.');
         }
 
-        if (requestParameters.topicStatusRequest === null || requestParameters.topicStatusRequest === undefined) {
-            throw new runtime.RequiredError('topicStatusRequest','Required parameter requestParameters.topicStatusRequest was null or undefined when calling createExtensionStatus.');
+        if (requestParameters.TopicStatusRequest === null || requestParameters.TopicStatusRequest === undefined) {
+            throw new runtime.RequiredError('TopicStatusRequest','Required parameter requestParameters.TopicStatusRequest was null or undefined when calling createExtensionStatus.');
         }
 
         const queryParameters: any = {};
@@ -687,11 +687,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/status`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/status`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: TopicStatusRequestToJSON(requestParameters.topicStatusRequest),
+            body: TopicStatusRequestToJSON(requestParameters.TopicStatusRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicStatusFromJSON(jsonValue));
@@ -701,8 +701,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a TopicStatus available for the project  Required scopes: bcf:write
      * Create a TopicStatus
      */
-    async createExtensionStatus(projectsPk: number, topicStatusRequest: TopicStatusRequest, initOverrides?: RequestInit): Promise<TopicStatus> {
-        const response = await this.createExtensionStatusRaw({ projectsPk: projectsPk, topicStatusRequest: topicStatusRequest }, initOverrides);
+    async createExtensionStatus(projects_pk: number, TopicStatusRequest: TopicStatusRequest, initOverrides?: RequestInit): Promise<TopicStatus> {
+        const response = await this.createExtensionStatusRaw({ projects_pk: projects_pk, TopicStatusRequest: TopicStatusRequest }, initOverrides);
         return await response.value();
     }
 
@@ -711,12 +711,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a TopicType
      */
     async createExtensionTypeRaw(requestParameters: CreateExtensionTypeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<TopicType>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createExtensionType.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createExtensionType.');
         }
 
-        if (requestParameters.topicTypeRequest === null || requestParameters.topicTypeRequest === undefined) {
-            throw new runtime.RequiredError('topicTypeRequest','Required parameter requestParameters.topicTypeRequest was null or undefined when calling createExtensionType.');
+        if (requestParameters.TopicTypeRequest === null || requestParameters.TopicTypeRequest === undefined) {
+            throw new runtime.RequiredError('TopicTypeRequest','Required parameter requestParameters.TopicTypeRequest was null or undefined when calling createExtensionType.');
         }
 
         const queryParameters: any = {};
@@ -744,11 +744,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/type`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/type`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: TopicTypeRequestToJSON(requestParameters.topicTypeRequest),
+            body: TopicTypeRequestToJSON(requestParameters.TopicTypeRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicTypeFromJSON(jsonValue));
@@ -758,8 +758,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a TopicType available for the project  Required scopes: bcf:write
      * Create a TopicType
      */
-    async createExtensionType(projectsPk: number, topicTypeRequest: TopicTypeRequest, initOverrides?: RequestInit): Promise<TopicType> {
-        const response = await this.createExtensionTypeRaw({ projectsPk: projectsPk, topicTypeRequest: topicTypeRequest }, initOverrides);
+    async createExtensionType(projects_pk: number, TopicTypeRequest: TopicTypeRequest, initOverrides?: RequestInit): Promise<TopicType> {
+        const response = await this.createExtensionTypeRaw({ projects_pk: projects_pk, TopicTypeRequest: TopicTypeRequest }, initOverrides);
         return await response.value();
     }
 
@@ -768,18 +768,18 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a Topic with viewpoints and comments
      */
     async createFullTopicRaw(requestParameters: CreateFullTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FullTopic>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createFullTopic.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createFullTopic.');
         }
 
-        if (requestParameters.fullTopicRequest === null || requestParameters.fullTopicRequest === undefined) {
-            throw new runtime.RequiredError('fullTopicRequest','Required parameter requestParameters.fullTopicRequest was null or undefined when calling createFullTopic.');
+        if (requestParameters.FullTopicRequest === null || requestParameters.FullTopicRequest === undefined) {
+            throw new runtime.RequiredError('FullTopicRequest','Required parameter requestParameters.FullTopicRequest was null or undefined when calling createFullTopic.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -805,11 +805,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/full-topic`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/full-topic`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: FullTopicRequestToJSON(requestParameters.fullTopicRequest),
+            body: FullTopicRequestToJSON(requestParameters.FullTopicRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FullTopicFromJSON(jsonValue));
@@ -819,8 +819,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. You can send a topic, viewpoints and comments in a single call  Required scopes: bcf:write
      * Create a Topic with viewpoints and comments
      */
-    async createFullTopic(projectsPk: number, fullTopicRequest: FullTopicRequest, imgFormat?: CreateFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
-        const response = await this.createFullTopicRaw({ projectsPk: projectsPk, fullTopicRequest: fullTopicRequest, imgFormat: imgFormat }, initOverrides);
+    async createFullTopic(projects_pk: number, FullTopicRequest: FullTopicRequest, img_format?: CreateFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
+        const response = await this.createFullTopicRaw({ projects_pk: projects_pk, FullTopicRequest: FullTopicRequest, img_format: img_format }, initOverrides);
         return await response.value();
     }
 
@@ -829,12 +829,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a topic
      */
     async createTopicRaw(requestParameters: CreateTopicRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Topic>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createTopic.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createTopic.');
         }
 
-        if (requestParameters.topicRequest === null || requestParameters.topicRequest === undefined) {
-            throw new runtime.RequiredError('topicRequest','Required parameter requestParameters.topicRequest was null or undefined when calling createTopic.');
+        if (requestParameters.TopicRequest === null || requestParameters.TopicRequest === undefined) {
+            throw new runtime.RequiredError('TopicRequest','Required parameter requestParameters.TopicRequest was null or undefined when calling createTopic.');
         }
 
         const queryParameters: any = {};
@@ -862,11 +862,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: TopicRequestToJSON(requestParameters.topicRequest),
+            body: TopicRequestToJSON(requestParameters.TopicRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicFromJSON(jsonValue));
@@ -876,8 +876,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a topic  Required scopes: bcf:write
      * Create a topic
      */
-    async createTopic(projectsPk: number, topicRequest: TopicRequest, initOverrides?: RequestInit): Promise<Topic> {
-        const response = await this.createTopicRaw({ projectsPk: projectsPk, topicRequest: topicRequest }, initOverrides);
+    async createTopic(projects_pk: number, TopicRequest: TopicRequest, initOverrides?: RequestInit): Promise<Topic> {
+        const response = await this.createTopicRaw({ projects_pk: projects_pk, TopicRequest: TopicRequest }, initOverrides);
         return await response.value();
     }
 
@@ -886,18 +886,18 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a Viewpoint
      */
     async createViewpointRaw(requestParameters: CreateViewpointRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Viewpoint>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling createViewpoint.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createViewpoint.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling createViewpoint.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling createViewpoint.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -923,11 +923,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ViewpointRequestToJSON(requestParameters.viewpointRequest),
+            body: ViewpointRequestToJSON(requestParameters.ViewpointRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ViewpointFromJSON(jsonValue));
@@ -937,8 +937,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Create a Viewpoint  Required scopes: bcf:write
      * Create a Viewpoint
      */
-    async createViewpoint(projectsPk: number, topicsGuid: string, imgFormat?: CreateViewpointImgFormatEnum, viewpointRequest?: ViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
-        const response = await this.createViewpointRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat, viewpointRequest: viewpointRequest }, initOverrides);
+    async createViewpoint(projects_pk: number, topics_guid: string, img_format?: CreateViewpointImgFormatEnum, ViewpointRequest?: ViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
+        const response = await this.createViewpointRaw({ projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format, ViewpointRequest: ViewpointRequest }, initOverrides);
         return await response.value();
     }
 
@@ -951,12 +951,12 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling deleteComment.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteComment.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteComment.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling deleteComment.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling deleteComment.');
         }
 
         const queryParameters: any = {};
@@ -982,7 +982,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -995,8 +995,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Delete a comment  Required scopes: bcf:write
      * Delete a comment
      */
-    async deleteComment(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
+    async deleteComment(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCommentRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
     }
 
     /**
@@ -1008,8 +1008,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionLabel.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionLabel.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionLabel.');
         }
 
         const queryParameters: any = {};
@@ -1035,7 +1035,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/label/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/label/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1048,8 +1048,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Label. Topics using this label won\'t be deleted   Required scopes: bcf:write
      * Delete a Label
      */
-    async deleteExtensionLabel(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionLabelRaw({ id: id, projectsPk: projectsPk }, initOverrides);
+    async deleteExtensionLabel(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionLabelRaw({ id: id, projects_pk: projects_pk }, initOverrides);
     }
 
     /**
@@ -1061,8 +1061,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionPriority.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionPriority.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionPriority.');
         }
 
         const queryParameters: any = {};
@@ -1088,7 +1088,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/priority/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/priority/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1101,8 +1101,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Priority. Topics using this priority won\'t be deleted   Required scopes: bcf:write
      * Delete a Priority
      */
-    async deleteExtensionPriority(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionPriorityRaw({ id: id, projectsPk: projectsPk }, initOverrides);
+    async deleteExtensionPriority(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionPriorityRaw({ id: id, projects_pk: projects_pk }, initOverrides);
     }
 
     /**
@@ -1114,8 +1114,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionStage.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionStage.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionStage.');
         }
 
         const queryParameters: any = {};
@@ -1141,7 +1141,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/stage/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/stage/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1154,8 +1154,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Stage. Topics using this stage won\'t be deleted   Required scopes: bcf:write
      * Delete a Stage
      */
-    async deleteExtensionStage(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionStageRaw({ id: id, projectsPk: projectsPk }, initOverrides);
+    async deleteExtensionStage(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionStageRaw({ id: id, projects_pk: projects_pk }, initOverrides);
     }
 
     /**
@@ -1167,8 +1167,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionStatus.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionStatus.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionStatus.');
         }
 
         const queryParameters: any = {};
@@ -1194,7 +1194,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/status/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/status/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1207,8 +1207,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a TopicStatus. Topics using this status won\'t be deleted   Required scopes: bcf:write
      * Delete a TopicStatus
      */
-    async deleteExtensionStatus(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionStatusRaw({ id: id, projectsPk: projectsPk }, initOverrides);
+    async deleteExtensionStatus(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionStatusRaw({ id: id, projects_pk: projects_pk }, initOverrides);
     }
 
     /**
@@ -1220,8 +1220,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteExtensionType.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteExtensionType.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionType.');
         }
 
         const queryParameters: any = {};
@@ -1247,7 +1247,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/type/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/type/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1260,8 +1260,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a TopicType. Topics using this type won\'t be deleted  Required scopes: bcf:write
      * Delete a TopicType
      */
-    async deleteExtensionType(id: number, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionTypeRaw({ id: id, projectsPk: projectsPk }, initOverrides);
+    async deleteExtensionType(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionTypeRaw({ id: id, projects_pk: projects_pk }, initOverrides);
     }
 
     /**
@@ -1273,8 +1273,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling deleteTopic.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteTopic.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteTopic.');
         }
 
         const queryParameters: any = {};
@@ -1300,7 +1300,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1313,8 +1313,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Delete a topic  Required scopes: bcf:write
      * Delete a topic
      */
-    async deleteTopic(guid: string, projectsPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteTopicRaw({ guid: guid, projectsPk: projectsPk }, initOverrides);
+    async deleteTopic(guid: string, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteTopicRaw({ guid: guid, projects_pk: projects_pk }, initOverrides);
     }
 
     /**
@@ -1326,18 +1326,18 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling deleteViewpoint.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling deleteViewpoint.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteViewpoint.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling deleteViewpoint.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling deleteViewpoint.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -1361,7 +1361,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1374,8 +1374,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Viewpoint  Required scopes: bcf:write
      * Delete a Viewpoint
      */
-    async deleteViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: DeleteViewpointImgFormatEnum, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat }, initOverrides);
+    async deleteViewpoint(guid: string, projects_pk: number, topics_guid: string, img_format?: DeleteViewpointImgFormatEnum, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteViewpointRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format }, initOverrides);
     }
 
     /**
@@ -1445,8 +1445,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling fullUpdateBcfProject.');
         }
 
-        if (requestParameters.bcfProjectRequest === null || requestParameters.bcfProjectRequest === undefined) {
-            throw new runtime.RequiredError('bcfProjectRequest','Required parameter requestParameters.bcfProjectRequest was null or undefined when calling fullUpdateBcfProject.');
+        if (requestParameters.BcfProjectRequest === null || requestParameters.BcfProjectRequest === undefined) {
+            throw new runtime.RequiredError('BcfProjectRequest','Required parameter requestParameters.BcfProjectRequest was null or undefined when calling fullUpdateBcfProject.');
         }
 
         const queryParameters: any = {};
@@ -1478,7 +1478,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: BcfProjectRequestToJSON(requestParameters.bcfProjectRequest),
+            body: BcfProjectRequestToJSON(requestParameters.BcfProjectRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BcfProjectFromJSON(jsonValue));
@@ -1488,8 +1488,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a BCF project  Required scopes: bcf:write
      * Update all fields of a BCF project
      */
-    async fullUpdateBcfProject(id: number, bcfProjectRequest: BcfProjectRequest, initOverrides?: RequestInit): Promise<BcfProject> {
-        const response = await this.fullUpdateBcfProjectRaw({ id: id, bcfProjectRequest: bcfProjectRequest }, initOverrides);
+    async fullUpdateBcfProject(id: number, BcfProjectRequest: BcfProjectRequest, initOverrides?: RequestInit): Promise<BcfProject> {
+        const response = await this.fullUpdateBcfProjectRaw({ id: id, BcfProjectRequest: BcfProjectRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1502,12 +1502,12 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateComment.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling fullUpdateComment.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling fullUpdateComment.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling fullUpdateComment.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling fullUpdateComment.');
         }
 
         const queryParameters: any = {};
@@ -1535,11 +1535,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: CommentRequestToJSON(requestParameters.commentRequest),
+            body: CommentRequestToJSON(requestParameters.CommentRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CommentFromJSON(jsonValue));
@@ -1549,8 +1549,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a comment  Required scopes: bcf:write
      * Update all fields of a comment
      */
-    async fullUpdateComment(guid: string, projectsPk: number, topicsGuid: string, commentRequest?: CommentRequest, initOverrides?: RequestInit): Promise<Comment> {
-        const response = await this.fullUpdateCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, commentRequest: commentRequest }, initOverrides);
+    async fullUpdateComment(guid: string, projects_pk: number, topics_guid: string, CommentRequest?: CommentRequest, initOverrides?: RequestInit): Promise<Comment> {
+        const response = await this.fullUpdateCommentRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, CommentRequest: CommentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1563,18 +1563,18 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateFullTopic.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling fullUpdateFullTopic.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling fullUpdateFullTopic.');
         }
 
-        if (requestParameters.fullTopicRequest === null || requestParameters.fullTopicRequest === undefined) {
-            throw new runtime.RequiredError('fullTopicRequest','Required parameter requestParameters.fullTopicRequest was null or undefined when calling fullUpdateFullTopic.');
+        if (requestParameters.FullTopicRequest === null || requestParameters.FullTopicRequest === undefined) {
+            throw new runtime.RequiredError('FullTopicRequest','Required parameter requestParameters.FullTopicRequest was null or undefined when calling fullUpdateFullTopic.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -1600,11 +1600,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/full-topic/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/full-topic/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: FullTopicRequestToJSON(requestParameters.fullTopicRequest),
+            body: FullTopicRequestToJSON(requestParameters.FullTopicRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FullTopicFromJSON(jsonValue));
@@ -1614,8 +1614,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. You can update topic, viewpoints and comment is a signle call  Required scopes: bcf:write
      * Update all fields of a topic
      */
-    async fullUpdateFullTopic(guid: string, projectsPk: number, fullTopicRequest: FullTopicRequest, imgFormat?: FullUpdateFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
-        const response = await this.fullUpdateFullTopicRaw({ guid: guid, projectsPk: projectsPk, fullTopicRequest: fullTopicRequest, imgFormat: imgFormat }, initOverrides);
+    async fullUpdateFullTopic(guid: string, projects_pk: number, FullTopicRequest: FullTopicRequest, img_format?: FullUpdateFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
+        const response = await this.fullUpdateFullTopicRaw({ guid: guid, projects_pk: projects_pk, FullTopicRequest: FullTopicRequest, img_format: img_format }, initOverrides);
         return await response.value();
     }
 
@@ -1628,12 +1628,12 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateTopic.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling fullUpdateTopic.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling fullUpdateTopic.');
         }
 
-        if (requestParameters.topicRequest === null || requestParameters.topicRequest === undefined) {
-            throw new runtime.RequiredError('topicRequest','Required parameter requestParameters.topicRequest was null or undefined when calling fullUpdateTopic.');
+        if (requestParameters.TopicRequest === null || requestParameters.TopicRequest === undefined) {
+            throw new runtime.RequiredError('TopicRequest','Required parameter requestParameters.TopicRequest was null or undefined when calling fullUpdateTopic.');
         }
 
         const queryParameters: any = {};
@@ -1661,11 +1661,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: TopicRequestToJSON(requestParameters.topicRequest),
+            body: TopicRequestToJSON(requestParameters.TopicRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicFromJSON(jsonValue));
@@ -1675,8 +1675,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a topic  Required scopes: bcf:write
      * Update all fields of a topic
      */
-    async fullUpdateTopic(guid: string, projectsPk: number, topicRequest: TopicRequest, initOverrides?: RequestInit): Promise<Topic> {
-        const response = await this.fullUpdateTopicRaw({ guid: guid, projectsPk: projectsPk, topicRequest: topicRequest }, initOverrides);
+    async fullUpdateTopic(guid: string, projects_pk: number, TopicRequest: TopicRequest, initOverrides?: RequestInit): Promise<Topic> {
+        const response = await this.fullUpdateTopicRaw({ guid: guid, projects_pk: projects_pk, TopicRequest: TopicRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1689,18 +1689,18 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateViewpoint.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling fullUpdateViewpoint.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling fullUpdateViewpoint.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling fullUpdateViewpoint.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling fullUpdateViewpoint.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -1726,11 +1726,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: ViewpointRequestToJSON(requestParameters.viewpointRequest),
+            body: ViewpointRequestToJSON(requestParameters.ViewpointRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ViewpointFromJSON(jsonValue));
@@ -1740,8 +1740,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update all fields of a Viewpoint  Required scopes: bcf:write
      * Update all fields of a Viewpoint
      */
-    async fullUpdateViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: FullUpdateViewpointImgFormatEnum, viewpointRequest?: ViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
-        const response = await this.fullUpdateViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat, viewpointRequest: viewpointRequest }, initOverrides);
+    async fullUpdateViewpoint(guid: string, projects_pk: number, topics_guid: string, img_format?: FullUpdateViewpointImgFormatEnum, ViewpointRequest?: ViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
+        const response = await this.fullUpdateViewpointRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format, ViewpointRequest: ViewpointRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1850,12 +1850,12 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getColorings.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getColorings.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getColorings.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getColorings.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getColorings.');
         }
 
         const queryParameters: any = {};
@@ -1881,7 +1881,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}/coloring`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}/coloring`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1894,8 +1894,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all colorings of a viewpoint  Required scopes: bcf:read
      * Retrieve all colorings of a viewpoint
      */
-    async getColorings(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Array<Coloring>> {
-        const response = await this.getColoringsRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
+    async getColorings(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Array<Coloring>> {
+        const response = await this.getColoringsRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
         return await response.value();
     }
 
@@ -1908,12 +1908,12 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getComment.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getComment.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getComment.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getComment.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getComment.');
         }
 
         const queryParameters: any = {};
@@ -1939,7 +1939,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1952,8 +1952,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a comment  Required scopes: bcf:read
      * Retrieve a comment
      */
-    async getComment(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Comment> {
-        const response = await this.getCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
+    async getComment(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Comment> {
+        const response = await this.getCommentRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
         return await response.value();
     }
 
@@ -1962,12 +1962,12 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all comments
      */
     async getCommentsRaw(requestParameters: GetCommentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Comment>>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getComments.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getComments.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getComments.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getComments.');
         }
 
         const queryParameters: any = {};
@@ -1993,7 +1993,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2006,8 +2006,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all comments  Required scopes: bcf:read
      * Retrieve all comments
      */
-    async getComments(projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Array<Comment>> {
-        const response = await this.getCommentsRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
+    async getComments(projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Array<Comment>> {
+        const response = await this.getCommentsRaw({ projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
         return await response.value();
     }
 
@@ -2120,14 +2120,14 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getFullTopic.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getFullTopic.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getFullTopic.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -2151,7 +2151,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/full-topic/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/full-topic/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2164,8 +2164,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It responds with a topic, its viewpoints and its comments  Required scopes: bcf:read
      * Retrieve a full topic
      */
-    async getFullTopic(guid: string, projectsPk: number, imgFormat?: GetFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
-        const response = await this.getFullTopicRaw({ guid: guid, projectsPk: projectsPk, imgFormat: imgFormat }, initOverrides);
+    async getFullTopic(guid: string, projects_pk: number, img_format?: GetFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
+        const response = await this.getFullTopicRaw({ guid: guid, projects_pk: projects_pk, img_format: img_format }, initOverrides);
         return await response.value();
     }
 
@@ -2174,8 +2174,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all full topics
      */
     async getFullTopicsRaw(requestParameters: GetFullTopicsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<FullTopic>>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getFullTopics.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getFullTopics.');
         }
 
         const queryParameters: any = {};
@@ -2188,8 +2188,8 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         if (requestParameters.models) {
@@ -2217,7 +2217,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/full-topic`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/full-topic`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2230,8 +2230,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It responds with all topics, their viewpoints and their comments  Required scopes: bcf:read
      * Retrieve all full topics
      */
-    async getFullTopics(projectsPk: number, format?: string, ifcs?: Array<number>, imgFormat?: GetFullTopicsImgFormatEnum, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<FullTopic>> {
-        const response = await this.getFullTopicsRaw({ projectsPk: projectsPk, format: format, ifcs: ifcs, imgFormat: imgFormat, models: models }, initOverrides);
+    async getFullTopics(projects_pk: number, format?: string, ifcs?: Array<number>, img_format?: GetFullTopicsImgFormatEnum, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<FullTopic>> {
+        const response = await this.getFullTopicsRaw({ projects_pk: projects_pk, format: format, ifcs: ifcs, img_format: img_format, models: models }, initOverrides);
         return await response.value();
     }
 
@@ -2244,12 +2244,12 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getSelections.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getSelections.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getSelections.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getSelections.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getSelections.');
         }
 
         const queryParameters: any = {};
@@ -2275,7 +2275,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}/selection`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}/selection`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2288,8 +2288,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all selections of a viewpoint  Required scopes: bcf:read
      * Retrieve all selections of a viewpoint
      */
-    async getSelections(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Array<Component>> {
-        const response = await this.getSelectionsRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
+    async getSelections(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Array<Component>> {
+        const response = await this.getSelectionsRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
         return await response.value();
     }
 
@@ -2302,12 +2302,12 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getSnapshot.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getSnapshot.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getSnapshot.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getSnapshot.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getSnapshot.');
         }
 
         const queryParameters: any = {};
@@ -2333,7 +2333,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}/snapshot`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}/snapshot`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2346,8 +2346,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve the viewpoint\' snapshot  Required scopes: bcf:read
      * Retrieve the viewpoint\' snapshot
      */
-    async getSnapshot(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Blob> {
-        const response = await this.getSnapshotRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
+    async getSnapshot(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Blob> {
+        const response = await this.getSnapshotRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
         return await response.value();
     }
 
@@ -2360,8 +2360,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getTopic.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getTopic.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getTopic.');
         }
 
         const queryParameters: any = {};
@@ -2387,7 +2387,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2400,8 +2400,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a topic  Required scopes: bcf:read
      * Retrieve a topic
      */
-    async getTopic(guid: string, projectsPk: number, initOverrides?: RequestInit): Promise<Topic> {
-        const response = await this.getTopicRaw({ guid: guid, projectsPk: projectsPk }, initOverrides);
+    async getTopic(guid: string, projects_pk: number, initOverrides?: RequestInit): Promise<Topic> {
+        const response = await this.getTopicRaw({ guid: guid, projects_pk: projects_pk }, initOverrides);
         return await response.value();
     }
 
@@ -2410,18 +2410,18 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all viewpoints attached to the topic
      */
     async getTopicViewpointsRaw(requestParameters: GetTopicViewpointsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Viewpoint>>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getTopicViewpoints.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getTopicViewpoints.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getTopicViewpoints.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getTopicViewpoints.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -2445,7 +2445,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/topic-viewpoints`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/topic-viewpoints`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2458,8 +2458,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It returns all viewpoints of the topic that are not attached to a comment.  Required scopes: bcf:read
      * Retrieve all viewpoints attached to the topic
      */
-    async getTopicViewpoints(projectsPk: number, topicsGuid: string, imgFormat?: GetTopicViewpointsImgFormatEnum, initOverrides?: RequestInit): Promise<Array<Viewpoint>> {
-        const response = await this.getTopicViewpointsRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat }, initOverrides);
+    async getTopicViewpoints(projects_pk: number, topics_guid: string, img_format?: GetTopicViewpointsImgFormatEnum, initOverrides?: RequestInit): Promise<Array<Viewpoint>> {
+        const response = await this.getTopicViewpointsRaw({ projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format }, initOverrides);
         return await response.value();
     }
 
@@ -2468,8 +2468,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all topics
      */
     async getTopicsRaw(requestParameters: GetTopicsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Topic>>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getTopics.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getTopics.');
         }
 
         const queryParameters: any = {};
@@ -2507,7 +2507,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2520,8 +2520,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all topics  Required scopes: bcf:read
      * Retrieve all topics
      */
-    async getTopics(projectsPk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<Topic>> {
-        const response = await this.getTopicsRaw({ projectsPk: projectsPk, format: format, ifcs: ifcs, models: models }, initOverrides);
+    async getTopics(projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<Topic>> {
+        const response = await this.getTopicsRaw({ projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
 
@@ -2580,18 +2580,18 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getViewpoint.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getViewpoint.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getViewpoint.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getViewpoint.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getViewpoint.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -2615,7 +2615,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2628,8 +2628,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve a Viewpoint  Required scopes: bcf:read
      * Retrieve a Viewpoint
      */
-    async getViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: GetViewpointImgFormatEnum, initOverrides?: RequestInit): Promise<Viewpoint> {
-        const response = await this.getViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat }, initOverrides);
+    async getViewpoint(guid: string, projects_pk: number, topics_guid: string, img_format?: GetViewpointImgFormatEnum, initOverrides?: RequestInit): Promise<Viewpoint> {
+        const response = await this.getViewpointRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format }, initOverrides);
         return await response.value();
     }
 
@@ -2638,18 +2638,18 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all Viewpoints of a topic
      */
     async getViewpointsRaw(requestParameters: GetViewpointsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Viewpoint>>> {
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getViewpoints.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getViewpoints.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getViewpoints.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getViewpoints.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -2673,7 +2673,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2686,8 +2686,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all Viewpoints of a topic  Required scopes: bcf:read
      * Retrieve all Viewpoints of a topic
      */
-    async getViewpoints(projectsPk: number, topicsGuid: string, imgFormat?: GetViewpointsImgFormatEnum, initOverrides?: RequestInit): Promise<Array<Viewpoint>> {
-        const response = await this.getViewpointsRaw({ projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat }, initOverrides);
+    async getViewpoints(projects_pk: number, topics_guid: string, img_format?: GetViewpointsImgFormatEnum, initOverrides?: RequestInit): Promise<Array<Viewpoint>> {
+        const response = await this.getViewpointsRaw({ projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format }, initOverrides);
         return await response.value();
     }
 
@@ -2700,12 +2700,12 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getVisibilities.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling getVisibilities.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getVisibilities.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling getVisibilities.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getVisibilities.');
         }
 
         const queryParameters: any = {};
@@ -2731,7 +2731,7 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}/visibility`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}/visibility`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -2744,8 +2744,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all visibilities of a viewpoint  Required scopes: bcf:read
      * Retrieve all visibilities of a viewpoint
      */
-    async getVisibilities(guid: string, projectsPk: number, topicsGuid: string, initOverrides?: RequestInit): Promise<Visibility> {
-        const response = await this.getVisibilitiesRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid }, initOverrides);
+    async getVisibilities(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Visibility> {
+        const response = await this.getVisibilitiesRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
         return await response.value();
     }
 
@@ -2860,7 +2860,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedBcfProjectRequestToJSON(requestParameters.patchedBcfProjectRequest),
+            body: PatchedBcfProjectRequestToJSON(requestParameters.PatchedBcfProjectRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BcfProjectFromJSON(jsonValue));
@@ -2870,8 +2870,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update some fields of a BCF project  Required scopes: bcf:write
      * Update some fields of a BCF project
      */
-    async updateBcfProject(id: number, patchedBcfProjectRequest?: PatchedBcfProjectRequest, initOverrides?: RequestInit): Promise<BcfProject> {
-        const response = await this.updateBcfProjectRaw({ id: id, patchedBcfProjectRequest: patchedBcfProjectRequest }, initOverrides);
+    async updateBcfProject(id: number, PatchedBcfProjectRequest?: PatchedBcfProjectRequest, initOverrides?: RequestInit): Promise<BcfProject> {
+        const response = await this.updateBcfProjectRaw({ id: id, PatchedBcfProjectRequest: PatchedBcfProjectRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2884,12 +2884,12 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updateComment.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateComment.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateComment.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling updateComment.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling updateComment.');
         }
 
         const queryParameters: any = {};
@@ -2917,11 +2917,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/comments/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedCommentRequestToJSON(requestParameters.patchedCommentRequest),
+            body: PatchedCommentRequestToJSON(requestParameters.PatchedCommentRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CommentFromJSON(jsonValue));
@@ -2931,8 +2931,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update some fields of a comment  Required scopes: bcf:write
      * Update some fields of a comment
      */
-    async updateComment(guid: string, projectsPk: number, topicsGuid: string, patchedCommentRequest?: PatchedCommentRequest, initOverrides?: RequestInit): Promise<Comment> {
-        const response = await this.updateCommentRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, patchedCommentRequest: patchedCommentRequest }, initOverrides);
+    async updateComment(guid: string, projects_pk: number, topics_guid: string, PatchedCommentRequest?: PatchedCommentRequest, initOverrides?: RequestInit): Promise<Comment> {
+        const response = await this.updateCommentRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, PatchedCommentRequest: PatchedCommentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2945,8 +2945,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionLabel.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionLabel.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateExtensionLabel.');
         }
 
         const queryParameters: any = {};
@@ -2974,11 +2974,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/label/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/label/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedLabelRequestToJSON(requestParameters.patchedLabelRequest),
+            body: PatchedLabelRequestToJSON(requestParameters.PatchedLabelRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => LabelFromJSON(jsonValue));
@@ -2988,8 +2988,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Label. All topics using this label will be updated  Required scopes: bcf:write
      * Update a Label
      */
-    async updateExtensionLabel(id: number, projectsPk: number, patchedLabelRequest?: PatchedLabelRequest, initOverrides?: RequestInit): Promise<Label> {
-        const response = await this.updateExtensionLabelRaw({ id: id, projectsPk: projectsPk, patchedLabelRequest: patchedLabelRequest }, initOverrides);
+    async updateExtensionLabel(id: number, projects_pk: number, PatchedLabelRequest?: PatchedLabelRequest, initOverrides?: RequestInit): Promise<Label> {
+        const response = await this.updateExtensionLabelRaw({ id: id, projects_pk: projects_pk, PatchedLabelRequest: PatchedLabelRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3002,8 +3002,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionPriority.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionPriority.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateExtensionPriority.');
         }
 
         const queryParameters: any = {};
@@ -3031,11 +3031,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/priority/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/priority/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedPriorityRequestToJSON(requestParameters.patchedPriorityRequest),
+            body: PatchedPriorityRequestToJSON(requestParameters.PatchedPriorityRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PriorityFromJSON(jsonValue));
@@ -3045,8 +3045,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Priority. All topics using this priority will be updated  Required scopes: bcf:write
      * Update a Priority
      */
-    async updateExtensionPriority(id: number, projectsPk: number, patchedPriorityRequest?: PatchedPriorityRequest, initOverrides?: RequestInit): Promise<Priority> {
-        const response = await this.updateExtensionPriorityRaw({ id: id, projectsPk: projectsPk, patchedPriorityRequest: patchedPriorityRequest }, initOverrides);
+    async updateExtensionPriority(id: number, projects_pk: number, PatchedPriorityRequest?: PatchedPriorityRequest, initOverrides?: RequestInit): Promise<Priority> {
+        const response = await this.updateExtensionPriorityRaw({ id: id, projects_pk: projects_pk, PatchedPriorityRequest: PatchedPriorityRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3059,8 +3059,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionStage.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionStage.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateExtensionStage.');
         }
 
         const queryParameters: any = {};
@@ -3088,11 +3088,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/stage/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/stage/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedStageRequestToJSON(requestParameters.patchedStageRequest),
+            body: PatchedStageRequestToJSON(requestParameters.PatchedStageRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StageFromJSON(jsonValue));
@@ -3102,8 +3102,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Stage. All topics using this stage will be updated  Required scopes: bcf:write
      * Update a Stage
      */
-    async updateExtensionStage(id: number, projectsPk: number, patchedStageRequest?: PatchedStageRequest, initOverrides?: RequestInit): Promise<Stage> {
-        const response = await this.updateExtensionStageRaw({ id: id, projectsPk: projectsPk, patchedStageRequest: patchedStageRequest }, initOverrides);
+    async updateExtensionStage(id: number, projects_pk: number, PatchedStageRequest?: PatchedStageRequest, initOverrides?: RequestInit): Promise<Stage> {
+        const response = await this.updateExtensionStageRaw({ id: id, projects_pk: projects_pk, PatchedStageRequest: PatchedStageRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3116,8 +3116,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionStatus.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionStatus.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateExtensionStatus.');
         }
 
         const queryParameters: any = {};
@@ -3145,11 +3145,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/status/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/status/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedTopicStatusRequestToJSON(requestParameters.patchedTopicStatusRequest),
+            body: PatchedTopicStatusRequestToJSON(requestParameters.PatchedTopicStatusRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicStatusFromJSON(jsonValue));
@@ -3159,8 +3159,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a TopicStatus. All topics using this status will be updated  Required scopes: bcf:write
      * Update a TopicStatus
      */
-    async updateExtensionStatus(id: number, projectsPk: number, patchedTopicStatusRequest?: PatchedTopicStatusRequest, initOverrides?: RequestInit): Promise<TopicStatus> {
-        const response = await this.updateExtensionStatusRaw({ id: id, projectsPk: projectsPk, patchedTopicStatusRequest: patchedTopicStatusRequest }, initOverrides);
+    async updateExtensionStatus(id: number, projects_pk: number, PatchedTopicStatusRequest?: PatchedTopicStatusRequest, initOverrides?: RequestInit): Promise<TopicStatus> {
+        const response = await this.updateExtensionStatusRaw({ id: id, projects_pk: projects_pk, PatchedTopicStatusRequest: PatchedTopicStatusRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3173,8 +3173,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionType.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateExtensionType.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateExtensionType.');
         }
 
         const queryParameters: any = {};
@@ -3202,11 +3202,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/extension/type/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/extension/type/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedTopicTypeRequestToJSON(requestParameters.patchedTopicTypeRequest),
+            body: PatchedTopicTypeRequestToJSON(requestParameters.PatchedTopicTypeRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicTypeFromJSON(jsonValue));
@@ -3216,8 +3216,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a TopicType. All topics using this type will be updated  Required scopes: bcf:write
      * Update a TopicType
      */
-    async updateExtensionType(id: number, projectsPk: number, patchedTopicTypeRequest?: PatchedTopicTypeRequest, initOverrides?: RequestInit): Promise<TopicType> {
-        const response = await this.updateExtensionTypeRaw({ id: id, projectsPk: projectsPk, patchedTopicTypeRequest: patchedTopicTypeRequest }, initOverrides);
+    async updateExtensionType(id: number, projects_pk: number, PatchedTopicTypeRequest?: PatchedTopicTypeRequest, initOverrides?: RequestInit): Promise<TopicType> {
+        const response = await this.updateExtensionTypeRaw({ id: id, projects_pk: projects_pk, PatchedTopicTypeRequest: PatchedTopicTypeRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3230,14 +3230,14 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updateFullTopic.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateFullTopic.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateFullTopic.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -3263,11 +3263,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/full-topic/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/full-topic/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedFullTopicRequestToJSON(requestParameters.patchedFullTopicRequest),
+            body: PatchedFullTopicRequestToJSON(requestParameters.PatchedFullTopicRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FullTopicFromJSON(jsonValue));
@@ -3277,8 +3277,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. You can update topic, viewpoints and comment is a signle call  Required scopes: bcf:write
      * Update some fields of a topic
      */
-    async updateFullTopic(guid: string, projectsPk: number, imgFormat?: UpdateFullTopicImgFormatEnum, patchedFullTopicRequest?: PatchedFullTopicRequest, initOverrides?: RequestInit): Promise<FullTopic> {
-        const response = await this.updateFullTopicRaw({ guid: guid, projectsPk: projectsPk, imgFormat: imgFormat, patchedFullTopicRequest: patchedFullTopicRequest }, initOverrides);
+    async updateFullTopic(guid: string, projects_pk: number, img_format?: UpdateFullTopicImgFormatEnum, PatchedFullTopicRequest?: PatchedFullTopicRequest, initOverrides?: RequestInit): Promise<FullTopic> {
+        const response = await this.updateFullTopicRaw({ guid: guid, projects_pk: projects_pk, img_format: img_format, PatchedFullTopicRequest: PatchedFullTopicRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3291,8 +3291,8 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updateTopic.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateTopic.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateTopic.');
         }
 
         const queryParameters: any = {};
@@ -3320,11 +3320,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedTopicRequestToJSON(requestParameters.patchedTopicRequest),
+            body: PatchedTopicRequestToJSON(requestParameters.PatchedTopicRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TopicFromJSON(jsonValue));
@@ -3334,8 +3334,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Update some fields of a topic  Required scopes: bcf:write
      * Update some fields of a topic
      */
-    async updateTopic(guid: string, projectsPk: number, patchedTopicRequest?: PatchedTopicRequest, initOverrides?: RequestInit): Promise<Topic> {
-        const response = await this.updateTopicRaw({ guid: guid, projectsPk: projectsPk, patchedTopicRequest: patchedTopicRequest }, initOverrides);
+    async updateTopic(guid: string, projects_pk: number, PatchedTopicRequest?: PatchedTopicRequest, initOverrides?: RequestInit): Promise<Topic> {
+        const response = await this.updateTopicRaw({ guid: guid, projects_pk: projects_pk, PatchedTopicRequest: PatchedTopicRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3348,18 +3348,18 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updateViewpoint.');
         }
 
-        if (requestParameters.projectsPk === null || requestParameters.projectsPk === undefined) {
-            throw new runtime.RequiredError('projectsPk','Required parameter requestParameters.projectsPk was null or undefined when calling updateViewpoint.');
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateViewpoint.');
         }
 
-        if (requestParameters.topicsGuid === null || requestParameters.topicsGuid === undefined) {
-            throw new runtime.RequiredError('topicsGuid','Required parameter requestParameters.topicsGuid was null or undefined when calling updateViewpoint.');
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling updateViewpoint.');
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.imgFormat !== undefined) {
-            queryParameters['img_format'] = requestParameters.imgFormat;
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -3385,11 +3385,11 @@ export class BcfApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projectsPk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topicsGuid))),
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedViewpointRequestToJSON(requestParameters.patchedViewpointRequest),
+            body: PatchedViewpointRequestToJSON(requestParameters.PatchedViewpointRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ViewpointFromJSON(jsonValue));
@@ -3399,8 +3399,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update some fields of a Viewpoint  Required scopes: bcf:write
      * Update some fields of a Viewpoint
      */
-    async updateViewpoint(guid: string, projectsPk: number, topicsGuid: string, imgFormat?: UpdateViewpointImgFormatEnum, patchedViewpointRequest?: PatchedViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
-        const response = await this.updateViewpointRaw({ guid: guid, projectsPk: projectsPk, topicsGuid: topicsGuid, imgFormat: imgFormat, patchedViewpointRequest: patchedViewpointRequest }, initOverrides);
+    async updateViewpoint(guid: string, projects_pk: number, topics_guid: string, img_format?: UpdateViewpointImgFormatEnum, PatchedViewpointRequest?: PatchedViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
+        const response = await this.updateViewpointRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format, PatchedViewpointRequest: PatchedViewpointRequest }, initOverrides);
         return await response.value();
     }
 

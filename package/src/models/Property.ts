@@ -49,19 +49,19 @@ export interface Property {
      * @type {number}
      * @memberof Property
      */
-    readonly propertySetId: number;
+    readonly property_set_id: number;
     /**
      * 
      * @type {Date}
      * @memberof Property
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof Property
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
 }
 
 export function PropertyFromJSON(json: any): Property {
@@ -77,9 +77,9 @@ export function PropertyFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'id': json['id'],
         'definition': PropertyDefinitionFromJSON(json['definition']),
         'value': !exists(json, 'value') ? undefined : json['value'],
-        'propertySetId': json['property_set_id'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'property_set_id': json['property_set_id'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
     };
 }
 

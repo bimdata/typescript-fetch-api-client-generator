@@ -49,13 +49,13 @@ export interface Document {
      * @type {number}
      * @memberof Document
      */
-    parentId?: number | null;
+    parent_id?: number | null;
     /**
      * 
      * @type {User}
      * @memberof Document
      */
-    readonly createdBy: User | null;
+    readonly created_by: User | null;
     /**
      * 
      * @type {number}
@@ -73,7 +73,7 @@ export interface Document {
      * @type {string}
      * @memberof Document
      */
-    fileName?: string;
+    file_name?: string;
     /**
      * Description of the file
      * @type {string}
@@ -109,43 +109,43 @@ export interface Document {
      * @type {Date}
      * @memberof Document
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * Date of the last update
      * @type {Date}
      * @memberof Document
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {number}
      * @memberof Document
      */
-    readonly modelId: number | null;
+    readonly model_id: number | null;
     /**
      * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, DAE, BFX
      * @type {string}
      * @memberof Document
      */
-    readonly modelType: DocumentModelTypeEnum;
+    readonly model_type: DocumentModelTypeEnum;
     /**
      * DEPRECATED: Use 'model_id' instead.
      * @type {number}
      * @memberof Document
      */
-    readonly ifcId: number | null;
+    readonly ifc_id: number | null;
     /**
      * Aggregate of group user permissions and folder default permission
      * @type {number}
      * @memberof Document
      */
-    readonly userPermission: DocumentUserPermissionEnum;
+    readonly user_permission: DocumentUserPermissionEnum;
     /**
      * Document is a head of version or is owned by another document
      * @type {boolean}
      * @memberof Document
      */
-    readonly isHeadVersion: boolean;
+    readonly is_head_version: boolean;
 }
 
 /**
@@ -185,23 +185,23 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     return {
         
         'id': json['id'],
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'createdBy': UserFromJSON(json['created_by']),
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'created_by': UserFromJSON(json['created_by']),
         'project': json['project'],
         'name': json['name'],
-        'fileName': !exists(json, 'file_name') ? undefined : json['file_name'],
+        'file_name': !exists(json, 'file_name') ? undefined : json['file_name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'file': json['file'],
         'size': !exists(json, 'size') ? undefined : json['size'],
         'tags': ((json['tags'] as Array<any>).map(TagFromJSON)),
         'visas': ((json['visas'] as Array<any>).map(VisaFromJSON)),
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
-        'modelId': json['model_id'],
-        'modelType': json['model_type'],
-        'ifcId': json['ifc_id'],
-        'userPermission': json['user_permission'],
-        'isHeadVersion': json['is_head_version'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
+        'model_id': json['model_id'],
+        'model_type': json['model_type'],
+        'ifc_id': json['ifc_id'],
+        'user_permission': json['user_permission'],
+        'is_head_version': json['is_head_version'],
     };
 }
 
@@ -214,9 +214,9 @@ export function DocumentToJSON(value?: Document | null): any {
     }
     return {
         
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
         'name': value.name,
-        'file_name': value.fileName,
+        'file_name': value.file_name,
         'description': value.description,
         'file': value.file,
         'size': value.size,

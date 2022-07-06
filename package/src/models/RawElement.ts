@@ -42,7 +42,7 @@ export interface RawElement {
      * @type {Array<number>}
      * @memberof RawElement
      */
-    materialList?: Array<number> | null;
+    material_list?: Array<number> | null;
     /**
      * 
      * @type {Array<number>}
@@ -82,7 +82,7 @@ export function RawElementFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'uuid': json['uuid'],
         'type': json['type'],
         'attributes': !exists(json, 'attributes') ? undefined : json['attributes'],
-        'materialList': !exists(json, 'material_list') ? undefined : json['material_list'],
+        'material_list': !exists(json, 'material_list') ? undefined : json['material_list'],
         'psets': !exists(json, 'psets') ? undefined : json['psets'],
         'classifications': !exists(json, 'classifications') ? undefined : json['classifications'],
         'layers': !exists(json, 'layers') ? undefined : json['layers'],
@@ -102,7 +102,7 @@ export function RawElementToJSON(value?: RawElement | null): any {
         'uuid': value.uuid,
         'type': value.type,
         'attributes': value.attributes,
-        'material_list': value.materialList,
+        'material_list': value.material_list,
         'psets': value.psets,
         'classifications': value.classifications,
         'layers': value.layers,

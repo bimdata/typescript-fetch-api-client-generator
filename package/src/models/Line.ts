@@ -31,13 +31,13 @@ export interface Line {
      * @type {Point}
      * @memberof Line
      */
-    endPoint: Point;
+    end_point: Point;
     /**
      * 
      * @type {Point}
      * @memberof Line
      */
-    startPoint: Point;
+    start_point: Point;
 }
 
 export function LineFromJSON(json: any): Line {
@@ -50,8 +50,8 @@ export function LineFromJSONTyped(json: any, ignoreDiscriminator: boolean): Line
     }
     return {
         
-        'endPoint': PointFromJSON(json['end_point']),
-        'startPoint': PointFromJSON(json['start_point']),
+        'end_point': PointFromJSON(json['end_point']),
+        'start_point': PointFromJSON(json['start_point']),
     };
 }
 
@@ -64,8 +64,8 @@ export function LineToJSON(value?: Line | null): any {
     }
     return {
         
-        'end_point': PointToJSON(value.endPoint),
-        'start_point': PointToJSON(value.startPoint),
+        'end_point': PointToJSON(value.end_point),
+        'start_point': PointToJSON(value.start_point),
     };
 }
 

@@ -108,6 +108,9 @@ import {
     ProjectAccessTokenRequest,
     ProjectAccessTokenRequestFromJSON,
     ProjectAccessTokenRequestToJSON,
+    ProjectFolderTree,
+    ProjectFolderTreeFromJSON,
+    ProjectFolderTreeToJSON,
     ProjectInvitation,
     ProjectInvitationFromJSON,
     ProjectInvitationToJSON,
@@ -171,36 +174,36 @@ import {
 } from '../models';
 
 export interface AcceptValidationRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    visaPk: number;
+    project_pk: number;
+    visa_pk: number;
 }
 
 export interface AddDocumentTagRequest {
-    cloudPk: number;
-    documentPk: number;
-    projectPk: number;
-    tagIdRequest: TagIdRequest;
+    cloud_pk: number;
+    document_pk: number;
+    project_pk: number;
+    TagIdRequest: TagIdRequest;
 }
 
 export interface AddGroupMemberRequest {
-    cloudPk: number;
-    groupPk: number;
-    projectPk: number;
-    userProjectIdRequest: UserProjectIdRequest;
+    cloud_pk: number;
+    group_pk: number;
+    project_pk: number;
+    UserProjectIdRequest: UserProjectIdRequest;
 }
 
 export interface CancelCloudUserInvitationRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface CancelProjectUserInvitationRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface CheckAccessRequest {
@@ -208,26 +211,26 @@ export interface CheckAccessRequest {
 }
 
 export interface CloseVisaRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface CreateClassificationRequest {
-    cloudPk: number;
-    projectPk: number;
-    classificationRequest: Array<ClassificationRequest>;
+    cloud_pk: number;
+    project_pk: number;
+    ClassificationRequest: Array<ClassificationRequest>;
 }
 
 export interface CreateCloudRequest {
-    cloudRequest: CloudRequest;
+    CloudRequest: CloudRequest;
 }
 
 export interface CreateDMSTreeRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    writeFolderRequest: Array<WriteFolderRequest>;
+    WriteFolderRequest: Array<WriteFolderRequest>;
 }
 
 export interface CreateDemoRequest {
@@ -235,81 +238,81 @@ export interface CreateDemoRequest {
 }
 
 export interface CreateDocumentRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
     name: string;
     file: Blob;
-    parentId?: number | null;
-    fileName?: string;
+    parent_id?: number | null;
+    file_name?: string;
     description?: string | null;
     size?: number | null;
-    modelSource?: CreateDocumentModelSourceEnum;
-    ifcSource?: CreateDocumentIfcSourceEnum;
-    successorOf?: number;
+    model_source?: CreateDocumentModelSourceEnum;
+    ifc_source?: CreateDocumentIfcSourceEnum;
+    successor_of?: number;
 }
 
 export interface CreateFolderRequest {
-    cloudPk: number;
-    projectPk: number;
-    folderWithoutChildrenRequest: FolderWithoutChildrenRequest;
+    cloud_pk: number;
+    project_pk: number;
+    FolderWithoutChildrenRequest: FolderWithoutChildrenRequest;
 }
 
 export interface CreateManageGroupRequest {
-    cloudPk: number;
-    projectPk: number;
-    groupRequest: GroupRequest;
+    cloud_pk: number;
+    project_pk: number;
+    GroupRequest: GroupRequest;
 }
 
 export interface CreateProjectRequest {
-    cloudPk: number;
-    projectRequest: ProjectRequest;
+    cloud_pk: number;
+    ProjectRequest: ProjectRequest;
 }
 
 export interface CreateProjectAccessTokenRequest {
-    cloudPk: number;
-    projectPk: number;
-    projectAccessTokenRequest: ProjectAccessTokenRequest;
+    cloud_pk: number;
+    project_pk: number;
+    ProjectAccessTokenRequest: ProjectAccessTokenRequest;
 }
 
 export interface CreateTagRequest {
-    cloudPk: number;
-    projectPk: number;
-    tagRequest: TagRequest;
+    cloud_pk: number;
+    project_pk: number;
+    TagRequest: TagRequest;
 }
 
 export interface CreateValidationRequest {
-    cloudPk: number;
-    documentPk: number;
-    projectPk: number;
-    visaPk: number;
-    visaValidationRequest: VisaValidationRequest;
+    cloud_pk: number;
+    document_pk: number;
+    project_pk: number;
+    visa_pk: number;
+    VisaValidationRequest: VisaValidationRequest;
 }
 
 export interface CreateVisaRequest {
-    cloudPk: number;
-    documentPk: number;
-    projectPk: number;
-    visaRequest?: VisaRequest;
+    cloud_pk: number;
+    document_pk: number;
+    project_pk: number;
+    VisaRequest?: VisaRequest;
 }
 
 export interface CreateVisaCommentRequest {
-    cloudPk: number;
-    documentPk: number;
-    projectPk: number;
-    visaPk: number;
-    visaCommentRequest?: VisaCommentRequest;
+    cloud_pk: number;
+    document_pk: number;
+    project_pk: number;
+    visa_pk: number;
+    VisaCommentRequest?: VisaCommentRequest;
 }
 
 export interface DeleteAllDocumentHistoryRequest {
-    cloudPk: number;
-    documentPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    document_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteClassificationRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteCloudRequest {
@@ -317,105 +320,105 @@ export interface DeleteCloudRequest {
 }
 
 export interface DeleteCloudUserRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface DeleteDocumentRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteDocumentTagRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteFolderRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteGroupMemberRequest {
-    cloudPk: number;
-    groupPk: number;
+    cloud_pk: number;
+    group_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteManageGroupRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteProjectRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface DeleteProjectAccessTokenRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
     token: string;
 }
 
 export interface DeleteProjectUserRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteTagRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteValidationRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    visaPk: number;
+    project_pk: number;
+    visa_pk: number;
 }
 
 export interface DeleteVisaRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteVisaCommentRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    visaPk: number;
+    project_pk: number;
+    visa_pk: number;
 }
 
 export interface DenyValidationRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    visaPk: number;
+    project_pk: number;
+    visa_pk: number;
 }
 
 export interface GetClassificationRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetClassificationsRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetCloudRequest {
@@ -423,7 +426,7 @@ export interface GetCloudRequest {
 }
 
 export interface GetCloudInvitationsRequest {
-    cloudPk: number;
+    cloud_pk: number;
 }
 
 export interface GetCloudSizeRequest {
@@ -431,341 +434,345 @@ export interface GetCloudSizeRequest {
 }
 
 export interface GetCloudUserRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface GetCloudUsersRequest {
-    cloudPk: number;
+    cloud_pk: number;
     email?: string;
-    emailContains?: string;
-    emailEndswith?: string;
-    emailStartswith?: string;
+    email__contains?: string;
+    email__endswith?: string;
+    email__startswith?: string;
 }
 
 export interface GetDocumentRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetDocumentHistoriesRequest {
-    cloudPk: number;
-    documentPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    document_pk: number;
+    project_pk: number;
 }
 
 export interface GetDocumentsRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetFolderRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetFolderProjectUsersRequest {
-    cloudPk: number;
-    folderPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    folder_pk: number;
+    project_pk: number;
 }
 
 export interface GetFoldersRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetGroupRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetGroupsRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetManageGroupRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetManageGroupsRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetProjectRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface GetProjectAccessTokenRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
     token: string;
 }
 
 export interface GetProjectAccessTokensRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetProjectCreatorVisasRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetProjectDMSTreeRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
+export interface GetProjectFolderTreeSerializersRequest {
+    cloud_pk: number;
+}
+
 export interface GetProjectInvitationsRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetProjectSizeRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface GetProjectSubTreeRequest {
-    cloudPk: number;
+    cloud_pk: number;
 }
 
 export interface GetProjectTreeRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface GetProjectUsersRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
     email?: string;
-    emailContains?: string;
-    emailEndswith?: string;
-    emailStartswith?: string;
+    email__contains?: string;
+    email__endswith?: string;
+    email__startswith?: string;
 }
 
 export interface GetProjectValidatorVisasRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetProjectsRequest {
-    cloudPk: number;
+    cloud_pk: number;
 }
 
 export interface GetTagRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetTagsRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetValidationRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    visaPk: number;
+    project_pk: number;
+    visa_pk: number;
 }
 
 export interface GetValidationsRequest {
-    cloudPk: number;
-    documentPk: number;
-    projectPk: number;
-    visaPk: number;
+    cloud_pk: number;
+    document_pk: number;
+    project_pk: number;
+    visa_pk: number;
 }
 
 export interface GetVisaRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetVisaCommentRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    visaPk: number;
+    project_pk: number;
+    visa_pk: number;
 }
 
 export interface GetVisaCommentsRequest {
-    cloudPk: number;
-    documentPk: number;
-    projectPk: number;
-    visaPk: number;
+    cloud_pk: number;
+    document_pk: number;
+    project_pk: number;
+    visa_pk: number;
 }
 
 export interface GetVisasRequest {
-    cloudPk: number;
-    documentPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    document_pk: number;
+    project_pk: number;
 }
 
 export interface InviteCloudUserRequest {
-    cloudPk: number;
-    cloudInvitationRequest: CloudInvitationRequest;
+    cloud_pk: number;
+    CloudInvitationRequest: CloudInvitationRequest;
 }
 
 export interface InviteProjectUserRequest {
-    cloudPk: number;
-    projectPk: number;
-    projectInvitationRequest: ProjectInvitationRequest;
+    cloud_pk: number;
+    project_pk: number;
+    ProjectInvitationRequest: ProjectInvitationRequest;
 }
 
 export interface LeaveProjectRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
 }
 
 export interface LeaveVersionDocumentHistoryRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface MakeHeadVersionDocumentHistoryRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface PauseVisaRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface ResetValidationRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    visaPk: number;
+    project_pk: number;
+    visa_pk: number;
 }
 
 export interface ResumeVisaRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface UpdateClassificationRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    patchedClassificationRequest?: PatchedClassificationRequest;
+    project_pk: number;
+    PatchedClassificationRequest?: PatchedClassificationRequest;
 }
 
 export interface UpdateCloudRequest {
     id: number;
-    patchedCloudRequest?: PatchedCloudRequest;
+    PatchedCloudRequest?: PatchedCloudRequest;
 }
 
 export interface UpdateCloudUserRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    patchedUserCloudUpdateRequest?: PatchedUserCloudUpdateRequest;
+    PatchedUserCloudUpdateRequest?: PatchedUserCloudUpdateRequest;
 }
 
 export interface UpdateDocumentRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    patchedDocumentRequest?: PatchedDocumentRequest;
+    project_pk: number;
+    PatchedDocumentRequest?: PatchedDocumentRequest;
 }
 
 export interface UpdateFolderRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    patchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest;
+    project_pk: number;
+    PatchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest;
 }
 
 export interface UpdateGroupFolderRequest {
-    cloudPk: number;
-    folderPk: number;
+    cloud_pk: number;
+    folder_pk: number;
     id: number;
-    projectPk: number;
-    patchedGroupFolderRequest?: PatchedGroupFolderRequest;
+    project_pk: number;
+    PatchedGroupFolderRequest?: PatchedGroupFolderRequest;
 }
 
 export interface UpdateManageGroupRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    patchedGroupRequest?: PatchedGroupRequest;
+    project_pk: number;
+    PatchedGroupRequest?: PatchedGroupRequest;
 }
 
 export interface UpdateProjectRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    patchedProjectRequest?: PatchedProjectRequest;
+    PatchedProjectRequest?: PatchedProjectRequest;
 }
 
 export interface UpdateProjectAccessTokenRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
     token: string;
-    patchedProjectAccessTokenRequest?: PatchedProjectAccessTokenRequest;
+    PatchedProjectAccessTokenRequest?: PatchedProjectAccessTokenRequest;
 }
 
 export interface UpdateProjectUserRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    patchedUserProjectUpdateRequest?: PatchedUserProjectUpdateRequest;
+    project_pk: number;
+    PatchedUserProjectUpdateRequest?: PatchedUserProjectUpdateRequest;
 }
 
 export interface UpdateTagRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    patchedTagRequest?: PatchedTagRequest;
+    project_pk: number;
+    PatchedTagRequest?: PatchedTagRequest;
 }
 
 export interface UpdateValidationRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    visaPk: number;
-    patchedVisaValidationRequest?: PatchedVisaValidationRequest;
+    project_pk: number;
+    visa_pk: number;
+    PatchedVisaValidationRequest?: PatchedVisaValidationRequest;
 }
 
 export interface UpdateVisaRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    patchedVisaRequest?: PatchedVisaRequest;
+    project_pk: number;
+    PatchedVisaRequest?: PatchedVisaRequest;
 }
 
 export interface UpdateVisaCommentRequest {
-    cloudPk: number;
-    documentPk: number;
+    cloud_pk: number;
+    document_pk: number;
     id: number;
-    projectPk: number;
-    visaPk: number;
-    patchedVisaCommentRequest?: PatchedVisaCommentRequest;
+    project_pk: number;
+    visa_pk: number;
+    PatchedVisaCommentRequest?: PatchedVisaCommentRequest;
 }
 
 /**
@@ -778,24 +785,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Accept a validation
      */
     async acceptValidationRaw(requestParameters: AcceptValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling acceptValidation.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling acceptValidation.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling acceptValidation.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling acceptValidation.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling acceptValidation.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling acceptValidation.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling acceptValidation.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling acceptValidation.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling acceptValidation.');
         }
 
         const queryParameters: any = {};
@@ -821,7 +828,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/accept`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/accept`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -834,8 +841,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Accept a validation  Required scopes: document:write
      * Accept a validation
      */
-    async acceptValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.acceptValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    async acceptValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.acceptValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
     }
 
     /**
@@ -843,20 +850,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a tag to a document
      */
     async addDocumentTagRaw(requestParameters: AddDocumentTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addDocumentTag.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling addDocumentTag.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling addDocumentTag.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling addDocumentTag.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling addDocumentTag.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling addDocumentTag.');
         }
 
-        if (requestParameters.tagIdRequest === null || requestParameters.tagIdRequest === undefined) {
-            throw new runtime.RequiredError('tagIdRequest','Required parameter requestParameters.tagIdRequest was null or undefined when calling addDocumentTag.');
+        if (requestParameters.TagIdRequest === null || requestParameters.TagIdRequest === undefined) {
+            throw new runtime.RequiredError('TagIdRequest','Required parameter requestParameters.TagIdRequest was null or undefined when calling addDocumentTag.');
         }
 
         const queryParameters: any = {};
@@ -884,11 +891,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/tag`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/tag`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: TagIdRequestToJSON(requestParameters.tagIdRequest),
+            body: TagIdRequestToJSON(requestParameters.TagIdRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DocumentFromJSON(jsonValue));
@@ -898,8 +905,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a tag to a document  Required scopes: document:write
      * Add a tag to a document
      */
-    async addDocumentTag(cloudPk: number, documentPk: number, projectPk: number, tagIdRequest: TagIdRequest, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.addDocumentTagRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, tagIdRequest: tagIdRequest }, initOverrides);
+    async addDocumentTag(cloud_pk: number, document_pk: number, project_pk: number, TagIdRequest: TagIdRequest, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.addDocumentTagRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk, TagIdRequest: TagIdRequest }, initOverrides);
         return await response.value();
     }
 
@@ -908,20 +915,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a user to a group
      */
     async addGroupMemberRaw(requestParameters: AddGroupMemberRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<UserProject>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling addGroupMember.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling addGroupMember.');
         }
 
-        if (requestParameters.groupPk === null || requestParameters.groupPk === undefined) {
-            throw new runtime.RequiredError('groupPk','Required parameter requestParameters.groupPk was null or undefined when calling addGroupMember.');
+        if (requestParameters.group_pk === null || requestParameters.group_pk === undefined) {
+            throw new runtime.RequiredError('group_pk','Required parameter requestParameters.group_pk was null or undefined when calling addGroupMember.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling addGroupMember.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling addGroupMember.');
         }
 
-        if (requestParameters.userProjectIdRequest === null || requestParameters.userProjectIdRequest === undefined) {
-            throw new runtime.RequiredError('userProjectIdRequest','Required parameter requestParameters.userProjectIdRequest was null or undefined when calling addGroupMember.');
+        if (requestParameters.UserProjectIdRequest === null || requestParameters.UserProjectIdRequest === undefined) {
+            throw new runtime.RequiredError('UserProjectIdRequest','Required parameter requestParameters.UserProjectIdRequest was null or undefined when calling addGroupMember.');
         }
 
         const queryParameters: any = {};
@@ -949,11 +956,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{group_pk}/member`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"group_pk"}}`, encodeURIComponent(String(requestParameters.groupPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{group_pk}/member`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"group_pk"}}`, encodeURIComponent(String(requestParameters.group_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UserProjectIdRequestToJSON(requestParameters.userProjectIdRequest),
+            body: UserProjectIdRequestToJSON(requestParameters.UserProjectIdRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProjectFromJSON(jsonValue));
@@ -963,8 +970,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a userproject to a group. Must be an admin of the project  Required scopes: org:manage
      * Add a user to a group
      */
-    async addGroupMember(cloudPk: number, groupPk: number, projectPk: number, userProjectIdRequest: UserProjectIdRequest, initOverrides?: RequestInit): Promise<UserProject> {
-        const response = await this.addGroupMemberRaw({ cloudPk: cloudPk, groupPk: groupPk, projectPk: projectPk, userProjectIdRequest: userProjectIdRequest }, initOverrides);
+    async addGroupMember(cloud_pk: number, group_pk: number, project_pk: number, UserProjectIdRequest: UserProjectIdRequest, initOverrides?: RequestInit): Promise<UserProject> {
+        const response = await this.addGroupMemberRaw({ cloud_pk: cloud_pk, group_pk: group_pk, project_pk: project_pk, UserProjectIdRequest: UserProjectIdRequest }, initOverrides);
         return await response.value();
     }
 
@@ -973,8 +980,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Cancel a pending invitation
      */
     async cancelCloudUserInvitationRaw(requestParameters: CancelCloudUserInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling cancelCloudUserInvitation.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling cancelCloudUserInvitation.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -1004,7 +1011,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/invitation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/invitation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1017,8 +1024,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Cancel a pending invitation  Required scopes: org:manage
      * Cancel a pending invitation
      */
-    async cancelCloudUserInvitation(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
-        await this.cancelCloudUserInvitationRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async cancelCloudUserInvitation(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.cancelCloudUserInvitationRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
     }
 
     /**
@@ -1026,16 +1033,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Cancel a pending invitation
      */
     async cancelProjectUserInvitationRaw(requestParameters: CancelProjectUserInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling cancelProjectUserInvitation.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling cancelProjectUserInvitation.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling cancelProjectUserInvitation.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling cancelProjectUserInvitation.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling cancelProjectUserInvitation.');
         }
 
         const queryParameters: any = {};
@@ -1061,7 +1068,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/invitation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/invitation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1074,8 +1081,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Cancel a pending invitation  Required scopes: org:manage
      * Cancel a pending invitation
      */
-    async cancelProjectUserInvitation(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.cancelProjectUserInvitationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async cancelProjectUserInvitation(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.cancelProjectUserInvitationRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1132,20 +1139,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Close a visa of a document
      */
     async closeVisaRaw(requestParameters: CloseVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling closeVisa.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling closeVisa.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling closeVisa.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling closeVisa.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling closeVisa.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling closeVisa.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling closeVisa.');
         }
 
         const queryParameters: any = {};
@@ -1171,7 +1178,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}/close`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}/close`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -1184,8 +1191,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Close a visa of a document  Required scopes: document:write
      * Close a visa of a document
      */
-    async closeVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.closeVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+    async closeVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.closeVisaRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1193,16 +1200,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a classification
      */
     async createClassificationRaw(requestParameters: CreateClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createClassification.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createClassification.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createClassification.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createClassification.');
         }
 
-        if (requestParameters.classificationRequest === null || requestParameters.classificationRequest === undefined) {
-            throw new runtime.RequiredError('classificationRequest','Required parameter requestParameters.classificationRequest was null or undefined when calling createClassification.');
+        if (requestParameters.ClassificationRequest === null || requestParameters.ClassificationRequest === undefined) {
+            throw new runtime.RequiredError('ClassificationRequest','Required parameter requestParameters.ClassificationRequest was null or undefined when calling createClassification.');
         }
 
         const queryParameters: any = {};
@@ -1230,11 +1237,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.classificationRequest.map(ClassificationRequestToJSON),
+            body: requestParameters.ClassificationRequest.map(ClassificationRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ClassificationFromJSON));
@@ -1244,8 +1251,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  If created classification already exists, it will not be duplicated and the previous one will be returned. You also can add a \'classification\' filter on this endpoint. By ex: /classification?name=\'untec\'. The name is case sensitive  Required scopes: ifc:write, model:write
      * Create a classification
      */
-    async createClassification(cloudPk: number, projectPk: number, classificationRequest: Array<ClassificationRequest>, initOverrides?: RequestInit): Promise<Array<Classification>> {
-        const response = await this.createClassificationRaw({ cloudPk: cloudPk, projectPk: projectPk, classificationRequest: classificationRequest }, initOverrides);
+    async createClassification(cloud_pk: number, project_pk: number, ClassificationRequest: Array<ClassificationRequest>, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.createClassificationRaw({ cloud_pk: cloud_pk, project_pk: project_pk, ClassificationRequest: ClassificationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1254,8 +1261,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a cloud
      */
     async createCloudRaw(requestParameters: CreateCloudRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Cloud>> {
-        if (requestParameters.cloudRequest === null || requestParameters.cloudRequest === undefined) {
-            throw new runtime.RequiredError('cloudRequest','Required parameter requestParameters.cloudRequest was null or undefined when calling createCloud.');
+        if (requestParameters.CloudRequest === null || requestParameters.CloudRequest === undefined) {
+            throw new runtime.RequiredError('CloudRequest','Required parameter requestParameters.CloudRequest was null or undefined when calling createCloud.');
         }
 
         const queryParameters: any = {};
@@ -1287,7 +1294,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CloudRequestToJSON(requestParameters.cloudRequest),
+            body: CloudRequestToJSON(requestParameters.CloudRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CloudFromJSON(jsonValue));
@@ -1297,8 +1304,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a cloud  Required scopes: cloud:manage
      * Create a cloud
      */
-    async createCloud(cloudRequest: CloudRequest, initOverrides?: RequestInit): Promise<Cloud> {
-        const response = await this.createCloudRaw({ cloudRequest: cloudRequest }, initOverrides);
+    async createCloud(CloudRequest: CloudRequest, initOverrides?: RequestInit): Promise<Cloud> {
+        const response = await this.createCloudRaw({ CloudRequest: CloudRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1307,16 +1314,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a complete DMS tree
      */
     async createDMSTreeRaw(requestParameters: CreateDMSTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createDMSTree.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createDMSTree.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createDMSTree.');
         }
 
-        if (requestParameters.writeFolderRequest === null || requestParameters.writeFolderRequest === undefined) {
-            throw new runtime.RequiredError('writeFolderRequest','Required parameter requestParameters.writeFolderRequest was null or undefined when calling createDMSTree.');
+        if (requestParameters.WriteFolderRequest === null || requestParameters.WriteFolderRequest === undefined) {
+            throw new runtime.RequiredError('WriteFolderRequest','Required parameter requestParameters.WriteFolderRequest was null or undefined when calling createDMSTree.');
         }
 
         const queryParameters: any = {};
@@ -1344,11 +1351,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{id}/dms-tree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/project/{id}/dms-tree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.writeFolderRequest.map(WriteFolderRequestToJSON),
+            body: requestParameters.WriteFolderRequest.map(WriteFolderRequestToJSON),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1358,8 +1365,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      *  Create a DMS structure of folder Format request : ``` [{     \"name\": :name:     \"parent_id\": :parent_id:                      # optionnal     \"default_permission\": :default_permission:    # optionnal     \"children\": [{                                # optionnal         \"name\": :name:,         \"children\": []     }] }], ```                   Required scopes: org:manage
      * Create a complete DMS tree
      */
-    async createDMSTree(cloudPk: number, id: number, writeFolderRequest: Array<WriteFolderRequest>, initOverrides?: RequestInit): Promise<void> {
-        await this.createDMSTreeRaw({ cloudPk: cloudPk, id: id, writeFolderRequest: writeFolderRequest }, initOverrides);
+    async createDMSTree(cloud_pk: number, id: number, WriteFolderRequest: Array<WriteFolderRequest>, initOverrides?: RequestInit): Promise<void> {
+        await this.createDMSTreeRaw({ cloud_pk: cloud_pk, id: id, WriteFolderRequest: WriteFolderRequest }, initOverrides);
     }
 
     /**
@@ -1413,16 +1420,16 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DXF\', \'IFC\', \'DWG\', \'OBJ\', \'DAE\', \'GLTF\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'BFX\', \'DWG\', \'DAE\', \'OBJ\', \'DXF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createDocument.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createDocument.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createDocument.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createDocument.');
         }
 
         if (requestParameters.name === null || requestParameters.name === undefined) {
@@ -1472,16 +1479,16 @@ export class CollaborationApi extends runtime.BaseAPI {
             formParams = new URLSearchParams();
         }
 
-        if (requestParameters.parentId !== undefined) {
-            formParams.append('parent_id', requestParameters.parentId as any);
+        if (requestParameters.parent_id !== undefined) {
+            formParams.append('parent_id', requestParameters.parent_id as any);
         }
 
         if (requestParameters.name !== undefined) {
             formParams.append('name', requestParameters.name as any);
         }
 
-        if (requestParameters.fileName !== undefined) {
-            formParams.append('file_name', requestParameters.fileName as any);
+        if (requestParameters.file_name !== undefined) {
+            formParams.append('file_name', requestParameters.file_name as any);
         }
 
         if (requestParameters.description !== undefined) {
@@ -1496,20 +1503,20 @@ export class CollaborationApi extends runtime.BaseAPI {
             formParams.append('size', requestParameters.size as any);
         }
 
-        if (requestParameters.modelSource !== undefined) {
-            formParams.append('model_source', requestParameters.modelSource as any);
+        if (requestParameters.model_source !== undefined) {
+            formParams.append('model_source', requestParameters.model_source as any);
         }
 
-        if (requestParameters.ifcSource !== undefined) {
-            formParams.append('ifc_source', requestParameters.ifcSource as any);
+        if (requestParameters.ifc_source !== undefined) {
+            formParams.append('ifc_source', requestParameters.ifc_source as any);
         }
 
-        if (requestParameters.successorOf !== undefined) {
-            formParams.append('successor_of', requestParameters.successorOf as any);
+        if (requestParameters.successor_of !== undefined) {
+            formParams.append('successor_of', requestParameters.successor_of as any);
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -1520,11 +1527,11 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DXF\', \'IFC\', \'DWG\', \'OBJ\', \'DAE\', \'GLTF\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'BFX\', \'DWG\', \'DAE\', \'OBJ\', \'DXF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocument(cloudPk: number, projectPk: number, name: string, file: Blob, parentId?: number | null, fileName?: string, description?: string | null, size?: number | null, modelSource?: CreateDocumentModelSourceEnum, ifcSource?: CreateDocumentIfcSourceEnum, successorOf?: number, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.createDocumentRaw({ cloudPk: cloudPk, projectPk: projectPk, name: name, file: file, parentId: parentId, fileName: fileName, description: description, size: size, modelSource: modelSource, ifcSource: ifcSource, successorOf: successorOf }, initOverrides);
+    async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.createDocumentRaw({ cloud_pk: cloud_pk, project_pk: project_pk, name: name, file: file, parent_id: parent_id, file_name: file_name, description: description, size: size, model_source: model_source, ifc_source: ifc_source, successor_of: successor_of }, initOverrides);
         return await response.value();
     }
 
@@ -1533,16 +1540,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a folder
      */
     async createFolderRaw(requestParameters: CreateFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createFolder.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createFolder.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createFolder.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createFolder.');
         }
 
-        if (requestParameters.folderWithoutChildrenRequest === null || requestParameters.folderWithoutChildrenRequest === undefined) {
-            throw new runtime.RequiredError('folderWithoutChildrenRequest','Required parameter requestParameters.folderWithoutChildrenRequest was null or undefined when calling createFolder.');
+        if (requestParameters.FolderWithoutChildrenRequest === null || requestParameters.FolderWithoutChildrenRequest === undefined) {
+            throw new runtime.RequiredError('FolderWithoutChildrenRequest','Required parameter requestParameters.FolderWithoutChildrenRequest was null or undefined when calling createFolder.');
         }
 
         const queryParameters: any = {};
@@ -1570,11 +1577,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/folder`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: FolderWithoutChildrenRequestToJSON(requestParameters.folderWithoutChildrenRequest),
+            body: FolderWithoutChildrenRequestToJSON(requestParameters.FolderWithoutChildrenRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FolderWithoutChildrenFromJSON(jsonValue));
@@ -1584,8 +1591,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * If the created folder have no parent, it will be put as a child of the default root folder of the project  Required scopes: document:write
      * Create a folder
      */
-    async createFolder(cloudPk: number, projectPk: number, folderWithoutChildrenRequest: FolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
-        const response = await this.createFolderRaw({ cloudPk: cloudPk, projectPk: projectPk, folderWithoutChildrenRequest: folderWithoutChildrenRequest }, initOverrides);
+    async createFolder(cloud_pk: number, project_pk: number, FolderWithoutChildrenRequest: FolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
+        const response = await this.createFolderRaw({ cloud_pk: cloud_pk, project_pk: project_pk, FolderWithoutChildrenRequest: FolderWithoutChildrenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1594,16 +1601,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a group
      */
     async createManageGroupRaw(requestParameters: CreateManageGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Group>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createManageGroup.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createManageGroup.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createManageGroup.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createManageGroup.');
         }
 
-        if (requestParameters.groupRequest === null || requestParameters.groupRequest === undefined) {
-            throw new runtime.RequiredError('groupRequest','Required parameter requestParameters.groupRequest was null or undefined when calling createManageGroup.');
+        if (requestParameters.GroupRequest === null || requestParameters.GroupRequest === undefined) {
+            throw new runtime.RequiredError('GroupRequest','Required parameter requestParameters.GroupRequest was null or undefined when calling createManageGroup.');
         }
 
         const queryParameters: any = {};
@@ -1631,11 +1638,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/group`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: GroupRequestToJSON(requestParameters.groupRequest),
+            body: GroupRequestToJSON(requestParameters.GroupRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => GroupFromJSON(jsonValue));
@@ -1645,8 +1652,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a group. Must be an admin of the project  Required scopes: org:manage
      * Create a group
      */
-    async createManageGroup(cloudPk: number, projectPk: number, groupRequest: GroupRequest, initOverrides?: RequestInit): Promise<Group> {
-        const response = await this.createManageGroupRaw({ cloudPk: cloudPk, projectPk: projectPk, groupRequest: groupRequest }, initOverrides);
+    async createManageGroup(cloud_pk: number, project_pk: number, GroupRequest: GroupRequest, initOverrides?: RequestInit): Promise<Group> {
+        const response = await this.createManageGroupRaw({ cloud_pk: cloud_pk, project_pk: project_pk, GroupRequest: GroupRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1655,12 +1662,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a project
      */
     async createProjectRaw(requestParameters: CreateProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Project>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createProject.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createProject.');
         }
 
-        if (requestParameters.projectRequest === null || requestParameters.projectRequest === undefined) {
-            throw new runtime.RequiredError('projectRequest','Required parameter requestParameters.projectRequest was null or undefined when calling createProject.');
+        if (requestParameters.ProjectRequest === null || requestParameters.ProjectRequest === undefined) {
+            throw new runtime.RequiredError('ProjectRequest','Required parameter requestParameters.ProjectRequest was null or undefined when calling createProject.');
         }
 
         const queryParameters: any = {};
@@ -1688,11 +1695,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))),
+            path: `/cloud/{cloud_pk}/project`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ProjectRequestToJSON(requestParameters.projectRequest),
+            body: ProjectRequestToJSON(requestParameters.ProjectRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectFromJSON(jsonValue));
@@ -1702,8 +1709,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a project  Required scopes: org:manage
      * Create a project
      */
-    async createProject(cloudPk: number, projectRequest: ProjectRequest, initOverrides?: RequestInit): Promise<Project> {
-        const response = await this.createProjectRaw({ cloudPk: cloudPk, projectRequest: projectRequest }, initOverrides);
+    async createProject(cloud_pk: number, ProjectRequest: ProjectRequest, initOverrides?: RequestInit): Promise<Project> {
+        const response = await this.createProjectRaw({ cloud_pk: cloud_pk, ProjectRequest: ProjectRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1712,16 +1719,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a token for this project
      */
     async createProjectAccessTokenRaw(requestParameters: CreateProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectAccessToken>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createProjectAccessToken.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createProjectAccessToken.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createProjectAccessToken.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createProjectAccessToken.');
         }
 
-        if (requestParameters.projectAccessTokenRequest === null || requestParameters.projectAccessTokenRequest === undefined) {
-            throw new runtime.RequiredError('projectAccessTokenRequest','Required parameter requestParameters.projectAccessTokenRequest was null or undefined when calling createProjectAccessToken.');
+        if (requestParameters.ProjectAccessTokenRequest === null || requestParameters.ProjectAccessTokenRequest === undefined) {
+            throw new runtime.RequiredError('ProjectAccessTokenRequest','Required parameter requestParameters.ProjectAccessTokenRequest was null or undefined when calling createProjectAccessToken.');
         }
 
         const queryParameters: any = {};
@@ -1749,11 +1756,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ProjectAccessTokenRequestToJSON(requestParameters.projectAccessTokenRequest),
+            body: ProjectAccessTokenRequestToJSON(requestParameters.ProjectAccessTokenRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectAccessTokenFromJSON(jsonValue));
@@ -1763,8 +1770,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Tokens are valid 1 day by default  Required scopes: org:manage
      * Create a token for this project
      */
-    async createProjectAccessToken(cloudPk: number, projectPk: number, projectAccessTokenRequest: ProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
-        const response = await this.createProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, projectAccessTokenRequest: projectAccessTokenRequest }, initOverrides);
+    async createProjectAccessToken(cloud_pk: number, project_pk: number, ProjectAccessTokenRequest: ProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
+        const response = await this.createProjectAccessTokenRaw({ cloud_pk: cloud_pk, project_pk: project_pk, ProjectAccessTokenRequest: ProjectAccessTokenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1773,16 +1780,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a tag
      */
     async createTagRaw(requestParameters: CreateTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Tag>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createTag.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createTag.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createTag.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createTag.');
         }
 
-        if (requestParameters.tagRequest === null || requestParameters.tagRequest === undefined) {
-            throw new runtime.RequiredError('tagRequest','Required parameter requestParameters.tagRequest was null or undefined when calling createTag.');
+        if (requestParameters.TagRequest === null || requestParameters.TagRequest === undefined) {
+            throw new runtime.RequiredError('TagRequest','Required parameter requestParameters.TagRequest was null or undefined when calling createTag.');
         }
 
         const queryParameters: any = {};
@@ -1810,11 +1817,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/tag`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: TagRequestToJSON(requestParameters.tagRequest),
+            body: TagRequestToJSON(requestParameters.TagRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TagFromJSON(jsonValue));
@@ -1824,8 +1831,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a tag  Required scopes: org:manage
      * Create a tag
      */
-    async createTag(cloudPk: number, projectPk: number, tagRequest: TagRequest, initOverrides?: RequestInit): Promise<Tag> {
-        const response = await this.createTagRaw({ cloudPk: cloudPk, projectPk: projectPk, tagRequest: tagRequest }, initOverrides);
+    async createTag(cloud_pk: number, project_pk: number, TagRequest: TagRequest, initOverrides?: RequestInit): Promise<Tag> {
+        const response = await this.createTagRaw({ cloud_pk: cloud_pk, project_pk: project_pk, TagRequest: TagRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1834,24 +1841,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a validation to a visa
      */
     async createValidationRaw(requestParameters: CreateValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaValidation>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createValidation.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createValidation.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling createValidation.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling createValidation.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createValidation.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createValidation.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling createValidation.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling createValidation.');
         }
 
-        if (requestParameters.visaValidationRequest === null || requestParameters.visaValidationRequest === undefined) {
-            throw new runtime.RequiredError('visaValidationRequest','Required parameter requestParameters.visaValidationRequest was null or undefined when calling createValidation.');
+        if (requestParameters.VisaValidationRequest === null || requestParameters.VisaValidationRequest === undefined) {
+            throw new runtime.RequiredError('VisaValidationRequest','Required parameter requestParameters.VisaValidationRequest was null or undefined when calling createValidation.');
         }
 
         const queryParameters: any = {};
@@ -1879,11 +1886,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: VisaValidationRequestToJSON(requestParameters.visaValidationRequest),
+            body: VisaValidationRequestToJSON(requestParameters.VisaValidationRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaValidationFromJSON(jsonValue));
@@ -1893,8 +1900,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a validation to a visa  Required scopes: document:write
      * Add a validation to a visa
      */
-    async createValidation(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, visaValidationRequest: VisaValidationRequest, initOverrides?: RequestInit): Promise<VisaValidation> {
-        const response = await this.createValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk, visaValidationRequest: visaValidationRequest }, initOverrides);
+    async createValidation(cloud_pk: number, document_pk: number, project_pk: number, visa_pk: number, VisaValidationRequest: VisaValidationRequest, initOverrides?: RequestInit): Promise<VisaValidation> {
+        const response = await this.createValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk, visa_pk: visa_pk, VisaValidationRequest: VisaValidationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1903,16 +1910,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a visa
      */
     async createVisaRaw(requestParameters: CreateVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visa>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createVisa.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createVisa.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling createVisa.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling createVisa.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createVisa.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createVisa.');
         }
 
         const queryParameters: any = {};
@@ -1940,11 +1947,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: VisaRequestToJSON(requestParameters.visaRequest),
+            body: VisaRequestToJSON(requestParameters.VisaRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaFromJSON(jsonValue));
@@ -1954,8 +1961,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Create a visa  Required scopes: document:write
      * Create a visa
      */
-    async createVisa(cloudPk: number, documentPk: number, projectPk: number, visaRequest?: VisaRequest, initOverrides?: RequestInit): Promise<Visa> {
-        const response = await this.createVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaRequest: visaRequest }, initOverrides);
+    async createVisa(cloud_pk: number, document_pk: number, project_pk: number, VisaRequest?: VisaRequest, initOverrides?: RequestInit): Promise<Visa> {
+        const response = await this.createVisaRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk, VisaRequest: VisaRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1964,20 +1971,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a comment
      */
     async createVisaCommentRaw(requestParameters: CreateVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaComment>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createVisaComment.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createVisaComment.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling createVisaComment.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling createVisaComment.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createVisaComment.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createVisaComment.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling createVisaComment.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling createVisaComment.');
         }
 
         const queryParameters: any = {};
@@ -2005,11 +2012,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: VisaCommentRequestToJSON(requestParameters.visaCommentRequest),
+            body: VisaCommentRequestToJSON(requestParameters.VisaCommentRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaCommentFromJSON(jsonValue));
@@ -2019,8 +2026,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Add a comment  Required scopes: document:write
      * Add a comment
      */
-    async createVisaComment(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, visaCommentRequest?: VisaCommentRequest, initOverrides?: RequestInit): Promise<VisaComment> {
-        const response = await this.createVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk, visaCommentRequest: visaCommentRequest }, initOverrides);
+    async createVisaComment(cloud_pk: number, document_pk: number, project_pk: number, visa_pk: number, VisaCommentRequest?: VisaCommentRequest, initOverrides?: RequestInit): Promise<VisaComment> {
+        const response = await this.createVisaCommentRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk, visa_pk: visa_pk, VisaCommentRequest: VisaCommentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2029,16 +2036,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete all document history
      */
     async deleteAllDocumentHistoryRaw(requestParameters: DeleteAllDocumentHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteAllDocumentHistory.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteAllDocumentHistory.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteAllDocumentHistory.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling deleteAllDocumentHistory.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteAllDocumentHistory.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteAllDocumentHistory.');
         }
 
         const queryParameters: any = {};
@@ -2064,7 +2071,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/delete`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/delete`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2077,8 +2084,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete the document from the head version and all its history  Required scopes: document:write
      * Delete all document history
      */
-    async deleteAllDocumentHistory(cloudPk: number, documentPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteAllDocumentHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk }, initOverrides);
+    async deleteAllDocumentHistory(cloud_pk: number, document_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteAllDocumentHistoryRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2086,16 +2093,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a classification
      */
     async deleteClassificationRaw(requestParameters: DeleteClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteClassification.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteClassification.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteClassification.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteClassification.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteClassification.');
         }
 
         const queryParameters: any = {};
@@ -2121,7 +2128,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/classification/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/classification/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2134,8 +2141,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * All elements having this classification will lose it  Required scopes: ifc:write, model:write
      * Delete a classification
      */
-    async deleteClassification(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteClassificationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteClassification(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteClassificationRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2192,8 +2199,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a user from a cloud
      */
     async deleteCloudUserRaw(requestParameters: DeleteCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteCloudUser.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteCloudUser.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -2223,7 +2230,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2236,8 +2243,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * The user will also be removed from all the projects of the cloud  Required scopes: cloud:manage
      * Remove a user from a cloud
      */
-    async deleteCloudUser(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCloudUserRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async deleteCloudUser(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCloudUserRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
     }
 
     /**
@@ -2245,16 +2252,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete the document
      */
     async deleteDocumentRaw(requestParameters: DeleteDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteDocument.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteDocument.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteDocument.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteDocument.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteDocument.');
         }
 
         const queryParameters: any = {};
@@ -2280,7 +2287,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2293,8 +2300,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete the document  Required scopes: document:write
      * Delete the document
      */
-    async deleteDocument(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteDocument(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteDocumentRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2302,20 +2309,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a tag from a document
      */
     async deleteDocumentTagRaw(requestParameters: DeleteDocumentTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteDocumentTag.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteDocumentTag.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteDocumentTag.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling deleteDocumentTag.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteDocumentTag.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteDocumentTag.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteDocumentTag.');
         }
 
         const queryParameters: any = {};
@@ -2341,7 +2348,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2354,8 +2361,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a tag from a document  Required scopes: document:write
      * Delete a tag from a document
      */
-    async deleteDocumentTag(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteDocumentTagRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteDocumentTag(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteDocumentTagRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2363,16 +2370,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a folder
      */
     async deleteFolderRaw(requestParameters: DeleteFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteFolder.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteFolder.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteFolder.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteFolder.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteFolder.');
         }
 
         const queryParameters: any = {};
@@ -2398,7 +2405,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2411,8 +2418,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * All files and subfolders will be deleted too. If folder is a project\'s root folder, only children are deleted  Required scopes: document:write
      * Delete a folder
      */
-    async deleteFolder(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteFolderRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteFolder(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteFolderRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2420,20 +2427,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a user from a group
      */
     async deleteGroupMemberRaw(requestParameters: DeleteGroupMemberRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteGroupMember.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteGroupMember.');
         }
 
-        if (requestParameters.groupPk === null || requestParameters.groupPk === undefined) {
-            throw new runtime.RequiredError('groupPk','Required parameter requestParameters.groupPk was null or undefined when calling deleteGroupMember.');
+        if (requestParameters.group_pk === null || requestParameters.group_pk === undefined) {
+            throw new runtime.RequiredError('group_pk','Required parameter requestParameters.group_pk was null or undefined when calling deleteGroupMember.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteGroupMember.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteGroupMember.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteGroupMember.');
         }
 
         const queryParameters: any = {};
@@ -2459,7 +2466,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{group_pk}/member/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"group_pk"}}`, encodeURIComponent(String(requestParameters.groupPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{group_pk}/member/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"group_pk"}}`, encodeURIComponent(String(requestParameters.group_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2472,8 +2479,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a userproject from a group. Id is the userproject_id. Must be an admin of the project.  Required scopes: org:manage
      * Delete a user from a group
      */
-    async deleteGroupMember(cloudPk: number, groupPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteGroupMemberRaw({ cloudPk: cloudPk, groupPk: groupPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteGroupMember(cloud_pk: number, group_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteGroupMemberRaw({ cloud_pk: cloud_pk, group_pk: group_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2481,16 +2488,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a group
      */
     async deleteManageGroupRaw(requestParameters: DeleteManageGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteManageGroup.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteManageGroup.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteManageGroup.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteManageGroup.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteManageGroup.');
         }
 
         const queryParameters: any = {};
@@ -2516,7 +2523,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2529,8 +2536,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a group. Must be an admin of the project  Required scopes: org:manage
      * Delete a group
      */
-    async deleteManageGroup(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteManageGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteManageGroup(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteManageGroupRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2538,8 +2545,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a project
      */
     async deleteProjectRaw(requestParameters: DeleteProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteProject.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteProject.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -2569,7 +2576,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/project/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2582,8 +2589,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * It can take a long time to respond because we may need to delete all properties of all elements of all models in the project  Required scopes: org:manage
      * Delete a project
      */
-    async deleteProject(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteProjectRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async deleteProject(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteProjectRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
     }
 
     /**
@@ -2591,12 +2598,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a token
      */
     async deleteProjectAccessTokenRaw(requestParameters: DeleteProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteProjectAccessToken.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteProjectAccessToken.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteProjectAccessToken.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteProjectAccessToken.');
         }
 
         if (requestParameters.token === null || requestParameters.token === undefined) {
@@ -2626,7 +2633,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2639,8 +2646,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Deleting a token will revoke it  Required scopes: org:manage
      * Delete a token
      */
-    async deleteProjectAccessToken(cloudPk: number, projectPk: number, token: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, token: token }, initOverrides);
+    async deleteProjectAccessToken(cloud_pk: number, project_pk: number, token: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteProjectAccessTokenRaw({ cloud_pk: cloud_pk, project_pk: project_pk, token: token }, initOverrides);
     }
 
     /**
@@ -2648,16 +2655,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a user from a project
      */
     async deleteProjectUserRaw(requestParameters: DeleteProjectUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteProjectUser.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteProjectUser.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteProjectUser.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteProjectUser.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteProjectUser.');
         }
 
         const queryParameters: any = {};
@@ -2683,7 +2690,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2696,8 +2703,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a user from a project  Required scopes: cloud:manage
      * Remove a user from a project
      */
-    async deleteProjectUser(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteProjectUserRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteProjectUser(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteProjectUserRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2705,16 +2712,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete the tag
      */
     async deleteTagRaw(requestParameters: DeleteTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteTag.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteTag.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteTag.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteTag.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteTag.');
         }
 
         const queryParameters: any = {};
@@ -2740,7 +2747,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2753,8 +2760,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete the tag  Required scopes: org:manage
      * Delete the tag
      */
-    async deleteTag(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteTagRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteTag(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteTagRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2762,24 +2769,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a validation
      */
     async deleteValidationRaw(requestParameters: DeleteValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteValidation.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteValidation.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteValidation.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling deleteValidation.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteValidation.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteValidation.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteValidation.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling deleteValidation.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling deleteValidation.');
         }
 
         const queryParameters: any = {};
@@ -2805,7 +2812,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2818,8 +2825,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a validation  Required scopes: document:write
      * Remove a validation
      */
-    async deleteValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    async deleteValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
     }
 
     /**
@@ -2827,20 +2834,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a visa
      */
     async deleteVisaRaw(requestParameters: DeleteVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteVisa.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteVisa.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteVisa.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling deleteVisa.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteVisa.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteVisa.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteVisa.');
         }
 
         const queryParameters: any = {};
@@ -2866,7 +2873,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2879,8 +2886,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a visa  Required scopes: document:write
      * Remove a visa
      */
-    async deleteVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteVisaRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2888,24 +2895,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a comment
      */
     async deleteVisaCommentRaw(requestParameters: DeleteVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteVisaComment.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteVisaComment.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling deleteVisaComment.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling deleteVisaComment.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteVisaComment.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteVisaComment.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteVisaComment.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling deleteVisaComment.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling deleteVisaComment.');
         }
 
         const queryParameters: any = {};
@@ -2931,7 +2938,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2944,8 +2951,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a comment  Required scopes: document:write
      * Remove a comment
      */
-    async deleteVisaComment(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    async deleteVisaComment(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteVisaCommentRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
     }
 
     /**
@@ -2953,24 +2960,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Deny a validation
      */
     async denyValidationRaw(requestParameters: DenyValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling denyValidation.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling denyValidation.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling denyValidation.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling denyValidation.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling denyValidation.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling denyValidation.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling denyValidation.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling denyValidation.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling denyValidation.');
         }
 
         const queryParameters: any = {};
@@ -2996,7 +3003,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/deny`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/deny`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -3009,8 +3016,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Deny a validation  Required scopes: document:write
      * Deny a validation
      */
-    async denyValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.denyValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    async denyValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.denyValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
     }
 
     /**
@@ -3018,16 +3025,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a classification
      */
     async getClassificationRaw(requestParameters: GetClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Classification>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getClassification.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getClassification.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getClassification.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getClassification.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getClassification.');
         }
 
         const queryParameters: any = {};
@@ -3053,7 +3060,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/classification/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/classification/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3066,8 +3073,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a classification  Required scopes: ifc:read, model:read
      * Retrieve a classification
      */
-    async getClassification(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Classification> {
-        const response = await this.getClassificationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async getClassification(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Classification> {
+        const response = await this.getClassificationRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3076,12 +3083,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all classifications
      */
     async getClassificationsRaw(requestParameters: GetClassificationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Classification>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getClassifications.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getClassifications.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getClassifications.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getClassifications.');
         }
 
         const queryParameters: any = {};
@@ -3107,7 +3114,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/classification`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3120,8 +3127,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all classifications of all models in the project  Required scopes: ifc:read, model:read
      * Retrieve all classifications
      */
-    async getClassifications(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Classification>> {
-        const response = await this.getClassificationsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getClassifications(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Classification>> {
+        const response = await this.getClassificationsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3180,8 +3187,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all pending invitations in the cloud
      */
     async getCloudInvitationsRaw(requestParameters: GetCloudInvitationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<CloudInvitation>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCloudInvitations.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCloudInvitations.');
         }
 
         const queryParameters: any = {};
@@ -3207,7 +3214,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/invitation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))),
+            path: `/cloud/{cloud_pk}/invitation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3220,8 +3227,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns app\'s invitations only  Required scopes: org:manage
      * Retrieve all pending invitations in the cloud
      */
-    async getCloudInvitations(cloudPk: number, initOverrides?: RequestInit): Promise<Array<CloudInvitation>> {
-        const response = await this.getCloudInvitationsRaw({ cloudPk: cloudPk }, initOverrides);
+    async getCloudInvitations(cloud_pk: number, initOverrides?: RequestInit): Promise<Array<CloudInvitation>> {
+        const response = await this.getCloudInvitationsRaw({ cloud_pk: cloud_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3280,8 +3287,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a user in a cloud
      */
     async getCloudUserRaw(requestParameters: GetCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<User>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCloudUser.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCloudUser.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -3311,7 +3318,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3324,8 +3331,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Only administrators can see a cloud member  Required scopes: cloud:read
      * Retrieve a user in a cloud
      */
-    async getCloudUser(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<User> {
-        const response = await this.getCloudUserRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async getCloudUser(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<User> {
+        const response = await this.getCloudUserRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -3334,8 +3341,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all users in a cloud, or a list with a filter by email
      */
     async getCloudUsersRaw(requestParameters: GetCloudUsersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<User>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCloudUsers.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCloudUsers.');
         }
 
         const queryParameters: any = {};
@@ -3344,16 +3351,16 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['email'] = requestParameters.email;
         }
 
-        if (requestParameters.emailContains !== undefined) {
-            queryParameters['email__contains'] = requestParameters.emailContains;
+        if (requestParameters.email__contains !== undefined) {
+            queryParameters['email__contains'] = requestParameters.email__contains;
         }
 
-        if (requestParameters.emailEndswith !== undefined) {
-            queryParameters['email__endswith'] = requestParameters.emailEndswith;
+        if (requestParameters.email__endswith !== undefined) {
+            queryParameters['email__endswith'] = requestParameters.email__endswith;
         }
 
-        if (requestParameters.emailStartswith !== undefined) {
-            queryParameters['email__startswith'] = requestParameters.emailStartswith;
+        if (requestParameters.email__startswith !== undefined) {
+            queryParameters['email__startswith'] = requestParameters.email__startswith;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -3377,7 +3384,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/user`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))),
+            path: `/cloud/{cloud_pk}/user`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3390,8 +3397,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Only administrators can see cloud members.  Required scopes: cloud:read
      * Retrieve all users in a cloud, or a list with a filter by email
      */
-    async getCloudUsers(cloudPk: number, email?: string, emailContains?: string, emailEndswith?: string, emailStartswith?: string, initOverrides?: RequestInit): Promise<Array<User>> {
-        const response = await this.getCloudUsersRaw({ cloudPk: cloudPk, email: email, emailContains: emailContains, emailEndswith: emailEndswith, emailStartswith: emailStartswith }, initOverrides);
+    async getCloudUsers(cloud_pk: number, email?: string, email__contains?: string, email__endswith?: string, email__startswith?: string, initOverrides?: RequestInit): Promise<Array<User>> {
+        const response = await this.getCloudUsersRaw({ cloud_pk: cloud_pk, email: email, email__contains: email__contains, email__endswith: email__endswith, email__startswith: email__startswith }, initOverrides);
         return await response.value();
     }
 
@@ -3446,16 +3453,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a document
      */
     async getDocumentRaw(requestParameters: GetDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocument.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getDocument.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getDocument.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocument.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getDocument.');
         }
 
         const queryParameters: any = {};
@@ -3481,7 +3488,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3494,8 +3501,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a document in the project  Required scopes: document:read
      * Retrieve a document
      */
-    async getDocument(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.getDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async getDocument(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.getDocumentRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3504,16 +3511,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all document histories
      */
     async getDocumentHistoriesRaw(requestParameters: GetDocumentHistoriesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocumentHistories.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getDocumentHistories.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getDocumentHistories.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling getDocumentHistories.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocumentHistories.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getDocumentHistories.');
         }
 
         const queryParameters: any = {};
@@ -3539,7 +3546,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3552,8 +3559,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all documents from the header document history  Required scopes: document:read
      * Retrieve all document histories
      */
-    async getDocumentHistories(cloudPk: number, documentPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getDocumentHistoriesRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk }, initOverrides);
+    async getDocumentHistories(cloud_pk: number, document_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentHistoriesRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3562,12 +3569,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all documents
      */
     async getDocumentsRaw(requestParameters: GetDocumentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getDocuments.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getDocuments.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getDocuments.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getDocuments.');
         }
 
         const queryParameters: any = {};
@@ -3593,7 +3600,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3606,8 +3613,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all documents in the project  Required scopes: document:read
      * Retrieve all documents
      */
-    async getDocuments(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getDocumentsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getDocuments(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3616,16 +3623,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a folder
      */
     async getFolderRaw(requestParameters: GetFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getFolder.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getFolder.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getFolder.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getFolder.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getFolder.');
         }
 
         const queryParameters: any = {};
@@ -3651,7 +3658,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3664,8 +3671,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a folder  Required scopes: document:read
      * Retrieve a folder
      */
-    async getFolder(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
-        const response = await this.getFolderRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async getFolder(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
+        const response = await this.getFolderRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3674,16 +3681,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all users in a project with the permission on the folder
      */
     async getFolderProjectUsersRaw(requestParameters: GetFolderProjectUsersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<FolderUserProject>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getFolderProjectUsers.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getFolderProjectUsers.');
         }
 
-        if (requestParameters.folderPk === null || requestParameters.folderPk === undefined) {
-            throw new runtime.RequiredError('folderPk','Required parameter requestParameters.folderPk was null or undefined when calling getFolderProjectUsers.');
+        if (requestParameters.folder_pk === null || requestParameters.folder_pk === undefined) {
+            throw new runtime.RequiredError('folder_pk','Required parameter requestParameters.folder_pk was null or undefined when calling getFolderProjectUsers.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getFolderProjectUsers.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getFolderProjectUsers.');
         }
 
         const queryParameters: any = {};
@@ -3709,7 +3716,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{folder_pk}/user`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"folder_pk"}}`, encodeURIComponent(String(requestParameters.folderPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{folder_pk}/user`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"folder_pk"}}`, encodeURIComponent(String(requestParameters.folder_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3722,8 +3729,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all users in a project with the permission on the folder  Required scopes: document:read
      * Retrieve all users in a project with the permission on the folder
      */
-    async getFolderProjectUsers(cloudPk: number, folderPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<FolderUserProject>> {
-        const response = await this.getFolderProjectUsersRaw({ cloudPk: cloudPk, folderPk: folderPk, projectPk: projectPk }, initOverrides);
+    async getFolderProjectUsers(cloud_pk: number, folder_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<FolderUserProject>> {
+        const response = await this.getFolderProjectUsersRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3732,12 +3739,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all folders
      */
     async getFoldersRaw(requestParameters: GetFoldersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<FolderWithoutChildren>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getFolders.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getFolders.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getFolders.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getFolders.');
         }
 
         const queryParameters: any = {};
@@ -3763,7 +3770,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/folder`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3776,8 +3783,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all folders in the project. This is an array of folder. If you want to get the tree of all folders, see getProjectTree  Required scopes: document:read
      * Retrieve all folders
      */
-    async getFolders(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<FolderWithoutChildren>> {
-        const response = await this.getFoldersRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getFolders(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<FolderWithoutChildren>> {
+        const response = await this.getFoldersRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3786,16 +3793,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a group
      */
     async getGroupRaw(requestParameters: GetGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Group>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getGroup.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getGroup.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getGroup.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getGroup.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getGroup.');
         }
 
         const queryParameters: any = {};
@@ -3821,7 +3828,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/me/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/me/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3834,8 +3841,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a group to which the user belongs  Required scopes: document:read
      * Retrieve a group
      */
-    async getGroup(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Group> {
-        const response = await this.getGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async getGroup(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Group> {
+        const response = await this.getGroupRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3844,12 +3851,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all groups
      */
     async getGroupsRaw(requestParameters: GetGroupsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Group>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getGroups.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getGroups.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getGroups.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getGroups.');
         }
 
         const queryParameters: any = {};
@@ -3875,7 +3882,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/me/group`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/me/group`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3888,8 +3895,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieves all groups to which the user belongs  Required scopes: document:read
      * Retrieve all groups
      */
-    async getGroups(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Group>> {
-        const response = await this.getGroupsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getGroups(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Group>> {
+        const response = await this.getGroupsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3898,16 +3905,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a group
      */
     async getManageGroupRaw(requestParameters: GetManageGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Group>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getManageGroup.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getManageGroup.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getManageGroup.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getManageGroup.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getManageGroup.');
         }
 
         const queryParameters: any = {};
@@ -3933,7 +3940,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -3946,8 +3953,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a group. Must be an admin of the project  Required scopes: org:manage
      * Retrieve a group
      */
-    async getManageGroup(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Group> {
-        const response = await this.getManageGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async getManageGroup(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Group> {
+        const response = await this.getManageGroupRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -3956,12 +3963,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all groups
      */
     async getManageGroupsRaw(requestParameters: GetManageGroupsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Group>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getManageGroups.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getManageGroups.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getManageGroups.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getManageGroups.');
         }
 
         const queryParameters: any = {};
@@ -3987,7 +3994,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/group`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4000,8 +4007,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all groups in the project. Must be an admin of the project  Required scopes: org:manage
      * Retrieve all groups
      */
-    async getManageGroups(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Group>> {
-        const response = await this.getManageGroupsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getManageGroups(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Group>> {
+        const response = await this.getManageGroupsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4010,8 +4017,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a project
      */
     async getProjectRaw(requestParameters: GetProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectWithChildren>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProject.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProject.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -4041,7 +4048,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/project/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4054,8 +4061,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a project
      * Retrieve a project
      */
-    async getProject(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<ProjectWithChildren> {
-        const response = await this.getProjectRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async getProject(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<ProjectWithChildren> {
+        const response = await this.getProjectRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -4064,12 +4071,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve one token created for this project
      */
     async getProjectAccessTokenRaw(requestParameters: GetProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectAccessToken>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectAccessToken.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectAccessToken.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectAccessToken.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProjectAccessToken.');
         }
 
         if (requestParameters.token === null || requestParameters.token === undefined) {
@@ -4099,7 +4106,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4112,8 +4119,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve one token created for this project  Required scopes: org:manage
      * Retrieve one token created for this project
      */
-    async getProjectAccessToken(cloudPk: number, projectPk: number, token: string, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
-        const response = await this.getProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, token: token }, initOverrides);
+    async getProjectAccessToken(cloud_pk: number, project_pk: number, token: string, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
+        const response = await this.getProjectAccessTokenRaw({ cloud_pk: cloud_pk, project_pk: project_pk, token: token }, initOverrides);
         return await response.value();
     }
 
@@ -4122,12 +4129,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all tokens created for this project
      */
     async getProjectAccessTokensRaw(requestParameters: GetProjectAccessTokensRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectAccessToken>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectAccessTokens.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectAccessTokens.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectAccessTokens.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProjectAccessTokens.');
         }
 
         const queryParameters: any = {};
@@ -4153,7 +4160,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4166,8 +4173,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all tokens created for this project  Required scopes: org:manage
      * Retrieve all tokens created for this project
      */
-    async getProjectAccessTokens(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<ProjectAccessToken>> {
-        const response = await this.getProjectAccessTokensRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getProjectAccessTokens(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ProjectAccessToken>> {
+        const response = await this.getProjectAccessTokensRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4176,12 +4183,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas created by user
      */
     async getProjectCreatorVisasRaw(requestParameters: GetProjectCreatorVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Visa>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectCreatorVisas.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectCreatorVisas.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectCreatorVisas.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProjectCreatorVisas.');
         }
 
         const queryParameters: any = {};
@@ -4207,7 +4214,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/me/visa/creator`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/me/visa/creator`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4220,8 +4227,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas created by user in a project  Required scopes: document:read
      * List visas created by user
      */
-    async getProjectCreatorVisas(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
-        const response = await this.getProjectCreatorVisasRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getProjectCreatorVisas(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
+        const response = await this.getProjectCreatorVisasRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4230,8 +4237,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete DMS tree
      */
     async getProjectDMSTreeRaw(requestParameters: GetProjectDMSTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Folder>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectDMSTree.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectDMSTree.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -4261,7 +4268,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{id}/dms-tree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/project/{id}/dms-tree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4274,22 +4281,18 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete DMS tree (all folders and all documents in the project)
      * Retrieve the complete DMS tree
      */
-    async getProjectDMSTree(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<Folder> {
-        const response = await this.getProjectDMSTreeRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async getProjectDMSTree(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<Folder> {
+        const response = await this.getProjectDMSTreeRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }
 
     /**
-     * Returns app\'s invitations only  Required scopes: org:manage
-     * Retrieve all pending invitations in the project
+     * Retrieve folder tree for all projects
+     * Retrieve folder tree for all projects
      */
-    async getProjectInvitationsRaw(requestParameters: GetProjectInvitationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectInvitation>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectInvitations.');
-        }
-
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectInvitations.');
+    async getProjectFolderTreeSerializersRaw(requestParameters: GetProjectFolderTreeSerializersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectFolderTree>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectFolderTreeSerializers.');
         }
 
         const queryParameters: any = {};
@@ -4315,7 +4318,61 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/invitation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/folder-trees`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProjectFolderTreeFromJSON));
+    }
+
+    /**
+     * Retrieve folder tree for all projects
+     * Retrieve folder tree for all projects
+     */
+    async getProjectFolderTreeSerializers(cloud_pk: number, initOverrides?: RequestInit): Promise<Array<ProjectFolderTree>> {
+        const response = await this.getProjectFolderTreeSerializersRaw({ cloud_pk: cloud_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Returns app\'s invitations only  Required scopes: org:manage
+     * Retrieve all pending invitations in the project
+     */
+    async getProjectInvitationsRaw(requestParameters: GetProjectInvitationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectInvitation>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectInvitations.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProjectInvitations.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/invitation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4328,8 +4385,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns app\'s invitations only  Required scopes: org:manage
      * Retrieve all pending invitations in the project
      */
-    async getProjectInvitations(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<ProjectInvitation>> {
-        const response = await this.getProjectInvitationsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getProjectInvitations(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ProjectInvitation>> {
+        const response = await this.getProjectInvitationsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4338,8 +4395,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Get size of all model files in the project
      */
     async getProjectSizeRaw(requestParameters: GetProjectSizeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectSize>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectSize.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectSize.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -4369,7 +4426,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{id}/size`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/project/{id}/size`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4382,8 +4439,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Returns the size of the project in Bytes
      * Get size of all model files in the project
      */
-    async getProjectSize(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<ProjectSize> {
-        const response = await this.getProjectSizeRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async getProjectSize(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<ProjectSize> {
+        const response = await this.getProjectSizeRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -4392,8 +4449,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete projects tree of the cloud
      */
     async getProjectSubTreeRaw(requestParameters: GetProjectSubTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectWithChildren>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectSubTree.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectSubTree.');
         }
 
         const queryParameters: any = {};
@@ -4419,7 +4476,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/subtree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))),
+            path: `/cloud/{cloud_pk}/project/subtree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4432,8 +4489,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete projects tree of the cloud
      * Retrieve the complete projects tree of the cloud
      */
-    async getProjectSubTree(cloudPk: number, initOverrides?: RequestInit): Promise<Array<ProjectWithChildren>> {
-        const response = await this.getProjectSubTreeRaw({ cloudPk: cloudPk }, initOverrides);
+    async getProjectSubTree(cloud_pk: number, initOverrides?: RequestInit): Promise<Array<ProjectWithChildren>> {
+        const response = await this.getProjectSubTreeRaw({ cloud_pk: cloud_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4442,8 +4499,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete DMS tree
      */
     async getProjectTreeRaw(requestParameters: GetProjectTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Folder>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectTree.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectTree.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -4473,7 +4530,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{id}/tree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/project/{id}/tree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4486,8 +4543,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete DMS tree (all folders and all documents in the project). DEPRECATED: renamed to getProjectDMSTree
      * Retrieve the complete DMS tree
      */
-    async getProjectTree(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<Folder> {
-        const response = await this.getProjectTreeRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async getProjectTree(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<Folder> {
+        const response = await this.getProjectTreeRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -4496,12 +4553,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all users in a project, or a list with a filter by email
      */
     async getProjectUsersRaw(requestParameters: GetProjectUsersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<UserProject>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectUsers.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectUsers.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectUsers.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProjectUsers.');
         }
 
         const queryParameters: any = {};
@@ -4510,16 +4567,16 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['email'] = requestParameters.email;
         }
 
-        if (requestParameters.emailContains !== undefined) {
-            queryParameters['email__contains'] = requestParameters.emailContains;
+        if (requestParameters.email__contains !== undefined) {
+            queryParameters['email__contains'] = requestParameters.email__contains;
         }
 
-        if (requestParameters.emailEndswith !== undefined) {
-            queryParameters['email__endswith'] = requestParameters.emailEndswith;
+        if (requestParameters.email__endswith !== undefined) {
+            queryParameters['email__endswith'] = requestParameters.email__endswith;
         }
 
-        if (requestParameters.emailStartswith !== undefined) {
-            queryParameters['email__startswith'] = requestParameters.emailStartswith;
+        if (requestParameters.email__startswith !== undefined) {
+            queryParameters['email__startswith'] = requestParameters.email__startswith;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -4543,7 +4600,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/user`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/user`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4556,8 +4613,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Each member of a project can see other members of the project  Required scopes: cloud:read, bcf:read
      * Retrieve all users in a project, or a list with a filter by email
      */
-    async getProjectUsers(cloudPk: number, projectPk: number, email?: string, emailContains?: string, emailEndswith?: string, emailStartswith?: string, initOverrides?: RequestInit): Promise<Array<UserProject>> {
-        const response = await this.getProjectUsersRaw({ cloudPk: cloudPk, projectPk: projectPk, email: email, emailContains: emailContains, emailEndswith: emailEndswith, emailStartswith: emailStartswith }, initOverrides);
+    async getProjectUsers(cloud_pk: number, project_pk: number, email?: string, email__contains?: string, email__endswith?: string, email__startswith?: string, initOverrides?: RequestInit): Promise<Array<UserProject>> {
+        const response = await this.getProjectUsersRaw({ cloud_pk: cloud_pk, project_pk: project_pk, email: email, email__contains: email__contains, email__endswith: email__endswith, email__startswith: email__startswith }, initOverrides);
         return await response.value();
     }
 
@@ -4566,12 +4623,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas where user is a validator
      */
     async getProjectValidatorVisasRaw(requestParameters: GetProjectValidatorVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Visa>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjectValidatorVisas.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectValidatorVisas.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getProjectValidatorVisas.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProjectValidatorVisas.');
         }
 
         const queryParameters: any = {};
@@ -4597,7 +4654,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/me/visa/validator`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/me/visa/validator`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4610,8 +4667,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas where user is a validator in a project  Required scopes: document:read
      * List visas where user is a validator
      */
-    async getProjectValidatorVisas(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
-        const response = await this.getProjectValidatorVisasRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getProjectValidatorVisas(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
+        const response = await this.getProjectValidatorVisasRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4620,8 +4677,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all projects
      */
     async getProjectsRaw(requestParameters: GetProjectsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Project>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getProjects.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjects.');
         }
 
         const queryParameters: any = {};
@@ -4647,7 +4704,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))),
+            path: `/cloud/{cloud_pk}/project`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4660,8 +4717,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all projects of the cloud. All project are shown at the same level. see #getProjectSubTree
      * Retrieve all projects
      */
-    async getProjects(cloudPk: number, initOverrides?: RequestInit): Promise<Array<Project>> {
-        const response = await this.getProjectsRaw({ cloudPk: cloudPk }, initOverrides);
+    async getProjects(cloud_pk: number, initOverrides?: RequestInit): Promise<Array<Project>> {
+        const response = await this.getProjectsRaw({ cloud_pk: cloud_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4762,16 +4819,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a tag
      */
     async getTagRaw(requestParameters: GetTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Tag>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getTag.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getTag.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTag.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getTag.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getTag.');
         }
 
         const queryParameters: any = {};
@@ -4797,7 +4854,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4810,8 +4867,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a tag in the project  Required scopes: org:manage
      * Retrieve a tag
      */
-    async getTag(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Tag> {
-        const response = await this.getTagRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async getTag(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Tag> {
+        const response = await this.getTagRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4820,12 +4877,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all tags
      */
     async getTagsRaw(requestParameters: GetTagsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Tag>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getTags.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getTags.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getTags.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getTags.');
         }
 
         const queryParameters: any = {};
@@ -4851,7 +4908,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/tag`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4864,8 +4921,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all tags in the project  Required scopes: org:manage
      * Retrieve all tags
      */
-    async getTags(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Tag>> {
-        const response = await this.getTagsRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getTags(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Tag>> {
+        const response = await this.getTagsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4874,24 +4931,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a validation to a visa
      */
     async getValidationRaw(requestParameters: GetValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaValidation>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getValidation.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getValidation.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getValidation.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling getValidation.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getValidation.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getValidation.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getValidation.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getValidation.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling getValidation.');
         }
 
         const queryParameters: any = {};
@@ -4917,7 +4974,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4930,8 +4987,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a validation to a visa  Required scopes: document:read
      * Retrieve a validation to a visa
      */
-    async getValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<VisaValidation> {
-        const response = await this.getValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    async getValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<VisaValidation> {
+        const response = await this.getValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4940,20 +4997,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all validations to a visa
      */
     async getValidationsRaw(requestParameters: GetValidationsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<VisaValidation>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getValidations.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getValidations.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getValidations.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling getValidations.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getValidations.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getValidations.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getValidations.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling getValidations.');
         }
 
         const queryParameters: any = {};
@@ -4979,7 +5036,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -4992,8 +5049,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all validations to a visa  Required scopes: document:read
      * List all validations to a visa
      */
-    async getValidations(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<Array<VisaValidation>> {
-        const response = await this.getValidationsRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    async getValidations(cloud_pk: number, document_pk: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<Array<VisaValidation>> {
+        const response = await this.getValidationsRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5002,20 +5059,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a visa of a document
      */
     async getVisaRaw(requestParameters: GetVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visa>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisa.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getVisa.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getVisa.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling getVisa.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getVisa.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisa.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getVisa.');
         }
 
         const queryParameters: any = {};
@@ -5041,7 +5098,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5054,8 +5111,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a unique visa of a document  Required scopes: document:read
      * Retrieve a visa of a document
      */
-    async getVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Visa> {
-        const response = await this.getVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+    async getVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Visa> {
+        const response = await this.getVisaRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5064,24 +5121,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a comment
      */
     async getVisaCommentRaw(requestParameters: GetVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaComment>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisaComment.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getVisaComment.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getVisaComment.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling getVisaComment.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getVisaComment.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisaComment.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getVisaComment.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getVisaComment.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling getVisaComment.');
         }
 
         const queryParameters: any = {};
@@ -5107,7 +5164,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5120,8 +5177,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a comment  Required scopes: document:read
      * Retrieve a comment
      */
-    async getVisaComment(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<VisaComment> {
-        const response = await this.getVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    async getVisaComment(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<VisaComment> {
+        const response = await this.getVisaCommentRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5130,20 +5187,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all comment of a visa
      */
     async getVisaCommentsRaw(requestParameters: GetVisaCommentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<VisaComment>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisaComments.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getVisaComments.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getVisaComments.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling getVisaComments.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisaComments.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getVisaComments.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling getVisaComments.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling getVisaComments.');
         }
 
         const queryParameters: any = {};
@@ -5169,7 +5226,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5182,8 +5239,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all comment of a visa  Required scopes: document:read
      * List all comment of a visa
      */
-    async getVisaComments(cloudPk: number, documentPk: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<Array<VisaComment>> {
-        const response = await this.getVisaCommentsRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    async getVisaComments(cloud_pk: number, document_pk: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<Array<VisaComment>> {
+        const response = await this.getVisaCommentsRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5192,16 +5249,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all visas of a document
      */
     async getVisasRaw(requestParameters: GetVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Visa>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getVisas.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getVisas.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling getVisas.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling getVisas.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getVisas.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getVisas.');
         }
 
         const queryParameters: any = {};
@@ -5227,7 +5284,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -5240,8 +5297,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all visas of a document  Required scopes: document:read
      * List all visas of a document
      */
-    async getVisas(cloudPk: number, documentPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
-        const response = await this.getVisasRaw({ cloudPk: cloudPk, documentPk: documentPk, projectPk: projectPk }, initOverrides);
+    async getVisas(cloud_pk: number, document_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
+        const response = await this.getVisasRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5250,12 +5307,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Invite a cloud administrator
      */
     async inviteCloudUserRaw(requestParameters: InviteCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CloudInvitation>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling inviteCloudUser.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling inviteCloudUser.');
         }
 
-        if (requestParameters.cloudInvitationRequest === null || requestParameters.cloudInvitationRequest === undefined) {
-            throw new runtime.RequiredError('cloudInvitationRequest','Required parameter requestParameters.cloudInvitationRequest was null or undefined when calling inviteCloudUser.');
+        if (requestParameters.CloudInvitationRequest === null || requestParameters.CloudInvitationRequest === undefined) {
+            throw new runtime.RequiredError('CloudInvitationRequest','Required parameter requestParameters.CloudInvitationRequest was null or undefined when calling inviteCloudUser.');
         }
 
         const queryParameters: any = {};
@@ -5283,11 +5340,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/invitation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))),
+            path: `/cloud/{cloud_pk}/invitation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CloudInvitationRequestToJSON(requestParameters.cloudInvitationRequest),
+            body: CloudInvitationRequestToJSON(requestParameters.CloudInvitationRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CloudInvitationFromJSON(jsonValue));
@@ -5297,8 +5354,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Invite cloud administrators only. To invite in a project, see inviteProjectUser. You can\'t invite a user already in the cloud. Create multiple invitations of the same email in the same cloud will generate multiple invitation emails but not multiple invitation object  Required scopes: org:manage
      * Invite a cloud administrator
      */
-    async inviteCloudUser(cloudPk: number, cloudInvitationRequest: CloudInvitationRequest, initOverrides?: RequestInit): Promise<CloudInvitation> {
-        const response = await this.inviteCloudUserRaw({ cloudPk: cloudPk, cloudInvitationRequest: cloudInvitationRequest }, initOverrides);
+    async inviteCloudUser(cloud_pk: number, CloudInvitationRequest: CloudInvitationRequest, initOverrides?: RequestInit): Promise<CloudInvitation> {
+        const response = await this.inviteCloudUserRaw({ cloud_pk: cloud_pk, CloudInvitationRequest: CloudInvitationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5307,16 +5364,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Invite a project member
      */
     async inviteProjectUserRaw(requestParameters: InviteProjectUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectInvitation>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling inviteProjectUser.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling inviteProjectUser.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling inviteProjectUser.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling inviteProjectUser.');
         }
 
-        if (requestParameters.projectInvitationRequest === null || requestParameters.projectInvitationRequest === undefined) {
-            throw new runtime.RequiredError('projectInvitationRequest','Required parameter requestParameters.projectInvitationRequest was null or undefined when calling inviteProjectUser.');
+        if (requestParameters.ProjectInvitationRequest === null || requestParameters.ProjectInvitationRequest === undefined) {
+            throw new runtime.RequiredError('ProjectInvitationRequest','Required parameter requestParameters.ProjectInvitationRequest was null or undefined when calling inviteProjectUser.');
         }
 
         const queryParameters: any = {};
@@ -5344,11 +5401,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/invitation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/invitation`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ProjectInvitationRequestToJSON(requestParameters.projectInvitationRequest),
+            body: ProjectInvitationRequestToJSON(requestParameters.ProjectInvitationRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectInvitationFromJSON(jsonValue));
@@ -5358,8 +5415,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Invite a project member. If the user is not already a cloud member, they will also be invited in the cloud with USER role.  Required scopes: org:manage
      * Invite a project member
      */
-    async inviteProjectUser(cloudPk: number, projectPk: number, projectInvitationRequest: ProjectInvitationRequest, initOverrides?: RequestInit): Promise<ProjectInvitation> {
-        const response = await this.inviteProjectUserRaw({ cloudPk: cloudPk, projectPk: projectPk, projectInvitationRequest: projectInvitationRequest }, initOverrides);
+    async inviteProjectUser(cloud_pk: number, project_pk: number, ProjectInvitationRequest: ProjectInvitationRequest, initOverrides?: RequestInit): Promise<ProjectInvitation> {
+        const response = await this.inviteProjectUserRaw({ cloud_pk: cloud_pk, project_pk: project_pk, ProjectInvitationRequest: ProjectInvitationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5368,8 +5425,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Leave the project
      */
     async leaveProjectRaw(requestParameters: LeaveProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling leaveProject.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling leaveProject.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -5399,7 +5456,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{id}/leave`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/project/{id}/leave`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -5412,8 +5469,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Leave the project. Only authenticated users (no app) can call this route.  Required scopes: org:manage
      * Leave the project
      */
-    async leaveProject(cloudPk: number, id: number, initOverrides?: RequestInit): Promise<void> {
-        await this.leaveProjectRaw({ cloudPk: cloudPk, id: id }, initOverrides);
+    async leaveProject(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.leaveProjectRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
     }
 
     /**
@@ -5421,20 +5478,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Leave the history version
      */
     async leaveVersionDocumentHistoryRaw(requestParameters: LeaveVersionDocumentHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling leaveVersionDocumentHistory.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling leaveVersionDocumentHistory.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling leaveVersionDocumentHistory.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling leaveVersionDocumentHistory.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling leaveVersionDocumentHistory.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling leaveVersionDocumentHistory.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling leaveVersionDocumentHistory.');
         }
 
         const queryParameters: any = {};
@@ -5460,7 +5517,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/{id}/leave`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/{id}/leave`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -5473,8 +5530,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * This will create a new independent document in the same folder  Required scopes: document:write
      * Leave the history version
      */
-    async leaveVersionDocumentHistory(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.leaveVersionDocumentHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+    async leaveVersionDocumentHistory(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.leaveVersionDocumentHistoryRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5483,20 +5540,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Make the head of the version
      */
     async makeHeadVersionDocumentHistoryRaw(requestParameters: MakeHeadVersionDocumentHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling makeHeadVersionDocumentHistory.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling makeHeadVersionDocumentHistory.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling makeHeadVersionDocumentHistory.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling makeHeadVersionDocumentHistory.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling makeHeadVersionDocumentHistory.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling makeHeadVersionDocumentHistory.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling makeHeadVersionDocumentHistory.');
         }
 
         const queryParameters: any = {};
@@ -5522,7 +5579,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/{id}/head-version`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/history/{id}/head-version`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -5535,8 +5592,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * The actual head version will be defined as the previous version  Required scopes: document:write
      * Make the head of the version
      */
-    async makeHeadVersionDocumentHistory(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.makeHeadVersionDocumentHistoryRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+    async makeHeadVersionDocumentHistory(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.makeHeadVersionDocumentHistoryRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -5545,20 +5602,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Pause a visa of a document
      */
     async pauseVisaRaw(requestParameters: PauseVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling pauseVisa.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling pauseVisa.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling pauseVisa.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling pauseVisa.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling pauseVisa.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling pauseVisa.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling pauseVisa.');
         }
 
         const queryParameters: any = {};
@@ -5584,7 +5641,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}/pause`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}/pause`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -5597,8 +5654,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Pause a visa of a document  Required scopes: document:write
      * Pause a visa of a document
      */
-    async pauseVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.pauseVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+    async pauseVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.pauseVisaRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -5606,24 +5663,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Reset a validation
      */
     async resetValidationRaw(requestParameters: ResetValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling resetValidation.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling resetValidation.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling resetValidation.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling resetValidation.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling resetValidation.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling resetValidation.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling resetValidation.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling resetValidation.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling resetValidation.');
         }
 
         const queryParameters: any = {};
@@ -5649,7 +5706,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/reset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/reset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -5662,8 +5719,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Reset a validation if the validation has been accepted or rejected  Required scopes: document:write
      * Reset a validation
      */
-    async resetValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.resetValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk }, initOverrides);
+    async resetValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.resetValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
     }
 
     /**
@@ -5671,20 +5728,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Resume a visa of a document
      */
     async resumeVisaRaw(requestParameters: ResumeVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling resumeVisa.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling resumeVisa.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling resumeVisa.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling resumeVisa.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling resumeVisa.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling resumeVisa.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling resumeVisa.');
         }
 
         const queryParameters: any = {};
@@ -5710,7 +5767,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}/resume`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}/resume`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -5723,8 +5780,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Resume a visa of a document after a pause  Required scopes: document:write
      * Resume a visa of a document
      */
-    async resumeVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.resumeVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk }, initOverrides);
+    async resumeVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.resumeVisaRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -5732,16 +5789,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a classification
      */
     async updateClassificationRaw(requestParameters: UpdateClassificationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Classification>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateClassification.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateClassification.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateClassification.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateClassification.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateClassification.');
         }
 
         const queryParameters: any = {};
@@ -5769,11 +5826,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/classification/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/classification/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedClassificationRequestToJSON(requestParameters.patchedClassificationRequest),
+            body: PatchedClassificationRequestToJSON(requestParameters.PatchedClassificationRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ClassificationFromJSON(jsonValue));
@@ -5783,8 +5840,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a classification  Required scopes: ifc:write, model:write
      * Update some fields of a classification
      */
-    async updateClassification(cloudPk: number, id: number, projectPk: number, patchedClassificationRequest?: PatchedClassificationRequest, initOverrides?: RequestInit): Promise<Classification> {
-        const response = await this.updateClassificationRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedClassificationRequest: patchedClassificationRequest }, initOverrides);
+    async updateClassification(cloud_pk: number, id: number, project_pk: number, PatchedClassificationRequest?: PatchedClassificationRequest, initOverrides?: RequestInit): Promise<Classification> {
+        const response = await this.updateClassificationRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedClassificationRequest: PatchedClassificationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5826,7 +5883,7 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedCloudRequestToJSON(requestParameters.patchedCloudRequest),
+            body: PatchedCloudRequestToJSON(requestParameters.PatchedCloudRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CloudFromJSON(jsonValue));
@@ -5836,8 +5893,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a cloud  Required scopes: cloud:manage
      * Update some fields of a cloud
      */
-    async updateCloud(id: number, patchedCloudRequest?: PatchedCloudRequest, initOverrides?: RequestInit): Promise<Cloud> {
-        const response = await this.updateCloudRaw({ id: id, patchedCloudRequest: patchedCloudRequest }, initOverrides);
+    async updateCloud(id: number, PatchedCloudRequest?: PatchedCloudRequest, initOverrides?: RequestInit): Promise<Cloud> {
+        const response = await this.updateCloudRaw({ id: id, PatchedCloudRequest: PatchedCloudRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5846,8 +5903,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Change the user role in the cloud
      */
     async updateCloudUserRaw(requestParameters: UpdateCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<User>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateCloudUser.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateCloudUser.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -5879,11 +5936,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedUserCloudUpdateRequestToJSON(requestParameters.patchedUserCloudUpdateRequest),
+            body: PatchedUserCloudUpdateRequestToJSON(requestParameters.PatchedUserCloudUpdateRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
@@ -5893,8 +5950,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Change the user role in the cloud  Required scopes: cloud:manage
      * Change the user role in the cloud
      */
-    async updateCloudUser(cloudPk: number, id: number, patchedUserCloudUpdateRequest?: PatchedUserCloudUpdateRequest, initOverrides?: RequestInit): Promise<User> {
-        const response = await this.updateCloudUserRaw({ cloudPk: cloudPk, id: id, patchedUserCloudUpdateRequest: patchedUserCloudUpdateRequest }, initOverrides);
+    async updateCloudUser(cloud_pk: number, id: number, PatchedUserCloudUpdateRequest?: PatchedUserCloudUpdateRequest, initOverrides?: RequestInit): Promise<User> {
+        const response = await this.updateCloudUserRaw({ cloud_pk: cloud_pk, id: id, PatchedUserCloudUpdateRequest: PatchedUserCloudUpdateRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5903,16 +5960,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of the document
      */
     async updateDocumentRaw(requestParameters: UpdateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateDocument.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateDocument.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateDocument.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateDocument.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateDocument.');
         }
 
         const queryParameters: any = {};
@@ -5940,11 +5997,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedDocumentRequestToJSON(requestParameters.patchedDocumentRequest),
+            body: PatchedDocumentRequestToJSON(requestParameters.PatchedDocumentRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => DocumentFromJSON(jsonValue));
@@ -5954,8 +6011,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of the document  Required scopes: document:write
      * Update some fields of the document
      */
-    async updateDocument(cloudPk: number, id: number, projectPk: number, patchedDocumentRequest?: PatchedDocumentRequest, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.updateDocumentRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedDocumentRequest: patchedDocumentRequest }, initOverrides);
+    async updateDocument(cloud_pk: number, id: number, project_pk: number, PatchedDocumentRequest?: PatchedDocumentRequest, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.updateDocumentRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedDocumentRequest: PatchedDocumentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5964,16 +6021,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a folder
      */
     async updateFolderRaw(requestParameters: UpdateFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateFolder.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateFolder.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateFolder.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateFolder.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateFolder.');
         }
 
         const queryParameters: any = {};
@@ -6001,11 +6058,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedFolderWithoutChildrenRequestToJSON(requestParameters.patchedFolderWithoutChildrenRequest),
+            body: PatchedFolderWithoutChildrenRequestToJSON(requestParameters.PatchedFolderWithoutChildrenRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => FolderWithoutChildrenFromJSON(jsonValue));
@@ -6015,8 +6072,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a folder. Only project admins can update the `default_permission` field  Required scopes: document:write
      * Update some fields of a folder
      */
-    async updateFolder(cloudPk: number, id: number, projectPk: number, patchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
-        const response = await this.updateFolderRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedFolderWithoutChildrenRequest: patchedFolderWithoutChildrenRequest }, initOverrides);
+    async updateFolder(cloud_pk: number, id: number, project_pk: number, PatchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
+        const response = await this.updateFolderRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedFolderWithoutChildrenRequest: PatchedFolderWithoutChildrenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -6025,20 +6082,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update the permission of a group on a folder
      */
     async updateGroupFolderRaw(requestParameters: UpdateGroupFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<GroupFolder>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateGroupFolder.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateGroupFolder.');
         }
 
-        if (requestParameters.folderPk === null || requestParameters.folderPk === undefined) {
-            throw new runtime.RequiredError('folderPk','Required parameter requestParameters.folderPk was null or undefined when calling updateGroupFolder.');
+        if (requestParameters.folder_pk === null || requestParameters.folder_pk === undefined) {
+            throw new runtime.RequiredError('folder_pk','Required parameter requestParameters.folder_pk was null or undefined when calling updateGroupFolder.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateGroupFolder.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateGroupFolder.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateGroupFolder.');
         }
 
         const queryParameters: any = {};
@@ -6066,11 +6123,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{folder_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"folder_pk"}}`, encodeURIComponent(String(requestParameters.folderPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{folder_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"folder_pk"}}`, encodeURIComponent(String(requestParameters.folder_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedGroupFolderRequestToJSON(requestParameters.patchedGroupFolderRequest),
+            body: PatchedGroupFolderRequestToJSON(requestParameters.PatchedGroupFolderRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => GroupFolderFromJSON(jsonValue));
@@ -6080,8 +6137,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update the permission of a group on a folder.             0: ACCESS_DENIED,             50: READ_ONLY,             100: READ_WRTIE               Required scopes: org:manage
      * Update the permission of a group on a folder
      */
-    async updateGroupFolder(cloudPk: number, folderPk: number, id: number, projectPk: number, patchedGroupFolderRequest?: PatchedGroupFolderRequest, initOverrides?: RequestInit): Promise<GroupFolder> {
-        const response = await this.updateGroupFolderRaw({ cloudPk: cloudPk, folderPk: folderPk, id: id, projectPk: projectPk, patchedGroupFolderRequest: patchedGroupFolderRequest }, initOverrides);
+    async updateGroupFolder(cloud_pk: number, folder_pk: number, id: number, project_pk: number, PatchedGroupFolderRequest?: PatchedGroupFolderRequest, initOverrides?: RequestInit): Promise<GroupFolder> {
+        const response = await this.updateGroupFolderRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, id: id, project_pk: project_pk, PatchedGroupFolderRequest: PatchedGroupFolderRequest }, initOverrides);
         return await response.value();
     }
 
@@ -6090,16 +6147,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a group
      */
     async updateManageGroupRaw(requestParameters: UpdateManageGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Group>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateManageGroup.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateManageGroup.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateManageGroup.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateManageGroup.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateManageGroup.');
         }
 
         const queryParameters: any = {};
@@ -6127,11 +6184,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedGroupRequestToJSON(requestParameters.patchedGroupRequest),
+            body: PatchedGroupRequestToJSON(requestParameters.PatchedGroupRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => GroupFromJSON(jsonValue));
@@ -6141,8 +6198,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a group. Must be an admin of the project  Required scopes: org:manage
      * Update some fields of a group
      */
-    async updateManageGroup(cloudPk: number, id: number, projectPk: number, patchedGroupRequest?: PatchedGroupRequest, initOverrides?: RequestInit): Promise<Group> {
-        const response = await this.updateManageGroupRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedGroupRequest: patchedGroupRequest }, initOverrides);
+    async updateManageGroup(cloud_pk: number, id: number, project_pk: number, PatchedGroupRequest?: PatchedGroupRequest, initOverrides?: RequestInit): Promise<Group> {
+        const response = await this.updateManageGroupRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedGroupRequest: PatchedGroupRequest }, initOverrides);
         return await response.value();
     }
 
@@ -6151,8 +6208,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a project
      */
     async updateProjectRaw(requestParameters: UpdateProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Project>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProject.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateProject.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -6184,11 +6241,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/project/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedProjectRequestToJSON(requestParameters.patchedProjectRequest),
+            body: PatchedProjectRequestToJSON(requestParameters.PatchedProjectRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectFromJSON(jsonValue));
@@ -6198,8 +6255,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a project  Required scopes: org:manage
      * Update some fields of a project
      */
-    async updateProject(cloudPk: number, id: number, patchedProjectRequest?: PatchedProjectRequest, initOverrides?: RequestInit): Promise<Project> {
-        const response = await this.updateProjectRaw({ cloudPk: cloudPk, id: id, patchedProjectRequest: patchedProjectRequest }, initOverrides);
+    async updateProject(cloud_pk: number, id: number, PatchedProjectRequest?: PatchedProjectRequest, initOverrides?: RequestInit): Promise<Project> {
+        const response = await this.updateProjectRaw({ cloud_pk: cloud_pk, id: id, PatchedProjectRequest: PatchedProjectRequest }, initOverrides);
         return await response.value();
     }
 
@@ -6208,12 +6265,12 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a token
      */
     async updateProjectAccessTokenRaw(requestParameters: UpdateProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectAccessToken>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProjectAccessToken.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateProjectAccessToken.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateProjectAccessToken.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateProjectAccessToken.');
         }
 
         if (requestParameters.token === null || requestParameters.token === undefined) {
@@ -6245,11 +6302,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedProjectAccessTokenRequestToJSON(requestParameters.patchedProjectAccessTokenRequest),
+            body: PatchedProjectAccessTokenRequestToJSON(requestParameters.PatchedProjectAccessTokenRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ProjectAccessTokenFromJSON(jsonValue));
@@ -6259,8 +6316,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * You can update the expiration date field  Required scopes: org:manage
      * Update some fields of a token
      */
-    async updateProjectAccessToken(cloudPk: number, projectPk: number, token: string, patchedProjectAccessTokenRequest?: PatchedProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
-        const response = await this.updateProjectAccessTokenRaw({ cloudPk: cloudPk, projectPk: projectPk, token: token, patchedProjectAccessTokenRequest: patchedProjectAccessTokenRequest }, initOverrides);
+    async updateProjectAccessToken(cloud_pk: number, project_pk: number, token: string, PatchedProjectAccessTokenRequest?: PatchedProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
+        const response = await this.updateProjectAccessTokenRaw({ cloud_pk: cloud_pk, project_pk: project_pk, token: token, PatchedProjectAccessTokenRequest: PatchedProjectAccessTokenRequest }, initOverrides);
         return await response.value();
     }
 
@@ -6269,16 +6326,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Change the user role in the cloud
      */
     async updateProjectUserRaw(requestParameters: UpdateProjectUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<UserProject>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateProjectUser.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateProjectUser.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateProjectUser.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateProjectUser.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateProjectUser.');
         }
 
         const queryParameters: any = {};
@@ -6306,11 +6363,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedUserProjectUpdateRequestToJSON(requestParameters.patchedUserProjectUpdateRequest),
+            body: PatchedUserProjectUpdateRequestToJSON(requestParameters.PatchedUserProjectUpdateRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserProjectFromJSON(jsonValue));
@@ -6320,8 +6377,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Change the user role in the cloud  Required scopes: cloud:manage
      * Change the user role in the cloud
      */
-    async updateProjectUser(cloudPk: number, id: number, projectPk: number, patchedUserProjectUpdateRequest?: PatchedUserProjectUpdateRequest, initOverrides?: RequestInit): Promise<UserProject> {
-        const response = await this.updateProjectUserRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedUserProjectUpdateRequest: patchedUserProjectUpdateRequest }, initOverrides);
+    async updateProjectUser(cloud_pk: number, id: number, project_pk: number, PatchedUserProjectUpdateRequest?: PatchedUserProjectUpdateRequest, initOverrides?: RequestInit): Promise<UserProject> {
+        const response = await this.updateProjectUserRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedUserProjectUpdateRequest: PatchedUserProjectUpdateRequest }, initOverrides);
         return await response.value();
     }
 
@@ -6330,16 +6387,16 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of the tag
      */
     async updateTagRaw(requestParameters: UpdateTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Tag>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateTag.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateTag.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateTag.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateTag.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateTag.');
         }
 
         const queryParameters: any = {};
@@ -6367,11 +6424,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/tag/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedTagRequestToJSON(requestParameters.patchedTagRequest),
+            body: PatchedTagRequestToJSON(requestParameters.PatchedTagRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => TagFromJSON(jsonValue));
@@ -6381,8 +6438,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of the tag  Required scopes: org:manage
      * Update some fields of the tag
      */
-    async updateTag(cloudPk: number, id: number, projectPk: number, patchedTagRequest?: PatchedTagRequest, initOverrides?: RequestInit): Promise<Tag> {
-        const response = await this.updateTagRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedTagRequest: patchedTagRequest }, initOverrides);
+    async updateTag(cloud_pk: number, id: number, project_pk: number, PatchedTagRequest?: PatchedTagRequest, initOverrides?: RequestInit): Promise<Tag> {
+        const response = await this.updateTagRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedTagRequest: PatchedTagRequest }, initOverrides);
         return await response.value();
     }
 
@@ -6391,24 +6448,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update the validator of validation
      */
     async updateValidationRaw(requestParameters: UpdateValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaValidation>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateValidation.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateValidation.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling updateValidation.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling updateValidation.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateValidation.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateValidation.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateValidation.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling updateValidation.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling updateValidation.');
         }
 
         const queryParameters: any = {};
@@ -6436,11 +6493,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedVisaValidationRequestToJSON(requestParameters.patchedVisaValidationRequest),
+            body: PatchedVisaValidationRequestToJSON(requestParameters.PatchedVisaValidationRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaValidationFromJSON(jsonValue));
@@ -6450,8 +6507,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update the validator of validation. This route is only useful for an App  Required scopes: document:write
      * Update the validator of validation
      */
-    async updateValidation(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, patchedVisaValidationRequest?: PatchedVisaValidationRequest, initOverrides?: RequestInit): Promise<VisaValidation> {
-        const response = await this.updateValidationRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk, patchedVisaValidationRequest: patchedVisaValidationRequest }, initOverrides);
+    async updateValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, PatchedVisaValidationRequest?: PatchedVisaValidationRequest, initOverrides?: RequestInit): Promise<VisaValidation> {
+        const response = await this.updateValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk, PatchedVisaValidationRequest: PatchedVisaValidationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -6460,20 +6517,20 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a visa
      */
     async updateVisaRaw(requestParameters: UpdateVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visa>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateVisa.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateVisa.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling updateVisa.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling updateVisa.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateVisa.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateVisa.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateVisa.');
         }
 
         const queryParameters: any = {};
@@ -6501,11 +6558,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedVisaRequestToJSON(requestParameters.patchedVisaRequest),
+            body: PatchedVisaRequestToJSON(requestParameters.PatchedVisaRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaFromJSON(jsonValue));
@@ -6515,8 +6572,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a visa  Required scopes: document:write
      * Update some fields of a visa
      */
-    async updateVisa(cloudPk: number, documentPk: number, id: number, projectPk: number, patchedVisaRequest?: PatchedVisaRequest, initOverrides?: RequestInit): Promise<Visa> {
-        const response = await this.updateVisaRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, patchedVisaRequest: patchedVisaRequest }, initOverrides);
+    async updateVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, PatchedVisaRequest?: PatchedVisaRequest, initOverrides?: RequestInit): Promise<Visa> {
+        const response = await this.updateVisaRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, PatchedVisaRequest: PatchedVisaRequest }, initOverrides);
         return await response.value();
     }
 
@@ -6525,24 +6582,24 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a comment
      */
     async updateVisaCommentRaw(requestParameters: UpdateVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaComment>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateVisaComment.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateVisaComment.');
         }
 
-        if (requestParameters.documentPk === null || requestParameters.documentPk === undefined) {
-            throw new runtime.RequiredError('documentPk','Required parameter requestParameters.documentPk was null or undefined when calling updateVisaComment.');
+        if (requestParameters.document_pk === null || requestParameters.document_pk === undefined) {
+            throw new runtime.RequiredError('document_pk','Required parameter requestParameters.document_pk was null or undefined when calling updateVisaComment.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateVisaComment.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateVisaComment.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateVisaComment.');
         }
 
-        if (requestParameters.visaPk === null || requestParameters.visaPk === undefined) {
-            throw new runtime.RequiredError('visaPk','Required parameter requestParameters.visaPk was null or undefined when calling updateVisaComment.');
+        if (requestParameters.visa_pk === null || requestParameters.visa_pk === undefined) {
+            throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling updateVisaComment.');
         }
 
         const queryParameters: any = {};
@@ -6570,11 +6627,11 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.documentPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visaPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/comment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedVisaCommentRequestToJSON(requestParameters.patchedVisaCommentRequest),
+            body: PatchedVisaCommentRequestToJSON(requestParameters.PatchedVisaCommentRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VisaCommentFromJSON(jsonValue));
@@ -6584,8 +6641,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Update some fields of a comment  Required scopes: document:write
      * Update some fields of a comment
      */
-    async updateVisaComment(cloudPk: number, documentPk: number, id: number, projectPk: number, visaPk: number, patchedVisaCommentRequest?: PatchedVisaCommentRequest, initOverrides?: RequestInit): Promise<VisaComment> {
-        const response = await this.updateVisaCommentRaw({ cloudPk: cloudPk, documentPk: documentPk, id: id, projectPk: projectPk, visaPk: visaPk, patchedVisaCommentRequest: patchedVisaCommentRequest }, initOverrides);
+    async updateVisaComment(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, PatchedVisaCommentRequest?: PatchedVisaCommentRequest, initOverrides?: RequestInit): Promise<VisaComment> {
+        const response = await this.updateVisaCommentRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk, PatchedVisaCommentRequest: PatchedVisaCommentRequest }, initOverrides);
         return await response.value();
     }
 

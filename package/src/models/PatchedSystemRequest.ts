@@ -36,7 +36,7 @@ export interface PatchedSystemRequest {
      * @type {string}
      * @memberof PatchedSystemRequest
      */
-    objectType?: string | null;
+    object_type?: string | null;
     /**
      * 
      * @type {string}
@@ -63,7 +63,7 @@ export function PatchedSystemRequestFromJSONTyped(json: any, ignoreDiscriminator
         
         'uuid': !exists(json, 'uuid') ? undefined : json['uuid'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'objectType': !exists(json, 'object_type') ? undefined : json['object_type'],
+        'object_type': !exists(json, 'object_type') ? undefined : json['object_type'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'elements': !exists(json, 'elements') ? undefined : json['elements'],
     };
@@ -80,7 +80,7 @@ export function PatchedSystemRequestToJSON(value?: PatchedSystemRequest | null):
         
         'uuid': value.uuid,
         'name': value.name,
-        'object_type': value.objectType,
+        'object_type': value.object_type,
         'description': value.description,
         'elements': value.elements,
     };

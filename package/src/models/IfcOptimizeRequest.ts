@@ -24,7 +24,7 @@ export interface IfcOptimizeRequest {
      * @type {number}
      * @memberof IfcOptimizeRequest
      */
-    floatingPointReduction?: number;
+    floating_point_reduction?: number;
 }
 
 export function IfcOptimizeRequestFromJSON(json: any): IfcOptimizeRequest {
@@ -37,7 +37,7 @@ export function IfcOptimizeRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'floatingPointReduction': !exists(json, 'floating_point_reduction') ? undefined : json['floating_point_reduction'],
+        'floating_point_reduction': !exists(json, 'floating_point_reduction') ? undefined : json['floating_point_reduction'],
     };
 }
 
@@ -50,7 +50,7 @@ export function IfcOptimizeRequestToJSON(value?: IfcOptimizeRequest | null): any
     }
     return {
         
-        'floating_point_reduction': value.floatingPointReduction,
+        'floating_point_reduction': value.floating_point_reduction,
     };
 }
 

@@ -54,7 +54,7 @@ export interface RuleComponentRequest {
      * @type {{ [key: string]: any; }}
      * @memberof RuleComponentRequest
      */
-    ruleComponents?: { [key: string]: any; } | null;
+    rule_components?: { [key: string]: any; } | null;
 }
 
 export function RuleComponentRequestFromJSON(json: any): RuleComponentRequest {
@@ -72,7 +72,7 @@ export function RuleComponentRequestFromJSONTyped(json: any, ignoreDiscriminator
         'operator': !exists(json, 'operator') ? undefined : json['operator'],
         'params': !exists(json, 'params') ? undefined : json['params'],
         'condition': !exists(json, 'condition') ? undefined : json['condition'],
-        'ruleComponents': !exists(json, 'rule_components') ? undefined : json['rule_components'],
+        'rule_components': !exists(json, 'rule_components') ? undefined : json['rule_components'],
     };
 }
 
@@ -90,7 +90,7 @@ export function RuleComponentRequestToJSON(value?: RuleComponentRequest | null):
         'operator': value.operator,
         'params': value.params,
         'condition': value.condition,
-        'rule_components': value.ruleComponents,
+        'rule_components': value.rule_components,
     };
 }
 

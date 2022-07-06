@@ -30,37 +30,37 @@ export interface Invitation {
      * @type {number}
      * @memberof Invitation
      */
-    readonly clientId: number;
+    readonly client_id: number;
     /**
      * User will be redirected to this uri when they accept the invitation
      * @type {string}
      * @memberof Invitation
      */
-    redirectUri: string;
+    redirect_uri: string;
     /**
      * 
      * @type {string}
      * @memberof Invitation
      */
-    cloudName: string;
+    cloud_name: string;
     /**
      * Role the user will have when they accept the invitation
      * @type {number}
      * @memberof Invitation
      */
-    cloudRole: InvitationCloudRoleEnum;
+    cloud_role: InvitationCloudRoleEnum;
     /**
      * 
      * @type {string}
      * @memberof Invitation
      */
-    projectName?: string;
+    project_name?: string;
     /**
      * Role the user will have when they accept the invitation
      * @type {number}
      * @memberof Invitation
      */
-    projectRole?: InvitationProjectRoleEnum;
+    project_role?: InvitationProjectRoleEnum;
     /**
      * email of the user to invite
      * @type {string}
@@ -82,7 +82,7 @@ export interface Invitation {
      * @type {string}
      * @memberof Invitation
      */
-    senderProviderSub?: string;
+    sender_provider_sub?: string;
 }
 
 /**
@@ -122,15 +122,15 @@ export function InvitationFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'id': json['id'],
-        'clientId': json['client_id'],
-        'redirectUri': json['redirect_uri'],
-        'cloudName': json['cloud_name'],
-        'cloudRole': json['cloud_role'],
-        'projectName': !exists(json, 'project_name') ? undefined : json['project_name'],
-        'projectRole': !exists(json, 'project_role') ? undefined : json['project_role'],
+        'client_id': json['client_id'],
+        'redirect_uri': json['redirect_uri'],
+        'cloud_name': json['cloud_name'],
+        'cloud_role': json['cloud_role'],
+        'project_name': !exists(json, 'project_name') ? undefined : json['project_name'],
+        'project_role': !exists(json, 'project_role') ? undefined : json['project_role'],
         'email': json['email'],
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'senderProviderSub': !exists(json, 'sender_provider_sub') ? undefined : json['sender_provider_sub'],
+        'sender_provider_sub': !exists(json, 'sender_provider_sub') ? undefined : json['sender_provider_sub'],
     };
 }
 
@@ -143,14 +143,14 @@ export function InvitationToJSON(value?: Invitation | null): any {
     }
     return {
         
-        'redirect_uri': value.redirectUri,
-        'cloud_name': value.cloudName,
-        'cloud_role': value.cloudRole,
-        'project_name': value.projectName,
-        'project_role': value.projectRole,
+        'redirect_uri': value.redirect_uri,
+        'cloud_name': value.cloud_name,
+        'cloud_role': value.cloud_role,
+        'project_name': value.project_name,
+        'project_role': value.project_role,
         'email': value.email,
         'status': value.status,
-        'sender_provider_sub': value.senderProviderSub,
+        'sender_provider_sub': value.sender_provider_sub,
     };
 }
 

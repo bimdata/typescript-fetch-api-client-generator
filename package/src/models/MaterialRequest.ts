@@ -31,7 +31,7 @@ export interface MaterialRequest {
      * @type {Array<PropertySetRequest>}
      * @memberof MaterialRequest
      */
-    propertySets: Array<PropertySetRequest>;
+    property_sets: Array<PropertySetRequest>;
 }
 
 export function MaterialRequestFromJSON(json: any): MaterialRequest {
@@ -44,7 +44,7 @@ export function MaterialRequestFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'propertySets': ((json['property_sets'] as Array<any>).map(PropertySetRequestFromJSON)),
+        'property_sets': ((json['property_sets'] as Array<any>).map(PropertySetRequestFromJSON)),
     };
 }
 
@@ -57,7 +57,7 @@ export function MaterialRequestToJSON(value?: MaterialRequest | null): any {
     }
     return {
         
-        'property_sets': ((value.propertySets as Array<any>).map(PropertySetRequestToJSON)),
+        'property_sets': ((value.property_sets as Array<any>).map(PropertySetRequestToJSON)),
     };
 }
 

@@ -43,13 +43,13 @@ export interface RawMaterialListRequest {
      * @type {Array<RawMaterialRequest>}
      * @memberof RawMaterialListRequest
      */
-    materialsData?: Array<RawMaterialRequest> | null;
+    materials_data?: Array<RawMaterialRequest> | null;
     /**
      * 
      * @type {Array<RawMaterialListComponentsRequest>}
      * @memberof RawMaterialListRequest
      */
-    listComponents?: Array<RawMaterialListComponentsRequest> | null;
+    list_components?: Array<RawMaterialListComponentsRequest> | null;
     /**
      * 
      * @type {Array<RawMaterialOptionsRequest>}
@@ -68,8 +68,8 @@ export function RawMaterialListRequestFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'materialsData': !exists(json, 'materials_data') ? undefined : (json['materials_data'] === null ? null : (json['materials_data'] as Array<any>).map(RawMaterialRequestFromJSON)),
-        'listComponents': !exists(json, 'list_components') ? undefined : (json['list_components'] === null ? null : (json['list_components'] as Array<any>).map(RawMaterialListComponentsRequestFromJSON)),
+        'materials_data': !exists(json, 'materials_data') ? undefined : (json['materials_data'] === null ? null : (json['materials_data'] as Array<any>).map(RawMaterialRequestFromJSON)),
+        'list_components': !exists(json, 'list_components') ? undefined : (json['list_components'] === null ? null : (json['list_components'] as Array<any>).map(RawMaterialListComponentsRequestFromJSON)),
         'options': !exists(json, 'options') ? undefined : (json['options'] === null ? null : (json['options'] as Array<any>).map(RawMaterialOptionsRequestFromJSON)),
     };
 }
@@ -83,8 +83,8 @@ export function RawMaterialListRequestToJSON(value?: RawMaterialListRequest | nu
     }
     return {
         
-        'materials_data': value.materialsData === undefined ? undefined : (value.materialsData === null ? null : (value.materialsData as Array<any>).map(RawMaterialRequestToJSON)),
-        'list_components': value.listComponents === undefined ? undefined : (value.listComponents === null ? null : (value.listComponents as Array<any>).map(RawMaterialListComponentsRequestToJSON)),
+        'materials_data': value.materials_data === undefined ? undefined : (value.materials_data === null ? null : (value.materials_data as Array<any>).map(RawMaterialRequestToJSON)),
+        'list_components': value.list_components === undefined ? undefined : (value.list_components === null ? null : (value.list_components as Array<any>).map(RawMaterialListComponentsRequestToJSON)),
         'options': value.options === undefined ? undefined : (value.options === null ? null : (value.options as Array<any>).map(RawMaterialOptionsRequestToJSON)),
     };
 }

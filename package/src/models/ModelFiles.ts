@@ -24,49 +24,49 @@ export interface ModelFiles {
      * @type {string}
      * @memberof ModelFiles
      */
-    structureFile?: string | null;
+    structure_file?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ModelFiles
      */
-    systemsFile?: string | null;
+    systems_file?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ModelFiles
      */
-    mapFile?: string | null;
+    map_file?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ModelFiles
      */
-    gltfFile?: string | null;
+    gltf_file?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ModelFiles
      */
-    gltfWithOpeningsFile?: string | null;
+    gltf_with_openings_file?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ModelFiles
      */
-    bvhTreeFile?: string | null;
+    bvh_tree_file?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ModelFiles
      */
-    viewer360File?: string | null;
+    viewer_360_file?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ModelFiles
      */
-    xktFile?: string | null;
+    xkt_file?: string | null;
 }
 
 export function ModelFilesFromJSON(json: any): ModelFiles {
@@ -79,14 +79,14 @@ export function ModelFilesFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
-        'structureFile': !exists(json, 'structure_file') ? undefined : json['structure_file'],
-        'systemsFile': !exists(json, 'systems_file') ? undefined : json['systems_file'],
-        'mapFile': !exists(json, 'map_file') ? undefined : json['map_file'],
-        'gltfFile': !exists(json, 'gltf_file') ? undefined : json['gltf_file'],
-        'gltfWithOpeningsFile': !exists(json, 'gltf_with_openings_file') ? undefined : json['gltf_with_openings_file'],
-        'bvhTreeFile': !exists(json, 'bvh_tree_file') ? undefined : json['bvh_tree_file'],
-        'viewer360File': !exists(json, 'viewer_360_file') ? undefined : json['viewer_360_file'],
-        'xktFile': !exists(json, 'xkt_file') ? undefined : json['xkt_file'],
+        'structure_file': !exists(json, 'structure_file') ? undefined : json['structure_file'],
+        'systems_file': !exists(json, 'systems_file') ? undefined : json['systems_file'],
+        'map_file': !exists(json, 'map_file') ? undefined : json['map_file'],
+        'gltf_file': !exists(json, 'gltf_file') ? undefined : json['gltf_file'],
+        'gltf_with_openings_file': !exists(json, 'gltf_with_openings_file') ? undefined : json['gltf_with_openings_file'],
+        'bvh_tree_file': !exists(json, 'bvh_tree_file') ? undefined : json['bvh_tree_file'],
+        'viewer_360_file': !exists(json, 'viewer_360_file') ? undefined : json['viewer_360_file'],
+        'xkt_file': !exists(json, 'xkt_file') ? undefined : json['xkt_file'],
     };
 }
 
@@ -99,14 +99,14 @@ export function ModelFilesToJSON(value?: ModelFiles | null): any {
     }
     return {
         
-        'structure_file': value.structureFile,
-        'systems_file': value.systemsFile,
-        'map_file': value.mapFile,
-        'gltf_file': value.gltfFile,
-        'gltf_with_openings_file': value.gltfWithOpeningsFile,
-        'bvh_tree_file': value.bvhTreeFile,
-        'viewer_360_file': value.viewer360File,
-        'xkt_file': value.xktFile,
+        'structure_file': value.structure_file,
+        'systems_file': value.systems_file,
+        'map_file': value.map_file,
+        'gltf_file': value.gltf_file,
+        'gltf_with_openings_file': value.gltf_with_openings_file,
+        'bvh_tree_file': value.bvh_tree_file,
+        'viewer_360_file': value.viewer_360_file,
+        'xkt_file': value.xkt_file,
     };
 }
 

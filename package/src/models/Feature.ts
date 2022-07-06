@@ -30,7 +30,7 @@ export interface Feature {
      * @type {string}
      * @memberof Feature
      */
-    viewerUrl?: string | null;
+    viewer_url?: string | null;
 }
 
 export function FeatureFromJSON(json: any): Feature {
@@ -44,7 +44,7 @@ export function FeatureFromJSONTyped(json: any, ignoreDiscriminator: boolean): F
     return {
         
         'name': json['name'],
-        'viewerUrl': !exists(json, 'viewer_url') ? undefined : json['viewer_url'],
+        'viewer_url': !exists(json, 'viewer_url') ? undefined : json['viewer_url'],
     };
 }
 
@@ -58,7 +58,7 @@ export function FeatureToJSON(value?: Feature | null): any {
     return {
         
         'name': value.name,
-        'viewer_url': value.viewerUrl,
+        'viewer_url': value.viewer_url,
     };
 }
 

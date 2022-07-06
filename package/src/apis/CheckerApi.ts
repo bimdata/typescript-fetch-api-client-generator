@@ -72,236 +72,236 @@ import {
 } from '../models';
 
 export interface CreateCheckerRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    ifcCheckerRequest?: IfcCheckerRequest;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    IfcCheckerRequest?: IfcCheckerRequest;
 }
 
 export interface CreateCheckerResultRequest {
-    checkerPk: number;
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
-    checkerResultRequest?: CheckerResultRequest;
+    checker_pk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    CheckerResultRequest?: CheckerResultRequest;
 }
 
 export interface CreateCheckplanRequest {
-    cloudPk: number;
-    projectPk: number;
-    checkPlanRequest: CheckPlanRequest;
+    cloud_pk: number;
+    project_pk: number;
+    CheckPlanRequest: CheckPlanRequest;
 }
 
 export interface CreateRuleRequest {
-    checkPlanPk: number;
-    cloudPk: number;
-    projectPk: number;
-    rulesetPk: number;
-    ruleRequest: RuleRequest;
+    check_plan_pk: number;
+    cloud_pk: number;
+    project_pk: number;
+    ruleset_pk: number;
+    RuleRequest: RuleRequest;
 }
 
 export interface CreateRuleComponentRequest {
-    checkPlanPk: number;
-    cloudPk: number;
-    projectPk: number;
-    rulePk: number;
-    rulesetPk: number;
-    ruleComponentRequest?: RuleComponentRequest;
+    check_plan_pk: number;
+    cloud_pk: number;
+    project_pk: number;
+    rule_pk: number;
+    ruleset_pk: number;
+    RuleComponentRequest?: RuleComponentRequest;
 }
 
 export interface CreateRulesetRequest {
-    checkPlanPk: number;
-    cloudPk: number;
-    projectPk: number;
-    rulesetRequest: RulesetRequest;
+    check_plan_pk: number;
+    cloud_pk: number;
+    project_pk: number;
+    RulesetRequest: RulesetRequest;
 }
 
 export interface DeleteCheckerRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteCheckerResultRequest {
-    checkerPk: number;
-    cloudPk: number;
+    checker_pk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteCheckplanRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface DeleteRuleRequest {
-    checkPlanPk: number;
-    cloudPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    rulesetPk: number;
+    project_pk: number;
+    ruleset_pk: number;
 }
 
 export interface DeleteRuleComponentRequest {
-    checkPlanPk: number;
-    cloudPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    rulePk: number;
-    rulesetPk: number;
+    project_pk: number;
+    rule_pk: number;
+    ruleset_pk: number;
 }
 
 export interface DeleteRulesetRequest {
-    checkPlanPk: number;
-    cloudPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetCheckerRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetCheckerResultRequest {
-    checkerPk: number;
-    cloudPk: number;
+    checker_pk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetCheckerResultsRequest {
-    checkerPk: number;
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    checker_pk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetCheckersRequest {
-    cloudPk: number;
-    modelPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetCheckplanRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetCheckplansRequest {
-    cloudPk: number;
-    projectPk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetRuleRequest {
-    checkPlanPk: number;
-    cloudPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    rulesetPk: number;
+    project_pk: number;
+    ruleset_pk: number;
 }
 
 export interface GetRuleComponentRequest {
-    checkPlanPk: number;
-    cloudPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    rulePk: number;
-    rulesetPk: number;
+    project_pk: number;
+    rule_pk: number;
+    ruleset_pk: number;
 }
 
 export interface GetRuleComponentsRequest {
-    checkPlanPk: number;
-    cloudPk: number;
-    projectPk: number;
-    rulePk: number;
-    rulesetPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
+    project_pk: number;
+    rule_pk: number;
+    ruleset_pk: number;
 }
 
 export interface GetRulesRequest {
-    checkPlanPk: number;
-    cloudPk: number;
-    projectPk: number;
-    rulesetPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
+    project_pk: number;
+    ruleset_pk: number;
 }
 
 export interface GetRulesetRequest {
-    checkPlanPk: number;
-    cloudPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
+    project_pk: number;
 }
 
 export interface GetRulesetsRequest {
-    checkPlanPk: number;
-    cloudPk: number;
-    projectPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface LaunchNewCheckRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    ifcCheckerRequest?: IfcCheckerRequest;
+    model_pk: number;
+    project_pk: number;
+    IfcCheckerRequest?: IfcCheckerRequest;
 }
 
 export interface UpdateCheckerRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedIfcCheckerRequest?: PatchedIfcCheckerRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedIfcCheckerRequest?: PatchedIfcCheckerRequest;
 }
 
 export interface UpdateCheckerResultRequest {
-    checkerPk: number;
-    cloudPk: number;
+    checker_pk: number;
+    cloud_pk: number;
     id: number;
-    modelPk: number;
-    projectPk: number;
-    patchedCheckerResultRequest?: PatchedCheckerResultRequest;
+    model_pk: number;
+    project_pk: number;
+    PatchedCheckerResultRequest?: PatchedCheckerResultRequest;
 }
 
 export interface UpdateCheckplanRequest {
-    cloudPk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    patchedCheckPlanRequest?: PatchedCheckPlanRequest;
+    project_pk: number;
+    PatchedCheckPlanRequest?: PatchedCheckPlanRequest;
 }
 
 export interface UpdateRuleRequest {
-    checkPlanPk: number;
-    cloudPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    rulesetPk: number;
-    patchedRuleRequest?: PatchedRuleRequest;
+    project_pk: number;
+    ruleset_pk: number;
+    PatchedRuleRequest?: PatchedRuleRequest;
 }
 
 export interface UpdateRuleComponentRequest {
-    checkPlanPk: number;
-    cloudPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    rulePk: number;
-    rulesetPk: number;
-    patchedRuleComponentRequest?: PatchedRuleComponentRequest;
+    project_pk: number;
+    rule_pk: number;
+    ruleset_pk: number;
+    PatchedRuleComponentRequest?: PatchedRuleComponentRequest;
 }
 
 export interface UpdateRulesetRequest {
-    checkPlanPk: number;
-    cloudPk: number;
+    check_plan_pk: number;
+    cloud_pk: number;
     id: number;
-    projectPk: number;
-    patchedRulesetRequest?: PatchedRulesetRequest;
+    project_pk: number;
+    PatchedRulesetRequest?: PatchedRulesetRequest;
 }
 
 /**
@@ -314,16 +314,16 @@ export class CheckerApi extends runtime.BaseAPI {
      * Create a checker to a model
      */
     async createCheckerRaw(requestParameters: CreateCheckerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createChecker.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createChecker.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createChecker.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createChecker.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createChecker.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createChecker.');
         }
 
         const queryParameters: any = {};
@@ -351,11 +351,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: IfcCheckerRequestToJSON(requestParameters.ifcCheckerRequest),
+            body: IfcCheckerRequestToJSON(requestParameters.IfcCheckerRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
@@ -365,8 +365,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Create a checker to a model
      */
-    async createChecker(cloudPk: number, modelPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
-        const response = await this.createCheckerRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest }, initOverrides);
+    async createChecker(cloud_pk: number, model_pk: number, project_pk: number, IfcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
+        const response = await this.createCheckerRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, IfcCheckerRequest: IfcCheckerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -375,20 +375,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Create a CheckerResult
      */
     async createCheckerResultRaw(requestParameters: CreateCheckerResultRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
-        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
-            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling createCheckerResult.');
+        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
+            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling createCheckerResult.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createCheckerResult.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createCheckerResult.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling createCheckerResult.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createCheckerResult.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createCheckerResult.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createCheckerResult.');
         }
 
         const queryParameters: any = {};
@@ -416,11 +416,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CheckerResultRequestToJSON(requestParameters.checkerResultRequest),
+            body: CheckerResultRequestToJSON(requestParameters.CheckerResultRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
@@ -430,8 +430,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a CheckerResult  Required scopes: check:write
      * Create a CheckerResult
      */
-    async createCheckerResult(checkerPk: number, cloudPk: number, modelPk: number, projectPk: number, checkerResultRequest?: CheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
-        const response = await this.createCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk, checkerResultRequest: checkerResultRequest }, initOverrides);
+    async createCheckerResult(checker_pk: number, cloud_pk: number, model_pk: number, project_pk: number, CheckerResultRequest?: CheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
+        const response = await this.createCheckerResultRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, CheckerResultRequest: CheckerResultRequest }, initOverrides);
         return await response.value();
     }
 
@@ -440,16 +440,16 @@ export class CheckerApi extends runtime.BaseAPI {
      * Create a Checkplan
      */
     async createCheckplanRaw(requestParameters: CreateCheckplanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckPlan>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createCheckplan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createCheckplan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createCheckplan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createCheckplan.');
         }
 
-        if (requestParameters.checkPlanRequest === null || requestParameters.checkPlanRequest === undefined) {
-            throw new runtime.RequiredError('checkPlanRequest','Required parameter requestParameters.checkPlanRequest was null or undefined when calling createCheckplan.');
+        if (requestParameters.CheckPlanRequest === null || requestParameters.CheckPlanRequest === undefined) {
+            throw new runtime.RequiredError('CheckPlanRequest','Required parameter requestParameters.CheckPlanRequest was null or undefined when calling createCheckplan.');
         }
 
         const queryParameters: any = {};
@@ -477,11 +477,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CheckPlanRequestToJSON(requestParameters.checkPlanRequest),
+            body: CheckPlanRequestToJSON(requestParameters.CheckPlanRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckPlanFromJSON(jsonValue));
@@ -491,8 +491,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a Checkplan  Required scopes: check:write
      * Create a Checkplan
      */
-    async createCheckplan(cloudPk: number, projectPk: number, checkPlanRequest: CheckPlanRequest, initOverrides?: RequestInit): Promise<CheckPlan> {
-        const response = await this.createCheckplanRaw({ cloudPk: cloudPk, projectPk: projectPk, checkPlanRequest: checkPlanRequest }, initOverrides);
+    async createCheckplan(cloud_pk: number, project_pk: number, CheckPlanRequest: CheckPlanRequest, initOverrides?: RequestInit): Promise<CheckPlan> {
+        const response = await this.createCheckplanRaw({ cloud_pk: cloud_pk, project_pk: project_pk, CheckPlanRequest: CheckPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -501,24 +501,24 @@ export class CheckerApi extends runtime.BaseAPI {
      * Create a Rule
      */
     async createRuleRaw(requestParameters: CreateRuleRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Rule>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling createRule.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling createRule.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createRule.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createRule.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createRule.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createRule.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling createRule.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling createRule.');
         }
 
-        if (requestParameters.ruleRequest === null || requestParameters.ruleRequest === undefined) {
-            throw new runtime.RequiredError('ruleRequest','Required parameter requestParameters.ruleRequest was null or undefined when calling createRule.');
+        if (requestParameters.RuleRequest === null || requestParameters.RuleRequest === undefined) {
+            throw new runtime.RequiredError('RuleRequest','Required parameter requestParameters.RuleRequest was null or undefined when calling createRule.');
         }
 
         const queryParameters: any = {};
@@ -546,11 +546,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: RuleRequestToJSON(requestParameters.ruleRequest),
+            body: RuleRequestToJSON(requestParameters.RuleRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleFromJSON(jsonValue));
@@ -560,8 +560,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a Rule  Required scopes: check:write
      * Create a Rule
      */
-    async createRule(checkPlanPk: number, cloudPk: number, projectPk: number, rulesetPk: number, ruleRequest: RuleRequest, initOverrides?: RequestInit): Promise<Rule> {
-        const response = await this.createRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulesetPk: rulesetPk, ruleRequest: ruleRequest }, initOverrides);
+    async createRule(check_plan_pk: number, cloud_pk: number, project_pk: number, ruleset_pk: number, RuleRequest: RuleRequest, initOverrides?: RequestInit): Promise<Rule> {
+        const response = await this.createRuleRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, project_pk: project_pk, ruleset_pk: ruleset_pk, RuleRequest: RuleRequest }, initOverrides);
         return await response.value();
     }
 
@@ -570,24 +570,24 @@ export class CheckerApi extends runtime.BaseAPI {
      * Create a RuleComponent
      */
     async createRuleComponentRaw(requestParameters: CreateRuleComponentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<RuleComponent>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling createRuleComponent.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling createRuleComponent.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createRuleComponent.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createRuleComponent.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createRuleComponent.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createRuleComponent.');
         }
 
-        if (requestParameters.rulePk === null || requestParameters.rulePk === undefined) {
-            throw new runtime.RequiredError('rulePk','Required parameter requestParameters.rulePk was null or undefined when calling createRuleComponent.');
+        if (requestParameters.rule_pk === null || requestParameters.rule_pk === undefined) {
+            throw new runtime.RequiredError('rule_pk','Required parameter requestParameters.rule_pk was null or undefined when calling createRuleComponent.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling createRuleComponent.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling createRuleComponent.');
         }
 
         const queryParameters: any = {};
@@ -615,11 +615,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rulePk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rule_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: RuleComponentRequestToJSON(requestParameters.ruleComponentRequest),
+            body: RuleComponentRequestToJSON(requestParameters.RuleComponentRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleComponentFromJSON(jsonValue));
@@ -629,8 +629,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a RuleComponent  Required scopes: check:write
      * Create a RuleComponent
      */
-    async createRuleComponent(checkPlanPk: number, cloudPk: number, projectPk: number, rulePk: number, rulesetPk: number, ruleComponentRequest?: RuleComponentRequest, initOverrides?: RequestInit): Promise<RuleComponent> {
-        const response = await this.createRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk, ruleComponentRequest: ruleComponentRequest }, initOverrides);
+    async createRuleComponent(check_plan_pk: number, cloud_pk: number, project_pk: number, rule_pk: number, ruleset_pk: number, RuleComponentRequest?: RuleComponentRequest, initOverrides?: RequestInit): Promise<RuleComponent> {
+        const response = await this.createRuleComponentRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, project_pk: project_pk, rule_pk: rule_pk, ruleset_pk: ruleset_pk, RuleComponentRequest: RuleComponentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -639,20 +639,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Create a Ruleset
      */
     async createRulesetRaw(requestParameters: CreateRulesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Ruleset>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling createRuleset.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling createRuleset.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling createRuleset.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createRuleset.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling createRuleset.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createRuleset.');
         }
 
-        if (requestParameters.rulesetRequest === null || requestParameters.rulesetRequest === undefined) {
-            throw new runtime.RequiredError('rulesetRequest','Required parameter requestParameters.rulesetRequest was null or undefined when calling createRuleset.');
+        if (requestParameters.RulesetRequest === null || requestParameters.RulesetRequest === undefined) {
+            throw new runtime.RequiredError('RulesetRequest','Required parameter requestParameters.RulesetRequest was null or undefined when calling createRuleset.');
         }
 
         const queryParameters: any = {};
@@ -680,11 +680,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: RulesetRequestToJSON(requestParameters.rulesetRequest),
+            body: RulesetRequestToJSON(requestParameters.RulesetRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RulesetFromJSON(jsonValue));
@@ -694,8 +694,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * TCreate a Ruleset  Required scopes: check:write
      * Create a Ruleset
      */
-    async createRuleset(checkPlanPk: number, cloudPk: number, projectPk: number, rulesetRequest: RulesetRequest, initOverrides?: RequestInit): Promise<Ruleset> {
-        const response = await this.createRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulesetRequest: rulesetRequest }, initOverrides);
+    async createRuleset(check_plan_pk: number, cloud_pk: number, project_pk: number, RulesetRequest: RulesetRequest, initOverrides?: RequestInit): Promise<Ruleset> {
+        const response = await this.createRulesetRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, project_pk: project_pk, RulesetRequest: RulesetRequest }, initOverrides);
         return await response.value();
     }
 
@@ -704,20 +704,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a checker of a model
      */
     async deleteCheckerRaw(requestParameters: DeleteCheckerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteChecker.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteChecker.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteChecker.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteChecker.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteChecker.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteChecker.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteChecker.');
         }
 
         const queryParameters: any = {};
@@ -743,7 +743,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -756,8 +756,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Delete a checker of a model
      */
-    async deleteChecker(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deleteChecker(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -765,24 +765,24 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a CheckerResult
      */
     async deleteCheckerResultRaw(requestParameters: DeleteCheckerResultRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
-            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling deleteCheckerResult.');
+        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
+            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling deleteCheckerResult.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteCheckerResult.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteCheckerResult.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCheckerResult.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling deleteCheckerResult.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteCheckerResult.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteCheckerResult.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteCheckerResult.');
         }
 
         const queryParameters: any = {};
@@ -808,7 +808,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -821,8 +821,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a CheckerResult  Required scopes: check:write
      * Delete a CheckerResult
      */
-    async deleteCheckerResult(checkerPk: number, cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async deleteCheckerResult(checker_pk: number, cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerResultRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -830,16 +830,16 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Checkplan
      */
     async deleteCheckplanRaw(requestParameters: DeleteCheckplanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteCheckplan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteCheckplan.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCheckplan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteCheckplan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteCheckplan.');
         }
 
         const queryParameters: any = {};
@@ -865,7 +865,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -878,8 +878,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Checkplan  Required scopes: check:write
      * Delete a Checkplan
      */
-    async deleteCheckplan(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckplanRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteCheckplan(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckplanRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -887,24 +887,24 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Rule
      */
     async deleteRuleRaw(requestParameters: DeleteRuleRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling deleteRule.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling deleteRule.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteRule.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteRule.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteRule.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteRule.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteRule.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling deleteRule.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling deleteRule.');
         }
 
         const queryParameters: any = {};
@@ -930,7 +930,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -943,8 +943,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Rule  Required scopes: check:write
      * Delete a Rule
      */
-    async deleteRule(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulesetPk: rulesetPk }, initOverrides);
+    async deleteRule(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, ruleset_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteRuleRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, ruleset_pk: ruleset_pk }, initOverrides);
     }
 
     /**
@@ -952,28 +952,28 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a RuleComponent
      */
     async deleteRuleComponentRaw(requestParameters: DeleteRuleComponentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling deleteRuleComponent.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling deleteRuleComponent.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteRuleComponent.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteRuleComponent.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteRuleComponent.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteRuleComponent.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteRuleComponent.');
         }
 
-        if (requestParameters.rulePk === null || requestParameters.rulePk === undefined) {
-            throw new runtime.RequiredError('rulePk','Required parameter requestParameters.rulePk was null or undefined when calling deleteRuleComponent.');
+        if (requestParameters.rule_pk === null || requestParameters.rule_pk === undefined) {
+            throw new runtime.RequiredError('rule_pk','Required parameter requestParameters.rule_pk was null or undefined when calling deleteRuleComponent.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling deleteRuleComponent.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling deleteRuleComponent.');
         }
 
         const queryParameters: any = {};
@@ -999,7 +999,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rulePk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rule_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1012,8 +1012,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a RuleComponent  Required scopes: check:write
      * Delete a RuleComponent
      */
-    async deleteRuleComponent(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulePk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk }, initOverrides);
+    async deleteRuleComponent(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, rule_pk: number, ruleset_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteRuleComponentRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, rule_pk: rule_pk, ruleset_pk: ruleset_pk }, initOverrides);
     }
 
     /**
@@ -1021,20 +1021,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Ruleset
      */
     async deleteRulesetRaw(requestParameters: DeleteRulesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling deleteRuleset.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling deleteRuleset.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling deleteRuleset.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteRuleset.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteRuleset.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling deleteRuleset.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteRuleset.');
         }
 
         const queryParameters: any = {};
@@ -1060,7 +1060,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -1073,8 +1073,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Ruleset  Required scopes: check:write
      * Delete a Ruleset
      */
-    async deleteRuleset(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async deleteRuleset(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteRulesetRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1082,20 +1082,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve a checker of a model
      */
     async getCheckerRaw(requestParameters: GetCheckerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getChecker.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getChecker.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getChecker.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getChecker.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getChecker.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getChecker.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getChecker.');
         }
 
         const queryParameters: any = {};
@@ -1121,7 +1121,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1134,8 +1134,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve a checker of a model
      */
-    async getChecker(cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<IfcChecker> {
-        const response = await this.getCheckerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getChecker(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<IfcChecker> {
+        const response = await this.getCheckerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1144,24 +1144,24 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one CheckerResult
      */
     async getCheckerResultRaw(requestParameters: GetCheckerResultRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
-        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
-            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling getCheckerResult.');
+        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
+            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling getCheckerResult.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckerResult.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCheckerResult.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCheckerResult.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getCheckerResult.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getCheckerResult.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerResult.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getCheckerResult.');
         }
 
         const queryParameters: any = {};
@@ -1187,7 +1187,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1200,8 +1200,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one CheckerResult  Required scopes: check:read
      * Retrieve one CheckerResult
      */
-    async getCheckerResult(checkerPk: number, cloudPk: number, id: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<CheckerResult> {
-        const response = await this.getCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getCheckerResult(checker_pk: number, cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<CheckerResult> {
+        const response = await this.getCheckerResultRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1210,20 +1210,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all CheckerResults
      */
     async getCheckerResultsRaw(requestParameters: GetCheckerResultsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<CheckerResult>>> {
-        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
-            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling getCheckerResults.');
+        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
+            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling getCheckerResults.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckerResults.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCheckerResults.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getCheckerResults.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getCheckerResults.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckerResults.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getCheckerResults.');
         }
 
         const queryParameters: any = {};
@@ -1249,7 +1249,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1262,8 +1262,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all CheckerResults  Required scopes: check:read
      * Retrieve all CheckerResults
      */
-    async getCheckerResults(checkerPk: number, cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<CheckerResult>> {
-        const response = await this.getCheckerResultsRaw({ checkerPk: checkerPk, cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getCheckerResults(checker_pk: number, cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<CheckerResult>> {
+        const response = await this.getCheckerResultsRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1272,16 +1272,16 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all checkers of a model
      */
     async getCheckersRaw(requestParameters: GetCheckersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<IfcChecker>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckers.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCheckers.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling getCheckers.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getCheckers.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckers.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getCheckers.');
         }
 
         const queryParameters: any = {};
@@ -1307,7 +1307,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1320,8 +1320,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
      * Retrieve all checkers of a model
      */
-    async getCheckers(cloudPk: number, modelPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<IfcChecker>> {
-        const response = await this.getCheckersRaw({ cloudPk: cloudPk, modelPk: modelPk, projectPk: projectPk }, initOverrides);
+    async getCheckers(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<IfcChecker>> {
+        const response = await this.getCheckersRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1330,16 +1330,16 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Checkplan
      */
     async getCheckplanRaw(requestParameters: GetCheckplanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckPlan>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckplan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCheckplan.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCheckplan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckplan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getCheckplan.');
         }
 
         const queryParameters: any = {};
@@ -1365,7 +1365,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1378,8 +1378,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Checkplan  Required scopes: check:read
      * Retrieve one Checkplan
      */
-    async getCheckplan(cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<CheckPlan> {
-        const response = await this.getCheckplanRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async getCheckplan(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<CheckPlan> {
+        const response = await this.getCheckplanRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1388,12 +1388,12 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Checkplans
      */
     async getCheckplansRaw(requestParameters: GetCheckplansRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<CheckPlan>>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getCheckplans.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCheckplans.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getCheckplans.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getCheckplans.');
         }
 
         const queryParameters: any = {};
@@ -1419,7 +1419,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1432,8 +1432,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Checkplans  Required scopes: check:read
      * Retrieve all Checkplans
      */
-    async getCheckplans(cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<CheckPlan>> {
-        const response = await this.getCheckplansRaw({ cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getCheckplans(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<CheckPlan>> {
+        const response = await this.getCheckplansRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1442,24 +1442,24 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Rule
      */
     async getRuleRaw(requestParameters: GetRuleRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Rule>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRule.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling getRule.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRule.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getRule.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getRule.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRule.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getRule.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling getRule.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling getRule.');
         }
 
         const queryParameters: any = {};
@@ -1485,7 +1485,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1498,8 +1498,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Rule  Required scopes: check:read
      * Retrieve one Rule
      */
-    async getRule(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<Rule> {
-        const response = await this.getRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulesetPk: rulesetPk }, initOverrides);
+    async getRule(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, ruleset_pk: number, initOverrides?: RequestInit): Promise<Rule> {
+        const response = await this.getRuleRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, ruleset_pk: ruleset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1508,28 +1508,28 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one RuleComponent
      */
     async getRuleComponentRaw(requestParameters: GetRuleComponentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<RuleComponent>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRuleComponent.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling getRuleComponent.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRuleComponent.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getRuleComponent.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getRuleComponent.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRuleComponent.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getRuleComponent.');
         }
 
-        if (requestParameters.rulePk === null || requestParameters.rulePk === undefined) {
-            throw new runtime.RequiredError('rulePk','Required parameter requestParameters.rulePk was null or undefined when calling getRuleComponent.');
+        if (requestParameters.rule_pk === null || requestParameters.rule_pk === undefined) {
+            throw new runtime.RequiredError('rule_pk','Required parameter requestParameters.rule_pk was null or undefined when calling getRuleComponent.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling getRuleComponent.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling getRuleComponent.');
         }
 
         const queryParameters: any = {};
@@ -1555,7 +1555,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rulePk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rule_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1568,8 +1568,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one RuleComponent  Required scopes: check:read
      * Retrieve one RuleComponent
      */
-    async getRuleComponent(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulePk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<RuleComponent> {
-        const response = await this.getRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk }, initOverrides);
+    async getRuleComponent(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, rule_pk: number, ruleset_pk: number, initOverrides?: RequestInit): Promise<RuleComponent> {
+        const response = await this.getRuleComponentRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, rule_pk: rule_pk, ruleset_pk: ruleset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1578,24 +1578,24 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all RuleComponents
      */
     async getRuleComponentsRaw(requestParameters: GetRuleComponentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<RuleComponent>>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRuleComponents.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling getRuleComponents.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRuleComponents.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getRuleComponents.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRuleComponents.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getRuleComponents.');
         }
 
-        if (requestParameters.rulePk === null || requestParameters.rulePk === undefined) {
-            throw new runtime.RequiredError('rulePk','Required parameter requestParameters.rulePk was null or undefined when calling getRuleComponents.');
+        if (requestParameters.rule_pk === null || requestParameters.rule_pk === undefined) {
+            throw new runtime.RequiredError('rule_pk','Required parameter requestParameters.rule_pk was null or undefined when calling getRuleComponents.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling getRuleComponents.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling getRuleComponents.');
         }
 
         const queryParameters: any = {};
@@ -1621,7 +1621,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rulePk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rule_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1634,8 +1634,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all RuleComponents  Required scopes: check:read
      * Retrieve all RuleComponents
      */
-    async getRuleComponents(checkPlanPk: number, cloudPk: number, projectPk: number, rulePk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<Array<RuleComponent>> {
-        const response = await this.getRuleComponentsRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk }, initOverrides);
+    async getRuleComponents(check_plan_pk: number, cloud_pk: number, project_pk: number, rule_pk: number, ruleset_pk: number, initOverrides?: RequestInit): Promise<Array<RuleComponent>> {
+        const response = await this.getRuleComponentsRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, project_pk: project_pk, rule_pk: rule_pk, ruleset_pk: ruleset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1644,20 +1644,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Rules
      */
     async getRulesRaw(requestParameters: GetRulesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Rule>>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRules.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling getRules.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRules.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getRules.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRules.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getRules.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling getRules.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling getRules.');
         }
 
         const queryParameters: any = {};
@@ -1683,7 +1683,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1696,8 +1696,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Rules  Required scopes: check:read
      * Retrieve all Rules
      */
-    async getRules(checkPlanPk: number, cloudPk: number, projectPk: number, rulesetPk: number, initOverrides?: RequestInit): Promise<Array<Rule>> {
-        const response = await this.getRulesRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk, rulesetPk: rulesetPk }, initOverrides);
+    async getRules(check_plan_pk: number, cloud_pk: number, project_pk: number, ruleset_pk: number, initOverrides?: RequestInit): Promise<Array<Rule>> {
+        const response = await this.getRulesRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, project_pk: project_pk, ruleset_pk: ruleset_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1706,20 +1706,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Ruleset
      */
     async getRulesetRaw(requestParameters: GetRulesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Ruleset>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRuleset.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling getRuleset.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRuleset.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getRuleset.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getRuleset.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRuleset.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getRuleset.');
         }
 
         const queryParameters: any = {};
@@ -1745,7 +1745,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1758,8 +1758,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve one Ruleset  Required scopes: check:read
      * Retrieve one Ruleset
      */
-    async getRuleset(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, initOverrides?: RequestInit): Promise<Ruleset> {
-        const response = await this.getRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk }, initOverrides);
+    async getRuleset(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Ruleset> {
+        const response = await this.getRulesetRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1768,16 +1768,16 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Rulesets
      */
     async getRulesetsRaw(requestParameters: GetRulesetsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Ruleset>>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling getRulesets.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling getRulesets.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling getRulesets.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getRulesets.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling getRulesets.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getRulesets.');
         }
 
         const queryParameters: any = {};
@@ -1803,7 +1803,7 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -1816,8 +1816,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Retrieve all Rulesets  Required scopes: check:read
      * Retrieve all Rulesets
      */
-    async getRulesets(checkPlanPk: number, cloudPk: number, projectPk: number, initOverrides?: RequestInit): Promise<Array<Ruleset>> {
-        const response = await this.getRulesetsRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, projectPk: projectPk }, initOverrides);
+    async getRulesets(check_plan_pk: number, cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Ruleset>> {
+        const response = await this.getRulesetsRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -1826,20 +1826,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Launch a new check on the model
      */
     async launchNewCheckRaw(requestParameters: LaunchNewCheckRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling launchNewCheck.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling launchNewCheck.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling launchNewCheck.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling launchNewCheck.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling launchNewCheck.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling launchNewCheck.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling launchNewCheck.');
         }
 
         const queryParameters: any = {};
@@ -1867,11 +1867,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}/launch-check`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}/launch-check`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: IfcCheckerRequestToJSON(requestParameters.ifcCheckerRequest),
+            body: IfcCheckerRequestToJSON(requestParameters.IfcCheckerRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1881,8 +1881,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A nex check will be played with the current state of elements, properties, etc.  Required scopes: check:write, ifc:read
      * Launch a new check on the model
      */
-    async launchNewCheck(cloudPk: number, id: number, modelPk: number, projectPk: number, ifcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.launchNewCheckRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, ifcCheckerRequest: ifcCheckerRequest }, initOverrides);
+    async launchNewCheck(cloud_pk: number, id: number, model_pk: number, project_pk: number, IfcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.launchNewCheckRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, IfcCheckerRequest: IfcCheckerRequest }, initOverrides);
     }
 
     /**
@@ -1890,20 +1890,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a checker of a model
      */
     async updateCheckerRaw(requestParameters: UpdateCheckerRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateChecker.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateChecker.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateChecker.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateChecker.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateChecker.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateChecker.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateChecker.');
         }
 
         const queryParameters: any = {};
@@ -1931,11 +1931,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedIfcCheckerRequestToJSON(requestParameters.patchedIfcCheckerRequest),
+            body: PatchedIfcCheckerRequestToJSON(requestParameters.PatchedIfcCheckerRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
@@ -1945,8 +1945,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Update some fields of a checker of a model
      */
-    async updateChecker(cloudPk: number, id: number, modelPk: number, projectPk: number, patchedIfcCheckerRequest?: PatchedIfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
-        const response = await this.updateCheckerRaw({ cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedIfcCheckerRequest: patchedIfcCheckerRequest }, initOverrides);
+    async updateChecker(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedIfcCheckerRequest?: PatchedIfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
+        const response = await this.updateCheckerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedIfcCheckerRequest: PatchedIfcCheckerRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1955,24 +1955,24 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a CheckerResult
      */
     async updateCheckerResultRaw(requestParameters: UpdateCheckerResultRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
-        if (requestParameters.checkerPk === null || requestParameters.checkerPk === undefined) {
-            throw new runtime.RequiredError('checkerPk','Required parameter requestParameters.checkerPk was null or undefined when calling updateCheckerResult.');
+        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
+            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling updateCheckerResult.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateCheckerResult.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateCheckerResult.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCheckerResult.');
         }
 
-        if (requestParameters.modelPk === null || requestParameters.modelPk === undefined) {
-            throw new runtime.RequiredError('modelPk','Required parameter requestParameters.modelPk was null or undefined when calling updateCheckerResult.');
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateCheckerResult.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateCheckerResult.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateCheckerResult.');
         }
 
         const queryParameters: any = {};
@@ -2000,11 +2000,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checkerPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.modelPk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedCheckerResultRequestToJSON(requestParameters.patchedCheckerResultRequest),
+            body: PatchedCheckerResultRequestToJSON(requestParameters.PatchedCheckerResultRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
@@ -2014,8 +2014,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a CheckerResult  Required scopes: check:write
      * Update some fields of a CheckerResult
      */
-    async updateCheckerResult(checkerPk: number, cloudPk: number, id: number, modelPk: number, projectPk: number, patchedCheckerResultRequest?: PatchedCheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
-        const response = await this.updateCheckerResultRaw({ checkerPk: checkerPk, cloudPk: cloudPk, id: id, modelPk: modelPk, projectPk: projectPk, patchedCheckerResultRequest: patchedCheckerResultRequest }, initOverrides);
+    async updateCheckerResult(checker_pk: number, cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedCheckerResultRequest?: PatchedCheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
+        const response = await this.updateCheckerResultRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedCheckerResultRequest: PatchedCheckerResultRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2024,16 +2024,16 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Checkplan
      */
     async updateCheckplanRaw(requestParameters: UpdateCheckplanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckPlan>> {
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateCheckplan.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateCheckplan.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCheckplan.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateCheckplan.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateCheckplan.');
         }
 
         const queryParameters: any = {};
@@ -2061,11 +2061,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedCheckPlanRequestToJSON(requestParameters.patchedCheckPlanRequest),
+            body: PatchedCheckPlanRequestToJSON(requestParameters.PatchedCheckPlanRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => CheckPlanFromJSON(jsonValue));
@@ -2075,8 +2075,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Checkplan  Required scopes: check:write
      * Update some fields of a Checkplan
      */
-    async updateCheckplan(cloudPk: number, id: number, projectPk: number, patchedCheckPlanRequest?: PatchedCheckPlanRequest, initOverrides?: RequestInit): Promise<CheckPlan> {
-        const response = await this.updateCheckplanRaw({ cloudPk: cloudPk, id: id, projectPk: projectPk, patchedCheckPlanRequest: patchedCheckPlanRequest }, initOverrides);
+    async updateCheckplan(cloud_pk: number, id: number, project_pk: number, PatchedCheckPlanRequest?: PatchedCheckPlanRequest, initOverrides?: RequestInit): Promise<CheckPlan> {
+        const response = await this.updateCheckplanRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedCheckPlanRequest: PatchedCheckPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2085,24 +2085,24 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Rule
      */
     async updateRuleRaw(requestParameters: UpdateRuleRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Rule>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling updateRule.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling updateRule.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateRule.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateRule.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateRule.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateRule.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateRule.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling updateRule.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling updateRule.');
         }
 
         const queryParameters: any = {};
@@ -2130,11 +2130,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedRuleRequestToJSON(requestParameters.patchedRuleRequest),
+            body: PatchedRuleRequestToJSON(requestParameters.PatchedRuleRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleFromJSON(jsonValue));
@@ -2144,8 +2144,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Rule  Required scopes: check:write
      * Update some fields of a Rule
      */
-    async updateRule(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulesetPk: number, patchedRuleRequest?: PatchedRuleRequest, initOverrides?: RequestInit): Promise<Rule> {
-        const response = await this.updateRuleRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulesetPk: rulesetPk, patchedRuleRequest: patchedRuleRequest }, initOverrides);
+    async updateRule(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, ruleset_pk: number, PatchedRuleRequest?: PatchedRuleRequest, initOverrides?: RequestInit): Promise<Rule> {
+        const response = await this.updateRuleRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, ruleset_pk: ruleset_pk, PatchedRuleRequest: PatchedRuleRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2154,28 +2154,28 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a RuleComponent
      */
     async updateRuleComponentRaw(requestParameters: UpdateRuleComponentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<RuleComponent>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling updateRuleComponent.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling updateRuleComponent.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateRuleComponent.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateRuleComponent.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateRuleComponent.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateRuleComponent.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateRuleComponent.');
         }
 
-        if (requestParameters.rulePk === null || requestParameters.rulePk === undefined) {
-            throw new runtime.RequiredError('rulePk','Required parameter requestParameters.rulePk was null or undefined when calling updateRuleComponent.');
+        if (requestParameters.rule_pk === null || requestParameters.rule_pk === undefined) {
+            throw new runtime.RequiredError('rule_pk','Required parameter requestParameters.rule_pk was null or undefined when calling updateRuleComponent.');
         }
 
-        if (requestParameters.rulesetPk === null || requestParameters.rulesetPk === undefined) {
-            throw new runtime.RequiredError('rulesetPk','Required parameter requestParameters.rulesetPk was null or undefined when calling updateRuleComponent.');
+        if (requestParameters.ruleset_pk === null || requestParameters.ruleset_pk === undefined) {
+            throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling updateRuleComponent.');
         }
 
         const queryParameters: any = {};
@@ -2203,11 +2203,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rulePk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.rulesetPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{ruleset_pk}/rule/{rule_pk}/rulecomponent/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"rule_pk"}}`, encodeURIComponent(String(requestParameters.rule_pk))).replace(`{${"ruleset_pk"}}`, encodeURIComponent(String(requestParameters.ruleset_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedRuleComponentRequestToJSON(requestParameters.patchedRuleComponentRequest),
+            body: PatchedRuleComponentRequestToJSON(requestParameters.PatchedRuleComponentRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RuleComponentFromJSON(jsonValue));
@@ -2217,8 +2217,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a RuleComponent  Required scopes: check:write
      * Update some fields of a RuleComponent
      */
-    async updateRuleComponent(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, rulePk: number, rulesetPk: number, patchedRuleComponentRequest?: PatchedRuleComponentRequest, initOverrides?: RequestInit): Promise<RuleComponent> {
-        const response = await this.updateRuleComponentRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, rulePk: rulePk, rulesetPk: rulesetPk, patchedRuleComponentRequest: patchedRuleComponentRequest }, initOverrides);
+    async updateRuleComponent(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, rule_pk: number, ruleset_pk: number, PatchedRuleComponentRequest?: PatchedRuleComponentRequest, initOverrides?: RequestInit): Promise<RuleComponent> {
+        const response = await this.updateRuleComponentRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, rule_pk: rule_pk, ruleset_pk: ruleset_pk, PatchedRuleComponentRequest: PatchedRuleComponentRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2227,20 +2227,20 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Ruleset
      */
     async updateRulesetRaw(requestParameters: UpdateRulesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Ruleset>> {
-        if (requestParameters.checkPlanPk === null || requestParameters.checkPlanPk === undefined) {
-            throw new runtime.RequiredError('checkPlanPk','Required parameter requestParameters.checkPlanPk was null or undefined when calling updateRuleset.');
+        if (requestParameters.check_plan_pk === null || requestParameters.check_plan_pk === undefined) {
+            throw new runtime.RequiredError('check_plan_pk','Required parameter requestParameters.check_plan_pk was null or undefined when calling updateRuleset.');
         }
 
-        if (requestParameters.cloudPk === null || requestParameters.cloudPk === undefined) {
-            throw new runtime.RequiredError('cloudPk','Required parameter requestParameters.cloudPk was null or undefined when calling updateRuleset.');
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateRuleset.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateRuleset.');
         }
 
-        if (requestParameters.projectPk === null || requestParameters.projectPk === undefined) {
-            throw new runtime.RequiredError('projectPk','Required parameter requestParameters.projectPk was null or undefined when calling updateRuleset.');
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateRuleset.');
         }
 
         const queryParameters: any = {};
@@ -2268,11 +2268,11 @@ export class CheckerApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.checkPlanPk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloudPk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.projectPk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/checkplan/{check_plan_pk}/ruleset/{id}`.replace(`{${"check_plan_pk"}}`, encodeURIComponent(String(requestParameters.check_plan_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedRulesetRequestToJSON(requestParameters.patchedRulesetRequest),
+            body: PatchedRulesetRequestToJSON(requestParameters.PatchedRulesetRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RulesetFromJSON(jsonValue));
@@ -2282,8 +2282,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Update some fields of a Ruleset  Required scopes: check:write
      * Update some fields of a Ruleset
      */
-    async updateRuleset(checkPlanPk: number, cloudPk: number, id: number, projectPk: number, patchedRulesetRequest?: PatchedRulesetRequest, initOverrides?: RequestInit): Promise<Ruleset> {
-        const response = await this.updateRulesetRaw({ checkPlanPk: checkPlanPk, cloudPk: cloudPk, id: id, projectPk: projectPk, patchedRulesetRequest: patchedRulesetRequest }, initOverrides);
+    async updateRuleset(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, PatchedRulesetRequest?: PatchedRulesetRequest, initOverrides?: RequestInit): Promise<Ruleset> {
+        const response = await this.updateRulesetRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedRulesetRequest: PatchedRulesetRequest }, initOverrides);
         return await response.value();
     }
 

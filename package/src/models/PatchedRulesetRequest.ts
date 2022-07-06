@@ -37,7 +37,7 @@ export interface PatchedRulesetRequest {
      * @type {number}
      * @memberof PatchedRulesetRequest
      */
-    parentRulesetId?: number | null;
+    parent_ruleset_id?: number | null;
     /**
      * 
      * @type {string}
@@ -74,7 +74,7 @@ export function PatchedRulesetRequestFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
-        'parentRulesetId': !exists(json, 'parent_ruleset_id') ? undefined : json['parent_ruleset_id'],
+        'parent_ruleset_id': !exists(json, 'parent_ruleset_id') ? undefined : json['parent_ruleset_id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'rules': !exists(json, 'rules') ? undefined : ((json['rules'] as Array<any>).map(RuleRequestFromJSON)),
@@ -91,7 +91,7 @@ export function PatchedRulesetRequestToJSON(value?: PatchedRulesetRequest | null
     }
     return {
         
-        'parent_ruleset_id': value.parentRulesetId,
+        'parent_ruleset_id': value.parent_ruleset_id,
         'name': value.name,
         'description': value.description,
         'rules': value.rules === undefined ? undefined : ((value.rules as Array<any>).map(RuleRequestToJSON)),

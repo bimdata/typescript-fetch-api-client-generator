@@ -24,7 +24,7 @@ export interface VisaValidationRequest {
      * @type {number}
      * @memberof VisaValidationRequest
      */
-    validatorId: number;
+    validator_id: number;
 }
 
 export function VisaValidationRequestFromJSON(json: any): VisaValidationRequest {
@@ -37,7 +37,7 @@ export function VisaValidationRequestFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
-        'validatorId': json['validator_id'],
+        'validator_id': json['validator_id'],
     };
 }
 
@@ -50,7 +50,7 @@ export function VisaValidationRequestToJSON(value?: VisaValidationRequest | null
     }
     return {
         
-        'validator_id': value.validatorId,
+        'validator_id': value.validator_id,
     };
 }
 

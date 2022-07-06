@@ -30,7 +30,7 @@ export interface FeatureRequest {
      * @type {string}
      * @memberof FeatureRequest
      */
-    viewerUrl?: string | null;
+    viewer_url?: string | null;
 }
 
 export function FeatureRequestFromJSON(json: any): FeatureRequest {
@@ -44,7 +44,7 @@ export function FeatureRequestFromJSONTyped(json: any, ignoreDiscriminator: bool
     return {
         
         'name': json['name'],
-        'viewerUrl': !exists(json, 'viewer_url') ? undefined : json['viewer_url'],
+        'viewer_url': !exists(json, 'viewer_url') ? undefined : json['viewer_url'],
     };
 }
 
@@ -58,7 +58,7 @@ export function FeatureRequestToJSON(value?: FeatureRequest | null): any {
     return {
         
         'name': value.name,
-        'viewer_url': value.viewerUrl,
+        'viewer_url': value.viewer_url,
     };
 }
 

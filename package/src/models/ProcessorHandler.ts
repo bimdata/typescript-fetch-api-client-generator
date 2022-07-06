@@ -42,7 +42,7 @@ export interface ProcessorHandler {
      * @type {string}
      * @memberof ProcessorHandler
      */
-    detailMessage?: string | null;
+    detail_message?: string | null;
 }
 
 /**
@@ -72,7 +72,7 @@ export function ProcessorHandlerFromJSONTyped(json: any, ignoreDiscriminator: bo
         'id': json['id'],
         'worker': json['worker'],
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'detailMessage': !exists(json, 'detail_message') ? undefined : json['detail_message'],
+        'detail_message': !exists(json, 'detail_message') ? undefined : json['detail_message'],
     };
 }
 
@@ -86,7 +86,7 @@ export function ProcessorHandlerToJSON(value?: ProcessorHandler | null): any {
     return {
         
         'status': value.status,
-        'detail_message': value.detailMessage,
+        'detail_message': value.detail_message,
     };
 }
 

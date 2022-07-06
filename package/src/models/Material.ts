@@ -55,7 +55,7 @@ export interface Material {
      * @type {Array<PropertySet>}
      * @memberof Material
      */
-    propertySets: Array<PropertySet>;
+    property_sets: Array<PropertySet>;
 }
 
 export function MaterialFromJSON(json: any): Material {
@@ -72,7 +72,7 @@ export function MaterialFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'name': json['name'],
         'category': json['category'],
         'description': json['description'],
-        'propertySets': ((json['property_sets'] as Array<any>).map(PropertySetFromJSON)),
+        'property_sets': ((json['property_sets'] as Array<any>).map(PropertySetFromJSON)),
     };
 }
 
@@ -85,7 +85,7 @@ export function MaterialToJSON(value?: Material | null): any {
     }
     return {
         
-        'property_sets': ((value.propertySets as Array<any>).map(PropertySetToJSON)),
+        'property_sets': ((value.property_sets as Array<any>).map(PropertySetToJSON)),
     };
 }
 

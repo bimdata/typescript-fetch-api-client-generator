@@ -37,7 +37,7 @@ export interface Ruleset {
      * @type {number}
      * @memberof Ruleset
      */
-    parentRulesetId?: number | null;
+    parent_ruleset_id?: number | null;
     /**
      * 
      * @type {string}
@@ -75,7 +75,7 @@ export function RulesetFromJSONTyped(json: any, ignoreDiscriminator: boolean): R
     return {
         
         'id': json['id'],
-        'parentRulesetId': !exists(json, 'parent_ruleset_id') ? undefined : json['parent_ruleset_id'],
+        'parent_ruleset_id': !exists(json, 'parent_ruleset_id') ? undefined : json['parent_ruleset_id'],
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'rules': !exists(json, 'rules') ? undefined : ((json['rules'] as Array<any>).map(RuleFromJSON)),
@@ -92,7 +92,7 @@ export function RulesetToJSON(value?: Ruleset | null): any {
     }
     return {
         
-        'parent_ruleset_id': value.parentRulesetId,
+        'parent_ruleset_id': value.parent_ruleset_id,
         'name': value.name,
         'description': value.description,
         'rules': value.rules === undefined ? undefined : ((value.rules as Array<any>).map(RuleToJSON)),

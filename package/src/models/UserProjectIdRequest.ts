@@ -24,7 +24,7 @@ export interface UserProjectIdRequest {
      * @type {number}
      * @memberof UserProjectIdRequest
      */
-    userprojectId: number;
+    userproject_id: number;
 }
 
 export function UserProjectIdRequestFromJSON(json: any): UserProjectIdRequest {
@@ -37,7 +37,7 @@ export function UserProjectIdRequestFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'userprojectId': json['userproject_id'],
+        'userproject_id': json['userproject_id'],
     };
 }
 
@@ -50,7 +50,7 @@ export function UserProjectIdRequestToJSON(value?: UserProjectIdRequest | null):
     }
     return {
         
-        'userproject_id': value.userprojectId,
+        'userproject_id': value.userproject_id,
     };
 }
 

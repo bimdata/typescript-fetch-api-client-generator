@@ -30,7 +30,7 @@ export interface BcfProject {
      * @type {string}
      * @memberof BcfProject
      */
-    readonly projectId: string;
+    readonly project_id: string;
     /**
      * Name of the project
      * @type {string}
@@ -50,7 +50,7 @@ export function BcfProjectFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'id': json['id'],
-        'projectId': json['project_id'],
+        'project_id': json['project_id'],
         'name': json['name'],
     };
 }

@@ -24,13 +24,13 @@ export interface ProjectSize {
      * @type {number}
      * @memberof ProjectSize
      */
-    readonly totalSize: number | null;
+    readonly total_size: number | null;
     /**
      * 
      * @type {number}
      * @memberof ProjectSize
      */
-    readonly smartDataSize: number | null;
+    readonly smart_data_size: number | null;
 }
 
 export function ProjectSizeFromJSON(json: any): ProjectSize {
@@ -43,8 +43,8 @@ export function ProjectSizeFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'totalSize': json['total_size'],
-        'smartDataSize': json['smart_data_size'],
+        'total_size': json['total_size'],
+        'smart_data_size': json['smart_data_size'],
     };
 }
 

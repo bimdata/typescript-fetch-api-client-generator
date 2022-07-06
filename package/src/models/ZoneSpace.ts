@@ -48,19 +48,19 @@ export interface ZoneSpace {
      * @type {Array<number>}
      * @memberof ZoneSpace
      */
-    readonly zoneSet: Array<number>;
+    readonly zone_set: Array<number>;
     /**
      * 
      * @type {Date}
      * @memberof ZoneSpace
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof ZoneSpace
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
 }
 
 export function ZoneSpaceFromJSON(json: any): ZoneSpace {
@@ -77,9 +77,9 @@ export function ZoneSpaceFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'name': !exists(json, 'name') ? undefined : json['name'],
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': json['uuid'],
-        'zoneSet': json['zone_set'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'zone_set': json['zone_set'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
     };
 }
 

@@ -79,25 +79,25 @@ export interface Viewpoint {
      * @type {string}
      * @memberof Viewpoint
      */
-    originatingSystem?: string | null;
+    originating_system?: string | null;
     /**
      * System specific identifier of the viewpoint in the originating BIM tool
      * @type {string}
      * @memberof Viewpoint
      */
-    authoringToolId?: string | null;
+    authoring_tool_id?: string | null;
     /**
      * 
      * @type {OrthogonalCamera}
      * @memberof Viewpoint
      */
-    orthogonalCamera?: OrthogonalCamera | null;
+    orthogonal_camera?: OrthogonalCamera | null;
     /**
      * 
      * @type {PerspectiveCamera}
      * @memberof Viewpoint
      */
-    perspectiveCamera?: PerspectiveCamera | null;
+    perspective_camera?: PerspectiveCamera | null;
     /**
      * 
      * @type {Array<Line>}
@@ -109,7 +109,7 @@ export interface Viewpoint {
      * @type {Array<ClippingPlane>}
      * @memberof Viewpoint
      */
-    clippingPlanes?: Array<ClippingPlane> | null;
+    clipping_planes?: Array<ClippingPlane> | null;
     /**
      * 
      * @type {Snapshot}
@@ -142,12 +142,12 @@ export function ViewpointFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         
         'index': !exists(json, 'index') ? undefined : json['index'],
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
-        'originatingSystem': !exists(json, 'originating_system') ? undefined : json['originating_system'],
-        'authoringToolId': !exists(json, 'authoring_tool_id') ? undefined : json['authoring_tool_id'],
-        'orthogonalCamera': !exists(json, 'orthogonal_camera') ? undefined : OrthogonalCameraFromJSON(json['orthogonal_camera']),
-        'perspectiveCamera': !exists(json, 'perspective_camera') ? undefined : PerspectiveCameraFromJSON(json['perspective_camera']),
+        'originating_system': !exists(json, 'originating_system') ? undefined : json['originating_system'],
+        'authoring_tool_id': !exists(json, 'authoring_tool_id') ? undefined : json['authoring_tool_id'],
+        'orthogonal_camera': !exists(json, 'orthogonal_camera') ? undefined : OrthogonalCameraFromJSON(json['orthogonal_camera']),
+        'perspective_camera': !exists(json, 'perspective_camera') ? undefined : PerspectiveCameraFromJSON(json['perspective_camera']),
         'lines': !exists(json, 'lines') ? undefined : (json['lines'] === null ? null : (json['lines'] as Array<any>).map(LineFromJSON)),
-        'clippingPlanes': !exists(json, 'clipping_planes') ? undefined : (json['clipping_planes'] === null ? null : (json['clipping_planes'] as Array<any>).map(ClippingPlaneFromJSON)),
+        'clipping_planes': !exists(json, 'clipping_planes') ? undefined : (json['clipping_planes'] === null ? null : (json['clipping_planes'] as Array<any>).map(ClippingPlaneFromJSON)),
         'snapshot': !exists(json, 'snapshot') ? undefined : SnapshotFromJSON(json['snapshot']),
         'components': !exists(json, 'components') ? undefined : ComponentsParentFromJSON(json['components']),
         'pins': !exists(json, 'pins') ? undefined : (json['pins'] === null ? null : (json['pins'] as Array<any>).map(PinFromJSON)),
@@ -165,12 +165,12 @@ export function ViewpointToJSON(value?: Viewpoint | null): any {
         
         'index': value.index,
         'guid': value.guid,
-        'originating_system': value.originatingSystem,
-        'authoring_tool_id': value.authoringToolId,
-        'orthogonal_camera': OrthogonalCameraToJSON(value.orthogonalCamera),
-        'perspective_camera': PerspectiveCameraToJSON(value.perspectiveCamera),
+        'originating_system': value.originating_system,
+        'authoring_tool_id': value.authoring_tool_id,
+        'orthogonal_camera': OrthogonalCameraToJSON(value.orthogonal_camera),
+        'perspective_camera': PerspectiveCameraToJSON(value.perspective_camera),
         'lines': value.lines === undefined ? undefined : (value.lines === null ? null : (value.lines as Array<any>).map(LineToJSON)),
-        'clipping_planes': value.clippingPlanes === undefined ? undefined : (value.clippingPlanes === null ? null : (value.clippingPlanes as Array<any>).map(ClippingPlaneToJSON)),
+        'clipping_planes': value.clipping_planes === undefined ? undefined : (value.clipping_planes === null ? null : (value.clipping_planes as Array<any>).map(ClippingPlaneToJSON)),
         'snapshot': SnapshotToJSON(value.snapshot),
         'components': ComponentsParentToJSON(value.components),
         'pins': value.pins === undefined ? undefined : (value.pins === null ? null : (value.pins as Array<any>).map(PinToJSON)),

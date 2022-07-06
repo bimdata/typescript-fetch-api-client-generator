@@ -78,7 +78,7 @@ export interface IfcExportRequest {
      * @type {string}
      * @memberof IfcExportRequest
      */
-    fileName: string;
+    file_name: string;
 }
 
 /**
@@ -166,7 +166,7 @@ export function IfcExportRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'attributes': !exists(json, 'attributes') ? undefined : json['attributes'],
         'structure': !exists(json, 'structure') ? undefined : json['structure'],
         'uuids': !exists(json, 'uuids') ? undefined : json['uuids'],
-        'fileName': json['file_name'],
+        'file_name': json['file_name'],
     };
 }
 
@@ -188,7 +188,7 @@ export function IfcExportRequestToJSON(value?: IfcExportRequest | null): any {
         'attributes': value.attributes,
         'structure': value.structure,
         'uuids': value.uuids,
-        'file_name': value.fileName,
+        'file_name': value.file_name,
     };
 }
 

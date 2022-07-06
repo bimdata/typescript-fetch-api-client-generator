@@ -49,13 +49,13 @@ export interface CheckPlan {
      * @type {Date}
      * @memberof CheckPlan
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof CheckPlan
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {Array<Ruleset>}
@@ -67,7 +67,7 @@ export interface CheckPlan {
      * @type {boolean}
      * @memberof CheckPlan
      */
-    readonly isDefault: boolean;
+    readonly is_default: boolean;
 }
 
 export function CheckPlanFromJSON(json: any): CheckPlan {
@@ -83,10 +83,10 @@ export function CheckPlanFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'id': json['id'],
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
         'rulesets': !exists(json, 'rulesets') ? undefined : ((json['rulesets'] as Array<any>).map(RulesetFromJSON)),
-        'isDefault': json['is_default'],
+        'is_default': json['is_default'],
     };
 }
 

@@ -43,19 +43,19 @@ export interface PatchedFullTopicRequest {
      * @type {Date}
      * @memberof PatchedFullTopicRequest
      */
-    creationDate?: Date;
+    creation_date?: Date;
     /**
      * 
      * @type {string}
      * @memberof PatchedFullTopicRequest
      */
-    creationAuthor?: string | null;
+    creation_author?: string | null;
     /**
      * 
      * @type {string}
      * @memberof PatchedFullTopicRequest
      */
-    modifiedAuthor?: string | null;
+    modified_author?: string | null;
     /**
      * 
      * @type {string}
@@ -73,7 +73,7 @@ export interface PatchedFullTopicRequest {
      * @type {Array<string>}
      * @memberof PatchedFullTopicRequest
      */
-    referenceLinks?: Array<string> | null;
+    reference_links?: Array<string> | null;
     /**
      * DEPRECATED: Use 'models' instead
      * @type {Array<number>}
@@ -97,13 +97,13 @@ export interface PatchedFullTopicRequest {
      * @type {string}
      * @memberof PatchedFullTopicRequest
      */
-    topicType?: string | null;
+    topic_type?: string | null;
     /**
      * 
      * @type {string}
      * @memberof PatchedFullTopicRequest
      */
-    topicStatus?: string | null;
+    topic_status?: string | null;
     /**
      * 
      * @type {string}
@@ -127,7 +127,7 @@ export interface PatchedFullTopicRequest {
      * @type {string}
      * @memberof PatchedFullTopicRequest
      */
-    assignedTo?: string | null;
+    assigned_to?: string | null;
     /**
      * 
      * @type {string}
@@ -139,7 +139,7 @@ export interface PatchedFullTopicRequest {
      * @type {Date}
      * @memberof PatchedFullTopicRequest
      */
-    dueDate?: Date | null;
+    due_date?: Date | null;
     /**
      * 
      * @type {Array<CommentRequest>}
@@ -171,23 +171,23 @@ export function PatchedFullTopicRequestFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
-        'creationDate': !exists(json, 'creation_date') ? undefined : (new Date(json['creation_date'])),
-        'creationAuthor': !exists(json, 'creation_author') ? undefined : json['creation_author'],
-        'modifiedAuthor': !exists(json, 'modified_author') ? undefined : json['modified_author'],
+        'creation_date': !exists(json, 'creation_date') ? undefined : (new Date(json['creation_date'])),
+        'creation_author': !exists(json, 'creation_author') ? undefined : json['creation_author'],
+        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
         'title': !exists(json, 'title') ? undefined : json['title'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'referenceLinks': !exists(json, 'reference_links') ? undefined : json['reference_links'],
+        'reference_links': !exists(json, 'reference_links') ? undefined : json['reference_links'],
         'ifcs': !exists(json, 'ifcs') ? undefined : json['ifcs'],
         'models': !exists(json, 'models') ? undefined : json['models'],
         'labels': !exists(json, 'labels') ? undefined : json['labels'],
-        'topicType': !exists(json, 'topic_type') ? undefined : json['topic_type'],
-        'topicStatus': !exists(json, 'topic_status') ? undefined : json['topic_status'],
+        'topic_type': !exists(json, 'topic_type') ? undefined : json['topic_type'],
+        'topic_status': !exists(json, 'topic_status') ? undefined : json['topic_status'],
         'stage': !exists(json, 'stage') ? undefined : json['stage'],
         'priority': !exists(json, 'priority') ? undefined : json['priority'],
         'index': !exists(json, 'index') ? undefined : json['index'],
-        'assignedTo': !exists(json, 'assigned_to') ? undefined : json['assigned_to'],
+        'assigned_to': !exists(json, 'assigned_to') ? undefined : json['assigned_to'],
         'format': !exists(json, 'format') ? undefined : json['format'],
-        'dueDate': !exists(json, 'due_date') ? undefined : (json['due_date'] === null ? null : new Date(json['due_date'])),
+        'due_date': !exists(json, 'due_date') ? undefined : (json['due_date'] === null ? null : new Date(json['due_date'])),
         'comments': !exists(json, 'comments') ? undefined : ((json['comments'] as Array<any>).map(CommentRequestFromJSON)),
         'viewpoints': !exists(json, 'viewpoints') ? undefined : ((json['viewpoints'] as Array<any>).map(ViewpointRequestFromJSON)),
         'project': !exists(json, 'project') ? undefined : json['project'],
@@ -204,23 +204,23 @@ export function PatchedFullTopicRequestToJSON(value?: PatchedFullTopicRequest | 
     return {
         
         'guid': value.guid,
-        'creation_date': value.creationDate === undefined ? undefined : (value.creationDate.toISOString()),
-        'creation_author': value.creationAuthor,
-        'modified_author': value.modifiedAuthor,
+        'creation_date': value.creation_date === undefined ? undefined : (value.creation_date.toISOString()),
+        'creation_author': value.creation_author,
+        'modified_author': value.modified_author,
         'title': value.title,
         'description': value.description,
-        'reference_links': value.referenceLinks,
+        'reference_links': value.reference_links,
         'ifcs': value.ifcs,
         'models': value.models,
         'labels': value.labels,
-        'topic_type': value.topicType,
-        'topic_status': value.topicStatus,
+        'topic_type': value.topic_type,
+        'topic_status': value.topic_status,
         'stage': value.stage,
         'priority': value.priority,
         'index': value.index,
-        'assigned_to': value.assignedTo,
+        'assigned_to': value.assigned_to,
         'format': value.format,
-        'due_date': value.dueDate === undefined ? undefined : (value.dueDate === null ? null : value.dueDate.toISOString()),
+        'due_date': value.due_date === undefined ? undefined : (value.due_date === null ? null : value.due_date.toISOString()),
         'comments': value.comments === undefined ? undefined : ((value.comments as Array<any>).map(CommentRequestToJSON)),
         'viewpoints': value.viewpoints === undefined ? undefined : ((value.viewpoints as Array<any>).map(ViewpointRequestToJSON)),
         'project': value.project,

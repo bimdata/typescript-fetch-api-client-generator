@@ -79,13 +79,13 @@ export interface IfcChecker {
      * @type {Date}
      * @memberof IfcChecker
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * 
      * @type {Date}
      * @memberof IfcChecker
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {CheckPlan}
@@ -109,8 +109,8 @@ export function IfcCheckerFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'creator': UserFromJSON(json['creator']),
         'name': !exists(json, 'name') ? undefined : json['name'],
         'results': ((json['results'] as Array<any>).map(CheckerResultFromJSON)),
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
         'checkplan': CheckPlanFromJSON(json['checkplan']),
     };
 }

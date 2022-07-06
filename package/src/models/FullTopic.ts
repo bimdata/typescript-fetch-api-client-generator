@@ -43,25 +43,25 @@ export interface FullTopic {
      * @type {Date}
      * @memberof FullTopic
      */
-    creationDate?: Date;
+    creation_date?: Date;
     /**
      * 
      * @type {string}
      * @memberof FullTopic
      */
-    creationAuthor?: string | null;
+    creation_author?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof FullTopic
      */
-    readonly modifiedDate: Date;
+    readonly modified_date: Date;
     /**
      * 
      * @type {string}
      * @memberof FullTopic
      */
-    modifiedAuthor?: string | null;
+    modified_author?: string | null;
     /**
      * 
      * @type {string}
@@ -79,7 +79,7 @@ export interface FullTopic {
      * @type {Array<string>}
      * @memberof FullTopic
      */
-    referenceLinks?: Array<string> | null;
+    reference_links?: Array<string> | null;
     /**
      * DEPRECATED: Use 'models' instead
      * @type {Array<number>}
@@ -103,13 +103,13 @@ export interface FullTopic {
      * @type {string}
      * @memberof FullTopic
      */
-    topicType?: string | null;
+    topic_type?: string | null;
     /**
      * 
      * @type {string}
      * @memberof FullTopic
      */
-    topicStatus?: string | null;
+    topic_status?: string | null;
     /**
      * 
      * @type {string}
@@ -133,7 +133,7 @@ export interface FullTopic {
      * @type {string}
      * @memberof FullTopic
      */
-    assignedTo?: string | null;
+    assigned_to?: string | null;
     /**
      * 
      * @type {string}
@@ -145,7 +145,7 @@ export interface FullTopic {
      * @type {Date}
      * @memberof FullTopic
      */
-    dueDate?: Date | null;
+    due_date?: Date | null;
     /**
      * 
      * @type {Array<Comment>}
@@ -177,24 +177,24 @@ export function FullTopicFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return {
         
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
-        'creationDate': !exists(json, 'creation_date') ? undefined : (new Date(json['creation_date'])),
-        'creationAuthor': !exists(json, 'creation_author') ? undefined : json['creation_author'],
-        'modifiedDate': (new Date(json['modified_date'])),
-        'modifiedAuthor': !exists(json, 'modified_author') ? undefined : json['modified_author'],
+        'creation_date': !exists(json, 'creation_date') ? undefined : (new Date(json['creation_date'])),
+        'creation_author': !exists(json, 'creation_author') ? undefined : json['creation_author'],
+        'modified_date': (new Date(json['modified_date'])),
+        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
         'title': json['title'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'referenceLinks': !exists(json, 'reference_links') ? undefined : json['reference_links'],
+        'reference_links': !exists(json, 'reference_links') ? undefined : json['reference_links'],
         'ifcs': !exists(json, 'ifcs') ? undefined : json['ifcs'],
         'models': !exists(json, 'models') ? undefined : json['models'],
         'labels': !exists(json, 'labels') ? undefined : json['labels'],
-        'topicType': !exists(json, 'topic_type') ? undefined : json['topic_type'],
-        'topicStatus': !exists(json, 'topic_status') ? undefined : json['topic_status'],
+        'topic_type': !exists(json, 'topic_type') ? undefined : json['topic_type'],
+        'topic_status': !exists(json, 'topic_status') ? undefined : json['topic_status'],
         'stage': !exists(json, 'stage') ? undefined : json['stage'],
         'priority': !exists(json, 'priority') ? undefined : json['priority'],
         'index': !exists(json, 'index') ? undefined : json['index'],
-        'assignedTo': !exists(json, 'assigned_to') ? undefined : json['assigned_to'],
+        'assigned_to': !exists(json, 'assigned_to') ? undefined : json['assigned_to'],
         'format': !exists(json, 'format') ? undefined : json['format'],
-        'dueDate': !exists(json, 'due_date') ? undefined : (json['due_date'] === null ? null : new Date(json['due_date'])),
+        'due_date': !exists(json, 'due_date') ? undefined : (json['due_date'] === null ? null : new Date(json['due_date'])),
         'comments': !exists(json, 'comments') ? undefined : ((json['comments'] as Array<any>).map(CommentFromJSON)),
         'viewpoints': !exists(json, 'viewpoints') ? undefined : ((json['viewpoints'] as Array<any>).map(ViewpointFromJSON)),
         'project': json['project'],
@@ -211,23 +211,23 @@ export function FullTopicToJSON(value?: FullTopic | null): any {
     return {
         
         'guid': value.guid,
-        'creation_date': value.creationDate === undefined ? undefined : (value.creationDate.toISOString()),
-        'creation_author': value.creationAuthor,
-        'modified_author': value.modifiedAuthor,
+        'creation_date': value.creation_date === undefined ? undefined : (value.creation_date.toISOString()),
+        'creation_author': value.creation_author,
+        'modified_author': value.modified_author,
         'title': value.title,
         'description': value.description,
-        'reference_links': value.referenceLinks,
+        'reference_links': value.reference_links,
         'ifcs': value.ifcs,
         'models': value.models,
         'labels': value.labels,
-        'topic_type': value.topicType,
-        'topic_status': value.topicStatus,
+        'topic_type': value.topic_type,
+        'topic_status': value.topic_status,
         'stage': value.stage,
         'priority': value.priority,
         'index': value.index,
-        'assigned_to': value.assignedTo,
+        'assigned_to': value.assigned_to,
         'format': value.format,
-        'due_date': value.dueDate === undefined ? undefined : (value.dueDate === null ? null : value.dueDate.toISOString()),
+        'due_date': value.due_date === undefined ? undefined : (value.due_date === null ? null : value.due_date.toISOString()),
         'comments': value.comments === undefined ? undefined : ((value.comments as Array<any>).map(CommentToJSON)),
         'viewpoints': value.viewpoints === undefined ? undefined : ((value.viewpoints as Array<any>).map(ViewpointToJSON)),
         'project': value.project,

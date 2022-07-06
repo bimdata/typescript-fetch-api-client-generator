@@ -30,7 +30,7 @@ export interface ProjectInvitationRequest {
      * @type {string}
      * @memberof ProjectInvitationRequest
      */
-    redirectUri: string;
+    redirect_uri: string;
     /**
      * 
      * @type {number}
@@ -60,7 +60,7 @@ export function ProjectInvitationRequestFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'email': json['email'],
-        'redirectUri': json['redirect_uri'],
+        'redirect_uri': json['redirect_uri'],
         'role': json['role'],
     };
 }
@@ -75,7 +75,7 @@ export function ProjectInvitationRequestToJSON(value?: ProjectInvitationRequest 
     return {
         
         'email': value.email,
-        'redirect_uri': value.redirectUri,
+        'redirect_uri': value.redirect_uri,
         'role': value.role,
     };
 }

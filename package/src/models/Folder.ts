@@ -49,7 +49,7 @@ export interface Folder {
      * @type {number}
      * @memberof Folder
      */
-    parentId?: number | null;
+    parent_id?: number | null;
     /**
      * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
@@ -73,37 +73,37 @@ export interface Folder {
      * @type {Date}
      * @memberof Folder
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * Date of the last update
      * @type {Date}
      * @memberof Folder
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {User}
      * @memberof Folder
      */
-    readonly createdBy: User | null;
+    readonly created_by: User | null;
     /**
      * 
      * @type {Array<FolderGroupPermission>}
      * @memberof Folder
      */
-    readonly groupsPermissions: Array<FolderGroupPermission>;
+    readonly groups_permissions: Array<FolderGroupPermission>;
     /**
      * Permission for a Folder
      * @type {number}
      * @memberof Folder
      */
-    defaultPermission?: FolderDefaultPermissionEnum;
+    default_permission?: FolderDefaultPermissionEnum;
     /**
      * Aggregate of group user permissions and folder default permission
      * @type {number}
      * @memberof Folder
      */
-    readonly userPermission: FolderUserPermissionEnum;
+    readonly user_permission: FolderUserPermissionEnum;
     /**
      * 
      * @type {Array<RecursiveFolderChildren>}
@@ -141,16 +141,16 @@ export function FolderFromJSONTyped(json: any, ignoreDiscriminator: boolean): Fo
     return {
         
         'id': json['id'],
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'type': json['type'],
         'nature': json['nature'],
         'name': json['name'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
-        'createdBy': UserFromJSON(json['created_by']),
-        'groupsPermissions': ((json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
-        'defaultPermission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
-        'userPermission': json['user_permission'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
+        'created_by': UserFromJSON(json['created_by']),
+        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
+        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'user_permission': json['user_permission'],
         'children': ((json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),
     };
 }
@@ -164,9 +164,9 @@ export function FolderToJSON(value?: Folder | null): any {
     }
     return {
         
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
         'name': value.name,
-        'default_permission': value.defaultPermission,
+        'default_permission': value.default_permission,
     };
 }
 

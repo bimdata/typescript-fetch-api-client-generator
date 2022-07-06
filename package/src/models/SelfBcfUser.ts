@@ -42,13 +42,13 @@ export interface SelfBcfUser {
      * @type {boolean}
      * @memberof SelfBcfUser
      */
-    readonly isClient: boolean;
+    readonly is_client: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof SelfBcfUser
      */
-    readonly isProjectToken: boolean;
+    readonly is_project_token: boolean;
 }
 
 export function SelfBcfUserFromJSON(json: any): SelfBcfUser {
@@ -64,8 +64,8 @@ export function SelfBcfUserFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'id': json['id'],
         'name': json['name'],
         'email': json['email'],
-        'isClient': json['is_client'],
-        'isProjectToken': json['is_project_token'],
+        'is_client': json['is_client'],
+        'is_project_token': json['is_project_token'],
     };
 }
 

@@ -37,7 +37,7 @@ export interface DocumentWithElementList {
      * @type {Array<string>}
      * @memberof DocumentWithElementList
      */
-    readonly elementUuids: Array<string>;
+    readonly element_uuids: Array<string>;
 }
 
 export function DocumentWithElementListFromJSON(json: any): DocumentWithElementList {
@@ -51,7 +51,7 @@ export function DocumentWithElementListFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'document': DocumentFromJSON(json['document']),
-        'elementUuids': json['element_uuids'],
+        'element_uuids': json['element_uuids'],
     };
 }
 

@@ -24,7 +24,7 @@ export interface PatchedTopicStatusRequest {
      * @type {string}
      * @memberof PatchedTopicStatusRequest
      */
-    topicStatus?: string;
+    topic_status?: string;
     /**
      * 
      * @type {string}
@@ -49,7 +49,7 @@ export function PatchedTopicStatusRequestFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
-        'topicStatus': !exists(json, 'topic_status') ? undefined : json['topic_status'],
+        'topic_status': !exists(json, 'topic_status') ? undefined : json['topic_status'],
         'color': !exists(json, 'color') ? undefined : json['color'],
         'project': !exists(json, 'project') ? undefined : json['project'],
     };
@@ -64,7 +64,7 @@ export function PatchedTopicStatusRequestToJSON(value?: PatchedTopicStatusReques
     }
     return {
         
-        'topic_status': value.topicStatus,
+        'topic_status': value.topic_status,
         'color': value.color,
         'project': value.project,
     };

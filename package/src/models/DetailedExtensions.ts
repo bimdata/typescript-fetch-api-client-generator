@@ -55,19 +55,19 @@ export interface DetailedExtensions {
      * @type {Array<Label>}
      * @memberof DetailedExtensions
      */
-    topicLabels?: Array<Label>;
+    topic_labels?: Array<Label>;
     /**
      * 
      * @type {Array<TopicType>}
      * @memberof DetailedExtensions
      */
-    topicTypes?: Array<TopicType>;
+    topic_types?: Array<TopicType>;
     /**
      * 
      * @type {Array<TopicStatus>}
      * @memberof DetailedExtensions
      */
-    topicStatuses?: Array<TopicStatus>;
+    topic_statuses?: Array<TopicStatus>;
     /**
      * 
      * @type {Array<Priority>}
@@ -92,9 +92,9 @@ export function DetailedExtensionsFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'topicLabels': !exists(json, 'topic_labels') ? undefined : ((json['topic_labels'] as Array<any>).map(LabelFromJSON)),
-        'topicTypes': !exists(json, 'topic_types') ? undefined : ((json['topic_types'] as Array<any>).map(TopicTypeFromJSON)),
-        'topicStatuses': !exists(json, 'topic_statuses') ? undefined : ((json['topic_statuses'] as Array<any>).map(TopicStatusFromJSON)),
+        'topic_labels': !exists(json, 'topic_labels') ? undefined : ((json['topic_labels'] as Array<any>).map(LabelFromJSON)),
+        'topic_types': !exists(json, 'topic_types') ? undefined : ((json['topic_types'] as Array<any>).map(TopicTypeFromJSON)),
+        'topic_statuses': !exists(json, 'topic_statuses') ? undefined : ((json['topic_statuses'] as Array<any>).map(TopicStatusFromJSON)),
         'priorities': !exists(json, 'priorities') ? undefined : ((json['priorities'] as Array<any>).map(PriorityFromJSON)),
         'stages': !exists(json, 'stages') ? undefined : ((json['stages'] as Array<any>).map(StageFromJSON)),
     };
@@ -109,9 +109,9 @@ export function DetailedExtensionsToJSON(value?: DetailedExtensions | null): any
     }
     return {
         
-        'topic_labels': value.topicLabels === undefined ? undefined : ((value.topicLabels as Array<any>).map(LabelToJSON)),
-        'topic_types': value.topicTypes === undefined ? undefined : ((value.topicTypes as Array<any>).map(TopicTypeToJSON)),
-        'topic_statuses': value.topicStatuses === undefined ? undefined : ((value.topicStatuses as Array<any>).map(TopicStatusToJSON)),
+        'topic_labels': value.topic_labels === undefined ? undefined : ((value.topic_labels as Array<any>).map(LabelToJSON)),
+        'topic_types': value.topic_types === undefined ? undefined : ((value.topic_types as Array<any>).map(TopicTypeToJSON)),
+        'topic_statuses': value.topic_statuses === undefined ? undefined : ((value.topic_statuses as Array<any>).map(TopicStatusToJSON)),
         'priorities': value.priorities === undefined ? undefined : ((value.priorities as Array<any>).map(PriorityToJSON)),
         'stages': value.stages === undefined ? undefined : ((value.stages as Array<any>).map(StageToJSON)),
     };

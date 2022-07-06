@@ -24,13 +24,13 @@ export interface SnapshotRequest {
      * @type {string}
      * @memberof SnapshotRequest
      */
-    snapshotType: string;
+    snapshot_type: string;
     /**
      * 
      * @type {Blob}
      * @memberof SnapshotRequest
      */
-    snapshotData: Blob;
+    snapshot_data: Blob;
 }
 
 export function SnapshotRequestFromJSON(json: any): SnapshotRequest {
@@ -43,8 +43,8 @@ export function SnapshotRequestFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'snapshotType': json['snapshot_type'],
-        'snapshotData': json['snapshot_data'],
+        'snapshot_type': json['snapshot_type'],
+        'snapshot_data': json['snapshot_data'],
     };
 }
 
@@ -57,8 +57,8 @@ export function SnapshotRequestToJSON(value?: SnapshotRequest | null): any {
     }
     return {
         
-        'snapshot_type': value.snapshotType,
-        'snapshot_data': value.snapshotData,
+        'snapshot_type': value.snapshot_type,
+        'snapshot_data': value.snapshot_data,
     };
 }
 

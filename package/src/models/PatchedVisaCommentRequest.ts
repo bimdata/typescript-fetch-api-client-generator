@@ -24,7 +24,7 @@ export interface PatchedVisaCommentRequest {
      * @type {number}
      * @memberof PatchedVisaCommentRequest
      */
-    authorId?: number;
+    author_id?: number;
     /**
      * 
      * @type {string}
@@ -43,7 +43,7 @@ export function PatchedVisaCommentRequestFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
-        'authorId': !exists(json, 'author_id') ? undefined : json['author_id'],
+        'author_id': !exists(json, 'author_id') ? undefined : json['author_id'],
         'content': !exists(json, 'content') ? undefined : json['content'],
     };
 }
@@ -57,7 +57,7 @@ export function PatchedVisaCommentRequestToJSON(value?: PatchedVisaCommentReques
     }
     return {
         
-        'author_id': value.authorId,
+        'author_id': value.author_id,
         'content': value.content,
     };
 }

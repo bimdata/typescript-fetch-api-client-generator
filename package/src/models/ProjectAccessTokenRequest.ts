@@ -30,7 +30,7 @@ export interface ProjectAccessTokenRequest {
      * @type {Date}
      * @memberof ProjectAccessTokenRequest
      */
-    expiresAt?: Date;
+    expires_at?: Date;
 }
 
 export function ProjectAccessTokenRequestFromJSON(json: any): ProjectAccessTokenRequest {
@@ -44,7 +44,7 @@ export function ProjectAccessTokenRequestFromJSONTyped(json: any, ignoreDiscrimi
     return {
         
         'scopes': json['scopes'],
-        'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
+        'expires_at': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
     };
 }
 
@@ -58,7 +58,7 @@ export function ProjectAccessTokenRequestToJSON(value?: ProjectAccessTokenReques
     return {
         
         'scopes': value.scopes,
-        'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
+        'expires_at': value.expires_at === undefined ? undefined : (value.expires_at.toISOString()),
     };
 }
 

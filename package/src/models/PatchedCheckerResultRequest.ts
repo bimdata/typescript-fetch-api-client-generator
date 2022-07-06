@@ -42,7 +42,7 @@ export interface PatchedCheckerResultRequest {
      * @type {string}
      * @memberof PatchedCheckerResultRequest
      */
-    errorDetail?: string;
+    error_detail?: string;
 }
 
 /**
@@ -68,7 +68,7 @@ export function PatchedCheckerResultRequestFromJSONTyped(json: any, ignoreDiscri
         'status': !exists(json, 'status') ? undefined : json['status'],
         'result': !exists(json, 'result') ? undefined : json['result'],
         'collisions': !exists(json, 'collisions') ? undefined : json['collisions'],
-        'errorDetail': !exists(json, 'error_detail') ? undefined : json['error_detail'],
+        'error_detail': !exists(json, 'error_detail') ? undefined : json['error_detail'],
     };
 }
 
@@ -84,7 +84,7 @@ export function PatchedCheckerResultRequestToJSON(value?: PatchedCheckerResultRe
         'status': value.status,
         'result': value.result,
         'collisions': value.collisions,
-        'error_detail': value.errorDetail,
+        'error_detail': value.error_detail,
     };
 }
 

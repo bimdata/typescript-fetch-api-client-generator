@@ -36,7 +36,7 @@ export interface CloudInvitation {
      * @type {string}
      * @memberof CloudInvitation
      */
-    redirectUri: string;
+    redirect_uri: string;
     /**
      * 
      * @type {number}
@@ -66,7 +66,7 @@ export function CloudInvitationFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'id': json['id'],
         'email': json['email'],
-        'redirectUri': json['redirect_uri'],
+        'redirect_uri': json['redirect_uri'],
         'role': json['role'],
     };
 }
@@ -81,7 +81,7 @@ export function CloudInvitationToJSON(value?: CloudInvitation | null): any {
     return {
         
         'email': value.email,
-        'redirect_uri': value.redirectUri,
+        'redirect_uri': value.redirect_uri,
     };
 }
 

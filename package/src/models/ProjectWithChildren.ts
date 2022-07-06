@@ -48,19 +48,19 @@ export interface ProjectWithChildren {
      * @type {Date}
      * @memberof ProjectWithChildren
      */
-    readonly createdAt: Date;
+    readonly created_at: Date;
     /**
      * Date of the last update
      * @type {Date}
      * @memberof ProjectWithChildren
      */
-    readonly updatedAt: Date;
+    readonly updated_at: Date;
     /**
      * 
      * @type {number}
      * @memberof ProjectWithChildren
      */
-    parentId?: number | null;
+    parent_id?: number | null;
     /**
      * 
      * @type {Array<ProjectWithChildren>}
@@ -72,7 +72,7 @@ export interface ProjectWithChildren {
      * @type {number}
      * @memberof ProjectWithChildren
      */
-    readonly rootFolderId: number | null;
+    readonly root_folder_id: number | null;
 }
 
 /**
@@ -98,11 +98,11 @@ export function ProjectWithChildrenFromJSONTyped(json: any, ignoreDiscriminator:
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'name': json['name'],
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'createdAt': (new Date(json['created_at'])),
-        'updatedAt': (new Date(json['updated_at'])),
-        'parentId': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'children': ((json['children'] as Array<any>).map(ProjectWithChildrenFromJSON)),
-        'rootFolderId': json['root_folder_id'],
+        'root_folder_id': json['root_folder_id'],
     };
 }
 
@@ -118,7 +118,7 @@ export function ProjectWithChildrenToJSON(value?: ProjectWithChildren | null): a
         'logo': value.logo,
         'name': value.name,
         'status': value.status,
-        'parent_id': value.parentId,
+        'parent_id': value.parent_id,
     };
 }
 

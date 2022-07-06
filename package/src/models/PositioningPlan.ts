@@ -24,19 +24,19 @@ export interface PositioningPlan {
      * @type {number}
      * @memberof PositioningPlan
      */
-    translationX?: number | null;
+    translation_x?: number | null;
     /**
      * 
      * @type {number}
      * @memberof PositioningPlan
      */
-    translationY?: number | null;
+    translation_y?: number | null;
     /**
      * 
      * @type {number}
      * @memberof PositioningPlan
      */
-    rotateZ?: number | null;
+    rotate_z?: number | null;
     /**
      * 
      * @type {number}
@@ -61,9 +61,9 @@ export function PositioningPlanFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'translationX': !exists(json, 'translation_x') ? undefined : json['translation_x'],
-        'translationY': !exists(json, 'translation_y') ? undefined : json['translation_y'],
-        'rotateZ': !exists(json, 'rotate_z') ? undefined : json['rotate_z'],
+        'translation_x': !exists(json, 'translation_x') ? undefined : json['translation_x'],
+        'translation_y': !exists(json, 'translation_y') ? undefined : json['translation_y'],
+        'rotate_z': !exists(json, 'rotate_z') ? undefined : json['rotate_z'],
         'scale': !exists(json, 'scale') ? undefined : json['scale'],
         'opacity': !exists(json, 'opacity') ? undefined : json['opacity'],
     };
@@ -78,9 +78,9 @@ export function PositioningPlanToJSON(value?: PositioningPlan | null): any {
     }
     return {
         
-        'translation_x': value.translationX,
-        'translation_y': value.translationY,
-        'rotate_z': value.rotateZ,
+        'translation_x': value.translation_x,
+        'translation_y': value.translation_y,
+        'rotate_z': value.rotate_z,
         'scale': value.scale,
         'opacity': value.opacity,
     };
