@@ -24,13 +24,30 @@ export interface ProjectAccessTokenRequest {
      * @type {Array<string>}
      * @memberof ProjectAccessTokenRequest
      */
-    scopes: Array<string>;
+    scopes: Array<ProjectAccessTokenRequestScopesEnum>;
     /**
      * 
      * @type {Date}
      * @memberof ProjectAccessTokenRequest
      */
     expires_at?: Date;
+}
+
+/**
+* @export
+* @enum {string}
+*/
+export enum ProjectAccessTokenRequestScopesEnum {
+    Bcfread = 'bcf:read',
+    Bcfwrite = 'bcf:write',
+    Documentread = 'document:read',
+    Documentwrite = 'document:write',
+    Ifcread = 'ifc:read',
+    Ifcwrite = 'ifc:write',
+    Modelread = 'model:read',
+    Modelwrite = 'model:write',
+    Empty = '',
+    Null = 'null'
 }
 
 export function ProjectAccessTokenRequestFromJSON(json: any): ProjectAccessTokenRequest {

@@ -24,13 +24,30 @@ export interface PatchedProjectAccessTokenRequest {
      * @type {Array<string>}
      * @memberof PatchedProjectAccessTokenRequest
      */
-    scopes?: Array<string>;
+    scopes?: Array<PatchedProjectAccessTokenRequestScopesEnum>;
     /**
      * 
      * @type {Date}
      * @memberof PatchedProjectAccessTokenRequest
      */
     expires_at?: Date;
+}
+
+/**
+* @export
+* @enum {string}
+*/
+export enum PatchedProjectAccessTokenRequestScopesEnum {
+    Bcfread = 'bcf:read',
+    Bcfwrite = 'bcf:write',
+    Documentread = 'document:read',
+    Documentwrite = 'document:write',
+    Ifcread = 'ifc:read',
+    Ifcwrite = 'ifc:write',
+    Modelread = 'model:read',
+    Modelwrite = 'model:write',
+    Empty = '',
+    Null = 'null'
 }
 
 export function PatchedProjectAccessTokenRequestFromJSON(json: any): PatchedProjectAccessTokenRequest {

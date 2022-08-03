@@ -139,7 +139,7 @@ export interface Model {
      * @type {number}
      * @memberof Model
      */
-    readonly project_id: number;
+    readonly project_id: number | null;
     /**
      * [x,y,z] array of the position of the local_placement in world coordinates
      * @type {Array<number>}

@@ -1313,7 +1313,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      *  Create a DMS structure of folder Format request : ``` [{     \"name\": :name:     \"parent_id\": :parent_id:                      # optionnal     \"default_permission\": :default_permission:    # optionnal     \"children\": [{                                # optionnal         \"name\": :name:,         \"children\": []     }] }], ```                   Required scopes: org:manage
      * Create a complete DMS tree
      */
-    async createDMSTreeRaw(requestParameters: CreateDMSTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async createDMSTreeRaw(requestParameters: CreateDMSTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Folder>>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createDMSTree.');
         }
@@ -1358,15 +1358,16 @@ export class CollaborationApi extends runtime.BaseAPI {
             body: requestParameters.WriteFolderRequest.map(WriteFolderRequestToJSON),
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FolderFromJSON));
     }
 
     /**
      *  Create a DMS structure of folder Format request : ``` [{     \"name\": :name:     \"parent_id\": :parent_id:                      # optionnal     \"default_permission\": :default_permission:    # optionnal     \"children\": [{                                # optionnal         \"name\": :name:,         \"children\": []     }] }], ```                   Required scopes: org:manage
      * Create a complete DMS tree
      */
-    async createDMSTree(cloud_pk: number, id: number, WriteFolderRequest: Array<WriteFolderRequest>, initOverrides?: RequestInit): Promise<void> {
-        await this.createDMSTreeRaw({ cloud_pk: cloud_pk, id: id, WriteFolderRequest: WriteFolderRequest }, initOverrides);
+    async createDMSTree(cloud_pk: number, id: number, WriteFolderRequest: Array<WriteFolderRequest>, initOverrides?: RequestInit): Promise<Array<Folder>> {
+        const response = await this.createDMSTreeRaw({ cloud_pk: cloud_pk, id: id, WriteFolderRequest: WriteFolderRequest }, initOverrides);
+        return await response.value();
     }
 
     /**
@@ -1420,7 +1421,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'BFX\', \'DWG\', \'DAE\', \'OBJ\', \'DXF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'BFX\', \'DAE\', \'IFC\', \'GLTF\', \'DWG\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1527,7 +1528,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'BFX\', \'DWG\', \'DAE\', \'OBJ\', \'DXF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'BFX\', \'DAE\', \'IFC\', \'GLTF\', \'DWG\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -6017,7 +6018,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a folder. Only project admins can update the `default_permission` field  Required scopes: document:write
+     *  Update some fields of a folder. Only project admins can update the `default_permission` field.  `default_permission` choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When this route is used, the permission of all children in the folder will be updated unless a child has already been updated with this route. In this case, if the updated permission is the same as the previously modified child\'s, the child will lose its \"independence\" and follow the parent\'s future permission when it is modified again.  Caution: The \'default_permission\' field is not applied to users belonging to one or more groups.   Required scopes: document:write
      * Update some fields of a folder
      */
     async updateFolderRaw(requestParameters: UpdateFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
@@ -6069,7 +6070,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a folder. Only project admins can update the `default_permission` field  Required scopes: document:write
+     *  Update some fields of a folder. Only project admins can update the `default_permission` field.  `default_permission` choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When this route is used, the permission of all children in the folder will be updated unless a child has already been updated with this route. In this case, if the updated permission is the same as the previously modified child\'s, the child will lose its \"independence\" and follow the parent\'s future permission when it is modified again.  Caution: The \'default_permission\' field is not applied to users belonging to one or more groups.   Required scopes: document:write
      * Update some fields of a folder
      */
     async updateFolder(cloud_pk: number, id: number, project_pk: number, PatchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
@@ -6078,7 +6079,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update the permission of a group on a folder.             0: ACCESS_DENIED,             50: READ_ONLY,             100: READ_WRTIE               Required scopes: org:manage
+     *  Update the permission of a group on a folder. Permissions choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When this route is used, the permission of all children in the folder will be updated unless a child has already been updated with this route. In this case, if the updated permission is the same as the previously modified child\'s, the child will lose its \"independence\" and follow the parent\'s future permission when it is modified again.               Required scopes: org:manage
      * Update the permission of a group on a folder
      */
     async updateGroupFolderRaw(requestParameters: UpdateGroupFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<GroupFolder>> {
@@ -6134,7 +6135,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update the permission of a group on a folder.             0: ACCESS_DENIED,             50: READ_ONLY,             100: READ_WRTIE               Required scopes: org:manage
+     *  Update the permission of a group on a folder. Permissions choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When this route is used, the permission of all children in the folder will be updated unless a child has already been updated with this route. In this case, if the updated permission is the same as the previously modified child\'s, the child will lose its \"independence\" and follow the parent\'s future permission when it is modified again.               Required scopes: org:manage
      * Update the permission of a group on a folder
      */
     async updateGroupFolder(cloud_pk: number, folder_pk: number, id: number, project_pk: number, PatchedGroupFolderRequest?: PatchedGroupFolderRequest, initOverrides?: RequestInit): Promise<GroupFolder> {
