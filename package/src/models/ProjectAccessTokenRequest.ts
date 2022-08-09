@@ -45,9 +45,7 @@ export enum ProjectAccessTokenRequestScopesEnum {
     Ifcread = 'ifc:read',
     Ifcwrite = 'ifc:write',
     Modelread = 'model:read',
-    Modelwrite = 'model:write',
-    Empty = '',
-    Null = 'null'
+    Modelwrite = 'model:write'
 }
 
 export function ProjectAccessTokenRequestFromJSON(json: any): ProjectAccessTokenRequest {
