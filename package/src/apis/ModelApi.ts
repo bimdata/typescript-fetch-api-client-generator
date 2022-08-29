@@ -18,6 +18,9 @@ import {
     Building,
     BuildingFromJSON,
     BuildingToJSON,
+    BuildingModelPlanRequest,
+    BuildingModelPlanRequestFromJSON,
+    BuildingModelPlanRequestToJSON,
     Classification,
     ClassificationFromJSON,
     ClassificationToJSON,
@@ -120,6 +123,9 @@ import {
     PatchedSpaceRequest,
     PatchedSpaceRequestFromJSON,
     PatchedSpaceRequestToJSON,
+    PatchedStoreyBuildingRequest,
+    PatchedStoreyBuildingRequestFromJSON,
+    PatchedStoreyBuildingRequestToJSON,
     PatchedSystemRequest,
     PatchedSystemRequestFromJSON,
     PatchedSystemRequestToJSON,
@@ -174,6 +180,12 @@ import {
     Storey,
     StoreyFromJSON,
     StoreyToJSON,
+    StoreyBuildingRequest,
+    StoreyBuildingRequestFromJSON,
+    StoreyBuildingRequestToJSON,
+    StoreyModelPlanRequest,
+    StoreyModelPlanRequestFromJSON,
+    StoreyModelPlanRequestToJSON,
     System,
     SystemFromJSON,
     SystemToJSON,
@@ -303,6 +315,7 @@ export interface CreateBuildingRequest {
     cloud_pk: number;
     model_pk: number;
     project_pk: number;
+    StoreyBuildingRequest: StoreyBuildingRequest;
 }
 
 export interface CreateBuildingPlanRequest {
@@ -310,6 +323,7 @@ export interface CreateBuildingPlanRequest {
     cloud_pk: number;
     model_pk: number;
     project_pk: number;
+    BuildingModelPlanRequest: BuildingModelPlanRequest;
 }
 
 export interface CreateClassificationElementRelationsRequest {
@@ -440,6 +454,7 @@ export interface CreateStoreyRequest {
     cloud_pk: number;
     model_pk: number;
     project_pk: number;
+    StoreyBuildingRequest: StoreyBuildingRequest;
 }
 
 export interface CreateStoreyPlanRequest {
@@ -447,6 +462,7 @@ export interface CreateStoreyPlanRequest {
     model_pk: number;
     project_pk: number;
     storey_uuid: string;
+    StoreyModelPlanRequest: StoreyModelPlanRequest;
 }
 
 export interface CreateSystemRequest {
@@ -1094,6 +1110,7 @@ export interface UpdateBuildingRequest {
     model_pk: number;
     project_pk: number;
     uuid: string;
+    PatchedStoreyBuildingRequest?: PatchedStoreyBuildingRequest;
 }
 
 export interface UpdateBuildingPlanPositioningRequest {
@@ -1228,6 +1245,7 @@ export interface UpdateStoreyRequest {
     model_pk: number;
     project_pk: number;
     uuid: string;
+    PatchedStoreyBuildingRequest?: PatchedStoreyBuildingRequest;
 }
 
 export interface UpdateStoreyPlanPositioningRequest {
@@ -2160,9 +2178,15 @@ export class ModelApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createBuilding.');
         }
 
+        if (requestParameters.StoreyBuildingRequest === null || requestParameters.StoreyBuildingRequest === undefined) {
+            throw new runtime.RequiredError('StoreyBuildingRequest','Required parameter requestParameters.StoreyBuildingRequest was null or undefined when calling createBuilding.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2187,6 +2211,7 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: StoreyBuildingRequestToJSON(requestParameters.StoreyBuildingRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
@@ -2196,8 +2221,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a building of a model.  Required scopes: ifc:write, model:write
      * Create a building of a model
      */
-    async createBuilding(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.createBuildingRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    async createBuilding(cloud_pk: number, model_pk: number, project_pk: number, StoreyBuildingRequest: StoreyBuildingRequest, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.createBuildingRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, StoreyBuildingRequest: StoreyBuildingRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2222,9 +2247,15 @@ export class ModelApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createBuildingPlan.');
         }
 
+        if (requestParameters.BuildingModelPlanRequest === null || requestParameters.BuildingModelPlanRequest === undefined) {
+            throw new runtime.RequiredError('BuildingModelPlanRequest','Required parameter requestParameters.BuildingModelPlanRequest was null or undefined when calling createBuildingPlan.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2249,6 +2280,7 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: BuildingModelPlanRequestToJSON(requestParameters.BuildingModelPlanRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
@@ -2258,8 +2290,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a building. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a building
      */
-    async createBuildingPlan(building_uuid: string, cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.createBuildingPlanRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    async createBuildingPlan(building_uuid: string, cloud_pk: number, model_pk: number, project_pk: number, BuildingModelPlanRequest: BuildingModelPlanRequest, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.createBuildingPlanRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, BuildingModelPlanRequest: BuildingModelPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3357,9 +3389,15 @@ export class ModelApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createStorey.');
         }
 
+        if (requestParameters.StoreyBuildingRequest === null || requestParameters.StoreyBuildingRequest === undefined) {
+            throw new runtime.RequiredError('StoreyBuildingRequest','Required parameter requestParameters.StoreyBuildingRequest was null or undefined when calling createStorey.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -3384,6 +3422,7 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: StoreyBuildingRequestToJSON(requestParameters.StoreyBuildingRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -3393,8 +3432,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a storey of a model.  Required scopes: ifc:write, model:write
      * Create a storey of a model
      */
-    async createStorey(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.createStoreyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    async createStorey(cloud_pk: number, model_pk: number, project_pk: number, StoreyBuildingRequest: StoreyBuildingRequest, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.createStoreyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, StoreyBuildingRequest: StoreyBuildingRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3419,9 +3458,15 @@ export class ModelApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('storey_uuid','Required parameter requestParameters.storey_uuid was null or undefined when calling createStoreyPlan.');
         }
 
+        if (requestParameters.StoreyModelPlanRequest === null || requestParameters.StoreyModelPlanRequest === undefined) {
+            throw new runtime.RequiredError('StoreyModelPlanRequest','Required parameter requestParameters.StoreyModelPlanRequest was null or undefined when calling createStoreyPlan.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -3446,6 +3491,7 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: StoreyModelPlanRequestToJSON(requestParameters.StoreyModelPlanRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -3455,8 +3501,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a storey
      */
-    async createStoreyPlan(cloud_pk: number, model_pk: number, project_pk: number, storey_uuid: string, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.createStoreyPlanRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, storey_uuid: storey_uuid }, initOverrides);
+    async createStoreyPlan(cloud_pk: number, model_pk: number, project_pk: number, storey_uuid: string, StoreyModelPlanRequest: StoreyModelPlanRequest, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.createStoreyPlanRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, storey_uuid: storey_uuid, StoreyModelPlanRequest: StoreyModelPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9025,6 +9071,8 @@ export class ModelApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -9048,6 +9096,7 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
+            body: PatchedStoreyBuildingRequestToJSON(requestParameters.PatchedStoreyBuildingRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
@@ -9057,8 +9106,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a building  Required scopes: ifc:write, model:write
      * Update some fields of a building
      */
-    async updateBuilding(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.updateBuildingRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    async updateBuilding(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, PatchedStoreyBuildingRequest?: PatchedStoreyBuildingRequest, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.updateBuildingRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid, PatchedStoreyBuildingRequest: PatchedStoreyBuildingRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10135,6 +10184,8 @@ export class ModelApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -10158,6 +10209,7 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
+            body: PatchedStoreyBuildingRequestToJSON(requestParameters.PatchedStoreyBuildingRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -10167,8 +10219,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update some fields of a storey  Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStorey(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.updateStoreyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    async updateStorey(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, PatchedStoreyBuildingRequest?: PatchedStoreyBuildingRequest, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.updateStoreyRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid, PatchedStoreyBuildingRequest: PatchedStoreyBuildingRequest }, initOverrides);
         return await response.value();
     }
 

@@ -11,6 +11,7 @@ src/apis/index.ts
 src/models/BcfProject.ts
 src/models/BcfProjectRequest.ts
 src/models/Building.ts
+src/models/BuildingModelPlanRequest.ts
 src/models/CheckPlan.ts
 src/models/CheckPlanRequest.ts
 src/models/CheckerResult.ts
@@ -125,6 +126,7 @@ src/models/PatchedRuleRequest.ts
 src/models/PatchedRulesetRequest.ts
 src/models/PatchedSpaceRequest.ts
 src/models/PatchedStageRequest.ts
+src/models/PatchedStoreyBuildingRequest.ts
 src/models/PatchedSystemRequest.ts
 src/models/PatchedTagRequest.ts
 src/models/PatchedTopicRequest.ts
@@ -212,6 +214,8 @@ src/models/SpaceRequest.ts
 src/models/Stage.ts
 src/models/StageRequest.ts
 src/models/Storey.ts
+src/models/StoreyBuildingRequest.ts
+src/models/StoreyModelPlanRequest.ts
 src/models/System.ts
 src/models/SystemRequest.ts
 src/models/Tag.ts

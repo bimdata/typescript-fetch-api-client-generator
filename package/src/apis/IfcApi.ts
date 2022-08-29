@@ -18,6 +18,9 @@ import {
     Building,
     BuildingFromJSON,
     BuildingToJSON,
+    BuildingModelPlanRequest,
+    BuildingModelPlanRequestFromJSON,
+    BuildingModelPlanRequestToJSON,
     CheckerResult,
     CheckerResultFromJSON,
     CheckerResultToJSON,
@@ -138,6 +141,9 @@ import {
     PatchedSpaceRequest,
     PatchedSpaceRequestFromJSON,
     PatchedSpaceRequestToJSON,
+    PatchedStoreyBuildingRequest,
+    PatchedStoreyBuildingRequestFromJSON,
+    PatchedStoreyBuildingRequestToJSON,
     PatchedSystemRequest,
     PatchedSystemRequestFromJSON,
     PatchedSystemRequestToJSON,
@@ -192,6 +198,12 @@ import {
     Storey,
     StoreyFromJSON,
     StoreyToJSON,
+    StoreyBuildingRequest,
+    StoreyBuildingRequestFromJSON,
+    StoreyBuildingRequestToJSON,
+    StoreyModelPlanRequest,
+    StoreyModelPlanRequestFromJSON,
+    StoreyModelPlanRequestToJSON,
     System,
     SystemFromJSON,
     SystemToJSON,
@@ -321,6 +333,7 @@ export interface CreateBuildingDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
+    StoreyBuildingRequest: StoreyBuildingRequest;
 }
 
 export interface CreateBuildingPlanDeprecatedRequest {
@@ -328,6 +341,7 @@ export interface CreateBuildingPlanDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
+    BuildingModelPlanRequest: BuildingModelPlanRequest;
 }
 
 export interface CreateCheckerDeprecatedRequest {
@@ -473,6 +487,7 @@ export interface CreateStoreyDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
+    StoreyBuildingRequest: StoreyBuildingRequest;
 }
 
 export interface CreateStoreyPlanDeprecatedRequest {
@@ -480,6 +495,7 @@ export interface CreateStoreyPlanDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     storey_uuid: string;
+    StoreyModelPlanRequest: StoreyModelPlanRequest;
 }
 
 export interface CreateSystemDeprecatedRequest {
@@ -1178,6 +1194,7 @@ export interface UpdateBuildingDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     uuid: string;
+    PatchedStoreyBuildingRequest?: PatchedStoreyBuildingRequest;
 }
 
 export interface UpdateBuildingPlanPositioningDeprecatedRequest {
@@ -1329,6 +1346,7 @@ export interface UpdateStoreyDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     uuid: string;
+    PatchedStoreyBuildingRequest?: PatchedStoreyBuildingRequest;
 }
 
 export interface UpdateStoreyPlanPositioningDeprecatedRequest {
@@ -2261,9 +2279,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createBuildingDeprecated.');
         }
 
+        if (requestParameters.StoreyBuildingRequest === null || requestParameters.StoreyBuildingRequest === undefined) {
+            throw new runtime.RequiredError('StoreyBuildingRequest','Required parameter requestParameters.StoreyBuildingRequest was null or undefined when calling createBuildingDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2288,6 +2312,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: StoreyBuildingRequestToJSON(requestParameters.StoreyBuildingRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
@@ -2297,8 +2322,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a building of a model.  Required scopes: ifc:write, model:write
      * Create a building of a model
      */
-    async createBuildingDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.createBuildingDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async createBuildingDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, StoreyBuildingRequest: StoreyBuildingRequest, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.createBuildingDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, StoreyBuildingRequest: StoreyBuildingRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2323,9 +2348,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createBuildingPlanDeprecated.');
         }
 
+        if (requestParameters.BuildingModelPlanRequest === null || requestParameters.BuildingModelPlanRequest === undefined) {
+            throw new runtime.RequiredError('BuildingModelPlanRequest','Required parameter requestParameters.BuildingModelPlanRequest was null or undefined when calling createBuildingPlanDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2350,6 +2381,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: BuildingModelPlanRequestToJSON(requestParameters.BuildingModelPlanRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
@@ -2359,8 +2391,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a building. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a building
      */
-    async createBuildingPlanDeprecated(building_uuid: string, cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.createBuildingPlanDeprecatedRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async createBuildingPlanDeprecated(building_uuid: string, cloud_pk: number, ifc_pk: number, project_pk: number, BuildingModelPlanRequest: BuildingModelPlanRequest, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.createBuildingPlanDeprecatedRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, BuildingModelPlanRequest: BuildingModelPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3584,9 +3616,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createStoreyDeprecated.');
         }
 
+        if (requestParameters.StoreyBuildingRequest === null || requestParameters.StoreyBuildingRequest === undefined) {
+            throw new runtime.RequiredError('StoreyBuildingRequest','Required parameter requestParameters.StoreyBuildingRequest was null or undefined when calling createStoreyDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -3611,6 +3649,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: StoreyBuildingRequestToJSON(requestParameters.StoreyBuildingRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -3620,8 +3659,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a storey of a model.  Required scopes: ifc:write, model:write
      * Create a storey of a model
      */
-    async createStoreyDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.createStoreyDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async createStoreyDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, StoreyBuildingRequest: StoreyBuildingRequest, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.createStoreyDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, StoreyBuildingRequest: StoreyBuildingRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3646,9 +3685,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('storey_uuid','Required parameter requestParameters.storey_uuid was null or undefined when calling createStoreyPlanDeprecated.');
         }
 
+        if (requestParameters.StoreyModelPlanRequest === null || requestParameters.StoreyModelPlanRequest === undefined) {
+            throw new runtime.RequiredError('StoreyModelPlanRequest','Required parameter requestParameters.StoreyModelPlanRequest was null or undefined when calling createStoreyPlanDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -3673,6 +3718,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: StoreyModelPlanRequestToJSON(requestParameters.StoreyModelPlanRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -3682,8 +3728,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a storey
      */
-    async createStoreyPlanDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, storey_uuid: string, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.createStoreyPlanDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, storey_uuid: storey_uuid }, initOverrides);
+    async createStoreyPlanDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, storey_uuid: string, StoreyModelPlanRequest: StoreyModelPlanRequest, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.createStoreyPlanDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, storey_uuid: storey_uuid, StoreyModelPlanRequest: StoreyModelPlanRequest }, initOverrides);
         return await response.value();
     }
 
@@ -9690,6 +9736,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -9713,6 +9761,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
+            body: PatchedStoreyBuildingRequestToJSON(requestParameters.PatchedStoreyBuildingRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => BuildingFromJSON(jsonValue));
@@ -9722,8 +9771,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a building  Required scopes: ifc:write, model:write
      * Update some fields of a building
      */
-    async updateBuildingDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Building> {
-        const response = await this.updateBuildingDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    async updateBuildingDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, uuid: string, PatchedStoreyBuildingRequest?: PatchedStoreyBuildingRequest, initOverrides?: RequestInit): Promise<Building> {
+        const response = await this.updateBuildingDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, uuid: uuid, PatchedStoreyBuildingRequest: PatchedStoreyBuildingRequest }, initOverrides);
         return await response.value();
     }
 
@@ -10934,6 +10983,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -10957,6 +11008,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
+            body: PatchedStoreyBuildingRequestToJSON(requestParameters.PatchedStoreyBuildingRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => StoreyFromJSON(jsonValue));
@@ -10966,8 +11018,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Update some fields of a storey  Required scopes: ifc:write, model:write
      * Update some fields of a storey
      */
-    async updateStoreyDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Storey> {
-        const response = await this.updateStoreyDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    async updateStoreyDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, uuid: string, PatchedStoreyBuildingRequest?: PatchedStoreyBuildingRequest, initOverrides?: RequestInit): Promise<Storey> {
+        const response = await this.updateStoreyDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, uuid: uuid, PatchedStoreyBuildingRequest: PatchedStoreyBuildingRequest }, initOverrides);
         return await response.value();
     }
 
