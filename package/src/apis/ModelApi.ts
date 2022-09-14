@@ -472,6 +472,12 @@ export interface CreateSystemRequest {
     SystemRequest: SystemRequest;
 }
 
+export interface CreateTilesetRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+}
+
 export interface CreateZoneRequest {
     cloud_pk: number;
     model_pk: number;
@@ -965,6 +971,13 @@ export interface GetSystemsRequest {
     cloud_pk: number;
     model_pk: number;
     project_pk: number;
+}
+
+export interface GetTilesetRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    tile_format?: GetTilesetTileFormatEnum;
 }
 
 export interface GetZoneRequest {
@@ -3569,6 +3582,63 @@ export class ModelApi extends runtime.BaseAPI {
     async createSystem(cloud_pk: number, model_pk: number, project_pk: number, SystemRequest: SystemRequest, initOverrides?: RequestInit): Promise<System> {
         const response = await this.createSystemRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, SystemRequest: SystemRequest }, initOverrides);
         return await response.value();
+    }
+
+    /**
+     * This route is internaly used by BIMData, you probably don\'t want to use it  Required scopes: ifc:write, model:write
+     * Create the tileset of the model and upload all files
+     */
+    async createTilesetRaw(requestParameters: CreateTilesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createTileset.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createTileset.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createTileset.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/tileset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * This route is internaly used by BIMData, you probably don\'t want to use it  Required scopes: ifc:write, model:write
+     * Create the tileset of the model and upload all files
+     */
+    async createTileset(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.createTilesetRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -7893,6 +7963,67 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * This is only availble if the model is a POINT_CLOUD  Required scopes: ifc:read, model:read
+     * Retrieve the tileset of the model
+     */
+    async getTilesetRaw(requestParameters: GetTilesetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getTileset.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getTileset.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getTileset.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.tile_format !== undefined) {
+            queryParameters['tile_format'] = requestParameters.tile_format;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/tileset`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * This is only availble if the model is a POINT_CLOUD  Required scopes: ifc:read, model:read
+     * Retrieve the tileset of the model
+     */
+    async getTileset(cloud_pk: number, id: number, project_pk: number, tile_format?: GetTilesetTileFormatEnum, initOverrides?: RequestInit): Promise<void> {
+        await this.getTilesetRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, tile_format: tile_format }, initOverrides);
+    }
+
+    /**
      * Retrieve one zone of a model  Required scopes: ifc:read, model:read
      * Retrieve one zone of a model
      */
@@ -10533,5 +10664,14 @@ export enum GetModelsTypeEnum {
     Metabuilding = 'METABUILDING',
     Obj = 'OBJ',
     Pdf = 'PDF',
-    Png = 'PNG'
+    Png = 'PNG',
+    PointCloud = 'POINT_CLOUD'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetTilesetTileFormatEnum {
+    Pnts = 'pnts',
+    Xkt = 'xkt'
 }

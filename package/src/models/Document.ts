@@ -123,7 +123,7 @@ export interface Document {
      */
     readonly model_id: number | null;
     /**
-     * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, DAE, BFX
+     * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, DAE, BFX, POINT_CLOUD
      * @type {string}
      * @memberof Document
      */
@@ -163,6 +163,7 @@ export enum DocumentModelTypeEnum {
     Obj = 'OBJ',
     Dae = 'DAE',
     Bfx = 'BFX',
+    PointCloud = 'POINT_CLOUD',
     Null = 'null'
 }/**
 * @export
