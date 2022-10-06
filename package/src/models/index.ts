@@ -222,6 +222,7 @@ export * from './TopicTypeRequest';
 export * from './Unit';
 export * from './UnitRequest';
 export * from './User';
+export * from './UserInvitation';
 export * from './UserProject';
 export * from './UserProjectIdRequest';
 export * from './ViewSetupHints';

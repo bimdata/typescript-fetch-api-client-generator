@@ -57,9 +57,6 @@ import {
     GroupRequest,
     GroupRequestFromJSON,
     GroupRequestToJSON,
-    Invitation,
-    InvitationFromJSON,
-    InvitationToJSON,
     PatchedClassificationRequest,
     PatchedClassificationRequestFromJSON,
     PatchedClassificationRequestToJSON,
@@ -147,6 +144,9 @@ import {
     User,
     UserFromJSON,
     UserToJSON,
+    UserInvitation,
+    UserInvitationFromJSON,
+    UserInvitationToJSON,
     UserProject,
     UserProjectFromJSON,
     UserProjectToJSON,
@@ -1485,7 +1485,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DXF\', \'BFX\', \'GLTF\', \'DAE\', \'OBJ\', \'IFC\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'BFX\', \'DAE\', \'DWG\', \'DXF\', \'GLTF\', \'IFC\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1592,7 +1592,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DXF\', \'BFX\', \'GLTF\', \'DAE\', \'OBJ\', \'IFC\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'BFX\', \'DAE\', \'DWG\', \'DXF\', \'GLTF\', \'IFC\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -5044,7 +5044,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the invitation  Required scopes: user:read
      * Retrieve an invitation
      */
-    async getUserInvitationRaw(requestParameters: GetUserInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Invitation>> {
+    async getUserInvitationRaw(requestParameters: GetUserInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<UserInvitation>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getUserInvitation.');
         }
@@ -5078,14 +5078,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InvitationFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserInvitationFromJSON(jsonValue));
     }
 
     /**
      * Retrieve the invitation  Required scopes: user:read
      * Retrieve an invitation
      */
-    async getUserInvitation(id: number, initOverrides?: RequestInit): Promise<Invitation> {
+    async getUserInvitation(id: number, initOverrides?: RequestInit): Promise<UserInvitation> {
         const response = await this.getUserInvitationRaw({ id: id }, initOverrides);
         return await response.value();
     }
@@ -5094,7 +5094,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List all user\'s invitations  Required scopes: user:read
      * List user\'s invitations
      */
-    async getUserInvitationsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Invitation>>> {
+    async getUserInvitationsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<UserInvitation>>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -5124,14 +5124,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InvitationFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserInvitationFromJSON));
     }
 
     /**
      * List all user\'s invitations  Required scopes: user:read
      * List user\'s invitations
      */
-    async getUserInvitations(initOverrides?: RequestInit): Promise<Array<Invitation>> {
+    async getUserInvitations(initOverrides?: RequestInit): Promise<Array<UserInvitation>> {
         const response = await this.getUserInvitationsRaw(initOverrides);
         return await response.value();
     }

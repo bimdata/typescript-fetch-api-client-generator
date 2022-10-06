@@ -230,6 +230,7 @@ src/models/TopicTypeRequest.ts
 src/models/Unit.ts
 src/models/UnitRequest.ts
 src/models/User.ts
+src/models/UserInvitation.ts
 src/models/UserProject.ts
 src/models/UserProjectIdRequest.ts
 src/models/ViewSetupHints.ts
