@@ -57,6 +57,9 @@ import {
     GroupRequest,
     GroupRequestFromJSON,
     GroupRequestToJSON,
+    Invitation,
+    InvitationFromJSON,
+    InvitationToJSON,
     PatchedClassificationRequest,
     PatchedClassificationRequestFromJSON,
     PatchedClassificationRequestToJSON,
@@ -172,6 +175,10 @@ import {
     WriteFolderRequestFromJSON,
     WriteFolderRequestToJSON,
 } from '../models';
+
+export interface AcceptUserInvitationRequest {
+    id: number;
+}
 
 export interface AcceptValidationRequest {
     cloud_pk: number;
@@ -402,6 +409,10 @@ export interface DeleteVisaCommentRequest {
     visa_pk: number;
 }
 
+export interface DenyUserInvitationRequest {
+    id: number;
+}
+
 export interface DenyValidationRequest {
     cloud_pk: number;
     document_pk: number;
@@ -578,6 +589,10 @@ export interface GetTagRequest {
 export interface GetTagsRequest {
     cloud_pk: number;
     project_pk: number;
+}
+
+export interface GetUserInvitationRequest {
+    id: number;
 }
 
 export interface GetValidationRequest {
@@ -779,6 +794,55 @@ export interface UpdateVisaCommentRequest {
  * 
  */
 export class CollaborationApi extends runtime.BaseAPI {
+
+    /**
+     * The user is added to the cloud and projet.  Required scopes: user:write
+     * Accept an invitation
+     */
+    async acceptUserInvitationRaw(requestParameters: AcceptUserInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling acceptUserInvitation.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/user/invitations/{id}/accept`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * The user is added to the cloud and projet.  Required scopes: user:write
+     * Accept an invitation
+     */
+    async acceptUserInvitation(id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.acceptUserInvitationRaw({ id: id }, initOverrides);
+    }
 
     /**
      * Accept a validation  Required scopes: document:write
@@ -1421,7 +1485,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'DWG\', \'POINT_CLOUD\', \'BFX\', \'OBJ\', \'IFC\', \'DAE\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'BFX\', \'GLTF\', \'DAE\', \'OBJ\', \'IFC\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1528,7 +1592,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'DWG\', \'POINT_CLOUD\', \'BFX\', \'OBJ\', \'IFC\', \'DAE\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'BFX\', \'GLTF\', \'DAE\', \'OBJ\', \'IFC\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -2954,6 +3018,55 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async deleteVisaComment(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
         await this.deleteVisaCommentRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
+    }
+
+    /**
+     * The invitation status change to DENIED and the user is not added to the cloud. You can accept an invitation previously denied  Required scopes: user:write
+     * Deny an invitation
+     */
+    async denyUserInvitationRaw(requestParameters: DenyUserInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling denyUserInvitation.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/user/invitations/{id}/deny`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * The invitation status change to DENIED and the user is not added to the cloud. You can accept an invitation previously denied  Required scopes: user:write
+     * Deny an invitation
+     */
+    async denyUserInvitation(id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.denyUserInvitationRaw({ id: id }, initOverrides);
     }
 
     /**
@@ -4924,6 +5037,102 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getTags(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Tag>> {
         const response = await this.getTagsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve the invitation  Required scopes: user:read
+     * Retrieve an invitation
+     */
+    async getUserInvitationRaw(requestParameters: GetUserInvitationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Invitation>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getUserInvitation.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/user/invitations/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InvitationFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve the invitation  Required scopes: user:read
+     * Retrieve an invitation
+     */
+    async getUserInvitation(id: number, initOverrides?: RequestInit): Promise<Invitation> {
+        const response = await this.getUserInvitationRaw({ id: id }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * List all user\'s invitations  Required scopes: user:read
+     * List user\'s invitations
+     */
+    async getUserInvitationsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Invitation>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/user/invitations`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InvitationFromJSON));
+    }
+
+    /**
+     * List all user\'s invitations  Required scopes: user:read
+     * List user\'s invitations
+     */
+    async getUserInvitations(initOverrides?: RequestInit): Promise<Array<Invitation>> {
+        const response = await this.getUserInvitationsRaw(initOverrides);
         return await response.value();
     }
 
