@@ -6,15 +6,23 @@ export * from './apis';
 export * from './models';
 
 export function makeBIMDataApiClient(config) {
+  let _accessToken = null;
+  let _config = null;
+  let _clients = {
+    bcfApi: null,
+    checkerApi: null,
+    collaborationApi: null,
+    modelApi: null,
+    ssoApi: null,
+    webhookApi: null,
+  };
+
   const apiClient = {
-    _accessToken: null,
-    _config: null,
-    _clients: {},
 
     // Setters
     set config(value) {
-      this._accessToken = value.accessToken;
-      this._config = new Configuration({
+      _accessToken = value.accessToken;
+      _config = new Configuration({
         // basePath is renamed to make the makeBIMDataApiClient signature more readable
         basePath: value.basePath || value.apiUrl,
         credentials: value.credentials,
@@ -22,34 +30,40 @@ export function makeBIMDataApiClient(config) {
           Authorization: `Bearer ${value.accessToken}`
         }
       });
-      Object.assign(this._clients, {
-        bfcApi: new BcfApi(this._config),
-        checkerApi: new CheckerApi(this._config),
-        collaborationApi: new CollaborationApi(this._config),
-        modelApi: new ModelApi(this._config),
-        ssoApi: new SsoApi(this._config),
-        webhookApi: new WebhookApi(this._config),
+      Object.assign(_clients, {
+        bfcApi: new BcfApi(_config),
+        checkerApi: new CheckerApi(_config),
+        collaborationApi: new CollaborationApi(_config),
+        modelApi: new ModelApi(_config),
+        ssoApi: new SsoApi(_config),
+        webhookApi: new WebhookApi(_config),
       });
     },
     set accessToken(value) {
       this.config = {
-        ...this._config.configuration,
+        ..._config.configuration,
         accessToken: value
       };
     },
 
-
     // Getters
-    get accessToken() { return this._accessToken; },
-    get authHeader() { return this._config.headers; },
-    get config() { return this._config; },
+    get accessToken() { return _accessToken; },
+    get authHeader() { return _config.headers; },
+    get config() { return _config; },
 
-    get bcfApi() { return this._clients.bfcApi; },
-    get checkerApi() { return this._clients.checkerApi; },
-    get collaborationApi() { return this._clients.collaborationApi; },
-    get modelApi() { return this._clients.modelApi; },
-    get ssoApi() { return this._clients.ssoApi; },
-    get webhookApi() { return this._clients.webhookApi; },
+    get bcfApi() { return _clients.bcfApi; },
+    get checkerApi() { return _clients.checkerApi; },
+    get collaborationApi() { return _clients.collaborationApi; },
+    get modelApi() { return _clients.modelApi; },
+    get ssoApi() { return _clients.ssoApi; },
+    get webhookApi() { return _clients.webhookApi; },
+
+    BcfApi() { return _clients.bcfApi; },
+    CheckerApi() { return _clients.checkerApi; },
+    CollaborationApi() { return _clients.collaborationApi; },
+    ModelApi() { return _clients.modelApi; },
+    SsoApi() { return _clients.ssoApi; },
+    WebhookApi() { return _clients.webhookApi; },
   };
 
   apiClient.config = config;
