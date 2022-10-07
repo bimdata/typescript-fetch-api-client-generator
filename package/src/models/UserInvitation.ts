@@ -78,6 +78,18 @@ export interface UserInvitation {
      * @memberof UserInvitation
      */
     sender: User;
+    /**
+     * 
+     * @type {Date}
+     * @memberof UserInvitation
+     */
+    readonly created_at: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof UserInvitation
+     */
+    responded_at?: Date | null;
 }
 
 /**
@@ -108,6 +120,8 @@ export function UserInvitationFromJSONTyped(json: any, ignoreDiscriminator: bool
         'project_name': !exists(json, 'project_name') ? undefined : json['project_name'],
         'status': !exists(json, 'status') ? undefined : json['status'],
         'sender': UserFromJSON(json['sender']),
+        'created_at': (new Date(json['created_at'])),
+        'responded_at': !exists(json, 'responded_at') ? undefined : (json['responded_at'] === null ? null : new Date(json['responded_at'])),
     };
 }
 
@@ -125,6 +139,7 @@ export function UserInvitationToJSON(value?: UserInvitation | null): any {
         'project_name': value.project_name,
         'status': value.status,
         'sender': UserToJSON(value.sender),
+        'responded_at': value.responded_at === undefined ? undefined : (value.responded_at === null ? null : value.responded_at.toISOString()),
     };
 }
 
