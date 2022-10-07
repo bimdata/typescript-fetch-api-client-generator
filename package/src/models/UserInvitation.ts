@@ -40,10 +40,22 @@ export interface UserInvitation {
     redirect_uri: string;
     /**
      * 
+     * @type {number}
+     * @memberof UserInvitation
+     */
+    readonly cloud_id: number;
+    /**
+     * 
      * @type {string}
      * @memberof UserInvitation
      */
     cloud_name: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserInvitation
+     */
+    readonly project_id: number | null;
     /**
      * 
      * @type {string}
@@ -90,7 +102,9 @@ export function UserInvitationFromJSONTyped(json: any, ignoreDiscriminator: bool
         
         'id': json['id'],
         'redirect_uri': json['redirect_uri'],
+        'cloud_id': json['cloud_id'],
         'cloud_name': json['cloud_name'],
+        'project_id': json['project_id'],
         'project_name': !exists(json, 'project_name') ? undefined : json['project_name'],
         'status': !exists(json, 'status') ? undefined : json['status'],
         'sender': UserFromJSON(json['sender']),
