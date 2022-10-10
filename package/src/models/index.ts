@@ -31,6 +31,7 @@ export * from './DetailedExtensions';
 export * from './Direction';
 export * from './DirectionRequest';
 export * from './Document';
+export * from './DocumentIdRequest';
 export * from './DocumentWithElementList';
 export * from './Element';
 export * from './ElementClassificationRelation';

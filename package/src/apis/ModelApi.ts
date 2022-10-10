@@ -36,6 +36,9 @@ import {
     Document,
     DocumentFromJSON,
     DocumentToJSON,
+    DocumentIdRequest,
+    DocumentIdRequestFromJSON,
+    DocumentIdRequestToJSON,
     DocumentWithElementList,
     DocumentWithElementListFromJSON,
     DocumentWithElementListToJSON,
@@ -1014,6 +1017,7 @@ export interface LinkDocumentsOfElementRequest {
     element_uuid: string;
     model_pk: number;
     project_pk: number;
+    DocumentIdRequest: Array<DocumentIdRequest>;
 }
 
 export interface ListClassificationElementRelationsRequest {
@@ -8296,9 +8300,15 @@ export class ModelApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling linkDocumentsOfElement.');
         }
 
+        if (requestParameters.DocumentIdRequest === null || requestParameters.DocumentIdRequest === undefined) {
+            throw new runtime.RequiredError('DocumentIdRequest','Required parameter requestParameters.DocumentIdRequest was null or undefined when calling linkDocumentsOfElement.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -8323,6 +8333,7 @@ export class ModelApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.DocumentIdRequest.map(DocumentIdRequestToJSON),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
@@ -8332,8 +8343,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk relation create available. You can either post an id or a list of ids. Is you post a list, the response will be a list (in the same order) of created relation or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Link one or many documents to an element
      */
-    async linkDocumentsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.linkDocumentsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    async linkDocumentsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, DocumentIdRequest: Array<DocumentIdRequest>, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.linkDocumentsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, DocumentIdRequest: DocumentIdRequest }, initOverrides);
         return await response.value();
     }
 
