@@ -39,7 +39,6 @@ src/models/DetailedExtensions.ts
 src/models/Direction.ts
 src/models/DirectionRequest.ts
 src/models/Document.ts
-src/models/DocumentIdRequest.ts
 src/models/DocumentWithElementList.ts
 src/models/Element.ts
 src/models/ElementClassificationRelation.ts

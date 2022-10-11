@@ -42,9 +42,6 @@ import {
     Document,
     DocumentFromJSON,
     DocumentToJSON,
-    DocumentIdRequest,
-    DocumentIdRequestFromJSON,
-    DocumentIdRequestToJSON,
     DocumentWithElementList,
     DocumentWithElementListFromJSON,
     DocumentWithElementListToJSON,
@@ -1101,7 +1098,7 @@ export interface LinkDocumentsOfElementDeprecatedRequest {
     element_uuid: string;
     ifc_pk: number;
     project_pk: number;
-    DocumentIdRequest: Array<DocumentIdRequest>;
+    request_body: Array<number>;
 }
 
 export interface ListClassificationElementRelationsDeprecatedRequest {
@@ -8965,8 +8962,8 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling linkDocumentsOfElementDeprecated.');
         }
 
-        if (requestParameters.DocumentIdRequest === null || requestParameters.DocumentIdRequest === undefined) {
-            throw new runtime.RequiredError('DocumentIdRequest','Required parameter requestParameters.DocumentIdRequest was null or undefined when calling linkDocumentsOfElementDeprecated.');
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling linkDocumentsOfElementDeprecated.');
         }
 
         const queryParameters: any = {};
@@ -8998,7 +8995,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.DocumentIdRequest.map(DocumentIdRequestToJSON),
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
@@ -9008,8 +9005,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk relation create available. You can either post an id or a list of ids. Is you post a list, the response will be a list (in the same order) of created relation or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Link one or many documents to an element
      */
-    async linkDocumentsOfElementDeprecated(cloud_pk: number, element_uuid: string, ifc_pk: number, project_pk: number, DocumentIdRequest: Array<DocumentIdRequest>, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.linkDocumentsOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, ifc_pk: ifc_pk, project_pk: project_pk, DocumentIdRequest: DocumentIdRequest }, initOverrides);
+    async linkDocumentsOfElementDeprecated(cloud_pk: number, element_uuid: string, ifc_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.linkDocumentsOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, ifc_pk: ifc_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
         return await response.value();
     }
 
