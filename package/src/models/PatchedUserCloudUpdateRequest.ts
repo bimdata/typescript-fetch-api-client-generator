@@ -20,18 +20,18 @@ import { exists, mapValues } from '../runtime';
  */
 export interface PatchedUserCloudUpdateRequest {
     /**
-     * Role of the user in the cloud
+     * 
      * @type {number}
      * @memberof PatchedUserCloudUpdateRequest
      */
-    role?: PatchedUserCloudUpdateRequestRoleEnum;
+    cloud_role?: PatchedUserCloudUpdateRequestCloudRoleEnum;
 }
 
 /**
 * @export
 * @enum {string}
 */
-export enum PatchedUserCloudUpdateRequestRoleEnum {
+export enum PatchedUserCloudUpdateRequestCloudRoleEnum {
     NUMBER_100 = 100,
     NUMBER_50 = 50
 }
@@ -46,7 +46,7 @@ export function PatchedUserCloudUpdateRequestFromJSONTyped(json: any, ignoreDisc
     }
     return {
         
-        'role': !exists(json, 'role') ? undefined : json['role'],
+        'cloud_role': !exists(json, 'cloud_role') ? undefined : json['cloud_role'],
     };
 }
 
@@ -59,7 +59,7 @@ export function PatchedUserCloudUpdateRequestToJSON(value?: PatchedUserCloudUpda
     }
     return {
         
-        'role': value.role,
+        'cloud_role': value.cloud_role,
     };
 }
 
