@@ -60,7 +60,7 @@ export interface ModelFiles {
      * @type {string}
      * @memberof ModelFiles
      */
-    viewer_360_file?: string | null;
+    preview_file?: string | null;
     /**
      * 
      * @type {string}
@@ -85,7 +85,7 @@ export function ModelFilesFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'gltf_file': !exists(json, 'gltf_file') ? undefined : json['gltf_file'],
         'gltf_with_openings_file': !exists(json, 'gltf_with_openings_file') ? undefined : json['gltf_with_openings_file'],
         'bvh_tree_file': !exists(json, 'bvh_tree_file') ? undefined : json['bvh_tree_file'],
-        'viewer_360_file': !exists(json, 'viewer_360_file') ? undefined : json['viewer_360_file'],
+        'preview_file': !exists(json, 'preview_file') ? undefined : json['preview_file'],
         'xkt_file': !exists(json, 'xkt_file') ? undefined : json['xkt_file'],
     };
 }
@@ -105,7 +105,7 @@ export function ModelFilesToJSON(value?: ModelFiles | null): any {
         'gltf_file': value.gltf_file,
         'gltf_with_openings_file': value.gltf_with_openings_file,
         'bvh_tree_file': value.bvh_tree_file,
-        'viewer_360_file': value.viewer_360_file,
+        'preview_file': value.preview_file,
         'xkt_file': value.xkt_file,
     };
 }

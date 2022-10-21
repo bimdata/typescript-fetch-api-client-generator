@@ -127,7 +127,13 @@ export interface Model {
      * @type {string}
      * @memberof Model
      */
-    readonly viewer_360_file: string | null;
+    readonly preview_file: string | null;
+    /**
+     * DEPRECATED: Use 'preview_file' instead.
+     * @type {string}
+     * @memberof Model
+     */
+    viewer_360_file: string;
     /**
      * 
      * @type {string}
@@ -244,6 +250,7 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'map_file': json['map_file'],
         'gltf_file': json['gltf_file'],
         'bvh_tree_file': json['bvh_tree_file'],
+        'preview_file': json['preview_file'],
         'viewer_360_file': json['viewer_360_file'],
         'xkt_file': json['xkt_file'],
         'project_id': json['project_id'],
@@ -269,6 +276,7 @@ export function ModelToJSON(value?: Model | null): any {
         
         'name': value.name,
         'source': value.source,
+        'viewer_360_file': value.viewer_360_file,
         'world_position': value.world_position,
         'size_ratio': value.size_ratio,
         'archived': value.archived,
