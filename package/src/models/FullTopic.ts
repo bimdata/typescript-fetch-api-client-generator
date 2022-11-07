@@ -55,7 +55,7 @@ export interface FullTopic {
      * @type {Date}
      * @memberof FullTopic
      */
-    readonly modified_date: Date;
+    readonly modified_date: Date | null;
     /**
      * 
      * @type {string}
@@ -179,7 +179,7 @@ export function FullTopicFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
         'creation_date': !exists(json, 'creation_date') ? undefined : (new Date(json['creation_date'])),
         'creation_author': !exists(json, 'creation_author') ? undefined : json['creation_author'],
-        'modified_date': (new Date(json['modified_date'])),
+        'modified_date': (json['modified_date'] === null ? null : new Date(json['modified_date'])),
         'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
         'title': json['title'],
         'description': !exists(json, 'description') ? undefined : json['description'],

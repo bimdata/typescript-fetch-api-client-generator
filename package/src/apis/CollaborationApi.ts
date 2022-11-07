@@ -1485,7 +1485,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DAE\', \'DXF\', \'POINT_CLOUD\', \'IFC\', \'DWG\', \'BFX\', \'OBJ\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'DAE\', \'OBJ\', \'BFX\', \'IFC\', \'DWG\', \'GLTF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1592,7 +1592,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DAE\', \'DXF\', \'POINT_CLOUD\', \'IFC\', \'DWG\', \'BFX\', \'OBJ\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'DAE\', \'OBJ\', \'BFX\', \'IFC\', \'DWG\', \'GLTF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {

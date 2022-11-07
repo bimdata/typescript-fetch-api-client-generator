@@ -32,12 +32,6 @@ export interface PatchedModelRequest {
      */
     source?: PatchedModelRequestSourceEnum;
     /**
-     * DEPRECATED: Use 'preview_file' instead.
-     * @type {Blob}
-     * @memberof PatchedModelRequest
-     */
-    viewer_360_file?: Blob;
-    /**
      * [x,y,z] array of the position of the local_placement in world coordinates
      * @type {Array<number>}
      * @memberof PatchedModelRequest
@@ -99,7 +93,6 @@ export function PatchedModelRequestFromJSONTyped(json: any, ignoreDiscriminator:
         
         'name': !exists(json, 'name') ? undefined : json['name'],
         'source': !exists(json, 'source') ? undefined : json['source'],
-        'viewer_360_file': !exists(json, 'viewer_360_file') ? undefined : json['viewer_360_file'],
         'world_position': !exists(json, 'world_position') ? undefined : json['world_position'],
         'size_ratio': !exists(json, 'size_ratio') ? undefined : json['size_ratio'],
         'archived': !exists(json, 'archived') ? undefined : json['archived'],
@@ -120,7 +113,6 @@ export function PatchedModelRequestToJSON(value?: PatchedModelRequest | null): a
         
         'name': value.name,
         'source': value.source,
-        'viewer_360_file': value.viewer_360_file,
         'world_position': value.world_position,
         'size_ratio': value.size_ratio,
         'archived': value.archived,

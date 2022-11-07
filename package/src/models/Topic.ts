@@ -72,7 +72,7 @@ export interface Topic {
      * @type {Date}
      * @memberof Topic
      */
-    readonly modified_date: Date;
+    readonly modified_date: Date | null;
     /**
      * 
      * @type {string}
@@ -159,7 +159,7 @@ export function TopicFromJSONTyped(json: any, ignoreDiscriminator: boolean): Top
         'labels': !exists(json, 'labels') ? undefined : json['labels'],
         'creation_date': !exists(json, 'creation_date') ? undefined : (new Date(json['creation_date'])),
         'creation_author': !exists(json, 'creation_author') ? undefined : json['creation_author'],
-        'modified_date': (new Date(json['modified_date'])),
+        'modified_date': (json['modified_date'] === null ? null : new Date(json['modified_date'])),
         'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
         'assigned_to': !exists(json, 'assigned_to') ? undefined : json['assigned_to'],
         'reference_links': !exists(json, 'reference_links') ? undefined : json['reference_links'],

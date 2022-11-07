@@ -133,7 +133,7 @@ export interface Model {
      * @type {string}
      * @memberof Model
      */
-    viewer_360_file: string;
+    readonly viewer_360_file: string | null;
     /**
      * 
      * @type {string}
@@ -276,7 +276,6 @@ export function ModelToJSON(value?: Model | null): any {
         
         'name': value.name,
         'source': value.source,
-        'viewer_360_file': value.viewer_360_file,
         'world_position': value.world_position,
         'size_ratio': value.size_ratio,
         'archived': value.archived,
