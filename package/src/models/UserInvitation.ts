@@ -74,6 +74,12 @@ export interface UserInvitation {
     status?: UserInvitationStatusEnum;
     /**
      * 
+     * @type {string}
+     * @memberof UserInvitation
+     */
+    client_name: string;
+    /**
+     * 
      * @type {User}
      * @memberof UserInvitation
      */
@@ -119,6 +125,7 @@ export function UserInvitationFromJSONTyped(json: any, ignoreDiscriminator: bool
         'project_id': json['project_id'],
         'project_name': !exists(json, 'project_name') ? undefined : json['project_name'],
         'status': !exists(json, 'status') ? undefined : json['status'],
+        'client_name': json['client_name'],
         'sender': UserFromJSON(json['sender']),
         'created_at': (new Date(json['created_at'])),
         'responded_at': !exists(json, 'responded_at') ? undefined : (json['responded_at'] === null ? null : new Date(json['responded_at'])),
@@ -138,6 +145,7 @@ export function UserInvitationToJSON(value?: UserInvitation | null): any {
         'cloud_name': value.cloud_name,
         'project_name': value.project_name,
         'status': value.status,
+        'client_name': value.client_name,
         'sender': UserToJSON(value.sender),
         'responded_at': value.responded_at === undefined ? undefined : (value.responded_at === null ? null : value.responded_at.toISOString()),
     };
