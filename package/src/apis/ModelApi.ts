@@ -60,9 +60,6 @@ import {
     IfcAccessTokenRequest,
     IfcAccessTokenRequestFromJSON,
     IfcAccessTokenRequestToJSON,
-    IfcExport,
-    IfcExportFromJSON,
-    IfcExportToJSON,
     IfcExportRequest,
     IfcExportRequestFromJSON,
     IfcExportRequestToJSON,
@@ -4825,7 +4822,7 @@ export class ModelApi extends runtime.BaseAPI {
      * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result  Required scopes: ifc:write, model:write
      * Export IFC
      */
-    async exportIfcRaw(requestParameters: ExportIfcRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcExport>> {
+    async exportIfcRaw(requestParameters: ExportIfcRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling exportIfc.');
         }
@@ -4874,16 +4871,15 @@ export class ModelApi extends runtime.BaseAPI {
             body: IfcExportRequestToJSON(requestParameters.IfcExportRequest),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcExportFromJSON(jsonValue));
+        return new runtime.VoidApiResponse(response);
     }
 
     /**
      * Only works for IFC files. Export IFC as requested in parameters. When the export is finished, a new IFC file with will be created in the same folder than the original IFC. You can query the folder or subscribe to the new document webhook to retrieve the result  Required scopes: ifc:write, model:write
      * Export IFC
      */
-    async exportIfc(cloud_pk: number, id: number, project_pk: number, IfcExportRequest: IfcExportRequest, initOverrides?: RequestInit): Promise<IfcExport> {
-        const response = await this.exportIfcRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, IfcExportRequest: IfcExportRequest }, initOverrides);
-        return await response.value();
+    async exportIfc(cloud_pk: number, id: number, project_pk: number, IfcExportRequest: IfcExportRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.exportIfcRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, IfcExportRequest: IfcExportRequest }, initOverrides);
     }
 
     /**

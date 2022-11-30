@@ -56,7 +56,6 @@ export * from './IfcAccessToken';
 export * from './IfcAccessTokenRequest';
 export * from './IfcChecker';
 export * from './IfcCheckerRequest';
-export * from './IfcExport';
 export * from './IfcExportRequest';
 export * from './IfcMergeRequest';
 export * from './IfcOptimizeRequest';

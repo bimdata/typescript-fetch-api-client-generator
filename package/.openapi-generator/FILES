@@ -64,7 +64,6 @@ src/models/IfcAccessToken.ts
 src/models/IfcAccessTokenRequest.ts
 src/models/IfcChecker.ts
 src/models/IfcCheckerRequest.ts
-src/models/IfcExport.ts
 src/models/IfcExportRequest.ts
 src/models/IfcMergeRequest.ts
 src/models/IfcOptimizeRequest.ts
