@@ -6,6 +6,7 @@ export * from './Building';
 export * from './BuildingModelPlanRequest';
 export * from './CheckPlan';
 export * from './CheckPlanRequest';
+export * from './CheckProjectAccess';
 export * from './CheckerResult';
 export * from './CheckerResultRequest';
 export * from './Classification';

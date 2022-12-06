@@ -14,6 +14,7 @@ src/models/Building.ts
 src/models/BuildingModelPlanRequest.ts
 src/models/CheckPlan.ts
 src/models/CheckPlanRequest.ts
+src/models/CheckProjectAccess.ts
 src/models/CheckerResult.ts
 src/models/CheckerResultRequest.ts
 src/models/Classification.ts

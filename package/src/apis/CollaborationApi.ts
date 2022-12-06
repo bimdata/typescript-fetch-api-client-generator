@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    CheckProjectAccess,
+    CheckProjectAccessFromJSON,
+    CheckProjectAccessToJSON,
     Classification,
     ClassificationFromJSON,
     ClassificationToJSON,
@@ -214,6 +217,11 @@ export interface CancelProjectUserInvitationRequest {
 }
 
 export interface CheckAccessRequest {
+    id: number;
+}
+
+export interface CheckProjectAccessRequest {
+    cloud_pk: number;
     id: number;
 }
 
@@ -1199,6 +1207,60 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     *                  The response gives you details about the right of the user or app, the scopes of the token and the usable scopes (scopes filtered by the right of the user).                 It works with user tokens, app tokens and ProjectAccessToken             
+     * Check if the current token has access to the requested project
+     */
+    async checkProjectAccessRaw(requestParameters: CheckProjectAccessRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckProjectAccess>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling checkProjectAccess.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling checkProjectAccess.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{id}/check-access`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CheckProjectAccessFromJSON(jsonValue));
+    }
+
+    /**
+     *                  The response gives you details about the right of the user or app, the scopes of the token and the usable scopes (scopes filtered by the right of the user).                 It works with user tokens, app tokens and ProjectAccessToken             
+     * Check if the current token has access to the requested project
+     */
+    async checkProjectAccess(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<CheckProjectAccess> {
+        const response = await this.checkProjectAccessRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Close a visa of a document  Required scopes: document:write
      * Close a visa of a document
      */
@@ -1485,7 +1547,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DAE\', \'DXF\', \'GLTF\', \'BFX\', \'DWG\', \'IFC\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DAE\', \'DXF\', \'DWG\', \'POINT_CLOUD\', \'BFX\', \'IFC\', \'GLTF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1592,7 +1654,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DAE\', \'DXF\', \'GLTF\', \'BFX\', \'DWG\', \'IFC\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DAE\', \'DXF\', \'DWG\', \'POINT_CLOUD\', \'BFX\', \'IFC\', \'GLTF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
