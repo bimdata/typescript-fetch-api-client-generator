@@ -36,6 +36,7 @@ src/models/ComponentsParent.ts
 src/models/ComponentsParentRequest.ts
 src/models/CreateBuildingByNameRequest.ts
 src/models/CreateModelRequest.ts
+src/models/CreateMultiPageModelRequest.ts
 src/models/DetailedExtensions.ts
 src/models/Direction.ts
 src/models/DirectionRequest.ts

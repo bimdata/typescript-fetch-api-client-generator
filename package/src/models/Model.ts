@@ -194,6 +194,18 @@ export interface Model {
      * @memberof Model
      */
     recommanded_2d_angle?: number | null;
+    /**
+     * The page number of the related pdf
+     * @type {number}
+     * @memberof Model
+     */
+    readonly page_number: number | null;
+    /**
+     * Contains additional pages of a pdf
+     * @type {Array<Model>}
+     * @memberof Model
+     */
+    readonly children: Array<Model>;
 }
 
 /**
@@ -262,6 +274,8 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'version': !exists(json, 'version') ? undefined : json['version'],
         'north_vector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
         'recommanded_2d_angle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
+        'page_number': json['page_number'],
+        'children': ((json['children'] as Array<any>).map(ModelFromJSON)),
     };
 }
 

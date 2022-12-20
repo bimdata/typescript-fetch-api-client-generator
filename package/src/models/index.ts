@@ -28,6 +28,7 @@ export * from './ComponentsParent';
 export * from './ComponentsParentRequest';
 export * from './CreateBuildingByNameRequest';
 export * from './CreateModelRequest';
+export * from './CreateMultiPageModelRequest';
 export * from './DetailedExtensions';
 export * from './Direction';
 export * from './DirectionRequest';

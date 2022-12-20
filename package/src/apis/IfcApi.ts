@@ -39,6 +39,9 @@ import {
     CreateModelRequest,
     CreateModelRequestFromJSON,
     CreateModelRequestToJSON,
+    CreateMultiPageModelRequest,
+    CreateMultiPageModelRequestFromJSON,
+    CreateMultiPageModelRequestToJSON,
     Document,
     DocumentFromJSON,
     DocumentToJSON,
@@ -450,6 +453,13 @@ export interface CreateMetaBuildingDeprecatedRequest {
     cloud_pk: number;
     project_pk: number;
     CreateBuildingByNameRequest: CreateBuildingByNameRequest;
+}
+
+export interface CreateMultiPageIfcDeprecatedRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    CreateMultiPageModelRequest: CreateMultiPageModelRequest;
 }
 
 export interface CreatePropertySetDeprecatedRequest {
@@ -3349,6 +3359,71 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async createMetaBuildingDeprecated(cloud_pk: number, project_pk: number, CreateBuildingByNameRequest: CreateBuildingByNameRequest, initOverrides?: RequestInit): Promise<Model> {
         const response = await this.createMetaBuildingDeprecatedRaw({ cloud_pk: cloud_pk, project_pk: project_pk, CreateBuildingByNameRequest: CreateBuildingByNameRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create a multi page model  Required scopes: ifc:write, model:write
+     * Create a multi page model
+     */
+    async createMultiPageIfcDeprecatedRaw(requestParameters: CreateMultiPageIfcDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createMultiPageIfcDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createMultiPageIfcDeprecated.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createMultiPageIfcDeprecated.');
+        }
+
+        if (requestParameters.CreateMultiPageModelRequest === null || requestParameters.CreateMultiPageModelRequest === undefined) {
+            throw new runtime.RequiredError('CreateMultiPageModelRequest','Required parameter requestParameters.CreateMultiPageModelRequest was null or undefined when calling createMultiPageIfcDeprecated.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{id}/create-multipage-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateMultiPageModelRequestToJSON(requestParameters.CreateMultiPageModelRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a multi page model  Required scopes: ifc:write, model:write
+     * Create a multi page model
+     */
+    async createMultiPageIfcDeprecated(cloud_pk: number, id: number, project_pk: number, CreateMultiPageModelRequest: CreateMultiPageModelRequest, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.createMultiPageIfcDeprecatedRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, CreateMultiPageModelRequest: CreateMultiPageModelRequest }, initOverrides);
         return await response.value();
     }
 
