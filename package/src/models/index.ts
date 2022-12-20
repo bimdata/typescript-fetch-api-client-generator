@@ -60,6 +60,7 @@ export * from './IfcCheckerRequest';
 export * from './IfcExportRequest';
 export * from './IfcMergeRequest';
 export * from './IfcOptimizeRequest';
+export * from './ImportGroupRequest';
 export * from './Invitation';
 export * from './Label';
 export * from './LabelRequest';

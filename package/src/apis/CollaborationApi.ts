@@ -60,6 +60,9 @@ import {
     GroupRequest,
     GroupRequestFromJSON,
     GroupRequestToJSON,
+    ImportGroupRequest,
+    ImportGroupRequestFromJSON,
+    ImportGroupRequestToJSON,
     PatchedClassificationRequest,
     PatchedClassificationRequestFromJSON,
     PatchedClassificationRequestToJSON,
@@ -644,6 +647,12 @@ export interface GetVisasRequest {
     cloud_pk: number;
     document_pk: number;
     project_pk: number;
+}
+
+export interface ImportManageGroupRequest {
+    cloud_pk: number;
+    project_pk: number;
+    ImportGroupRequest: ImportGroupRequest;
 }
 
 export interface InviteCloudUserRequest {
@@ -1547,7 +1556,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DAE\', \'DXF\', \'DWG\', \'POINT_CLOUD\', \'BFX\', \'IFC\', \'GLTF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'DXF\', \'IFC\', \'DWG\', \'DAE\', \'BFX\', \'GLTF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1654,7 +1663,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DAE\', \'DXF\', \'DWG\', \'POINT_CLOUD\', \'BFX\', \'IFC\', \'GLTF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'DXF\', \'IFC\', \'DWG\', \'DAE\', \'BFX\', \'GLTF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -5571,6 +5580,67 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getVisas(cloud_pk: number, document_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
         const response = await this.getVisasRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Import a group from another project. Must be an admin of the project  Required scopes: org:manage
+     * Import a group from another project
+     */
+    async importManageGroupRaw(requestParameters: ImportManageGroupRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Group>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling importManageGroup.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling importManageGroup.');
+        }
+
+        if (requestParameters.ImportGroupRequest === null || requestParameters.ImportGroupRequest === undefined) {
+            throw new runtime.RequiredError('ImportGroupRequest','Required parameter requestParameters.ImportGroupRequest was null or undefined when calling importManageGroup.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/group/import`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ImportGroupRequestToJSON(requestParameters.ImportGroupRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(GroupFromJSON));
+    }
+
+    /**
+     * Import a group from another project. Must be an admin of the project  Required scopes: org:manage
+     * Import a group from another project
+     */
+    async importManageGroup(cloud_pk: number, project_pk: number, ImportGroupRequest: ImportGroupRequest, initOverrides?: RequestInit): Promise<Array<Group>> {
+        const response = await this.importManageGroupRaw({ cloud_pk: cloud_pk, project_pk: project_pk, ImportGroupRequest: ImportGroupRequest }, initOverrides);
         return await response.value();
     }
 
