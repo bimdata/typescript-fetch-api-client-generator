@@ -14,18 +14,6 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Document,
-    DocumentFromJSON,
-    DocumentFromJSONTyped,
-    DocumentToJSON,
-} from './Document';
-import {
-    FolderGroupPermission,
-    FolderGroupPermissionFromJSON,
-    FolderGroupPermissionFromJSONTyped,
-    FolderGroupPermissionToJSON,
-} from './FolderGroupPermission';
-import {
     Tag,
     TagFromJSON,
     TagFromJSONTyped,
@@ -141,11 +129,11 @@ export interface RecursiveFolderChildren {
      */
     file?: string | null;
     /**
-     * Groups permissions of folder
-     * @type {Array<FolderGroupPermission>}
+     * DEPRECATED: This field must be present because of legacy constraints but will always be empty. If you want to see group permissions of a folder, see `getFolder`
+     * @type {boolean}
      * @memberof RecursiveFolderChildren
      */
-    readonly groups_permissions: Array<FolderGroupPermission> | null;
+    readonly groups_permissions: boolean | null;
     /**
      * Default permissions of folder
      * @type {number}
@@ -159,11 +147,11 @@ export interface RecursiveFolderChildren {
      */
     readonly user_permission: RecursiveFolderChildrenUserPermissionEnum;
     /**
-     * History of a document
-     * @type {Array<Document>}
+     * Number of previous versions
+     * @type {number}
      * @memberof RecursiveFolderChildren
      */
-    readonly history: Array<Document> | null;
+    readonly history_count: number | null;
     /**
      * Tags of a document
      * @type {Array<Tag>}
@@ -255,10 +243,10 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
         'model_id': json['model_id'],
         'ifc_id': json['ifc_id'],
         'file': !exists(json, 'file') ? undefined : json['file'],
-        'groups_permissions': (json['groups_permissions'] === null ? null : (json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
+        'groups_permissions': json['groups_permissions'],
         'default_permission': json['default_permission'],
         'user_permission': json['user_permission'],
-        'history': (json['history'] === null ? null : (json['history'] as Array<any>).map(DocumentFromJSON)),
+        'history_count': json['history_count'],
         'tags': (json['tags'] === null ? null : (json['tags'] as Array<any>).map(TagFromJSON)),
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),
     };

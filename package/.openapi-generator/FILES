@@ -79,10 +79,9 @@ src/models/LayerElementRequest.ts
 src/models/LayerRequest.ts
 src/models/Line.ts
 src/models/LineRequest.ts
-src/models/MarketplaceApp.ts
 src/models/MarketplaceAppImage.ts
-src/models/MarketplaceAppImageRequest.ts
-src/models/MarketplaceAppRequest.ts
+src/models/MarketplaceAppLight.ts
+src/models/MarketplaceAppLightRequest.ts
 src/models/Material.ts
 src/models/MaterialListComponent.ts
 src/models/MaterialListComponentRequest.ts

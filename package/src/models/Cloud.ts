@@ -20,11 +20,11 @@ import {
     FeatureToJSON,
 } from './Feature';
 import {
-    MarketplaceApp,
-    MarketplaceAppFromJSON,
-    MarketplaceAppFromJSONTyped,
-    MarketplaceAppToJSON,
-} from './MarketplaceApp';
+    MarketplaceAppLight,
+    MarketplaceAppLightFromJSON,
+    MarketplaceAppLightFromJSONTyped,
+    MarketplaceAppLightToJSON,
+} from './MarketplaceAppLight';
 import {
     Organization,
     OrganizationFromJSON,
@@ -64,10 +64,10 @@ export interface Cloud {
     readonly features: Array<Feature>;
     /**
      * 
-     * @type {Array<MarketplaceApp>}
+     * @type {Array<MarketplaceAppLight>}
      * @memberof Cloud
      */
-    readonly marketplace_apps: Array<MarketplaceApp>;
+    readonly marketplace_apps: Array<MarketplaceAppLight>;
     /**
      * 
      * @type {Organization}
@@ -125,7 +125,7 @@ export function CloudFromJSONTyped(json: any, ignoreDiscriminator: boolean): Clo
         'id': json['id'],
         'name': json['name'],
         'features': ((json['features'] as Array<any>).map(FeatureFromJSON)),
-        'marketplace_apps': ((json['marketplace_apps'] as Array<any>).map(MarketplaceAppFromJSON)),
+        'marketplace_apps': ((json['marketplace_apps'] as Array<any>).map(MarketplaceAppLightFromJSON)),
         'organization': OrganizationFromJSON(json['organization']),
         'creator': UserFromJSON(json['creator']),
         'creator_app': json['creator_app'],
