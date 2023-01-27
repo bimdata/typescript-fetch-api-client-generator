@@ -178,36 +178,43 @@ export interface DeleteCommentRequest {
     guid: string;
     projects_pk: number;
     topics_guid: string;
+    CommentRequest?: CommentRequest;
 }
 
 export interface DeleteExtensionLabelRequest {
     id: number;
     projects_pk: number;
+    LabelRequest: LabelRequest;
 }
 
 export interface DeleteExtensionPriorityRequest {
     id: number;
     projects_pk: number;
+    PriorityRequest: PriorityRequest;
 }
 
 export interface DeleteExtensionStageRequest {
     id: number;
     projects_pk: number;
+    StageRequest: StageRequest;
 }
 
 export interface DeleteExtensionStatusRequest {
     id: number;
     projects_pk: number;
+    TopicStatusRequest: TopicStatusRequest;
 }
 
 export interface DeleteExtensionTypeRequest {
     id: number;
     projects_pk: number;
+    TopicTypeRequest: TopicTypeRequest;
 }
 
 export interface DeleteTopicRequest {
     guid: string;
     projects_pk: number;
+    TopicRequest: TopicRequest;
 }
 
 export interface DeleteViewpointRequest {
@@ -215,6 +222,7 @@ export interface DeleteViewpointRequest {
     projects_pk: number;
     topics_guid: string;
     img_format?: DeleteViewpointImgFormatEnum;
+    ViewpointRequest?: ViewpointRequest;
 }
 
 export interface DownloadBcfExportRequest {
@@ -963,6 +971,8 @@ export class BcfApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -986,6 +996,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: CommentRequestToJSON(requestParameters.CommentRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -995,8 +1006,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Delete a comment  Required scopes: bcf:write
      * Delete a comment
      */
-    async deleteComment(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCommentRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
+    async deleteComment(guid: string, projects_pk: number, topics_guid: string, CommentRequest?: CommentRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCommentRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, CommentRequest: CommentRequest }, initOverrides);
     }
 
     /**
@@ -1012,9 +1023,15 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionLabel.');
         }
 
+        if (requestParameters.LabelRequest === null || requestParameters.LabelRequest === undefined) {
+            throw new runtime.RequiredError('LabelRequest','Required parameter requestParameters.LabelRequest was null or undefined when calling deleteExtensionLabel.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1039,6 +1056,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: LabelRequestToJSON(requestParameters.LabelRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1048,8 +1066,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Label. Topics using this label won\'t be deleted   Required scopes: bcf:write
      * Delete a Label
      */
-    async deleteExtensionLabel(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionLabelRaw({ id: id, projects_pk: projects_pk }, initOverrides);
+    async deleteExtensionLabel(id: number, projects_pk: number, LabelRequest: LabelRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionLabelRaw({ id: id, projects_pk: projects_pk, LabelRequest: LabelRequest }, initOverrides);
     }
 
     /**
@@ -1065,9 +1083,15 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionPriority.');
         }
 
+        if (requestParameters.PriorityRequest === null || requestParameters.PriorityRequest === undefined) {
+            throw new runtime.RequiredError('PriorityRequest','Required parameter requestParameters.PriorityRequest was null or undefined when calling deleteExtensionPriority.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1092,6 +1116,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: PriorityRequestToJSON(requestParameters.PriorityRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1101,8 +1126,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Priority. Topics using this priority won\'t be deleted   Required scopes: bcf:write
      * Delete a Priority
      */
-    async deleteExtensionPriority(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionPriorityRaw({ id: id, projects_pk: projects_pk }, initOverrides);
+    async deleteExtensionPriority(id: number, projects_pk: number, PriorityRequest: PriorityRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionPriorityRaw({ id: id, projects_pk: projects_pk, PriorityRequest: PriorityRequest }, initOverrides);
     }
 
     /**
@@ -1118,9 +1143,15 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionStage.');
         }
 
+        if (requestParameters.StageRequest === null || requestParameters.StageRequest === undefined) {
+            throw new runtime.RequiredError('StageRequest','Required parameter requestParameters.StageRequest was null or undefined when calling deleteExtensionStage.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1145,6 +1176,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: StageRequestToJSON(requestParameters.StageRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1154,8 +1186,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Stage. Topics using this stage won\'t be deleted   Required scopes: bcf:write
      * Delete a Stage
      */
-    async deleteExtensionStage(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionStageRaw({ id: id, projects_pk: projects_pk }, initOverrides);
+    async deleteExtensionStage(id: number, projects_pk: number, StageRequest: StageRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionStageRaw({ id: id, projects_pk: projects_pk, StageRequest: StageRequest }, initOverrides);
     }
 
     /**
@@ -1171,9 +1203,15 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionStatus.');
         }
 
+        if (requestParameters.TopicStatusRequest === null || requestParameters.TopicStatusRequest === undefined) {
+            throw new runtime.RequiredError('TopicStatusRequest','Required parameter requestParameters.TopicStatusRequest was null or undefined when calling deleteExtensionStatus.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1198,6 +1236,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: TopicStatusRequestToJSON(requestParameters.TopicStatusRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1207,8 +1246,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a TopicStatus. Topics using this status won\'t be deleted   Required scopes: bcf:write
      * Delete a TopicStatus
      */
-    async deleteExtensionStatus(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionStatusRaw({ id: id, projects_pk: projects_pk }, initOverrides);
+    async deleteExtensionStatus(id: number, projects_pk: number, TopicStatusRequest: TopicStatusRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionStatusRaw({ id: id, projects_pk: projects_pk, TopicStatusRequest: TopicStatusRequest }, initOverrides);
     }
 
     /**
@@ -1224,9 +1263,15 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteExtensionType.');
         }
 
+        if (requestParameters.TopicTypeRequest === null || requestParameters.TopicTypeRequest === undefined) {
+            throw new runtime.RequiredError('TopicTypeRequest','Required parameter requestParameters.TopicTypeRequest was null or undefined when calling deleteExtensionType.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1251,6 +1296,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: TopicTypeRequestToJSON(requestParameters.TopicTypeRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1260,8 +1306,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a TopicType. Topics using this type won\'t be deleted  Required scopes: bcf:write
      * Delete a TopicType
      */
-    async deleteExtensionType(id: number, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteExtensionTypeRaw({ id: id, projects_pk: projects_pk }, initOverrides);
+    async deleteExtensionType(id: number, projects_pk: number, TopicTypeRequest: TopicTypeRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteExtensionTypeRaw({ id: id, projects_pk: projects_pk, TopicTypeRequest: TopicTypeRequest }, initOverrides);
     }
 
     /**
@@ -1277,9 +1323,15 @@ export class BcfApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deleteTopic.');
         }
 
+        if (requestParameters.TopicRequest === null || requestParameters.TopicRequest === undefined) {
+            throw new runtime.RequiredError('TopicRequest','Required parameter requestParameters.TopicRequest was null or undefined when calling deleteTopic.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1304,6 +1356,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: TopicRequestToJSON(requestParameters.TopicRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1313,8 +1366,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Delete a topic  Required scopes: bcf:write
      * Delete a topic
      */
-    async deleteTopic(guid: string, projects_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteTopicRaw({ guid: guid, projects_pk: projects_pk }, initOverrides);
+    async deleteTopic(guid: string, projects_pk: number, TopicRequest: TopicRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteTopicRaw({ guid: guid, projects_pk: projects_pk, TopicRequest: TopicRequest }, initOverrides);
     }
 
     /**
@@ -1342,6 +1395,8 @@ export class BcfApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -1365,6 +1420,7 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: ViewpointRequestToJSON(requestParameters.ViewpointRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1374,8 +1430,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Delete a Viewpoint  Required scopes: bcf:write
      * Delete a Viewpoint
      */
-    async deleteViewpoint(guid: string, projects_pk: number, topics_guid: string, img_format?: DeleteViewpointImgFormatEnum, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteViewpointRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format }, initOverrides);
+    async deleteViewpoint(guid: string, projects_pk: number, topics_guid: string, img_format?: DeleteViewpointImgFormatEnum, ViewpointRequest?: ViewpointRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteViewpointRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format, ViewpointRequest: ViewpointRequest }, initOverrides);
     }
 
     /**

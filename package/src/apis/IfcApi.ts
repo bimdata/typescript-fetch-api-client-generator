@@ -45,6 +45,9 @@ import {
     Document,
     DocumentFromJSON,
     DocumentToJSON,
+    DocumentRequest,
+    DocumentRequestFromJSON,
+    DocumentRequestToJSON,
     DocumentWithElementList,
     DocumentWithElementListFromJSON,
     DocumentWithElementListToJSON,
@@ -105,6 +108,9 @@ import {
     ModelFiles,
     ModelFilesFromJSON,
     ModelFilesToJSON,
+    ModelRequest,
+    ModelRequestFromJSON,
+    ModelRequestToJSON,
     PatchedCheckerResultRequest,
     PatchedCheckerResultRequestFromJSON,
     PatchedCheckerResultRequestToJSON,
@@ -241,30 +247,35 @@ export interface BulkDeleteIfcClassificationsDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
+    ClassificationRequest?: ClassificationRequest;
 }
 
 export interface BulkDeleteIfcPropertiesDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
+    request_body: Array<number>;
 }
 
 export interface BulkDeleteIfcPropertyDefinitionsDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
+    request_body: Array<number>;
 }
 
 export interface BulkDeleteIfcUnitsDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
+    request_body: Array<number>;
 }
 
 export interface BulkDeletePropertySetDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
+    request_body: Array<number>;
 }
 
 export interface BulkFullUpdateElementsDeprecatedRequest {
@@ -289,6 +300,7 @@ export interface BulkRemoveClassificationsOfElementDeprecatedRequest {
     element_uuid: string;
     ifc_pk: number;
     project_pk: number;
+    request_body: Array<number>;
 }
 
 export interface BulkRemoveDocumentsOfElementDeprecatedRequest {
@@ -296,6 +308,7 @@ export interface BulkRemoveDocumentsOfElementDeprecatedRequest {
     element_uuid: string;
     ifc_pk: number;
     project_pk: number;
+    request_body: Array<number>;
 }
 
 export interface BulkRemoveElementsFromClassificationDeprecatedRequest {
@@ -303,6 +316,7 @@ export interface BulkRemoveElementsFromClassificationDeprecatedRequest {
     ifc_pk: number;
     model_classification_pk: number;
     project_pk: number;
+    request_body: Array<number>;
 }
 
 export interface BulkUpdateElementsDeprecatedRequest {
@@ -539,6 +553,7 @@ export interface DeleteAccessTokenDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     token: string;
+    IfcAccessTokenRequest?: IfcAccessTokenRequest;
 }
 
 export interface DeleteBuildingDeprecatedRequest {
@@ -561,6 +576,7 @@ export interface DeleteCheckerDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    IfcCheckerRequest?: IfcCheckerRequest;
 }
 
 export interface DeleteCheckerResultDeprecatedRequest {
@@ -569,6 +585,7 @@ export interface DeleteCheckerResultDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    CheckerResultRequest?: CheckerResultRequest;
 }
 
 export interface DeleteElementDeprecatedRequest {
@@ -576,12 +593,14 @@ export interface DeleteElementDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     uuid: string;
+    ElementRequest: ElementRequest;
 }
 
 export interface DeleteIfcDeprecatedRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
+    ModelRequest?: ModelRequest;
 }
 
 export interface DeleteIfcPropertyDefinitionDeprecatedRequest {
@@ -589,6 +608,7 @@ export interface DeleteIfcPropertyDefinitionDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    PropertyDefinitionRequest?: PropertyDefinitionRequest;
 }
 
 export interface DeleteIfcPropertyDeprecatedRequest {
@@ -596,6 +616,7 @@ export interface DeleteIfcPropertyDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    PropertyRequest: PropertyRequest;
 }
 
 export interface DeleteIfcUnitDeprecatedRequest {
@@ -603,6 +624,7 @@ export interface DeleteIfcUnitDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    UnitRequest: UnitRequest;
 }
 
 export interface DeleteIfcWithoutDocDeprecatedRequest {
@@ -616,6 +638,7 @@ export interface DeleteLayerDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    LayerRequest: LayerRequest;
 }
 
 export interface DeletePropertySetDeprecatedRequest {
@@ -623,6 +646,7 @@ export interface DeletePropertySetDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    PropertySetRequest?: PropertySetRequest;
 }
 
 export interface DeleteSpaceDeprecatedRequest {
@@ -630,6 +654,7 @@ export interface DeleteSpaceDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    SpaceRequest: SpaceRequest;
 }
 
 export interface DeleteStoreyDeprecatedRequest {
@@ -652,6 +677,7 @@ export interface DeleteSystemDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     uuid: string;
+    SystemRequest: SystemRequest;
 }
 
 export interface DeleteZoneDeprecatedRequest {
@@ -659,6 +685,7 @@ export interface DeleteZoneDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    ZoneRequest: ZoneRequest;
 }
 
 export interface DeleteZoneSpaceDeprecatedRequest {
@@ -667,6 +694,7 @@ export interface DeleteZoneSpaceDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     zone_pk: number;
+    ZoneSpaceRequest: ZoneSpaceRequest;
 }
 
 export interface ExportIfcDeprecatedRequest {
@@ -1140,6 +1168,7 @@ export interface RemoveClassificationOfElementDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    ClassificationRequest?: ClassificationRequest;
 }
 
 export interface RemoveDocumentOfElementDeprecatedRequest {
@@ -1148,6 +1177,7 @@ export interface RemoveDocumentOfElementDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    DocumentRequest: DocumentRequest;
 }
 
 export interface RemoveElementPropertySetDeprecatedRequest {
@@ -1156,6 +1186,7 @@ export interface RemoveElementPropertySetDeprecatedRequest {
     id: number;
     ifc_pk: number;
     project_pk: number;
+    PropertySetRequest?: PropertySetRequest;
 }
 
 export interface RemoveElementPropertySetPropertyDefinitionDeprecatedRequest {
@@ -1166,6 +1197,7 @@ export interface RemoveElementPropertySetPropertyDefinitionDeprecatedRequest {
     project_pk: number;
     property_pk: number;
     propertyset_pk: number;
+    PropertyDefinitionRequest?: PropertyDefinitionRequest;
 }
 
 export interface RemoveElementPropertySetPropertyDefinitionUnitDeprecatedRequest {
@@ -1177,6 +1209,7 @@ export interface RemoveElementPropertySetPropertyDefinitionUnitDeprecatedRequest
     property_pk: number;
     propertydefinition_pk: number;
     propertyset_pk: number;
+    UnitRequest: UnitRequest;
 }
 
 export interface RemoveElementPropertySetPropertyDeprecatedRequest {
@@ -1186,6 +1219,7 @@ export interface RemoveElementPropertySetPropertyDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     propertyset_pk: number;
+    PropertyRequest: PropertyRequest;
 }
 
 export interface RemoveElementsFromClassificationDeprecatedRequest {
@@ -1194,6 +1228,7 @@ export interface RemoveElementsFromClassificationDeprecatedRequest {
     model_classification_pk: number;
     project_pk: number;
     uuid: string;
+    ElementRequest: ElementRequest;
 }
 
 export interface ReprocessIfcDeprecatedRequest {
@@ -1491,6 +1526,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -1514,6 +1551,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: ClassificationRequestToJSON(requestParameters.ClassificationRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1523,8 +1561,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete relation between filtered classifications (eg. /classifications?name=untec) and all mode\'s elements. No classification will be deleted on this endpoint, only the relation between model\'s elements and their classification.  Required scopes: ifc:write, model:write
      * Remove all classifications from model\'s elements
      */
-    async bulkDeleteIfcClassificationsDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeleteIfcClassificationsDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async bulkDeleteIfcClassificationsDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, ClassificationRequest?: ClassificationRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteIfcClassificationsDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, ClassificationRequest: ClassificationRequest }, initOverrides);
     }
 
     /**
@@ -1544,9 +1582,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteIfcPropertiesDeprecated.');
         }
 
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkDeleteIfcPropertiesDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1571,6 +1615,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1580,8 +1625,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many Property of a model
      */
-    async bulkDeleteIfcPropertiesDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeleteIfcPropertiesDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async bulkDeleteIfcPropertiesDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteIfcPropertiesDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
     }
 
     /**
@@ -1601,9 +1646,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteIfcPropertyDefinitionsDeprecated.');
         }
 
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkDeleteIfcPropertyDefinitionsDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1628,6 +1679,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1637,8 +1689,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many PropertyDefinitions of a model
      */
-    async bulkDeleteIfcPropertyDefinitionsDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeleteIfcPropertyDefinitionsDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async bulkDeleteIfcPropertyDefinitionsDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteIfcPropertyDefinitionsDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
     }
 
     /**
@@ -1658,9 +1710,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteIfcUnitsDeprecated.');
         }
 
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkDeleteIfcUnitsDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1685,6 +1743,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1694,8 +1753,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many Units of a model
      */
-    async bulkDeleteIfcUnitsDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeleteIfcUnitsDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async bulkDeleteIfcUnitsDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteIfcUnitsDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
     }
 
     /**
@@ -1715,9 +1774,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeletePropertySetDeprecated.');
         }
 
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkDeletePropertySetDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1742,6 +1807,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1751,8 +1817,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Delete many PropertySet of a model
      */
-    async bulkDeletePropertySetDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkDeletePropertySetDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async bulkDeletePropertySetDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeletePropertySetDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
     }
 
     /**
@@ -1918,9 +1984,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkRemoveClassificationsOfElementDeprecated.');
         }
 
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkRemoveClassificationsOfElementDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1945,6 +2017,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1954,8 +2027,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove many classifications from an element
      */
-    async bulkRemoveClassificationsOfElementDeprecated(cloud_pk: number, element_uuid: string, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkRemoveClassificationsOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async bulkRemoveClassificationsOfElementDeprecated(cloud_pk: number, element_uuid: string, ifc_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkRemoveClassificationsOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, ifc_pk: ifc_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
     }
 
     /**
@@ -1979,9 +2052,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkRemoveDocumentsOfElementDeprecated.');
         }
 
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkRemoveDocumentsOfElementDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2006,6 +2085,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2015,8 +2095,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove many documents from an element
      */
-    async bulkRemoveDocumentsOfElementDeprecated(cloud_pk: number, element_uuid: string, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkRemoveDocumentsOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async bulkRemoveDocumentsOfElementDeprecated(cloud_pk: number, element_uuid: string, ifc_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkRemoveDocumentsOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, ifc_pk: ifc_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
     }
 
     /**
@@ -2040,9 +2120,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkRemoveElementsFromClassificationDeprecated.');
         }
 
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkRemoveElementsFromClassificationDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2067,6 +2153,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.request_body,
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2076,8 +2163,8 @@ export class IfcApi extends runtime.BaseAPI {
      *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: ifc:write, model:write
      * Remove the classifications from all elements
      */
-    async bulkRemoveElementsFromClassificationDeprecated(cloud_pk: number, ifc_pk: number, model_classification_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.bulkRemoveElementsFromClassificationDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, model_classification_pk: model_classification_pk, project_pk: project_pk }, initOverrides);
+    async bulkRemoveElementsFromClassificationDeprecated(cloud_pk: number, ifc_pk: number, model_classification_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkRemoveElementsFromClassificationDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, model_classification_pk: model_classification_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
     }
 
     /**
@@ -4104,6 +4191,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -4127,6 +4216,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: IfcAccessTokenRequestToJSON(requestParameters.IfcAccessTokenRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4136,8 +4226,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Deleting a token will revoke it.  Required scopes: ifc:token_manage, model:token_manage
      * Delete a token
      */
-    async deleteAccessTokenDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, token: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteAccessTokenDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, token: token }, initOverrides);
+    async deleteAccessTokenDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, token: string, IfcAccessTokenRequest?: IfcAccessTokenRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteAccessTokenDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, token: token, IfcAccessTokenRequest: IfcAccessTokenRequest }, initOverrides);
     }
 
     /**
@@ -4291,6 +4381,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -4314,6 +4406,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: IfcCheckerRequestToJSON(requestParameters.IfcCheckerRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4323,8 +4416,8 @@ export class IfcApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Delete a checker of a model
      */
-    async deleteCheckerDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckerDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async deleteCheckerDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, IfcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, IfcCheckerRequest: IfcCheckerRequest }, initOverrides);
     }
 
     /**
@@ -4356,6 +4449,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -4379,6 +4474,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: CheckerResultRequestToJSON(requestParameters.CheckerResultRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4388,8 +4484,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a CheckerResult  Required scopes: check:write
      * Delete a CheckerResult
      */
-    async deleteCheckerResultDeprecated(checker_pk: number, cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckerResultDeprecatedRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async deleteCheckerResultDeprecated(checker_pk: number, cloud_pk: number, id: number, ifc_pk: number, project_pk: number, CheckerResultRequest?: CheckerResultRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerResultDeprecatedRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, CheckerResultRequest: CheckerResultRequest }, initOverrides);
     }
 
     /**
@@ -4413,9 +4509,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteElementDeprecated.');
         }
 
+        if (requestParameters.ElementRequest === null || requestParameters.ElementRequest === undefined) {
+            throw new runtime.RequiredError('ElementRequest','Required parameter requestParameters.ElementRequest was null or undefined when calling deleteElementDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -4440,6 +4542,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: ElementRequestToJSON(requestParameters.ElementRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4449,8 +4552,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete an element of a model
      */
-    async deleteElementDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteElementDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    async deleteElementDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, uuid: string, ElementRequest: ElementRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteElementDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, uuid: uuid, ElementRequest: ElementRequest }, initOverrides);
     }
 
     /**
@@ -4473,6 +4576,8 @@ export class IfcApi extends runtime.BaseAPI {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -4497,6 +4602,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: ModelRequestToJSON(requestParameters.ModelRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4506,8 +4612,8 @@ export class IfcApi extends runtime.BaseAPI {
      * It will also delete the related document  Required scopes: ifc:write, model:write
      * Delete a model
      */
-    async deleteIfcDeprecated(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteIfcDeprecatedRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+    async deleteIfcDeprecated(cloud_pk: number, id: number, project_pk: number, ModelRequest?: ModelRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteIfcDeprecatedRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, ModelRequest: ModelRequest }, initOverrides);
     }
 
     /**
@@ -4535,6 +4641,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -4558,6 +4666,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: PropertyDefinitionRequestToJSON(requestParameters.PropertyDefinitionRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4567,8 +4676,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a PropertyDefinitions of a model  Required scopes: ifc:write, model:write
      * Delete a PropertyDefinitions of a model
      */
-    async deleteIfcPropertyDefinitionDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteIfcPropertyDefinitionDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async deleteIfcPropertyDefinitionDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, PropertyDefinitionRequest?: PropertyDefinitionRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteIfcPropertyDefinitionDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, PropertyDefinitionRequest: PropertyDefinitionRequest }, initOverrides);
     }
 
     /**
@@ -4592,9 +4701,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteIfcPropertyDeprecated.');
         }
 
+        if (requestParameters.PropertyRequest === null || requestParameters.PropertyRequest === undefined) {
+            throw new runtime.RequiredError('PropertyRequest','Required parameter requestParameters.PropertyRequest was null or undefined when calling deleteIfcPropertyDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -4619,6 +4734,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: PropertyRequestToJSON(requestParameters.PropertyRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4628,8 +4744,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a Property of a model  Required scopes: ifc:write, model:write
      * Delete a Property of a model
      */
-    async deleteIfcPropertyDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteIfcPropertyDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async deleteIfcPropertyDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, PropertyRequest: PropertyRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteIfcPropertyDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, PropertyRequest: PropertyRequest }, initOverrides);
     }
 
     /**
@@ -4653,9 +4769,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteIfcUnitDeprecated.');
         }
 
+        if (requestParameters.UnitRequest === null || requestParameters.UnitRequest === undefined) {
+            throw new runtime.RequiredError('UnitRequest','Required parameter requestParameters.UnitRequest was null or undefined when calling deleteIfcUnitDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -4680,6 +4802,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: UnitRequestToJSON(requestParameters.UnitRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4689,8 +4812,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a Unit of a model  Required scopes: ifc:write, model:write
      * Delete a Unit of a model
      */
-    async deleteIfcUnitDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteIfcUnitDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async deleteIfcUnitDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, UnitRequest: UnitRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteIfcUnitDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, UnitRequest: UnitRequest }, initOverrides);
     }
 
     /**
@@ -4771,9 +4894,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteLayerDeprecated.');
         }
 
+        if (requestParameters.LayerRequest === null || requestParameters.LayerRequest === undefined) {
+            throw new runtime.RequiredError('LayerRequest','Required parameter requestParameters.LayerRequest was null or undefined when calling deleteLayerDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -4798,6 +4927,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: LayerRequestToJSON(requestParameters.LayerRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4807,8 +4937,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining layers are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a layer of a model
      */
-    async deleteLayerDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteLayerDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async deleteLayerDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, LayerRequest: LayerRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteLayerDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, LayerRequest: LayerRequest }, initOverrides);
     }
 
     /**
@@ -4836,6 +4966,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -4859,6 +4991,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: PropertySetRequestToJSON(requestParameters.PropertySetRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4868,8 +5001,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a PropertySet of a model  Required scopes: ifc:write, model:write
      * Delete a PropertySet of a model
      */
-    async deletePropertySetDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deletePropertySetDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async deletePropertySetDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, PropertySetRequest?: PropertySetRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deletePropertySetDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, PropertySetRequest: PropertySetRequest }, initOverrides);
     }
 
     /**
@@ -4893,9 +5026,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteSpaceDeprecated.');
         }
 
+        if (requestParameters.SpaceRequest === null || requestParameters.SpaceRequest === undefined) {
+            throw new runtime.RequiredError('SpaceRequest','Required parameter requestParameters.SpaceRequest was null or undefined when calling deleteSpaceDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -4920,6 +5059,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: SpaceRequestToJSON(requestParameters.SpaceRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -4929,8 +5069,8 @@ export class IfcApi extends runtime.BaseAPI {
      * It will not delete related zones. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a space
      */
-    async deleteSpaceDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteSpaceDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async deleteSpaceDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, SpaceRequest: SpaceRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteSpaceDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, SpaceRequest: SpaceRequest }, initOverrides);
     }
 
     /**
@@ -5080,9 +5220,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling deleteSystemDeprecated.');
         }
 
+        if (requestParameters.SystemRequest === null || requestParameters.SystemRequest === undefined) {
+            throw new runtime.RequiredError('SystemRequest','Required parameter requestParameters.SystemRequest was null or undefined when calling deleteSystemDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -5107,6 +5253,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: SystemRequestToJSON(requestParameters.SystemRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -5116,8 +5263,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining systems are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a system of a model
      */
-    async deleteSystemDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteSystemDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    async deleteSystemDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, uuid: string, SystemRequest: SystemRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteSystemDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, uuid: uuid, SystemRequest: SystemRequest }, initOverrides);
     }
 
     /**
@@ -5141,9 +5288,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteZoneDeprecated.');
         }
 
+        if (requestParameters.ZoneRequest === null || requestParameters.ZoneRequest === undefined) {
+            throw new runtime.RequiredError('ZoneRequest','Required parameter requestParameters.ZoneRequest was null or undefined when calling deleteZoneDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -5168,6 +5321,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: ZoneRequestToJSON(requestParameters.ZoneRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -5177,8 +5331,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining zones are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a zone of a model
      */
-    async deleteZoneDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteZoneDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async deleteZoneDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, ZoneRequest: ZoneRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteZoneDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, ZoneRequest: ZoneRequest }, initOverrides);
     }
 
     /**
@@ -5206,9 +5360,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('zone_pk','Required parameter requestParameters.zone_pk was null or undefined when calling deleteZoneSpaceDeprecated.');
         }
 
+        if (requestParameters.ZoneSpaceRequest === null || requestParameters.ZoneSpaceRequest === undefined) {
+            throw new runtime.RequiredError('ZoneSpaceRequest','Required parameter requestParameters.ZoneSpaceRequest was null or undefined when calling deleteZoneSpaceDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -5233,6 +5393,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: ZoneSpaceRequestToJSON(requestParameters.ZoneSpaceRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -5242,8 +5403,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete a space of a zone
      */
-    async deleteZoneSpaceDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, zone_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteZoneSpaceDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, zone_pk: zone_pk }, initOverrides);
+    async deleteZoneSpaceDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, zone_pk: number, ZoneSpaceRequest: ZoneSpaceRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteZoneSpaceDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, zone_pk: zone_pk, ZoneSpaceRequest: ZoneSpaceRequest }, initOverrides);
     }
 
     /**
@@ -9349,6 +9510,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -9372,6 +9535,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: ClassificationRequestToJSON(requestParameters.ClassificationRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -9381,8 +9545,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The classification will not be deleted  Required scopes: ifc:write, model:write
      * Remove a classification from an element
      */
-    async removeClassificationOfElementDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeClassificationOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async removeClassificationOfElementDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, ClassificationRequest?: ClassificationRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.removeClassificationOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk, ClassificationRequest: ClassificationRequest }, initOverrides);
     }
 
     /**
@@ -9410,9 +9574,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeDocumentOfElementDeprecated.');
         }
 
+        if (requestParameters.DocumentRequest === null || requestParameters.DocumentRequest === undefined) {
+            throw new runtime.RequiredError('DocumentRequest','Required parameter requestParameters.DocumentRequest was null or undefined when calling removeDocumentOfElementDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -9437,6 +9607,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: DocumentRequestToJSON(requestParameters.DocumentRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -9446,8 +9617,8 @@ export class IfcApi extends runtime.BaseAPI {
      * The document will not be deleted  Required scopes: ifc:write, model:write
      * Remove a documents from an element
      */
-    async removeDocumentOfElementDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeDocumentOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async removeDocumentOfElementDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, DocumentRequest: DocumentRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.removeDocumentOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk, DocumentRequest: DocumentRequest }, initOverrides);
     }
 
     /**
@@ -9479,6 +9650,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -9502,6 +9675,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: PropertySetRequestToJSON(requestParameters.PropertySetRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -9511,8 +9685,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete the relation between the element and the property set. Does not delete any object  Required scopes: ifc:write, model:write
      * Remove a PropertySet from an element
      */
-    async removeElementPropertySetDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementPropertySetDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    async removeElementPropertySetDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, PropertySetRequest?: PropertySetRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk, PropertySetRequest: PropertySetRequest }, initOverrides);
     }
 
     /**
@@ -9552,6 +9726,8 @@ export class IfcApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        headerParameters['Content-Type'] = 'application/json';
+
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -9575,6 +9751,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: PropertyDefinitionRequestToJSON(requestParameters.PropertyDefinitionRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -9584,8 +9761,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Delete a Definition to a Property  Required scopes: ifc:write, model:write
      * Delete a Definition to a Property
      */
-    async removeElementPropertySetPropertyDefinitionDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, property_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementPropertySetPropertyDefinitionDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk, property_pk: property_pk, propertyset_pk: propertyset_pk }, initOverrides);
+    async removeElementPropertySetPropertyDefinitionDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, property_pk: number, propertyset_pk: number, PropertyDefinitionRequest?: PropertyDefinitionRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetPropertyDefinitionDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk, property_pk: property_pk, propertyset_pk: propertyset_pk, PropertyDefinitionRequest: PropertyDefinitionRequest }, initOverrides);
     }
 
     /**
@@ -9625,9 +9802,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
         }
 
+        if (requestParameters.UnitRequest === null || requestParameters.UnitRequest === undefined) {
+            throw new runtime.RequiredError('UnitRequest','Required parameter requestParameters.UnitRequest was null or undefined when calling removeElementPropertySetPropertyDefinitionUnitDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -9652,6 +9835,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: UnitRequestToJSON(requestParameters.UnitRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -9661,8 +9845,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Remove a Unit from a Definition  Required scopes: ifc:write, model:write
      * Remove a Unit from a Definition
      */
-    async removeElementPropertySetPropertyDefinitionUnitDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, property_pk: number, propertydefinition_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementPropertySetPropertyDefinitionUnitDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk, property_pk: property_pk, propertydefinition_pk: propertydefinition_pk, propertyset_pk: propertyset_pk }, initOverrides);
+    async removeElementPropertySetPropertyDefinitionUnitDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, property_pk: number, propertydefinition_pk: number, propertyset_pk: number, UnitRequest: UnitRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetPropertyDefinitionUnitDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk, property_pk: property_pk, propertydefinition_pk: propertydefinition_pk, propertyset_pk: propertyset_pk, UnitRequest: UnitRequest }, initOverrides);
     }
 
     /**
@@ -9694,9 +9878,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('propertyset_pk','Required parameter requestParameters.propertyset_pk was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
         }
 
+        if (requestParameters.PropertyRequest === null || requestParameters.PropertyRequest === undefined) {
+            throw new runtime.RequiredError('PropertyRequest','Required parameter requestParameters.PropertyRequest was null or undefined when calling removeElementPropertySetPropertyDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -9721,6 +9911,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: PropertyRequestToJSON(requestParameters.PropertyRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -9730,8 +9921,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Remove a property from a PropertySet  Required scopes: ifc:write, model:write
      * Remove a property from a PropertySet
      */
-    async removeElementPropertySetPropertyDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, propertyset_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementPropertySetPropertyDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk, propertyset_pk: propertyset_pk }, initOverrides);
+    async removeElementPropertySetPropertyDeprecated(cloud_pk: number, element_uuid: string, id: number, ifc_pk: number, project_pk: number, propertyset_pk: number, PropertyRequest: PropertyRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementPropertySetPropertyDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, ifc_pk: ifc_pk, project_pk: project_pk, propertyset_pk: propertyset_pk, PropertyRequest: PropertyRequest }, initOverrides);
     }
 
     /**
@@ -9759,9 +9950,15 @@ export class IfcApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('uuid','Required parameter requestParameters.uuid was null or undefined when calling removeElementsFromClassificationDeprecated.');
         }
 
+        if (requestParameters.ElementRequest === null || requestParameters.ElementRequest === undefined) {
+            throw new runtime.RequiredError('ElementRequest','Required parameter requestParameters.ElementRequest was null or undefined when calling removeElementsFromClassificationDeprecated.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -9786,6 +9983,7 @@ export class IfcApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: ElementRequestToJSON(requestParameters.ElementRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -9795,8 +9993,8 @@ export class IfcApi extends runtime.BaseAPI {
      * Remove the classification from all elements. No element nor classification will be deleted  Required scopes: ifc:write, model:write
      * Remove the classification from all elements
      */
-    async removeElementsFromClassificationDeprecated(cloud_pk: number, ifc_pk: number, model_classification_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
-        await this.removeElementsFromClassificationDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, model_classification_pk: model_classification_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    async removeElementsFromClassificationDeprecated(cloud_pk: number, ifc_pk: number, model_classification_pk: number, project_pk: number, uuid: string, ElementRequest: ElementRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.removeElementsFromClassificationDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, model_classification_pk: model_classification_pk, project_pk: project_pk, uuid: uuid, ElementRequest: ElementRequest }, initOverrides);
     }
 
     /**

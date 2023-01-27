@@ -34,6 +34,7 @@ export interface CreateWebHookRequest {
 export interface DeleteWebHookRequest {
     cloud_pk: number;
     id: number;
+    WebHookRequest: WebHookRequest;
 }
 
 export interface GetWebHookRequest {
@@ -132,9 +133,15 @@ export class WebhookApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteWebHook.');
         }
 
+        if (requestParameters.WebHookRequest === null || requestParameters.WebHookRequest === undefined) {
+            throw new runtime.RequiredError('WebHookRequest','Required parameter requestParameters.WebHookRequest was null or undefined when calling deleteWebHook.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -159,6 +166,7 @@ export class WebhookApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: WebHookRequestToJSON(requestParameters.WebHookRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -168,8 +176,8 @@ export class WebhookApi extends runtime.BaseAPI {
      * Delete a webhook  Required scopes: webhook:manage
      * Delete a webhook
      */
-    async deleteWebHook(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteWebHookRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
+    async deleteWebHook(cloud_pk: number, id: number, WebHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteWebHookRaw({ cloud_pk: cloud_pk, id: id, WebHookRequest: WebHookRequest }, initOverrides);
     }
 
     /**
