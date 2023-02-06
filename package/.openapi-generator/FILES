@@ -8,6 +8,7 @@ src/apis/ModelApi.ts
 src/apis/SsoApi.ts
 src/apis/WebhookApi.ts
 src/apis/index.ts
+src/models/Auth.ts
 src/models/BcfProject.ts
 src/models/BcfProjectRequest.ts
 src/models/Building.ts
@@ -208,6 +209,7 @@ src/models/RulesetRequest.ts
 src/models/SelectUserRequest.ts
 src/models/SelfBcfUser.ts
 src/models/SelfUser.ts
+src/models/ShortUser.ts
 src/models/SimpleElement.ts
 src/models/Size.ts
 src/models/Snapshot.ts
@@ -236,6 +238,7 @@ src/models/User.ts
 src/models/UserInvitation.ts
 src/models/UserProject.ts
 src/models/UserProjectIdRequest.ts
+src/models/Version.ts
 src/models/ViewSetupHints.ts
 src/models/ViewSetupHintsRequest.ts
 src/models/Viewpoint.ts

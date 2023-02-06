@@ -121,12 +121,6 @@ export interface Model {
      * @type {string}
      * @memberof Model
      */
-    readonly bvh_tree_file: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Model
-     */
     readonly preview_file: string | null;
     /**
      * DEPRECATED: Use 'preview_file' instead.
@@ -261,7 +255,6 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'systems_file': json['systems_file'],
         'map_file': json['map_file'],
         'gltf_file': json['gltf_file'],
-        'bvh_tree_file': json['bvh_tree_file'],
         'preview_file': json['preview_file'],
         'viewer_360_file': json['viewer_360_file'],
         'xkt_file': json['xkt_file'],

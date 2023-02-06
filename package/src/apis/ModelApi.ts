@@ -1217,8 +1217,6 @@ export interface UpdateModelFilesRequest {
     systems_file?: Blob | null;
     map_file?: Blob | null;
     gltf_file?: Blob | null;
-    gltf_with_openings_file?: Blob | null;
-    bvh_tree_file?: Blob | null;
     preview_file?: Blob | null;
     xkt_file?: Blob | null;
 }
@@ -9904,10 +9902,6 @@ export class ModelApi extends runtime.BaseAPI {
         useForm = canConsumeForm;
         // use FormData to transmit files using content-type "multipart/form-data"
         useForm = canConsumeForm;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        useForm = canConsumeForm;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        useForm = canConsumeForm;
         if (useForm) {
             formParams = new FormData();
         } else {
@@ -9928,14 +9922,6 @@ export class ModelApi extends runtime.BaseAPI {
 
         if (requestParameters.gltf_file !== undefined) {
             formParams.append('gltf_file', requestParameters.gltf_file as any);
-        }
-
-        if (requestParameters.gltf_with_openings_file !== undefined) {
-            formParams.append('gltf_with_openings_file', requestParameters.gltf_with_openings_file as any);
-        }
-
-        if (requestParameters.bvh_tree_file !== undefined) {
-            formParams.append('bvh_tree_file', requestParameters.bvh_tree_file as any);
         }
 
         if (requestParameters.preview_file !== undefined) {
@@ -9961,8 +9947,8 @@ export class ModelApi extends runtime.BaseAPI {
      * This route does not accept JSON, only files as x-www-form-urlencoded  Required scopes: ifc:write, model:write
      * Update models file (gltf, svg, structure, etc)
      */
-    async updateModelFiles(cloud_pk: number, id: number, project_pk: number, structure_file?: Blob | null, systems_file?: Blob | null, map_file?: Blob | null, gltf_file?: Blob | null, gltf_with_openings_file?: Blob | null, bvh_tree_file?: Blob | null, preview_file?: Blob | null, xkt_file?: Blob | null, initOverrides?: RequestInit): Promise<ModelFiles> {
-        const response = await this.updateModelFilesRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, structure_file: structure_file, systems_file: systems_file, map_file: map_file, gltf_file: gltf_file, gltf_with_openings_file: gltf_with_openings_file, bvh_tree_file: bvh_tree_file, preview_file: preview_file, xkt_file: xkt_file }, initOverrides);
+    async updateModelFiles(cloud_pk: number, id: number, project_pk: number, structure_file?: Blob | null, systems_file?: Blob | null, map_file?: Blob | null, gltf_file?: Blob | null, preview_file?: Blob | null, xkt_file?: Blob | null, initOverrides?: RequestInit): Promise<ModelFiles> {
+        const response = await this.updateModelFilesRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, structure_file: structure_file, systems_file: systems_file, map_file: map_file, gltf_file: gltf_file, preview_file: preview_file, xkt_file: xkt_file }, initOverrides);
         return await response.value();
     }
 

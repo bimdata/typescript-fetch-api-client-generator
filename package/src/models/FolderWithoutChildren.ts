@@ -20,11 +20,11 @@ import {
     FolderGroupPermissionToJSON,
 } from './FolderGroupPermission';
 import {
-    User,
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-} from './User';
+    ShortUser,
+    ShortUserFromJSON,
+    ShortUserFromJSONTyped,
+    ShortUserToJSON,
+} from './ShortUser';
 
 /**
  * 
@@ -76,10 +76,10 @@ export interface FolderWithoutChildren {
     readonly updated_at: Date;
     /**
      * 
-     * @type {User}
+     * @type {ShortUser}
      * @memberof FolderWithoutChildren
      */
-    readonly created_by: User | null;
+    readonly created_by: ShortUser | null;
     /**
      * 
      * @type {Array<FolderGroupPermission>}
@@ -135,7 +135,7 @@ export function FolderWithoutChildrenFromJSONTyped(json: any, ignoreDiscriminato
         'name': json['name'],
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
-        'created_by': UserFromJSON(json['created_by']),
+        'created_by': ShortUserFromJSON(json['created_by']),
         'groups_permissions': ((json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'user_permission': json['user_permission'],

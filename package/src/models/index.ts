@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+export * from './Auth';
 export * from './BcfProject';
 export * from './BcfProjectRequest';
 export * from './Building';
@@ -200,6 +201,7 @@ export * from './RulesetRequest';
 export * from './SelectUserRequest';
 export * from './SelfBcfUser';
 export * from './SelfUser';
+export * from './ShortUser';
 export * from './SimpleElement';
 export * from './Size';
 export * from './Snapshot';
@@ -228,6 +230,7 @@ export * from './User';
 export * from './UserInvitation';
 export * from './UserProject';
 export * from './UserProjectIdRequest';
+export * from './Version';
 export * from './ViewSetupHints';
 export * from './ViewSetupHintsRequest';
 export * from './Viewpoint';

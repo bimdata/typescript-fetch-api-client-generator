@@ -48,18 +48,6 @@ export interface ModelFiles {
      * @type {string}
      * @memberof ModelFiles
      */
-    gltf_with_openings_file?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelFiles
-     */
-    bvh_tree_file?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ModelFiles
-     */
     preview_file?: string | null;
     /**
      * 
@@ -83,8 +71,6 @@ export function ModelFilesFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'systems_file': !exists(json, 'systems_file') ? undefined : json['systems_file'],
         'map_file': !exists(json, 'map_file') ? undefined : json['map_file'],
         'gltf_file': !exists(json, 'gltf_file') ? undefined : json['gltf_file'],
-        'gltf_with_openings_file': !exists(json, 'gltf_with_openings_file') ? undefined : json['gltf_with_openings_file'],
-        'bvh_tree_file': !exists(json, 'bvh_tree_file') ? undefined : json['bvh_tree_file'],
         'preview_file': !exists(json, 'preview_file') ? undefined : json['preview_file'],
         'xkt_file': !exists(json, 'xkt_file') ? undefined : json['xkt_file'],
     };
@@ -103,8 +89,6 @@ export function ModelFilesToJSON(value?: ModelFiles | null): any {
         'systems_file': value.systems_file,
         'map_file': value.map_file,
         'gltf_file': value.gltf_file,
-        'gltf_with_openings_file': value.gltf_with_openings_file,
-        'bvh_tree_file': value.bvh_tree_file,
         'preview_file': value.preview_file,
         'xkt_file': value.xkt_file,
     };

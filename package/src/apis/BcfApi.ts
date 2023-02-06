@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    Auth,
+    AuthFromJSON,
+    AuthToJSON,
     BcfProject,
     BcfProjectFromJSON,
     BcfProjectToJSON,
@@ -114,6 +117,9 @@ import {
     TopicTypeRequest,
     TopicTypeRequestFromJSON,
     TopicTypeRequestToJSON,
+    Version,
+    VersionFromJSON,
+    VersionToJSON,
     Viewpoint,
     ViewpointFromJSON,
     ViewpointToJSON,
@@ -1802,6 +1808,52 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
+     * oauth2_dynamic_client_reg_url is not supported, http_basic_supported is always set to false, 
+     * Retrieve Authentication Information
+     */
+    async getAuthRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Auth>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/auth`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(AuthFromJSON));
+    }
+
+    /**
+     * oauth2_dynamic_client_reg_url is not supported, http_basic_supported is always set to false, 
+     * Retrieve Authentication Information
+     */
+    async getAuth(initOverrides?: RequestInit): Promise<Array<Auth>> {
+        const response = await this.getAuthRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve a BCF project  Required scopes: bcf:read
      * Retrieve a BCF project
      */
@@ -2624,6 +2676,52 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async getUser(initOverrides?: RequestInit): Promise<SelfBcfUser> {
         const response = await this.getUserRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Spoiler: it\'s only v2.1
+     * Retrieve all supported BCF versions by this API
+     */
+    async getVersionsRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Version>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/versions`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VersionFromJSON));
+    }
+
+    /**
+     * Spoiler: it\'s only v2.1
+     * Retrieve all supported BCF versions by this API
+     */
+    async getVersions(initOverrides?: RequestInit): Promise<Array<Version>> {
+        const response = await this.getVersionsRaw(initOverrides);
         return await response.value();
     }
 

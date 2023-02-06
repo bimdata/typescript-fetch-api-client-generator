@@ -14,17 +14,17 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    ShortUser,
+    ShortUserFromJSON,
+    ShortUserFromJSONTyped,
+    ShortUserToJSON,
+} from './ShortUser';
+import {
     Tag,
     TagFromJSON,
     TagFromJSONTyped,
     TagToJSON,
 } from './Tag';
-import {
-    User,
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-} from './User';
 
 /**
  * 
@@ -46,16 +46,10 @@ export interface RecursiveFolderChildren {
     readonly parent_id: number | null;
     /**
      * 
-     * @type {User}
+     * @type {ShortUser}
      * @memberof RecursiveFolderChildren
      */
-    created_by?: User | null;
-    /**
-     * 
-     * @type {User}
-     * @memberof RecursiveFolderChildren
-     */
-    creator?: User | null;
+    created_by?: ShortUser | null;
     /**
      * DEPRECATED: Use 'nature' instead. Values can be 'Folder', 'Document' or 'Ifc'. It is usefull to parse the tree and discriminate folders and files
      * @type {string}
@@ -229,8 +223,7 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
         
         'id': json['id'],
         'parent_id': json['parent_id'],
-        'created_by': !exists(json, 'created_by') ? undefined : UserFromJSON(json['created_by']),
-        'creator': !exists(json, 'creator') ? undefined : UserFromJSON(json['creator']),
+        'created_by': !exists(json, 'created_by') ? undefined : ShortUserFromJSON(json['created_by']),
         'type': json['type'],
         'nature': json['nature'],
         'model_type': json['model_type'],
@@ -262,8 +255,7 @@ export function RecursiveFolderChildrenToJSON(value?: RecursiveFolderChildren | 
     return {
         
         'id': value.id,
-        'created_by': UserToJSON(value.created_by),
-        'creator': UserToJSON(value.creator),
+        'created_by': ShortUserToJSON(value.created_by),
         'name': value.name,
         'created_at': (value.created_at.toISOString()),
         'updated_at': (value.updated_at.toISOString()),
