@@ -55,6 +55,12 @@ export interface ModelFiles {
      * @memberof ModelFiles
      */
     xkt_file?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ModelFiles
+     */
+    binary_2d_file?: string | null;
 }
 
 export function ModelFilesFromJSON(json: any): ModelFiles {
@@ -73,6 +79,7 @@ export function ModelFilesFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'gltf_file': !exists(json, 'gltf_file') ? undefined : json['gltf_file'],
         'preview_file': !exists(json, 'preview_file') ? undefined : json['preview_file'],
         'xkt_file': !exists(json, 'xkt_file') ? undefined : json['xkt_file'],
+        'binary_2d_file': !exists(json, 'binary_2d_file') ? undefined : json['binary_2d_file'],
     };
 }
 
@@ -91,6 +98,7 @@ export function ModelFilesToJSON(value?: ModelFiles | null): any {
         'gltf_file': value.gltf_file,
         'preview_file': value.preview_file,
         'xkt_file': value.xkt_file,
+        'binary_2d_file': value.binary_2d_file,
     };
 }
 

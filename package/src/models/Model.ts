@@ -136,6 +136,12 @@ export interface Model {
     readonly xkt_file: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof Model
+     */
+    readonly binary_2d_file: string | null;
+    /**
+     * 
      * @type {number}
      * @memberof Model
      */
@@ -258,6 +264,7 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'preview_file': json['preview_file'],
         'viewer_360_file': json['viewer_360_file'],
         'xkt_file': json['xkt_file'],
+        'binary_2d_file': json['binary_2d_file'],
         'project_id': json['project_id'],
         'world_position': !exists(json, 'world_position') ? undefined : json['world_position'],
         'size_ratio': !exists(json, 'size_ratio') ? undefined : json['size_ratio'],

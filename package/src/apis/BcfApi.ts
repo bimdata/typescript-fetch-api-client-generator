@@ -313,6 +313,14 @@ export interface GetFullTopicsRequest {
     models?: Array<number>;
 }
 
+export interface GetRelatedTopicsRequest {
+    guid: string;
+    projects_pk: number;
+    format?: string;
+    ifcs?: Array<number>;
+    models?: Array<number>;
+}
+
 export interface GetSelectionsRequest {
     guid: string;
     projects_pk: number;
@@ -328,6 +336,14 @@ export interface GetSnapshotRequest {
 export interface GetTopicRequest {
     guid: string;
     projects_pk: number;
+}
+
+export interface GetTopicDocumentReferencesRequest {
+    guid: string;
+    projects_pk: number;
+    format?: string;
+    ifcs?: Array<number>;
+    models?: Array<number>;
 }
 
 export interface GetTopicViewpointsRequest {
@@ -2344,6 +2360,72 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
+     * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
+     * Get all related topics
+     */
+    async getRelatedTopicsRaw(requestParameters: GetRelatedTopicsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<string>>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getRelatedTopics.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getRelatedTopics.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.format !== undefined) {
+            queryParameters['format'] = requestParameters.format;
+        }
+
+        if (requestParameters.ifcs) {
+            queryParameters['ifcs'] = requestParameters.ifcs;
+        }
+
+        if (requestParameters.models) {
+            queryParameters['models'] = requestParameters.models;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}/related_topics`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
+     * Get all related topics
+     */
+    async getRelatedTopics(guid: string, projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<string>> {
+        const response = await this.getRelatedTopicsRaw({ guid: guid, projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve all selections of a viewpoint  Required scopes: bcf:read
      * Retrieve all selections of a viewpoint
      */
@@ -2510,6 +2592,72 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async getTopic(guid: string, projects_pk: number, initOverrides?: RequestInit): Promise<Topic> {
         const response = await this.getTopicRaw({ guid: guid, projects_pk: projects_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
+     * Get all related documents
+     */
+    async getTopicDocumentReferencesRaw(requestParameters: GetTopicDocumentReferencesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<string>>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getTopicDocumentReferences.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getTopicDocumentReferences.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.format !== undefined) {
+            queryParameters['format'] = requestParameters.format;
+        }
+
+        if (requestParameters.ifcs) {
+            queryParameters['ifcs'] = requestParameters.ifcs;
+        }
+
+        if (requestParameters.models) {
+            queryParameters['models'] = requestParameters.models;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}/document_references`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
+     * Get all related documents
+     */
+    async getTopicDocumentReferences(guid: string, projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<string>> {
+        const response = await this.getTopicDocumentReferencesRaw({ guid: guid, projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
 

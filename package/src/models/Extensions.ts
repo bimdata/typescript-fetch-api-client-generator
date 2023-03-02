@@ -67,6 +67,30 @@ export interface Extensions {
      * @memberof Extensions
      */
     topic_status_colors: Array<string>;
+    /**
+     * Snippet are not yet supported. This field will always be null.
+     * @type {Array<string>}
+     * @memberof Extensions
+     */
+    readonly snippet_type: Array<string> | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Extensions
+     */
+    readonly project_actions: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Extensions
+     */
+    readonly topic_actions: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Extensions
+     */
+    readonly comment_actions: Array<string>;
 }
 
 export function ExtensionsFromJSON(json: any): Extensions {
@@ -87,6 +111,10 @@ export function ExtensionsFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'user_id_type': json['user_id_type'],
         'priority_colors': json['priority_colors'],
         'topic_status_colors': json['topic_status_colors'],
+        'snippet_type': json['snippet_type'],
+        'project_actions': json['project_actions'],
+        'topic_actions': json['topic_actions'],
+        'comment_actions': json['comment_actions'],
     };
 }
 
