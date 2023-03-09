@@ -18,17 +18,10 @@ import {
     Invitation,
     InvitationFromJSON,
     InvitationToJSON,
-    SelectUserRequest,
-    SelectUserRequestFromJSON,
-    SelectUserRequestToJSON,
 } from '../models';
 
 export interface AcceptInvitationRequest {
     id: number;
-}
-
-export interface DeleteUserRequest {
-    SelectUserRequest: SelectUserRequest;
 }
 
 export interface DenyInvitationRequest {
@@ -101,16 +94,10 @@ export class SsoApi extends runtime.BaseAPI {
      * Delete the user and all clouds where the user is alone
      * Delete user from BIMData
      */
-    async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.SelectUserRequest === null || requestParameters.SelectUserRequest === undefined) {
-            throw new runtime.RequiredError('SelectUserRequest','Required parameter requestParameters.SelectUserRequest was null or undefined when calling deleteUser.');
-        }
-
+    async deleteUserRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -135,7 +122,6 @@ export class SsoApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: SelectUserRequestToJSON(requestParameters.SelectUserRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -145,8 +131,8 @@ export class SsoApi extends runtime.BaseAPI {
      * Delete the user and all clouds where the user is alone
      * Delete user from BIMData
      */
-    async deleteUser(SelectUserRequest: SelectUserRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteUserRaw({ SelectUserRequest: SelectUserRequest }, initOverrides);
+    async deleteUser(initOverrides?: RequestInit): Promise<void> {
+        await this.deleteUserRaw(initOverrides);
     }
 
     /**

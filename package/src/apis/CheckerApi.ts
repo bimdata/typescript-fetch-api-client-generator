@@ -121,7 +121,6 @@ export interface DeleteCheckerRequest {
     id: number;
     model_pk: number;
     project_pk: number;
-    IfcCheckerRequest?: IfcCheckerRequest;
 }
 
 export interface DeleteCheckerResultRequest {
@@ -130,14 +129,12 @@ export interface DeleteCheckerResultRequest {
     id: number;
     model_pk: number;
     project_pk: number;
-    CheckerResultRequest?: CheckerResultRequest;
 }
 
 export interface DeleteCheckplanRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    CheckPlanRequest: CheckPlanRequest;
 }
 
 export interface DeleteRuleRequest {
@@ -146,7 +143,6 @@ export interface DeleteRuleRequest {
     id: number;
     project_pk: number;
     ruleset_pk: number;
-    RuleRequest: RuleRequest;
 }
 
 export interface DeleteRuleComponentRequest {
@@ -156,7 +152,6 @@ export interface DeleteRuleComponentRequest {
     project_pk: number;
     rule_pk: number;
     ruleset_pk: number;
-    RuleComponentRequest?: RuleComponentRequest;
 }
 
 export interface DeleteRulesetRequest {
@@ -164,7 +159,6 @@ export interface DeleteRulesetRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    RulesetRequest: RulesetRequest;
 }
 
 export interface GetCheckerRequest {
@@ -730,8 +724,6 @@ export class CheckerApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json';
-
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -755,7 +747,6 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: IfcCheckerRequestToJSON(requestParameters.IfcCheckerRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -765,8 +756,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
      * Delete a checker of a model
      */
-    async deleteChecker(cloud_pk: number, id: number, model_pk: number, project_pk: number, IfcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, IfcCheckerRequest: IfcCheckerRequest }, initOverrides);
+    async deleteChecker(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -798,8 +789,6 @@ export class CheckerApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json';
-
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -823,7 +812,6 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: CheckerResultRequestToJSON(requestParameters.CheckerResultRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -833,8 +821,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a CheckerResult  Required scopes: check:write
      * Delete a CheckerResult
      */
-    async deleteCheckerResult(checker_pk: number, cloud_pk: number, id: number, model_pk: number, project_pk: number, CheckerResultRequest?: CheckerResultRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckerResultRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, CheckerResultRequest: CheckerResultRequest }, initOverrides);
+    async deleteCheckerResult(checker_pk: number, cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckerResultRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -854,15 +842,9 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteCheckplan.');
         }
 
-        if (requestParameters.CheckPlanRequest === null || requestParameters.CheckPlanRequest === undefined) {
-            throw new runtime.RequiredError('CheckPlanRequest','Required parameter requestParameters.CheckPlanRequest was null or undefined when calling deleteCheckplan.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -887,7 +869,6 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: CheckPlanRequestToJSON(requestParameters.CheckPlanRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -897,8 +878,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Checkplan  Required scopes: check:write
      * Delete a Checkplan
      */
-    async deleteCheckplan(cloud_pk: number, id: number, project_pk: number, CheckPlanRequest: CheckPlanRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckplanRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, CheckPlanRequest: CheckPlanRequest }, initOverrides);
+    async deleteCheckplan(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCheckplanRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -926,15 +907,9 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('ruleset_pk','Required parameter requestParameters.ruleset_pk was null or undefined when calling deleteRule.');
         }
 
-        if (requestParameters.RuleRequest === null || requestParameters.RuleRequest === undefined) {
-            throw new runtime.RequiredError('RuleRequest','Required parameter requestParameters.RuleRequest was null or undefined when calling deleteRule.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -959,7 +934,6 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: RuleRequestToJSON(requestParameters.RuleRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -969,8 +943,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Rule  Required scopes: check:write
      * Delete a Rule
      */
-    async deleteRule(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, ruleset_pk: number, RuleRequest: RuleRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteRuleRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, ruleset_pk: ruleset_pk, RuleRequest: RuleRequest }, initOverrides);
+    async deleteRule(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, ruleset_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteRuleRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, ruleset_pk: ruleset_pk }, initOverrides);
     }
 
     /**
@@ -1006,8 +980,6 @@ export class CheckerApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json';
-
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -1031,7 +1003,6 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: RuleComponentRequestToJSON(requestParameters.RuleComponentRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1041,8 +1012,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a RuleComponent  Required scopes: check:write
      * Delete a RuleComponent
      */
-    async deleteRuleComponent(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, rule_pk: number, ruleset_pk: number, RuleComponentRequest?: RuleComponentRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteRuleComponentRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, rule_pk: rule_pk, ruleset_pk: ruleset_pk, RuleComponentRequest: RuleComponentRequest }, initOverrides);
+    async deleteRuleComponent(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, rule_pk: number, ruleset_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteRuleComponentRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, rule_pk: rule_pk, ruleset_pk: ruleset_pk }, initOverrides);
     }
 
     /**
@@ -1066,15 +1037,9 @@ export class CheckerApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteRuleset.');
         }
 
-        if (requestParameters.RulesetRequest === null || requestParameters.RulesetRequest === undefined) {
-            throw new runtime.RequiredError('RulesetRequest','Required parameter requestParameters.RulesetRequest was null or undefined when calling deleteRuleset.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1099,7 +1064,6 @@ export class CheckerApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: RulesetRequestToJSON(requestParameters.RulesetRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1109,8 +1073,8 @@ export class CheckerApi extends runtime.BaseAPI {
      * Delete a Ruleset  Required scopes: check:write
      * Delete a Ruleset
      */
-    async deleteRuleset(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, RulesetRequest: RulesetRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteRulesetRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk, RulesetRequest: RulesetRequest }, initOverrides);
+    async deleteRuleset(check_plan_pk: number, cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteRulesetRaw({ check_plan_pk: check_plan_pk, cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**

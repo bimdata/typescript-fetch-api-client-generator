@@ -39,9 +39,6 @@ import {
     Document,
     DocumentFromJSON,
     DocumentToJSON,
-    DocumentRequest,
-    DocumentRequestFromJSON,
-    DocumentRequestToJSON,
     Folder,
     FolderFromJSON,
     FolderToJSON,
@@ -214,14 +211,12 @@ export interface AddGroupMemberRequest {
 export interface CancelCloudUserInvitationRequest {
     cloud_pk: number;
     id: number;
-    CloudInvitationRequest: CloudInvitationRequest;
 }
 
 export interface CancelProjectUserInvitationRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    ProjectInvitationRequest: ProjectInvitationRequest;
 }
 
 export interface CheckAccessRequest {
@@ -330,19 +325,16 @@ export interface DeleteAllDocumentHistoryRequest {
     cloud_pk: number;
     document_pk: number;
     project_pk: number;
-    DocumentRequest: DocumentRequest;
 }
 
 export interface DeleteClassificationRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    ClassificationRequest?: ClassificationRequest;
 }
 
 export interface DeleteCloudRequest {
     id: number;
-    CloudRequest: CloudRequest;
 }
 
 export interface DeleteCloudUserRequest {
@@ -354,7 +346,6 @@ export interface DeleteDocumentRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    DocumentRequest: DocumentRequest;
 }
 
 export interface DeleteDocumentTagRequest {
@@ -362,14 +353,12 @@ export interface DeleteDocumentTagRequest {
     document_pk: number;
     id: number;
     project_pk: number;
-    DocumentRequest: DocumentRequest;
 }
 
 export interface DeleteFolderRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    FolderWithoutChildrenRequest: FolderWithoutChildrenRequest;
 }
 
 export interface DeleteGroupMemberRequest {
@@ -377,27 +366,23 @@ export interface DeleteGroupMemberRequest {
     group_pk: number;
     id: number;
     project_pk: number;
-    GroupRequest: GroupRequest;
 }
 
 export interface DeleteManageGroupRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    GroupRequest: GroupRequest;
 }
 
 export interface DeleteProjectRequest {
     cloud_pk: number;
     id: number;
-    ProjectRequest: ProjectRequest;
 }
 
 export interface DeleteProjectAccessTokenRequest {
     cloud_pk: number;
     project_pk: number;
     token: string;
-    ProjectAccessTokenRequest: ProjectAccessTokenRequest;
 }
 
 export interface DeleteProjectUserRequest {
@@ -410,7 +395,6 @@ export interface DeleteTagRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    TagRequest: TagRequest;
 }
 
 export interface DeleteValidationRequest {
@@ -419,7 +403,6 @@ export interface DeleteValidationRequest {
     id: number;
     project_pk: number;
     visa_pk: number;
-    VisaValidationRequest: VisaValidationRequest;
 }
 
 export interface DeleteVisaRequest {
@@ -427,7 +410,6 @@ export interface DeleteVisaRequest {
     document_pk: number;
     id: number;
     project_pk: number;
-    VisaRequest?: VisaRequest;
 }
 
 export interface DeleteVisaCommentRequest {
@@ -436,7 +418,6 @@ export interface DeleteVisaCommentRequest {
     id: number;
     project_pk: number;
     visa_pk: number;
-    VisaCommentRequest?: VisaCommentRequest;
 }
 
 export interface DenyUserInvitationRequest {
@@ -1088,15 +1069,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling cancelCloudUserInvitation.');
         }
 
-        if (requestParameters.CloudInvitationRequest === null || requestParameters.CloudInvitationRequest === undefined) {
-            throw new runtime.RequiredError('CloudInvitationRequest','Required parameter requestParameters.CloudInvitationRequest was null or undefined when calling cancelCloudUserInvitation.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1121,7 +1096,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: CloudInvitationRequestToJSON(requestParameters.CloudInvitationRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1131,8 +1105,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Cancel a pending invitation  Required scopes: org:manage
      * Cancel a pending invitation
      */
-    async cancelCloudUserInvitation(cloud_pk: number, id: number, CloudInvitationRequest: CloudInvitationRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.cancelCloudUserInvitationRaw({ cloud_pk: cloud_pk, id: id, CloudInvitationRequest: CloudInvitationRequest }, initOverrides);
+    async cancelCloudUserInvitation(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.cancelCloudUserInvitationRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
     }
 
     /**
@@ -1152,15 +1126,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling cancelProjectUserInvitation.');
         }
 
-        if (requestParameters.ProjectInvitationRequest === null || requestParameters.ProjectInvitationRequest === undefined) {
-            throw new runtime.RequiredError('ProjectInvitationRequest','Required parameter requestParameters.ProjectInvitationRequest was null or undefined when calling cancelProjectUserInvitation.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -1185,7 +1153,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: ProjectInvitationRequestToJSON(requestParameters.ProjectInvitationRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -1195,8 +1162,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Cancel a pending invitation  Required scopes: org:manage
      * Cancel a pending invitation
      */
-    async cancelProjectUserInvitation(cloud_pk: number, id: number, project_pk: number, ProjectInvitationRequest: ProjectInvitationRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.cancelProjectUserInvitationRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, ProjectInvitationRequest: ProjectInvitationRequest }, initOverrides);
+    async cancelProjectUserInvitation(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.cancelProjectUserInvitationRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -1589,7 +1556,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'BFX\', \'OBJ\', \'DAE\', \'DXF\', \'GLTF\', \'DWG\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'DAE\', \'GLTF\', \'IFC\', \'BFX\', \'POINT_CLOUD\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1696,7 +1663,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'BFX\', \'OBJ\', \'DAE\', \'DXF\', \'GLTF\', \'DWG\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'DAE\', \'GLTF\', \'IFC\', \'BFX\', \'POINT_CLOUD\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -2217,15 +2184,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteAllDocumentHistory.');
         }
 
-        if (requestParameters.DocumentRequest === null || requestParameters.DocumentRequest === undefined) {
-            throw new runtime.RequiredError('DocumentRequest','Required parameter requestParameters.DocumentRequest was null or undefined when calling deleteAllDocumentHistory.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2250,7 +2211,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: DocumentRequestToJSON(requestParameters.DocumentRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2260,8 +2220,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete the document from the head version and all its history  Required scopes: document:write
      * Delete all document history
      */
-    async deleteAllDocumentHistory(cloud_pk: number, document_pk: number, project_pk: number, DocumentRequest: DocumentRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteAllDocumentHistoryRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk, DocumentRequest: DocumentRequest }, initOverrides);
+    async deleteAllDocumentHistory(cloud_pk: number, document_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteAllDocumentHistoryRaw({ cloud_pk: cloud_pk, document_pk: document_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2284,8 +2244,6 @@ export class CollaborationApi extends runtime.BaseAPI {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2310,7 +2268,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: ClassificationRequestToJSON(requestParameters.ClassificationRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2320,8 +2277,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * All elements having this classification will lose it  Required scopes: ifc:write, model:write
      * Delete a classification
      */
-    async deleteClassification(cloud_pk: number, id: number, project_pk: number, ClassificationRequest?: ClassificationRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteClassificationRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, ClassificationRequest: ClassificationRequest }, initOverrides);
+    async deleteClassification(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteClassificationRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2333,15 +2290,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCloud.');
         }
 
-        if (requestParameters.CloudRequest === null || requestParameters.CloudRequest === undefined) {
-            throw new runtime.RequiredError('CloudRequest','Required parameter requestParameters.CloudRequest was null or undefined when calling deleteCloud.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2366,7 +2317,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: CloudRequestToJSON(requestParameters.CloudRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2376,8 +2326,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a cloud  Required scopes: cloud:manage
      * Delete a cloud
      */
-    async deleteCloud(id: number, CloudRequest: CloudRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCloudRaw({ id: id, CloudRequest: CloudRequest }, initOverrides);
+    async deleteCloud(id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteCloudRaw({ id: id }, initOverrides);
     }
 
     /**
@@ -2450,15 +2400,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteDocument.');
         }
 
-        if (requestParameters.DocumentRequest === null || requestParameters.DocumentRequest === undefined) {
-            throw new runtime.RequiredError('DocumentRequest','Required parameter requestParameters.DocumentRequest was null or undefined when calling deleteDocument.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2483,7 +2427,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: DocumentRequestToJSON(requestParameters.DocumentRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2493,8 +2436,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete the document  Required scopes: document:write
      * Delete the document
      */
-    async deleteDocument(cloud_pk: number, id: number, project_pk: number, DocumentRequest: DocumentRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteDocumentRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, DocumentRequest: DocumentRequest }, initOverrides);
+    async deleteDocument(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteDocumentRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2518,15 +2461,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteDocumentTag.');
         }
 
-        if (requestParameters.DocumentRequest === null || requestParameters.DocumentRequest === undefined) {
-            throw new runtime.RequiredError('DocumentRequest','Required parameter requestParameters.DocumentRequest was null or undefined when calling deleteDocumentTag.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2551,7 +2488,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: DocumentRequestToJSON(requestParameters.DocumentRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2561,8 +2497,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a tag from a document  Required scopes: document:write
      * Delete a tag from a document
      */
-    async deleteDocumentTag(cloud_pk: number, document_pk: number, id: number, project_pk: number, DocumentRequest: DocumentRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteDocumentTagRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, DocumentRequest: DocumentRequest }, initOverrides);
+    async deleteDocumentTag(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteDocumentTagRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2582,15 +2518,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteFolder.');
         }
 
-        if (requestParameters.FolderWithoutChildrenRequest === null || requestParameters.FolderWithoutChildrenRequest === undefined) {
-            throw new runtime.RequiredError('FolderWithoutChildrenRequest','Required parameter requestParameters.FolderWithoutChildrenRequest was null or undefined when calling deleteFolder.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2615,7 +2545,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: FolderWithoutChildrenRequestToJSON(requestParameters.FolderWithoutChildrenRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2625,8 +2554,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * All files and subfolders will be deleted too. If folder is a project\'s root folder, only children are deleted  Required scopes: document:write
      * Delete a folder
      */
-    async deleteFolder(cloud_pk: number, id: number, project_pk: number, FolderWithoutChildrenRequest: FolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteFolderRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, FolderWithoutChildrenRequest: FolderWithoutChildrenRequest }, initOverrides);
+    async deleteFolder(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteFolderRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2650,15 +2579,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteGroupMember.');
         }
 
-        if (requestParameters.GroupRequest === null || requestParameters.GroupRequest === undefined) {
-            throw new runtime.RequiredError('GroupRequest','Required parameter requestParameters.GroupRequest was null or undefined when calling deleteGroupMember.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2683,7 +2606,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: GroupRequestToJSON(requestParameters.GroupRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2693,8 +2615,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a userproject from a group. Id is the userproject_id. Must be an admin of the project.  Required scopes: org:manage
      * Delete a user from a group
      */
-    async deleteGroupMember(cloud_pk: number, group_pk: number, id: number, project_pk: number, GroupRequest: GroupRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteGroupMemberRaw({ cloud_pk: cloud_pk, group_pk: group_pk, id: id, project_pk: project_pk, GroupRequest: GroupRequest }, initOverrides);
+    async deleteGroupMember(cloud_pk: number, group_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteGroupMemberRaw({ cloud_pk: cloud_pk, group_pk: group_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2714,15 +2636,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteManageGroup.');
         }
 
-        if (requestParameters.GroupRequest === null || requestParameters.GroupRequest === undefined) {
-            throw new runtime.RequiredError('GroupRequest','Required parameter requestParameters.GroupRequest was null or undefined when calling deleteManageGroup.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2747,7 +2663,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: GroupRequestToJSON(requestParameters.GroupRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2757,8 +2672,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete a group. Must be an admin of the project  Required scopes: org:manage
      * Delete a group
      */
-    async deleteManageGroup(cloud_pk: number, id: number, project_pk: number, GroupRequest: GroupRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteManageGroupRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, GroupRequest: GroupRequest }, initOverrides);
+    async deleteManageGroup(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteManageGroupRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -2774,15 +2689,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteProject.');
         }
 
-        if (requestParameters.ProjectRequest === null || requestParameters.ProjectRequest === undefined) {
-            throw new runtime.RequiredError('ProjectRequest','Required parameter requestParameters.ProjectRequest was null or undefined when calling deleteProject.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2807,7 +2716,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: ProjectRequestToJSON(requestParameters.ProjectRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2817,8 +2725,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * It can take a long time to respond because we may need to delete all properties of all elements of all models in the project  Required scopes: org:manage
      * Delete a project
      */
-    async deleteProject(cloud_pk: number, id: number, ProjectRequest: ProjectRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteProjectRaw({ cloud_pk: cloud_pk, id: id, ProjectRequest: ProjectRequest }, initOverrides);
+    async deleteProject(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteProjectRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
     }
 
     /**
@@ -2838,15 +2746,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling deleteProjectAccessToken.');
         }
 
-        if (requestParameters.ProjectAccessTokenRequest === null || requestParameters.ProjectAccessTokenRequest === undefined) {
-            throw new runtime.RequiredError('ProjectAccessTokenRequest','Required parameter requestParameters.ProjectAccessTokenRequest was null or undefined when calling deleteProjectAccessToken.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2871,7 +2773,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: ProjectAccessTokenRequestToJSON(requestParameters.ProjectAccessTokenRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -2881,8 +2782,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Deleting a token will revoke it  Required scopes: org:manage
      * Delete a token
      */
-    async deleteProjectAccessToken(cloud_pk: number, project_pk: number, token: string, ProjectAccessTokenRequest: ProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteProjectAccessTokenRaw({ cloud_pk: cloud_pk, project_pk: project_pk, token: token, ProjectAccessTokenRequest: ProjectAccessTokenRequest }, initOverrides);
+    async deleteProjectAccessToken(cloud_pk: number, project_pk: number, token: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteProjectAccessTokenRaw({ cloud_pk: cloud_pk, project_pk: project_pk, token: token }, initOverrides);
     }
 
     /**
@@ -2959,15 +2860,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteTag.');
         }
 
-        if (requestParameters.TagRequest === null || requestParameters.TagRequest === undefined) {
-            throw new runtime.RequiredError('TagRequest','Required parameter requestParameters.TagRequest was null or undefined when calling deleteTag.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -2992,7 +2887,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: TagRequestToJSON(requestParameters.TagRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -3002,8 +2896,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Delete the tag  Required scopes: org:manage
      * Delete the tag
      */
-    async deleteTag(cloud_pk: number, id: number, project_pk: number, TagRequest: TagRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteTagRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, TagRequest: TagRequest }, initOverrides);
+    async deleteTag(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteTagRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -3031,15 +2925,9 @@ export class CollaborationApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('visa_pk','Required parameter requestParameters.visa_pk was null or undefined when calling deleteValidation.');
         }
 
-        if (requestParameters.VisaValidationRequest === null || requestParameters.VisaValidationRequest === undefined) {
-            throw new runtime.RequiredError('VisaValidationRequest','Required parameter requestParameters.VisaValidationRequest was null or undefined when calling deleteValidation.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -3064,7 +2952,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: VisaValidationRequestToJSON(requestParameters.VisaValidationRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -3074,8 +2961,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a validation  Required scopes: document:write
      * Remove a validation
      */
-    async deleteValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, VisaValidationRequest: VisaValidationRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk, VisaValidationRequest: VisaValidationRequest }, initOverrides);
+    async deleteValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
     }
 
     /**
@@ -3103,8 +2990,6 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json';
-
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -3128,7 +3013,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: VisaRequestToJSON(requestParameters.VisaRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -3138,8 +3022,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a visa  Required scopes: document:write
      * Remove a visa
      */
-    async deleteVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, VisaRequest?: VisaRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteVisaRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, VisaRequest: VisaRequest }, initOverrides);
+    async deleteVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteVisaRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -3171,8 +3055,6 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json';
-
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
         }
@@ -3196,7 +3078,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: VisaCommentRequestToJSON(requestParameters.VisaCommentRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -3206,8 +3087,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Remove a comment  Required scopes: document:write
      * Remove a comment
      */
-    async deleteVisaComment(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, VisaCommentRequest?: VisaCommentRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteVisaCommentRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk, VisaCommentRequest: VisaCommentRequest }, initOverrides);
+    async deleteVisaComment(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteVisaCommentRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
     }
 
     /**

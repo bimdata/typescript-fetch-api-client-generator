@@ -42,7 +42,6 @@ src/models/DetailedExtensions.ts
 src/models/Direction.ts
 src/models/DirectionRequest.ts
 src/models/Document.ts
-src/models/DocumentRequest.ts
 src/models/DocumentWithElementList.ts
 src/models/Element.ts
 src/models/ElementClassificationRelation.ts
@@ -206,7 +205,6 @@ src/models/RuleComponentRequest.ts
 src/models/RuleRequest.ts
 src/models/Ruleset.ts
 src/models/RulesetRequest.ts
-src/models/SelectUserRequest.ts
 src/models/SelfBcfUser.ts
 src/models/SelfUser.ts
 src/models/ShortUser.ts
