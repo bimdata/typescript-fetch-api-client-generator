@@ -28,6 +28,12 @@ import {
 export interface Pin {
     /**
      * 
+     * @type {number}
+     * @memberof Pin
+     */
+    readonly id: number;
+    /**
+     * 
      * @type {string}
      * @memberof Pin
      */
@@ -56,6 +62,7 @@ export function PinFromJSONTyped(json: any, ignoreDiscriminator: boolean): Pin {
     }
     return {
         
+        'id': json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
         'point': PointFromJSON(json['point']),

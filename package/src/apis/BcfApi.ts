@@ -300,17 +300,17 @@ export interface GetFullTopicRequest {
 export interface GetFullTopicsRequest {
     projects_pk: number;
     format?: string;
-    ifcs?: Array<number>;
+    ifcs?: string;
     img_format?: GetFullTopicsImgFormatEnum;
-    models?: Array<number>;
+    models?: string;
 }
 
 export interface GetRelatedTopicsRequest {
     guid: string;
     projects_pk: number;
     format?: string;
-    ifcs?: Array<number>;
-    models?: Array<number>;
+    ifcs?: string;
+    models?: string;
 }
 
 export interface GetSelectionsRequest {
@@ -334,8 +334,8 @@ export interface GetTopicDocumentReferencesRequest {
     guid: string;
     projects_pk: number;
     format?: string;
-    ifcs?: Array<number>;
-    models?: Array<number>;
+    ifcs?: string;
+    models?: string;
 }
 
 export interface GetTopicViewpointsRequest {
@@ -347,8 +347,8 @@ export interface GetTopicViewpointsRequest {
 export interface GetTopicsRequest {
     projects_pk: number;
     format?: string;
-    ifcs?: Array<number>;
-    models?: Array<number>;
+    ifcs?: string;
+    models?: string;
 }
 
 export interface GetViewpointRequest {
@@ -2252,7 +2252,7 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['format'] = requestParameters.format;
         }
 
-        if (requestParameters.ifcs) {
+        if (requestParameters.ifcs !== undefined) {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
 
@@ -2260,7 +2260,7 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['img_format'] = requestParameters.img_format;
         }
 
-        if (requestParameters.models) {
+        if (requestParameters.models !== undefined) {
             queryParameters['models'] = requestParameters.models;
         }
 
@@ -2298,7 +2298,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It responds with all topics, their viewpoints and their comments  Required scopes: bcf:read
      * Retrieve all full topics
      */
-    async getFullTopics(projects_pk: number, format?: string, ifcs?: Array<number>, img_format?: GetFullTopicsImgFormatEnum, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<FullTopic>> {
+    async getFullTopics(projects_pk: number, format?: string, ifcs?: string, img_format?: GetFullTopicsImgFormatEnum, models?: string, initOverrides?: RequestInit): Promise<Array<FullTopic>> {
         const response = await this.getFullTopicsRaw({ projects_pk: projects_pk, format: format, ifcs: ifcs, img_format: img_format, models: models }, initOverrides);
         return await response.value();
     }
@@ -2322,11 +2322,11 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['format'] = requestParameters.format;
         }
 
-        if (requestParameters.ifcs) {
+        if (requestParameters.ifcs !== undefined) {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
 
-        if (requestParameters.models) {
+        if (requestParameters.models !== undefined) {
             queryParameters['models'] = requestParameters.models;
         }
 
@@ -2364,7 +2364,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
      * Get all related topics
      */
-    async getRelatedTopics(guid: string, projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<string>> {
+    async getRelatedTopics(guid: string, projects_pk: number, format?: string, ifcs?: string, models?: string, initOverrides?: RequestInit): Promise<Array<string>> {
         const response = await this.getRelatedTopicsRaw({ guid: guid, projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
@@ -2558,11 +2558,11 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['format'] = requestParameters.format;
         }
 
-        if (requestParameters.ifcs) {
+        if (requestParameters.ifcs !== undefined) {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
 
-        if (requestParameters.models) {
+        if (requestParameters.models !== undefined) {
             queryParameters['models'] = requestParameters.models;
         }
 
@@ -2600,7 +2600,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
      * Get all related documents
      */
-    async getTopicDocumentReferences(guid: string, projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<string>> {
+    async getTopicDocumentReferences(guid: string, projects_pk: number, format?: string, ifcs?: string, models?: string, initOverrides?: RequestInit): Promise<Array<string>> {
         const response = await this.getTopicDocumentReferencesRaw({ guid: guid, projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
@@ -2678,11 +2678,11 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['format'] = requestParameters.format;
         }
 
-        if (requestParameters.ifcs) {
+        if (requestParameters.ifcs !== undefined) {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
 
-        if (requestParameters.models) {
+        if (requestParameters.models !== undefined) {
             queryParameters['models'] = requestParameters.models;
         }
 
@@ -2720,7 +2720,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all topics  Required scopes: bcf:read
      * Retrieve all topics
      */
-    async getTopics(projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<Topic>> {
+    async getTopics(projects_pk: number, format?: string, ifcs?: string, models?: string, initOverrides?: RequestInit): Promise<Array<Topic>> {
         const response = await this.getTopicsRaw({ projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
