@@ -85,6 +85,7 @@ export * from './ModelErrors';
 export * from './ModelErrorsRequest';
 export * from './ModelFiles';
 export * from './ModelRequest';
+export * from './ModelSerializerWithoutChildren';
 export * from './ModelWithPositioningPlan';
 export * from './Organization';
 export * from './OrganizationRequest';

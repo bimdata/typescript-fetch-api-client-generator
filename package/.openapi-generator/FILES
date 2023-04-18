@@ -93,6 +93,7 @@ src/models/ModelErrors.ts
 src/models/ModelErrorsRequest.ts
 src/models/ModelFiles.ts
 src/models/ModelRequest.ts
+src/models/ModelSerializerWithoutChildren.ts
 src/models/ModelWithPositioningPlan.ts
 src/models/Organization.ts
 src/models/OrganizationRequest.ts

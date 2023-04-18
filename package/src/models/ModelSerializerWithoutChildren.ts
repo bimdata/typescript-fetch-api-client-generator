@@ -20,12 +20,6 @@ import {
     DocumentToJSON,
 } from './Document';
 import {
-    ModelSerializerWithoutChildren,
-    ModelSerializerWithoutChildrenFromJSON,
-    ModelSerializerWithoutChildrenFromJSONTyped,
-    ModelSerializerWithoutChildrenToJSON,
-} from './ModelSerializerWithoutChildren';
-import {
     User,
     UserFromJSON,
     UserFromJSONTyped,
@@ -35,190 +29,184 @@ import {
 /**
  * 
  * @export
- * @interface Model
+ * @interface ModelSerializerWithoutChildren
  */
-export interface Model {
+export interface ModelSerializerWithoutChildren {
     /**
      * 
      * @type {number}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly id: number;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     name?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
-    readonly type: ModelTypeEnum;
+    readonly type: ModelSerializerWithoutChildrenTypeEnum;
     /**
      * 
      * @type {User}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly creator: User | null;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly status: string;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
-    source?: ModelSourceEnum;
+    source?: ModelSerializerWithoutChildrenSourceEnum;
     /**
      * 
      * @type {Date}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly created_at: Date;
     /**
      * 
      * @type {Date}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly updated_at: Date;
     /**
      * 
      * @type {number}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly document_id: number | null;
     /**
      * 
      * @type {Document}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly document: Document | null;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly structure_file: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly systems_file: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly map_file: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly gltf_file: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly preview_file: string | null;
     /**
      * DEPRECATED: Use 'preview_file' instead.
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly viewer_360_file: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly xkt_file: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly binary_2d_file: string | null;
     /**
      * 
      * @type {number}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly project_id: number | null;
     /**
      * [x,y,z] array of the position of the local_placement in world coordinates
      * @type {Array<number>}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     world_position?: Array<number> | null;
     /**
      * How many meters a unit represents
      * @type {number}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     size_ratio?: number | null;
     /**
      * List of errors that happened during IFC processing
      * @type {Array<string>}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly errors: Array<string> | null;
     /**
      * List of warnings that happened during IFC processing
      * @type {Array<string>}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly warnings: Array<string> | null;
     /**
      * 
      * @type {boolean}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     archived?: boolean;
     /**
      * This field is only for information. Updating it won't impact the export.
      * @type {string}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     version?: string | null;
     /**
      * This field is only for information. Updating it won't impact the export.
      * @type {Array<Array<number>>}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     north_vector?: Array<Array<number>> | null;
     /**
      * This is the angle in clockwise degree to apply on the 2D to optimise the horizontality of objects. This field is only for information. Updating it won't impact the export.
      * @type {number}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     recommanded_2d_angle?: number | null;
     /**
      * The page number of the related pdf
      * @type {number}
-     * @memberof Model
+     * @memberof ModelSerializerWithoutChildren
      */
     readonly page_number: number | null;
-    /**
-     * Contains additional pages of a pdf
-     * @type {Array<ModelSerializerWithoutChildren>}
-     * @memberof Model
-     */
-    readonly children: Array<ModelSerializerWithoutChildren>;
 }
 
 /**
 * @export
 * @enum {string}
 */
-export enum ModelTypeEnum {
+export enum ModelSerializerWithoutChildrenTypeEnum {
     Ifc = 'IFC',
     Dwg = 'DWG',
     Dxf = 'DXF',
@@ -235,7 +223,7 @@ export enum ModelTypeEnum {
 * @export
 * @enum {string}
 */
-export enum ModelSourceEnum {
+export enum ModelSerializerWithoutChildrenSourceEnum {
     Upload = 'UPLOAD',
     Split = 'SPLIT',
     Merge = 'MERGE',
@@ -243,11 +231,11 @@ export enum ModelSourceEnum {
     Optimized = 'OPTIMIZED'
 }
 
-export function ModelFromJSON(json: any): Model {
-    return ModelFromJSONTyped(json, false);
+export function ModelSerializerWithoutChildrenFromJSON(json: any): ModelSerializerWithoutChildren {
+    return ModelSerializerWithoutChildrenFromJSONTyped(json, false);
 }
 
-export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Model {
+export function ModelSerializerWithoutChildrenFromJSONTyped(json: any, ignoreDiscriminator: boolean): ModelSerializerWithoutChildren {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -281,11 +269,10 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'north_vector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
         'recommanded_2d_angle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
         'page_number': json['page_number'],
-        'children': ((json['children'] as Array<any>).map(ModelSerializerWithoutChildrenFromJSON)),
     };
 }
 
-export function ModelToJSON(value?: Model | null): any {
+export function ModelSerializerWithoutChildrenToJSON(value?: ModelSerializerWithoutChildren | null): any {
     if (value === undefined) {
         return undefined;
     }

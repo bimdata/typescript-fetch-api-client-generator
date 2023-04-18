@@ -21,12 +21,6 @@ import { exists, mapValues } from '../runtime';
 export interface Size {
     /**
      * 
-     * @type {boolean}
-     * @memberof Size
-     */
-    readonly is_unsupervised: boolean;
-    /**
-     * 
      * @type {string}
      * @memberof Size
      */
@@ -113,7 +107,6 @@ export function SizeFromJSONTyped(json: any, ignoreDiscriminator: boolean): Size
     }
     return {
         
-        'is_unsupervised': json['is_unsupervised'],
         'managed_by': json['managed_by'],
         'role': json['role'],
         'total_size': json['total_size'],
