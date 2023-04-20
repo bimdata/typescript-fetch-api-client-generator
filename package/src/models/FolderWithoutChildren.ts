@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    FolderGroupPermission,
-    FolderGroupPermissionFromJSON,
-    FolderGroupPermissionFromJSONTyped,
-    FolderGroupPermissionToJSON,
-} from './FolderGroupPermission';
+    GroupFolderRead,
+    GroupFolderReadFromJSON,
+    GroupFolderReadFromJSONTyped,
+    GroupFolderReadToJSON,
+} from './GroupFolderRead';
 import {
     ShortUser,
     ShortUserFromJSON,
@@ -81,11 +81,11 @@ export interface FolderWithoutChildren {
      */
     readonly created_by: ShortUser | null;
     /**
-     * 
-     * @type {Array<FolderGroupPermission>}
+     * List of group permissions
+     * @type {Array<GroupFolderRead>}
      * @memberof FolderWithoutChildren
      */
-    readonly groups_permissions: Array<FolderGroupPermission>;
+    readonly groups_permissions: Array<GroupFolderRead>;
     /**
      * Permission for a Folder
      * @type {number}
@@ -136,7 +136,7 @@ export function FolderWithoutChildrenFromJSONTyped(json: any, ignoreDiscriminato
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
         'created_by': ShortUserFromJSON(json['created_by']),
-        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(FolderGroupPermissionFromJSON)),
+        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'user_permission': json['user_permission'],
     };

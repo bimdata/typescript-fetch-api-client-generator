@@ -23,49 +23,50 @@ import {
 /**
  * 
  * @export
- * @interface FolderGroupPermission
+ * @interface GroupFolderRead
  */
-export interface FolderGroupPermission {
+export interface GroupFolderRead {
     /**
      * 
      * @type {Group}
-     * @memberof FolderGroupPermission
+     * @memberof GroupFolderRead
      */
     group: Group;
     /**
-     * Group's permission for a folder
+     * 
      * @type {number}
-     * @memberof FolderGroupPermission
+     * @memberof GroupFolderRead
      */
-    permission?: FolderGroupPermissionPermissionEnum;
+    permission: GroupFolderReadPermissionEnum;
 }
 
 /**
 * @export
 * @enum {string}
 */
-export enum FolderGroupPermissionPermissionEnum {
+export enum GroupFolderReadPermissionEnum {
     NUMBER_1 = 1,
     NUMBER_50 = 50,
-    NUMBER_100 = 100
+    NUMBER_100 = 100,
+    NUMBER_null = null
 }
 
-export function FolderGroupPermissionFromJSON(json: any): FolderGroupPermission {
-    return FolderGroupPermissionFromJSONTyped(json, false);
+export function GroupFolderReadFromJSON(json: any): GroupFolderRead {
+    return GroupFolderReadFromJSONTyped(json, false);
 }
 
-export function FolderGroupPermissionFromJSONTyped(json: any, ignoreDiscriminator: boolean): FolderGroupPermission {
+export function GroupFolderReadFromJSONTyped(json: any, ignoreDiscriminator: boolean): GroupFolderRead {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'group': GroupFromJSON(json['group']),
-        'permission': !exists(json, 'permission') ? undefined : json['permission'],
+        'permission': json['permission'],
     };
 }
 
-export function FolderGroupPermissionToJSON(value?: FolderGroupPermission | null): any {
+export function GroupFolderReadToJSON(value?: GroupFolderRead | null): any {
     if (value === undefined) {
         return undefined;
     }

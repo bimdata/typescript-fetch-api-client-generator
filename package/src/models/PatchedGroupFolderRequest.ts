@@ -20,11 +20,17 @@ import { exists, mapValues } from '../runtime';
  */
 export interface PatchedGroupFolderRequest {
     /**
-     * Group's permission for a folder
+     * 
      * @type {number}
      * @memberof PatchedGroupFolderRequest
      */
     permission?: PatchedGroupFolderRequestPermissionEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PatchedGroupFolderRequest
+     */
+    propagate?: boolean;
 }
 
 /**
@@ -34,7 +40,8 @@ export interface PatchedGroupFolderRequest {
 export enum PatchedGroupFolderRequestPermissionEnum {
     NUMBER_1 = 1,
     NUMBER_50 = 50,
-    NUMBER_100 = 100
+    NUMBER_100 = 100,
+    NUMBER_null = null
 }
 
 export function PatchedGroupFolderRequestFromJSON(json: any): PatchedGroupFolderRequest {
@@ -48,6 +55,7 @@ export function PatchedGroupFolderRequestFromJSONTyped(json: any, ignoreDiscrimi
     return {
         
         'permission': !exists(json, 'permission') ? undefined : json['permission'],
+        'propagate': !exists(json, 'propagate') ? undefined : json['propagate'],
     };
 }
 
@@ -61,6 +69,7 @@ export function PatchedGroupFolderRequestToJSON(value?: PatchedGroupFolderReques
     return {
         
         'permission': value.permission,
+        'propagate': value.propagate,
     };
 }
 

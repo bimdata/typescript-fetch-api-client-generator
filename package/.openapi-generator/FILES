@@ -52,8 +52,6 @@ src/models/Extensions.ts
 src/models/Feature.ts
 src/models/FeatureRequest.ts
 src/models/Folder.ts
-src/models/FolderGroupPermission.ts
-src/models/FolderGroupPermissionRequest.ts
 src/models/FolderTree.ts
 src/models/FolderUserProject.ts
 src/models/FolderWithoutChildren.ts
@@ -62,6 +60,7 @@ src/models/FullTopic.ts
 src/models/FullTopicRequest.ts
 src/models/Group.ts
 src/models/GroupFolder.ts
+src/models/GroupFolderRead.ts
 src/models/GroupRequest.ts
 src/models/IfcAccessToken.ts
 src/models/IfcAccessTokenRequest.ts

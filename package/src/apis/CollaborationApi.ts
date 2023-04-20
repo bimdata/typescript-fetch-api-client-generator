@@ -1556,7 +1556,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'POINT_CLOUD\', \'DXF\', \'OBJ\', \'IFC\', \'GLTF\', \'DAE\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DAE\', \'GLTF\', \'IFC\', \'OBJ\', \'DWG\', \'BFX\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1663,7 +1663,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'POINT_CLOUD\', \'DXF\', \'OBJ\', \'IFC\', \'GLTF\', \'DAE\', \'BFX\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DAE\', \'GLTF\', \'IFC\', \'OBJ\', \'DWG\', \'BFX\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -6359,7 +6359,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Update some fields of a folder. Only project admins can update the `default_permission` field.  `default_permission` choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When this route is used, the permission of all children in the folder will be updated unless a child has already been updated with this route. In this case, if the updated permission is the same as the previously modified child\'s, the child will lose its \"independence\" and follow the parent\'s future permission when it is modified again.  Caution: The \'default_permission\' field is not applied to users belonging to one or more groups.   Required scopes: document:write
+     *  Update some fields of a folder. Only project admins can update the `default_permission` field.  `default_permission` choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When propagate is set to True, the permission of all children in the folder will be updated.  Caution: The \'default_permission\' field is not applied to users belonging to one or more groups.   Required scopes: document:write
      * Update some fields of a folder
      */
     async updateFolderRaw(requestParameters: UpdateFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
@@ -6411,7 +6411,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Update some fields of a folder. Only project admins can update the `default_permission` field.  `default_permission` choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When this route is used, the permission of all children in the folder will be updated unless a child has already been updated with this route. In this case, if the updated permission is the same as the previously modified child\'s, the child will lose its \"independence\" and follow the parent\'s future permission when it is modified again.  Caution: The \'default_permission\' field is not applied to users belonging to one or more groups.   Required scopes: document:write
+     *  Update some fields of a folder. Only project admins can update the `default_permission` field.  `default_permission` choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When propagate is set to True, the permission of all children in the folder will be updated.  Caution: The \'default_permission\' field is not applied to users belonging to one or more groups.   Required scopes: document:write
      * Update some fields of a folder
      */
     async updateFolder(cloud_pk: number, id: number, project_pk: number, PatchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
@@ -6420,8 +6420,8 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Update the permission of a group on a folder. Permissions choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When this route is used, the permission of all children in the folder will be updated unless a child has already been updated with this route. In this case, if the updated permission is the same as the previously modified child\'s, the child will lose its \"independence\" and follow the parent\'s future permission when it is modified again.               Required scopes: org:manage
-     * Update the permission of a group on a folder
+     *  Update the permission of a group on a folder. Permissions choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRITE, None: Default value (See the default_permission field of the folder) ``` When propagate is set to True, the permission of all children in the folder will be updated.               Required scopes: org:manage
+     * Update the permission of a group on a folder. When propagate is set to True, the permission of all children in the folder will be updated.
      */
     async updateGroupFolderRaw(requestParameters: UpdateGroupFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<GroupFolder>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
@@ -6476,8 +6476,8 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     *  Update the permission of a group on a folder. Permissions choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When this route is used, the permission of all children in the folder will be updated unless a child has already been updated with this route. In this case, if the updated permission is the same as the previously modified child\'s, the child will lose its \"independence\" and follow the parent\'s future permission when it is modified again.               Required scopes: org:manage
-     * Update the permission of a group on a folder
+     *  Update the permission of a group on a folder. Permissions choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRITE, None: Default value (See the default_permission field of the folder) ``` When propagate is set to True, the permission of all children in the folder will be updated.               Required scopes: org:manage
+     * Update the permission of a group on a folder. When propagate is set to True, the permission of all children in the folder will be updated.
      */
     async updateGroupFolder(cloud_pk: number, folder_pk: number, id: number, project_pk: number, PatchedGroupFolderRequest?: PatchedGroupFolderRequest, initOverrides?: RequestInit): Promise<GroupFolder> {
         const response = await this.updateGroupFolderRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, id: id, project_pk: project_pk, PatchedGroupFolderRequest: PatchedGroupFolderRequest }, initOverrides);

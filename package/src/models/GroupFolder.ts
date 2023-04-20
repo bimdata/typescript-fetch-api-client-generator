@@ -45,11 +45,11 @@ export interface GroupFolder {
      */
     readonly group: Group | null;
     /**
-     * Group's permission for a folder
+     * 
      * @type {number}
      * @memberof GroupFolder
      */
-    permission?: GroupFolderPermissionEnum;
+    permission: GroupFolderPermissionEnum;
 }
 
 /**
@@ -59,7 +59,8 @@ export interface GroupFolder {
 export enum GroupFolderPermissionEnum {
     NUMBER_1 = 1,
     NUMBER_50 = 50,
-    NUMBER_100 = 100
+    NUMBER_100 = 100,
+    NUMBER_null = null
 }
 
 export function GroupFolderFromJSON(json: any): GroupFolder {
@@ -74,7 +75,7 @@ export function GroupFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'folder': FolderWithoutChildrenFromJSON(json['folder']),
         'group': GroupFromJSON(json['group']),
-        'permission': !exists(json, 'permission') ? undefined : json['permission'],
+        'permission': json['permission'],
     };
 }
 
