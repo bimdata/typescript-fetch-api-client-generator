@@ -39,6 +39,9 @@ import {
     Document,
     DocumentFromJSON,
     DocumentToJSON,
+    DocumentPreviewFile,
+    DocumentPreviewFileFromJSON,
+    DocumentPreviewFileToJSON,
     Folder,
     FolderFromJSON,
     FolderToJSON,
@@ -263,7 +266,6 @@ export interface CreateDocumentRequest {
     parent_id?: number | null;
     file_name?: string;
     description?: string | null;
-    size?: number | null;
     model_source?: CreateDocumentModelSourceEnum;
     ifc_source?: CreateDocumentIfcSourceEnum;
     successor_of?: number;
@@ -752,6 +754,13 @@ export interface UpdateManageGroupRequest {
     id: number;
     project_pk: number;
     PatchedGroupRequest?: PatchedGroupRequest;
+}
+
+export interface UpdatePreviewFileRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    office_preview?: Blob;
 }
 
 export interface UpdateProjectRequest {
@@ -1556,7 +1565,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DAE\', \'GLTF\', \'IFC\', \'OBJ\', \'DWG\', \'BFX\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'IFC\', \'DWG\', \'POINT_CLOUD\', \'GLTF\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1635,10 +1644,6 @@ export class CollaborationApi extends runtime.BaseAPI {
             formParams.append('file', requestParameters.file as any);
         }
 
-        if (requestParameters.size !== undefined) {
-            formParams.append('size', requestParameters.size as any);
-        }
-
         if (requestParameters.model_source !== undefined) {
             formParams.append('model_source', requestParameters.model_source as any);
         }
@@ -1663,11 +1668,11 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DAE\', \'GLTF\', \'IFC\', \'OBJ\', \'DWG\', \'BFX\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'IFC\', \'DWG\', \'POINT_CLOUD\', \'GLTF\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, size?: number | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.createDocumentRaw({ cloud_pk: cloud_pk, project_pk: project_pk, name: name, file: file, parent_id: parent_id, file_name: file_name, description: description, size: size, model_source: model_source, ifc_source: ifc_source, successor_of: successor_of }, initOverrides);
+    async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.createDocumentRaw({ cloud_pk: cloud_pk, project_pk: project_pk, name: name, file: file, parent_id: parent_id, file_name: file_name, description: description, model_source: model_source, ifc_source: ifc_source, successor_of: successor_of }, initOverrides);
         return await response.value();
     }
 
@@ -6542,6 +6547,86 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async updateManageGroup(cloud_pk: number, id: number, project_pk: number, PatchedGroupRequest?: PatchedGroupRequest, initOverrides?: RequestInit): Promise<Group> {
         const response = await this.updateManageGroupRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedGroupRequest: PatchedGroupRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update preview of the document  Required scopes: document:write
+     * Update preview of the document
+     */
+    async updatePreviewFileRaw(requestParameters: UpdatePreviewFileRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<DocumentPreviewFile>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updatePreviewFile.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePreviewFile.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updatePreviewFile.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+            { contentType: 'application/x-www-form-urlencoded' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters.office_preview !== undefined) {
+            formParams.append('office_preview', requestParameters.office_preview as any);
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}/preview-file`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: formParams,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentPreviewFileFromJSON(jsonValue));
+    }
+
+    /**
+     * Update preview of the document  Required scopes: document:write
+     * Update preview of the document
+     */
+    async updatePreviewFile(cloud_pk: number, id: number, project_pk: number, office_preview?: Blob, initOverrides?: RequestInit): Promise<DocumentPreviewFile> {
+        const response = await this.updatePreviewFileRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, office_preview: office_preview }, initOverrides);
         return await response.value();
     }
 

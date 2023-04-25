@@ -91,7 +91,7 @@ export interface Document {
      * @type {number}
      * @memberof Document
      */
-    size?: number | null;
+    readonly size: number | null;
     /**
      * 
      * @type {Array<Tag>}
@@ -123,7 +123,7 @@ export interface Document {
      */
     readonly model_id: number | null;
     /**
-     * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, DAE, BFX, POINT_CLOUD
+     * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, POINT_CLOUD
      * @type {string}
      * @memberof Document
      */
@@ -146,6 +146,12 @@ export interface Document {
      * @memberof Document
      */
     readonly is_head_version: boolean;
+    /**
+     * Office files will be converted as pdf to provide a web preview. Supported extensions are .ppt, .pptx, .odp, .xls, .xlsx, .ods, .doc, .docx, .odt
+     * @type {string}
+     * @memberof Document
+     */
+    readonly office_preview: string | null;
 }
 
 /**
@@ -161,8 +167,6 @@ export enum DocumentModelTypeEnum {
     Jpeg = 'JPEG',
     Png = 'PNG',
     Obj = 'OBJ',
-    Dae = 'DAE',
-    Bfx = 'BFX',
     PointCloud = 'POINT_CLOUD',
     Null = 'null'
 }/**
@@ -193,7 +197,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'file_name': !exists(json, 'file_name') ? undefined : json['file_name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'file': json['file'],
-        'size': !exists(json, 'size') ? undefined : json['size'],
+        'size': json['size'],
         'tags': ((json['tags'] as Array<any>).map(TagFromJSON)),
         'visas': ((json['visas'] as Array<any>).map(VisaFromJSON)),
         'created_at': (new Date(json['created_at'])),
@@ -203,6 +207,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'ifc_id': json['ifc_id'],
         'user_permission': json['user_permission'],
         'is_head_version': json['is_head_version'],
+        'office_preview': json['office_preview'],
     };
 }
 
@@ -220,7 +225,6 @@ export function DocumentToJSON(value?: Document | null): any {
         'file_name': value.file_name,
         'description': value.description,
         'file': value.file,
-        'size': value.size,
     };
 }
 

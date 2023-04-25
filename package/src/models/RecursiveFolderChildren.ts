@@ -63,7 +63,7 @@ export interface RecursiveFolderChildren {
      */
     readonly nature: RecursiveFolderChildrenNatureEnum;
     /**
-     * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, DAE, BFX, POINT_CLOUD
+     * Model's type. Values can be IFC, DWG, DXF, GLTF, PDF, JPEG, PNG, OBJ, POINT_CLOUD
      * @type {string}
      * @memberof RecursiveFolderChildren
      */
@@ -189,8 +189,6 @@ export enum RecursiveFolderChildrenModelTypeEnum {
     Jpeg = 'JPEG',
     Png = 'PNG',
     Obj = 'OBJ',
-    Dae = 'DAE',
-    Bfx = 'BFX',
     PointCloud = 'POINT_CLOUD',
     Null = 'null'
 }/**

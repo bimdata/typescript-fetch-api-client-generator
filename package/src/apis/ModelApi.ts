@@ -10786,8 +10786,6 @@ export enum GetModelsStatusEnum {
     * @enum {string}
     */
 export enum GetModelsTypeEnum {
-    Bfx = 'BFX',
-    Dae = 'DAE',
     Dwg = 'DWG',
     Dxf = 'DXF',
     Gltf = 'GLTF',

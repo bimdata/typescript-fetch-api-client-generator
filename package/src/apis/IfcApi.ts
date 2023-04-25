@@ -11585,8 +11585,6 @@ export enum GetIfcsDeprecatedStatusEnum {
     * @enum {string}
     */
 export enum GetIfcsDeprecatedTypeEnum {
-    Bfx = 'BFX',
-    Dae = 'DAE',
     Dwg = 'DWG',
     Dxf = 'DXF',
     Gltf = 'GLTF',

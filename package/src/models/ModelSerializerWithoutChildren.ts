@@ -215,8 +215,6 @@ export enum ModelSerializerWithoutChildrenTypeEnum {
     Jpeg = 'JPEG',
     Png = 'PNG',
     Obj = 'OBJ',
-    Dae = 'DAE',
-    Bfx = 'BFX',
     PointCloud = 'POINT_CLOUD',
     Metabuilding = 'METABUILDING'
 }/**
