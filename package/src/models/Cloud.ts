@@ -85,7 +85,7 @@ export interface Cloud {
      * @type {string}
      * @memberof Cloud
      */
-    readonly creator_app: string;
+    readonly creator_app: string | null;
     /**
      * 
      * @type {boolean}

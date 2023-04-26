@@ -63,6 +63,12 @@ export interface UserProject {
     readonly profile_picture: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof UserProject
+     */
+    readonly sub: string | null;
+    /**
+     * 
      * @type {number}
      * @memberof UserProject
      */
@@ -96,6 +102,7 @@ export function UserProjectFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'firstname': json['firstname'],
         'lastname': json['lastname'],
         'profile_picture': json['profile_picture'],
+        'sub': json['sub'],
         'role': json['role'],
     };
 }

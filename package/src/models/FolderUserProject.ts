@@ -63,6 +63,12 @@ export interface FolderUserProject {
     readonly profile_picture: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof FolderUserProject
+     */
+    readonly sub: string | null;
+    /**
+     * 
      * @type {number}
      * @memberof FolderUserProject
      */
@@ -110,6 +116,7 @@ export function FolderUserProjectFromJSONTyped(json: any, ignoreDiscriminator: b
         'firstname': json['firstname'],
         'lastname': json['lastname'],
         'profile_picture': json['profile_picture'],
+        'sub': json['sub'],
         'role': json['role'],
         'permission': json['permission'],
     };
