@@ -123,6 +123,12 @@ export interface RecursiveFolderChildren {
      */
     file?: string | null;
     /**
+     * 
+     * @type {string}
+     * @memberof RecursiveFolderChildren
+     */
+    office_preview?: string | null;
+    /**
      * DEPRECATED: This field must be present because of legacy constraints but will always be empty. If you want to see group permissions of a folder, see `getFolder`
      * @type {boolean}
      * @memberof RecursiveFolderChildren
@@ -234,6 +240,7 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
         'model_id': json['model_id'],
         'ifc_id': json['ifc_id'],
         'file': !exists(json, 'file') ? undefined : json['file'],
+        'office_preview': !exists(json, 'office_preview') ? undefined : json['office_preview'],
         'groups_permissions': json['groups_permissions'],
         'default_permission': json['default_permission'],
         'user_permission': json['user_permission'],
@@ -261,6 +268,7 @@ export function RecursiveFolderChildrenToJSON(value?: RecursiveFolderChildren | 
         'description': value.description,
         'size': value.size,
         'file': value.file,
+        'office_preview': value.office_preview,
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(RecursiveFolderChildrenToJSON)),
     };
 }
