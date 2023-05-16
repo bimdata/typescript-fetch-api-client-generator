@@ -926,6 +926,9 @@ export interface GetRawElementsRequest {
     cloud_pk: number;
     model_pk: number;
     project_pk: number;
+    classification?: string;
+    classification__notation?: string;
+    type?: string;
 }
 
 export interface GetSimpleElementRequest {
@@ -939,6 +942,9 @@ export interface GetSimpleElementsRequest {
     cloud_pk: number;
     model_pk: number;
     project_pk: number;
+    classification?: string;
+    classification__notation?: string;
+    type?: string;
 }
 
 export interface GetSpaceRequest {
@@ -7508,6 +7514,18 @@ export class ModelApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
+        if (requestParameters.classification !== undefined) {
+            queryParameters['classification'] = requestParameters.classification;
+        }
+
+        if (requestParameters.classification__notation !== undefined) {
+            queryParameters['classification__notation'] = requestParameters.classification__notation;
+        }
+
+        if (requestParameters.type !== undefined) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7542,8 +7560,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Instead of a nested representation, this route respond with a flat structure and indices pointing to related object. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read, model:read
      * Retrieve all elements in a optimized format
      */
-    async getRawElements(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<RawElements> {
-        const response = await this.getRawElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    async getRawElements(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<RawElements> {
+        const response = await this.getRawElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -7628,6 +7646,18 @@ export class ModelApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
+        if (requestParameters.classification !== undefined) {
+            queryParameters['classification'] = requestParameters.classification;
+        }
+
+        if (requestParameters.classification__notation !== undefined) {
+            queryParameters['classification__notation'] = requestParameters.classification__notation;
+        }
+
+        if (requestParameters.type !== undefined) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -7662,8 +7692,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all elements of a model with a simple value representation  Required scopes: ifc:read, model:read
      * Retrieve all elements of a model with a simple value representation
      */
-    async getSimpleElements(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<SimpleElement> {
-        const response = await this.getSimpleElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    async getSimpleElements(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<SimpleElement> {
+        const response = await this.getSimpleElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
         return await response.value();
     }
 
