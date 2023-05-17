@@ -198,6 +198,9 @@ import {
     UnitRequest,
     UnitRequestFromJSON,
     UnitRequestToJSON,
+    XktFile,
+    XktFileFromJSON,
+    XktFileToJSON,
     Zone,
     ZoneFromJSON,
     ZoneToJSON,
@@ -491,6 +494,14 @@ export interface CreateTilesetRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
+}
+
+export interface CreateXktFileRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    version: number;
+    file: Blob;
 }
 
 export interface CreateZoneRequest {
@@ -2187,7 +2198,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Tokens are read_only by default and are valid 1 day  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Create a token for this model
      */
     async createAccessTokenRaw(requestParameters: CreateAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcAccessToken>> {
@@ -2239,7 +2250,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Tokens are read_only by default and are valid 1 day  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Create a token for this model
      */
     async createAccessToken(cloud_pk: number, model_pk: number, project_pk: number, IfcAccessTokenRequest?: IfcAccessTokenRequest, initOverrides?: RequestInit): Promise<IfcAccessToken> {
@@ -3780,6 +3791,98 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * This route does not accept JSON, only files as x-www-form-urlencoded  Required scopes: ifc:write, model:write
+     * Create an xkt file for the model. Overrides existing file with same version
+     */
+    async createXktFileRaw(requestParameters: CreateXktFileRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<XktFile>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createXktFile.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createXktFile.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createXktFile.');
+        }
+
+        if (requestParameters.version === null || requestParameters.version === undefined) {
+            throw new runtime.RequiredError('version','Required parameter requestParameters.version was null or undefined when calling createXktFile.');
+        }
+
+        if (requestParameters.file === null || requestParameters.file === undefined) {
+            throw new runtime.RequiredError('file','Required parameter requestParameters.file was null or undefined when calling createXktFile.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+            { contentType: 'application/x-www-form-urlencoded' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters.version !== undefined) {
+            formParams.append('version', requestParameters.version as any);
+        }
+
+        if (requestParameters.file !== undefined) {
+            formParams.append('file', requestParameters.file as any);
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/xkt-file`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: formParams,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => XktFileFromJSON(jsonValue));
+    }
+
+    /**
+     * This route does not accept JSON, only files as x-www-form-urlencoded  Required scopes: ifc:write, model:write
+     * Create an xkt file for the model. Overrides existing file with same version
+     */
+    async createXktFile(cloud_pk: number, id: number, project_pk: number, version: number, file: Blob, initOverrides?: RequestInit): Promise<XktFile> {
+        const response = await this.createXktFileRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, version: version, file: file }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created zone will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a zone in the model
      */
@@ -3918,7 +4021,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deleting a token will revoke it.  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Delete a token
      */
     async deleteAccessTokenRaw(requestParameters: DeleteAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -3971,7 +4074,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deleting a token will revoke it.  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Delete a token
      */
     async deleteAccessToken(cloud_pk: number, model_pk: number, project_pk: number, token: string, initOverrides?: RequestInit): Promise<void> {
@@ -5092,7 +5195,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve one token created for this model  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve one token created for this model
      */
     async getAccessTokenRaw(requestParameters: GetAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcAccessToken>> {
@@ -5145,7 +5248,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve one token created for this model  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve one token created for this model
      */
     async getAccessToken(cloud_pk: number, model_pk: number, project_pk: number, token: string, initOverrides?: RequestInit): Promise<IfcAccessToken> {
@@ -5154,7 +5257,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all tokens created for this model  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve all tokens created for this model
      */
     async getAccessTokensRaw(requestParameters: GetAccessTokensRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<IfcAccessToken>>> {
@@ -5203,7 +5306,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all tokens created for this model  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Retrieve all tokens created for this model
      */
     async getAccessTokens(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<IfcAccessToken>> {
@@ -9281,7 +9384,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * You can update the expiration date or the read_only field  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Update some fields of a token
      */
     async updateAccessTokenRaw(requestParameters: UpdateAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcAccessToken>> {
@@ -9337,7 +9440,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * You can update the expiration date or the read_only field  Required scopes: ifc:token_manage, model:token_manage
+     * DEPECRATED: Use ProjectAccessToken instead  Required scopes: ifc:token_manage, model:token_manage
      * Update some fields of a token
      */
     async updateAccessToken(cloud_pk: number, model_pk: number, project_pk: number, token: string, PatchedIfcAccessTokenRequest?: PatchedIfcAccessTokenRequest, initOverrides?: RequestInit): Promise<IfcAccessToken> {

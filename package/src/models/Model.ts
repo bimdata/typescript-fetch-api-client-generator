@@ -31,6 +31,12 @@ import {
     UserFromJSONTyped,
     UserToJSON,
 } from './User';
+import {
+    XktFile,
+    XktFileFromJSON,
+    XktFileFromJSONTyped,
+    XktFileToJSON,
+} from './XktFile';
 
 /**
  * 
@@ -135,11 +141,17 @@ export interface Model {
      */
     readonly viewer_360_file: string | null;
     /**
-     * 
+     * DEPRECATED: Use 'xkt_files' instead. This field only respond with xkt v6 files
      * @type {string}
      * @memberof Model
      */
     readonly xkt_file: string | null;
+    /**
+     * 
+     * @type {Array<XktFile>}
+     * @memberof Model
+     */
+    readonly xkt_files: Array<XktFile>;
     /**
      * 
      * @type {string}
@@ -268,6 +280,7 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'preview_file': json['preview_file'],
         'viewer_360_file': json['viewer_360_file'],
         'xkt_file': json['xkt_file'],
+        'xkt_files': ((json['xkt_files'] as Array<any>).map(XktFileFromJSON)),
         'binary_2d_file': json['binary_2d_file'],
         'project_id': json['project_id'],
         'world_position': !exists(json, 'world_position') ? undefined : json['world_position'],

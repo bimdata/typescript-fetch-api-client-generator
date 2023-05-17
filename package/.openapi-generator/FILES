@@ -253,6 +253,7 @@ src/models/VisibilityRequest.ts
 src/models/WebHook.ts
 src/models/WebHookRequest.ts
 src/models/WriteFolderRequest.ts
+src/models/XktFile.ts
 src/models/Zone.ts
 src/models/ZoneRequest.ts
 src/models/ZoneSpace.ts

@@ -245,6 +245,7 @@ export * from './VisibilityRequest';
 export * from './WebHook';
 export * from './WebHookRequest';
 export * from './WriteFolderRequest';
+export * from './XktFile';
 export * from './Zone';
 export * from './ZoneRequest';
 export * from './ZoneSpace';

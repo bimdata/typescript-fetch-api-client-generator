@@ -50,7 +50,7 @@ export interface ModelFiles {
      */
     preview_file?: string | null;
     /**
-     * 
+     * DEPRECATED. xkt file url is now in xkt_files field with its version number
      * @type {string}
      * @memberof ModelFiles
      */
