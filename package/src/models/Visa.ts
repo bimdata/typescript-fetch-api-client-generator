@@ -69,7 +69,9 @@ export interface Visa {
      */
     readonly document_id: number;
     /**
-     * 
+     * * `O` - opened
+     * * `A` - paused
+     * * `C` - closed
      * @type {string}
      * @memberof Visa
      */

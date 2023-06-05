@@ -51,7 +51,16 @@ export interface ModelSerializerWithoutChildren {
      */
     name?: string | null;
     /**
-     * 
+     * * `IFC` - IFC
+     * * `DWG` - DWG
+     * * `DXF` - DXF
+     * * `GLTF` - GLTF
+     * * `PDF` - PDF
+     * * `JPEG` - JPEG
+     * * `PNG` - PNG
+     * * `OBJ` - OBJ
+     * * `POINT_CLOUD` - POINT_CLOUD
+     * * `METABUILDING` - METABUILDING
      * @type {string}
      * @memberof ModelSerializerWithoutChildren
      */
@@ -69,7 +78,11 @@ export interface ModelSerializerWithoutChildren {
      */
     readonly status: string;
     /**
-     * 
+     * * `UPLOAD` - UPLOAD
+     * * `SPLIT` - SPLIT
+     * * `MERGE` - MERGE
+     * * `EXPORT` - EXPORT
+     * * `OPTIMIZED` - OPTIMIZED
      * @type {string}
      * @memberof ModelSerializerWithoutChildren
      */

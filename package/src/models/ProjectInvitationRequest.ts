@@ -32,7 +32,9 @@ export interface ProjectInvitationRequest {
      */
     redirect_uri: string;
     /**
-     * 
+     * * `100` - admin
+     * * `50` - user
+     * * `25` - guest
      * @type {number}
      * @memberof ProjectInvitationRequest
      */

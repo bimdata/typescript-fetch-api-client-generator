@@ -57,7 +57,16 @@ export interface Model {
      */
     name?: string | null;
     /**
-     * 
+     * * `IFC` - IFC
+     * * `DWG` - DWG
+     * * `DXF` - DXF
+     * * `GLTF` - GLTF
+     * * `PDF` - PDF
+     * * `JPEG` - JPEG
+     * * `PNG` - PNG
+     * * `OBJ` - OBJ
+     * * `POINT_CLOUD` - POINT_CLOUD
+     * * `METABUILDING` - METABUILDING
      * @type {string}
      * @memberof Model
      */
@@ -75,7 +84,11 @@ export interface Model {
      */
     readonly status: string;
     /**
-     * 
+     * * `UPLOAD` - UPLOAD
+     * * `SPLIT` - SPLIT
+     * * `MERGE` - MERGE
+     * * `EXPORT` - EXPORT
+     * * `OPTIMIZED` - OPTIMIZED
      * @type {string}
      * @memberof Model
      */

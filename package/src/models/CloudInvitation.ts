@@ -38,7 +38,8 @@ export interface CloudInvitation {
      */
     redirect_uri: string;
     /**
-     * 
+     * * `100` - admin
+     * * `50` - user
      * @type {number}
      * @memberof CloudInvitation
      */

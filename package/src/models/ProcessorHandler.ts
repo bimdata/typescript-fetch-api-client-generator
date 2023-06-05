@@ -32,7 +32,13 @@ export interface ProcessorHandler {
      */
     readonly worker: string;
     /**
-     * 
+     * * `C` - completed
+     * * `D` - deleted
+     * * `P` - pending
+     * * `W` - waiting
+     * * `I` - in process
+     * * `E` - errored
+     * * `X` - won't fix
      * @type {string}
      * @memberof ProcessorHandler
      */

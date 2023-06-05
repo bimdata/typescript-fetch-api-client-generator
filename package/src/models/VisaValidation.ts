@@ -45,7 +45,9 @@ export interface VisaValidation {
      */
     readonly validator: UserProject | null;
     /**
-     * 
+     * * `P` - pending
+     * * `A` - accepted
+     * * `D` - denied
      * @type {string}
      * @memberof VisaValidation
      */

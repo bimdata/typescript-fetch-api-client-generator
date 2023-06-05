@@ -51,12 +51,24 @@ export interface PatchedDocumentRequest {
     file?: Blob;
     /**
      * Define the model.source field if the upload is a Model (IFC, PDF, DWG...)
+     * 
+     * * `UPLOAD` - UPLOAD
+     * * `SPLIT` - SPLIT
+     * * `MERGE` - MERGE
+     * * `EXPORT` - EXPORT
+     * * `OPTIMIZED` - OPTIMIZED
      * @type {string}
      * @memberof PatchedDocumentRequest
      */
     model_source?: PatchedDocumentRequestModelSourceEnum;
     /**
      * DEPRECATED: Use 'model_source' instead. Define the model.source field if the upload is a Model (IFC, PDF, DWG...)
+     * 
+     * * `UPLOAD` - UPLOAD
+     * * `SPLIT` - SPLIT
+     * * `MERGE` - MERGE
+     * * `EXPORT` - EXPORT
+     * * `OPTIMIZED` - OPTIMIZED
      * @type {string}
      * @memberof PatchedDocumentRequest
      */

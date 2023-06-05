@@ -27,6 +27,9 @@ export interface CloudRole {
     cloud: number;
     /**
      * Role of the user in the cloud
+     * 
+     * * `100` - admin
+     * * `50` - user
      * @type {number}
      * @memberof CloudRole
      */

@@ -20,7 +20,8 @@ import { exists, mapValues } from '../runtime';
  */
 export interface PatchedUserCloudUpdateRequest {
     /**
-     * 
+     * * `100` - admin
+     * * `50` - user
      * @type {number}
      * @memberof PatchedUserCloudUpdateRequest
      */

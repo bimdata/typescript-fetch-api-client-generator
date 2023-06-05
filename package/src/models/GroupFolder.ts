@@ -45,7 +45,9 @@ export interface GroupFolder {
      */
     readonly group: Group | null;
     /**
-     * 
+     * * `1` - denied
+     * * `50` - read_only
+     * * `100` - read_write
      * @type {number}
      * @memberof GroupFolder
      */

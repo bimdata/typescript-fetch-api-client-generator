@@ -45,6 +45,9 @@ export interface Invitation {
     cloud_name: string;
     /**
      * Role the user will have when they accept the invitation
+     * 
+     * * `100` - admin
+     * * `50` - user
      * @type {number}
      * @memberof Invitation
      */
@@ -57,6 +60,10 @@ export interface Invitation {
     project_name?: string;
     /**
      * Role the user will have when they accept the invitation
+     * 
+     * * `100` - admin
+     * * `50` - user
+     * * `25` - guest
      * @type {number}
      * @memberof Invitation
      */
@@ -73,6 +80,10 @@ export interface Invitation {
      *         D: Denied
      *         P: Pending
      *         
+     * 
+     * * `A` - accepted
+     * * `D` - denied
+     * * `P` - pending
      * @type {string}
      * @memberof Invitation
      */

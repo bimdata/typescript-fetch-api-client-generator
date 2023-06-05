@@ -26,7 +26,11 @@ export interface PatchedModelRequest {
      */
     name?: string | null;
     /**
-     * 
+     * * `UPLOAD` - UPLOAD
+     * * `SPLIT` - SPLIT
+     * * `MERGE` - MERGE
+     * * `EXPORT` - EXPORT
+     * * `OPTIMIZED` - OPTIMIZED
      * @type {string}
      * @memberof PatchedModelRequest
      */

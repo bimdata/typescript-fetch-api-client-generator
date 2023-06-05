@@ -21,6 +21,10 @@ import { exists, mapValues } from '../runtime';
 export interface PatchedUserProjectUpdateRequest {
     /**
      * User's role in the project
+     * 
+     * * `100` - admin
+     * * `50` - user
+     * * `25` - guest
      * @type {number}
      * @memberof PatchedUserProjectUpdateRequest
      */

@@ -33,6 +33,10 @@ export interface PatchedFolderWithoutChildrenRequest {
     name?: string;
     /**
      * Permission for a Folder
+     * 
+     * * `1` - denied
+     * * `50` - read_only
+     * * `100` - read_write
      * @type {number}
      * @memberof PatchedFolderWithoutChildrenRequest
      */

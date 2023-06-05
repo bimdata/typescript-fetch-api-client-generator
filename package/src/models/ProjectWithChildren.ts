@@ -42,6 +42,13 @@ export interface ProjectWithChildren {
      * @type {string}
      * @memberof ProjectWithChildren
      */
+    description?: string | null;
+    /**
+     * * `A` - active
+     * * `D` - deleted
+     * @type {string}
+     * @memberof ProjectWithChildren
+     */
     status?: ProjectWithChildrenStatusEnum;
     /**
      * Creation date
@@ -97,6 +104,7 @@ export function ProjectWithChildrenFromJSONTyped(json: any, ignoreDiscriminator:
         'id': json['id'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'name': json['name'],
+        'description': !exists(json, 'description') ? undefined : json['description'],
         'status': !exists(json, 'status') ? undefined : json['status'],
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
@@ -117,6 +125,7 @@ export function ProjectWithChildrenToJSON(value?: ProjectWithChildren | null): a
         
         'logo': value.logo,
         'name': value.name,
+        'description': value.description,
         'status': value.status,
         'parent_id': value.parent_id,
     };

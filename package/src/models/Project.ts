@@ -46,12 +46,19 @@ export interface Project {
     name: string;
     /**
      * 
+     * @type {string}
+     * @memberof Project
+     */
+    description?: string | null;
+    /**
+     * 
      * @type {Cloud}
      * @memberof Project
      */
     readonly cloud: Cloud | null;
     /**
-     * 
+     * * `A` - active
+     * * `D` - deleted
      * @type {string}
      * @memberof Project
      */
@@ -104,6 +111,7 @@ export function ProjectFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'id': json['id'],
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'name': json['name'],
+        'description': !exists(json, 'description') ? undefined : json['description'],
         'cloud': CloudFromJSON(json['cloud']),
         'status': !exists(json, 'status') ? undefined : json['status'],
         'created_at': (new Date(json['created_at'])),
@@ -124,6 +132,7 @@ export function ProjectToJSON(value?: Project | null): any {
         
         'logo': value.logo,
         'name': value.name,
+        'description': value.description,
         'status': value.status,
         'parent_id': value.parent_id,
     };

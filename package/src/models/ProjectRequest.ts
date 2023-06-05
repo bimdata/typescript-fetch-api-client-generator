@@ -36,6 +36,13 @@ export interface ProjectRequest {
      * @type {string}
      * @memberof ProjectRequest
      */
+    description?: string | null;
+    /**
+     * * `A` - active
+     * * `D` - deleted
+     * @type {string}
+     * @memberof ProjectRequest
+     */
     status?: ProjectRequestStatusEnum;
     /**
      * 
@@ -66,6 +73,7 @@ export function ProjectRequestFromJSONTyped(json: any, ignoreDiscriminator: bool
         
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'name': json['name'],
+        'description': !exists(json, 'description') ? undefined : json['description'],
         'status': !exists(json, 'status') ? undefined : json['status'],
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
     };
@@ -82,6 +90,7 @@ export function ProjectRequestToJSON(value?: ProjectRequest | null): any {
         
         'logo': value.logo,
         'name': value.name,
+        'description': value.description,
         'status': value.status,
         'parent_id': value.parent_id,
     };

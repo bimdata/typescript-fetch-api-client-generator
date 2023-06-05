@@ -20,13 +20,15 @@ import { exists, mapValues } from '../runtime';
  */
 export interface Size {
     /**
-     * 
+     * * `BIMDATA_PLATFORM` - BIMDATA_PLATFORM
+     * * `ORGANIZATION` - ORGANIZATION
      * @type {string}
      * @memberof Size
      */
     managed_by: SizeManagedByEnum;
     /**
-     * 
+     * * `100` - admin
+     * * `50` - user
      * @type {number}
      * @memberof Size
      */

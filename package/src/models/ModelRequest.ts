@@ -26,7 +26,11 @@ export interface ModelRequest {
      */
     name?: string | null;
     /**
-     * 
+     * * `UPLOAD` - UPLOAD
+     * * `SPLIT` - SPLIT
+     * * `MERGE` - MERGE
+     * * `EXPORT` - EXPORT
+     * * `OPTIMIZED` - OPTIMIZED
      * @type {string}
      * @memberof ModelRequest
      */

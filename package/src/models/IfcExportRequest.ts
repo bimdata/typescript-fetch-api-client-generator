@@ -21,48 +21,80 @@ import { exists, mapValues } from '../runtime';
 export interface IfcExportRequest {
     /**
      * Exported IFC will include classifications from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include classifications(NONE)
+     * 
+     * * `ORIGINAL` - ORIGINAL
+     * * `UPDATED` - UPDATED
+     * * `NONE` - NONE
      * @type {string}
      * @memberof IfcExportRequest
      */
     classifications?: IfcExportRequestClassificationsEnum;
     /**
      * Exported IFC will include zones from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include zones(NONE)
+     * 
+     * * `ORIGINAL` - ORIGINAL
+     * * `UPDATED` - UPDATED
+     * * `NONE` - NONE
      * @type {string}
      * @memberof IfcExportRequest
      */
     zones?: IfcExportRequestZonesEnum;
     /**
      * Exported IFC will include properties from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include properties(NONE)
+     * 
+     * * `ORIGINAL` - ORIGINAL
+     * * `UPDATED` - UPDATED
+     * * `NONE` - NONE
      * @type {string}
      * @memberof IfcExportRequest
      */
     properties?: IfcExportRequestPropertiesEnum;
     /**
      * Exported IFC will include systems from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include systems(NONE)
+     * 
+     * * `ORIGINAL` - ORIGINAL
+     * * `UPDATED` - UPDATED
+     * * `NONE` - NONE
      * @type {string}
      * @memberof IfcExportRequest
      */
     systems?: IfcExportRequestSystemsEnum;
     /**
      * Exported IFC will include layers from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include layers(NONE)
+     * 
+     * * `ORIGINAL` - ORIGINAL
+     * * `UPDATED` - UPDATED
+     * * `NONE` - NONE
      * @type {string}
      * @memberof IfcExportRequest
      */
     layers?: IfcExportRequestLayersEnum;
     /**
      * Exported IFC will include materials from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include materials(NONE)
+     * 
+     * * `ORIGINAL` - ORIGINAL
+     * * `UPDATED` - UPDATED
+     * * `NONE` - NONE
      * @type {string}
      * @memberof IfcExportRequest
      */
     materials?: IfcExportRequestMaterialsEnum;
     /**
      * Exported IFC will include attributes from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include attributes(NONE)
+     * 
+     * * `ORIGINAL` - ORIGINAL
+     * * `UPDATED` - UPDATED
+     * * `NONE` - NONE
      * @type {string}
      * @memberof IfcExportRequest
      */
     attributes?: IfcExportRequestAttributesEnum;
     /**
      * Exported IFC will include the structure from original IFC file (ORIGINAL), from latest API updates (UPDATED), or won't include structure(NONE)
+     * 
+     * * `ORIGINAL` - ORIGINAL
+     * * `UPDATED` - UPDATED
+     * * `NONE` - NONE
      * @type {string}
      * @memberof IfcExportRequest
      */

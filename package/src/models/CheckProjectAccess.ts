@@ -50,7 +50,9 @@ export interface CheckProjectAccess {
      */
     usable_scopes: Array<string>;
     /**
-     * 
+     * * `100` - admin
+     * * `50` - user
+     * * `25` - guest
      * @type {number}
      * @memberof CheckProjectAccess
      */

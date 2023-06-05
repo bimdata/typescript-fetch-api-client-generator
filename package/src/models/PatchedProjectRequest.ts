@@ -36,6 +36,13 @@ export interface PatchedProjectRequest {
      * @type {string}
      * @memberof PatchedProjectRequest
      */
+    description?: string | null;
+    /**
+     * * `A` - active
+     * * `D` - deleted
+     * @type {string}
+     * @memberof PatchedProjectRequest
+     */
     status?: PatchedProjectRequestStatusEnum;
     /**
      * 
@@ -66,6 +73,7 @@ export function PatchedProjectRequestFromJSONTyped(json: any, ignoreDiscriminato
         
         'logo': !exists(json, 'logo') ? undefined : json['logo'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'description': !exists(json, 'description') ? undefined : json['description'],
         'status': !exists(json, 'status') ? undefined : json['status'],
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
     };
@@ -82,6 +90,7 @@ export function PatchedProjectRequestToJSON(value?: PatchedProjectRequest | null
         
         'logo': value.logo,
         'name': value.name,
+        'description': value.description,
         'status': value.status,
         'parent_id': value.parent_id,
     };

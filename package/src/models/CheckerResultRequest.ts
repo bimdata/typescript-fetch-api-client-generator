@@ -20,7 +20,9 @@ import { exists, mapValues } from '../runtime';
  */
 export interface CheckerResultRequest {
     /**
-     * 
+     * * `C` - completed
+     * * `P` - pending
+     * * `E` - errored
      * @type {string}
      * @memberof CheckerResultRequest
      */

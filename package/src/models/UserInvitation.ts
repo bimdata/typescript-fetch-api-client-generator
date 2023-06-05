@@ -68,6 +68,10 @@ export interface UserInvitation {
      *         D: Denied
      *         P: Pending
      *         
+     * 
+     * * `A` - accepted
+     * * `D` - denied
+     * * `P` - pending
      * @type {string}
      * @memberof UserInvitation
      */

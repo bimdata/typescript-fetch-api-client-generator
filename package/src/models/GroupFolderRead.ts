@@ -33,7 +33,9 @@ export interface GroupFolderRead {
      */
     group: Group;
     /**
-     * 
+     * * `1` - denied
+     * * `50` - read_only
+     * * `100` - read_write
      * @type {number}
      * @memberof GroupFolderRead
      */

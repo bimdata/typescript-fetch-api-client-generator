@@ -68,13 +68,17 @@ export interface FolderUserProject {
      */
     readonly sub: string | null;
     /**
-     * 
+     * * `100` - admin
+     * * `50` - user
+     * * `25` - guest
      * @type {number}
      * @memberof FolderUserProject
      */
     readonly role: FolderUserProjectRoleEnum;
     /**
-     * 
+     * * `1` - denied
+     * * `50` - read_only
+     * * `100` - read_write
      * @type {number}
      * @memberof FolderUserProject
      */

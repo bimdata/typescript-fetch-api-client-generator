@@ -26,7 +26,9 @@ export interface CheckerResult {
      */
     readonly id: number;
     /**
-     * 
+     * * `C` - completed
+     * * `P` - pending
+     * * `E` - errored
      * @type {string}
      * @memberof CheckerResult
      */
