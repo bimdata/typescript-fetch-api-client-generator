@@ -220,6 +220,12 @@ export interface ModelSerializerWithoutChildren {
      */
     recommanded_2d_angle?: number | null;
     /**
+     * The first page of the pdf
+     * @type {number}
+     * @memberof ModelSerializerWithoutChildren
+     */
+    readonly parent_id: number | null;
+    /**
      * The page number of the related pdf
      * @type {number}
      * @memberof ModelSerializerWithoutChildren
@@ -292,6 +298,7 @@ export function ModelSerializerWithoutChildrenFromJSONTyped(json: any, ignoreDis
         'version': !exists(json, 'version') ? undefined : json['version'],
         'north_vector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
         'recommanded_2d_angle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
+        'parent_id': json['parent_id'],
         'page_number': json['page_number'],
     };
 }
