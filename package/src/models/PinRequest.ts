@@ -21,11 +21,17 @@ import {
 } from './PointRequest';
 
 /**
- * Adds nested create feature
+ * 
  * @export
  * @interface PinRequest
  */
 export interface PinRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof PinRequest
+     */
+    guid?: string;
     /**
      * 
      * @type {string}
@@ -44,6 +50,12 @@ export interface PinRequest {
      * @memberof PinRequest
      */
     point: PointRequest;
+    /**
+     * 
+     * @type {number}
+     * @memberof PinRequest
+     */
+    index?: number | null;
 }
 
 export function PinRequestFromJSON(json: any): PinRequest {
@@ -56,9 +68,11 @@ export function PinRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
+        'guid': !exists(json, 'guid') ? undefined : json['guid'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
         'point': PointRequestFromJSON(json['point']),
+        'index': !exists(json, 'index') ? undefined : json['index'],
     };
 }
 
@@ -71,9 +85,11 @@ export function PinRequestToJSON(value?: PinRequest | null): any {
     }
     return {
         
+        'guid': value.guid,
         'name': value.name,
         'color': value.color,
         'point': PointRequestToJSON(value.point),
+        'index': value.index,
     };
 }
 

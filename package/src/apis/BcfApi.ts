@@ -66,6 +66,9 @@ import {
     PatchedLabelRequest,
     PatchedLabelRequestFromJSON,
     PatchedLabelRequestToJSON,
+    PatchedPinRequest,
+    PatchedPinRequestFromJSON,
+    PatchedPinRequestToJSON,
     PatchedPriorityRequest,
     PatchedPriorityRequestFromJSON,
     PatchedPriorityRequestToJSON,
@@ -84,6 +87,12 @@ import {
     PatchedViewpointRequest,
     PatchedViewpointRequestFromJSON,
     PatchedViewpointRequestToJSON,
+    Pin,
+    PinFromJSON,
+    PinToJSON,
+    PinRequest,
+    PinRequestFromJSON,
+    PinRequestToJSON,
     Priority,
     PriorityFromJSON,
     PriorityToJSON,
@@ -168,6 +177,13 @@ export interface CreateFullTopicRequest {
     img_format?: CreateFullTopicImgFormatEnum;
 }
 
+export interface CreatePinRequest {
+    projects_pk: number;
+    topics_guid: string;
+    viewpoints_guid: string;
+    PinRequest: PinRequest;
+}
+
 export interface CreateTopicRequest {
     projects_pk: number;
     TopicRequest: TopicRequest;
@@ -211,6 +227,13 @@ export interface DeleteExtensionTypeRequest {
     projects_pk: number;
 }
 
+export interface DeletePinRequest {
+    guid: string;
+    projects_pk: number;
+    topics_guid: string;
+    viewpoints_guid: string;
+}
+
 export interface DeleteTopicRequest {
     guid: string;
     projects_pk: number;
@@ -246,6 +269,14 @@ export interface FullUpdateFullTopicRequest {
     projects_pk: number;
     FullTopicRequest: FullTopicRequest;
     img_format?: FullUpdateFullTopicImgFormatEnum;
+}
+
+export interface FullUpdatePinRequest {
+    guid: string;
+    projects_pk: number;
+    topics_guid: string;
+    viewpoints_guid: string;
+    PinRequest: PinRequest;
 }
 
 export interface FullUpdateTopicRequest {
@@ -305,6 +336,12 @@ export interface GetFullTopicsRequest {
     models?: string;
 }
 
+export interface GetPinsRequest {
+    projects_pk: number;
+    topics_guid: string;
+    viewpoints_guid: string;
+}
+
 export interface GetRelatedTopicsRequest {
     guid: string;
     projects_pk: number;
@@ -349,6 +386,13 @@ export interface GetTopicsRequest {
     format?: string;
     ifcs?: string;
     models?: string;
+}
+
+export interface GetViewpoinPinRequest {
+    guid: string;
+    projects_pk: number;
+    topics_guid: string;
+    viewpoints_guid: string;
 }
 
 export interface GetViewpointRequest {
@@ -422,6 +466,14 @@ export interface UpdateFullTopicRequest {
     projects_pk: number;
     img_format?: UpdateFullTopicImgFormatEnum;
     PatchedFullTopicRequest?: PatchedFullTopicRequest;
+}
+
+export interface UpdatePinRequest {
+    guid: string;
+    projects_pk: number;
+    topics_guid: string;
+    viewpoints_guid: string;
+    PatchedPinRequest?: PatchedPinRequest;
 }
 
 export interface UpdateTopicRequest {
@@ -843,6 +895,71 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async createFullTopic(projects_pk: number, FullTopicRequest: FullTopicRequest, img_format?: CreateFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
         const response = await this.createFullTopicRaw({ projects_pk: projects_pk, FullTopicRequest: FullTopicRequest, img_format: img_format }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Create a Pin  Required scopes: bcf:write
+     * Create a Pin
+     */
+    async createPinRaw(requestParameters: CreatePinRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Pin>> {
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createPin.');
+        }
+
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling createPin.');
+        }
+
+        if (requestParameters.viewpoints_guid === null || requestParameters.viewpoints_guid === undefined) {
+            throw new runtime.RequiredError('viewpoints_guid','Required parameter requestParameters.viewpoints_guid was null or undefined when calling createPin.');
+        }
+
+        if (requestParameters.PinRequest === null || requestParameters.PinRequest === undefined) {
+            throw new runtime.RequiredError('PinRequest','Required parameter requestParameters.PinRequest was null or undefined when calling createPin.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{viewpoints_guid}/pin`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))).replace(`{${"viewpoints_guid"}}`, encodeURIComponent(String(requestParameters.viewpoints_guid))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PinRequestToJSON(requestParameters.PinRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PinFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Create a Pin  Required scopes: bcf:write
+     * Create a Pin
+     */
+    async createPin(projects_pk: number, topics_guid: string, viewpoints_guid: string, PinRequest: PinRequest, initOverrides?: RequestInit): Promise<Pin> {
+        const response = await this.createPinRaw({ projects_pk: projects_pk, topics_guid: topics_guid, viewpoints_guid: viewpoints_guid, PinRequest: PinRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1287,6 +1404,67 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
+     * This is not a standard route. Delete a Pin  Required scopes: bcf:write
+     * Delete a Pin
+     */
+    async deletePinRaw(requestParameters: DeletePinRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling deletePin.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling deletePin.');
+        }
+
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling deletePin.');
+        }
+
+        if (requestParameters.viewpoints_guid === null || requestParameters.viewpoints_guid === undefined) {
+            throw new runtime.RequiredError('viewpoints_guid','Required parameter requestParameters.viewpoints_guid was null or undefined when calling deletePin.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{viewpoints_guid}/pin/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))).replace(`{${"viewpoints_guid"}}`, encodeURIComponent(String(requestParameters.viewpoints_guid))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * This is not a standard route. Delete a Pin  Required scopes: bcf:write
+     * Delete a Pin
+     */
+    async deletePin(guid: string, projects_pk: number, topics_guid: string, viewpoints_guid: string, initOverrides?: RequestInit): Promise<void> {
+        await this.deletePinRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, viewpoints_guid: viewpoints_guid }, initOverrides);
+    }
+
+    /**
      * Delete a topic  Required scopes: bcf:write
      * Delete a topic
      */
@@ -1638,6 +1816,75 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async fullUpdateFullTopic(guid: string, projects_pk: number, FullTopicRequest: FullTopicRequest, img_format?: FullUpdateFullTopicImgFormatEnum, initOverrides?: RequestInit): Promise<FullTopic> {
         const response = await this.fullUpdateFullTopicRaw({ guid: guid, projects_pk: projects_pk, FullTopicRequest: FullTopicRequest, img_format: img_format }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Update all fields of a Pin  Required scopes: bcf:write
+     * Update all fields of a Pin
+     */
+    async fullUpdatePinRaw(requestParameters: FullUpdatePinRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Pin>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdatePin.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling fullUpdatePin.');
+        }
+
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling fullUpdatePin.');
+        }
+
+        if (requestParameters.viewpoints_guid === null || requestParameters.viewpoints_guid === undefined) {
+            throw new runtime.RequiredError('viewpoints_guid','Required parameter requestParameters.viewpoints_guid was null or undefined when calling fullUpdatePin.');
+        }
+
+        if (requestParameters.PinRequest === null || requestParameters.PinRequest === undefined) {
+            throw new runtime.RequiredError('PinRequest','Required parameter requestParameters.PinRequest was null or undefined when calling fullUpdatePin.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{viewpoints_guid}/pin/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))).replace(`{${"viewpoints_guid"}}`, encodeURIComponent(String(requestParameters.viewpoints_guid))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PinRequestToJSON(requestParameters.PinRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PinFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Update all fields of a Pin  Required scopes: bcf:write
+     * Update all fields of a Pin
+     */
+    async fullUpdatePin(guid: string, projects_pk: number, topics_guid: string, viewpoints_guid: string, PinRequest: PinRequest, initOverrides?: RequestInit): Promise<Pin> {
+        const response = await this.fullUpdatePinRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, viewpoints_guid: viewpoints_guid, PinRequest: PinRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2304,6 +2551,64 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
+     * This is not a standard route. Retrieve all Pins of a viewpoint  Required scopes: bcf:read
+     * Retrieve all Pins of a viewpoint
+     */
+    async getPinsRaw(requestParameters: GetPinsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Pin>>> {
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getPins.');
+        }
+
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getPins.');
+        }
+
+        if (requestParameters.viewpoints_guid === null || requestParameters.viewpoints_guid === undefined) {
+            throw new runtime.RequiredError('viewpoints_guid','Required parameter requestParameters.viewpoints_guid was null or undefined when calling getPins.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{viewpoints_guid}/pin`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))).replace(`{${"viewpoints_guid"}}`, encodeURIComponent(String(requestParameters.viewpoints_guid))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PinFromJSON));
+    }
+
+    /**
+     * This is not a standard route. Retrieve all Pins of a viewpoint  Required scopes: bcf:read
+     * Retrieve all Pins of a viewpoint
+     */
+    async getPins(projects_pk: number, topics_guid: string, viewpoints_guid: string, initOverrides?: RequestInit): Promise<Array<Pin>> {
+        const response = await this.getPinsRaw({ projects_pk: projects_pk, topics_guid: topics_guid, viewpoints_guid: viewpoints_guid }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
      * Get all related topics
      */
@@ -2814,6 +3119,68 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async getVersions(initOverrides?: RequestInit): Promise<Array<Version>> {
         const response = await this.getVersionsRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Retrieve a Pin  Required scopes: bcf:read
+     * Retrieve a Pin
+     */
+    async getViewpoinPinRaw(requestParameters: GetViewpoinPinRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Pin>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getViewpoinPin.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getViewpoinPin.');
+        }
+
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling getViewpoinPin.');
+        }
+
+        if (requestParameters.viewpoints_guid === null || requestParameters.viewpoints_guid === undefined) {
+            throw new runtime.RequiredError('viewpoints_guid','Required parameter requestParameters.viewpoints_guid was null or undefined when calling getViewpoinPin.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{viewpoints_guid}/pin/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))).replace(`{${"viewpoints_guid"}}`, encodeURIComponent(String(requestParameters.viewpoints_guid))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PinFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Retrieve a Pin  Required scopes: bcf:read
+     * Retrieve a Pin
+     */
+    async getViewpoinPin(guid: string, projects_pk: number, topics_guid: string, viewpoints_guid: string, initOverrides?: RequestInit): Promise<Pin> {
+        const response = await this.getViewpoinPinRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, viewpoints_guid: viewpoints_guid }, initOverrides);
         return await response.value();
     }
 
@@ -3525,6 +3892,71 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async updateFullTopic(guid: string, projects_pk: number, img_format?: UpdateFullTopicImgFormatEnum, PatchedFullTopicRequest?: PatchedFullTopicRequest, initOverrides?: RequestInit): Promise<FullTopic> {
         const response = await this.updateFullTopicRaw({ guid: guid, projects_pk: projects_pk, img_format: img_format, PatchedFullTopicRequest: PatchedFullTopicRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Update some fields of a Pin  Required scopes: bcf:write
+     * Update some fields of a Pin
+     */
+    async updatePinRaw(requestParameters: UpdatePinRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Pin>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updatePin.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updatePin.');
+        }
+
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling updatePin.');
+        }
+
+        if (requestParameters.viewpoints_guid === null || requestParameters.viewpoints_guid === undefined) {
+            throw new runtime.RequiredError('viewpoints_guid','Required parameter requestParameters.viewpoints_guid was null or undefined when calling updatePin.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{viewpoints_guid}/pin/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))).replace(`{${"viewpoints_guid"}}`, encodeURIComponent(String(requestParameters.viewpoints_guid))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedPinRequestToJSON(requestParameters.PatchedPinRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PinFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Update some fields of a Pin  Required scopes: bcf:write
+     * Update some fields of a Pin
+     */
+    async updatePin(guid: string, projects_pk: number, topics_guid: string, viewpoints_guid: string, PatchedPinRequest?: PatchedPinRequest, initOverrides?: RequestInit): Promise<Pin> {
+        const response = await this.updatePinRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, viewpoints_guid: viewpoints_guid, PatchedPinRequest: PatchedPinRequest }, initOverrides);
         return await response.value();
     }
 

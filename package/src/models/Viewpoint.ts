@@ -123,7 +123,7 @@ export interface Viewpoint {
      */
     components?: ComponentsParent | null;
     /**
-     * Non standard field. Pins (or markers/annotations) are points of interest
+     * Non standard field. Pins (or markers/annotations) are points of interest. When creating a Viewpoint you can create pins with the fields `pins`, but you can't edit pins through here. You must use dedicated pin routes.
      * @type {Array<Pin>}
      * @memberof Viewpoint
      */

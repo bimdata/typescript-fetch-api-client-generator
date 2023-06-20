@@ -14,55 +14,55 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Point,
-    PointFromJSON,
-    PointFromJSONTyped,
-    PointToJSON,
-} from './Point';
+    PointRequest,
+    PointRequestFromJSON,
+    PointRequestFromJSONTyped,
+    PointRequestToJSON,
+} from './PointRequest';
 
 /**
  * 
  * @export
- * @interface Pin
+ * @interface PatchedPinRequest
  */
-export interface Pin {
+export interface PatchedPinRequest {
     /**
      * 
      * @type {string}
-     * @memberof Pin
+     * @memberof PatchedPinRequest
      */
     guid?: string;
     /**
      * 
      * @type {string}
-     * @memberof Pin
+     * @memberof PatchedPinRequest
      */
     name?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Pin
+     * @memberof PatchedPinRequest
      */
     color?: string | null;
     /**
      * 
-     * @type {Point}
-     * @memberof Pin
+     * @type {PointRequest}
+     * @memberof PatchedPinRequest
      */
-    point: Point;
+    point?: PointRequest;
     /**
      * 
      * @type {number}
-     * @memberof Pin
+     * @memberof PatchedPinRequest
      */
     index?: number | null;
 }
 
-export function PinFromJSON(json: any): Pin {
-    return PinFromJSONTyped(json, false);
+export function PatchedPinRequestFromJSON(json: any): PatchedPinRequest {
+    return PatchedPinRequestFromJSONTyped(json, false);
 }
 
-export function PinFromJSONTyped(json: any, ignoreDiscriminator: boolean): Pin {
+export function PatchedPinRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedPinRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -71,12 +71,12 @@ export function PinFromJSONTyped(json: any, ignoreDiscriminator: boolean): Pin {
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'point': PointFromJSON(json['point']),
+        'point': !exists(json, 'point') ? undefined : PointRequestFromJSON(json['point']),
         'index': !exists(json, 'index') ? undefined : json['index'],
     };
 }
 
-export function PinToJSON(value?: Pin | null): any {
+export function PatchedPinRequestToJSON(value?: PatchedPinRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -88,7 +88,7 @@ export function PinToJSON(value?: Pin | null): any {
         'guid': value.guid,
         'name': value.name,
         'color': value.color,
-        'point': PointToJSON(value.point),
+        'point': PointRequestToJSON(value.point),
         'index': value.index,
     };
 }

@@ -21,12 +21,6 @@ import {
     BuildingModelPlanRequest,
     BuildingModelPlanRequestFromJSON,
     BuildingModelPlanRequestToJSON,
-    CheckerResult,
-    CheckerResultFromJSON,
-    CheckerResultToJSON,
-    CheckerResultRequest,
-    CheckerResultRequestFromJSON,
-    CheckerResultRequestToJSON,
     Classification,
     ClassificationFromJSON,
     ClassificationToJSON,
@@ -69,12 +63,6 @@ import {
     IfcAccessTokenRequest,
     IfcAccessTokenRequestFromJSON,
     IfcAccessTokenRequestToJSON,
-    IfcChecker,
-    IfcCheckerFromJSON,
-    IfcCheckerToJSON,
-    IfcCheckerRequest,
-    IfcCheckerRequestFromJSON,
-    IfcCheckerRequestToJSON,
     IfcExportRequest,
     IfcExportRequestFromJSON,
     IfcExportRequestToJSON,
@@ -105,18 +93,12 @@ import {
     ModelFiles,
     ModelFilesFromJSON,
     ModelFilesToJSON,
-    PatchedCheckerResultRequest,
-    PatchedCheckerResultRequestFromJSON,
-    PatchedCheckerResultRequestToJSON,
     PatchedElementRequest,
     PatchedElementRequestFromJSON,
     PatchedElementRequestToJSON,
     PatchedIfcAccessTokenRequest,
     PatchedIfcAccessTokenRequestFromJSON,
     PatchedIfcAccessTokenRequestToJSON,
-    PatchedIfcCheckerRequest,
-    PatchedIfcCheckerRequestFromJSON,
-    PatchedIfcCheckerRequestToJSON,
     PatchedLayerRequest,
     PatchedLayerRequestFromJSON,
     PatchedLayerRequestToJSON,
@@ -355,21 +337,6 @@ export interface CreateBuildingPlanDeprecatedRequest {
     BuildingModelPlanRequest: BuildingModelPlanRequest;
 }
 
-export interface CreateCheckerDeprecatedRequest {
-    cloud_pk: number;
-    ifc_pk: number;
-    project_pk: number;
-    IfcCheckerRequest?: IfcCheckerRequest;
-}
-
-export interface CreateCheckerResultDeprecatedRequest {
-    checker_pk: number;
-    cloud_pk: number;
-    ifc_pk: number;
-    project_pk: number;
-    CheckerResultRequest?: CheckerResultRequest;
-}
-
 export interface CreateClassificationElementRelationsDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
@@ -575,21 +542,6 @@ export interface DeleteBuildingPlanDeprecatedRequest {
     project_pk: number;
 }
 
-export interface DeleteCheckerDeprecatedRequest {
-    cloud_pk: number;
-    id: number;
-    ifc_pk: number;
-    project_pk: number;
-}
-
-export interface DeleteCheckerResultDeprecatedRequest {
-    checker_pk: number;
-    cloud_pk: number;
-    id: number;
-    ifc_pk: number;
-    project_pk: number;
-}
-
 export interface DeleteElementDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
@@ -732,34 +684,6 @@ export interface GetBuildingPlanPositioningDeprecatedRequest {
 }
 
 export interface GetBuildingsDeprecatedRequest {
-    cloud_pk: number;
-    ifc_pk: number;
-    project_pk: number;
-}
-
-export interface GetCheckerDeprecatedRequest {
-    cloud_pk: number;
-    id: number;
-    ifc_pk: number;
-    project_pk: number;
-}
-
-export interface GetCheckerResultDeprecatedRequest {
-    checker_pk: number;
-    cloud_pk: number;
-    id: number;
-    ifc_pk: number;
-    project_pk: number;
-}
-
-export interface GetCheckerResultsDeprecatedRequest {
-    checker_pk: number;
-    cloud_pk: number;
-    ifc_pk: number;
-    project_pk: number;
-}
-
-export interface GetCheckersDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
@@ -1111,14 +1035,6 @@ export interface GetZonesDeprecatedRequest {
     color?: string;
 }
 
-export interface LaunchNewCheckDeprecatedRequest {
-    cloud_pk: number;
-    id: number;
-    ifc_pk: number;
-    project_pk: number;
-    IfcCheckerRequest?: IfcCheckerRequest;
-}
-
 export interface LinkDocumentsOfElementDeprecatedRequest {
     cloud_pk: number;
     element_uuid: string;
@@ -1244,23 +1160,6 @@ export interface UpdateBuildingPlanPositioningDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest;
-}
-
-export interface UpdateCheckerDeprecatedRequest {
-    cloud_pk: number;
-    id: number;
-    ifc_pk: number;
-    project_pk: number;
-    PatchedIfcCheckerRequest?: PatchedIfcCheckerRequest;
-}
-
-export interface UpdateCheckerResultDeprecatedRequest {
-    checker_pk: number;
-    cloud_pk: number;
-    id: number;
-    ifc_pk: number;
-    project_pk: number;
-    PatchedCheckerResultRequest?: PatchedCheckerResultRequest;
 }
 
 export interface UpdateElementDeprecatedRequest {
@@ -2484,132 +2383,6 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async createBuildingPlanDeprecated(building_uuid: string, cloud_pk: number, ifc_pk: number, project_pk: number, BuildingModelPlanRequest: BuildingModelPlanRequest, initOverrides?: RequestInit): Promise<Building> {
         const response = await this.createBuildingPlanDeprecatedRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, BuildingModelPlanRequest: BuildingModelPlanRequest }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
-     * Create a checker to a model
-     */
-    async createCheckerDeprecatedRaw(requestParameters: CreateCheckerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createCheckerDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling createCheckerDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createCheckerDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: IfcCheckerRequestToJSON(requestParameters.IfcCheckerRequest),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
-    }
-
-    /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
-     * Create a checker to a model
-     */
-    async createCheckerDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, IfcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
-        const response = await this.createCheckerDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, IfcCheckerRequest: IfcCheckerRequest }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * TCreate a CheckerResult  Required scopes: check:write
-     * Create a CheckerResult
-     */
-    async createCheckerResultDeprecatedRaw(requestParameters: CreateCheckerResultDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
-        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
-            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling createCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling createCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createCheckerResultDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: CheckerResultRequestToJSON(requestParameters.CheckerResultRequest),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
-    }
-
-    /**
-     * TCreate a CheckerResult  Required scopes: check:write
-     * Create a CheckerResult
-     */
-    async createCheckerResultDeprecated(checker_pk: number, cloud_pk: number, ifc_pk: number, project_pk: number, CheckerResultRequest?: CheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
-        const response = await this.createCheckerResultDeprecatedRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, CheckerResultRequest: CheckerResultRequest }, initOverrides);
         return await response.value();
     }
 
@@ -4429,132 +4202,6 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
-     * Delete a checker of a model
-     */
-    async deleteCheckerDeprecatedRaw(requestParameters: DeleteCheckerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteCheckerDeprecated.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCheckerDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling deleteCheckerDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteCheckerDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
-     * Delete a checker of a model
-     */
-    async deleteCheckerDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckerDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
-    }
-
-    /**
-     * Delete a CheckerResult  Required scopes: check:write
-     * Delete a CheckerResult
-     */
-    async deleteCheckerResultDeprecatedRaw(requestParameters: DeleteCheckerResultDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
-            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling deleteCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling deleteCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteCheckerResultDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Delete a CheckerResult  Required scopes: check:write
-     * Delete a CheckerResult
-     */
-    async deleteCheckerResultDeprecated(checker_pk: number, cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteCheckerResultDeprecatedRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
-    }
-
-    /**
      * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete an element of a model
      */
@@ -5844,254 +5491,6 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async getBuildingsDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Building>> {
         const response = await this.getBuildingsDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
-     * Retrieve a checker of a model
-     */
-    async getCheckerDeprecatedRaw(requestParameters: GetCheckerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCheckerDeprecated.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCheckerDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling getCheckerDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getCheckerDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
-    }
-
-    /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
-     * Retrieve a checker of a model
-     */
-    async getCheckerDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<IfcChecker> {
-        const response = await this.getCheckerDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve one CheckerResult  Required scopes: check:read
-     * Retrieve one CheckerResult
-     */
-    async getCheckerResultDeprecatedRaw(requestParameters: GetCheckerResultDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
-        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
-            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling getCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling getCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getCheckerResultDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve one CheckerResult  Required scopes: check:read
-     * Retrieve one CheckerResult
-     */
-    async getCheckerResultDeprecated(checker_pk: number, cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<CheckerResult> {
-        const response = await this.getCheckerResultDeprecatedRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve all CheckerResults  Required scopes: check:read
-     * Retrieve all CheckerResults
-     */
-    async getCheckerResultsDeprecatedRaw(requestParameters: GetCheckerResultsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<CheckerResult>>> {
-        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
-            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling getCheckerResultsDeprecated.');
-        }
-
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCheckerResultsDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling getCheckerResultsDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getCheckerResultsDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CheckerResultFromJSON));
-    }
-
-    /**
-     * Retrieve all CheckerResults  Required scopes: check:read
-     * Retrieve all CheckerResults
-     */
-    async getCheckerResultsDeprecated(checker_pk: number, cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<CheckerResult>> {
-        const response = await this.getCheckerResultsDeprecatedRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
-     * Retrieve all checkers of a model
-     */
-    async getCheckersDeprecatedRaw(requestParameters: GetCheckersDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<IfcChecker>>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCheckersDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling getCheckersDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getCheckersDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(IfcCheckerFromJSON));
-    }
-
-    /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:read, ifc:read
-     * Retrieve all checkers of a model
-     */
-    async getCheckersDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<IfcChecker>> {
-        const response = await this.getCheckersDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -9111,70 +8510,6 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * A nex check will be played with the current state of elements, properties, etc.  Required scopes: check:write, ifc:read
-     * Launch a new check on the model
-     */
-    async launchNewCheckDeprecatedRaw(requestParameters: LaunchNewCheckDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling launchNewCheckDeprecated.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling launchNewCheckDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling launchNewCheckDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling launchNewCheckDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}/launch-check`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: IfcCheckerRequestToJSON(requestParameters.IfcCheckerRequest),
-        }, initOverrides);
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * A nex check will be played with the current state of elements, properties, etc.  Required scopes: check:write, ifc:read
-     * Launch a new check on the model
-     */
-    async launchNewCheckDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, IfcCheckerRequest?: IfcCheckerRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.launchNewCheckDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, IfcCheckerRequest: IfcCheckerRequest }, initOverrides);
-    }
-
-    /**
      *  Bulk relation create available. You can either post an id or a list of ids. Is you post a list, the response will be a list (in the same order) of created relation or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Link one or many documents to an element
      */
@@ -10214,140 +9549,6 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async updateBuildingPlanPositioningDeprecated(building_uuid: string, cloud_pk: number, id: number, ifc_pk: number, project_pk: number, PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest, initOverrides?: RequestInit): Promise<PositioningPlan> {
         const response = await this.updateBuildingPlanPositioningDeprecatedRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, PatchedPositioningPlanRequest: PatchedPositioningPlanRequest }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
-     * Update some fields of a checker of a model
-     */
-    async updateCheckerDeprecatedRaw(requestParameters: UpdateCheckerDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<IfcChecker>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateCheckerDeprecated.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCheckerDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling updateCheckerDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateCheckerDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PatchedIfcCheckerRequestToJSON(requestParameters.PatchedIfcCheckerRequest),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => IfcCheckerFromJSON(jsonValue));
-    }
-
-    /**
-     * A checker is a link between a checkplan and a model. A checker can launch a check multiple time and store all the results  Required scopes: check:write, ifc:read
-     * Update some fields of a checker of a model
-     */
-    async updateCheckerDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, PatchedIfcCheckerRequest?: PatchedIfcCheckerRequest, initOverrides?: RequestInit): Promise<IfcChecker> {
-        const response = await this.updateCheckerDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, PatchedIfcCheckerRequest: PatchedIfcCheckerRequest }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Update some fields of a CheckerResult  Required scopes: check:write
-     * Update some fields of a CheckerResult
-     */
-    async updateCheckerResultDeprecatedRaw(requestParameters: UpdateCheckerResultDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CheckerResult>> {
-        if (requestParameters.checker_pk === null || requestParameters.checker_pk === undefined) {
-            throw new runtime.RequiredError('checker_pk','Required parameter requestParameters.checker_pk was null or undefined when calling updateCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
-            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling updateCheckerResultDeprecated.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateCheckerResultDeprecated.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/checker/{checker_pk}/result/{id}`.replace(`{${"checker_pk"}}`, encodeURIComponent(String(requestParameters.checker_pk))).replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PatchedCheckerResultRequestToJSON(requestParameters.PatchedCheckerResultRequest),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CheckerResultFromJSON(jsonValue));
-    }
-
-    /**
-     * Update some fields of a CheckerResult  Required scopes: check:write
-     * Update some fields of a CheckerResult
-     */
-    async updateCheckerResultDeprecated(checker_pk: number, cloud_pk: number, id: number, ifc_pk: number, project_pk: number, PatchedCheckerResultRequest?: PatchedCheckerResultRequest, initOverrides?: RequestInit): Promise<CheckerResult> {
-        const response = await this.updateCheckerResultDeprecatedRaw({ checker_pk: checker_pk, cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, PatchedCheckerResultRequest: PatchedCheckerResultRequest }, initOverrides);
         return await response.value();
     }
 
