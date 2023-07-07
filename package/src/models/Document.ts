@@ -135,17 +135,23 @@ export interface Document {
      */
     readonly ifc_id: number | null;
     /**
-     * Aggregate of group user permissions and folder default permission
+     * Document id of head version
      * @type {number}
      * @memberof Document
      */
-    readonly user_permission: DocumentUserPermissionEnum;
+    readonly head_id: number | null;
     /**
      * Document is a head of version or is owned by another document
      * @type {boolean}
      * @memberof Document
      */
     readonly is_head_version: boolean;
+    /**
+     * Aggregate of group user permissions and folder default permission
+     * @type {number}
+     * @memberof Document
+     */
+    readonly user_permission: DocumentUserPermissionEnum;
     /**
      * Office files will be converted as pdf to provide a web preview. Supported extensions are .ppt, .pptx, .odp, .xls, .xlsx, .ods, .doc, .docx, .odt
      * @type {string}
@@ -205,8 +211,9 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'model_id': json['model_id'],
         'model_type': json['model_type'],
         'ifc_id': json['ifc_id'],
-        'user_permission': json['user_permission'],
+        'head_id': json['head_id'],
         'is_head_version': json['is_head_version'],
+        'user_permission': json['user_permission'],
         'office_preview': json['office_preview'],
     };
 }
