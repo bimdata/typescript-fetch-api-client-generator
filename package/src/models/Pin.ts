@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Point,
-    PointFromJSON,
-    PointFromJSONTyped,
-    PointToJSON,
-} from './Point';
+    GeometryPoint,
+    GeometryPointFromJSON,
+    GeometryPointFromJSONTyped,
+    GeometryPointToJSON,
+} from './GeometryPoint';
 
 /**
  * 
@@ -46,10 +46,10 @@ export interface Pin {
     color?: string | null;
     /**
      * 
-     * @type {Point}
+     * @type {GeometryPoint}
      * @memberof Pin
      */
-    point: Point;
+    point: GeometryPoint;
     /**
      * 
      * @type {number}
@@ -71,7 +71,7 @@ export function PinFromJSONTyped(json: any, ignoreDiscriminator: boolean): Pin {
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'point': PointFromJSON(json['point']),
+        'point': GeometryPointFromJSON(json['point']),
         'index': !exists(json, 'index') ? undefined : json['index'],
     };
 }
@@ -88,7 +88,7 @@ export function PinToJSON(value?: Pin | null): any {
         'guid': value.guid,
         'name': value.name,
         'color': value.color,
-        'point': PointToJSON(value.point),
+        'point': GeometryPointToJSON(value.point),
         'index': value.index,
     };
 }

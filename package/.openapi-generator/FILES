@@ -54,6 +54,8 @@ src/models/FolderWithoutChildren.ts
 src/models/FolderWithoutChildrenRequest.ts
 src/models/FullTopic.ts
 src/models/FullTopicRequest.ts
+src/models/GeometryPoint.ts
+src/models/GeometryPointRequest.ts
 src/models/Group.ts
 src/models/GroupFolder.ts
 src/models/GroupFolderRead.ts

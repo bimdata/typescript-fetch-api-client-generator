@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    PointRequest,
-    PointRequestFromJSON,
-    PointRequestFromJSONTyped,
-    PointRequestToJSON,
-} from './PointRequest';
+    GeometryPointRequest,
+    GeometryPointRequestFromJSON,
+    GeometryPointRequestFromJSONTyped,
+    GeometryPointRequestToJSON,
+} from './GeometryPointRequest';
 
 /**
  * 
@@ -46,10 +46,10 @@ export interface PatchedPinRequest {
     color?: string | null;
     /**
      * 
-     * @type {PointRequest}
+     * @type {GeometryPointRequest}
      * @memberof PatchedPinRequest
      */
-    point?: PointRequest;
+    point?: GeometryPointRequest;
     /**
      * 
      * @type {number}
@@ -71,7 +71,7 @@ export function PatchedPinRequestFromJSONTyped(json: any, ignoreDiscriminator: b
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'point': !exists(json, 'point') ? undefined : PointRequestFromJSON(json['point']),
+        'point': !exists(json, 'point') ? undefined : GeometryPointRequestFromJSON(json['point']),
         'index': !exists(json, 'index') ? undefined : json['index'],
     };
 }
@@ -88,7 +88,7 @@ export function PatchedPinRequestToJSON(value?: PatchedPinRequest | null): any {
         'guid': value.guid,
         'name': value.name,
         'color': value.color,
-        'point': PointRequestToJSON(value.point),
+        'point': GeometryPointRequestToJSON(value.point),
         'index': value.index,
     };
 }

@@ -47,6 +47,8 @@ export * from './FolderWithoutChildren';
 export * from './FolderWithoutChildrenRequest';
 export * from './FullTopic';
 export * from './FullTopicRequest';
+export * from './GeometryPoint';
+export * from './GeometryPointRequest';
 export * from './Group';
 export * from './GroupFolder';
 export * from './GroupFolderRead';

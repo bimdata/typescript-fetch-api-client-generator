@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    PointRequest,
-    PointRequestFromJSON,
-    PointRequestFromJSONTyped,
-    PointRequestToJSON,
-} from './PointRequest';
+    GeometryPointRequest,
+    GeometryPointRequestFromJSON,
+    GeometryPointRequestFromJSONTyped,
+    GeometryPointRequestToJSON,
+} from './GeometryPointRequest';
 
 /**
  * 
@@ -46,10 +46,10 @@ export interface PinRequest {
     color?: string | null;
     /**
      * 
-     * @type {PointRequest}
+     * @type {GeometryPointRequest}
      * @memberof PinRequest
      */
-    point: PointRequest;
+    point: GeometryPointRequest;
     /**
      * 
      * @type {number}
@@ -71,7 +71,7 @@ export function PinRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'point': PointRequestFromJSON(json['point']),
+        'point': GeometryPointRequestFromJSON(json['point']),
         'index': !exists(json, 'index') ? undefined : json['index'],
     };
 }
@@ -88,7 +88,7 @@ export function PinRequestToJSON(value?: PinRequest | null): any {
         'guid': value.guid,
         'name': value.name,
         'color': value.color,
-        'point': PointRequestToJSON(value.point),
+        'point': GeometryPointRequestToJSON(value.point),
         'index': value.index,
     };
 }

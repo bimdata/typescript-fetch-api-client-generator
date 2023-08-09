@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    GeometryPointRequest,
+    GeometryPointRequestFromJSON,
+    GeometryPointRequestFromJSONTyped,
+    GeometryPointRequestToJSON,
+} from './GeometryPointRequest';
+
 /**
  * 
  * @export
@@ -37,6 +44,12 @@ export interface SpaceRequest {
      * @memberof SpaceRequest
      */
     uuid: string;
+    /**
+     * 
+     * @type {Array<GeometryPointRequest>}
+     * @memberof SpaceRequest
+     */
+    geometry?: Array<GeometryPointRequest> | null;
 }
 
 export function SpaceRequestFromJSON(json: any): SpaceRequest {
@@ -52,6 +65,7 @@ export function SpaceRequestFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'name': !exists(json, 'name') ? undefined : json['name'],
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': json['uuid'],
+        'geometry': !exists(json, 'geometry') ? undefined : (json['geometry'] === null ? null : (json['geometry'] as Array<any>).map(GeometryPointRequestFromJSON)),
     };
 }
 
@@ -67,6 +81,7 @@ export function SpaceRequestToJSON(value?: SpaceRequest | null): any {
         'name': value.name,
         'longname': value.longname,
         'uuid': value.uuid,
+        'geometry': value.geometry === undefined ? undefined : (value.geometry === null ? null : (value.geometry as Array<any>).map(GeometryPointRequestToJSON)),
     };
 }
 

@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    GeometryPoint,
+    GeometryPointFromJSON,
+    GeometryPointFromJSONTyped,
+    GeometryPointToJSON,
+} from './GeometryPoint';
+
 /**
  * 
  * @export
@@ -51,6 +58,12 @@ export interface Space {
     readonly zone_set: Array<number>;
     /**
      * 
+     * @type {Array<GeometryPoint>}
+     * @memberof Space
+     */
+    geometry?: Array<GeometryPoint> | null;
+    /**
+     * 
      * @type {Date}
      * @memberof Space
      */
@@ -78,6 +91,7 @@ export function SpaceFromJSONTyped(json: any, ignoreDiscriminator: boolean): Spa
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': json['uuid'],
         'zone_set': json['zone_set'],
+        'geometry': !exists(json, 'geometry') ? undefined : (json['geometry'] === null ? null : (json['geometry'] as Array<any>).map(GeometryPointFromJSON)),
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
     };
@@ -95,6 +109,7 @@ export function SpaceToJSON(value?: Space | null): any {
         'name': value.name,
         'longname': value.longname,
         'uuid': value.uuid,
+        'geometry': value.geometry === undefined ? undefined : (value.geometry === null ? null : (value.geometry as Array<any>).map(GeometryPointToJSON)),
     };
 }
 

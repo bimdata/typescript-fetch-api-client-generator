@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    GeometryPointRequest,
+    GeometryPointRequestFromJSON,
+    GeometryPointRequestFromJSONTyped,
+    GeometryPointRequestToJSON,
+} from './GeometryPointRequest';
+
 /**
  * 
  * @export
@@ -37,6 +44,12 @@ export interface PatchedSpaceRequest {
      * @memberof PatchedSpaceRequest
      */
     uuid?: string;
+    /**
+     * 
+     * @type {Array<GeometryPointRequest>}
+     * @memberof PatchedSpaceRequest
+     */
+    geometry?: Array<GeometryPointRequest> | null;
 }
 
 export function PatchedSpaceRequestFromJSON(json: any): PatchedSpaceRequest {
@@ -52,6 +65,7 @@ export function PatchedSpaceRequestFromJSONTyped(json: any, ignoreDiscriminator:
         'name': !exists(json, 'name') ? undefined : json['name'],
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': !exists(json, 'uuid') ? undefined : json['uuid'],
+        'geometry': !exists(json, 'geometry') ? undefined : (json['geometry'] === null ? null : (json['geometry'] as Array<any>).map(GeometryPointRequestFromJSON)),
     };
 }
 
@@ -67,6 +81,7 @@ export function PatchedSpaceRequestToJSON(value?: PatchedSpaceRequest | null): a
         'name': value.name,
         'longname': value.longname,
         'uuid': value.uuid,
+        'geometry': value.geometry === undefined ? undefined : (value.geometry === null ? null : (value.geometry as Array<any>).map(GeometryPointRequestToJSON)),
     };
 }
 
