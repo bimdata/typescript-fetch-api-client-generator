@@ -31,6 +31,12 @@ export interface GeometryPoint {
      * @memberof GeometryPoint
      */
     y: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GeometryPoint
+     */
+    z: number;
 }
 
 export function GeometryPointFromJSON(json: any): GeometryPoint {
@@ -45,6 +51,7 @@ export function GeometryPointFromJSONTyped(json: any, ignoreDiscriminator: boole
         
         'x': json['x'],
         'y': json['y'],
+        'z': json['z'],
     };
 }
 
@@ -59,6 +66,7 @@ export function GeometryPointToJSON(value?: GeometryPoint | null): any {
         
         'x': value.x,
         'y': value.y,
+        'z': value.z,
     };
 }
 

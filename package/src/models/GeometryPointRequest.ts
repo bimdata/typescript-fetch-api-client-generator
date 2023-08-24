@@ -31,6 +31,12 @@ export interface GeometryPointRequest {
      * @memberof GeometryPointRequest
      */
     y: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof GeometryPointRequest
+     */
+    z: number;
 }
 
 export function GeometryPointRequestFromJSON(json: any): GeometryPointRequest {
@@ -45,6 +51,7 @@ export function GeometryPointRequestFromJSONTyped(json: any, ignoreDiscriminator
         
         'x': json['x'],
         'y': json['y'],
+        'z': json['z'],
     };
 }
 
@@ -59,6 +66,7 @@ export function GeometryPointRequestToJSON(value?: GeometryPointRequest | null):
         
         'x': value.x,
         'y': value.y,
+        'z': value.z,
     };
 }
 
