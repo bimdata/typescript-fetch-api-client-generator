@@ -252,6 +252,10 @@ export interface DownloadBcfExportRequest {
     topics?: string;
 }
 
+export interface DownloadBcfExportXlsxRequest {
+    id: number;
+}
+
 export interface FullUpdateBcfProjectRequest {
     id: number;
     BcfProjectRequest: BcfProjectRequest;
@@ -331,9 +335,9 @@ export interface GetFullTopicRequest {
 export interface GetFullTopicsRequest {
     projects_pk: number;
     format?: string;
-    ifcs?: string;
+    ifcs?: Array<number>;
     img_format?: GetFullTopicsImgFormatEnum;
-    models?: string;
+    models?: Array<number>;
 }
 
 export interface GetPinsRequest {
@@ -346,8 +350,8 @@ export interface GetRelatedTopicsRequest {
     guid: string;
     projects_pk: number;
     format?: string;
-    ifcs?: string;
-    models?: string;
+    ifcs?: Array<number>;
+    models?: Array<number>;
 }
 
 export interface GetSelectionsRequest {
@@ -371,8 +375,8 @@ export interface GetTopicDocumentReferencesRequest {
     guid: string;
     projects_pk: number;
     format?: string;
-    ifcs?: string;
-    models?: string;
+    ifcs?: Array<number>;
+    models?: Array<number>;
 }
 
 export interface GetTopicViewpointsRequest {
@@ -384,8 +388,8 @@ export interface GetTopicViewpointsRequest {
 export interface GetTopicsRequest {
     projects_pk: number;
     format?: string;
-    ifcs?: string;
-    models?: string;
+    ifcs?: Array<number>;
+    models?: Array<number>;
 }
 
 export interface GetViewpoinPinRequest {
@@ -1637,6 +1641,56 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
+     * This is not a standard route. Export project\'s topics in excel format  Required scopes: bcf:read
+     * Export project\'s topics in excel format
+     */
+    async downloadBcfExportXlsxRaw(requestParameters: DownloadBcfExportXlsxRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<BcfProject>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling downloadBcfExportXlsx.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{id}/export-xlsx`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BcfProjectFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Export project\'s topics in excel format  Required scopes: bcf:read
+     * Export project\'s topics in excel format
+     */
+    async downloadBcfExportXlsx(id: number, initOverrides?: RequestInit): Promise<BcfProject> {
+        const response = await this.downloadBcfExportXlsxRaw({ id: id }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Update all fields of a BCF project  Required scopes: bcf:write
      * Update all fields of a BCF project
      */
@@ -2499,7 +2553,7 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['format'] = requestParameters.format;
         }
 
-        if (requestParameters.ifcs !== undefined) {
+        if (requestParameters.ifcs) {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
 
@@ -2507,7 +2561,7 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['img_format'] = requestParameters.img_format;
         }
 
-        if (requestParameters.models !== undefined) {
+        if (requestParameters.models) {
             queryParameters['models'] = requestParameters.models;
         }
 
@@ -2545,7 +2599,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It responds with all topics, their viewpoints and their comments  Required scopes: bcf:read
      * Retrieve all full topics
      */
-    async getFullTopics(projects_pk: number, format?: string, ifcs?: string, img_format?: GetFullTopicsImgFormatEnum, models?: string, initOverrides?: RequestInit): Promise<Array<FullTopic>> {
+    async getFullTopics(projects_pk: number, format?: string, ifcs?: Array<number>, img_format?: GetFullTopicsImgFormatEnum, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<FullTopic>> {
         const response = await this.getFullTopicsRaw({ projects_pk: projects_pk, format: format, ifcs: ifcs, img_format: img_format, models: models }, initOverrides);
         return await response.value();
     }
@@ -2627,11 +2681,11 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['format'] = requestParameters.format;
         }
 
-        if (requestParameters.ifcs !== undefined) {
+        if (requestParameters.ifcs) {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
 
-        if (requestParameters.models !== undefined) {
+        if (requestParameters.models) {
             queryParameters['models'] = requestParameters.models;
         }
 
@@ -2669,7 +2723,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
      * Get all related topics
      */
-    async getRelatedTopics(guid: string, projects_pk: number, format?: string, ifcs?: string, models?: string, initOverrides?: RequestInit): Promise<Array<string>> {
+    async getRelatedTopics(guid: string, projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<string>> {
         const response = await this.getRelatedTopicsRaw({ guid: guid, projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
@@ -2863,11 +2917,11 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['format'] = requestParameters.format;
         }
 
-        if (requestParameters.ifcs !== undefined) {
+        if (requestParameters.ifcs) {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
 
-        if (requestParameters.models !== undefined) {
+        if (requestParameters.models) {
             queryParameters['models'] = requestParameters.models;
         }
 
@@ -2905,7 +2959,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
      * Get all related documents
      */
-    async getTopicDocumentReferences(guid: string, projects_pk: number, format?: string, ifcs?: string, models?: string, initOverrides?: RequestInit): Promise<Array<string>> {
+    async getTopicDocumentReferences(guid: string, projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<string>> {
         const response = await this.getTopicDocumentReferencesRaw({ guid: guid, projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
@@ -2983,11 +3037,11 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['format'] = requestParameters.format;
         }
 
-        if (requestParameters.ifcs !== undefined) {
+        if (requestParameters.ifcs) {
             queryParameters['ifcs'] = requestParameters.ifcs;
         }
 
-        if (requestParameters.models !== undefined) {
+        if (requestParameters.models) {
             queryParameters['models'] = requestParameters.models;
         }
 
@@ -3025,7 +3079,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all topics  Required scopes: bcf:read
      * Retrieve all topics
      */
-    async getTopics(projects_pk: number, format?: string, ifcs?: string, models?: string, initOverrides?: RequestInit): Promise<Array<Topic>> {
+    async getTopics(projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<Topic>> {
         const response = await this.getTopicsRaw({ projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
