@@ -80,6 +80,12 @@ export interface ProjectWithChildren {
      * @memberof ProjectWithChildren
      */
     readonly root_folder_id: number | null;
+    /**
+     * Main model of the project
+     * @type {number}
+     * @memberof ProjectWithChildren
+     */
+    readonly main_model_id: number | null;
 }
 
 /**
@@ -111,6 +117,7 @@ export function ProjectWithChildrenFromJSONTyped(json: any, ignoreDiscriminator:
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'children': ((json['children'] as Array<any>).map(ProjectWithChildrenFromJSON)),
         'root_folder_id': json['root_folder_id'],
+        'main_model_id': json['main_model_id'],
     };
 }
 
