@@ -254,6 +254,8 @@ export interface DownloadBcfExportRequest {
 
 export interface DownloadBcfExportXlsxRequest {
     id: number;
+    format?: string;
+    topics?: string;
 }
 
 export interface FullUpdateBcfProjectRequest {
@@ -1644,12 +1646,20 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Export project\'s topics in excel format  Required scopes: bcf:read
      * Export project\'s topics in excel format
      */
-    async downloadBcfExportXlsxRaw(requestParameters: DownloadBcfExportXlsxRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<BcfProject>> {
+    async downloadBcfExportXlsxRaw(requestParameters: DownloadBcfExportXlsxRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling downloadBcfExportXlsx.');
         }
 
         const queryParameters: any = {};
+
+        if (requestParameters.format !== undefined) {
+            queryParameters['format'] = requestParameters.format;
+        }
+
+        if (requestParameters.topics !== undefined) {
+            queryParameters['topics'] = requestParameters.topics;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -1678,15 +1688,15 @@ export class BcfApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => BcfProjectFromJSON(jsonValue));
+        return new runtime.BlobApiResponse(response);
     }
 
     /**
      * This is not a standard route. Export project\'s topics in excel format  Required scopes: bcf:read
      * Export project\'s topics in excel format
      */
-    async downloadBcfExportXlsx(id: number, initOverrides?: RequestInit): Promise<BcfProject> {
-        const response = await this.downloadBcfExportXlsxRaw({ id: id }, initOverrides);
+    async downloadBcfExportXlsx(id: number, format?: string, topics?: string, initOverrides?: RequestInit): Promise<Blob> {
+        const response = await this.downloadBcfExportXlsxRaw({ id: id, format: format, topics: topics }, initOverrides);
         return await response.value();
     }
 
