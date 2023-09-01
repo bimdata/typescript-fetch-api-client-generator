@@ -28,7 +28,7 @@ jobs:
             --prefix package \
             @semantic-release/npm \
             @semantic-release/github \
-            conventional-changelog-eslint \
+            conventional-changelog-eslint@4 \
       - name: Release
         run: npx semantic-release -e ./config/release.config.js
         working-directory: ./package
