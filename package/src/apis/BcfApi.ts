@@ -255,6 +255,7 @@ export interface DownloadBcfExportRequest {
 export interface DownloadBcfExportXlsxRequest {
     id: number;
     format?: string;
+    locale?: DownloadBcfExportXlsxLocaleEnum;
     topics?: string;
 }
 
@@ -1657,6 +1658,10 @@ export class BcfApi extends runtime.BaseAPI {
             queryParameters['format'] = requestParameters.format;
         }
 
+        if (requestParameters.locale !== undefined) {
+            queryParameters['locale'] = requestParameters.locale;
+        }
+
         if (requestParameters.topics !== undefined) {
             queryParameters['topics'] = requestParameters.topics;
         }
@@ -1695,8 +1700,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Export project\'s topics in excel format  Required scopes: bcf:read
      * Export project\'s topics in excel format
      */
-    async downloadBcfExportXlsx(id: number, format?: string, topics?: string, initOverrides?: RequestInit): Promise<Blob> {
-        const response = await this.downloadBcfExportXlsxRaw({ id: id, format: format, topics: topics }, initOverrides);
+    async downloadBcfExportXlsx(id: number, format?: string, locale?: DownloadBcfExportXlsxLocaleEnum, topics?: string, initOverrides?: RequestInit): Promise<Blob> {
+        const response = await this.downloadBcfExportXlsxRaw({ id: id, format: format, locale: locale, topics: topics }, initOverrides);
         return await response.value();
     }
 
@@ -4168,6 +4173,14 @@ export enum CreateViewpointImgFormatEnum {
     */
 export enum DeleteViewpointImgFormatEnum {
     Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum DownloadBcfExportXlsxLocaleEnum {
+    En = 'en',
+    Fr = 'fr'
 }
 /**
     * @export
