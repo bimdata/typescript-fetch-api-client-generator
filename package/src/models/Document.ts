@@ -147,6 +147,12 @@ export interface Document {
      */
     readonly is_head_version: boolean;
     /**
+     * Number of previous versions
+     * @type {number}
+     * @memberof Document
+     */
+    readonly history_count: number | null;
+    /**
      * Aggregate of group user permissions and folder default permission
      * @type {number}
      * @memberof Document
@@ -213,6 +219,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'ifc_id': json['ifc_id'],
         'head_id': json['head_id'],
         'is_head_version': json['is_head_version'],
+        'history_count': json['history_count'],
         'user_permission': json['user_permission'],
         'office_preview': json['office_preview'],
     };
