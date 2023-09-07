@@ -15,13 +15,30 @@
 
 import * as runtime from '../runtime';
 import {
+    CreateUserRequest,
+    CreateUserRequestFromJSON,
+    CreateUserRequestToJSON,
     Invitation,
     InvitationFromJSON,
     InvitationToJSON,
+    SelectUserRequest,
+    SelectUserRequestFromJSON,
+    SelectUserRequestToJSON,
+    ShortUser,
+    ShortUserFromJSON,
+    ShortUserToJSON,
 } from '../models';
 
 export interface AcceptInvitationRequest {
     id: number;
+}
+
+export interface CreateUserOperationRequest {
+    CreateUserRequest: CreateUserRequest;
+}
+
+export interface DeleteUserRequest {
+    SelectUserRequest: SelectUserRequest;
 }
 
 export interface DenyInvitationRequest {
@@ -91,13 +108,72 @@ export class SsoApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete the user and all clouds where the user is alone
-     * Delete user from BIMData
+     * Create a user, linked to the provider. This route is only useful when used with `ProjetAccessToken`s
+     * Create a user
      */
-    async deleteUserRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async createUserRaw(requestParameters: CreateUserOperationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ShortUser>> {
+        if (requestParameters.CreateUserRequest === null || requestParameters.CreateUserRequest === undefined) {
+            throw new runtime.RequiredError('CreateUserRequest','Required parameter requestParameters.CreateUserRequest was null or undefined when calling createUser.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/identity-provider/user`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateUserRequestToJSON(requestParameters.CreateUserRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ShortUserFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a user, linked to the provider. This route is only useful when used with `ProjetAccessToken`s
+     * Create a user
+     */
+    async createUser(CreateUserRequest: CreateUserRequest, initOverrides?: RequestInit): Promise<ShortUser> {
+        const response = await this.createUserRaw({ CreateUserRequest: CreateUserRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Delete the user and all clouds where the user is alone
+     * Delete user from BIMData
+     */
+    async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.SelectUserRequest === null || requestParameters.SelectUserRequest === undefined) {
+            throw new runtime.RequiredError('SelectUserRequest','Required parameter requestParameters.SelectUserRequest was null or undefined when calling deleteUser.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
@@ -122,6 +198,7 @@ export class SsoApi extends runtime.BaseAPI {
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
+            body: SelectUserRequestToJSON(requestParameters.SelectUserRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -131,8 +208,8 @@ export class SsoApi extends runtime.BaseAPI {
      * Delete the user and all clouds where the user is alone
      * Delete user from BIMData
      */
-    async deleteUser(initOverrides?: RequestInit): Promise<void> {
-        await this.deleteUserRaw(initOverrides);
+    async deleteUser(SelectUserRequest: SelectUserRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteUserRaw({ SelectUserRequest: SelectUserRequest }, initOverrides);
     }
 
     /**

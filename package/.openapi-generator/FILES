@@ -33,6 +33,7 @@ src/models/ComponentsParentRequest.ts
 src/models/CreateBuildingByNameRequest.ts
 src/models/CreateModelRequest.ts
 src/models/CreateMultiPageModelRequest.ts
+src/models/CreateUserRequest.ts
 src/models/DetailedExtensions.ts
 src/models/Direction.ts
 src/models/DirectionRequest.ts
@@ -111,7 +112,6 @@ src/models/PatchedPinRequest.ts
 src/models/PatchedPositioningPlanRequest.ts
 src/models/PatchedPriorityRequest.ts
 src/models/PatchedProcessorHandlerRequest.ts
-src/models/PatchedProjectAccessTokenRequest.ts
 src/models/PatchedProjectRequest.ts
 src/models/PatchedPropertyDefinitionRequest.ts
 src/models/PatchedPropertyRequest.ts
@@ -190,6 +190,7 @@ src/models/RawSystemRequest.ts
 src/models/RawUnit.ts
 src/models/RawUnitRequest.ts
 src/models/RecursiveFolderChildren.ts
+src/models/SelectUserRequest.ts
 src/models/SelfBcfUser.ts
 src/models/SelfUser.ts
 src/models/ShortUser.ts

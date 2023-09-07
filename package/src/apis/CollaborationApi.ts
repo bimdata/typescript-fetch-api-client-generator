@@ -84,9 +84,6 @@ import {
     PatchedGroupRequest,
     PatchedGroupRequestFromJSON,
     PatchedGroupRequestToJSON,
-    PatchedProjectAccessTokenRequest,
-    PatchedProjectAccessTokenRequestFromJSON,
-    PatchedProjectAccessTokenRequestToJSON,
     PatchedProjectRequest,
     PatchedProjectRequestFromJSON,
     PatchedProjectRequestToJSON,
@@ -776,13 +773,6 @@ export interface UpdateProjectRequest {
     cloud_pk: number;
     id: number;
     PatchedProjectRequest?: PatchedProjectRequest;
-}
-
-export interface UpdateProjectAccessTokenRequest {
-    cloud_pk: number;
-    project_pk: number;
-    token: string;
-    PatchedProjectAccessTokenRequest?: PatchedProjectAccessTokenRequest;
 }
 
 export interface UpdateProjectUserRequest {
@@ -1574,7 +1564,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'OBJ\', \'DWG\', \'IFC\', \'DXF\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'DWG\', \'IFC\', \'GLTF\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1677,7 +1667,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'OBJ\', \'DWG\', \'IFC\', \'DXF\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'DWG\', \'IFC\', \'GLTF\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -6754,67 +6744,6 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async updateProject(cloud_pk: number, id: number, PatchedProjectRequest?: PatchedProjectRequest, initOverrides?: RequestInit): Promise<Project> {
         const response = await this.updateProjectRaw({ cloud_pk: cloud_pk, id: id, PatchedProjectRequest: PatchedProjectRequest }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * You can update the expiration date field  Required scopes: org:manage
-     * Update some fields of a token
-     */
-    async updateProjectAccessTokenRaw(requestParameters: UpdateProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectAccessToken>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateProjectAccessToken.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateProjectAccessToken.');
-        }
-
-        if (requestParameters.token === null || requestParameters.token === undefined) {
-            throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling updateProjectAccessToken.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/access-token/{token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"token"}}`, encodeURIComponent(String(requestParameters.token))),
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-            body: PatchedProjectAccessTokenRequestToJSON(requestParameters.PatchedProjectAccessTokenRequest),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => ProjectAccessTokenFromJSON(jsonValue));
-    }
-
-    /**
-     * You can update the expiration date field  Required scopes: org:manage
-     * Update some fields of a token
-     */
-    async updateProjectAccessToken(cloud_pk: number, project_pk: number, token: string, PatchedProjectAccessTokenRequest?: PatchedProjectAccessTokenRequest, initOverrides?: RequestInit): Promise<ProjectAccessToken> {
-        const response = await this.updateProjectAccessTokenRaw({ cloud_pk: cloud_pk, project_pk: project_pk, token: token, PatchedProjectAccessTokenRequest: PatchedProjectAccessTokenRequest }, initOverrides);
         return await response.value();
     }
 

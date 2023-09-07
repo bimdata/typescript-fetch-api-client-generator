@@ -37,6 +37,16 @@ export interface ProjectAccessToken {
      * @memberof ProjectAccessToken
      */
     expires_at?: Date;
+    /**
+     * 
+     *         If the request is made from an SSO application, you can link the token to a user.
+     *         All calls made with the token will populate created_by fields with the user.
+     *         If the user don't have access to some data, the token won't have access.
+     *         
+     * @type {string}
+     * @memberof ProjectAccessToken
+     */
+    email_impersonation?: string | null;
 }
 
 /**
@@ -67,6 +77,7 @@ export function ProjectAccessTokenFromJSONTyped(json: any, ignoreDiscriminator: 
         'token': json['token'],
         'scopes': json['scopes'],
         'expires_at': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
+        'email_impersonation': !exists(json, 'email_impersonation') ? undefined : json['email_impersonation'],
     };
 }
 
@@ -81,6 +92,7 @@ export function ProjectAccessTokenToJSON(value?: ProjectAccessToken | null): any
         
         'scopes': value.scopes,
         'expires_at': value.expires_at === undefined ? undefined : (value.expires_at.toISOString()),
+        'email_impersonation': value.email_impersonation,
     };
 }
 
