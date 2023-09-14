@@ -37,6 +37,12 @@ export interface ZoneSpaceRequest {
      * @memberof ZoneSpaceRequest
      */
     uuid: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ZoneSpaceRequest
+     */
+    order?: number;
 }
 
 export function ZoneSpaceRequestFromJSON(json: any): ZoneSpaceRequest {
@@ -52,6 +58,7 @@ export function ZoneSpaceRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'name': !exists(json, 'name') ? undefined : json['name'],
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': json['uuid'],
+        'order': !exists(json, 'order') ? undefined : json['order'],
     };
 }
 
@@ -67,6 +74,7 @@ export function ZoneSpaceRequestToJSON(value?: ZoneSpaceRequest | null): any {
         'name': value.name,
         'longname': value.longname,
         'uuid': value.uuid,
+        'order': value.order,
     };
 }
 

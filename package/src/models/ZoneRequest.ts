@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    SpaceRequest,
-    SpaceRequestFromJSON,
-    SpaceRequestFromJSONTyped,
-    SpaceRequestToJSON,
-} from './SpaceRequest';
+    ZoneSpaceRequest,
+    ZoneSpaceRequestFromJSON,
+    ZoneSpaceRequestFromJSONTyped,
+    ZoneSpaceRequestToJSON,
+} from './ZoneSpaceRequest';
 
 /**
  * Adds nested create feature
@@ -52,16 +52,22 @@ export interface ZoneRequest {
     parent_id?: number;
     /**
      * 
-     * @type {Array<SpaceRequest>}
+     * @type {Array<ZoneSpaceRequest>}
      * @memberof ZoneRequest
      */
-    spaces?: Array<SpaceRequest>;
+    spaces?: Array<ZoneSpaceRequest>;
     /**
      * 
      * @type {string}
      * @memberof ZoneRequest
      */
     color?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ZoneRequest
+     */
+    order?: number;
 }
 
 export function ZoneRequestFromJSON(json: any): ZoneRequest {
@@ -78,8 +84,9 @@ export function ZoneRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'uuid': json['uuid'],
         'zones': !exists(json, 'zones') ? undefined : ((json['zones'] as Array<any>).map(ZoneRequestFromJSON)),
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'spaces': !exists(json, 'spaces') ? undefined : ((json['spaces'] as Array<any>).map(SpaceRequestFromJSON)),
+        'spaces': !exists(json, 'spaces') ? undefined : ((json['spaces'] as Array<any>).map(ZoneSpaceRequestFromJSON)),
         'color': !exists(json, 'color') ? undefined : json['color'],
+        'order': !exists(json, 'order') ? undefined : json['order'],
     };
 }
 
@@ -96,8 +103,9 @@ export function ZoneRequestToJSON(value?: ZoneRequest | null): any {
         'uuid': value.uuid,
         'zones': value.zones === undefined ? undefined : ((value.zones as Array<any>).map(ZoneRequestToJSON)),
         'parent_id': value.parent_id,
-        'spaces': value.spaces === undefined ? undefined : ((value.spaces as Array<any>).map(SpaceRequestToJSON)),
+        'spaces': value.spaces === undefined ? undefined : ((value.spaces as Array<any>).map(ZoneSpaceRequestToJSON)),
         'color': value.color,
+        'order': value.order,
     };
 }
 

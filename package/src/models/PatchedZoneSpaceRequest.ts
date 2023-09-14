@@ -37,6 +37,12 @@ export interface PatchedZoneSpaceRequest {
      * @memberof PatchedZoneSpaceRequest
      */
     uuid?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PatchedZoneSpaceRequest
+     */
+    order?: number;
 }
 
 export function PatchedZoneSpaceRequestFromJSON(json: any): PatchedZoneSpaceRequest {
@@ -52,6 +58,7 @@ export function PatchedZoneSpaceRequestFromJSONTyped(json: any, ignoreDiscrimina
         'name': !exists(json, 'name') ? undefined : json['name'],
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': !exists(json, 'uuid') ? undefined : json['uuid'],
+        'order': !exists(json, 'order') ? undefined : json['order'],
     };
 }
 
@@ -67,6 +74,7 @@ export function PatchedZoneSpaceRequestToJSON(value?: PatchedZoneSpaceRequest | 
         'name': value.name,
         'longname': value.longname,
         'uuid': value.uuid,
+        'order': value.order,
     };
 }
 

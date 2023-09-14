@@ -51,6 +51,12 @@ export interface ZoneSpace {
     readonly zone_set: Array<number>;
     /**
      * 
+     * @type {number}
+     * @memberof ZoneSpace
+     */
+    order?: number;
+    /**
+     * 
      * @type {Date}
      * @memberof ZoneSpace
      */
@@ -78,6 +84,7 @@ export function ZoneSpaceFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': json['uuid'],
         'zone_set': json['zone_set'],
+        'order': !exists(json, 'order') ? undefined : json['order'],
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
     };
@@ -95,6 +102,7 @@ export function ZoneSpaceToJSON(value?: ZoneSpace | null): any {
         'name': value.name,
         'longname': value.longname,
         'uuid': value.uuid,
+        'order': value.order,
     };
 }
 

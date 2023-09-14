@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Space,
-    SpaceFromJSON,
-    SpaceFromJSONTyped,
-    SpaceToJSON,
-} from './Space';
+    ZoneSpace,
+    ZoneSpaceFromJSON,
+    ZoneSpaceFromJSONTyped,
+    ZoneSpaceToJSON,
+} from './ZoneSpace';
 
 /**
  * Adds nested create feature
@@ -58,10 +58,10 @@ export interface Zone {
     parent_id?: number;
     /**
      * 
-     * @type {Array<Space>}
+     * @type {Array<ZoneSpace>}
      * @memberof Zone
      */
-    spaces?: Array<Space>;
+    spaces?: Array<ZoneSpace>;
     /**
      * 
      * @type {Date}
@@ -80,6 +80,12 @@ export interface Zone {
      * @memberof Zone
      */
     color?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Zone
+     */
+    order?: number;
 }
 
 export function ZoneFromJSON(json: any): Zone {
@@ -97,10 +103,11 @@ export function ZoneFromJSONTyped(json: any, ignoreDiscriminator: boolean): Zone
         'uuid': json['uuid'],
         'zones': !exists(json, 'zones') ? undefined : ((json['zones'] as Array<any>).map(ZoneFromJSON)),
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'spaces': !exists(json, 'spaces') ? undefined : ((json['spaces'] as Array<any>).map(SpaceFromJSON)),
+        'spaces': !exists(json, 'spaces') ? undefined : ((json['spaces'] as Array<any>).map(ZoneSpaceFromJSON)),
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
         'color': !exists(json, 'color') ? undefined : json['color'],
+        'order': !exists(json, 'order') ? undefined : json['order'],
     };
 }
 
@@ -117,8 +124,9 @@ export function ZoneToJSON(value?: Zone | null): any {
         'uuid': value.uuid,
         'zones': value.zones === undefined ? undefined : ((value.zones as Array<any>).map(ZoneToJSON)),
         'parent_id': value.parent_id,
-        'spaces': value.spaces === undefined ? undefined : ((value.spaces as Array<any>).map(SpaceToJSON)),
+        'spaces': value.spaces === undefined ? undefined : ((value.spaces as Array<any>).map(ZoneSpaceToJSON)),
         'color': value.color,
+        'order': value.order,
     };
 }
 
