@@ -28,6 +28,12 @@ import {
 export interface ProjectFolderTree {
     /**
      * 
+     * @type {number}
+     * @memberof ProjectFolderTree
+     */
+    id: number;
+    /**
+     * 
      * @type {string}
      * @memberof ProjectFolderTree
      */
@@ -50,6 +56,7 @@ export function ProjectFolderTreeFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
+        'id': json['id'],
         'name': json['name'],
         'folders': ((json['folders'] as Array<any>).map(FolderTreeFromJSON)),
     };
@@ -64,6 +71,7 @@ export function ProjectFolderTreeToJSON(value?: ProjectFolderTree | null): any {
     }
     return {
         
+        'id': value.id,
         'name': value.name,
         'folders': ((value.folders as Array<any>).map(FolderTreeToJSON)),
     };

@@ -1564,7 +1564,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'IFC\', \'GLTF\', \'POINT_CLOUD\', \'DWG\', \'OBJ\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'IFC\', \'GLTF\', \'OBJ\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1667,7 +1667,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'IFC\', \'GLTF\', \'POINT_CLOUD\', \'DWG\', \'OBJ\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'IFC\', \'GLTF\', \'OBJ\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -1916,7 +1916,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a tag  Required scopes: org:manage
+     * Create a tag  Required scopes: document:write
      * Create a tag
      */
     async createTagRaw(requestParameters: CreateTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Tag>> {
@@ -1968,7 +1968,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a tag  Required scopes: org:manage
+     * Create a tag  Required scopes: document:write
      * Create a tag
      */
     async createTag(cloud_pk: number, project_pk: number, TagRequest: TagRequest, initOverrides?: RequestInit): Promise<Tag> {
@@ -2848,7 +2848,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete the tag  Required scopes: org:manage
+     * Delete the tag  Required scopes: document:write
      * Delete the tag
      */
     async deleteTagRaw(requestParameters: DeleteTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -2897,7 +2897,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete the tag  Required scopes: org:manage
+     * Delete the tag  Required scopes: document:write
      * Delete the tag
      */
     async deleteTag(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -5004,7 +5004,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a tag in the project  Required scopes: org:manage
+     * Retrieve a tag in the project  Required scopes: document:read
      * Retrieve a tag
      */
     async getTagRaw(requestParameters: GetTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Tag>> {
@@ -5053,7 +5053,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve a tag in the project  Required scopes: org:manage
+     * Retrieve a tag in the project  Required scopes: document:read
      * Retrieve a tag
      */
     async getTag(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Tag> {
@@ -5062,7 +5062,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all tags in the project  Required scopes: org:manage
+     * Retrieve all tags in the project  Required scopes: document:read
      * Retrieve all tags
      */
     async getTagsRaw(requestParameters: GetTagsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Tag>>> {
@@ -5107,7 +5107,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all tags in the project  Required scopes: org:manage
+     * Retrieve all tags in the project  Required scopes: document:read
      * Retrieve all tags
      */
     async getTags(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Tag>> {
@@ -6809,7 +6809,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of the tag  Required scopes: org:manage
+     * Update some fields of the tag  Required scopes: document:write
      * Update some fields of the tag
      */
     async updateTagRaw(requestParameters: UpdateTagRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Tag>> {
@@ -6861,7 +6861,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of the tag  Required scopes: org:manage
+     * Update some fields of the tag  Required scopes: document:write
      * Update some fields of the tag
      */
     async updateTag(cloud_pk: number, id: number, project_pk: number, PatchedTagRequest?: PatchedTagRequest, initOverrides?: RequestInit): Promise<Tag> {
