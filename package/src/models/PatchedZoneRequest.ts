@@ -55,7 +55,7 @@ export interface PatchedZoneRequest {
      * @type {number}
      * @memberof PatchedZoneRequest
      */
-    parent_id?: number;
+    parent_id?: number | null;
     /**
      * 
      * @type {Array<ZoneSpaceRequest>}

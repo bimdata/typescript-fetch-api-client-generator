@@ -55,7 +55,7 @@ export interface Zone {
      * @type {number}
      * @memberof Zone
      */
-    parent_id?: number;
+    parent_id?: number | null;
     /**
      * 
      * @type {Array<ZoneSpace>}

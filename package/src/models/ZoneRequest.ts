@@ -49,7 +49,7 @@ export interface ZoneRequest {
      * @type {number}
      * @memberof ZoneRequest
      */
-    parent_id?: number;
+    parent_id?: number | null;
     /**
      * 
      * @type {Array<ZoneSpaceRequest>}
