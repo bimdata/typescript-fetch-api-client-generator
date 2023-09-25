@@ -235,4 +235,5 @@ export * from './XktFile';
 export * from './Zone';
 export * from './ZoneRequest';
 export * from './ZoneSpace';
+export * from './ZoneSpaceRelationRequest';
 export * from './ZoneSpaceRequest';

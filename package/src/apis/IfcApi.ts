@@ -210,6 +210,9 @@ import {
     ZoneSpace,
     ZoneSpaceFromJSON,
     ZoneSpaceToJSON,
+    ZoneSpaceRelationRequest,
+    ZoneSpaceRelationRequestFromJSON,
+    ZoneSpaceRelationRequestToJSON,
     ZoneSpaceRequest,
     ZoneSpaceRequestFromJSON,
     ZoneSpaceRequestToJSON,
@@ -220,6 +223,14 @@ export interface AddIfcErrorsDeprecatedRequest {
     id: number;
     project_pk: number;
     ModelErrorsRequest?: ModelErrorsRequest;
+}
+
+export interface AddZoneSpaceDeprecatedRequest {
+    cloud_pk: number;
+    ifc_pk: number;
+    project_pk: number;
+    zone_pk: number;
+    ZoneSpaceRelationRequest: ZoneSpaceRelationRequest;
 }
 
 export interface BulkDeleteIfcClassificationsDeprecatedRequest {
@@ -1384,6 +1395,75 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async addIfcErrorsDeprecated(cloud_pk: number, id: number, project_pk: number, ModelErrorsRequest?: ModelErrorsRequest, initOverrides?: RequestInit): Promise<ModelErrors> {
         const response = await this.addIfcErrorsDeprecatedRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, ModelErrorsRequest: ModelErrorsRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Add a space to a zone. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
+     * Add a space to a zone
+     */
+    async addZoneSpaceDeprecatedRaw(requestParameters: AddZoneSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ZoneSpace>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling addZoneSpaceDeprecated.');
+        }
+
+        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
+            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling addZoneSpaceDeprecated.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling addZoneSpaceDeprecated.');
+        }
+
+        if (requestParameters.zone_pk === null || requestParameters.zone_pk === undefined) {
+            throw new runtime.RequiredError('zone_pk','Required parameter requestParameters.zone_pk was null or undefined when calling addZoneSpaceDeprecated.');
+        }
+
+        if (requestParameters.ZoneSpaceRelationRequest === null || requestParameters.ZoneSpaceRelationRequest === undefined) {
+            throw new runtime.RequiredError('ZoneSpaceRelationRequest','Required parameter requestParameters.ZoneSpaceRelationRequest was null or undefined when calling addZoneSpaceDeprecated.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/zone/{zone_pk}/space/add`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"zone_pk"}}`, encodeURIComponent(String(requestParameters.zone_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ZoneSpaceRelationRequestToJSON(requestParameters.ZoneSpaceRelationRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ZoneSpaceFromJSON(jsonValue));
+    }
+
+    /**
+     * Add a space to a zone. The IFC file will not be updated. The created space will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
+     * Add a space to a zone
+     */
+    async addZoneSpaceDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, zone_pk: number, ZoneSpaceRelationRequest: ZoneSpaceRelationRequest, initOverrides?: RequestInit): Promise<ZoneSpace> {
+        const response = await this.addZoneSpaceDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, zone_pk: zone_pk, ZoneSpaceRelationRequest: ZoneSpaceRelationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -4991,8 +5071,8 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
-     * Delete a space of a zone
+     * Delete the relation between a space and a zone. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
+     * Delete the relation between a space and a zone
      */
     async deleteZoneSpaceDeprecatedRaw(requestParameters: DeleteZoneSpaceDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
@@ -5048,8 +5128,8 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
-     * The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
-     * Delete a space of a zone
+     * Delete the relation between a space and a zone. The IFC file will not be updated. The remaining spaces are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
+     * Delete the relation between a space and a zone
      */
     async deleteZoneSpaceDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, zone_pk: number, initOverrides?: RequestInit): Promise<void> {
         await this.deleteZoneSpaceDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, zone_pk: zone_pk }, initOverrides);

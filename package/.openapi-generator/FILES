@@ -242,6 +242,7 @@ src/models/XktFile.ts
 src/models/Zone.ts
 src/models/ZoneRequest.ts
 src/models/ZoneSpace.ts
+src/models/ZoneSpaceRelationRequest.ts
 src/models/ZoneSpaceRequest.ts
 src/models/index.ts
 src/runtime.ts
