@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    GeometryPointRequest,
+    GeometryPointRequestFromJSON,
+    GeometryPointRequestFromJSONTyped,
+    GeometryPointRequestToJSON,
+} from './GeometryPointRequest';
+
 /**
  * 
  * @export
@@ -39,6 +46,12 @@ export interface PatchedZoneSpaceRequest {
     uuid?: string;
     /**
      * 
+     * @type {Array<GeometryPointRequest>}
+     * @memberof PatchedZoneSpaceRequest
+     */
+    geometry?: Array<GeometryPointRequest> | null;
+    /**
+     * 
      * @type {number}
      * @memberof PatchedZoneSpaceRequest
      */
@@ -58,6 +71,7 @@ export function PatchedZoneSpaceRequestFromJSONTyped(json: any, ignoreDiscrimina
         'name': !exists(json, 'name') ? undefined : json['name'],
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': !exists(json, 'uuid') ? undefined : json['uuid'],
+        'geometry': !exists(json, 'geometry') ? undefined : (json['geometry'] === null ? null : (json['geometry'] as Array<any>).map(GeometryPointRequestFromJSON)),
         'order': !exists(json, 'order') ? undefined : json['order'],
     };
 }
@@ -74,6 +88,7 @@ export function PatchedZoneSpaceRequestToJSON(value?: PatchedZoneSpaceRequest | 
         'name': value.name,
         'longname': value.longname,
         'uuid': value.uuid,
+        'geometry': value.geometry === undefined ? undefined : (value.geometry === null ? null : (value.geometry as Array<any>).map(GeometryPointRequestToJSON)),
         'order': value.order,
     };
 }

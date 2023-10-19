@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    GeometryPoint,
+    GeometryPointFromJSON,
+    GeometryPointFromJSONTyped,
+    GeometryPointToJSON,
+} from './GeometryPoint';
+
 /**
  * 
  * @export
@@ -51,6 +58,12 @@ export interface ZoneSpace {
     readonly zone_set: Array<number>;
     /**
      * 
+     * @type {Array<GeometryPoint>}
+     * @memberof ZoneSpace
+     */
+    geometry?: Array<GeometryPoint> | null;
+    /**
+     * 
      * @type {number}
      * @memberof ZoneSpace
      */
@@ -84,6 +97,7 @@ export function ZoneSpaceFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'longname': !exists(json, 'longname') ? undefined : json['longname'],
         'uuid': json['uuid'],
         'zone_set': json['zone_set'],
+        'geometry': !exists(json, 'geometry') ? undefined : (json['geometry'] === null ? null : (json['geometry'] as Array<any>).map(GeometryPointFromJSON)),
         'order': !exists(json, 'order') ? undefined : json['order'],
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
@@ -102,6 +116,7 @@ export function ZoneSpaceToJSON(value?: ZoneSpace | null): any {
         'name': value.name,
         'longname': value.longname,
         'uuid': value.uuid,
+        'geometry': value.geometry === undefined ? undefined : (value.geometry === null ? null : (value.geometry as Array<any>).map(GeometryPointToJSON)),
         'order': value.order,
     };
 }

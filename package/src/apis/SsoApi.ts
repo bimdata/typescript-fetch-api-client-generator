@@ -108,7 +108,7 @@ export class SsoApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a user, linked to the provider. This route is only useful when used with `ProjetAccessToken`s
+     * Create a user, linked to the provider. This route is only useful when used with `ProjetAccessToken`s. If user already exists, it responds with a 200 instead of a 201
      * Create a user
      */
     async createUserRaw(requestParameters: CreateUserOperationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ShortUser>> {
@@ -152,7 +152,7 @@ export class SsoApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a user, linked to the provider. This route is only useful when used with `ProjetAccessToken`s
+     * Create a user, linked to the provider. This route is only useful when used with `ProjetAccessToken`s. If user already exists, it responds with a 200 instead of a 201
      * Create a user
      */
     async createUser(CreateUserRequest: CreateUserRequest, initOverrides?: RequestInit): Promise<ShortUser> {

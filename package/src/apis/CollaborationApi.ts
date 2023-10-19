@@ -870,7 +870,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Accept a validation  Required scopes: document:write
+     * Accept a validation  Required scopes: document:read
      * Accept a validation
      */
     async acceptValidationRaw(requestParameters: AcceptValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -927,7 +927,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Accept a validation  Required scopes: document:write
+     * Accept a validation  Required scopes: document:read
      * Accept a validation
      */
     async acceptValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -1278,7 +1278,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Close a visa of a document  Required scopes: document:write
+     * Close a visa of a document  Required scopes: document:read
      * Close a visa of a document
      */
     async closeVisaRaw(requestParameters: CloseVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -1331,7 +1331,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Close a visa of a document  Required scopes: document:write
+     * Close a visa of a document  Required scopes: document:read
      * Close a visa of a document
      */
     async closeVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -1564,7 +1564,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'OBJ\', \'IFC\', \'GLTF\', \'DXF\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'IFC\', \'GLTF\', \'POINT_CLOUD\', \'DXF\', \'OBJ\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1667,7 +1667,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'OBJ\', \'IFC\', \'GLTF\', \'DXF\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'IFC\', \'GLTF\', \'POINT_CLOUD\', \'DXF\', \'OBJ\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -1977,7 +1977,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Add a validation to a visa  Required scopes: document:write
+     * Add a validation to a visa  Required scopes: document:read
      * Add a validation to a visa
      */
     async createValidationRaw(requestParameters: CreateValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaValidation>> {
@@ -2037,7 +2037,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Add a validation to a visa  Required scopes: document:write
+     * Add a validation to a visa  Required scopes: document:read
      * Add a validation to a visa
      */
     async createValidation(cloud_pk: number, document_pk: number, project_pk: number, visa_pk: number, VisaValidationRequest: VisaValidationRequest, initOverrides?: RequestInit): Promise<VisaValidation> {
@@ -2046,7 +2046,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a visa  Required scopes: document:write
+     * Create a visa  Required scopes: document:read
      * Create a visa
      */
     async createVisaRaw(requestParameters: CreateVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visa>> {
@@ -2098,7 +2098,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a visa  Required scopes: document:write
+     * Create a visa  Required scopes: document:read
      * Create a visa
      */
     async createVisa(cloud_pk: number, document_pk: number, project_pk: number, VisaRequest?: VisaRequest, initOverrides?: RequestInit): Promise<Visa> {
@@ -2107,7 +2107,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Add a comment  Required scopes: document:write
+     * Add a comment  Required scopes: document:read
      * Add a comment
      */
     async createVisaCommentRaw(requestParameters: CreateVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaComment>> {
@@ -2163,7 +2163,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Add a comment  Required scopes: document:write
+     * Add a comment  Required scopes: document:read
      * Add a comment
      */
     async createVisaComment(cloud_pk: number, document_pk: number, project_pk: number, visa_pk: number, VisaCommentRequest?: VisaCommentRequest, initOverrides?: RequestInit): Promise<VisaComment> {
@@ -2905,7 +2905,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Remove a validation  Required scopes: document:write
+     * Remove a validation  Required scopes: document:read
      * Remove a validation
      */
     async deleteValidationRaw(requestParameters: DeleteValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -2962,7 +2962,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Remove a validation  Required scopes: document:write
+     * Remove a validation  Required scopes: document:read
      * Remove a validation
      */
     async deleteValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -2970,7 +2970,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Remove a visa  Required scopes: document:write
+     * Remove a visa  Required scopes: document:read
      * Remove a visa
      */
     async deleteVisaRaw(requestParameters: DeleteVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -3023,7 +3023,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Remove a visa  Required scopes: document:write
+     * Remove a visa  Required scopes: document:read
      * Remove a visa
      */
     async deleteVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -3031,7 +3031,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Remove a comment  Required scopes: document:write
+     * Remove a comment  Required scopes: document:read
      * Remove a comment
      */
     async deleteVisaCommentRaw(requestParameters: DeleteVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -3088,7 +3088,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Remove a comment  Required scopes: document:write
+     * Remove a comment  Required scopes: document:read
      * Remove a comment
      */
     async deleteVisaComment(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -3145,7 +3145,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deny a validation  Required scopes: document:write
+     * Deny a validation  Required scopes: document:read
      * Deny a validation
      */
     async denyValidationRaw(requestParameters: DenyValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -3202,7 +3202,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Deny a validation  Required scopes: document:write
+     * Deny a validation  Required scopes: document:read
      * Deny a validation
      */
     async denyValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -6005,7 +6005,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Pause a visa of a document  Required scopes: document:write
+     * Pause a visa of a document  Required scopes: document:read
      * Pause a visa of a document
      */
     async pauseVisaRaw(requestParameters: PauseVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -6058,7 +6058,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Pause a visa of a document  Required scopes: document:write
+     * Pause a visa of a document  Required scopes: document:read
      * Pause a visa of a document
      */
     async pauseVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -6066,7 +6066,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Reset a validation if the validation has been accepted or rejected  Required scopes: document:write
+     * Reset a validation if the validation has been accepted or rejected  Required scopes: document:read
      * Reset a validation
      */
     async resetValidationRaw(requestParameters: ResetValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -6123,7 +6123,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Reset a validation if the validation has been accepted or rejected  Required scopes: document:write
+     * Reset a validation if the validation has been accepted or rejected  Required scopes: document:read
      * Reset a validation
      */
     async resetValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -6131,7 +6131,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Resume a visa of a document after a pause  Required scopes: document:write
+     * Resume a visa of a document after a pause  Required scopes: document:read
      * Resume a visa of a document
      */
     async resumeVisaRaw(requestParameters: ResumeVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -6184,7 +6184,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Resume a visa of a document after a pause  Required scopes: document:write
+     * Resume a visa of a document after a pause  Required scopes: document:read
      * Resume a visa of a document
      */
     async resumeVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -6870,7 +6870,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update the validator of validation. This route is only useful for an App  Required scopes: document:write
+     * Update the validator of validation. This route is only useful for an App  Required scopes: document:read
      * Update the validator of validation
      */
     async updateValidationRaw(requestParameters: UpdateValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaValidation>> {
@@ -6930,7 +6930,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update the validator of validation. This route is only useful for an App  Required scopes: document:write
+     * Update the validator of validation. This route is only useful for an App  Required scopes: document:read
      * Update the validator of validation
      */
     async updateValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, PatchedVisaValidationRequest?: PatchedVisaValidationRequest, initOverrides?: RequestInit): Promise<VisaValidation> {
@@ -6939,7 +6939,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a visa  Required scopes: document:write
+     * Update some fields of a visa  Required scopes: document:read
      * Update some fields of a visa
      */
     async updateVisaRaw(requestParameters: UpdateVisaRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visa>> {
@@ -6995,7 +6995,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a visa  Required scopes: document:write
+     * Update some fields of a visa  Required scopes: document:read
      * Update some fields of a visa
      */
     async updateVisa(cloud_pk: number, document_pk: number, id: number, project_pk: number, PatchedVisaRequest?: PatchedVisaRequest, initOverrides?: RequestInit): Promise<Visa> {
@@ -7004,7 +7004,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a comment  Required scopes: document:write
+     * Update some fields of a comment  Required scopes: document:read
      * Update some fields of a comment
      */
     async updateVisaCommentRaw(requestParameters: UpdateVisaCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaComment>> {
@@ -7064,7 +7064,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a comment  Required scopes: document:write
+     * Update some fields of a comment  Required scopes: document:read
      * Update some fields of a comment
      */
     async updateVisaComment(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, PatchedVisaCommentRequest?: PatchedVisaCommentRequest, initOverrides?: RequestInit): Promise<VisaComment> {
