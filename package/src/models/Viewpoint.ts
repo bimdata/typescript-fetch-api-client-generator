@@ -128,6 +128,12 @@ export interface Viewpoint {
      * @memberof Viewpoint
      */
     pins?: Array<Pin> | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof Viewpoint
+     */
+    models?: Array<number>;
 }
 
 export function ViewpointFromJSON(json: any): Viewpoint {
@@ -151,6 +157,7 @@ export function ViewpointFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'snapshot': !exists(json, 'snapshot') ? undefined : SnapshotFromJSON(json['snapshot']),
         'components': !exists(json, 'components') ? undefined : ComponentsParentFromJSON(json['components']),
         'pins': !exists(json, 'pins') ? undefined : (json['pins'] === null ? null : (json['pins'] as Array<any>).map(PinFromJSON)),
+        'models': !exists(json, 'models') ? undefined : json['models'],
     };
 }
 
@@ -174,6 +181,7 @@ export function ViewpointToJSON(value?: Viewpoint | null): any {
         'snapshot': SnapshotToJSON(value.snapshot),
         'components': ComponentsParentToJSON(value.components),
         'pins': value.pins === undefined ? undefined : (value.pins === null ? null : (value.pins as Array<any>).map(PinToJSON)),
+        'models': value.models,
     };
 }
 

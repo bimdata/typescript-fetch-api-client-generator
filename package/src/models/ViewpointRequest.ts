@@ -134,6 +134,12 @@ export interface ViewpointRequest {
      * @memberof ViewpointRequest
      */
     temp_id?: number | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof ViewpointRequest
+     */
+    models?: Array<number>;
 }
 
 export function ViewpointRequestFromJSON(json: any): ViewpointRequest {
@@ -158,6 +164,7 @@ export function ViewpointRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
         'components': !exists(json, 'components') ? undefined : ComponentsParentRequestFromJSON(json['components']),
         'pins': !exists(json, 'pins') ? undefined : (json['pins'] === null ? null : (json['pins'] as Array<any>).map(PinRequestFromJSON)),
         'temp_id': !exists(json, 'temp_id') ? undefined : json['temp_id'],
+        'models': !exists(json, 'models') ? undefined : json['models'],
     };
 }
 
@@ -182,6 +189,7 @@ export function ViewpointRequestToJSON(value?: ViewpointRequest | null): any {
         'components': ComponentsParentRequestToJSON(value.components),
         'pins': value.pins === undefined ? undefined : (value.pins === null ? null : (value.pins as Array<any>).map(PinRequestToJSON)),
         'temp_id': value.temp_id,
+        'models': value.models,
     };
 }
 
