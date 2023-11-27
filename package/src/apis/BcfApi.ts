@@ -84,6 +84,9 @@ import {
     PatchedTopicTypeRequest,
     PatchedTopicTypeRequestFromJSON,
     PatchedTopicTypeRequestToJSON,
+    PatchedViewpointRequest,
+    PatchedViewpointRequestFromJSON,
+    PatchedViewpointRequestToJSON,
     Pin,
     PinFromJSON,
     PinToJSON,
@@ -476,6 +479,14 @@ export interface UpdateTopicRequest {
     guid: string;
     projects_pk: number;
     PatchedTopicRequest?: PatchedTopicRequest;
+}
+
+export interface UpdateViewpointRequest {
+    guid: string;
+    projects_pk: number;
+    topics_guid: string;
+    img_format?: UpdateViewpointImgFormatEnum;
+    PatchedViewpointRequest?: PatchedViewpointRequest;
 }
 
 /**
@@ -4002,6 +4013,71 @@ export class BcfApi extends runtime.BaseAPI {
         return await response.value();
     }
 
+    /**
+     * This is not a standard route. Update some fields of a Viewpoint  Required scopes: bcf:write
+     * Update some fields of a Viewpoint
+     */
+    async updateViewpointRaw(requestParameters: UpdateViewpointRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Viewpoint>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling updateViewpoint.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling updateViewpoint.');
+        }
+
+        if (requestParameters.topics_guid === null || requestParameters.topics_guid === undefined) {
+            throw new runtime.RequiredError('topics_guid','Required parameter requestParameters.topics_guid was null or undefined when calling updateViewpoint.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.img_format !== undefined) {
+            queryParameters['img_format'] = requestParameters.img_format;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{topics_guid}/viewpoints/{guid}`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))).replace(`{${"topics_guid"}}`, encodeURIComponent(String(requestParameters.topics_guid))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedViewpointRequestToJSON(requestParameters.PatchedViewpointRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ViewpointFromJSON(jsonValue));
+    }
+
+    /**
+     * This is not a standard route. Update some fields of a Viewpoint  Required scopes: bcf:write
+     * Update some fields of a Viewpoint
+     */
+    async updateViewpoint(guid: string, projects_pk: number, topics_guid: string, img_format?: UpdateViewpointImgFormatEnum, PatchedViewpointRequest?: PatchedViewpointRequest, initOverrides?: RequestInit): Promise<Viewpoint> {
+        const response = await this.updateViewpointRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, img_format: img_format, PatchedViewpointRequest: PatchedViewpointRequest }, initOverrides);
+        return await response.value();
+    }
+
 }
 
 /**
@@ -4080,5 +4156,12 @@ export enum GetViewpointsImgFormatEnum {
     * @enum {string}
     */
 export enum UpdateFullTopicImgFormatEnum {
+    Url = 'url'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum UpdateViewpointImgFormatEnum {
     Url = 'url'
 }

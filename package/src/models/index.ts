@@ -120,6 +120,7 @@ export * from './PatchedTopicTypeRequest';
 export * from './PatchedUnitRequest';
 export * from './PatchedUserCloudUpdateRequest';
 export * from './PatchedUserProjectUpdateRequest';
+export * from './PatchedViewpointRequest';
 export * from './PatchedVisaCommentRequest';
 export * from './PatchedVisaRequest';
 export * from './PatchedVisaValidationRequest';

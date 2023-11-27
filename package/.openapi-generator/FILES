@@ -127,6 +127,7 @@ src/models/PatchedTopicTypeRequest.ts
 src/models/PatchedUnitRequest.ts
 src/models/PatchedUserCloudUpdateRequest.ts
 src/models/PatchedUserProjectUpdateRequest.ts
+src/models/PatchedViewpointRequest.ts
 src/models/PatchedVisaCommentRequest.ts
 src/models/PatchedVisaRequest.ts
 src/models/PatchedVisaValidationRequest.ts
