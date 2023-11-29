@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    User,
+    UserFromJSON,
+    UserFromJSONTyped,
+    UserToJSON,
+} from './User';
+
 /**
  * 
  * @export
@@ -57,6 +64,12 @@ export interface CheckProjectAccess {
      * @memberof CheckProjectAccess
      */
     user_role?: CheckProjectAccessUserRoleEnum;
+    /**
+     * 
+     * @type {User}
+     * @memberof CheckProjectAccess
+     */
+    user?: User;
 }
 
 /**
@@ -85,6 +98,7 @@ export function CheckProjectAccessFromJSONTyped(json: any, ignoreDiscriminator: 
         'token_scopes': json['token_scopes'],
         'usable_scopes': json['usable_scopes'],
         'user_role': !exists(json, 'user_role') ? undefined : json['user_role'],
+        'user': !exists(json, 'user') ? undefined : UserFromJSON(json['user']),
     };
 }
 
@@ -103,6 +117,7 @@ export function CheckProjectAccessToJSON(value?: CheckProjectAccess | null): any
         'token_scopes': value.token_scopes,
         'usable_scopes': value.usable_scopes,
         'user_role': value.user_role,
+        'user': UserToJSON(value.user),
     };
 }
 
