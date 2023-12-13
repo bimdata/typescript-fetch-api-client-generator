@@ -165,6 +165,9 @@ import {
     Visa,
     VisaFromJSON,
     VisaToJSON,
+    VisaAttachment,
+    VisaAttachmentFromJSON,
+    VisaAttachmentToJSON,
     VisaComment,
     VisaCommentFromJSON,
     VisaCommentToJSON,
@@ -195,6 +198,7 @@ export interface AcceptValidationRequest {
     id: number;
     project_pk: number;
     visa_pk: number;
+    attachment?: Blob | null;
 }
 
 export interface AddDocumentTagRequest {
@@ -432,6 +436,7 @@ export interface DenyValidationRequest {
     id: number;
     project_pk: number;
     visa_pk: number;
+    attachment?: Blob | null;
 }
 
 export interface GetClassificationRequest {
@@ -485,12 +490,66 @@ export interface GetDocumentHistoriesRequest {
 export interface GetDocumentsRequest {
     cloud_pk: number;
     project_pk: number;
+    created_after?: Date;
+    created_before?: Date;
+    creator_email?: string;
+    description?: string;
+    description__contains?: string;
+    description__endswith?: string;
+    description__startswith?: string;
+    file_name?: string;
+    file_name__contains?: string;
+    file_name__endswith?: string;
+    file_name__startswith?: string;
+    name?: string;
+    name__contains?: string;
+    name__endswith?: string;
+    name__startswith?: string;
+    size_max?: number | null;
+    size_min?: number | null;
+    tags?: Array<string>;
+    visa__creator_email?: string;
+    visa__deadline_after?: Date;
+    visa__deadline_before?: Date;
+    visa__status?: GetDocumentsVisaStatusEnum;
+    visa__validation_status?: string;
+    visa__validator_email?: string;
 }
 
 export interface GetFolderRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
+}
+
+export interface GetFolderDocumentsRequest {
+    cloud_pk: number;
+    folder_pk: number;
+    project_pk: number;
+    created_after?: Date;
+    created_before?: Date;
+    creator_email?: string;
+    description?: string;
+    description__contains?: string;
+    description__endswith?: string;
+    description__startswith?: string;
+    file_name?: string;
+    file_name__contains?: string;
+    file_name__endswith?: string;
+    file_name__startswith?: string;
+    name?: string;
+    name__contains?: string;
+    name__endswith?: string;
+    name__startswith?: string;
+    size_max?: number | null;
+    size_min?: number | null;
+    tags?: Array<string>;
+    visa__creator_email?: string;
+    visa__deadline_after?: Date;
+    visa__deadline_before?: Date;
+    visa__status?: GetFolderDocumentsVisaStatusEnum;
+    visa__validation_status?: string;
+    visa__validator_email?: string;
 }
 
 export interface GetFolderProjectUsersRequest {
@@ -548,6 +607,11 @@ export interface GetProjectCreatorVisasRequest {
 }
 
 export interface GetProjectDMSTreeRequest {
+    cloud_pk: number;
+    id: number;
+}
+
+export interface GetProjectFolderTreeRequest {
     cloud_pk: number;
     id: number;
 }
@@ -873,7 +937,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Accept a validation  Required scopes: document:read
      * Accept a validation
      */
-    async acceptValidationRaw(requestParameters: AcceptValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async acceptValidationRaw(requestParameters: AcceptValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaAttachment>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling acceptValidation.');
         }
@@ -916,22 +980,45 @@ export class CollaborationApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
 
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+            { contentType: 'application/x-www-form-urlencoded' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters.attachment !== undefined) {
+            formParams.append('attachment', requestParameters.attachment as any);
+        }
+
         const response = await this.request({
             path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/accept`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: formParams,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaAttachmentFromJSON(jsonValue));
     }
 
     /**
      * Accept a validation  Required scopes: document:read
      * Accept a validation
      */
-    async acceptValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.acceptValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
+    async acceptValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, attachment?: Blob | null, initOverrides?: RequestInit): Promise<VisaAttachment> {
+        const response = await this.acceptValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk, attachment: attachment }, initOverrides);
+        return await response.value();
     }
 
     /**
@@ -1564,7 +1651,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'IFC\', \'OBJ\', \'POINT_CLOUD\', \'GLTF\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DWG\', \'OBJ\', \'GLTF\', \'IFC\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1667,7 +1754,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'IFC\', \'OBJ\', \'POINT_CLOUD\', \'GLTF\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DWG\', \'OBJ\', \'GLTF\', \'IFC\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -3148,7 +3235,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Deny a validation  Required scopes: document:read
      * Deny a validation
      */
-    async denyValidationRaw(requestParameters: DenyValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async denyValidationRaw(requestParameters: DenyValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisaAttachment>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling denyValidation.');
         }
@@ -3191,22 +3278,45 @@ export class CollaborationApi extends runtime.BaseAPI {
             headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
         }
 
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+            { contentType: 'application/x-www-form-urlencoded' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters.attachment !== undefined) {
+            formParams.append('attachment', requestParameters.attachment as any);
+        }
+
         const response = await this.request({
             path: `/cloud/{cloud_pk}/project/{project_pk}/document/{document_pk}/visa/{visa_pk}/validation/{id}/deny`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"document_pk"}}`, encodeURIComponent(String(requestParameters.document_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))).replace(`{${"visa_pk"}}`, encodeURIComponent(String(requestParameters.visa_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: formParams,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisaAttachmentFromJSON(jsonValue));
     }
 
     /**
      * Deny a validation  Required scopes: document:read
      * Deny a validation
      */
-    async denyValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.denyValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk }, initOverrides);
+    async denyValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, attachment?: Blob | null, initOverrides?: RequestInit): Promise<VisaAttachment> {
+        const response = await this.denyValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk, attachment: attachment }, initOverrides);
+        return await response.value();
     }
 
     /**
@@ -3754,7 +3864,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all documents in the project  Required scopes: document:read
+     * Retrieve all documents in the project. Filters are case insentive  Required scopes: document:read
      * Retrieve all documents
      */
     async getDocumentsRaw(requestParameters: GetDocumentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
@@ -3767,6 +3877,102 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const queryParameters: any = {};
+
+        if (requestParameters.created_after !== undefined) {
+            queryParameters['created_after'] = (requestParameters.created_after as any).toISOString();
+        }
+
+        if (requestParameters.created_before !== undefined) {
+            queryParameters['created_before'] = (requestParameters.created_before as any).toISOString();
+        }
+
+        if (requestParameters.creator_email !== undefined) {
+            queryParameters['creator_email'] = requestParameters.creator_email;
+        }
+
+        if (requestParameters.description !== undefined) {
+            queryParameters['description'] = requestParameters.description;
+        }
+
+        if (requestParameters.description__contains !== undefined) {
+            queryParameters['description__contains'] = requestParameters.description__contains;
+        }
+
+        if (requestParameters.description__endswith !== undefined) {
+            queryParameters['description__endswith'] = requestParameters.description__endswith;
+        }
+
+        if (requestParameters.description__startswith !== undefined) {
+            queryParameters['description__startswith'] = requestParameters.description__startswith;
+        }
+
+        if (requestParameters.file_name !== undefined) {
+            queryParameters['file_name'] = requestParameters.file_name;
+        }
+
+        if (requestParameters.file_name__contains !== undefined) {
+            queryParameters['file_name__contains'] = requestParameters.file_name__contains;
+        }
+
+        if (requestParameters.file_name__endswith !== undefined) {
+            queryParameters['file_name__endswith'] = requestParameters.file_name__endswith;
+        }
+
+        if (requestParameters.file_name__startswith !== undefined) {
+            queryParameters['file_name__startswith'] = requestParameters.file_name__startswith;
+        }
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.name__contains !== undefined) {
+            queryParameters['name__contains'] = requestParameters.name__contains;
+        }
+
+        if (requestParameters.name__endswith !== undefined) {
+            queryParameters['name__endswith'] = requestParameters.name__endswith;
+        }
+
+        if (requestParameters.name__startswith !== undefined) {
+            queryParameters['name__startswith'] = requestParameters.name__startswith;
+        }
+
+        if (requestParameters.size_max !== undefined) {
+            queryParameters['size_max'] = requestParameters.size_max;
+        }
+
+        if (requestParameters.size_min !== undefined) {
+            queryParameters['size_min'] = requestParameters.size_min;
+        }
+
+        if (requestParameters.tags) {
+            queryParameters['tags'] = requestParameters.tags.join(runtime.COLLECTION_FORMATS["csv"]);
+        }
+
+        if (requestParameters.visa__creator_email !== undefined) {
+            queryParameters['visa__creator_email'] = requestParameters.visa__creator_email;
+        }
+
+        if (requestParameters.visa__deadline_after !== undefined) {
+            queryParameters['visa__deadline_after'] = (requestParameters.visa__deadline_after as any).toISOString().substr(0,10);
+        }
+
+        if (requestParameters.visa__deadline_before !== undefined) {
+            queryParameters['visa__deadline_before'] = (requestParameters.visa__deadline_before as any).toISOString().substr(0,10);
+        }
+
+        if (requestParameters.visa__status !== undefined) {
+            queryParameters['visa__status'] = requestParameters.visa__status;
+        }
+
+        if (requestParameters.visa__validation_status !== undefined) {
+            queryParameters['visa__validation_status'] = requestParameters.visa__validation_status;
+        }
+
+        if (requestParameters.visa__validator_email !== undefined) {
+            queryParameters['visa__validator_email'] = requestParameters.visa__validator_email;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -3799,11 +4005,11 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all documents in the project  Required scopes: document:read
+     * Retrieve all documents in the project. Filters are case insentive  Required scopes: document:read
      * Retrieve all documents
      */
-    async getDocuments(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+    async getDocuments(cloud_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__status?: GetDocumentsVisaStatusEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__status: visa__status, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
         return await response.value();
     }
 
@@ -3862,6 +4068,160 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getFolder(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
         const response = await this.getFolderRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get all documents of a folder  Required scopes: document:read
+     * Get all documents of a folder
+     */
+    async getFolderDocumentsRaw(requestParameters: GetFolderDocumentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getFolderDocuments.');
+        }
+
+        if (requestParameters.folder_pk === null || requestParameters.folder_pk === undefined) {
+            throw new runtime.RequiredError('folder_pk','Required parameter requestParameters.folder_pk was null or undefined when calling getFolderDocuments.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getFolderDocuments.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.created_after !== undefined) {
+            queryParameters['created_after'] = (requestParameters.created_after as any).toISOString();
+        }
+
+        if (requestParameters.created_before !== undefined) {
+            queryParameters['created_before'] = (requestParameters.created_before as any).toISOString();
+        }
+
+        if (requestParameters.creator_email !== undefined) {
+            queryParameters['creator_email'] = requestParameters.creator_email;
+        }
+
+        if (requestParameters.description !== undefined) {
+            queryParameters['description'] = requestParameters.description;
+        }
+
+        if (requestParameters.description__contains !== undefined) {
+            queryParameters['description__contains'] = requestParameters.description__contains;
+        }
+
+        if (requestParameters.description__endswith !== undefined) {
+            queryParameters['description__endswith'] = requestParameters.description__endswith;
+        }
+
+        if (requestParameters.description__startswith !== undefined) {
+            queryParameters['description__startswith'] = requestParameters.description__startswith;
+        }
+
+        if (requestParameters.file_name !== undefined) {
+            queryParameters['file_name'] = requestParameters.file_name;
+        }
+
+        if (requestParameters.file_name__contains !== undefined) {
+            queryParameters['file_name__contains'] = requestParameters.file_name__contains;
+        }
+
+        if (requestParameters.file_name__endswith !== undefined) {
+            queryParameters['file_name__endswith'] = requestParameters.file_name__endswith;
+        }
+
+        if (requestParameters.file_name__startswith !== undefined) {
+            queryParameters['file_name__startswith'] = requestParameters.file_name__startswith;
+        }
+
+        if (requestParameters.name !== undefined) {
+            queryParameters['name'] = requestParameters.name;
+        }
+
+        if (requestParameters.name__contains !== undefined) {
+            queryParameters['name__contains'] = requestParameters.name__contains;
+        }
+
+        if (requestParameters.name__endswith !== undefined) {
+            queryParameters['name__endswith'] = requestParameters.name__endswith;
+        }
+
+        if (requestParameters.name__startswith !== undefined) {
+            queryParameters['name__startswith'] = requestParameters.name__startswith;
+        }
+
+        if (requestParameters.size_max !== undefined) {
+            queryParameters['size_max'] = requestParameters.size_max;
+        }
+
+        if (requestParameters.size_min !== undefined) {
+            queryParameters['size_min'] = requestParameters.size_min;
+        }
+
+        if (requestParameters.tags) {
+            queryParameters['tags'] = requestParameters.tags.join(runtime.COLLECTION_FORMATS["csv"]);
+        }
+
+        if (requestParameters.visa__creator_email !== undefined) {
+            queryParameters['visa__creator_email'] = requestParameters.visa__creator_email;
+        }
+
+        if (requestParameters.visa__deadline_after !== undefined) {
+            queryParameters['visa__deadline_after'] = (requestParameters.visa__deadline_after as any).toISOString().substr(0,10);
+        }
+
+        if (requestParameters.visa__deadline_before !== undefined) {
+            queryParameters['visa__deadline_before'] = (requestParameters.visa__deadline_before as any).toISOString().substr(0,10);
+        }
+
+        if (requestParameters.visa__status !== undefined) {
+            queryParameters['visa__status'] = requestParameters.visa__status;
+        }
+
+        if (requestParameters.visa__validation_status !== undefined) {
+            queryParameters['visa__validation_status'] = requestParameters.visa__validation_status;
+        }
+
+        if (requestParameters.visa__validator_email !== undefined) {
+            queryParameters['visa__validator_email'] = requestParameters.visa__validator_email;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{folder_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"folder_pk"}}`, encodeURIComponent(String(requestParameters.folder_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
+    }
+
+    /**
+     * Get all documents of a folder  Required scopes: document:read
+     * Get all documents of a folder
+     */
+    async getFolderDocuments(cloud_pk: number, folder_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__status?: GetFolderDocumentsVisaStatusEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getFolderDocumentsRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__status: visa__status, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
         return await response.value();
     }
 
@@ -4472,6 +4832,60 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getProjectDMSTree(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<Folder> {
         const response = await this.getProjectDMSTreeRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve folder tree of the project
+     * Retrieve folder tree of the project
+     */
+    async getProjectFolderTreeRaw(requestParameters: GetProjectFolderTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectFolderTree>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectFolderTree.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProjectFolderTree.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{id}/folder-trees`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ProjectFolderTreeFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve folder tree of the project
+     * Retrieve folder tree of the project
+     */
+    async getProjectFolderTree(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<ProjectFolderTree> {
+        const response = await this.getProjectFolderTreeRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }
 
@@ -6066,7 +6480,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Reset a validation if the validation has been accepted or rejected  Required scopes: document:read
+     * Reset a validation if the validation has been accepted or rejected. The attachment will be removed  Required scopes: document:read
      * Reset a validation
      */
     async resetValidationRaw(requestParameters: ResetValidationRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
@@ -6123,7 +6537,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Reset a validation if the validation has been accepted or rejected  Required scopes: document:read
+     * Reset a validation if the validation has been accepted or rejected. The attachment will be removed  Required scopes: document:read
      * Reset a validation
      */
     async resetValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, initOverrides?: RequestInit): Promise<void> {
@@ -7095,4 +7509,22 @@ export enum CreateDocumentIfcSourceEnum {
     Merge = 'MERGE',
     Export = 'EXPORT',
     Optimized = 'OPTIMIZED'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetDocumentsVisaStatusEnum {
+    C = 'C',
+    O = 'O',
+    P = 'P'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetFolderDocumentsVisaStatusEnum {
+    C = 'C',
+    O = 'O',
+    P = 'P'
 }

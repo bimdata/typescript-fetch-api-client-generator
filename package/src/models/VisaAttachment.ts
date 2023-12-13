@@ -16,46 +16,32 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface FolderTree
+ * @interface VisaAttachment
  */
-export interface FolderTree {
-    /**
-     * 
-     * @type {number}
-     * @memberof FolderTree
-     */
-    id: number;
+export interface VisaAttachment {
     /**
      * 
      * @type {string}
-     * @memberof FolderTree
+     * @memberof VisaAttachment
      */
-    name: string;
-    /**
-     * 
-     * @type {Array<FolderTree>}
-     * @memberof FolderTree
-     */
-    children: Array<FolderTree>;
+    attachment?: string | null;
 }
 
-export function FolderTreeFromJSON(json: any): FolderTree {
-    return FolderTreeFromJSONTyped(json, false);
+export function VisaAttachmentFromJSON(json: any): VisaAttachment {
+    return VisaAttachmentFromJSONTyped(json, false);
 }
 
-export function FolderTreeFromJSONTyped(json: any, ignoreDiscriminator: boolean): FolderTree {
+export function VisaAttachmentFromJSONTyped(json: any, ignoreDiscriminator: boolean): VisaAttachment {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': json['id'],
-        'name': json['name'],
-        'children': ((json['children'] as Array<any>).map(FolderTreeFromJSON)),
+        'attachment': !exists(json, 'attachment') ? undefined : json['attachment'],
     };
 }
 
-export function FolderTreeToJSON(value?: FolderTree | null): any {
+export function VisaAttachmentToJSON(value?: VisaAttachment | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -64,9 +50,7 @@ export function FolderTreeToJSON(value?: FolderTree | null): any {
     }
     return {
         
-        'id': value.id,
-        'name': value.name,
-        'children': ((value.children as Array<any>).map(FolderTreeToJSON)),
+        'attachment': value.attachment,
     };
 }
 

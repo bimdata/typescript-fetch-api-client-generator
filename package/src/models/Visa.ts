@@ -70,7 +70,7 @@ export interface Visa {
     readonly document_id: number;
     /**
      * * `O` - opened
-     * * `A` - paused
+     * * `P` - paused
      * * `C` - closed
      * @type {string}
      * @memberof Visa
@@ -114,7 +114,7 @@ export interface Visa {
 */
 export enum VisaStatusEnum {
     O = 'O',
-    A = 'A',
+    P = 'P',
     C = 'C'
 }
 
