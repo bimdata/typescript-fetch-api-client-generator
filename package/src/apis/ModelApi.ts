@@ -42,6 +42,12 @@ import {
     DocumentWithElementList,
     DocumentWithElementListFromJSON,
     DocumentWithElementListToJSON,
+    Drawing,
+    DrawingFromJSON,
+    DrawingToJSON,
+    DrawingRequest,
+    DrawingRequestFromJSON,
+    DrawingRequestToJSON,
     Element,
     ElementFromJSON,
     ElementToJSON,
@@ -93,6 +99,9 @@ import {
     ModelFiles,
     ModelFilesFromJSON,
     ModelFilesToJSON,
+    PatchedDrawingRequest,
+    PatchedDrawingRequestFromJSON,
+    PatchedDrawingRequestToJSON,
     PatchedElementRequest,
     PatchedElementRequestFromJSON,
     PatchedElementRequestToJSON,
@@ -363,6 +372,13 @@ export interface CreateClassificationsOfElementRequest {
     ClassificationRequest: Array<ClassificationRequest>;
 }
 
+export interface CreateDrawingRequest {
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    DrawingRequest: DrawingRequest;
+}
+
 export interface CreateElementRequest {
     cloud_pk: number;
     model_pk: number;
@@ -553,6 +569,13 @@ export interface DeleteBuildingPlanRequest {
     project_pk: number;
 }
 
+export interface DeleteDrawingRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+}
+
 export interface DeleteElementRequest {
     cloud_pk: number;
     model_pk: number;
@@ -710,6 +733,19 @@ export interface GetClassificationsOfElementRequest {
 export interface GetDocumentsOfElementRequest {
     cloud_pk: number;
     element_uuid: string;
+    model_pk: number;
+    project_pk: number;
+}
+
+export interface GetDrawingRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+}
+
+export interface GetDrawingsRequest {
+    cloud_pk: number;
     model_pk: number;
     project_pk: number;
 }
@@ -1177,6 +1213,14 @@ export interface UpdateBuildingPlanPositioningRequest {
     model_pk: number;
     project_pk: number;
     PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest;
+}
+
+export interface UpdateDrawingRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+    PatchedDrawingRequest?: PatchedDrawingRequest;
 }
 
 export interface UpdateElementRequest {
@@ -2602,6 +2646,71 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async createClassificationsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, ClassificationRequest: Array<ClassificationRequest>, initOverrides?: RequestInit): Promise<Array<Classification>> {
         const response = await this.createClassificationsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk, ClassificationRequest: ClassificationRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create a drawing in the model  Required scopes: model:write
+     * Create a drawing in the model
+     */
+    async createDrawingRaw(requestParameters: CreateDrawingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Drawing>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createDrawing.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createDrawing.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createDrawing.');
+        }
+
+        if (requestParameters.DrawingRequest === null || requestParameters.DrawingRequest === undefined) {
+            throw new runtime.RequiredError('DrawingRequest','Required parameter requestParameters.DrawingRequest was null or undefined when calling createDrawing.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/drawing`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DrawingRequestToJSON(requestParameters.DrawingRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DrawingFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a drawing in the model  Required scopes: model:write
+     * Create a drawing in the model
+     */
+    async createDrawing(cloud_pk: number, model_pk: number, project_pk: number, DrawingRequest: DrawingRequest, initOverrides?: RequestInit): Promise<Drawing> {
+        const response = await this.createDrawingRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, DrawingRequest: DrawingRequest }, initOverrides);
         return await response.value();
     }
 
@@ -4288,6 +4397,67 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * Delete a drawing of a model  Required scopes: model:write
+     * Delete a drawing of a model
+     */
+    async deleteDrawingRaw(requestParameters: DeleteDrawingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteDrawing.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteDrawing.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteDrawing.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteDrawing.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/drawing/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a drawing of a model  Required scopes: model:write
+     * Delete a drawing of a model
+     */
+    async deleteDrawing(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteDrawingRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    }
+
+    /**
      * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete an element of a model
      */
@@ -5701,6 +5871,126 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async getDocumentsOfElement(cloud_pk: number, element_uuid: string, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
         const response = await this.getDocumentsOfElementRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a drawing of a model  Required scopes: model:read
+     * Retrieve a drawing of a model
+     */
+    async getDrawingRaw(requestParameters: GetDrawingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Drawing>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getDrawing.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getDrawing.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getDrawing.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getDrawing.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/drawing/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DrawingFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a drawing of a model  Required scopes: model:read
+     * Retrieve a drawing of a model
+     */
+    async getDrawing(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Drawing> {
+        const response = await this.getDrawingRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all drawings of a model.  Required scopes: model:read
+     * Retrieve all drawings of a model
+     */
+    async getDrawingsRaw(requestParameters: GetDrawingsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Drawing>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getDrawings.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getDrawings.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getDrawings.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/drawing`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DrawingFromJSON));
+    }
+
+    /**
+     * Retrieve all drawings of a model.  Required scopes: model:read
+     * Retrieve all drawings of a model
+     */
+    async getDrawings(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Drawing>> {
+        const response = await this.getDrawingsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -9659,6 +9949,71 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async updateBuildingPlanPositioning(building_uuid: string, cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest, initOverrides?: RequestInit): Promise<PositioningPlan> {
         const response = await this.updateBuildingPlanPositioningRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedPositioningPlanRequest: PatchedPositioningPlanRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a drawing  Required scopes: model:write
+     * Update some fields of a drawing
+     */
+    async updateDrawingRaw(requestParameters: UpdateDrawingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Drawing>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateDrawing.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateDrawing.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateDrawing.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateDrawing.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/drawing/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedDrawingRequestToJSON(requestParameters.PatchedDrawingRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DrawingFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a drawing  Required scopes: model:write
+     * Update some fields of a drawing
+     */
+    async updateDrawing(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedDrawingRequest?: PatchedDrawingRequest, initOverrides?: RequestInit): Promise<Drawing> {
+        const response = await this.updateDrawingRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedDrawingRequest: PatchedDrawingRequest }, initOverrides);
         return await response.value();
     }
 

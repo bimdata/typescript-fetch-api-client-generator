@@ -42,6 +42,12 @@ import {
     DocumentWithElementList,
     DocumentWithElementListFromJSON,
     DocumentWithElementListToJSON,
+    Drawing,
+    DrawingFromJSON,
+    DrawingToJSON,
+    DrawingRequest,
+    DrawingRequestFromJSON,
+    DrawingRequestToJSON,
     Element,
     ElementFromJSON,
     ElementToJSON,
@@ -93,6 +99,9 @@ import {
     ModelFiles,
     ModelFilesFromJSON,
     ModelFilesToJSON,
+    PatchedDrawingRequest,
+    PatchedDrawingRequestFromJSON,
+    PatchedDrawingRequestToJSON,
     PatchedElementRequest,
     PatchedElementRequestFromJSON,
     PatchedElementRequestToJSON,
@@ -363,6 +372,13 @@ export interface CreateClassificationsOfElementDeprecatedRequest {
     ClassificationRequest: Array<ClassificationRequest>;
 }
 
+export interface CreateDrawingDeprecatedRequest {
+    cloud_pk: number;
+    ifc_pk: number;
+    project_pk: number;
+    DrawingRequest: DrawingRequest;
+}
+
 export interface CreateElementDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
@@ -553,6 +569,13 @@ export interface DeleteBuildingPlanDeprecatedRequest {
     project_pk: number;
 }
 
+export interface DeleteDrawingDeprecatedRequest {
+    cloud_pk: number;
+    id: number;
+    ifc_pk: number;
+    project_pk: number;
+}
+
 export interface DeleteElementDeprecatedRequest {
     cloud_pk: number;
     ifc_pk: number;
@@ -710,6 +733,19 @@ export interface GetClassificationsOfElementDeprecatedRequest {
 export interface GetDocumentsOfElementDeprecatedRequest {
     cloud_pk: number;
     element_uuid: string;
+    ifc_pk: number;
+    project_pk: number;
+}
+
+export interface GetDrawingDeprecatedRequest {
+    cloud_pk: number;
+    id: number;
+    ifc_pk: number;
+    project_pk: number;
+}
+
+export interface GetDrawingsDeprecatedRequest {
+    cloud_pk: number;
     ifc_pk: number;
     project_pk: number;
 }
@@ -1171,6 +1207,14 @@ export interface UpdateBuildingPlanPositioningDeprecatedRequest {
     ifc_pk: number;
     project_pk: number;
     PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest;
+}
+
+export interface UpdateDrawingDeprecatedRequest {
+    cloud_pk: number;
+    id: number;
+    ifc_pk: number;
+    project_pk: number;
+    PatchedDrawingRequest?: PatchedDrawingRequest;
 }
 
 export interface UpdateElementDeprecatedRequest {
@@ -2596,6 +2640,71 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async createClassificationsOfElementDeprecated(cloud_pk: number, element_uuid: string, ifc_pk: number, project_pk: number, ClassificationRequest: Array<ClassificationRequest>, initOverrides?: RequestInit): Promise<Array<Classification>> {
         const response = await this.createClassificationsOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, ifc_pk: ifc_pk, project_pk: project_pk, ClassificationRequest: ClassificationRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create a drawing in the model  Required scopes: model:write
+     * Create a drawing in the model
+     */
+    async createDrawingDeprecatedRaw(requestParameters: CreateDrawingDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Drawing>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createDrawingDeprecated.');
+        }
+
+        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
+            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling createDrawingDeprecated.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createDrawingDeprecated.');
+        }
+
+        if (requestParameters.DrawingRequest === null || requestParameters.DrawingRequest === undefined) {
+            throw new runtime.RequiredError('DrawingRequest','Required parameter requestParameters.DrawingRequest was null or undefined when calling createDrawingDeprecated.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/drawing`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DrawingRequestToJSON(requestParameters.DrawingRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DrawingFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a drawing in the model  Required scopes: model:write
+     * Create a drawing in the model
+     */
+    async createDrawingDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, DrawingRequest: DrawingRequest, initOverrides?: RequestInit): Promise<Drawing> {
+        const response = await this.createDrawingDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk, DrawingRequest: DrawingRequest }, initOverrides);
         return await response.value();
     }
 
@@ -4282,6 +4391,67 @@ export class IfcApi extends runtime.BaseAPI {
     }
 
     /**
+     * Delete a drawing of a model  Required scopes: model:write
+     * Delete a drawing of a model
+     */
+    async deleteDrawingDeprecatedRaw(requestParameters: DeleteDrawingDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteDrawingDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteDrawingDeprecated.');
+        }
+
+        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
+            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling deleteDrawingDeprecated.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteDrawingDeprecated.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/drawing/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a drawing of a model  Required scopes: model:write
+     * Delete a drawing of a model
+     */
+    async deleteDrawingDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteDrawingDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+    }
+
+    /**
      * The IFC file will not be updated. The remaining elements are available in API and will be available when exporting an IFC file  Required scopes: ifc:write, model:write
      * Delete an element of a model
      */
@@ -5695,6 +5865,126 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async getDocumentsOfElementDeprecated(cloud_pk: number, element_uuid: string, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Document>> {
         const response = await this.getDocumentsOfElementDeprecatedRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a drawing of a model  Required scopes: model:read
+     * Retrieve a drawing of a model
+     */
+    async getDrawingDeprecatedRaw(requestParameters: GetDrawingDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Drawing>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getDrawingDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getDrawingDeprecated.');
+        }
+
+        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
+            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling getDrawingDeprecated.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getDrawingDeprecated.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/drawing/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DrawingFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a drawing of a model  Required scopes: model:read
+     * Retrieve a drawing of a model
+     */
+    async getDrawingDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Drawing> {
+        const response = await this.getDrawingDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all drawings of a model.  Required scopes: model:read
+     * Retrieve all drawings of a model
+     */
+    async getDrawingsDeprecatedRaw(requestParameters: GetDrawingsDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Drawing>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getDrawingsDeprecated.');
+        }
+
+        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
+            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling getDrawingsDeprecated.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getDrawingsDeprecated.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/drawing`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DrawingFromJSON));
+    }
+
+    /**
+     * Retrieve all drawings of a model.  Required scopes: model:read
+     * Retrieve all drawings of a model
+     */
+    async getDrawingsDeprecated(cloud_pk: number, ifc_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Drawing>> {
+        const response = await this.getDrawingsDeprecatedRaw({ cloud_pk: cloud_pk, ifc_pk: ifc_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -9629,6 +9919,71 @@ export class IfcApi extends runtime.BaseAPI {
      */
     async updateBuildingPlanPositioningDeprecated(building_uuid: string, cloud_pk: number, id: number, ifc_pk: number, project_pk: number, PatchedPositioningPlanRequest?: PatchedPositioningPlanRequest, initOverrides?: RequestInit): Promise<PositioningPlan> {
         const response = await this.updateBuildingPlanPositioningDeprecatedRaw({ building_uuid: building_uuid, cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, PatchedPositioningPlanRequest: PatchedPositioningPlanRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a drawing  Required scopes: model:write
+     * Update some fields of a drawing
+     */
+    async updateDrawingDeprecatedRaw(requestParameters: UpdateDrawingDeprecatedRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Drawing>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateDrawingDeprecated.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateDrawingDeprecated.');
+        }
+
+        if (requestParameters.ifc_pk === null || requestParameters.ifc_pk === undefined) {
+            throw new runtime.RequiredError('ifc_pk','Required parameter requestParameters.ifc_pk was null or undefined when calling updateDrawingDeprecated.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateDrawingDeprecated.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/ifc/{ifc_pk}/drawing/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"ifc_pk"}}`, encodeURIComponent(String(requestParameters.ifc_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedDrawingRequestToJSON(requestParameters.PatchedDrawingRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DrawingFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a drawing  Required scopes: model:write
+     * Update some fields of a drawing
+     */
+    async updateDrawingDeprecated(cloud_pk: number, id: number, ifc_pk: number, project_pk: number, PatchedDrawingRequest?: PatchedDrawingRequest, initOverrides?: RequestInit): Promise<Drawing> {
+        const response = await this.updateDrawingDeprecatedRaw({ cloud_pk: cloud_pk, id: id, ifc_pk: ifc_pk, project_pk: project_pk, PatchedDrawingRequest: PatchedDrawingRequest }, initOverrides);
         return await response.value();
     }
 
