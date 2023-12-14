@@ -1651,7 +1651,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DWG\', \'OBJ\', \'GLTF\', \'IFC\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DWG\', \'POINT_CLOUD\', \'OBJ\', \'GLTF\', \'DXF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1754,7 +1754,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DWG\', \'OBJ\', \'GLTF\', \'IFC\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DWG\', \'POINT_CLOUD\', \'OBJ\', \'GLTF\', \'DXF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -4871,7 +4871,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{id}/folder-trees`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            path: `/cloud/{cloud_pk}/project/{id}/folder-tree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
