@@ -143,7 +143,6 @@ export * from './ProcessorHandler';
 export * from './Project';
 export * from './ProjectAccessToken';
 export * from './ProjectAccessTokenRequest';
-export * from './ProjectFolderTree';
 export * from './ProjectImportRequest';
 export * from './ProjectInvitation';
 export * from './ProjectInvitationRequest';

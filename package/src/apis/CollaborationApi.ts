@@ -45,6 +45,9 @@ import {
     Folder,
     FolderFromJSON,
     FolderToJSON,
+    FolderTree,
+    FolderTreeFromJSON,
+    FolderTreeToJSON,
     FolderUserProject,
     FolderUserProjectFromJSON,
     FolderUserProjectToJSON,
@@ -114,9 +117,6 @@ import {
     ProjectAccessTokenRequest,
     ProjectAccessTokenRequestFromJSON,
     ProjectAccessTokenRequestToJSON,
-    ProjectFolderTree,
-    ProjectFolderTreeFromJSON,
-    ProjectFolderTreeToJSON,
     ProjectImportRequest,
     ProjectImportRequestFromJSON,
     ProjectImportRequestToJSON,
@@ -1647,7 +1647,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'OBJ\', \'POINT_CLOUD\', \'IFC\', \'GLTF\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DWG\', \'IFC\', \'GLTF\', \'POINT_CLOUD\', \'OBJ\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1750,7 +1750,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'OBJ\', \'POINT_CLOUD\', \'IFC\', \'GLTF\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DWG\', \'IFC\', \'GLTF\', \'POINT_CLOUD\', \'OBJ\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -4835,7 +4835,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve folder tree of the project
      * Retrieve folder tree of the project
      */
-    async getProjectFolderTreeRaw(requestParameters: GetProjectFolderTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectFolderTree>>> {
+    async getProjectFolderTreeRaw(requestParameters: GetProjectFolderTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<FolderTree>>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectFolderTree.');
         }
@@ -4873,14 +4873,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProjectFolderTreeFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FolderTreeFromJSON));
     }
 
     /**
      * Retrieve folder tree of the project
      * Retrieve folder tree of the project
      */
-    async getProjectFolderTree(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<Array<ProjectFolderTree>> {
+    async getProjectFolderTree(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<Array<FolderTree>> {
         const response = await this.getProjectFolderTreeRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }

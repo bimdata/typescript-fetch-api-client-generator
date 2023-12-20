@@ -150,7 +150,6 @@ src/models/ProcessorHandler.ts
 src/models/Project.ts
 src/models/ProjectAccessToken.ts
 src/models/ProjectAccessTokenRequest.ts
-src/models/ProjectFolderTree.ts
 src/models/ProjectImportRequest.ts
 src/models/ProjectInvitation.ts
 src/models/ProjectInvitationRequest.ts
