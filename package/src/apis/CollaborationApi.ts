@@ -616,10 +616,6 @@ export interface GetProjectFolderTreeRequest {
     id: number;
 }
 
-export interface GetProjectFolderTreeSerializersRequest {
-    cloud_pk: number;
-}
-
 export interface GetProjectInvitationsRequest {
     cloud_pk: number;
     project_pk: number;
@@ -1651,7 +1647,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'POINT_CLOUD\', \'OBJ\', \'GLTF\', \'DXF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'POINT_CLOUD\', \'IFC\', \'GLTF\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1754,7 +1750,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'POINT_CLOUD\', \'OBJ\', \'GLTF\', \'DXF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'POINT_CLOUD\', \'IFC\', \'GLTF\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -4839,7 +4835,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve folder tree of the project
      * Retrieve folder tree of the project
      */
-    async getProjectFolderTreeRaw(requestParameters: GetProjectFolderTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectFolderTree>> {
+    async getProjectFolderTreeRaw(requestParameters: GetProjectFolderTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectFolderTree>>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectFolderTree.');
         }
@@ -4877,65 +4873,15 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ProjectFolderTreeFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve folder tree of the project
-     * Retrieve folder tree of the project
-     */
-    async getProjectFolderTree(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<ProjectFolderTree> {
-        const response = await this.getProjectFolderTreeRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve folder tree for all projects
-     * Retrieve folder tree for all projects
-     */
-    async getProjectFolderTreeSerializersRaw(requestParameters: GetProjectFolderTreeSerializersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectFolderTree>>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectFolderTreeSerializers.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/folder-trees`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProjectFolderTreeFromJSON));
     }
 
     /**
-     * Retrieve folder tree for all projects
-     * Retrieve folder tree for all projects
+     * Retrieve folder tree of the project
+     * Retrieve folder tree of the project
      */
-    async getProjectFolderTreeSerializers(cloud_pk: number, initOverrides?: RequestInit): Promise<Array<ProjectFolderTree>> {
-        const response = await this.getProjectFolderTreeSerializersRaw({ cloud_pk: cloud_pk }, initOverrides);
+    async getProjectFolderTree(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<Array<ProjectFolderTree>> {
+        const response = await this.getProjectFolderTreeRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }
 
