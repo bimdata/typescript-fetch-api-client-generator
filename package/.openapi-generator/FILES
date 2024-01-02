@@ -78,6 +78,7 @@ src/models/LayerElementRequest.ts
 src/models/LayerRequest.ts
 src/models/Line.ts
 src/models/LineRequest.ts
+src/models/LogEntry.ts
 src/models/MarketplaceAppImage.ts
 src/models/MarketplaceAppLight.ts
 src/models/MarketplaceAppLightRequest.ts

@@ -69,6 +69,9 @@ import {
     ImportGroupRequest,
     ImportGroupRequestFromJSON,
     ImportGroupRequestToJSON,
+    LogEntry,
+    LogEntryFromJSON,
+    LogEntryToJSON,
     PatchedClassificationRequest,
     PatchedClassificationRequestFromJSON,
     PatchedClassificationRequestToJSON,
@@ -570,6 +573,11 @@ export interface GetGroupRequest {
 }
 
 export interface GetGroupsRequest {
+    cloud_pk: number;
+    project_pk: number;
+}
+
+export interface GetLogsRequest {
     cloud_pk: number;
     project_pk: number;
 }
@@ -1647,7 +1655,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'IFC\', \'GLTF\', \'POINT_CLOUD\', \'OBJ\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'POINT_CLOUD\', \'DWG\', \'OBJ\', \'IFC\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1750,7 +1758,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'IFC\', \'GLTF\', \'POINT_CLOUD\', \'OBJ\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'POINT_CLOUD\', \'DWG\', \'OBJ\', \'IFC\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -4442,6 +4450,60 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getGroups(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Group>> {
         const response = await this.getGroupsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all logs of the project  Required scopes: logs:read
+     * Retrieve all logs of the project
+     */
+    async getLogsRaw(requestParameters: GetLogsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<LogEntry>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getLogs.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getLogs.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/logs`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LogEntryFromJSON));
+    }
+
+    /**
+     * Retrieve all logs of the project  Required scopes: logs:read
+     * Retrieve all logs of the project
+     */
+    async getLogs(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<LogEntry>> {
+        const response = await this.getLogsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 

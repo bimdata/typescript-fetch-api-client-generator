@@ -71,6 +71,7 @@ export * from './LayerElementRequest';
 export * from './LayerRequest';
 export * from './Line';
 export * from './LineRequest';
+export * from './LogEntry';
 export * from './MarketplaceAppImage';
 export * from './MarketplaceAppLight';
 export * from './MarketplaceAppLightRequest';
