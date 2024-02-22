@@ -86,6 +86,12 @@ export interface Zone {
      * @memberof Zone
      */
     order?: number;
+    /**
+     * IFC element or element type UUID
+     * @type {string}
+     * @memberof Zone
+     */
+    storey_uuid?: string | null;
 }
 
 export function ZoneFromJSON(json: any): Zone {
@@ -108,6 +114,7 @@ export function ZoneFromJSONTyped(json: any, ignoreDiscriminator: boolean): Zone
         'updated_at': (new Date(json['updated_at'])),
         'color': !exists(json, 'color') ? undefined : json['color'],
         'order': !exists(json, 'order') ? undefined : json['order'],
+        'storey_uuid': !exists(json, 'storey_uuid') ? undefined : json['storey_uuid'],
     };
 }
 
@@ -127,6 +134,7 @@ export function ZoneToJSON(value?: Zone | null): any {
         'spaces': value.spaces === undefined ? undefined : ((value.spaces as Array<any>).map(ZoneSpaceToJSON)),
         'color': value.color,
         'order': value.order,
+        'storey_uuid': value.storey_uuid,
     };
 }
 

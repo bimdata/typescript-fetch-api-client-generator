@@ -41,6 +41,12 @@ export interface PatchedFolderWithoutChildrenRequest {
      * @memberof PatchedFolderWithoutChildrenRequest
      */
     default_permission?: PatchedFolderWithoutChildrenRequestDefaultPermissionEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PatchedFolderWithoutChildrenRequest
+     */
+    propagate?: boolean;
 }
 
 /**
@@ -66,6 +72,7 @@ export function PatchedFolderWithoutChildrenRequestFromJSONTyped(json: any, igno
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'propagate': !exists(json, 'propagate') ? undefined : json['propagate'],
     };
 }
 
@@ -81,6 +88,7 @@ export function PatchedFolderWithoutChildrenRequestToJSON(value?: PatchedFolderW
         'parent_id': value.parent_id,
         'name': value.name,
         'default_permission': value.default_permission,
+        'propagate': value.propagate,
     };
 }
 

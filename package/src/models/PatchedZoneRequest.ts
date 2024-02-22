@@ -74,6 +74,12 @@ export interface PatchedZoneRequest {
      * @memberof PatchedZoneRequest
      */
     order?: number;
+    /**
+     * IFC element or element type UUID
+     * @type {string}
+     * @memberof PatchedZoneRequest
+     */
+    storey_uuid?: string | null;
 }
 
 export function PatchedZoneRequestFromJSON(json: any): PatchedZoneRequest {
@@ -93,6 +99,7 @@ export function PatchedZoneRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'spaces': !exists(json, 'spaces') ? undefined : ((json['spaces'] as Array<any>).map(ZoneSpaceRequestFromJSON)),
         'color': !exists(json, 'color') ? undefined : json['color'],
         'order': !exists(json, 'order') ? undefined : json['order'],
+        'storey_uuid': !exists(json, 'storey_uuid') ? undefined : json['storey_uuid'],
     };
 }
 
@@ -112,6 +119,7 @@ export function PatchedZoneRequestToJSON(value?: PatchedZoneRequest | null): any
         'spaces': value.spaces === undefined ? undefined : ((value.spaces as Array<any>).map(ZoneSpaceRequestToJSON)),
         'color': value.color,
         'order': value.order,
+        'storey_uuid': value.storey_uuid,
     };
 }
 

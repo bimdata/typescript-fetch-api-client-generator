@@ -41,6 +41,12 @@ export interface FolderWithoutChildrenRequest {
      * @memberof FolderWithoutChildrenRequest
      */
     default_permission?: FolderWithoutChildrenRequestDefaultPermissionEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FolderWithoutChildrenRequest
+     */
+    propagate?: boolean;
 }
 
 /**
@@ -66,6 +72,7 @@ export function FolderWithoutChildrenRequestFromJSONTyped(json: any, ignoreDiscr
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': json['name'],
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'propagate': !exists(json, 'propagate') ? undefined : json['propagate'],
     };
 }
 
@@ -81,6 +88,7 @@ export function FolderWithoutChildrenRequestToJSON(value?: FolderWithoutChildren
         'parent_id': value.parent_id,
         'name': value.name,
         'default_permission': value.default_permission,
+        'propagate': value.propagate,
     };
 }
 

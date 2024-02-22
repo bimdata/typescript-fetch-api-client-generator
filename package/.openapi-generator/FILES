@@ -232,6 +232,7 @@ src/models/Viewpoint.ts
 src/models/ViewpointRequest.ts
 src/models/Visa.ts
 src/models/VisaAttachment.ts
+src/models/VisaAttachmentRequest.ts
 src/models/VisaComment.ts
 src/models/VisaCommentRequest.ts
 src/models/VisaRequest.ts

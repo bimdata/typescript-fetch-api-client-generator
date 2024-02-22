@@ -225,6 +225,7 @@ export * from './Viewpoint';
 export * from './ViewpointRequest';
 export * from './Visa';
 export * from './VisaAttachment';
+export * from './VisaAttachmentRequest';
 export * from './VisaComment';
 export * from './VisaCommentRequest';
 export * from './VisaRequest';
