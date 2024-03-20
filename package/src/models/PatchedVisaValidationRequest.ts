@@ -25,6 +25,12 @@ export interface PatchedVisaValidationRequest {
      * @memberof PatchedVisaValidationRequest
      */
     validator_id?: number;
+    /**
+     * 
+     * @type {Blob}
+     * @memberof PatchedVisaValidationRequest
+     */
+    attachment?: Blob | null;
 }
 
 export function PatchedVisaValidationRequestFromJSON(json: any): PatchedVisaValidationRequest {
@@ -38,6 +44,7 @@ export function PatchedVisaValidationRequestFromJSONTyped(json: any, ignoreDiscr
     return {
         
         'validator_id': !exists(json, 'validator_id') ? undefined : json['validator_id'],
+        'attachment': !exists(json, 'attachment') ? undefined : json['attachment'],
     };
 }
 
@@ -51,6 +58,7 @@ export function PatchedVisaValidationRequestToJSON(value?: PatchedVisaValidation
     return {
         
         'validator_id': value.validator_id,
+        'attachment': value.attachment,
     };
 }
 

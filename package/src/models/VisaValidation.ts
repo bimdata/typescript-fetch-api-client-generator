@@ -70,6 +70,12 @@ export interface VisaValidation {
      * @memberof VisaValidation
      */
     readonly updated_at: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof VisaValidation
+     */
+    attachment?: string | null;
 }
 
 /**
@@ -99,6 +105,7 @@ export function VisaValidationFromJSONTyped(json: any, ignoreDiscriminator: bool
         'has_commented': json['has_commented'],
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
+        'attachment': !exists(json, 'attachment') ? undefined : json['attachment'],
     };
 }
 
@@ -111,6 +118,7 @@ export function VisaValidationToJSON(value?: VisaValidation | null): any {
     }
     return {
         
+        'attachment': value.attachment,
     };
 }
 

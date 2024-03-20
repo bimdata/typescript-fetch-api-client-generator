@@ -25,6 +25,12 @@ export interface VisaValidationRequest {
      * @memberof VisaValidationRequest
      */
     validator_id: number;
+    /**
+     * 
+     * @type {Blob}
+     * @memberof VisaValidationRequest
+     */
+    attachment?: Blob | null;
 }
 
 export function VisaValidationRequestFromJSON(json: any): VisaValidationRequest {
@@ -38,6 +44,7 @@ export function VisaValidationRequestFromJSONTyped(json: any, ignoreDiscriminato
     return {
         
         'validator_id': json['validator_id'],
+        'attachment': !exists(json, 'attachment') ? undefined : json['attachment'],
     };
 }
 
@@ -51,6 +58,7 @@ export function VisaValidationRequestToJSON(value?: VisaValidationRequest | null
     return {
         
         'validator_id': value.validator_id,
+        'attachment': value.attachment,
     };
 }
 
