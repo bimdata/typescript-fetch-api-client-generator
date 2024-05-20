@@ -43,7 +43,21 @@ export interface CloudInvitation {
      * @type {number}
      * @memberof CloudInvitation
      */
-    readonly role: CloudInvitationRoleEnum;
+    role?: CloudInvitationRoleEnum;
+    /**
+     * * `100` - admin
+     * * `50` - user
+     * * `25` - guest
+     * @type {number}
+     * @memberof CloudInvitation
+     */
+    project_role?: CloudInvitationProjectRoleEnum;
+    /**
+     * When inviting non-admin cloud user, specify if the user will be invited in all existing projects. project_role needs to be specified.
+     * @type {boolean}
+     * @memberof CloudInvitation
+     */
+    in_all_projects?: boolean;
 }
 
 /**
@@ -53,6 +67,14 @@ export interface CloudInvitation {
 export enum CloudInvitationRoleEnum {
     NUMBER_100 = 100,
     NUMBER_50 = 50
+}/**
+* @export
+* @enum {string}
+*/
+export enum CloudInvitationProjectRoleEnum {
+    NUMBER_100 = 100,
+    NUMBER_50 = 50,
+    NUMBER_25 = 25
 }
 
 export function CloudInvitationFromJSON(json: any): CloudInvitation {
@@ -68,7 +90,9 @@ export function CloudInvitationFromJSONTyped(json: any, ignoreDiscriminator: boo
         'id': json['id'],
         'email': json['email'],
         'redirect_uri': json['redirect_uri'],
-        'role': json['role'],
+        'role': !exists(json, 'role') ? undefined : json['role'],
+        'project_role': !exists(json, 'project_role') ? undefined : json['project_role'],
+        'in_all_projects': !exists(json, 'in_all_projects') ? undefined : json['in_all_projects'],
     };
 }
 
@@ -83,6 +107,9 @@ export function CloudInvitationToJSON(value?: CloudInvitation | null): any {
         
         'email': value.email,
         'redirect_uri': value.redirect_uri,
+        'role': value.role,
+        'project_role': value.project_role,
+        'in_all_projects': value.in_all_projects,
     };
 }
 

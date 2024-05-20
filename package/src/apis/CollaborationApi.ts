@@ -1656,7 +1656,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'OBJ\', \'DWG\', \'POINT_CLOUD\', \'DXF\', \'IFC\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'POINT_CLOUD\', \'DXF\', \'DWG\', \'GLTF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1759,7 +1759,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'OBJ\', \'DWG\', \'POINT_CLOUD\', \'DXF\', \'IFC\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'POINT_CLOUD\', \'DXF\', \'DWG\', \'GLTF\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -6134,8 +6134,8 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Invite cloud administrators only. To invite in a project, see inviteProjectUser. You can\'t invite a user already in the cloud. Create multiple invitations of the same email in the same cloud will generate multiple invitation emails but not multiple invitation object  Required scopes: org:manage
-     * Invite a cloud administrator
+     * Invite a cloud member. To invite in a project, see inviteProjectUser. You can\'t invite a user already in the cloud. Create multiple invitations of the same email in the same cloud will generate multiple invitation emails but not multiple invitation object  Required scopes: org:manage
+     * Invite a cloud member
      */
     async inviteCloudUserRaw(requestParameters: InviteCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<CloudInvitation>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
@@ -6182,8 +6182,8 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Invite cloud administrators only. To invite in a project, see inviteProjectUser. You can\'t invite a user already in the cloud. Create multiple invitations of the same email in the same cloud will generate multiple invitation emails but not multiple invitation object  Required scopes: org:manage
-     * Invite a cloud administrator
+     * Invite a cloud member. To invite in a project, see inviteProjectUser. You can\'t invite a user already in the cloud. Create multiple invitations of the same email in the same cloud will generate multiple invitation emails but not multiple invitation object  Required scopes: org:manage
+     * Invite a cloud member
      */
     async inviteCloudUser(cloud_pk: number, CloudInvitationRequest: CloudInvitationRequest, initOverrides?: RequestInit): Promise<CloudInvitation> {
         const response = await this.inviteCloudUserRaw({ cloud_pk: cloud_pk, CloudInvitationRequest: CloudInvitationRequest }, initOverrides);
