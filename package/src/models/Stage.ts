@@ -31,12 +31,6 @@ export interface Stage {
      * @memberof Stage
      */
     stage: string;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof Stage
-     */
-    project?: number;
 }
 
 export function StageFromJSON(json: any): Stage {
@@ -51,7 +45,6 @@ export function StageFromJSONTyped(json: any, ignoreDiscriminator: boolean): Sta
         
         'id': json['id'],
         'stage': json['stage'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -65,7 +58,6 @@ export function StageToJSON(value?: Stage | null): any {
     return {
         
         'stage': value.stage,
-        'project': value.project,
     };
 }
 

@@ -31,12 +31,6 @@ export interface Label {
      * @memberof Label
      */
     label: string;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof Label
-     */
-    project?: number;
 }
 
 export function LabelFromJSON(json: any): Label {
@@ -51,7 +45,6 @@ export function LabelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Lab
         
         'id': json['id'],
         'label': json['label'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -65,7 +58,6 @@ export function LabelToJSON(value?: Label | null): any {
     return {
         
         'label': value.label,
-        'project': value.project,
     };
 }
 

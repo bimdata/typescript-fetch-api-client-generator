@@ -37,12 +37,6 @@ export interface TopicStatus {
      * @memberof TopicStatus
      */
     color?: string | null;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof TopicStatus
-     */
-    project?: number;
 }
 
 export function TopicStatusFromJSON(json: any): TopicStatus {
@@ -58,7 +52,6 @@ export function TopicStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'id': json['id'],
         'topic_status': json['topic_status'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -73,7 +66,6 @@ export function TopicStatusToJSON(value?: TopicStatus | null): any {
         
         'topic_status': value.topic_status,
         'color': value.color,
-        'project': value.project,
     };
 }
 

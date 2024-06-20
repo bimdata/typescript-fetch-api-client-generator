@@ -504,6 +504,7 @@ export interface GetDocumentsRequest {
     file_name__contains?: string;
     file_name__endswith?: string;
     file_name__startswith?: string;
+    has__visa?: boolean;
     name?: string;
     name__contains?: string;
     name__endswith?: string;
@@ -514,7 +515,10 @@ export interface GetDocumentsRequest {
     visa__creator_email?: string;
     visa__deadline_after?: Date;
     visa__deadline_before?: Date;
+    visa__past__deadline?: boolean;
+    visa__past__deadline__strict?: boolean;
     visa__status?: GetDocumentsVisaStatusEnum;
+    visa__status__strict?: GetDocumentsVisaStatusStrictEnum;
     visa__validation_status?: string;
     visa__validator_email?: string;
 }
@@ -540,6 +544,7 @@ export interface GetFolderDocumentsRequest {
     file_name__contains?: string;
     file_name__endswith?: string;
     file_name__startswith?: string;
+    has__visa?: boolean;
     name?: string;
     name__contains?: string;
     name__endswith?: string;
@@ -550,7 +555,10 @@ export interface GetFolderDocumentsRequest {
     visa__creator_email?: string;
     visa__deadline_after?: Date;
     visa__deadline_before?: Date;
+    visa__past__deadline?: boolean;
+    visa__past__deadline__strict?: boolean;
     visa__status?: GetFolderDocumentsVisaStatusEnum;
+    visa__status__strict?: GetFolderDocumentsVisaStatusStrictEnum;
     visa__validation_status?: string;
     visa__validator_email?: string;
 }
@@ -612,6 +620,11 @@ export interface GetProjectAccessTokensRequest {
 export interface GetProjectCreatorVisasRequest {
     cloud_pk: number;
     project_pk: number;
+    deadline_after?: Date;
+    deadline_before?: Date;
+    has__past_deadline?: boolean;
+    status?: GetProjectCreatorVisasStatusEnum;
+    validation_status?: string;
 }
 
 export interface GetProjectDMSTreeRequest {
@@ -655,6 +668,11 @@ export interface GetProjectUsersRequest {
 export interface GetProjectValidatorVisasRequest {
     cloud_pk: number;
     project_pk: number;
+    deadline_after?: Date;
+    deadline_before?: Date;
+    has__past_deadline?: boolean;
+    status?: GetProjectValidatorVisasStatusEnum;
+    validation_status?: string;
 }
 
 export interface GetProjectsRequest {
@@ -1656,7 +1674,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DWG\', \'IFC\', \'DXF\', \'GLTF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DXF\', \'DWG\', \'GLTF\', \'OBJ\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1759,7 +1777,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DWG\', \'IFC\', \'DXF\', \'GLTF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DXF\', \'DWG\', \'GLTF\', \'OBJ\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -3928,6 +3946,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['file_name__startswith'] = requestParameters.file_name__startswith;
         }
 
+        if (requestParameters.has__visa !== undefined) {
+            queryParameters['has__visa'] = requestParameters.has__visa;
+        }
+
         if (requestParameters.name !== undefined) {
             queryParameters['name'] = requestParameters.name;
         }
@@ -3968,8 +3990,20 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['visa__deadline_before'] = (requestParameters.visa__deadline_before as any).toISOString().substr(0,10);
         }
 
+        if (requestParameters.visa__past__deadline !== undefined) {
+            queryParameters['visa__past__deadline'] = requestParameters.visa__past__deadline;
+        }
+
+        if (requestParameters.visa__past__deadline__strict !== undefined) {
+            queryParameters['visa__past__deadline__strict'] = requestParameters.visa__past__deadline__strict;
+        }
+
         if (requestParameters.visa__status !== undefined) {
             queryParameters['visa__status'] = requestParameters.visa__status;
+        }
+
+        if (requestParameters.visa__status__strict !== undefined) {
+            queryParameters['visa__status__strict'] = requestParameters.visa__status__strict;
         }
 
         if (requestParameters.visa__validation_status !== undefined) {
@@ -4014,8 +4048,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all documents in the project. Filters are case insentive  Required scopes: document:read
      * Retrieve all documents
      */
-    async getDocuments(cloud_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__status?: GetDocumentsVisaStatusEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__status: visa__status, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
+    async getDocuments(cloud_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetDocumentsVisaStatusEnum, visa__status__strict?: GetDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
         return await response.value();
     }
 
@@ -4140,6 +4174,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['file_name__startswith'] = requestParameters.file_name__startswith;
         }
 
+        if (requestParameters.has__visa !== undefined) {
+            queryParameters['has__visa'] = requestParameters.has__visa;
+        }
+
         if (requestParameters.name !== undefined) {
             queryParameters['name'] = requestParameters.name;
         }
@@ -4180,8 +4218,20 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['visa__deadline_before'] = (requestParameters.visa__deadline_before as any).toISOString().substr(0,10);
         }
 
+        if (requestParameters.visa__past__deadline !== undefined) {
+            queryParameters['visa__past__deadline'] = requestParameters.visa__past__deadline;
+        }
+
+        if (requestParameters.visa__past__deadline__strict !== undefined) {
+            queryParameters['visa__past__deadline__strict'] = requestParameters.visa__past__deadline__strict;
+        }
+
         if (requestParameters.visa__status !== undefined) {
             queryParameters['visa__status'] = requestParameters.visa__status;
+        }
+
+        if (requestParameters.visa__status__strict !== undefined) {
+            queryParameters['visa__status__strict'] = requestParameters.visa__status__strict;
         }
 
         if (requestParameters.visa__validation_status !== undefined) {
@@ -4226,8 +4276,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Get all documents of a folder  Required scopes: document:read
      * Get all documents of a folder
      */
-    async getFolderDocuments(cloud_pk: number, folder_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__status?: GetFolderDocumentsVisaStatusEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getFolderDocumentsRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__status: visa__status, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
+    async getFolderDocuments(cloud_pk: number, folder_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetFolderDocumentsVisaStatusEnum, visa__status__strict?: GetFolderDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getFolderDocumentsRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
         return await response.value();
     }
 
@@ -4802,6 +4852,26 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
+        if (requestParameters.deadline_after !== undefined) {
+            queryParameters['deadline_after'] = (requestParameters.deadline_after as any).toISOString().substr(0,10);
+        }
+
+        if (requestParameters.deadline_before !== undefined) {
+            queryParameters['deadline_before'] = (requestParameters.deadline_before as any).toISOString().substr(0,10);
+        }
+
+        if (requestParameters.has__past_deadline !== undefined) {
+            queryParameters['has__past_deadline'] = requestParameters.has__past_deadline;
+        }
+
+        if (requestParameters.status !== undefined) {
+            queryParameters['status'] = requestParameters.status;
+        }
+
+        if (requestParameters.validation_status !== undefined) {
+            queryParameters['validation_status'] = requestParameters.validation_status;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -4836,8 +4906,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas created by user in a project  Required scopes: document:read
      * List visas created by user
      */
-    async getProjectCreatorVisas(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
-        const response = await this.getProjectCreatorVisasRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+    async getProjectCreatorVisas(cloud_pk: number, project_pk: number, deadline_after?: Date, deadline_before?: Date, has__past_deadline?: boolean, status?: GetProjectCreatorVisasStatusEnum, validation_status?: string, initOverrides?: RequestInit): Promise<Array<Visa>> {
+        const response = await this.getProjectCreatorVisasRaw({ cloud_pk: cloud_pk, project_pk: project_pk, deadline_after: deadline_after, deadline_before: deadline_before, has__past_deadline: has__past_deadline, status: status, validation_status: validation_status }, initOverrides);
         return await response.value();
     }
 
@@ -5246,6 +5316,26 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
+        if (requestParameters.deadline_after !== undefined) {
+            queryParameters['deadline_after'] = (requestParameters.deadline_after as any).toISOString().substr(0,10);
+        }
+
+        if (requestParameters.deadline_before !== undefined) {
+            queryParameters['deadline_before'] = (requestParameters.deadline_before as any).toISOString().substr(0,10);
+        }
+
+        if (requestParameters.has__past_deadline !== undefined) {
+            queryParameters['has__past_deadline'] = requestParameters.has__past_deadline;
+        }
+
+        if (requestParameters.status !== undefined) {
+            queryParameters['status'] = requestParameters.status;
+        }
+
+        if (requestParameters.validation_status !== undefined) {
+            queryParameters['validation_status'] = requestParameters.validation_status;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5280,8 +5370,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas where user is a validator in a project  Required scopes: document:read
      * List visas where user is a validator
      */
-    async getProjectValidatorVisas(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Visa>> {
-        const response = await this.getProjectValidatorVisasRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+    async getProjectValidatorVisas(cloud_pk: number, project_pk: number, deadline_after?: Date, deadline_before?: Date, has__past_deadline?: boolean, status?: GetProjectValidatorVisasStatusEnum, validation_status?: string, initOverrides?: RequestInit): Promise<Array<Visa>> {
+        const response = await this.getProjectValidatorVisasRaw({ cloud_pk: cloud_pk, project_pk: project_pk, deadline_after: deadline_after, deadline_before: deadline_before, has__past_deadline: has__past_deadline, status: status, validation_status: validation_status }, initOverrides);
         return await response.value();
     }
 
@@ -7533,7 +7623,43 @@ export enum GetDocumentsVisaStatusEnum {
     * @export
     * @enum {string}
     */
+export enum GetDocumentsVisaStatusStrictEnum {
+    C = 'C',
+    O = 'O',
+    P = 'P'
+}
+/**
+    * @export
+    * @enum {string}
+    */
 export enum GetFolderDocumentsVisaStatusEnum {
+    C = 'C',
+    O = 'O',
+    P = 'P'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetFolderDocumentsVisaStatusStrictEnum {
+    C = 'C',
+    O = 'O',
+    P = 'P'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetProjectCreatorVisasStatusEnum {
+    C = 'C',
+    O = 'O',
+    P = 'P'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetProjectValidatorVisasStatusEnum {
     C = 'C',
     O = 'O',
     P = 'P'
