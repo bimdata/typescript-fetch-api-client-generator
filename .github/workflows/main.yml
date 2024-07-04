@@ -26,11 +26,11 @@ jobs:
         run: |
           npm install --no-save \
             --prefix package \
-            @semantic-release/npm@23.1.1 \
+            @semantic-release/npm \
             @semantic-release/github \
             conventional-changelog-eslint \
       - name: Release
-        run: npx semantic-release -e ./config/release.config.js
+        run: npx semantic-release@23.1.1 -e ./config/release.config.js
         working-directory: ./package
         env:
           GITHUB_TOKEN: ${{ secrets.REPOS_TOKEN }}
