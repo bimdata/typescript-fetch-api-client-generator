@@ -27,7 +27,7 @@ jobs:
           npm install --no-save \
             --prefix package \
             @semantic-release/npm@23.1.1 \
-            @semantic-release/github@23.1.1 \
+            @semantic-release/github \
             conventional-changelog-eslint \
       - name: Release
         run: npx semantic-release -e ./config/release.config.js
