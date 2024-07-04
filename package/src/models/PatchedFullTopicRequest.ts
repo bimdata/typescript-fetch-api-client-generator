@@ -163,6 +163,12 @@ export interface PatchedFullTopicRequest {
      * @memberof PatchedFullTopicRequest
      */
     project?: number;
+    /**
+     * Non standard field. JSON describing bimdataViewerLayout.
+     * @type {{ [key: string]: any; }}
+     * @memberof PatchedFullTopicRequest
+     */
+    bimdata_viewer_layout?: { [key: string]: any; } | null;
 }
 
 export function PatchedFullTopicRequestFromJSON(json: any): PatchedFullTopicRequest {
@@ -196,6 +202,7 @@ export function PatchedFullTopicRequestFromJSONTyped(json: any, ignoreDiscrimina
         'comments': !exists(json, 'comments') ? undefined : ((json['comments'] as Array<any>).map(CommentRequestFromJSON)),
         'viewpoints': !exists(json, 'viewpoints') ? undefined : ((json['viewpoints'] as Array<any>).map(ViewpointRequestFromJSON)),
         'project': !exists(json, 'project') ? undefined : json['project'],
+        'bimdata_viewer_layout': !exists(json, 'bimdata_viewer_layout') ? undefined : json['bimdata_viewer_layout'],
     };
 }
 
@@ -229,6 +236,7 @@ export function PatchedFullTopicRequestToJSON(value?: PatchedFullTopicRequest | 
         'comments': value.comments === undefined ? undefined : ((value.comments as Array<any>).map(CommentRequestToJSON)),
         'viewpoints': value.viewpoints === undefined ? undefined : ((value.viewpoints as Array<any>).map(ViewpointRequestToJSON)),
         'project': value.project,
+        'bimdata_viewer_layout': value.bimdata_viewer_layout,
     };
 }
 

@@ -144,6 +144,12 @@ export interface Topic {
      * @memberof Topic
      */
     project: number;
+    /**
+     * Non standard field. JSON describing bimdataViewerLayout.
+     * @type {{ [key: string]: any; }}
+     * @memberof Topic
+     */
+    bimdata_viewer_layout?: { [key: string]: any; } | null;
 }
 
 export function TopicFromJSON(json: any): Topic {
@@ -176,6 +182,7 @@ export function TopicFromJSONTyped(json: any, ignoreDiscriminator: boolean): Top
         'format': !exists(json, 'format') ? undefined : json['format'],
         'index': !exists(json, 'index') ? undefined : json['index'],
         'project': json['project'],
+        'bimdata_viewer_layout': !exists(json, 'bimdata_viewer_layout') ? undefined : json['bimdata_viewer_layout'],
     };
 }
 
@@ -207,6 +214,7 @@ export function TopicToJSON(value?: Topic | null): any {
         'format': value.format,
         'index': value.index,
         'project': value.project,
+        'bimdata_viewer_layout': value.bimdata_viewer_layout,
     };
 }
 
