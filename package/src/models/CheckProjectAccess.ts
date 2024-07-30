@@ -69,7 +69,7 @@ export interface CheckProjectAccess {
      * @type {User}
      * @memberof CheckProjectAccess
      */
-    user?: User;
+    user?: User | null;
 }
 
 /**
@@ -79,7 +79,8 @@ export interface CheckProjectAccess {
 export enum CheckProjectAccessUserRoleEnum {
     NUMBER_100 = 100,
     NUMBER_50 = 50,
-    NUMBER_25 = 25
+    NUMBER_25 = 25,
+    NUMBER_null = null
 }
 
 export function CheckProjectAccessFromJSON(json: any): CheckProjectAccess {
