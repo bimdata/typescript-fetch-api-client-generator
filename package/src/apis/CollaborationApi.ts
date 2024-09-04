@@ -186,6 +186,9 @@ import {
     VisaValidationRequest,
     VisaValidationRequestFromJSON,
     VisaValidationRequestToJSON,
+    VisaWithDocument,
+    VisaWithDocumentFromJSON,
+    VisaWithDocumentToJSON,
     WriteFolderRequest,
     WriteFolderRequestFromJSON,
     WriteFolderRequestToJSON,
@@ -1674,7 +1677,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'OBJ\', \'DXF\', \'POINT_CLOUD\', \'IFC\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'POINT_CLOUD\', \'GLTF\', \'DWG\', \'IFC\', \'OBJ\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1777,7 +1780,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'OBJ\', \'DXF\', \'POINT_CLOUD\', \'IFC\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'POINT_CLOUD\', \'GLTF\', \'DWG\', \'IFC\', \'OBJ\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -4841,7 +4844,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas created by user in a project  Required scopes: document:read
      * List visas created by user
      */
-    async getProjectCreatorVisasRaw(requestParameters: GetProjectCreatorVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Visa>>> {
+    async getProjectCreatorVisasRaw(requestParameters: GetProjectCreatorVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<VisaWithDocument>>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectCreatorVisas.');
         }
@@ -4899,14 +4902,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaWithDocumentFromJSON));
     }
 
     /**
      * List visas created by user in a project  Required scopes: document:read
      * List visas created by user
      */
-    async getProjectCreatorVisas(cloud_pk: number, project_pk: number, deadline_after?: Date, deadline_before?: Date, has__past_deadline?: boolean, status?: GetProjectCreatorVisasStatusEnum, validation_status?: string, initOverrides?: RequestInit): Promise<Array<Visa>> {
+    async getProjectCreatorVisas(cloud_pk: number, project_pk: number, deadline_after?: Date, deadline_before?: Date, has__past_deadline?: boolean, status?: GetProjectCreatorVisasStatusEnum, validation_status?: string, initOverrides?: RequestInit): Promise<Array<VisaWithDocument>> {
         const response = await this.getProjectCreatorVisasRaw({ cloud_pk: cloud_pk, project_pk: project_pk, deadline_after: deadline_after, deadline_before: deadline_before, has__past_deadline: has__past_deadline, status: status, validation_status: validation_status }, initOverrides);
         return await response.value();
     }
@@ -5305,7 +5308,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * List visas where user is a validator in a project  Required scopes: document:read
      * List visas where user is a validator
      */
-    async getProjectValidatorVisasRaw(requestParameters: GetProjectValidatorVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Visa>>> {
+    async getProjectValidatorVisasRaw(requestParameters: GetProjectValidatorVisasRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<VisaWithDocument>>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectValidatorVisas.');
         }
@@ -5363,14 +5366,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(VisaWithDocumentFromJSON));
     }
 
     /**
      * List visas where user is a validator in a project  Required scopes: document:read
      * List visas where user is a validator
      */
-    async getProjectValidatorVisas(cloud_pk: number, project_pk: number, deadline_after?: Date, deadline_before?: Date, has__past_deadline?: boolean, status?: GetProjectValidatorVisasStatusEnum, validation_status?: string, initOverrides?: RequestInit): Promise<Array<Visa>> {
+    async getProjectValidatorVisas(cloud_pk: number, project_pk: number, deadline_after?: Date, deadline_before?: Date, has__past_deadline?: boolean, status?: GetProjectValidatorVisasStatusEnum, validation_status?: string, initOverrides?: RequestInit): Promise<Array<VisaWithDocument>> {
         const response = await this.getProjectValidatorVisasRaw({ cloud_pk: cloud_pk, project_pk: project_pk, deadline_after: deadline_after, deadline_before: deadline_before, has__past_deadline: has__past_deadline, status: status, validation_status: validation_status }, initOverrides);
         return await response.value();
     }

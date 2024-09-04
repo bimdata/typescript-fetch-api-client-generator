@@ -75,6 +75,7 @@ src/models/Layer.ts
 src/models/LayerElement.ts
 src/models/LayerElementRequest.ts
 src/models/LayerRequest.ts
+src/models/LightDocument.ts
 src/models/Line.ts
 src/models/LineRequest.ts
 src/models/LogEntry.ts
@@ -237,6 +238,7 @@ src/models/VisaCommentRequest.ts
 src/models/VisaRequest.ts
 src/models/VisaValidation.ts
 src/models/VisaValidationRequest.ts
+src/models/VisaWithDocument.ts
 src/models/Visibility.ts
 src/models/VisibilityRequest.ts
 src/models/WebHook.ts
