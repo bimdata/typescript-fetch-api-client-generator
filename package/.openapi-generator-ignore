@@ -23,5 +23,6 @@
 #!docs/README.md
 
 src/index.ts
+package.json
 .npmignore
 README.md
