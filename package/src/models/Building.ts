@@ -43,7 +43,7 @@ export interface Building {
      * @type {number}
      * @memberof Building
      */
-    readonly bimdata_elevation: number;
+    readonly bimdata_elevation: number | null;
     /**
      * 
      * @type {Array<ModelWithPositioningPlan>}
