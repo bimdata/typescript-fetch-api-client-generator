@@ -40,10 +40,10 @@ export interface Building {
     readonly name: string;
     /**
      * Elevation computed by BIMData on storey's objects geometries.
-     * @type {string}
+     * @type {number}
      * @memberof Building
      */
-    readonly bimdata_elevation: string;
+    readonly bimdata_elevation: number;
     /**
      * 
      * @type {Array<ModelWithPositioningPlan>}
