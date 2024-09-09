@@ -37,7 +37,7 @@ export interface Building {
      * @type {string}
      * @memberof Building
      */
-    readonly name: string;
+    readonly name: string | null;
     /**
      * Elevation computed by BIMData on storey's objects geometries.
      * @type {number}
