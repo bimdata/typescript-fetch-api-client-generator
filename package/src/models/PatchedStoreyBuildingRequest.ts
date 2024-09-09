@@ -25,6 +25,12 @@ export interface PatchedStoreyBuildingRequest {
      * @memberof PatchedStoreyBuildingRequest
      */
     name?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PatchedStoreyBuildingRequest
+     */
+    bimdata_elevation?: number;
 }
 
 export function PatchedStoreyBuildingRequestFromJSON(json: any): PatchedStoreyBuildingRequest {
@@ -38,6 +44,7 @@ export function PatchedStoreyBuildingRequestFromJSONTyped(json: any, ignoreDiscr
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'bimdata_elevation': !exists(json, 'bimdata_elevation') ? undefined : json['bimdata_elevation'],
     };
 }
 
@@ -51,6 +58,7 @@ export function PatchedStoreyBuildingRequestToJSON(value?: PatchedStoreyBuilding
     return {
         
         'name': value.name,
+        'bimdata_elevation': value.bimdata_elevation,
     };
 }
 

@@ -39,6 +39,12 @@ export interface Storey {
      */
     readonly name: string;
     /**
+     * Elevation computed by BIMData on storey's objects geometries.
+     * @type {string}
+     * @memberof Storey
+     */
+    readonly bimdata_elevation: string;
+    /**
      * 
      * @type {Array<ModelWithPositioningPlan>}
      * @memberof Storey
@@ -64,6 +70,7 @@ export function StoreyFromJSONTyped(json: any, ignoreDiscriminator: boolean): St
         
         'uuid': json['uuid'],
         'name': json['name'],
+        'bimdata_elevation': json['bimdata_elevation'],
         'plans': ((json['plans'] as Array<any>).map(ModelWithPositioningPlanFromJSON)),
         'plans_unreachable_count': json['plans_unreachable_count'],
     };

@@ -1,5 +1,4 @@
 .gitignore
-package.json
 src/apis/BcfApi.ts
 src/apis/CollaborationApi.ts
 src/apis/ModelApi.ts
