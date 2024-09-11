@@ -61,6 +61,8 @@ export interface ModelSerializerWithoutChildren {
      * * `OBJ` - OBJ
      * * `POINT_CLOUD` - POINT_CLOUD
      * * `METABUILDING` - METABUILDING
+     * * `PHOTOSPHERE` - PHOTOSPHERE
+     * * `PHOTOSPHERE_BUILDING` - PHOTOSPHERE_BUILDING
      * @type {string}
      * @memberof ModelSerializerWithoutChildren
      */
@@ -247,7 +249,9 @@ export enum ModelSerializerWithoutChildrenTypeEnum {
     Png = 'PNG',
     Obj = 'OBJ',
     PointCloud = 'POINT_CLOUD',
-    Metabuilding = 'METABUILDING'
+    Metabuilding = 'METABUILDING',
+    Photosphere = 'PHOTOSPHERE',
+    PhotosphereBuilding = 'PHOTOSPHERE_BUILDING'
 }/**
 * @export
 * @enum {string}

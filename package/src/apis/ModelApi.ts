@@ -467,6 +467,18 @@ export interface CreateMultiPageModelOperationRequest {
     CreateMultiPageModelRequest: CreateMultiPageModelRequest;
 }
 
+export interface CreatePhotosphereRequest {
+    cloud_pk: number;
+    project_pk: number;
+    CreateModelRequest: CreateModelRequest;
+}
+
+export interface CreatePhotosphereBuildingRequest {
+    cloud_pk: number;
+    project_pk: number;
+    CreateBuildingByNameRequest: CreateBuildingByNameRequest;
+}
+
 export interface CreatePropertySetRequest {
     cloud_pk: number;
     model_pk: number;
@@ -3462,6 +3474,128 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async createMultiPageModel(cloud_pk: number, id: number, project_pk: number, CreateMultiPageModelRequest: CreateMultiPageModelRequest, initOverrides?: RequestInit): Promise<Model> {
         const response = await this.createMultiPageModelRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, CreateMultiPageModelRequest: CreateMultiPageModelRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create a photosphere model to be used in BIMData services  Required scopes: ifc:write, model:write
+     * Create a photopshere model from an image file
+     */
+    async createPhotosphereRaw(requestParameters: CreatePhotosphereRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createPhotosphere.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createPhotosphere.');
+        }
+
+        if (requestParameters.CreateModelRequest === null || requestParameters.CreateModelRequest === undefined) {
+            throw new runtime.RequiredError('CreateModelRequest','Required parameter requestParameters.CreateModelRequest was null or undefined when calling createPhotosphere.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/create-photosphere`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateModelRequestToJSON(requestParameters.CreateModelRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a photosphere model to be used in BIMData services  Required scopes: ifc:write, model:write
+     * Create a photopshere model from an image file
+     */
+    async createPhotosphere(cloud_pk: number, project_pk: number, CreateModelRequest: CreateModelRequest, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.createPhotosphereRaw({ cloud_pk: cloud_pk, project_pk: project_pk, CreateModelRequest: CreateModelRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create an empty Photosphere Building Model  Required scopes: ifc:write, model:write
+     * Create an empty Photosphere Building Model
+     */
+    async createPhotosphereBuildingRaw(requestParameters: CreatePhotosphereBuildingRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Model>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createPhotosphereBuilding.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createPhotosphereBuilding.');
+        }
+
+        if (requestParameters.CreateBuildingByNameRequest === null || requestParameters.CreateBuildingByNameRequest === undefined) {
+            throw new runtime.RequiredError('CreateBuildingByNameRequest','Required parameter requestParameters.CreateBuildingByNameRequest was null or undefined when calling createPhotosphereBuilding.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/create-photosphere-building`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateBuildingByNameRequestToJSON(requestParameters.CreateBuildingByNameRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelFromJSON(jsonValue));
+    }
+
+    /**
+     * Create an empty Photosphere Building Model  Required scopes: ifc:write, model:write
+     * Create an empty Photosphere Building Model
+     */
+    async createPhotosphereBuilding(cloud_pk: number, project_pk: number, CreateBuildingByNameRequest: CreateBuildingByNameRequest, initOverrides?: RequestInit): Promise<Model> {
+        const response = await this.createPhotosphereBuildingRaw({ cloud_pk: cloud_pk, project_pk: project_pk, CreateBuildingByNameRequest: CreateBuildingByNameRequest }, initOverrides);
         return await response.value();
     }
 
@@ -11362,6 +11496,8 @@ export enum GetModelsTypeEnum {
     Metabuilding = 'METABUILDING',
     Obj = 'OBJ',
     Pdf = 'PDF',
+    Photosphere = 'PHOTOSPHERE',
+    PhotosphereBuilding = 'PHOTOSPHERE_BUILDING',
     Png = 'PNG',
     PointCloud = 'POINT_CLOUD'
 }
