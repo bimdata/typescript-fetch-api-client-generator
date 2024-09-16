@@ -311,6 +311,8 @@ export interface GetCommentRequest {
 export interface GetCommentsRequest {
     projects_pk: number;
     topics_guid: string;
+    $filter?: string;
+    $orderby?: string;
 }
 
 export interface GetDetailedExtensionsRequest {
@@ -329,6 +331,8 @@ export interface GetFullTopicRequest {
 
 export interface GetFullTopicsRequest {
     projects_pk: number;
+    $filter?: string;
+    $orderby?: string;
     format?: string;
     ifcs?: Array<number>;
     img_format?: GetFullTopicsImgFormatEnum;
@@ -382,6 +386,8 @@ export interface GetTopicViewpointsRequest {
 
 export interface GetTopicsRequest {
     projects_pk: number;
+    $filter?: string;
+    $orderby?: string;
     format?: string;
     ifcs?: Array<number>;
     models?: Array<number>;
@@ -2283,6 +2289,14 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
+        if (requestParameters.$filter !== undefined) {
+            queryParameters['$filter'] = requestParameters.$filter;
+        }
+
+        if (requestParameters.$orderby !== undefined) {
+            queryParameters['$orderby'] = requestParameters.$orderby;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -2317,8 +2331,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all comments  Required scopes: bcf:read
      * Retrieve all comments
      */
-    async getComments(projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Array<Comment>> {
-        const response = await this.getCommentsRaw({ projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
+    async getComments(projects_pk: number, topics_guid: string, $filter?: string, $orderby?: string, initOverrides?: RequestInit): Promise<Array<Comment>> {
+        const response = await this.getCommentsRaw({ projects_pk: projects_pk, topics_guid: topics_guid, $filter: $filter, $orderby: $orderby }, initOverrides);
         return await response.value();
     }
 
@@ -2491,6 +2505,14 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
+        if (requestParameters.$filter !== undefined) {
+            queryParameters['$filter'] = requestParameters.$filter;
+        }
+
+        if (requestParameters.$orderby !== undefined) {
+            queryParameters['$orderby'] = requestParameters.$orderby;
+        }
+
         if (requestParameters.format !== undefined) {
             queryParameters['format'] = requestParameters.format;
         }
@@ -2541,8 +2563,8 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. It responds with all topics, their viewpoints and their comments  Required scopes: bcf:read
      * Retrieve all full topics
      */
-    async getFullTopics(projects_pk: number, format?: string, ifcs?: Array<number>, img_format?: GetFullTopicsImgFormatEnum, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<FullTopic>> {
-        const response = await this.getFullTopicsRaw({ projects_pk: projects_pk, format: format, ifcs: ifcs, img_format: img_format, models: models }, initOverrides);
+    async getFullTopics(projects_pk: number, $filter?: string, $orderby?: string, format?: string, ifcs?: Array<number>, img_format?: GetFullTopicsImgFormatEnum, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<FullTopic>> {
+        const response = await this.getFullTopicsRaw({ projects_pk: projects_pk, $filter: $filter, $orderby: $orderby, format: format, ifcs: ifcs, img_format: img_format, models: models }, initOverrides);
         return await response.value();
     }
 
@@ -2975,6 +2997,14 @@ export class BcfApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
+        if (requestParameters.$filter !== undefined) {
+            queryParameters['$filter'] = requestParameters.$filter;
+        }
+
+        if (requestParameters.$orderby !== undefined) {
+            queryParameters['$orderby'] = requestParameters.$orderby;
+        }
+
         if (requestParameters.format !== undefined) {
             queryParameters['format'] = requestParameters.format;
         }
@@ -3021,8 +3051,8 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all topics  Required scopes: bcf:read
      * Retrieve all topics
      */
-    async getTopics(projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<Topic>> {
-        const response = await this.getTopicsRaw({ projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
+    async getTopics(projects_pk: number, $filter?: string, $orderby?: string, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<Topic>> {
+        const response = await this.getTopicsRaw({ projects_pk: projects_pk, $filter: $filter, $orderby: $orderby, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
 

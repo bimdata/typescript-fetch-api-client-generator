@@ -20,6 +20,16 @@ import { exists, mapValues } from '../runtime';
  */
 export interface WriteFolderRequest {
     /**
+     * Permission for a Folder
+     * 
+     * * `1` - denied
+     * * `50` - read_only
+     * * `100` - read_write
+     * @type {number}
+     * @memberof WriteFolderRequest
+     */
+    default_permission?: WriteFolderRequestDefaultPermissionEnum;
+    /**
      * 
      * @type {number}
      * @memberof WriteFolderRequest
@@ -31,16 +41,6 @@ export interface WriteFolderRequest {
      * @memberof WriteFolderRequest
      */
     name: string;
-    /**
-     * Permission for a Folder
-     * 
-     * * `1` - denied
-     * * `50` - read_only
-     * * `100` - read_write
-     * @type {number}
-     * @memberof WriteFolderRequest
-     */
-    default_permission?: WriteFolderRequestDefaultPermissionEnum;
     /**
      * 
      * @type {Array<WriteFolderRequest>}
@@ -69,9 +69,9 @@ export function WriteFolderRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
+        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': json['name'],
-        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderRequestFromJSON)),
     };
 }
@@ -85,9 +85,9 @@ export function WriteFolderRequestToJSON(value?: WriteFolderRequest | null): any
     }
     return {
         
+        'default_permission': value.default_permission,
         'parent_id': value.parent_id,
         'name': value.name,
-        'default_permission': value.default_permission,
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(WriteFolderRequestToJSON)),
     };
 }
