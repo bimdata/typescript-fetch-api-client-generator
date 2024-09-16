@@ -44,19 +44,7 @@ export interface Size {
      * @type {number}
      * @memberof Size
      */
-    readonly smart_data_size: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Size
-     */
     readonly total_size_available: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Size
-     */
-    readonly smart_data_size_available: number | null;
     /**
      * 
      * @type {number}
@@ -68,19 +56,7 @@ export interface Size {
      * @type {number}
      * @memberof Size
      */
-    readonly remaining_smart_data_size: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Size
-     */
     readonly remaining_total_size_percent: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Size
-     */
-    readonly remaining_smart_data_size_percent: number | null;
 }
 
 /**
@@ -112,13 +88,9 @@ export function SizeFromJSONTyped(json: any, ignoreDiscriminator: boolean): Size
         'managed_by': json['managed_by'],
         'role': json['role'],
         'total_size': json['total_size'],
-        'smart_data_size': json['smart_data_size'],
         'total_size_available': json['total_size_available'],
-        'smart_data_size_available': json['smart_data_size_available'],
         'remaining_total_size': json['remaining_total_size'],
-        'remaining_smart_data_size': json['remaining_smart_data_size'],
         'remaining_total_size_percent': json['remaining_total_size_percent'],
-        'remaining_smart_data_size_percent': json['remaining_smart_data_size_percent'],
     };
 }
 
