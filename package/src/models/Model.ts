@@ -240,6 +240,12 @@ export interface Model {
      */
     readonly page_number: number | null;
     /**
+     * The name of the DWG layout (only set when type==DWG)
+     * @type {string}
+     * @memberof Model
+     */
+    layout_name?: string | null;
+    /**
      * Contains additional pages of a pdf
      * @type {Array<ModelSerializerWithoutChildren>}
      * @memberof Model
@@ -316,6 +322,7 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'recommanded_2d_angle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
         'parent_id': json['parent_id'],
         'page_number': json['page_number'],
+        'layout_name': !exists(json, 'layout_name') ? undefined : json['layout_name'],
         'children': ((json['children'] as Array<any>).map(ModelSerializerWithoutChildrenFromJSON)),
     };
 }
@@ -337,6 +344,7 @@ export function ModelToJSON(value?: Model | null): any {
         'version': value.version,
         'north_vector': value.north_vector,
         'recommanded_2d_angle': value.recommanded_2d_angle,
+        'layout_name': value.layout_name,
     };
 }
 

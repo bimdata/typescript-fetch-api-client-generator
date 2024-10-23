@@ -25,6 +25,12 @@ export interface CreateMultiPageModelRequest {
      * @memberof CreateMultiPageModelRequest
      */
     map_files: Array<Blob>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateMultiPageModelRequest
+     */
+    layout_names?: Array<string> | null;
 }
 
 export function CreateMultiPageModelRequestFromJSON(json: any): CreateMultiPageModelRequest {
@@ -38,6 +44,7 @@ export function CreateMultiPageModelRequestFromJSONTyped(json: any, ignoreDiscri
     return {
         
         'map_files': json['map_files'],
+        'layout_names': !exists(json, 'layout_names') ? undefined : json['layout_names'],
     };
 }
 
@@ -51,6 +58,7 @@ export function CreateMultiPageModelRequestToJSON(value?: CreateMultiPageModelRe
     return {
         
         'map_files': value.map_files,
+        'layout_names': value.layout_names,
     };
 }
 

@@ -71,6 +71,12 @@ export interface PatchedModelRequest {
      * @memberof PatchedModelRequest
      */
     recommanded_2d_angle?: number | null;
+    /**
+     * The name of the DWG layout (only set when type==DWG)
+     * @type {string}
+     * @memberof PatchedModelRequest
+     */
+    layout_name?: string | null;
 }
 
 /**
@@ -103,6 +109,7 @@ export function PatchedModelRequestFromJSONTyped(json: any, ignoreDiscriminator:
         'version': !exists(json, 'version') ? undefined : json['version'],
         'north_vector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
         'recommanded_2d_angle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
+        'layout_name': !exists(json, 'layout_name') ? undefined : json['layout_name'],
     };
 }
 
@@ -123,6 +130,7 @@ export function PatchedModelRequestToJSON(value?: PatchedModelRequest | null): a
         'version': value.version,
         'north_vector': value.north_vector,
         'recommanded_2d_angle': value.recommanded_2d_angle,
+        'layout_name': value.layout_name,
     };
 }
 

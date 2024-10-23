@@ -233,6 +233,12 @@ export interface ModelSerializerWithoutChildren {
      * @memberof ModelSerializerWithoutChildren
      */
     readonly page_number: number | null;
+    /**
+     * The name of the DWG layout (only set when type==DWG)
+     * @type {string}
+     * @memberof ModelSerializerWithoutChildren
+     */
+    layout_name?: string | null;
 }
 
 /**
@@ -304,6 +310,7 @@ export function ModelSerializerWithoutChildrenFromJSONTyped(json: any, ignoreDis
         'recommanded_2d_angle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
         'parent_id': json['parent_id'],
         'page_number': json['page_number'],
+        'layout_name': !exists(json, 'layout_name') ? undefined : json['layout_name'],
     };
 }
 
@@ -324,6 +331,7 @@ export function ModelSerializerWithoutChildrenToJSON(value?: ModelSerializerWith
         'version': value.version,
         'north_vector': value.north_vector,
         'recommanded_2d_angle': value.recommanded_2d_angle,
+        'layout_name': value.layout_name,
     };
 }
 
