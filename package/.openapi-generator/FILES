@@ -156,7 +156,6 @@ src/models/ProjectInvitationRequest.ts
 src/models/ProjectRequest.ts
 src/models/ProjectRole.ts
 src/models/ProjectSize.ts
-src/models/ProjectWithChildren.ts
 src/models/Property.ts
 src/models/PropertyDefinition.ts
 src/models/PropertyDefinitionRequest.ts

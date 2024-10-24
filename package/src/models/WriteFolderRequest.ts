@@ -30,17 +30,17 @@ export interface WriteFolderRequest {
      */
     default_permission?: WriteFolderRequestDefaultPermissionEnum;
     /**
-     * Name of the folder
-     * @type {string}
-     * @memberof WriteFolderRequest
-     */
-    name: string;
-    /**
      * 
      * @type {number}
      * @memberof WriteFolderRequest
      */
     parent_id?: number | null;
+    /**
+     * Name of the folder
+     * @type {string}
+     * @memberof WriteFolderRequest
+     */
+    name: string;
     /**
      * 
      * @type {Array<WriteFolderRequest>}
@@ -70,8 +70,8 @@ export function WriteFolderRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
-        'name': json['name'],
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'name': json['name'],
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderRequestFromJSON)),
     };
 }
@@ -86,8 +86,8 @@ export function WriteFolderRequestToJSON(value?: WriteFolderRequest | null): any
     return {
         
         'default_permission': value.default_permission,
-        'name': value.name,
         'parent_id': value.parent_id,
+        'name': value.name,
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(WriteFolderRequestToJSON)),
     };
 }

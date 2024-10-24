@@ -151,7 +151,6 @@ export * from './ProjectInvitationRequest';
 export * from './ProjectRequest';
 export * from './ProjectRole';
 export * from './ProjectSize';
-export * from './ProjectWithChildren';
 export * from './Property';
 export * from './PropertyDefinition';
 export * from './PropertyDefinitionRequest';

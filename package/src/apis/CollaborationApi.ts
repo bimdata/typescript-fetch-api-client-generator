@@ -135,9 +135,6 @@ import {
     ProjectSize,
     ProjectSizeFromJSON,
     ProjectSizeToJSON,
-    ProjectWithChildren,
-    ProjectWithChildrenFromJSON,
-    ProjectWithChildrenToJSON,
     SelfUser,
     SelfUserFromJSON,
     SelfUserToJSON,
@@ -1673,7 +1670,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DXF\', \'IFC\', \'POINT_CLOUD\', \'GLTF\', \'DWG\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'IFC\', \'DWG\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1776,7 +1773,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DXF\', \'IFC\', \'POINT_CLOUD\', \'GLTF\', \'DWG\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'IFC\', \'DWG\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -4674,7 +4671,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve a project
      * Retrieve a project
      */
-    async getProjectRaw(requestParameters: GetProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ProjectWithChildren>> {
+    async getProjectRaw(requestParameters: GetProjectRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Project>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProject.');
         }
@@ -4712,14 +4709,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ProjectWithChildrenFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ProjectFromJSON(jsonValue));
     }
 
     /**
      * Retrieve a project
      * Retrieve a project
      */
-    async getProject(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<ProjectWithChildren> {
+    async getProject(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<Project> {
         const response = await this.getProjectRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
         return await response.value();
     }
