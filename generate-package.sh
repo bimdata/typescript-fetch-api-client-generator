@@ -23,8 +23,10 @@ fi
 
 OUTPUT=./package
 
-rm -rf $OUTPUT/src/runtime.ts $OUTPUT/src/apis $OUTPUT/src/models $OUTPUT/dist $OUTPUT/tsconfig.json
+# Clean
+rm -rf $OUTPUT/dist $OUTPUT/src/apis $OUTPUT/src/models $OUTPUT/src/runtime.ts $OUTPUT/tsconfig.json
 
+# Generate
 # See https://openapi-generator.tech/docs/generators/typescript-fetch
 # for a list of available additional properties.
 java \
@@ -37,8 +39,8 @@ allowUnicodeIdentifiers=true,\
 supportsES6=true,\
 modelPropertyNaming=original,\
 paramNaming=original,\
-npmName=@bimdata/typescript-fetch-api-client,\
 useSingleRequestParameter=false,\
+npmName=@bimdata/typescript-fetch-api-client,\
 npmVersion=$VERSION
 
 exit 0
