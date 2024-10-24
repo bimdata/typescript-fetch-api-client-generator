@@ -80,12 +80,6 @@ export interface Project {
      * @type {number}
      * @memberof Project
      */
-    parent_id?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Project
-     */
     readonly root_folder_id: number | null;
     /**
      * 
@@ -122,7 +116,6 @@ export function ProjectFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
         'status': !exists(json, 'status') ? undefined : json['status'],
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'root_folder_id': json['root_folder_id'],
         'main_model_id': !exists(json, 'main_model_id') ? undefined : json['main_model_id'],
     };
@@ -141,7 +134,6 @@ export function ProjectToJSON(value?: Project | null): any {
         'name': value.name,
         'description': value.description,
         'status': value.status,
-        'parent_id': value.parent_id,
         'main_model_id': value.main_model_id,
     };
 }

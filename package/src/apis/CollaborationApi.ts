@@ -650,10 +650,6 @@ export interface GetProjectSizeRequest {
     id: number;
 }
 
-export interface GetProjectSubTreeRequest {
-    cloud_pk: number;
-}
-
 export interface GetProjectTreeRequest {
     cloud_pk: number;
     id: number;
@@ -1677,7 +1673,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'IFC\', \'GLTF\', \'OBJ\', \'DXF\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'IFC\', \'POINT_CLOUD\', \'GLTF\', \'DWG\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1780,7 +1776,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'IFC\', \'GLTF\', \'OBJ\', \'DXF\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DXF\', \'IFC\', \'POINT_CLOUD\', \'GLTF\', \'DWG\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
@@ -5127,56 +5123,6 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getProjectSize(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<ProjectSize> {
         const response = await this.getProjectSizeRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve the complete projects tree of the cloud
-     * Retrieve the complete projects tree of the cloud
-     */
-    async getProjectSubTreeRaw(requestParameters: GetProjectSubTreeRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ProjectWithChildren>>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectSubTree.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/subtree`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ProjectWithChildrenFromJSON));
-    }
-
-    /**
-     * Retrieve the complete projects tree of the cloud
-     * Retrieve the complete projects tree of the cloud
-     */
-    async getProjectSubTree(cloud_pk: number, initOverrides?: RequestInit): Promise<Array<ProjectWithChildren>> {
-        const response = await this.getProjectSubTreeRaw({ cloud_pk: cloud_pk }, initOverrides);
         return await response.value();
     }
 

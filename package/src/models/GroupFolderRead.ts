@@ -31,7 +31,7 @@ export interface GroupFolderRead {
      * @type {Group}
      * @memberof GroupFolderRead
      */
-    group: Group;
+    readonly group: Group | null;
     /**
      * * `1` - denied
      * * `50` - read_only
@@ -77,7 +77,6 @@ export function GroupFolderReadToJSON(value?: GroupFolderRead | null): any {
     }
     return {
         
-        'group': GroupToJSON(value.group),
         'permission': value.permission,
     };
 }

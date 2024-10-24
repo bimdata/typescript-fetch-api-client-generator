@@ -64,12 +64,6 @@ export interface ProjectWithChildren {
     readonly updated_at: Date;
     /**
      * 
-     * @type {number}
-     * @memberof ProjectWithChildren
-     */
-    parent_id?: number | null;
-    /**
-     * 
      * @type {Array<ProjectWithChildren>}
      * @memberof ProjectWithChildren
      */
@@ -114,7 +108,6 @@ export function ProjectWithChildrenFromJSONTyped(json: any, ignoreDiscriminator:
         'status': !exists(json, 'status') ? undefined : json['status'],
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'children': ((json['children'] as Array<any>).map(ProjectWithChildrenFromJSON)),
         'root_folder_id': json['root_folder_id'],
         'main_model_id': json['main_model_id'],
@@ -134,7 +127,6 @@ export function ProjectWithChildrenToJSON(value?: ProjectWithChildren | null): a
         'name': value.name,
         'description': value.description,
         'status': value.status,
-        'parent_id': value.parent_id,
     };
 }
 

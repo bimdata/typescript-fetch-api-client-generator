@@ -49,12 +49,6 @@ export interface ProjectRequest {
      * @type {number}
      * @memberof ProjectRequest
      */
-    parent_id?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectRequest
-     */
     main_model_id?: number | null;
 }
 
@@ -81,7 +75,6 @@ export function ProjectRequestFromJSONTyped(json: any, ignoreDiscriminator: bool
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'main_model_id': !exists(json, 'main_model_id') ? undefined : json['main_model_id'],
     };
 }
@@ -99,7 +92,6 @@ export function ProjectRequestToJSON(value?: ProjectRequest | null): any {
         'name': value.name,
         'description': value.description,
         'status': value.status,
-        'parent_id': value.parent_id,
         'main_model_id': value.main_model_id,
     };
 }
