@@ -79,6 +79,14 @@ export interface PatchedDocumentRequest {
      * @memberof PatchedDocumentRequest
      */
     successor_of?: number;
+    /**
+     * Provide a info about the document in order to customize the way it is processed.
+     * 
+     * * `PHOTOSPHERE` - PHOTOSPHERE
+     * @type {string}
+     * @memberof PatchedDocumentRequest
+     */
+    process_hint?: PatchedDocumentRequestProcessHintEnum;
 }
 
 /**
@@ -101,6 +109,12 @@ export enum PatchedDocumentRequestIfcSourceEnum {
     Merge = 'MERGE',
     Export = 'EXPORT',
     Optimized = 'OPTIMIZED'
+}/**
+* @export
+* @enum {string}
+*/
+export enum PatchedDocumentRequestProcessHintEnum {
+    Photosphere = 'PHOTOSPHERE'
 }
 
 export function PatchedDocumentRequestFromJSON(json: any): PatchedDocumentRequest {
@@ -121,6 +135,7 @@ export function PatchedDocumentRequestFromJSONTyped(json: any, ignoreDiscriminat
         'model_source': !exists(json, 'model_source') ? undefined : json['model_source'],
         'ifc_source': !exists(json, 'ifc_source') ? undefined : json['ifc_source'],
         'successor_of': !exists(json, 'successor_of') ? undefined : json['successor_of'],
+        'process_hint': !exists(json, 'process_hint') ? undefined : json['process_hint'],
     };
 }
 
@@ -141,6 +156,7 @@ export function PatchedDocumentRequestToJSON(value?: PatchedDocumentRequest | nu
         'model_source': value.model_source,
         'ifc_source': value.ifc_source,
         'successor_of': value.successor_of,
+        'process_hint': value.process_hint,
     };
 }
 

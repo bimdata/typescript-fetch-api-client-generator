@@ -2460,7 +2460,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a relation between a 2d model and a building. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
+     * Create a relation between a 2d model and a building. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\', \'PHOTOSPHERE\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a building
      */
     async createBuildingPlanRaw(requestParameters: CreateBuildingPlanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Building>> {
@@ -2520,7 +2520,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a relation between a 2d model and a building. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
+     * Create a relation between a 2d model and a building. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\', \'PHOTOSPHERE\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a building
      */
     async createBuildingPlan(building_uuid: string, cloud_pk: number, model_pk: number, project_pk: number, BuildingModelPlanRequest: BuildingModelPlanRequest, initOverrides?: RequestInit): Promise<Building> {
@@ -3923,7 +3923,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
+     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\', \'PHOTOSPHERE\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a storey
      */
     async createStoreyPlanRaw(requestParameters: CreateStoreyPlanRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Storey>> {
@@ -3983,7 +3983,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\')  Required scopes: ifc:write, model:write
+     * Create a relation between a 2d model and a storey. The model type must be one of : (\'DWG\', \'DXF\', \'PDF\', \'JPEG\', \'PNG\', \'PHOTOSPHERE\')  Required scopes: ifc:write, model:write
      * Create a relation between a 2d model and a storey
      */
     async createStoreyPlan(cloud_pk: number, model_pk: number, project_pk: number, storey_uuid: string, StoreyModelPlanRequest: StoreyModelPlanRequest, initOverrides?: RequestInit): Promise<Storey> {

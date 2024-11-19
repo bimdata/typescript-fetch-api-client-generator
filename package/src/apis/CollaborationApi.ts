@@ -276,6 +276,7 @@ export interface CreateDocumentRequest {
     model_source?: CreateDocumentModelSourceEnum;
     ifc_source?: CreateDocumentIfcSourceEnum;
     successor_of?: number;
+    process_hint?: CreateDocumentProcessHintEnum;
 }
 
 export interface CreateFolderRequest {
@@ -1670,7 +1671,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'IFC\', \'DWG\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'IFC\', \'GLTF\', \'DXF\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1761,6 +1762,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             formParams.append('successor_of', requestParameters.successor_of as any);
         }
 
+        if (requestParameters.process_hint !== undefined) {
+            formParams.append('process_hint', requestParameters.process_hint as any);
+        }
+
         const response = await this.request({
             path: `/cloud/{cloud_pk}/project/{project_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
@@ -1773,11 +1778,11 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'IFC\', \'DWG\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'IFC\', \'GLTF\', \'DXF\', \'POINT_CLOUD\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.createDocumentRaw({ cloud_pk: cloud_pk, project_pk: project_pk, name: name, file: file, parent_id: parent_id, file_name: file_name, description: description, model_source: model_source, ifc_source: ifc_source, successor_of: successor_of }, initOverrides);
+    async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.createDocumentRaw({ cloud_pk: cloud_pk, project_pk: project_pk, name: name, file: file, parent_id: parent_id, file_name: file_name, description: description, model_source: model_source, ifc_source: ifc_source, successor_of: successor_of, process_hint: process_hint }, initOverrides);
         return await response.value();
     }
 
@@ -7555,6 +7560,13 @@ export enum CreateDocumentIfcSourceEnum {
     Merge = 'MERGE',
     Export = 'EXPORT',
     Optimized = 'OPTIMIZED'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum CreateDocumentProcessHintEnum {
+    Photosphere = 'PHOTOSPHERE'
 }
 /**
     * @export
