@@ -87,6 +87,8 @@ src/models/MaterialListComponentRequest.ts
 src/models/MaterialOption.ts
 src/models/MaterialRequest.ts
 src/models/Model.ts
+src/models/ModelDocument.ts
+src/models/ModelDocumentRequest.ts
 src/models/ModelErrors.ts
 src/models/ModelErrorsRequest.ts
 src/models/ModelFiles.ts

@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Document,
-    DocumentFromJSON,
-    DocumentFromJSONTyped,
-    DocumentToJSON,
-} from './Document';
+    ModelDocument,
+    ModelDocumentFromJSON,
+    ModelDocumentFromJSONTyped,
+    ModelDocumentToJSON,
+} from './ModelDocument';
 import {
     ModelSerializerWithoutChildren,
     ModelSerializerWithoutChildrenFromJSON,
@@ -115,10 +115,10 @@ export interface Model {
     readonly document_id: number | null;
     /**
      * 
-     * @type {Document}
+     * @type {ModelDocument}
      * @memberof Model
      */
-    readonly document: Document | null;
+    readonly document: ModelDocument | null;
     /**
      * 
      * @type {string}
@@ -301,7 +301,7 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
         'document_id': json['document_id'],
-        'document': DocumentFromJSON(json['document']),
+        'document': ModelDocumentFromJSON(json['document']),
         'structure_file': json['structure_file'],
         'systems_file': json['systems_file'],
         'map_file': json['map_file'],

@@ -82,6 +82,8 @@ export * from './MaterialListComponentRequest';
 export * from './MaterialOption';
 export * from './MaterialRequest';
 export * from './Model';
+export * from './ModelDocument';
+export * from './ModelDocumentRequest';
 export * from './ModelErrors';
 export * from './ModelErrorsRequest';
 export * from './ModelFiles';
