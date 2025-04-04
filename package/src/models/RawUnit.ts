@@ -51,10 +51,10 @@ export interface RawUnit {
     prefix?: string | null;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof RawUnit
      */
-    elements?: { [key: string]: any; } | null;
+    elements?: any | null;
     /**
      * 
      * @type {number}

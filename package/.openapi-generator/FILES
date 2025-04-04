@@ -21,6 +21,7 @@ src/models/CloudInvitationRequest.ts
 src/models/CloudRequest.ts
 src/models/CloudRole.ts
 src/models/Coloring.ts
+src/models/ColoringDefinition.ts
 src/models/ColoringRequest.ts
 src/models/Comment.ts
 src/models/CommentRequest.ts
@@ -194,6 +195,7 @@ src/models/RawUnit.ts
 src/models/RawUnitRequest.ts
 src/models/RecursiveFolderChildren.ts
 src/models/SelectUserRequest.ts
+src/models/SelectionDefinition.ts
 src/models/SelfBcfUser.ts
 src/models/SelfUser.ts
 src/models/ShortUser.ts
@@ -240,9 +242,11 @@ src/models/VisaValidation.ts
 src/models/VisaValidationRequest.ts
 src/models/VisaWithDocument.ts
 src/models/Visibility.ts
+src/models/VisibilityDefinition.ts
 src/models/VisibilityRequest.ts
 src/models/WebHook.ts
 src/models/WebHookRequest.ts
+src/models/WriteFolder.ts
 src/models/WriteFolderRequest.ts
 src/models/XktFile.ts
 src/models/Zone.ts

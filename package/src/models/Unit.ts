@@ -69,10 +69,10 @@ export interface Unit {
     conversion_baseunit?: Unit;
     /**
      * List of constitutive unit elements by id with corresponding exponent (ex: [meterID/1, secondID/-1] for velocity)
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof Unit
      */
-    elements?: { [key: string]: any; } | null;
+    elements?: any | null;
     /**
      * 
      * @type {boolean}

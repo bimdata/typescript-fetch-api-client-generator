@@ -13,42 +13,42 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    Coloring,
+    ColoringFromJSON,
+    ColoringFromJSONTyped,
+    ColoringToJSON,
+} from './Coloring';
+
 /**
  * 
  * @export
- * @interface RawPropertyRequest
+ * @interface ColoringDefinition
  */
-export interface RawPropertyRequest {
+export interface ColoringDefinition {
     /**
      * 
-     * @type {any}
-     * @memberof RawPropertyRequest
+     * @type {Array<Coloring>}
+     * @memberof ColoringDefinition
      */
-    value?: any | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RawPropertyRequest
-     */
-    def_id: number;
+    coloring: Array<Coloring>;
 }
 
-export function RawPropertyRequestFromJSON(json: any): RawPropertyRequest {
-    return RawPropertyRequestFromJSONTyped(json, false);
+export function ColoringDefinitionFromJSON(json: any): ColoringDefinition {
+    return ColoringDefinitionFromJSONTyped(json, false);
 }
 
-export function RawPropertyRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): RawPropertyRequest {
+export function ColoringDefinitionFromJSONTyped(json: any, ignoreDiscriminator: boolean): ColoringDefinition {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'value': !exists(json, 'value') ? undefined : json['value'],
-        'def_id': json['def_id'],
+        'coloring': ((json['coloring'] as Array<any>).map(ColoringFromJSON)),
     };
 }
 
-export function RawPropertyRequestToJSON(value?: RawPropertyRequest | null): any {
+export function ColoringDefinitionToJSON(value?: ColoringDefinition | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +57,7 @@ export function RawPropertyRequestToJSON(value?: RawPropertyRequest | null): any
     }
     return {
         
-        'value': value.value,
-        'def_id': value.def_id,
+        'coloring': ((value.coloring as Array<any>).map(ColoringToJSON)),
     };
 }
 

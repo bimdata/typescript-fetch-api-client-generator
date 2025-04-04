@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    Zone,
+    ZoneFromJSON,
+    ZoneFromJSONTyped,
+    ZoneToJSON,
+} from './Zone';
+import {
     ZoneSpaceRequest,
     ZoneSpaceRequestFromJSON,
     ZoneSpaceRequestFromJSONTyped,
@@ -40,10 +46,10 @@ export interface ZoneRequest {
     uuid: string;
     /**
      * 
-     * @type {Array<ZoneRequest>}
+     * @type {Array<Zone>}
      * @memberof ZoneRequest
      */
-    zones?: Array<ZoneRequest>;
+    zones?: Array<Zone>;
     /**
      * 
      * @type {number}
@@ -88,7 +94,7 @@ export function ZoneRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'name': !exists(json, 'name') ? undefined : json['name'],
         'uuid': json['uuid'],
-        'zones': !exists(json, 'zones') ? undefined : ((json['zones'] as Array<any>).map(ZoneRequestFromJSON)),
+        'zones': !exists(json, 'zones') ? undefined : ((json['zones'] as Array<any>).map(ZoneFromJSON)),
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'spaces': !exists(json, 'spaces') ? undefined : ((json['spaces'] as Array<any>).map(ZoneSpaceRequestFromJSON)),
         'color': !exists(json, 'color') ? undefined : json['color'],
@@ -108,7 +114,7 @@ export function ZoneRequestToJSON(value?: ZoneRequest | null): any {
         
         'name': value.name,
         'uuid': value.uuid,
-        'zones': value.zones === undefined ? undefined : ((value.zones as Array<any>).map(ZoneRequestToJSON)),
+        'zones': value.zones === undefined ? undefined : ((value.zones as Array<any>).map(ZoneToJSON)),
         'parent_id': value.parent_id,
         'spaces': value.spaces === undefined ? undefined : ((value.spaces as Array<any>).map(ZoneSpaceRequestToJSON)),
         'color': value.color,

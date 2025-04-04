@@ -40,10 +40,10 @@ export interface Property {
     definition: PropertyDefinition;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof Property
      */
-    value?: { [key: string]: any; } | null;
+    value?: any | null;
     /**
      * This field is useful when you update a property and the  API is rebuilding a new property set to avoid an update on many elements. It gives you the new pset id
      * @type {number}

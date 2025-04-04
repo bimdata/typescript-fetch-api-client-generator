@@ -24,18 +24,15 @@ import {
     BcfProjectRequest,
     BcfProjectRequestFromJSON,
     BcfProjectRequestToJSON,
-    Coloring,
-    ColoringFromJSON,
-    ColoringToJSON,
+    ColoringDefinition,
+    ColoringDefinitionFromJSON,
+    ColoringDefinitionToJSON,
     Comment,
     CommentFromJSON,
     CommentToJSON,
     CommentRequest,
     CommentRequestFromJSON,
     CommentRequestToJSON,
-    Component,
-    ComponentFromJSON,
-    ComponentToJSON,
     DetailedExtensions,
     DetailedExtensionsFromJSON,
     DetailedExtensionsToJSON,
@@ -99,6 +96,9 @@ import {
     PriorityRequest,
     PriorityRequestFromJSON,
     PriorityRequestToJSON,
+    SelectionDefinition,
+    SelectionDefinitionFromJSON,
+    SelectionDefinitionToJSON,
     SelfBcfUser,
     SelfBcfUserFromJSON,
     SelfBcfUserToJSON,
@@ -135,9 +135,9 @@ import {
     ViewpointRequest,
     ViewpointRequestFromJSON,
     ViewpointRequestToJSON,
-    Visibility,
-    VisibilityFromJSON,
-    VisibilityToJSON,
+    VisibilityDefinition,
+    VisibilityDefinitionFromJSON,
+    VisibilityDefinitionToJSON,
 } from '../models';
 
 export interface CreateCommentRequest {
@@ -2162,7 +2162,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all colorings of a viewpoint  Required scopes: bcf:read
      * Retrieve all colorings of a viewpoint
      */
-    async getColoringsRaw(requestParameters: GetColoringsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Coloring>>> {
+    async getColoringsRaw(requestParameters: GetColoringsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ColoringDefinition>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getColorings.');
         }
@@ -2204,14 +2204,14 @@ export class BcfApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ColoringFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ColoringDefinitionFromJSON(jsonValue));
     }
 
     /**
      * Retrieve all colorings of a viewpoint  Required scopes: bcf:read
      * Retrieve all colorings of a viewpoint
      */
-    async getColorings(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Array<Coloring>> {
+    async getColorings(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<ColoringDefinition> {
         const response = await this.getColoringsRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
         return await response.value();
     }
@@ -2696,7 +2696,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all selections of a viewpoint  Required scopes: bcf:read
      * Retrieve all selections of a viewpoint
      */
-    async getSelectionsRaw(requestParameters: GetSelectionsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Component>>> {
+    async getSelectionsRaw(requestParameters: GetSelectionsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<SelectionDefinition>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getSelections.');
         }
@@ -2738,14 +2738,14 @@ export class BcfApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ComponentFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SelectionDefinitionFromJSON(jsonValue));
     }
 
     /**
      * Retrieve all selections of a viewpoint  Required scopes: bcf:read
      * Retrieve all selections of a viewpoint
      */
-    async getSelections(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Array<Component>> {
+    async getSelections(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<SelectionDefinition> {
         const response = await this.getSelectionsRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
         return await response.value();
     }
@@ -3334,7 +3334,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Retrieve all visibilities of a viewpoint  Required scopes: bcf:read
      * Retrieve all visibilities of a viewpoint
      */
-    async getVisibilitiesRaw(requestParameters: GetVisibilitiesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Visibility>> {
+    async getVisibilitiesRaw(requestParameters: GetVisibilitiesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<VisibilityDefinition>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getVisibilities.');
         }
@@ -3376,14 +3376,14 @@ export class BcfApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => VisibilityFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => VisibilityDefinitionFromJSON(jsonValue));
     }
 
     /**
      * Retrieve all visibilities of a viewpoint  Required scopes: bcf:read
      * Retrieve all visibilities of a viewpoint
      */
-    async getVisibilities(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<Visibility> {
+    async getVisibilities(guid: string, projects_pk: number, topics_guid: string, initOverrides?: RequestInit): Promise<VisibilityDefinition> {
         const response = await this.getVisibilitiesRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid }, initOverrides);
         return await response.value();
     }

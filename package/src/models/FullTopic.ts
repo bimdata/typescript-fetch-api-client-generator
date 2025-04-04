@@ -171,10 +171,10 @@ export interface FullTopic {
     project: number;
     /**
      * Non standard field. JSON describing bimdataViewerLayout.
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof FullTopic
      */
-    bimdata_viewer_layout?: { [key: string]: any; } | null;
+    bimdata_viewer_layout?: any | null;
 }
 
 export function FullTopicFromJSON(json: any): FullTopic {

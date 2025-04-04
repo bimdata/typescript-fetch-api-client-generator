@@ -34,10 +34,10 @@ export interface PropertyRequest {
     definition: PropertyDefinitionRequest;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof PropertyRequest
      */
-    value?: { [key: string]: any; } | null;
+    value?: any | null;
 }
 
 export function PropertyRequestFromJSON(json: any): PropertyRequest {

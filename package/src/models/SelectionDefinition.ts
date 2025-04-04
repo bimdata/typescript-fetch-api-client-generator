@@ -13,42 +13,42 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    Component,
+    ComponentFromJSON,
+    ComponentFromJSONTyped,
+    ComponentToJSON,
+} from './Component';
+
 /**
  * 
  * @export
- * @interface RawPropertyRequest
+ * @interface SelectionDefinition
  */
-export interface RawPropertyRequest {
+export interface SelectionDefinition {
     /**
      * 
-     * @type {any}
-     * @memberof RawPropertyRequest
+     * @type {Array<Component>}
+     * @memberof SelectionDefinition
      */
-    value?: any | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RawPropertyRequest
-     */
-    def_id: number;
+    selection: Array<Component>;
 }
 
-export function RawPropertyRequestFromJSON(json: any): RawPropertyRequest {
-    return RawPropertyRequestFromJSONTyped(json, false);
+export function SelectionDefinitionFromJSON(json: any): SelectionDefinition {
+    return SelectionDefinitionFromJSONTyped(json, false);
 }
 
-export function RawPropertyRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): RawPropertyRequest {
+export function SelectionDefinitionFromJSONTyped(json: any, ignoreDiscriminator: boolean): SelectionDefinition {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'value': !exists(json, 'value') ? undefined : json['value'],
-        'def_id': json['def_id'],
+        'selection': ((json['selection'] as Array<any>).map(ComponentFromJSON)),
     };
 }
 
-export function RawPropertyRequestToJSON(value?: RawPropertyRequest | null): any {
+export function SelectionDefinitionToJSON(value?: SelectionDefinition | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +57,7 @@ export function RawPropertyRequestToJSON(value?: RawPropertyRequest | null): any
     }
     return {
         
-        'value': value.value,
-        'def_id': value.def_id,
+        'selection': ((value.selection as Array<any>).map(ComponentToJSON)),
     };
 }
 

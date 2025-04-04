@@ -140,10 +140,10 @@ export interface PatchedTopicRequest {
     project?: number;
     /**
      * Non standard field. JSON describing bimdataViewerLayout.
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof PatchedTopicRequest
      */
-    bimdata_viewer_layout?: { [key: string]: any; } | null;
+    bimdata_viewer_layout?: any | null;
 }
 
 export function PatchedTopicRequestFromJSON(json: any): PatchedTopicRequest {

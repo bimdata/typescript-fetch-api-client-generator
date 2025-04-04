@@ -34,10 +34,10 @@ export interface PatchedPropertyRequest {
     definition?: PropertyDefinitionRequest;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof PatchedPropertyRequest
      */
-    value?: { [key: string]: any; } | null;
+    value?: any | null;
 }
 
 export function PatchedPropertyRequestFromJSON(json: any): PatchedPropertyRequest {

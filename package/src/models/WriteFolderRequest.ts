@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    WriteFolder,
+    WriteFolderFromJSON,
+    WriteFolderFromJSONTyped,
+    WriteFolderToJSON,
+} from './WriteFolder';
+
 /**
  * 
  * @export
@@ -30,12 +37,6 @@ export interface WriteFolderRequest {
      */
     default_permission?: WriteFolderRequestDefaultPermissionEnum;
     /**
-     * 
-     * @type {number}
-     * @memberof WriteFolderRequest
-     */
-    parent_id?: number | null;
-    /**
      * Name of the folder
      * @type {string}
      * @memberof WriteFolderRequest
@@ -43,10 +44,16 @@ export interface WriteFolderRequest {
     name: string;
     /**
      * 
-     * @type {Array<WriteFolderRequest>}
+     * @type {number}
      * @memberof WriteFolderRequest
      */
-    children?: Array<WriteFolderRequest> | null;
+    parent_id?: number | null;
+    /**
+     * 
+     * @type {Array<WriteFolder>}
+     * @memberof WriteFolderRequest
+     */
+    children?: Array<WriteFolder> | null;
 }
 
 /**
@@ -70,9 +77,9 @@ export function WriteFolderRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': json['name'],
-        'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderRequestFromJSON)),
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderFromJSON)),
     };
 }
 
@@ -86,9 +93,9 @@ export function WriteFolderRequestToJSON(value?: WriteFolderRequest | null): any
     return {
         
         'default_permission': value.default_permission,
-        'parent_id': value.parent_id,
         'name': value.name,
-        'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(WriteFolderRequestToJSON)),
+        'parent_id': value.parent_id,
+        'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(WriteFolderToJSON)),
     };
 }
 

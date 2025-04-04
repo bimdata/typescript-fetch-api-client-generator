@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    UnitRequest,
-    UnitRequestFromJSON,
-    UnitRequestFromJSONTyped,
-    UnitRequestToJSON,
-} from './UnitRequest';
+    Unit,
+    UnitFromJSON,
+    UnitFromJSONTyped,
+    UnitToJSON,
+} from './Unit';
 
 /**
  * Adds nested create feature
@@ -64,16 +64,16 @@ export interface PatchedUnitRequest {
     conversion_factor?: number | null;
     /**
      * 
-     * @type {UnitRequest}
+     * @type {Unit}
      * @memberof PatchedUnitRequest
      */
-    conversion_baseunit?: UnitRequest;
+    conversion_baseunit?: Unit;
     /**
      * List of constitutive unit elements by id with corresponding exponent (ex: [meterID/1, secondID/-1] for velocity)
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof PatchedUnitRequest
      */
-    elements?: { [key: string]: any; } | null;
+    elements?: any | null;
     /**
      * 
      * @type {boolean}
@@ -98,7 +98,7 @@ export function PatchedUnitRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'prefix': !exists(json, 'prefix') ? undefined : json['prefix'],
         'dimensions': !exists(json, 'dimensions') ? undefined : json['dimensions'],
         'conversion_factor': !exists(json, 'conversion_factor') ? undefined : json['conversion_factor'],
-        'conversion_baseunit': !exists(json, 'conversion_baseunit') ? undefined : UnitRequestFromJSON(json['conversion_baseunit']),
+        'conversion_baseunit': !exists(json, 'conversion_baseunit') ? undefined : UnitFromJSON(json['conversion_baseunit']),
         'elements': !exists(json, 'elements') ? undefined : json['elements'],
         'is_default': !exists(json, 'is_default') ? undefined : json['is_default'],
     };
@@ -119,7 +119,7 @@ export function PatchedUnitRequestToJSON(value?: PatchedUnitRequest | null): any
         'prefix': value.prefix,
         'dimensions': value.dimensions,
         'conversion_factor': value.conversion_factor,
-        'conversion_baseunit': UnitRequestToJSON(value.conversion_baseunit),
+        'conversion_baseunit': UnitToJSON(value.conversion_baseunit),
         'elements': value.elements,
         'is_default': value.is_default,
     };

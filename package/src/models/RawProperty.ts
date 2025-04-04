@@ -27,10 +27,10 @@ export interface RawProperty {
     readonly id: number;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof RawProperty
      */
-    value?: { [key: string]: any; } | null;
+    value?: any | null;
     /**
      * 
      * @type {number}

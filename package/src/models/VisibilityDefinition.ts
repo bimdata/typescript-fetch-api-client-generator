@@ -13,42 +13,42 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    Visibility,
+    VisibilityFromJSON,
+    VisibilityFromJSONTyped,
+    VisibilityToJSON,
+} from './Visibility';
+
 /**
  * 
  * @export
- * @interface RawPropertyRequest
+ * @interface VisibilityDefinition
  */
-export interface RawPropertyRequest {
+export interface VisibilityDefinition {
     /**
      * 
-     * @type {any}
-     * @memberof RawPropertyRequest
+     * @type {Array<Visibility>}
+     * @memberof VisibilityDefinition
      */
-    value?: any | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof RawPropertyRequest
-     */
-    def_id: number;
+    visibility: Array<Visibility>;
 }
 
-export function RawPropertyRequestFromJSON(json: any): RawPropertyRequest {
-    return RawPropertyRequestFromJSONTyped(json, false);
+export function VisibilityDefinitionFromJSON(json: any): VisibilityDefinition {
+    return VisibilityDefinitionFromJSONTyped(json, false);
 }
 
-export function RawPropertyRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): RawPropertyRequest {
+export function VisibilityDefinitionFromJSONTyped(json: any, ignoreDiscriminator: boolean): VisibilityDefinition {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'value': !exists(json, 'value') ? undefined : json['value'],
-        'def_id': json['def_id'],
+        'visibility': ((json['visibility'] as Array<any>).map(VisibilityFromJSON)),
     };
 }
 
-export function RawPropertyRequestToJSON(value?: RawPropertyRequest | null): any {
+export function VisibilityDefinitionToJSON(value?: VisibilityDefinition | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,8 +57,7 @@ export function RawPropertyRequestToJSON(value?: RawPropertyRequest | null): any
     }
     return {
         
-        'value': value.value,
-        'def_id': value.def_id,
+        'visibility': ((value.visibility as Array<any>).map(VisibilityToJSON)),
     };
 }
 

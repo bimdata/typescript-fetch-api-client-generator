@@ -165,10 +165,10 @@ export interface FullTopicRequest {
     project: number;
     /**
      * Non standard field. JSON describing bimdataViewerLayout.
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof FullTopicRequest
      */
-    bimdata_viewer_layout?: { [key: string]: any; } | null;
+    bimdata_viewer_layout?: any | null;
 }
 
 export function FullTopicRequestFromJSON(json: any): FullTopicRequest {

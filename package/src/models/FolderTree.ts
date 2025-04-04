@@ -36,7 +36,7 @@ export interface FolderTree {
      * @type {Array<FolderTree>}
      * @memberof FolderTree
      */
-    children: Array<FolderTree>;
+    readonly children: Array<FolderTree>;
 }
 
 export function FolderTreeFromJSON(json: any): FolderTree {
@@ -66,7 +66,6 @@ export function FolderTreeToJSON(value?: FolderTree | null): any {
         
         'id': value.id,
         'name': value.name,
-        'children': ((value.children as Array<any>).map(FolderTreeToJSON)),
     };
 }
 

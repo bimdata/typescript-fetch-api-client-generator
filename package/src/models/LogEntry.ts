@@ -63,10 +63,10 @@ export interface LogEntry {
     action: string;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {any}
      * @memberof LogEntry
      */
-    description: { [key: string]: any; };
+    description: any | null;
 }
 
 export function LogEntryFromJSON(json: any): LogEntry {
