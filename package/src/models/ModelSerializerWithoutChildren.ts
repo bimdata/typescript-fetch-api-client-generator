@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    Mask2D,
+    Mask2DFromJSON,
+    Mask2DFromJSONTyped,
+    Mask2DToJSON,
+} from './Mask2D';
+import {
     ModelDocument,
     ModelDocumentFromJSON,
     ModelDocumentFromJSONTyped,
@@ -239,6 +245,12 @@ export interface ModelSerializerWithoutChildren {
      * @memberof ModelSerializerWithoutChildren
      */
     layout_name?: string | null;
+    /**
+     * 
+     * @type {Mask2D}
+     * @memberof ModelSerializerWithoutChildren
+     */
+    mask_2d: Mask2D;
 }
 
 /**
@@ -311,6 +323,7 @@ export function ModelSerializerWithoutChildrenFromJSONTyped(json: any, ignoreDis
         'parent_id': json['parent_id'],
         'page_number': json['page_number'],
         'layout_name': !exists(json, 'layout_name') ? undefined : json['layout_name'],
+        'mask_2d': Mask2DFromJSON(json['mask_2d']),
     };
 }
 
@@ -332,6 +345,7 @@ export function ModelSerializerWithoutChildrenToJSON(value?: ModelSerializerWith
         'north_vector': value.north_vector,
         'recommanded_2d_angle': value.recommanded_2d_angle,
         'layout_name': value.layout_name,
+        'mask_2d': Mask2DToJSON(value.mask_2d),
     };
 }
 

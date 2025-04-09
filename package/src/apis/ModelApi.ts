@@ -84,6 +84,12 @@ import {
     LayerRequest,
     LayerRequestFromJSON,
     LayerRequestToJSON,
+    Mask2D,
+    Mask2DFromJSON,
+    Mask2DToJSON,
+    Mask2DRequest,
+    Mask2DRequestFromJSON,
+    Mask2DRequestToJSON,
     Material,
     MaterialFromJSON,
     MaterialToJSON,
@@ -434,6 +440,13 @@ export interface CreateLayerRequest {
     LayerRequest: LayerRequest;
 }
 
+export interface CreateMask2DRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    Mask2DRequest: Mask2DRequest;
+}
+
 export interface CreateMetaBuildingRequest {
     cloud_pk: number;
     project_pk: number;
@@ -599,6 +612,12 @@ export interface DeleteLayerRequest {
     cloud_pk: number;
     id: number;
     model_pk: number;
+    project_pk: number;
+}
+
+export interface DeleteMask2DRequest {
+    cloud_pk: number;
+    id: number;
     project_pk: number;
 }
 
@@ -3161,6 +3180,71 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create or update a 2D mask for the model. Only available for PDF, JPEG and PNG models
+     * Create or update a 2D mask for the model
+     */
+    async createMask2DRaw(requestParameters: CreateMask2DRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Mask2D>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createMask2D.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createMask2D.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createMask2D.');
+        }
+
+        if (requestParameters.Mask2DRequest === null || requestParameters.Mask2DRequest === undefined) {
+            throw new runtime.RequiredError('Mask2DRequest','Required parameter requestParameters.Mask2DRequest was null or undefined when calling createMask2D.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/mask-2d`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: Mask2DRequestToJSON(requestParameters.Mask2DRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => Mask2DFromJSON(jsonValue));
+    }
+
+    /**
+     * Create or update a 2D mask for the model. Only available for PDF, JPEG and PNG models
+     * Create or update a 2D mask for the model
+     */
+    async createMask2D(cloud_pk: number, id: number, project_pk: number, Mask2DRequest: Mask2DRequest, initOverrides?: RequestInit): Promise<Mask2D> {
+        const response = await this.createMask2DRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, Mask2DRequest: Mask2DRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Create an empty 3D Model to be used in BIMData services  Required scopes: ifc:write, model:write
      * Create an empty 3D Model
      */
@@ -4711,6 +4795,63 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async deleteLayer(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
         await this.deleteLayerRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    }
+
+    /**
+     * Delete the 2D mask for the model.
+     * Delete the 2D mask for the model
+     */
+    async deleteMask2DRaw(requestParameters: DeleteMask2DRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteMask2D.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteMask2D.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteMask2D.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/mask-2d`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete the 2D mask for the model.
+     * Delete the 2D mask for the model
+     */
+    async deleteMask2D(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteMask2DRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**

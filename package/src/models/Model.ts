@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    Mask2D,
+    Mask2DFromJSON,
+    Mask2DFromJSONTyped,
+    Mask2DToJSON,
+} from './Mask2D';
+import {
     ModelDocument,
     ModelDocumentFromJSON,
     ModelDocumentFromJSONTyped,
@@ -246,6 +252,12 @@ export interface Model {
      */
     layout_name?: string | null;
     /**
+     * 
+     * @type {Mask2D}
+     * @memberof Model
+     */
+    mask_2d: Mask2D;
+    /**
      * Contains additional pages of a pdf
      * @type {Array<ModelSerializerWithoutChildren>}
      * @memberof Model
@@ -323,6 +335,7 @@ export function ModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mod
         'parent_id': json['parent_id'],
         'page_number': json['page_number'],
         'layout_name': !exists(json, 'layout_name') ? undefined : json['layout_name'],
+        'mask_2d': Mask2DFromJSON(json['mask_2d']),
         'children': ((json['children'] as Array<any>).map(ModelSerializerWithoutChildrenFromJSON)),
     };
 }
@@ -345,6 +358,7 @@ export function ModelToJSON(value?: Model | null): any {
         'north_vector': value.north_vector,
         'recommanded_2d_angle': value.recommanded_2d_angle,
         'layout_name': value.layout_name,
+        'mask_2d': Mask2DToJSON(value.mask_2d),
     };
 }
 

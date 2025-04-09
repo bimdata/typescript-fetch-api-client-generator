@@ -77,6 +77,8 @@ export * from './LogEntry';
 export * from './MarketplaceAppImage';
 export * from './MarketplaceAppLight';
 export * from './MarketplaceAppLightRequest';
+export * from './Mask2D';
+export * from './Mask2DRequest';
 export * from './Material';
 export * from './MaterialListComponent';
 export * from './MaterialListComponentRequest';
