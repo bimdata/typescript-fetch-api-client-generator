@@ -163,7 +163,7 @@ export interface RecursiveFolderChildren {
      * @type {Array<RecursiveFolderChildren>}
      * @memberof RecursiveFolderChildren
      */
-    readonly children: Array<RecursiveFolderChildren> | null;
+    children?: Array<RecursiveFolderChildren> | null;
 }
 
 /**
@@ -246,7 +246,7 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
         'user_permission': json['user_permission'],
         'history_count': json['history_count'],
         'tags': (json['tags'] === null ? null : (json['tags'] as Array<any>).map(TagFromJSON)),
-        'children': (json['children'] === null ? null : (json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),
+        'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(RecursiveFolderChildrenFromJSON)),
     };
 }
 
@@ -269,6 +269,7 @@ export function RecursiveFolderChildrenToJSON(value?: RecursiveFolderChildren | 
         'size': value.size,
         'file': value.file,
         'office_preview': value.office_preview,
+        'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(RecursiveFolderChildrenToJSON)),
     };
 }
 

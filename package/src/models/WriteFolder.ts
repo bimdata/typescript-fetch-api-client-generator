@@ -33,35 +33,11 @@ import {
  */
 export interface WriteFolder {
     /**
-     * Creation date
-     * @type {Date}
-     * @memberof WriteFolder
-     */
-    readonly created_at: Date;
-    /**
-     * Aggregate of group user permissions and folder default permission
-     * @type {number}
-     * @memberof WriteFolder
-     */
-    readonly user_permission: WriteFolderUserPermissionEnum;
-    /**
-     * 
-     * @type {ShortUser}
-     * @memberof WriteFolder
-     */
-    readonly created_by: ShortUser | null;
-    /**
      * 
      * @type {number}
      * @memberof WriteFolder
      */
     parent_id?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof WriteFolder
-     */
-    readonly id: number;
     /**
      * Date of the last update
      * @type {Date}
@@ -69,11 +45,11 @@ export interface WriteFolder {
      */
     readonly updated_at: Date;
     /**
-     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
-     * @type {string}
+     * 
+     * @type {number}
      * @memberof WriteFolder
      */
-    readonly nature: string;
+    readonly id: number;
     /**
      * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
@@ -81,11 +57,11 @@ export interface WriteFolder {
      */
     readonly type: string;
     /**
-     * List of group permissions
-     * @type {Array<GroupFolderRead>}
+     * Aggregate of group user permissions and folder default permission
+     * @type {number}
      * @memberof WriteFolder
      */
-    readonly groups_permissions: Array<GroupFolderRead>;
+    readonly user_permission: WriteFolderUserPermissionEnum;
     /**
      * Name of the folder
      * @type {string}
@@ -102,6 +78,30 @@ export interface WriteFolder {
      * @memberof WriteFolder
      */
     default_permission?: WriteFolderDefaultPermissionEnum;
+    /**
+     * Creation date
+     * @type {Date}
+     * @memberof WriteFolder
+     */
+    readonly created_at: Date;
+    /**
+     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * @type {string}
+     * @memberof WriteFolder
+     */
+    readonly nature: string;
+    /**
+     * 
+     * @type {ShortUser}
+     * @memberof WriteFolder
+     */
+    readonly created_by: ShortUser | null;
+    /**
+     * List of group permissions
+     * @type {Array<GroupFolderRead>}
+     * @memberof WriteFolder
+     */
+    readonly groups_permissions: Array<GroupFolderRead>;
     /**
      * 
      * @type {Array<WriteFolder>}
@@ -138,17 +138,17 @@ export function WriteFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'created_at': (new Date(json['created_at'])),
-        'user_permission': json['user_permission'],
-        'created_by': ShortUserFromJSON(json['created_by']),
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'id': json['id'],
         'updated_at': (new Date(json['updated_at'])),
-        'nature': json['nature'],
+        'id': json['id'],
         'type': json['type'],
-        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
+        'user_permission': json['user_permission'],
         'name': json['name'],
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'created_at': (new Date(json['created_at'])),
+        'nature': json['nature'],
+        'created_by': ShortUserFromJSON(json['created_by']),
+        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderFromJSON)),
     };
 }
