@@ -26,11 +26,11 @@ export interface Mask2D {
      */
     readonly id: number;
     /**
-     * Viewport of the manually created mask to show only a part of the model.
+     * Crop path of the manually created mask to show only a part of the model.
      * @type {Array<Array<number>>}
      * @memberof Mask2D
      */
-    viewport: Array<Array<number>>;
+    crop_path: Array<Array<number>>;
     /**
      * Creation date
      * @type {Date}
@@ -56,7 +56,7 @@ export function Mask2DFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ma
     return {
         
         'id': json['id'],
-        'viewport': json['viewport'],
+        'crop_path': json['crop_path'],
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
     };
@@ -71,7 +71,7 @@ export function Mask2DToJSON(value?: Mask2D | null): any {
     }
     return {
         
-        'viewport': value.viewport,
+        'crop_path': value.crop_path,
     };
 }
 

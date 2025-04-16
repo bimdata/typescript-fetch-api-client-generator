@@ -20,11 +20,11 @@ import { exists, mapValues } from '../runtime';
  */
 export interface Mask2DRequest {
     /**
-     * Viewport of the manually created mask to show only a part of the model.
+     * Crop path of the manually created mask to show only a part of the model.
      * @type {Array<Array<number>>}
      * @memberof Mask2DRequest
      */
-    viewport: Array<Array<number>>;
+    crop_path: Array<Array<number>>;
 }
 
 export function Mask2DRequestFromJSON(json: any): Mask2DRequest {
@@ -37,7 +37,7 @@ export function Mask2DRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'viewport': json['viewport'],
+        'crop_path': json['crop_path'],
     };
 }
 
@@ -50,7 +50,7 @@ export function Mask2DRequestToJSON(value?: Mask2DRequest | null): any {
     }
     return {
         
-        'viewport': value.viewport,
+        'crop_path': value.crop_path,
     };
 }
 
