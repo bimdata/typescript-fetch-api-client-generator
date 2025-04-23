@@ -14,43 +14,43 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    XktChunk,
-    XktChunkFromJSON,
-    XktChunkFromJSONTyped,
-    XktChunkToJSON,
-} from './XktChunk';
+    XktChunkRequest,
+    XktChunkRequestFromJSON,
+    XktChunkRequestFromJSONTyped,
+    XktChunkRequestToJSON,
+} from './XktChunkRequest';
 
 /**
  * 
  * @export
- * @interface XktFile
+ * @interface XktFileRequest
  */
-export interface XktFile {
+export interface XktFileRequest {
     /**
      * 
      * @type {number}
-     * @memberof XktFile
+     * @memberof XktFileRequest
      */
     version: number;
     /**
      * 
-     * @type {string}
-     * @memberof XktFile
+     * @type {Blob}
+     * @memberof XktFileRequest
      */
-    file: string;
+    file: Blob;
     /**
      * 
-     * @type {Array<XktChunk>}
-     * @memberof XktFile
+     * @type {Array<XktChunkRequest>}
+     * @memberof XktFileRequest
      */
-    chunks?: Array<XktChunk>;
+    chunks?: Array<XktChunkRequest>;
 }
 
-export function XktFileFromJSON(json: any): XktFile {
-    return XktFileFromJSONTyped(json, false);
+export function XktFileRequestFromJSON(json: any): XktFileRequest {
+    return XktFileRequestFromJSONTyped(json, false);
 }
 
-export function XktFileFromJSONTyped(json: any, ignoreDiscriminator: boolean): XktFile {
+export function XktFileRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): XktFileRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -58,11 +58,11 @@ export function XktFileFromJSONTyped(json: any, ignoreDiscriminator: boolean): X
         
         'version': json['version'],
         'file': json['file'],
-        'chunks': !exists(json, 'chunks') ? undefined : ((json['chunks'] as Array<any>).map(XktChunkFromJSON)),
+        'chunks': !exists(json, 'chunks') ? undefined : ((json['chunks'] as Array<any>).map(XktChunkRequestFromJSON)),
     };
 }
 
-export function XktFileToJSON(value?: XktFile | null): any {
+export function XktFileRequestToJSON(value?: XktFileRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -73,7 +73,7 @@ export function XktFileToJSON(value?: XktFile | null): any {
         
         'version': value.version,
         'file': value.file,
-        'chunks': value.chunks === undefined ? undefined : ((value.chunks as Array<any>).map(XktChunkToJSON)),
+        'chunks': value.chunks === undefined ? undefined : ((value.chunks as Array<any>).map(XktChunkRequestToJSON)),
     };
 }
 

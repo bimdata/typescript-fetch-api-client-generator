@@ -13,56 +13,35 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    XktChunk,
-    XktChunkFromJSON,
-    XktChunkFromJSONTyped,
-    XktChunkToJSON,
-} from './XktChunk';
-
 /**
  * 
  * @export
- * @interface XktFile
+ * @interface XktChunk
  */
-export interface XktFile {
-    /**
-     * 
-     * @type {number}
-     * @memberof XktFile
-     */
-    version: number;
+export interface XktChunk {
     /**
      * 
      * @type {string}
-     * @memberof XktFile
+     * @memberof XktChunk
      */
     file: string;
-    /**
-     * 
-     * @type {Array<XktChunk>}
-     * @memberof XktFile
-     */
-    chunks?: Array<XktChunk>;
 }
 
-export function XktFileFromJSON(json: any): XktFile {
-    return XktFileFromJSONTyped(json, false);
+export function XktChunkFromJSON(json: any): XktChunk {
+    return XktChunkFromJSONTyped(json, false);
 }
 
-export function XktFileFromJSONTyped(json: any, ignoreDiscriminator: boolean): XktFile {
+export function XktChunkFromJSONTyped(json: any, ignoreDiscriminator: boolean): XktChunk {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'version': json['version'],
         'file': json['file'],
-        'chunks': !exists(json, 'chunks') ? undefined : ((json['chunks'] as Array<any>).map(XktChunkFromJSON)),
     };
 }
 
-export function XktFileToJSON(value?: XktFile | null): any {
+export function XktChunkToJSON(value?: XktChunk | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -71,9 +50,7 @@ export function XktFileToJSON(value?: XktFile | null): any {
     }
     return {
         
-        'version': value.version,
         'file': value.file,
-        'chunks': value.chunks === undefined ? undefined : ((value.chunks as Array<any>).map(XktChunkToJSON)),
     };
 }
 

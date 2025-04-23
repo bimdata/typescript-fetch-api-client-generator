@@ -250,7 +250,10 @@ src/models/WebHook.ts
 src/models/WebHookRequest.ts
 src/models/WriteFolder.ts
 src/models/WriteFolderRequest.ts
+src/models/XktChunk.ts
+src/models/XktChunkRequest.ts
 src/models/XktFile.ts
+src/models/XktFileRequest.ts
 src/models/Zone.ts
 src/models/ZoneRequest.ts
 src/models/ZoneSpace.ts

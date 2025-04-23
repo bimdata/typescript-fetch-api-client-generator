@@ -554,6 +554,7 @@ export interface CreateXktFileRequest {
     project_pk: number;
     version: number;
     file: Blob;
+    chunks?: Array<Blob>;
 }
 
 export interface CreateZoneRequest {
@@ -4255,6 +4256,8 @@ export class ModelApi extends runtime.BaseAPI {
         let useForm = false;
         // use FormData to transmit files using content-type "multipart/form-data"
         useForm = canConsumeForm;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
         if (useForm) {
             formParams = new FormData();
         } else {
@@ -4267,6 +4270,12 @@ export class ModelApi extends runtime.BaseAPI {
 
         if (requestParameters.file !== undefined) {
             formParams.append('file', requestParameters.file as any);
+        }
+
+        if (requestParameters.chunks) {
+            requestParameters.chunks.forEach((element) => {
+                formParams.append('chunks', element as any);
+            })
         }
 
         const response = await this.request({
@@ -4284,8 +4293,8 @@ export class ModelApi extends runtime.BaseAPI {
      * This route does not accept JSON, only files as x-www-form-urlencoded  Required scopes: ifc:write, model:write
      * Create an xkt file for the model. Overrides existing file with same version
      */
-    async createXktFile(cloud_pk: number, id: number, project_pk: number, version: number, file: Blob, initOverrides?: RequestInit): Promise<XktFile> {
-        const response = await this.createXktFileRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, version: version, file: file }, initOverrides);
+    async createXktFile(cloud_pk: number, id: number, project_pk: number, version: number, file: Blob, chunks?: Array<Blob>, initOverrides?: RequestInit): Promise<XktFile> {
+        const response = await this.createXktFileRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, version: version, file: file, chunks: chunks }, initOverrides);
         return await response.value();
     }
 

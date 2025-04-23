@@ -27,17 +27,17 @@ import {
  */
 export interface WriteFolderRequest {
     /**
-     * 
-     * @type {number}
-     * @memberof WriteFolderRequest
-     */
-    parent_id?: number | null;
-    /**
      * Name of the folder
      * @type {string}
      * @memberof WriteFolderRequest
      */
     name: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof WriteFolderRequest
+     */
+    parent_id?: number | null;
     /**
      * Permission for a Folder
      * 
@@ -76,8 +76,8 @@ export function WriteFolderRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': json['name'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderFromJSON)),
     };
@@ -92,8 +92,8 @@ export function WriteFolderRequestToJSON(value?: WriteFolderRequest | null): any
     }
     return {
         
-        'parent_id': value.parent_id,
         'name': value.name,
+        'parent_id': value.parent_id,
         'default_permission': value.default_permission,
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(WriteFolderToJSON)),
     };
