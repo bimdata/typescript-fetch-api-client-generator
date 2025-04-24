@@ -26,14 +26,37 @@ import {
     WebHookRequestToJSON,
 } from '../models';
 
+export interface CreateProjectWebHookRequest {
+    cloud_pk: number;
+    project_pk: number;
+    WebHookRequest: WebHookRequest;
+}
+
 export interface CreateWebHookRequest {
     cloud_pk: number;
     WebHookRequest: WebHookRequest;
 }
 
+export interface DeleteProjectWebHookRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+}
+
 export interface DeleteWebHookRequest {
     cloud_pk: number;
     id: number;
+}
+
+export interface GetProjectWebHookRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+}
+
+export interface GetProjectWebHooksRequest {
+    cloud_pk: number;
+    project_pk: number;
 }
 
 export interface GetWebHookRequest {
@@ -45,10 +68,24 @@ export interface GetWebHooksRequest {
     cloud_pk: number;
 }
 
+export interface PingProjectWebHookRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    WebHookRequest: WebHookRequest;
+}
+
 export interface PingWebHookRequest {
     cloud_pk: number;
     id: number;
     WebHookRequest: WebHookRequest;
+}
+
+export interface UpdateProjectWebHookRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    PatchedWebHookRequest?: PatchedWebHookRequest;
 }
 
 export interface UpdateWebHookRequest {
@@ -61,6 +98,67 @@ export interface UpdateWebHookRequest {
  * 
  */
 export class WebhookApi extends runtime.BaseAPI {
+
+    /**
+     * Create a new project Webhook  Required scopes: webhook:manage
+     * Create a new project Webhook
+     */
+    async createProjectWebHookRaw(requestParameters: CreateProjectWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createProjectWebHook.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createProjectWebHook.');
+        }
+
+        if (requestParameters.WebHookRequest === null || requestParameters.WebHookRequest === undefined) {
+            throw new runtime.RequiredError('WebHookRequest','Required parameter requestParameters.WebHookRequest was null or undefined when calling createProjectWebHook.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/webhook`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: WebHookRequestToJSON(requestParameters.WebHookRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a new project Webhook  Required scopes: webhook:manage
+     * Create a new project Webhook
+     */
+    async createProjectWebHook(cloud_pk: number, project_pk: number, WebHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.createProjectWebHookRaw({ cloud_pk: cloud_pk, project_pk: project_pk, WebHookRequest: WebHookRequest }, initOverrides);
+        return await response.value();
+    }
 
     /**
      * Create a new Webhook  Required scopes: webhook:manage
@@ -123,6 +221,63 @@ export class WebhookApi extends runtime.BaseAPI {
      * Delete a webhook  Required scopes: webhook:manage
      * Delete a webhook
      */
+    async deleteProjectWebHookRaw(requestParameters: DeleteProjectWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteProjectWebHook.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteProjectWebHook.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteProjectWebHook.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a webhook  Required scopes: webhook:manage
+     * Delete a webhook
+     */
+    async deleteProjectWebHook(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteProjectWebHookRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+    }
+
+    /**
+     * Delete a webhook  Required scopes: webhook:manage
+     * Delete a webhook
+     */
     async deleteWebHookRaw(requestParameters: DeleteWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteWebHook.');
@@ -170,6 +325,118 @@ export class WebhookApi extends runtime.BaseAPI {
      */
     async deleteWebHook(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<void> {
         await this.deleteWebHookRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
+    }
+
+    /**
+     * Retrieve one configured project webhook  Required scopes: webhook:manage
+     * Retrieve one configured project webhook
+     */
+    async getProjectWebHookRaw(requestParameters: GetProjectWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectWebHook.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getProjectWebHook.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProjectWebHook.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve one configured project webhook  Required scopes: webhook:manage
+     * Retrieve one configured project webhook
+     */
+    async getProjectWebHook(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.getProjectWebHookRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all configured project webhooks  Required scopes: webhook:manage
+     * Retrieve all configured project webhooks
+     */
+    async getProjectWebHooksRaw(requestParameters: GetProjectWebHooksRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<WebHook>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getProjectWebHooks.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getProjectWebHooks.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/webhook`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(WebHookFromJSON));
+    }
+
+    /**
+     * Retrieve all configured project webhooks  Required scopes: webhook:manage
+     * Retrieve all configured project webhooks
+     */
+    async getProjectWebHooks(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<WebHook>> {
+        const response = await this.getProjectWebHooksRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
     }
 
     /**
@@ -278,6 +545,71 @@ export class WebhookApi extends runtime.BaseAPI {
 
     /**
      * Trigger a Ping Event sending {\"ok\": true} to the webhook URL. Useful to test your app  Required scopes: webhook:manage
+     * Test a project webhook
+     */
+    async pingProjectWebHookRaw(requestParameters: PingProjectWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling pingProjectWebHook.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling pingProjectWebHook.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling pingProjectWebHook.');
+        }
+
+        if (requestParameters.WebHookRequest === null || requestParameters.WebHookRequest === undefined) {
+            throw new runtime.RequiredError('WebHookRequest','Required parameter requestParameters.WebHookRequest was null or undefined when calling pingProjectWebHook.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/webhook/{id}/ping`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: WebHookRequestToJSON(requestParameters.WebHookRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
+    }
+
+    /**
+     * Trigger a Ping Event sending {\"ok\": true} to the webhook URL. Useful to test your app  Required scopes: webhook:manage
+     * Test a project webhook
+     */
+    async pingProjectWebHook(cloud_pk: number, id: number, project_pk: number, WebHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.pingProjectWebHookRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, WebHookRequest: WebHookRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Trigger a Ping Event sending {\"ok\": true} to the webhook URL. Useful to test your app  Required scopes: webhook:manage
      * Test a webhook
      */
     async pingWebHookRaw(requestParameters: PingWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
@@ -334,6 +666,67 @@ export class WebhookApi extends runtime.BaseAPI {
      */
     async pingWebHook(cloud_pk: number, id: number, WebHookRequest: WebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
         const response = await this.pingWebHookRaw({ cloud_pk: cloud_pk, id: id, WebHookRequest: WebHookRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update some field of a webhook  Required scopes: webhook:manage
+     * Update some field of a webhook
+     */
+    async updateProjectWebHookRaw(requestParameters: UpdateProjectWebHookRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<WebHook>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateProjectWebHook.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateProjectWebHook.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateProjectWebHook.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/webhook/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedWebHookRequestToJSON(requestParameters.PatchedWebHookRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => WebHookFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some field of a webhook  Required scopes: webhook:manage
+     * Update some field of a webhook
+     */
+    async updateProjectWebHook(cloud_pk: number, id: number, project_pk: number, PatchedWebHookRequest?: PatchedWebHookRequest, initOverrides?: RequestInit): Promise<WebHook> {
+        const response = await this.updateProjectWebHookRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedWebHookRequest: PatchedWebHookRequest }, initOverrides);
         return await response.value();
     }
 
