@@ -250,7 +250,7 @@ export interface ModelSerializerWithoutChildren {
      * @type {Mask2D}
      * @memberof ModelSerializerWithoutChildren
      */
-    mask_2d: Mask2D;
+    readonly mask_2d: Mask2D | null;
 }
 
 /**
@@ -345,7 +345,6 @@ export function ModelSerializerWithoutChildrenToJSON(value?: ModelSerializerWith
         'north_vector': value.north_vector,
         'recommanded_2d_angle': value.recommanded_2d_angle,
         'layout_name': value.layout_name,
-        'mask_2d': Mask2DToJSON(value.mask_2d),
     };
 }
 

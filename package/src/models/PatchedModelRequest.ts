@@ -13,13 +13,6 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    Mask2DRequest,
-    Mask2DRequestFromJSON,
-    Mask2DRequestFromJSONTyped,
-    Mask2DRequestToJSON,
-} from './Mask2DRequest';
-
 /**
  * 
  * @export
@@ -84,12 +77,6 @@ export interface PatchedModelRequest {
      * @memberof PatchedModelRequest
      */
     layout_name?: string | null;
-    /**
-     * 
-     * @type {Mask2DRequest}
-     * @memberof PatchedModelRequest
-     */
-    mask_2d?: Mask2DRequest;
 }
 
 /**
@@ -123,7 +110,6 @@ export function PatchedModelRequestFromJSONTyped(json: any, ignoreDiscriminator:
         'north_vector': !exists(json, 'north_vector') ? undefined : json['north_vector'],
         'recommanded_2d_angle': !exists(json, 'recommanded_2d_angle') ? undefined : json['recommanded_2d_angle'],
         'layout_name': !exists(json, 'layout_name') ? undefined : json['layout_name'],
-        'mask_2d': !exists(json, 'mask_2d') ? undefined : Mask2DRequestFromJSON(json['mask_2d']),
     };
 }
 
@@ -145,7 +131,6 @@ export function PatchedModelRequestToJSON(value?: PatchedModelRequest | null): a
         'north_vector': value.north_vector,
         'recommanded_2d_angle': value.recommanded_2d_angle,
         'layout_name': value.layout_name,
-        'mask_2d': Mask2DRequestToJSON(value.mask_2d),
     };
 }
 

@@ -256,7 +256,7 @@ export interface Model {
      * @type {Mask2D}
      * @memberof Model
      */
-    mask_2d: Mask2D;
+    readonly mask_2d: Mask2D | null;
     /**
      * Contains additional pages of a pdf
      * @type {Array<ModelSerializerWithoutChildren>}
@@ -358,7 +358,6 @@ export function ModelToJSON(value?: Model | null): any {
         'north_vector': value.north_vector,
         'recommanded_2d_angle': value.recommanded_2d_angle,
         'layout_name': value.layout_name,
-        'mask_2d': Mask2DToJSON(value.mask_2d),
     };
 }
 
