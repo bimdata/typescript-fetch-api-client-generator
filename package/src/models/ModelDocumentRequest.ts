@@ -32,6 +32,12 @@ export interface ModelDocumentRequest {
      */
     file_name?: string;
     /**
+     * 
+     * @type {number}
+     * @memberof ModelDocumentRequest
+     */
+    parent_id?: number | null;
+    /**
      * Description of the file
      * @type {string}
      * @memberof ModelDocumentRequest
@@ -73,6 +79,7 @@ export function ModelDocumentRequestFromJSONTyped(json: any, ignoreDiscriminator
         
         'name': json['name'],
         'file_name': !exists(json, 'file_name') ? undefined : json['file_name'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'file': json['file'],
         'process_hint': !exists(json, 'process_hint') ? undefined : json['process_hint'],
@@ -90,6 +97,7 @@ export function ModelDocumentRequestToJSON(value?: ModelDocumentRequest | null):
         
         'name': value.name,
         'file_name': value.file_name,
+        'parent_id': value.parent_id,
         'description': value.description,
         'file': value.file,
         'process_hint': value.process_hint,

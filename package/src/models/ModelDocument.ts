@@ -38,6 +38,12 @@ export interface ModelDocument {
      */
     file_name?: string;
     /**
+     * 
+     * @type {number}
+     * @memberof ModelDocument
+     */
+    parent_id?: number | null;
+    /**
      * Description of the file
      * @type {string}
      * @memberof ModelDocument
@@ -122,6 +128,7 @@ export function ModelDocumentFromJSONTyped(json: any, ignoreDiscriminator: boole
         'id': json['id'],
         'name': json['name'],
         'file_name': !exists(json, 'file_name') ? undefined : json['file_name'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'file': json['file'],
         'size': json['size'],
@@ -146,6 +153,7 @@ export function ModelDocumentToJSON(value?: ModelDocument | null): any {
         
         'name': value.name,
         'file_name': value.file_name,
+        'parent_id': value.parent_id,
         'description': value.description,
         'file': value.file,
     };
