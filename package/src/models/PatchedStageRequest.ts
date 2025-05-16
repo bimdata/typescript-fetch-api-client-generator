@@ -25,12 +25,6 @@ export interface PatchedStageRequest {
      * @memberof PatchedStageRequest
      */
     stage?: string;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof PatchedStageRequest
-     */
-    project?: number;
 }
 
 export function PatchedStageRequestFromJSON(json: any): PatchedStageRequest {
@@ -44,7 +38,6 @@ export function PatchedStageRequestFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'stage': !exists(json, 'stage') ? undefined : json['stage'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -58,7 +51,6 @@ export function PatchedStageRequestToJSON(value?: PatchedStageRequest | null): a
     return {
         
         'stage': value.stage,
-        'project': value.project,
     };
 }
 

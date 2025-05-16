@@ -25,12 +25,6 @@ export interface PatchedTopicTypeRequest {
      * @memberof PatchedTopicTypeRequest
      */
     topic_type?: string;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof PatchedTopicTypeRequest
-     */
-    project?: number;
 }
 
 export function PatchedTopicTypeRequestFromJSON(json: any): PatchedTopicTypeRequest {
@@ -44,7 +38,6 @@ export function PatchedTopicTypeRequestFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'topic_type': !exists(json, 'topic_type') ? undefined : json['topic_type'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -58,7 +51,6 @@ export function PatchedTopicTypeRequestToJSON(value?: PatchedTopicTypeRequest | 
     return {
         
         'topic_type': value.topic_type,
-        'project': value.project,
     };
 }
 

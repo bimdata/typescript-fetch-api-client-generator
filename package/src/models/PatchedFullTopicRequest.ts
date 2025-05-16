@@ -158,12 +158,6 @@ export interface PatchedFullTopicRequest {
      */
     viewpoints?: Array<ViewpointRequest>;
     /**
-     * 
-     * @type {number}
-     * @memberof PatchedFullTopicRequest
-     */
-    project?: number;
-    /**
      * Non standard field. JSON describing bimdataViewerLayout.
      * @type {any}
      * @memberof PatchedFullTopicRequest
@@ -201,7 +195,6 @@ export function PatchedFullTopicRequestFromJSONTyped(json: any, ignoreDiscrimina
         'due_date': !exists(json, 'due_date') ? undefined : (json['due_date'] === null ? null : new Date(json['due_date'])),
         'comments': !exists(json, 'comments') ? undefined : ((json['comments'] as Array<any>).map(CommentRequestFromJSON)),
         'viewpoints': !exists(json, 'viewpoints') ? undefined : ((json['viewpoints'] as Array<any>).map(ViewpointRequestFromJSON)),
-        'project': !exists(json, 'project') ? undefined : json['project'],
         'bimdata_viewer_layout': !exists(json, 'bimdata_viewer_layout') ? undefined : json['bimdata_viewer_layout'],
     };
 }
@@ -235,7 +228,6 @@ export function PatchedFullTopicRequestToJSON(value?: PatchedFullTopicRequest | 
         'due_date': value.due_date === undefined ? undefined : (value.due_date === null ? null : value.due_date.toISOString()),
         'comments': value.comments === undefined ? undefined : ((value.comments as Array<any>).map(CommentRequestToJSON)),
         'viewpoints': value.viewpoints === undefined ? undefined : ((value.viewpoints as Array<any>).map(ViewpointRequestToJSON)),
-        'project': value.project,
         'bimdata_viewer_layout': value.bimdata_viewer_layout,
     };
 }

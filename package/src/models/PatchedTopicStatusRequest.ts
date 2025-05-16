@@ -31,12 +31,6 @@ export interface PatchedTopicStatusRequest {
      * @memberof PatchedTopicStatusRequest
      */
     color?: string | null;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof PatchedTopicStatusRequest
-     */
-    project?: number;
 }
 
 export function PatchedTopicStatusRequestFromJSON(json: any): PatchedTopicStatusRequest {
@@ -51,7 +45,6 @@ export function PatchedTopicStatusRequestFromJSONTyped(json: any, ignoreDiscrimi
         
         'topic_status': !exists(json, 'topic_status') ? undefined : json['topic_status'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -66,7 +59,6 @@ export function PatchedTopicStatusRequestToJSON(value?: PatchedTopicStatusReques
         
         'topic_status': value.topic_status,
         'color': value.color,
-        'project': value.project,
     };
 }
 

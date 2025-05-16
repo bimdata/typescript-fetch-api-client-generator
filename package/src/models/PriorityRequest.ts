@@ -31,12 +31,6 @@ export interface PriorityRequest {
      * @memberof PriorityRequest
      */
     color?: string | null;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof PriorityRequest
-     */
-    project?: number;
 }
 
 export function PriorityRequestFromJSON(json: any): PriorityRequest {
@@ -51,7 +45,6 @@ export function PriorityRequestFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'priority': json['priority'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -66,7 +59,6 @@ export function PriorityRequestToJSON(value?: PriorityRequest | null): any {
         
         'priority': value.priority,
         'color': value.color,
-        'project': value.project,
     };
 }
 

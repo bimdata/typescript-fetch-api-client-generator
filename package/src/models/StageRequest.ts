@@ -25,12 +25,6 @@ export interface StageRequest {
      * @memberof StageRequest
      */
     stage: string;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof StageRequest
-     */
-    project?: number;
 }
 
 export function StageRequestFromJSON(json: any): StageRequest {
@@ -44,7 +38,6 @@ export function StageRequestFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return {
         
         'stage': json['stage'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -58,7 +51,6 @@ export function StageRequestToJSON(value?: StageRequest | null): any {
     return {
         
         'stage': value.stage,
-        'project': value.project,
     };
 }
 

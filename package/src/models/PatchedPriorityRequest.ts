@@ -31,12 +31,6 @@ export interface PatchedPriorityRequest {
      * @memberof PatchedPriorityRequest
      */
     color?: string | null;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof PatchedPriorityRequest
-     */
-    project?: number;
 }
 
 export function PatchedPriorityRequestFromJSON(json: any): PatchedPriorityRequest {
@@ -51,7 +45,6 @@ export function PatchedPriorityRequestFromJSONTyped(json: any, ignoreDiscriminat
         
         'priority': !exists(json, 'priority') ? undefined : json['priority'],
         'color': !exists(json, 'color') ? undefined : json['color'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -66,7 +59,6 @@ export function PatchedPriorityRequestToJSON(value?: PatchedPriorityRequest | nu
         
         'priority': value.priority,
         'color': value.color,
-        'project': value.project,
     };
 }
 

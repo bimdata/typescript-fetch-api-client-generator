@@ -164,12 +164,6 @@ export interface FullTopic {
      */
     viewpoints?: Array<Viewpoint>;
     /**
-     * 
-     * @type {number}
-     * @memberof FullTopic
-     */
-    project: number;
-    /**
      * Non standard field. JSON describing bimdataViewerLayout.
      * @type {any}
      * @memberof FullTopic
@@ -208,7 +202,6 @@ export function FullTopicFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'due_date': !exists(json, 'due_date') ? undefined : (json['due_date'] === null ? null : new Date(json['due_date'])),
         'comments': !exists(json, 'comments') ? undefined : ((json['comments'] as Array<any>).map(CommentFromJSON)),
         'viewpoints': !exists(json, 'viewpoints') ? undefined : ((json['viewpoints'] as Array<any>).map(ViewpointFromJSON)),
-        'project': json['project'],
         'bimdata_viewer_layout': !exists(json, 'bimdata_viewer_layout') ? undefined : json['bimdata_viewer_layout'],
     };
 }
@@ -242,7 +235,6 @@ export function FullTopicToJSON(value?: FullTopic | null): any {
         'due_date': value.due_date === undefined ? undefined : (value.due_date === null ? null : value.due_date.toISOString()),
         'comments': value.comments === undefined ? undefined : ((value.comments as Array<any>).map(CommentToJSON)),
         'viewpoints': value.viewpoints === undefined ? undefined : ((value.viewpoints as Array<any>).map(ViewpointToJSON)),
-        'project': value.project,
         'bimdata_viewer_layout': value.bimdata_viewer_layout,
     };
 }

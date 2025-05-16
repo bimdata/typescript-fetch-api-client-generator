@@ -132,6 +132,7 @@ src/models/PatchedTagRequest.ts
 src/models/PatchedTopicRequest.ts
 src/models/PatchedTopicStatusRequest.ts
 src/models/PatchedTopicTypeRequest.ts
+src/models/PatchedTransformRequest.ts
 src/models/PatchedUnitRequest.ts
 src/models/PatchedUserCloudUpdateRequest.ts
 src/models/PatchedUserProjectUpdateRequest.ts
@@ -223,6 +224,8 @@ src/models/TopicStatus.ts
 src/models/TopicStatusRequest.ts
 src/models/TopicType.ts
 src/models/TopicTypeRequest.ts
+src/models/Transform.ts
+src/models/TransformRequest.ts
 src/models/Unit.ts
 src/models/UnitRequest.ts
 src/models/User.ts

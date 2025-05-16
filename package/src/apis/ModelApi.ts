@@ -144,6 +144,9 @@ import {
     PatchedSystemRequest,
     PatchedSystemRequestFromJSON,
     PatchedSystemRequestToJSON,
+    PatchedTransformRequest,
+    PatchedTransformRequestFromJSON,
+    PatchedTransformRequestToJSON,
     PatchedUnitRequest,
     PatchedUnitRequestFromJSON,
     PatchedUnitRequestToJSON,
@@ -207,6 +210,9 @@ import {
     SystemRequest,
     SystemRequestFromJSON,
     SystemRequestToJSON,
+    Transform,
+    TransformFromJSON,
+    TransformToJSON,
     Unit,
     UnitFromJSON,
     UnitToJSON,
@@ -1315,6 +1321,13 @@ export interface UpdateModelPropertyDefinitionRequest {
     model_pk: number;
     project_pk: number;
     PatchedPropertyDefinitionRequest?: PatchedPropertyDefinitionRequest;
+}
+
+export interface UpdateModelTransformRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    PatchedTransformRequest?: PatchedTransformRequest;
 }
 
 export interface UpdateModelUnitRequest {
@@ -10808,6 +10821,67 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async updateModelPropertyDefinition(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedPropertyDefinitionRequest?: PatchedPropertyDefinitionRequest, initOverrides?: RequestInit): Promise<PropertyDefinition> {
         const response = await this.updateModelPropertyDefinitionRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedPropertyDefinitionRequest: PatchedPropertyDefinitionRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update model transform (translate, scale, rotate and opacity)  Required scopes: ifc:write, model:write
+     * Update model transform
+     */
+    async updateModelTransformRaw(requestParameters: UpdateModelTransformRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Transform>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateModelTransform.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateModelTransform.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateModelTransform.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/transform`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedTransformRequestToJSON(requestParameters.PatchedTransformRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TransformFromJSON(jsonValue));
+    }
+
+    /**
+     * Update model transform (translate, scale, rotate and opacity)  Required scopes: ifc:write, model:write
+     * Update model transform
+     */
+    async updateModelTransform(cloud_pk: number, id: number, project_pk: number, PatchedTransformRequest?: PatchedTransformRequest, initOverrides?: RequestInit): Promise<Transform> {
+        const response = await this.updateModelTransformRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedTransformRequest: PatchedTransformRequest }, initOverrides);
         return await response.value();
     }
 

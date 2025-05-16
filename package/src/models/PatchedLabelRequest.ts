@@ -25,12 +25,6 @@ export interface PatchedLabelRequest {
      * @memberof PatchedLabelRequest
      */
     label?: string;
-    /**
-     * This field is automatically provided by the route, you don't need to provide it in the body
-     * @type {number}
-     * @memberof PatchedLabelRequest
-     */
-    project?: number;
 }
 
 export function PatchedLabelRequestFromJSON(json: any): PatchedLabelRequest {
@@ -44,7 +38,6 @@ export function PatchedLabelRequestFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'label': !exists(json, 'label') ? undefined : json['label'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
     };
 }
 
@@ -58,7 +51,6 @@ export function PatchedLabelRequestToJSON(value?: PatchedLabelRequest | null): a
     return {
         
         'label': value.label,
-        'project': value.project,
     };
 }
 

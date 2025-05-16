@@ -133,12 +133,6 @@ export interface PatchedTopicRequest {
      */
     index?: number | null;
     /**
-     * 
-     * @type {number}
-     * @memberof PatchedTopicRequest
-     */
-    project?: number;
-    /**
      * Non standard field. JSON describing bimdataViewerLayout.
      * @type {any}
      * @memberof PatchedTopicRequest
@@ -174,7 +168,6 @@ export function PatchedTopicRequestFromJSONTyped(json: any, ignoreDiscriminator:
         'models': !exists(json, 'models') ? undefined : json['models'],
         'format': !exists(json, 'format') ? undefined : json['format'],
         'index': !exists(json, 'index') ? undefined : json['index'],
-        'project': !exists(json, 'project') ? undefined : json['project'],
         'bimdata_viewer_layout': !exists(json, 'bimdata_viewer_layout') ? undefined : json['bimdata_viewer_layout'],
     };
 }
@@ -206,7 +199,6 @@ export function PatchedTopicRequestToJSON(value?: PatchedTopicRequest | null): a
         'models': value.models,
         'format': value.format,
         'index': value.index,
-        'project': value.project,
         'bimdata_viewer_layout': value.bimdata_viewer_layout,
     };
 }

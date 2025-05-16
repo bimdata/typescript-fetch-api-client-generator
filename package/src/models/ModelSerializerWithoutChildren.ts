@@ -26,6 +26,12 @@ import {
     ModelDocumentToJSON,
 } from './ModelDocument';
 import {
+    Transform,
+    TransformFromJSON,
+    TransformFromJSONTyped,
+    TransformToJSON,
+} from './Transform';
+import {
     User,
     UserFromJSON,
     UserFromJSONTyped,
@@ -251,6 +257,12 @@ export interface ModelSerializerWithoutChildren {
      * @memberof ModelSerializerWithoutChildren
      */
     readonly mask_2d: Mask2D | null;
+    /**
+     * 
+     * @type {Transform}
+     * @memberof ModelSerializerWithoutChildren
+     */
+    readonly transform: Transform | null;
 }
 
 /**
@@ -324,6 +336,7 @@ export function ModelSerializerWithoutChildrenFromJSONTyped(json: any, ignoreDis
         'page_number': json['page_number'],
         'layout_name': !exists(json, 'layout_name') ? undefined : json['layout_name'],
         'mask_2d': Mask2DFromJSON(json['mask_2d']),
+        'transform': TransformFromJSON(json['transform']),
     };
 }
 
