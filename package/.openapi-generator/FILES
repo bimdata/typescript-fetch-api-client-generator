@@ -147,6 +147,7 @@ src/models/PerspectiveCamera.ts
 src/models/PerspectiveCameraRequest.ts
 src/models/Pin.ts
 src/models/PinRequest.ts
+src/models/PinWithModels.ts
 src/models/Point.ts
 src/models/PointRequest.ts
 src/models/PositioningPlan.ts
@@ -219,6 +220,7 @@ src/models/Tag.ts
 src/models/TagIdRequest.ts
 src/models/TagRequest.ts
 src/models/Topic.ts
+src/models/TopicPin.ts
 src/models/TopicRequest.ts
 src/models/TopicStatus.ts
 src/models/TopicStatusRequest.ts

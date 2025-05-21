@@ -111,6 +111,9 @@ import {
     Topic,
     TopicFromJSON,
     TopicToJSON,
+    TopicPin,
+    TopicPinFromJSON,
+    TopicPinToJSON,
     TopicRequest,
     TopicRequestFromJSON,
     TopicRequestToJSON,
@@ -391,6 +394,14 @@ export interface GetTopicsRequest {
     format?: string;
     ifcs?: Array<number>;
     models?: Array<number>;
+}
+
+export interface GetTopicsPinsRequest {
+    projects_pk: number;
+    format?: string;
+    ifcs?: Array<number>;
+    models?: Array<number>;
+    topics?: string;
 }
 
 export interface GetViewpoinPinRequest {
@@ -3053,6 +3064,72 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async getTopics(projects_pk: number, $filter?: string, $orderby?: string, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<Topic>> {
         const response = await this.getTopicsRaw({ projects_pk: projects_pk, $filter: $filter, $orderby: $orderby, format: format, ifcs: ifcs, models: models }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * This is not a standard route. Get pins of all or many topics  Required scopes: bcf:read
+     * Get pins of all or many topics
+     */
+    async getTopicsPinsRaw(requestParameters: GetTopicsPinsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<TopicPin>>> {
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getTopicsPins.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.format !== undefined) {
+            queryParameters['format'] = requestParameters.format;
+        }
+
+        if (requestParameters.ifcs) {
+            queryParameters['ifcs'] = requestParameters.ifcs;
+        }
+
+        if (requestParameters.models) {
+            queryParameters['models'] = requestParameters.models;
+        }
+
+        if (requestParameters.topics !== undefined) {
+            queryParameters['topics'] = requestParameters.topics;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/pins`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TopicPinFromJSON));
+    }
+
+    /**
+     * This is not a standard route. Get pins of all or many topics  Required scopes: bcf:read
+     * Get pins of all or many topics
+     */
+    async getTopicsPins(projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, topics?: string, initOverrides?: RequestInit): Promise<Array<TopicPin>> {
+        const response = await this.getTopicsPinsRaw({ projects_pk: projects_pk, format: format, ifcs: ifcs, models: models, topics: topics }, initOverrides);
         return await response.value();
     }
 
