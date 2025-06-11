@@ -16,81 +16,60 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Mask2D
+ * @interface PatchedMask2DRequest
  */
-export interface Mask2D {
-    /**
-     * 
-     * @type {number}
-     * @memberof Mask2D
-     */
-    readonly id: number;
+export interface PatchedMask2DRequest {
     /**
      * Crop path of the manually created mask to show only a part of the model.
      * @type {Array<Array<number>>}
-     * @memberof Mask2D
+     * @memberof PatchedMask2DRequest
      */
-    crop_path: Array<Array<number>>;
+    crop_path?: Array<Array<number>>;
     /**
      * Whether the mask is grayscale
      * @type {boolean}
-     * @memberof Mask2D
+     * @memberof PatchedMask2DRequest
      */
     grayscale?: boolean;
     /**
      * Opacity of the mask (0-1)
      * @type {number}
-     * @memberof Mask2D
+     * @memberof PatchedMask2DRequest
      */
     opacity?: number | null;
     /**
      * Brightness of the mask
      * @type {number}
-     * @memberof Mask2D
+     * @memberof PatchedMask2DRequest
      */
     brightness?: number | null;
     /**
      * Contrast of the mask
      * @type {number}
-     * @memberof Mask2D
+     * @memberof PatchedMask2DRequest
      */
     contrast?: number | null;
-    /**
-     * Creation date
-     * @type {Date}
-     * @memberof Mask2D
-     */
-    readonly created_at: Date;
-    /**
-     * Date of the last update
-     * @type {Date}
-     * @memberof Mask2D
-     */
-    readonly updated_at: Date;
 }
 
-export function Mask2DFromJSON(json: any): Mask2D {
-    return Mask2DFromJSONTyped(json, false);
+export function PatchedMask2DRequestFromJSON(json: any): PatchedMask2DRequest {
+    return PatchedMask2DRequestFromJSONTyped(json, false);
 }
 
-export function Mask2DFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mask2D {
+export function PatchedMask2DRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedMask2DRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': json['id'],
-        'crop_path': json['crop_path'],
+        'crop_path': !exists(json, 'crop_path') ? undefined : json['crop_path'],
         'grayscale': !exists(json, 'grayscale') ? undefined : json['grayscale'],
         'opacity': !exists(json, 'opacity') ? undefined : json['opacity'],
         'brightness': !exists(json, 'brightness') ? undefined : json['brightness'],
         'contrast': !exists(json, 'contrast') ? undefined : json['contrast'],
-        'created_at': (new Date(json['created_at'])),
-        'updated_at': (new Date(json['updated_at'])),
     };
 }
 
-export function Mask2DToJSON(value?: Mask2D | null): any {
+export function PatchedMask2DRequestToJSON(value?: PatchedMask2DRequest | null): any {
     if (value === undefined) {
         return undefined;
     }

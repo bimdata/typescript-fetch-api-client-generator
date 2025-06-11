@@ -115,6 +115,7 @@ src/models/PatchedGroupRequest.ts
 src/models/PatchedIfcAccessTokenRequest.ts
 src/models/PatchedLabelRequest.ts
 src/models/PatchedLayerRequest.ts
+src/models/PatchedMask2DRequest.ts
 src/models/PatchedModelRequest.ts
 src/models/PatchedPinRequest.ts
 src/models/PatchedPositioningPlanRequest.ts

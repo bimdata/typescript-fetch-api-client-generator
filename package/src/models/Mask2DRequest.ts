@@ -25,6 +25,30 @@ export interface Mask2DRequest {
      * @memberof Mask2DRequest
      */
     crop_path: Array<Array<number>>;
+    /**
+     * Whether the mask is grayscale
+     * @type {boolean}
+     * @memberof Mask2DRequest
+     */
+    grayscale?: boolean;
+    /**
+     * Opacity of the mask (0-1)
+     * @type {number}
+     * @memberof Mask2DRequest
+     */
+    opacity?: number | null;
+    /**
+     * Brightness of the mask
+     * @type {number}
+     * @memberof Mask2DRequest
+     */
+    brightness?: number | null;
+    /**
+     * Contrast of the mask
+     * @type {number}
+     * @memberof Mask2DRequest
+     */
+    contrast?: number | null;
 }
 
 export function Mask2DRequestFromJSON(json: any): Mask2DRequest {
@@ -38,6 +62,10 @@ export function Mask2DRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'crop_path': json['crop_path'],
+        'grayscale': !exists(json, 'grayscale') ? undefined : json['grayscale'],
+        'opacity': !exists(json, 'opacity') ? undefined : json['opacity'],
+        'brightness': !exists(json, 'brightness') ? undefined : json['brightness'],
+        'contrast': !exists(json, 'contrast') ? undefined : json['contrast'],
     };
 }
 
@@ -51,6 +79,10 @@ export function Mask2DRequestToJSON(value?: Mask2DRequest | null): any {
     return {
         
         'crop_path': value.crop_path,
+        'grayscale': value.grayscale,
+        'opacity': value.opacity,
+        'brightness': value.brightness,
+        'contrast': value.contrast,
     };
 }
 

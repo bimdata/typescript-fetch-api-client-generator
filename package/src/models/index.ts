@@ -110,6 +110,7 @@ export * from './PatchedGroupRequest';
 export * from './PatchedIfcAccessTokenRequest';
 export * from './PatchedLabelRequest';
 export * from './PatchedLayerRequest';
+export * from './PatchedMask2DRequest';
 export * from './PatchedModelRequest';
 export * from './PatchedPinRequest';
 export * from './PatchedPositioningPlanRequest';
