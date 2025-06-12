@@ -24,7 +24,7 @@ export interface PatchedMask2DRequest {
      * @type {Array<Array<number>>}
      * @memberof PatchedMask2DRequest
      */
-    crop_path?: Array<Array<number>>;
+    crop_path?: Array<Array<number>> | null;
     /**
      * Whether the mask is grayscale
      * @type {boolean}

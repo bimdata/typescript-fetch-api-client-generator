@@ -453,7 +453,7 @@ export interface CreateMask2DRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    Mask2DRequest: Mask2DRequest;
+    Mask2DRequest?: Mask2DRequest;
 }
 
 export interface CreateMetaBuildingRequest {
@@ -2960,10 +2960,6 @@ export class ModelApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createMask2D.');
         }
 
-        if (requestParameters.Mask2DRequest === null || requestParameters.Mask2DRequest === undefined) {
-            throw new runtime.RequiredError('Mask2DRequest','Required parameter requestParameters.Mask2DRequest was null or undefined when calling createMask2D.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -2993,7 +2989,7 @@ export class ModelApi extends runtime.BaseAPI {
      * Create or update a 2D mask for the model. Only available for PDF, JPEG and PNG models
      * Create or update a 2D mask for the model
      */
-    async createMask2D(cloud_pk: number, id: number, project_pk: number, Mask2DRequest: Mask2DRequest, initOverrides?: RequestInit): Promise<Mask2D> {
+    async createMask2D(cloud_pk: number, id: number, project_pk: number, Mask2DRequest?: Mask2DRequest, initOverrides?: RequestInit): Promise<Mask2D> {
         const response = await this.createMask2DRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, Mask2DRequest: Mask2DRequest }, initOverrides);
         return await response.value();
     }

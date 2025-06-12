@@ -24,7 +24,7 @@ export interface Mask2DRequest {
      * @type {Array<Array<number>>}
      * @memberof Mask2DRequest
      */
-    crop_path: Array<Array<number>>;
+    crop_path?: Array<Array<number>> | null;
     /**
      * Whether the mask is grayscale
      * @type {boolean}
@@ -61,7 +61,7 @@ export function Mask2DRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'crop_path': json['crop_path'],
+        'crop_path': !exists(json, 'crop_path') ? undefined : json['crop_path'],
         'grayscale': !exists(json, 'grayscale') ? undefined : json['grayscale'],
         'opacity': !exists(json, 'opacity') ? undefined : json['opacity'],
         'brightness': !exists(json, 'brightness') ? undefined : json['brightness'],
