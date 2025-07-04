@@ -16,22 +16,22 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface LabelRequest
+ * @interface BcfLabelRequest
  */
-export interface LabelRequest {
+export interface BcfLabelRequest {
     /**
      * 
      * @type {string}
-     * @memberof LabelRequest
+     * @memberof BcfLabelRequest
      */
     label: string;
 }
 
-export function LabelRequestFromJSON(json: any): LabelRequest {
-    return LabelRequestFromJSONTyped(json, false);
+export function BcfLabelRequestFromJSON(json: any): BcfLabelRequest {
+    return BcfLabelRequestFromJSONTyped(json, false);
 }
 
-export function LabelRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): LabelRequest {
+export function BcfLabelRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): BcfLabelRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -41,7 +41,7 @@ export function LabelRequestFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function LabelRequestToJSON(value?: LabelRequest | null): any {
+export function BcfLabelRequestToJSON(value?: BcfLabelRequest | null): any {
     if (value === undefined) {
         return undefined;
     }

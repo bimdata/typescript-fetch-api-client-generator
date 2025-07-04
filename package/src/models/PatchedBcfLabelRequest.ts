@@ -16,22 +16,22 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface PatchedLabelRequest
+ * @interface PatchedBcfLabelRequest
  */
-export interface PatchedLabelRequest {
+export interface PatchedBcfLabelRequest {
     /**
      * 
      * @type {string}
-     * @memberof PatchedLabelRequest
+     * @memberof PatchedBcfLabelRequest
      */
     label?: string;
 }
 
-export function PatchedLabelRequestFromJSON(json: any): PatchedLabelRequest {
-    return PatchedLabelRequestFromJSONTyped(json, false);
+export function PatchedBcfLabelRequestFromJSON(json: any): PatchedBcfLabelRequest {
+    return PatchedBcfLabelRequestFromJSONTyped(json, false);
 }
 
-export function PatchedLabelRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedLabelRequest {
+export function PatchedBcfLabelRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedBcfLabelRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -41,7 +41,7 @@ export function PatchedLabelRequestFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function PatchedLabelRequestToJSON(value?: PatchedLabelRequest | null): any {
+export function PatchedBcfLabelRequestToJSON(value?: PatchedBcfLabelRequest | null): any {
     if (value === undefined) {
         return undefined;
     }

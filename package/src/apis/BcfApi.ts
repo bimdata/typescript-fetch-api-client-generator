@@ -18,6 +18,12 @@ import {
     Auth,
     AuthFromJSON,
     AuthToJSON,
+    BcfLabel,
+    BcfLabelFromJSON,
+    BcfLabelToJSON,
+    BcfLabelRequest,
+    BcfLabelRequestFromJSON,
+    BcfLabelRequestToJSON,
     BcfProject,
     BcfProjectFromJSON,
     BcfProjectToJSON,
@@ -45,12 +51,9 @@ import {
     FullTopicRequest,
     FullTopicRequestFromJSON,
     FullTopicRequestToJSON,
-    Label,
-    LabelFromJSON,
-    LabelToJSON,
-    LabelRequest,
-    LabelRequestFromJSON,
-    LabelRequestToJSON,
+    PatchedBcfLabelRequest,
+    PatchedBcfLabelRequestFromJSON,
+    PatchedBcfLabelRequestToJSON,
     PatchedBcfProjectRequest,
     PatchedBcfProjectRequestFromJSON,
     PatchedBcfProjectRequestToJSON,
@@ -60,9 +63,6 @@ import {
     PatchedFullTopicRequest,
     PatchedFullTopicRequestFromJSON,
     PatchedFullTopicRequestToJSON,
-    PatchedLabelRequest,
-    PatchedLabelRequestFromJSON,
-    PatchedLabelRequestToJSON,
     PatchedPinRequest,
     PatchedPinRequestFromJSON,
     PatchedPinRequestToJSON,
@@ -151,7 +151,7 @@ export interface CreateCommentRequest {
 
 export interface CreateExtensionLabelRequest {
     projects_pk: number;
-    LabelRequest: LabelRequest;
+    BcfLabelRequest: BcfLabelRequest;
 }
 
 export interface CreateExtensionPriorityRequest {
@@ -450,7 +450,7 @@ export interface UpdateCommentRequest {
 export interface UpdateExtensionLabelRequest {
     id: number;
     projects_pk: number;
-    PatchedLabelRequest?: PatchedLabelRequest;
+    PatchedBcfLabelRequest?: PatchedBcfLabelRequest;
 }
 
 export interface UpdateExtensionPriorityRequest {
@@ -562,13 +562,13 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Create a Label available for the project  Required scopes: bcf:write
      * Create a Label
      */
-    async createExtensionLabelRaw(requestParameters: CreateExtensionLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Label>> {
+    async createExtensionLabelRaw(requestParameters: CreateExtensionLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<BcfLabel>> {
         if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
             throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createExtensionLabel.');
         }
 
-        if (requestParameters.LabelRequest === null || requestParameters.LabelRequest === undefined) {
-            throw new runtime.RequiredError('LabelRequest','Required parameter requestParameters.LabelRequest was null or undefined when calling createExtensionLabel.');
+        if (requestParameters.BcfLabelRequest === null || requestParameters.BcfLabelRequest === undefined) {
+            throw new runtime.RequiredError('BcfLabelRequest','Required parameter requestParameters.BcfLabelRequest was null or undefined when calling createExtensionLabel.');
         }
 
         const queryParameters: any = {};
@@ -590,18 +590,18 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: LabelRequestToJSON(requestParameters.LabelRequest),
+            body: BcfLabelRequestToJSON(requestParameters.BcfLabelRequest),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => LabelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => BcfLabelFromJSON(jsonValue));
     }
 
     /**
      * This is not a standard route. Create a Label available for the project  Required scopes: bcf:write
      * Create a Label
      */
-    async createExtensionLabel(projects_pk: number, LabelRequest: LabelRequest, initOverrides?: RequestInit): Promise<Label> {
-        const response = await this.createExtensionLabelRaw({ projects_pk: projects_pk, LabelRequest: LabelRequest }, initOverrides);
+    async createExtensionLabel(projects_pk: number, BcfLabelRequest: BcfLabelRequest, initOverrides?: RequestInit): Promise<BcfLabel> {
+        const response = await this.createExtensionLabelRaw({ projects_pk: projects_pk, BcfLabelRequest: BcfLabelRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3116,7 +3116,7 @@ export class BcfApi extends runtime.BaseAPI {
      * This is not a standard route. Update a Label. All topics using this label will be updated  Required scopes: bcf:write
      * Update a Label
      */
-    async updateExtensionLabelRaw(requestParameters: UpdateExtensionLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Label>> {
+    async updateExtensionLabelRaw(requestParameters: UpdateExtensionLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<BcfLabel>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateExtensionLabel.');
         }
@@ -3144,18 +3144,18 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedLabelRequestToJSON(requestParameters.PatchedLabelRequest),
+            body: PatchedBcfLabelRequestToJSON(requestParameters.PatchedBcfLabelRequest),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => LabelFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => BcfLabelFromJSON(jsonValue));
     }
 
     /**
      * This is not a standard route. Update a Label. All topics using this label will be updated  Required scopes: bcf:write
      * Update a Label
      */
-    async updateExtensionLabel(id: number, projects_pk: number, PatchedLabelRequest?: PatchedLabelRequest, initOverrides?: RequestInit): Promise<Label> {
-        const response = await this.updateExtensionLabelRaw({ id: id, projects_pk: projects_pk, PatchedLabelRequest: PatchedLabelRequest }, initOverrides);
+    async updateExtensionLabel(id: number, projects_pk: number, PatchedBcfLabelRequest?: PatchedBcfLabelRequest, initOverrides?: RequestInit): Promise<BcfLabel> {
+        const response = await this.updateExtensionLabelRaw({ id: id, projects_pk: projects_pk, PatchedBcfLabelRequest: PatchedBcfLabelRequest }, initOverrides);
         return await response.value();
     }
 

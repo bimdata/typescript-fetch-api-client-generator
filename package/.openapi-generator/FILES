@@ -6,6 +6,8 @@ src/apis/SsoApi.ts
 src/apis/WebhookApi.ts
 src/apis/index.ts
 src/models/Auth.ts
+src/models/BcfLabel.ts
+src/models/BcfLabelRequest.ts
 src/models/BcfProject.ts
 src/models/BcfProjectRequest.ts
 src/models/Building.ts
@@ -56,6 +58,8 @@ src/models/FolderWithoutChildren.ts
 src/models/FolderWithoutChildrenRequest.ts
 src/models/FullTopic.ts
 src/models/FullTopicRequest.ts
+src/models/Geometry2dPoint.ts
+src/models/Geometry2dPointRequest.ts
 src/models/GeometryPoint.ts
 src/models/GeometryPointRequest.ts
 src/models/Group.ts
@@ -69,8 +73,6 @@ src/models/IfcMergeRequest.ts
 src/models/IfcOptimizeRequest.ts
 src/models/ImportGroupRequest.ts
 src/models/Invitation.ts
-src/models/Label.ts
-src/models/LabelRequest.ts
 src/models/Layer.ts
 src/models/LayerElement.ts
 src/models/LayerElementRequest.ts
@@ -95,12 +97,15 @@ src/models/ModelDocumentRequest.ts
 src/models/ModelErrors.ts
 src/models/ModelErrorsRequest.ts
 src/models/ModelFiles.ts
+src/models/ModelLabel.ts
+src/models/ModelLabelRequest.ts
 src/models/ModelSerializerWithoutChildren.ts
 src/models/ModelWithPositioningPlan.ts
 src/models/Organization.ts
 src/models/OrganizationRequest.ts
 src/models/OrthogonalCamera.ts
 src/models/OrthogonalCameraRequest.ts
+src/models/PatchedBcfLabelRequest.ts
 src/models/PatchedBcfProjectRequest.ts
 src/models/PatchedClassificationRequest.ts
 src/models/PatchedCloudRequest.ts
@@ -113,9 +118,9 @@ src/models/PatchedFullTopicRequest.ts
 src/models/PatchedGroupFolderRequest.ts
 src/models/PatchedGroupRequest.ts
 src/models/PatchedIfcAccessTokenRequest.ts
-src/models/PatchedLabelRequest.ts
 src/models/PatchedLayerRequest.ts
 src/models/PatchedMask2DRequest.ts
+src/models/PatchedModelLabelRequest.ts
 src/models/PatchedModelRequest.ts
 src/models/PatchedPinRequest.ts
 src/models/PatchedPositioningPlanRequest.ts

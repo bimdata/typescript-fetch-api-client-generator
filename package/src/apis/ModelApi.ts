@@ -105,6 +105,12 @@ import {
     ModelFiles,
     ModelFilesFromJSON,
     ModelFilesToJSON,
+    ModelLabel,
+    ModelLabelFromJSON,
+    ModelLabelToJSON,
+    ModelLabelRequest,
+    ModelLabelRequestFromJSON,
+    ModelLabelRequestToJSON,
     PatchedDrawingRequest,
     PatchedDrawingRequestFromJSON,
     PatchedDrawingRequestToJSON,
@@ -120,6 +126,9 @@ import {
     PatchedMask2DRequest,
     PatchedMask2DRequestFromJSON,
     PatchedMask2DRequestToJSON,
+    PatchedModelLabelRequest,
+    PatchedModelLabelRequestFromJSON,
+    PatchedModelLabelRequestToJSON,
     PatchedModelRequest,
     PatchedModelRequestFromJSON,
     PatchedModelRequestToJSON,
@@ -442,6 +451,13 @@ export interface CreateElementPropertySetPropertyDefinitionUnitRequest {
     UnitRequest: UnitRequest;
 }
 
+export interface CreateLabelRequest {
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    ModelLabelRequest: ModelLabelRequest;
+}
+
 export interface CreateLayerRequest {
     cloud_pk: number;
     model_pk: number;
@@ -616,6 +632,13 @@ export interface DeleteElementRequest {
     model_pk: number;
     project_pk: number;
     uuid: string;
+}
+
+export interface DeleteLabelRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteLayerRequest {
@@ -893,6 +916,20 @@ export interface GetElementsFromClassificationRequest {
     model_classification_pk: number;
     model_pk: number;
     project_pk: number;
+}
+
+export interface GetLabelRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+}
+
+export interface GetLabelsRequest {
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    is_validated?: boolean;
 }
 
 export interface GetLayerRequest {
@@ -1280,6 +1317,14 @@ export interface UpdateElementPropertySetPropertyRequest {
     project_pk: number;
     propertyset_pk: number;
     PatchedPropertyRequest?: PatchedPropertyRequest;
+}
+
+export interface UpdateLabelRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+    PatchedModelLabelRequest?: PatchedModelLabelRequest;
 }
 
 export interface UpdateLayerRequest {
@@ -2889,6 +2934,61 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
+     * Create a label in the model
+     */
+    async createLabelRaw(requestParameters: CreateLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelLabel>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createLabel.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createLabel.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createLabel.');
+        }
+
+        if (requestParameters.ModelLabelRequest === null || requestParameters.ModelLabelRequest === undefined) {
+            throw new runtime.RequiredError('ModelLabelRequest','Required parameter requestParameters.ModelLabelRequest was null or undefined when calling createLabel.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/label`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ModelLabelRequestToJSON(requestParameters.ModelLabelRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelLabelFromJSON(jsonValue));
+    }
+
+    /**
+     *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
+     * Create a label in the model
+     */
+    async createLabel(cloud_pk: number, model_pk: number, project_pk: number, ModelLabelRequest: ModelLabelRequest, initOverrides?: RequestInit): Promise<ModelLabel> {
+        const response = await this.createLabelRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ModelLabelRequest: ModelLabelRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * The IFC file will not be updated. The created layer will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create a layer in the model
      */
@@ -4262,6 +4362,57 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async deleteElement(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
         await this.deleteElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    }
+
+    /**
+     * Delete on label of the model.  Required scopes: ifc:write, model:write
+     * Delete a label
+     */
+    async deleteLabelRaw(requestParameters: DeleteLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteLabel.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteLabel.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteLabel.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteLabel.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/label/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete on label of the model.  Required scopes: ifc:write, model:write
+     * Delete a label
+     */
+    async deleteLabel(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteLabelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -6248,6 +6399,110 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async getElementsFromClassification(cloud_pk: number, model_classification_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Element>> {
         const response = await this.getElementsFromClassificationRaw({ cloud_pk: cloud_pk, model_classification_pk: model_classification_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve one label of the model  Required scopes: ifc:read, model:read
+     * Retrieve one label of the model
+     */
+    async getLabelRaw(requestParameters: GetLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelLabel>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getLabel.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getLabel.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getLabel.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getLabel.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/label/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelLabelFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve one label of the model  Required scopes: ifc:read, model:read
+     * Retrieve one label of the model
+     */
+    async getLabel(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<ModelLabel> {
+        const response = await this.getLabelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all labels of the model  Required scopes: ifc:read, model:read
+     * Retrieve all labels of the model
+     */
+    async getLabelsRaw(requestParameters: GetLabelsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ModelLabel>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getLabels.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getLabels.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getLabels.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.is_validated !== undefined) {
+            queryParameters['is_validated'] = requestParameters.is_validated;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/label`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ModelLabelFromJSON));
+    }
+
+    /**
+     * Retrieve all labels of the model  Required scopes: ifc:read, model:read
+     * Retrieve all labels of the model
+     */
+    async getLabels(cloud_pk: number, model_pk: number, project_pk: number, is_validated?: boolean, initOverrides?: RequestInit): Promise<Array<ModelLabel>> {
+        const response = await this.getLabelsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, is_validated: is_validated }, initOverrides);
         return await response.value();
     }
 
@@ -9055,6 +9310,61 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async updateElementPropertySetProperty(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, propertyset_pk: number, PatchedPropertyRequest?: PatchedPropertyRequest, initOverrides?: RequestInit): Promise<Property> {
         const response = await this.updateElementPropertySetPropertyRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk, propertyset_pk: propertyset_pk, PatchedPropertyRequest: PatchedPropertyRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a label.  Required scopes: ifc:write, model:write
+     * Update some fields of a label
+     */
+    async updateLabelRaw(requestParameters: UpdateLabelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelLabel>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateLabel.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateLabel.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateLabel.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateLabel.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/label/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedModelLabelRequestToJSON(requestParameters.PatchedModelLabelRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelLabelFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a label.  Required scopes: ifc:write, model:write
+     * Update some fields of a label
+     */
+    async updateLabel(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedModelLabelRequest?: PatchedModelLabelRequest, initOverrides?: RequestInit): Promise<ModelLabel> {
+        const response = await this.updateLabelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedModelLabelRequest: PatchedModelLabelRequest }, initOverrides);
         return await response.value();
     }
 

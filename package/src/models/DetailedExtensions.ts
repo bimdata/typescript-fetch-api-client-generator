@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    Label,
-    LabelFromJSON,
-    LabelFromJSONTyped,
-    LabelToJSON,
-} from './Label';
+    BcfLabel,
+    BcfLabelFromJSON,
+    BcfLabelFromJSONTyped,
+    BcfLabelToJSON,
+} from './BcfLabel';
 import {
     Priority,
     PriorityFromJSON,
@@ -52,10 +52,10 @@ import {
 export interface DetailedExtensions {
     /**
      * 
-     * @type {Array<Label>}
+     * @type {Array<BcfLabel>}
      * @memberof DetailedExtensions
      */
-    topic_labels?: Array<Label>;
+    topic_labels?: Array<BcfLabel>;
     /**
      * 
      * @type {Array<TopicType>}
@@ -92,7 +92,7 @@ export function DetailedExtensionsFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'topic_labels': !exists(json, 'topic_labels') ? undefined : ((json['topic_labels'] as Array<any>).map(LabelFromJSON)),
+        'topic_labels': !exists(json, 'topic_labels') ? undefined : ((json['topic_labels'] as Array<any>).map(BcfLabelFromJSON)),
         'topic_types': !exists(json, 'topic_types') ? undefined : ((json['topic_types'] as Array<any>).map(TopicTypeFromJSON)),
         'topic_statuses': !exists(json, 'topic_statuses') ? undefined : ((json['topic_statuses'] as Array<any>).map(TopicStatusFromJSON)),
         'priorities': !exists(json, 'priorities') ? undefined : ((json['priorities'] as Array<any>).map(PriorityFromJSON)),
@@ -109,7 +109,7 @@ export function DetailedExtensionsToJSON(value?: DetailedExtensions | null): any
     }
     return {
         
-        'topic_labels': value.topic_labels === undefined ? undefined : ((value.topic_labels as Array<any>).map(LabelToJSON)),
+        'topic_labels': value.topic_labels === undefined ? undefined : ((value.topic_labels as Array<any>).map(BcfLabelToJSON)),
         'topic_types': value.topic_types === undefined ? undefined : ((value.topic_types as Array<any>).map(TopicTypeToJSON)),
         'topic_statuses': value.topic_statuses === undefined ? undefined : ((value.topic_statuses as Array<any>).map(TopicStatusToJSON)),
         'priorities': value.priorities === undefined ? undefined : ((value.priorities as Array<any>).map(PriorityToJSON)),

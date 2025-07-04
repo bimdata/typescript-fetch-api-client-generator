@@ -16,39 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Label
+ * @interface Geometry2dPointRequest
  */
-export interface Label {
+export interface Geometry2dPointRequest {
     /**
      * 
      * @type {number}
-     * @memberof Label
+     * @memberof Geometry2dPointRequest
      */
-    readonly id: number;
+    x: number;
     /**
      * 
-     * @type {string}
-     * @memberof Label
+     * @type {number}
+     * @memberof Geometry2dPointRequest
      */
-    label: string;
+    y: number;
 }
 
-export function LabelFromJSON(json: any): Label {
-    return LabelFromJSONTyped(json, false);
+export function Geometry2dPointRequestFromJSON(json: any): Geometry2dPointRequest {
+    return Geometry2dPointRequestFromJSONTyped(json, false);
 }
 
-export function LabelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Label {
+export function Geometry2dPointRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): Geometry2dPointRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': json['id'],
-        'label': json['label'],
+        'x': json['x'],
+        'y': json['y'],
     };
 }
 
-export function LabelToJSON(value?: Label | null): any {
+export function Geometry2dPointRequestToJSON(value?: Geometry2dPointRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -57,7 +57,8 @@ export function LabelToJSON(value?: Label | null): any {
     }
     return {
         
-        'label': value.label,
+        'x': value.x,
+        'y': value.y,
     };
 }
 
