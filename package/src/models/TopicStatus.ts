@@ -33,6 +33,9 @@ export interface TopicStatus {
     topic_status: string;
     /**
      * 
+     *             Color of the topic status in hexadecimal string without the '#' prefix.
+     *             Example: 'fff', 'fff0', '0f0f0f', '0f0f0f00'.
+     *         
      * @type {string}
      * @memberof TopicStatus
      */
