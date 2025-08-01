@@ -183,6 +183,9 @@ import {
     PropertyDefinitionRequest,
     PropertyDefinitionRequestFromJSON,
     PropertyDefinitionRequestToJSON,
+    PropertyList,
+    PropertyListFromJSON,
+    PropertyListToJSON,
     PropertyRequest,
     PropertyRequestFromJSON,
     PropertyRequestToJSON,
@@ -1045,6 +1048,15 @@ export interface GetProcessorHandlersRequest {
     project_pk: number;
 }
 
+export interface GetPropertiesTypesRequest {
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    classification?: string;
+    classification__notation?: string;
+    type?: string;
+}
+
 export interface GetPropertySetRequest {
     cloud_pk: number;
     id: number;
@@ -1135,6 +1147,12 @@ export interface GetTilesetRequest {
     id: number;
     project_pk: number;
     tile_format?: GetTilesetTileFormatEnum;
+}
+
+export interface GetTypesRequest {
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface GetZoneRequest {
@@ -7367,6 +7385,66 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve all property types and their value type used in this model  Required scopes: ifc:read, model:read
+     * Retrieve all property types and their value type used in this model
+     */
+    async getPropertiesTypesRaw(requestParameters: GetPropertiesTypesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<PropertyList>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getPropertiesTypes.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getPropertiesTypes.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getPropertiesTypes.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.classification !== undefined) {
+            queryParameters['classification'] = requestParameters.classification;
+        }
+
+        if (requestParameters.classification__notation !== undefined) {
+            queryParameters['classification__notation'] = requestParameters.classification__notation;
+        }
+
+        if (requestParameters.type !== undefined) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/properties`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PropertyListFromJSON));
+    }
+
+    /**
+     * Retrieve all property types and their value type used in this model  Required scopes: ifc:read, model:read
+     * Retrieve all property types and their value type used in this model
+     */
+    async getPropertiesTypes(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<PropertyList>> {
+        const response = await this.getPropertiesTypesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve a PropertySet of a model  Required scopes: ifc:read, model:read
      * Retrieve a PropertySet of a model
      */
@@ -8043,6 +8121,54 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async getTileset(cloud_pk: number, id: number, project_pk: number, tile_format?: GetTilesetTileFormatEnum, initOverrides?: RequestInit): Promise<void> {
         await this.getTilesetRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, tile_format: tile_format }, initOverrides);
+    }
+
+    /**
+     * Retrieve all IFC Types used in this model  Required scopes: ifc:read, model:read
+     * Retrieve all IFC Types used in this model
+     */
+    async getTypesRaw(requestParameters: GetTypesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<string>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getTypes.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getTypes.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getTypes.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/element/types`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Retrieve all IFC Types used in this model  Required scopes: ifc:read, model:read
+     * Retrieve all IFC Types used in this model
+     */
+    async getTypes(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<string>> {
+        const response = await this.getTypesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
     }
 
     /**

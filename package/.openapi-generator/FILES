@@ -172,6 +172,7 @@ src/models/ProjectSize.ts
 src/models/Property.ts
 src/models/PropertyDefinition.ts
 src/models/PropertyDefinitionRequest.ts
+src/models/PropertyList.ts
 src/models/PropertyRequest.ts
 src/models/PropertySet.ts
 src/models/PropertySetRequest.ts

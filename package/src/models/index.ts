@@ -167,6 +167,7 @@ export * from './ProjectSize';
 export * from './Property';
 export * from './PropertyDefinition';
 export * from './PropertyDefinitionRequest';
+export * from './PropertyList';
 export * from './PropertyRequest';
 export * from './PropertySet';
 export * from './PropertySetRequest';
