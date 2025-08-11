@@ -164,6 +164,12 @@ export interface Document {
      * @memberof Document
      */
     readonly office_preview: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Document
+     */
+    readonly path: string;
 }
 
 /**
@@ -222,6 +228,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'history_count': json['history_count'],
         'user_permission': json['user_permission'],
         'office_preview': json['office_preview'],
+        'path': json['path'],
     };
 }
 
