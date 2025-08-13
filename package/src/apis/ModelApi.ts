@@ -311,6 +311,7 @@ export interface BulkFullUpdateElementsRequest {
     ElementRequest: Array<ElementRequest>;
     classification?: string;
     classification__notation?: string;
+    property_filter?: string;
     type?: string;
 }
 
@@ -352,6 +353,7 @@ export interface BulkUpdateElementsRequest {
     ElementRequest: Array<ElementRequest>;
     classification?: string;
     classification__notation?: string;
+    property_filter?: string;
     type?: string;
 }
 
@@ -413,6 +415,7 @@ export interface CreateElementRequest {
     ElementRequest: Array<ElementRequest>;
     classification?: string;
     classification__notation?: string;
+    property_filter?: string;
     type?: string;
 }
 
@@ -830,6 +833,7 @@ export interface GetElementLinkedDocumentsRequest {
     project_pk: number;
     classification?: string;
     classification__notation?: string;
+    property_filter?: string;
     type?: string;
 }
 
@@ -911,6 +915,7 @@ export interface GetElementsRequest {
     project_pk: number;
     classification?: string;
     classification__notation?: string;
+    property_filter?: string;
     type?: string;
 }
 
@@ -1054,6 +1059,7 @@ export interface GetPropertiesTypesRequest {
     project_pk: number;
     classification?: string;
     classification__notation?: string;
+    property_filter?: string;
     type?: string;
 }
 
@@ -1076,6 +1082,7 @@ export interface GetRawElementsRequest {
     project_pk: number;
     classification?: string;
     classification__notation?: string;
+    property_filter?: string;
     type?: string;
 }
 
@@ -1092,6 +1099,7 @@ export interface GetSimpleElementsRequest {
     project_pk: number;
     classification?: string;
     classification__notation?: string;
+    property_filter?: string;
     type?: string;
 }
 
@@ -1982,6 +1990,10 @@ export class ModelApi extends runtime.BaseAPI {
             queryParameters['classification__notation'] = requestParameters.classification__notation;
         }
 
+        if (requestParameters.property_filter !== undefined) {
+            queryParameters['property_filter'] = requestParameters.property_filter;
+        }
+
         if (requestParameters.type !== undefined) {
             queryParameters['type'] = requestParameters.type;
         }
@@ -2023,8 +2035,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update many elements at once (only changing fields may be defined)
      */
-    async bulkFullUpdateElements(cloud_pk: number, model_pk: number, project_pk: number, ElementRequest: Array<ElementRequest>, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
-        const response = await this.bulkFullUpdateElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementRequest: ElementRequest, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
+    async bulkFullUpdateElements(cloud_pk: number, model_pk: number, project_pk: number, ElementRequest: Array<ElementRequest>, classification?: string, classification__notation?: string, property_filter?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.bulkFullUpdateElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementRequest: ElementRequest, classification: classification, classification__notation: classification__notation, property_filter: property_filter, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -2328,6 +2340,10 @@ export class ModelApi extends runtime.BaseAPI {
             queryParameters['classification__notation'] = requestParameters.classification__notation;
         }
 
+        if (requestParameters.property_filter !== undefined) {
+            queryParameters['property_filter'] = requestParameters.property_filter;
+        }
+
         if (requestParameters.type !== undefined) {
             queryParameters['type'] = requestParameters.type;
         }
@@ -2369,8 +2385,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk update. Similar to update, but the body should be a list of objects to patch or put The response will be a list (in the same order) of updated objects or of errors if any If at least one update succeeded, the status code will be 200. If every update failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Update many elements at once (all field must be defined)
      */
-    async bulkUpdateElements(cloud_pk: number, model_pk: number, project_pk: number, ElementRequest: Array<ElementRequest>, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
-        const response = await this.bulkUpdateElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementRequest: ElementRequest, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
+    async bulkUpdateElements(cloud_pk: number, model_pk: number, project_pk: number, ElementRequest: Array<ElementRequest>, classification?: string, classification__notation?: string, property_filter?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.bulkUpdateElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementRequest: ElementRequest, classification: classification, classification__notation: classification__notation, property_filter: property_filter, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -2863,6 +2879,10 @@ export class ModelApi extends runtime.BaseAPI {
             queryParameters['classification__notation'] = requestParameters.classification__notation;
         }
 
+        if (requestParameters.property_filter !== undefined) {
+            queryParameters['property_filter'] = requestParameters.property_filter;
+        }
+
         if (requestParameters.type !== undefined) {
             queryParameters['type'] = requestParameters.type;
         }
@@ -2904,8 +2924,8 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors  The IFC file will not be updated. The created element will be accessible over the API and when exporting an IFC file  Required scopes: ifc:write, model:write
      * Create an element in the model
      */
-    async createElement(cloud_pk: number, model_pk: number, project_pk: number, ElementRequest: Array<ElementRequest>, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
-        const response = await this.createElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementRequest: ElementRequest, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
+    async createElement(cloud_pk: number, model_pk: number, project_pk: number, ElementRequest: Array<ElementRequest>, classification?: string, classification__notation?: string, property_filter?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.createElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ElementRequest: ElementRequest, classification: classification, classification__notation: classification__notation, property_filter: property_filter, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -6487,7 +6507,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve an element of a model  Required scopes: ifc:read, model:read
+     * Retrieve an element of a model      `property_filter` simple syntax:         {             \"name\": \"property_name\",             \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",             \"value\": \"property_value\"         }     `property_filter` combinatory syntax:         {             \"operande\": \"AND\" | \"OR\",             \"conditions\": [                 {                     \"operande\": \"AND\" | \"OR\",                     \"conditions\": [...],                 }                 // OR                 {                     \"name\": \"property_name\",                     \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",                     \"value\": \"property_value\"                 },                 ...             ]         }       Required scopes: ifc:read, model:read
      * Retrieve an element of a model
      */
     async getElementRaw(requestParameters: GetElementRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Element>> {
@@ -6540,7 +6560,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve an element of a model  Required scopes: ifc:read, model:read
+     * Retrieve an element of a model      `property_filter` simple syntax:         {             \"name\": \"property_name\",             \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",             \"value\": \"property_value\"         }     `property_filter` combinatory syntax:         {             \"operande\": \"AND\" | \"OR\",             \"conditions\": [                 {                     \"operande\": \"AND\" | \"OR\",                     \"conditions\": [...],                 }                 // OR                 {                     \"name\": \"property_name\",                     \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",                     \"value\": \"property_value\"                 },                 ...             ]         }       Required scopes: ifc:read, model:read
      * Retrieve an element of a model
      */
     async getElement(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<Element> {
@@ -6573,6 +6593,10 @@ export class ModelApi extends runtime.BaseAPI {
 
         if (requestParameters.classification__notation !== undefined) {
             queryParameters['classification__notation'] = requestParameters.classification__notation;
+        }
+
+        if (requestParameters.property_filter !== undefined) {
+            queryParameters['property_filter'] = requestParameters.property_filter;
         }
 
         if (requestParameters.type !== undefined) {
@@ -6613,8 +6637,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all documents linked to any element with the list of uuids  Required scopes: ifc:read, model:read
      * Retrieve all documents linked to any element
      */
-    async getElementLinkedDocuments(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<DocumentWithElementList>> {
-        const response = await this.getElementLinkedDocumentsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
+    async getElementLinkedDocuments(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, property_filter?: string, type?: string, initOverrides?: RequestInit): Promise<Array<DocumentWithElementList>> {
+        const response = await this.getElementLinkedDocumentsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, property_filter: property_filter, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -7179,7 +7203,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see getRawElements  Required scopes: ifc:read, model:read
+     * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see `getRawElements` or `getSimpleElements`      `property_filter` simple syntax:         {             \"name\": \"property_name\",             \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",             \"value\": \"property_value\"         }     `property_filter` combinatory syntax:         {             \"operande\": \"AND\" | \"OR\",             \"conditions\": [                 {                     \"operande\": \"AND\" | \"OR\",                     \"conditions\": [...],                 }                 // OR                 {                     \"name\": \"property_name\",                     \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",                     \"value\": \"property_value\"                 },                 ...             ]         }       Required scopes: ifc:read, model:read
      * Retrieve all elements of a model
      */
     async getElementsRaw(requestParameters: GetElementsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Element>>> {
@@ -7203,6 +7227,10 @@ export class ModelApi extends runtime.BaseAPI {
 
         if (requestParameters.classification__notation !== undefined) {
             queryParameters['classification__notation'] = requestParameters.classification__notation;
+        }
+
+        if (requestParameters.property_filter !== undefined) {
+            queryParameters['property_filter'] = requestParameters.property_filter;
         }
 
         if (requestParameters.type !== undefined) {
@@ -7240,11 +7268,11 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see getRawElements  Required scopes: ifc:read, model:read
+     * Retrieve all elements of a model. If not filtered, the json may be very large. To efficently retrieve all elements and their data, see `getRawElements` or `getSimpleElements`      `property_filter` simple syntax:         {             \"name\": \"property_name\",             \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",             \"value\": \"property_value\"         }     `property_filter` combinatory syntax:         {             \"operande\": \"AND\" | \"OR\",             \"conditions\": [                 {                     \"operande\": \"AND\" | \"OR\",                     \"conditions\": [...],                 }                 // OR                 {                     \"name\": \"property_name\",                     \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",                     \"value\": \"property_value\"                 },                 ...             ]         }       Required scopes: ifc:read, model:read
      * Retrieve all elements of a model
      */
-    async getElements(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
-        const response = await this.getElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
+    async getElements(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, property_filter?: string, type?: string, initOverrides?: RequestInit): Promise<Array<Element>> {
+        const response = await this.getElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, property_filter: property_filter, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -8491,6 +8519,10 @@ export class ModelApi extends runtime.BaseAPI {
             queryParameters['classification__notation'] = requestParameters.classification__notation;
         }
 
+        if (requestParameters.property_filter !== undefined) {
+            queryParameters['property_filter'] = requestParameters.property_filter;
+        }
+
         if (requestParameters.type !== undefined) {
             queryParameters['type'] = requestParameters.type;
         }
@@ -8529,8 +8561,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all property types and their value type used in this model  Required scopes: ifc:read, model:read
      * Retrieve all property types and their value type used in this model
      */
-    async getPropertiesTypes(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<Array<PropertyList>> {
-        const response = await this.getPropertiesTypesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
+    async getPropertiesTypes(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, property_filter?: string, type?: string, initOverrides?: RequestInit): Promise<Array<PropertyList>> {
+        const response = await this.getPropertiesTypesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, property_filter: property_filter, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -8655,7 +8687,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Instead of a nested representation, this route respond with a flat structure and indices pointing to related object. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read, model:read
+     * Instead of a nested representation, this route respond with a flat structure and indices pointing to related object. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. Returns elements, property_sets, properties, definitions and units in a JSON optimized structure      `property_filter` simple syntax:         {             \"name\": \"property_name\",             \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",             \"value\": \"property_value\"         }     `property_filter` combinatory syntax:         {             \"operande\": \"AND\" | \"OR\",             \"conditions\": [                 {                     \"operande\": \"AND\" | \"OR\",                     \"conditions\": [...],                 }                 // OR                 {                     \"name\": \"property_name\",                     \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",                     \"value\": \"property_value\"                 },                 ...             ]         }       Required scopes: ifc:read, model:read
      * Retrieve all elements in a optimized format
      */
     async getRawElementsRaw(requestParameters: GetRawElementsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<RawElements>> {
@@ -8679,6 +8711,10 @@ export class ModelApi extends runtime.BaseAPI {
 
         if (requestParameters.classification__notation !== undefined) {
             queryParameters['classification__notation'] = requestParameters.classification__notation;
+        }
+
+        if (requestParameters.property_filter !== undefined) {
+            queryParameters['property_filter'] = requestParameters.property_filter;
         }
 
         if (requestParameters.type !== undefined) {
@@ -8716,11 +8752,11 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Instead of a nested representation, this route respond with a flat structure and indices pointing to related object. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. Returns elements, property_sets, properties, definitions and units in a JSON optimized structure  Required scopes: ifc:read, model:read
+     * Instead of a nested representation, this route respond with a flat structure and indices pointing to related object. The IFC file will not be updated. The created elements will be accessible over the API and when exporting an IFC file. Returns elements, property_sets, properties, definitions and units in a JSON optimized structure      `property_filter` simple syntax:         {             \"name\": \"property_name\",             \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",             \"value\": \"property_value\"         }     `property_filter` combinatory syntax:         {             \"operande\": \"AND\" | \"OR\",             \"conditions\": [                 {                     \"operande\": \"AND\" | \"OR\",                     \"conditions\": [...],                 }                 // OR                 {                     \"name\": \"property_name\",                     \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",                     \"value\": \"property_value\"                 },                 ...             ]         }       Required scopes: ifc:read, model:read
      * Retrieve all elements in a optimized format
      */
-    async getRawElements(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<RawElements> {
-        const response = await this.getRawElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
+    async getRawElements(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, property_filter?: string, type?: string, initOverrides?: RequestInit): Promise<RawElements> {
+        const response = await this.getRawElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, property_filter: property_filter, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -8787,7 +8823,7 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all elements of a model with a simple value representation  Required scopes: ifc:read, model:read
+     * Retrieve all elements of a model with a simple value representation      `property_filter` simple syntax:         {             \"name\": \"property_name\",             \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",             \"value\": \"property_value\"         }     `property_filter` combinatory syntax:         {             \"operande\": \"AND\" | \"OR\",             \"conditions\": [                 {                     \"operande\": \"AND\" | \"OR\",                     \"conditions\": [...],                 }                 // OR                 {                     \"name\": \"property_name\",                     \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",                     \"value\": \"property_value\"                 },                 ...             ]         }       Required scopes: ifc:read, model:read
      * Retrieve all elements of a model with a simple value representation
      */
     async getSimpleElementsRaw(requestParameters: GetSimpleElementsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<SimpleElement>> {
@@ -8811,6 +8847,10 @@ export class ModelApi extends runtime.BaseAPI {
 
         if (requestParameters.classification__notation !== undefined) {
             queryParameters['classification__notation'] = requestParameters.classification__notation;
+        }
+
+        if (requestParameters.property_filter !== undefined) {
+            queryParameters['property_filter'] = requestParameters.property_filter;
         }
 
         if (requestParameters.type !== undefined) {
@@ -8848,11 +8888,11 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all elements of a model with a simple value representation  Required scopes: ifc:read, model:read
+     * Retrieve all elements of a model with a simple value representation      `property_filter` simple syntax:         {             \"name\": \"property_name\",             \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",             \"value\": \"property_value\"         }     `property_filter` combinatory syntax:         {             \"operande\": \"AND\" | \"OR\",             \"conditions\": [                 {                     \"operande\": \"AND\" | \"OR\",                     \"conditions\": [...],                 }                 // OR                 {                     \"name\": \"property_name\",                     \"comparator\": \"contains\" | \"icontains\" | \"exact\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"startswith\" | \"istartswith\" | \"endswith\" | \"iendswith\",                     \"value\": \"property_value\"                 },                 ...             ]         }       Required scopes: ifc:read, model:read
      * Retrieve all elements of a model with a simple value representation
      */
-    async getSimpleElements(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, type?: string, initOverrides?: RequestInit): Promise<SimpleElement> {
-        const response = await this.getSimpleElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, type: type }, initOverrides);
+    async getSimpleElements(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, property_filter?: string, type?: string, initOverrides?: RequestInit): Promise<SimpleElement> {
+        const response = await this.getSimpleElementsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, property_filter: property_filter, type: type }, initOverrides);
         return await response.value();
     }
 
