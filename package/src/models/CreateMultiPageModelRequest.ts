@@ -31,6 +31,12 @@ export interface CreateMultiPageModelRequest {
      * @memberof CreateMultiPageModelRequest
      */
     layout_names?: Array<string> | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof CreateMultiPageModelRequest
+     */
+    size_ratios?: Array<number> | null;
 }
 
 export function CreateMultiPageModelRequestFromJSON(json: any): CreateMultiPageModelRequest {
@@ -45,6 +51,7 @@ export function CreateMultiPageModelRequestFromJSONTyped(json: any, ignoreDiscri
         
         'map_files': json['map_files'],
         'layout_names': !exists(json, 'layout_names') ? undefined : json['layout_names'],
+        'size_ratios': !exists(json, 'size_ratios') ? undefined : json['size_ratios'],
     };
 }
 
@@ -59,6 +66,7 @@ export function CreateMultiPageModelRequestToJSON(value?: CreateMultiPageModelRe
         
         'map_files': value.map_files,
         'layout_names': value.layout_names,
+        'size_ratios': value.size_ratios,
     };
 }
 
