@@ -40,6 +40,7 @@ src/models/Direction.ts
 src/models/DirectionRequest.ts
 src/models/Document.ts
 src/models/DocumentPreviewFile.ts
+src/models/DocumentText.ts
 src/models/DocumentWithElementList.ts
 src/models/Drawing.ts
 src/models/DrawingRequest.ts
@@ -111,6 +112,7 @@ src/models/PatchedClassificationRequest.ts
 src/models/PatchedCloudRequest.ts
 src/models/PatchedCommentRequest.ts
 src/models/PatchedDocumentRequest.ts
+src/models/PatchedDocumentTextRequest.ts
 src/models/PatchedDrawingRequest.ts
 src/models/PatchedElementRequest.ts
 src/models/PatchedFolderWithoutChildrenRequest.ts

@@ -42,6 +42,9 @@ import {
     DocumentPreviewFile,
     DocumentPreviewFileFromJSON,
     DocumentPreviewFileToJSON,
+    DocumentText,
+    DocumentTextFromJSON,
+    DocumentTextToJSON,
     Folder,
     FolderFromJSON,
     FolderToJSON,
@@ -81,6 +84,9 @@ import {
     PatchedDocumentRequest,
     PatchedDocumentRequestFromJSON,
     PatchedDocumentRequestToJSON,
+    PatchedDocumentTextRequest,
+    PatchedDocumentTextRequestFromJSON,
+    PatchedDocumentTextRequestToJSON,
     PatchedFolderWithoutChildrenRequest,
     PatchedFolderWithoutChildrenRequestFromJSON,
     PatchedFolderWithoutChildrenRequestToJSON,
@@ -510,9 +516,11 @@ export interface GetDocumentsRequest {
     name__contains?: string;
     name__endswith?: string;
     name__startswith?: string;
+    search?: string;
     size_max?: number | null;
     size_min?: number | null;
     tags?: Array<string>;
+    text?: boolean;
     visa__creator_email?: string;
     visa__deadline_after?: Date;
     visa__deadline_before?: Date;
@@ -550,6 +558,7 @@ export interface GetFolderDocumentsRequest {
     name__contains?: string;
     name__endswith?: string;
     name__startswith?: string;
+    search?: string;
     size_max?: number | null;
     size_min?: number | null;
     tags?: Array<string>;
@@ -821,6 +830,13 @@ export interface UpdateDocumentRequest {
     id: number;
     project_pk: number;
     PatchedDocumentRequest?: PatchedDocumentRequest;
+}
+
+export interface UpdateDocumentTextRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    PatchedDocumentTextRequest?: PatchedDocumentTextRequest;
 }
 
 export interface UpdateFolderRequest {
@@ -1671,7 +1687,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'IFC\', \'OBJ\', \'POINT_CLOUD\', \'DXF\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'IFC\', \'POINT_CLOUD\', \'DWG\', \'DXF\', \'GLTF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1778,7 +1794,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'IFC\', \'OBJ\', \'POINT_CLOUD\', \'DXF\', \'DWG\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'IFC\', \'POINT_CLOUD\', \'DWG\', \'DXF\', \'GLTF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -3889,7 +3905,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all documents in the project. Filters are case insentive  Required scopes: document:read
+     * Retrieve all documents in the project. Filters are case insentive. Search filter only works if AI features are enabled.  Required scopes: document:read
      * Retrieve all documents
      */
     async getDocumentsRaw(requestParameters: GetDocumentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
@@ -3967,6 +3983,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['name__startswith'] = requestParameters.name__startswith;
         }
 
+        if (requestParameters.search !== undefined) {
+            queryParameters['search'] = requestParameters.search;
+        }
+
         if (requestParameters.size_max !== undefined) {
             queryParameters['size_max'] = requestParameters.size_max;
         }
@@ -3977,6 +3997,10 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (requestParameters.tags) {
             queryParameters['tags'] = requestParameters.tags.join(runtime.COLLECTION_FORMATS["csv"]);
+        }
+
+        if (requestParameters.text !== undefined) {
+            queryParameters['text'] = requestParameters.text;
         }
 
         if (requestParameters.visa__creator_email !== undefined) {
@@ -4046,11 +4070,11 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all documents in the project. Filters are case insentive  Required scopes: document:read
+     * Retrieve all documents in the project. Filters are case insentive. Search filter only works if AI features are enabled.  Required scopes: document:read
      * Retrieve all documents
      */
-    async getDocuments(cloud_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetDocumentsVisaStatusEnum, visa__status__strict?: GetDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
+    async getDocuments(cloud_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, text?: boolean, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetDocumentsVisaStatusEnum, visa__status__strict?: GetDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, search: search, size_max: size_max, size_min: size_min, tags: tags, text: text, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
         return await response.value();
     }
 
@@ -4195,6 +4219,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['name__startswith'] = requestParameters.name__startswith;
         }
 
+        if (requestParameters.search !== undefined) {
+            queryParameters['search'] = requestParameters.search;
+        }
+
         if (requestParameters.size_max !== undefined) {
             queryParameters['size_max'] = requestParameters.size_max;
         }
@@ -4277,8 +4305,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Get all documents of a folder  Required scopes: document:read
      * Get all documents of a folder
      */
-    async getFolderDocuments(cloud_pk: number, folder_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetFolderDocumentsVisaStatusEnum, visa__status__strict?: GetFolderDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getFolderDocumentsRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
+    async getFolderDocuments(cloud_pk: number, folder_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetFolderDocumentsVisaStatusEnum, visa__status__strict?: GetFolderDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getFolderDocumentsRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, search: search, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
         return await response.value();
     }
 
@@ -6885,6 +6913,67 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async updateDocument(cloud_pk: number, id: number, project_pk: number, PatchedDocumentRequest?: PatchedDocumentRequest, initOverrides?: RequestInit): Promise<Document> {
         const response = await this.updateDocumentRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedDocumentRequest: PatchedDocumentRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update the text representation of a document. The document itself will not be changed. It is useful for full text search  Required scopes: document:write
+     * Update the text representation of a document
+     */
+    async updateDocumentTextRaw(requestParameters: UpdateDocumentTextRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<DocumentText>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateDocumentText.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateDocumentText.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateDocumentText.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}/text`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedDocumentTextRequestToJSON(requestParameters.PatchedDocumentTextRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentTextFromJSON(jsonValue));
+    }
+
+    /**
+     * Update the text representation of a document. The document itself will not be changed. It is useful for full text search  Required scopes: document:write
+     * Update the text representation of a document
+     */
+    async updateDocumentText(cloud_pk: number, id: number, project_pk: number, PatchedDocumentTextRequest?: PatchedDocumentTextRequest, initOverrides?: RequestInit): Promise<DocumentText> {
+        const response = await this.updateDocumentTextRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedDocumentTextRequest: PatchedDocumentTextRequest }, initOverrides);
         return await response.value();
     }
 
