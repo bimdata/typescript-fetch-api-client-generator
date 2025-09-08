@@ -517,6 +517,7 @@ export interface GetDocumentsRequest {
     name__contains?: string;
     name__endswith?: string;
     name__startswith?: string;
+    parent_id__in?: Array<number>;
     search?: string;
     size_max?: number | null;
     size_min?: number | null;
@@ -560,6 +561,7 @@ export interface GetFolderDocumentsRequest {
     name__contains?: string;
     name__endswith?: string;
     name__startswith?: string;
+    parent_id__in?: Array<number>;
     search?: string;
     size_max?: number | null;
     size_min?: number | null;
@@ -1689,7 +1691,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'IFC\', \'DWG\', \'POINT_CLOUD\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'DWG\', \'IFC\', \'GLTF\', \'POINT_CLOUD\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1796,7 +1798,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'IFC\', \'DWG\', \'POINT_CLOUD\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'DWG\', \'IFC\', \'GLTF\', \'POINT_CLOUD\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -3989,6 +3991,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['name__startswith'] = requestParameters.name__startswith;
         }
 
+        if (requestParameters.parent_id__in) {
+            queryParameters['parent_id__in'] = requestParameters.parent_id__in.join(runtime.COLLECTION_FORMATS["csv"]);
+        }
+
         if (requestParameters.search !== undefined) {
             queryParameters['search'] = requestParameters.search;
         }
@@ -4079,8 +4085,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all documents in the project. Filters are case insentive. Search filter only works if AI features are enabled.  Required scopes: document:read
      * Retrieve all documents
      */
-    async getDocuments(cloud_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, id__in?: Array<number>, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, text?: boolean, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetDocumentsVisaStatusEnum, visa__status__strict?: GetDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, id__in: id__in, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, search: search, size_max: size_max, size_min: size_min, tags: tags, text: text, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
+    async getDocuments(cloud_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, id__in?: Array<number>, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, parent_id__in?: Array<number>, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, text?: boolean, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetDocumentsVisaStatusEnum, visa__status__strict?: GetDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, id__in: id__in, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, parent_id__in: parent_id__in, search: search, size_max: size_max, size_min: size_min, tags: tags, text: text, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
         return await response.value();
     }
 
@@ -4229,6 +4235,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['name__startswith'] = requestParameters.name__startswith;
         }
 
+        if (requestParameters.parent_id__in) {
+            queryParameters['parent_id__in'] = requestParameters.parent_id__in.join(runtime.COLLECTION_FORMATS["csv"]);
+        }
+
         if (requestParameters.search !== undefined) {
             queryParameters['search'] = requestParameters.search;
         }
@@ -4315,8 +4325,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Get all documents of a folder  Required scopes: document:read
      * Get all documents of a folder
      */
-    async getFolderDocuments(cloud_pk: number, folder_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, id__in?: Array<number>, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetFolderDocumentsVisaStatusEnum, visa__status__strict?: GetFolderDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getFolderDocumentsRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, id__in: id__in, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, search: search, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
+    async getFolderDocuments(cloud_pk: number, folder_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, has__visa?: boolean, id__in?: Array<number>, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, parent_id__in?: Array<number>, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetFolderDocumentsVisaStatusEnum, visa__status__strict?: GetFolderDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getFolderDocumentsRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, has__visa: has__visa, id__in: id__in, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, parent_id__in: parent_id__in, search: search, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
         return await response.value();
     }
 
