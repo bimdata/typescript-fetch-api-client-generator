@@ -42,6 +42,12 @@ import {
     DetailedExtensions,
     DetailedExtensionsFromJSON,
     DetailedExtensionsToJSON,
+    DocumentReference,
+    DocumentReferenceFromJSON,
+    DocumentReferenceToJSON,
+    DocumentReferenceRequest,
+    DocumentReferenceRequestFromJSON,
+    DocumentReferenceRequestToJSON,
     Extensions,
     ExtensionsFromJSON,
     ExtensionsToJSON,
@@ -147,6 +153,12 @@ export interface CreateCommentRequest {
     projects_pk: number;
     topics_guid: string;
     CommentRequest?: CommentRequest;
+}
+
+export interface CreateDocumentReferenceRequest {
+    guid: string;
+    projects_pk: number;
+    DocumentReferenceRequest: DocumentReferenceRequest;
 }
 
 export interface CreateExtensionLabelRequest {
@@ -274,6 +286,15 @@ export interface FullUpdateCommentRequest {
     CommentRequest?: CommentRequest;
 }
 
+export interface FullUpdateDocumentReferenceRequest {
+    guid: string;
+    projects_pk: number;
+    DocumentReferenceRequest: Array<DocumentReferenceRequest>;
+    format?: string;
+    ifcs?: Array<number>;
+    models?: Array<number>;
+}
+
 export interface FullUpdateFullTopicRequest {
     guid: string;
     projects_pk: number;
@@ -320,6 +341,14 @@ export interface GetCommentsRequest {
 
 export interface GetDetailedExtensionsRequest {
     id: number;
+}
+
+export interface GetDocumentReferencesRequest {
+    guid: string;
+    projects_pk: number;
+    format?: string;
+    ifcs?: Array<number>;
+    models?: Array<number>;
 }
 
 export interface GetExtensionsRequest {
@@ -371,14 +400,6 @@ export interface GetSnapshotRequest {
 export interface GetTopicRequest {
     guid: string;
     projects_pk: number;
-}
-
-export interface GetTopicDocumentReferencesRequest {
-    guid: string;
-    projects_pk: number;
-    format?: string;
-    ifcs?: Array<number>;
-    models?: Array<number>;
 }
 
 export interface GetTopicViewpointsRequest {
@@ -565,6 +586,67 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async createComment(projects_pk: number, topics_guid: string, CommentRequest?: CommentRequest, initOverrides?: RequestInit): Promise<Comment> {
         const response = await this.createCommentRaw({ projects_pk: projects_pk, topics_guid: topics_guid, CommentRequest: CommentRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create a reference to a document  Required scopes: bcf:write
+     * Create a reference to a document
+     */
+    async createDocumentReferenceRaw(requestParameters: CreateDocumentReferenceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<DocumentReference>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling createDocumentReference.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling createDocumentReference.');
+        }
+
+        if (requestParameters.DocumentReferenceRequest === null || requestParameters.DocumentReferenceRequest === undefined) {
+            throw new runtime.RequiredError('DocumentReferenceRequest','Required parameter requestParameters.DocumentReferenceRequest was null or undefined when calling createDocumentReference.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}/document_references`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DocumentReferenceRequestToJSON(requestParameters.DocumentReferenceRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentReferenceFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a reference to a document  Required scopes: bcf:write
+     * Create a reference to a document
+     */
+    async createDocumentReference(guid: string, projects_pk: number, DocumentReferenceRequest: DocumentReferenceRequest, initOverrides?: RequestInit): Promise<DocumentReference> {
+        const response = await this.createDocumentReferenceRaw({ guid: guid, projects_pk: projects_pk, DocumentReferenceRequest: DocumentReferenceRequest }, initOverrides);
         return await response.value();
     }
 
@@ -1833,6 +1915,79 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
+     * This will replace every references by references passed in the body  Required scopes: bcf:write
+     * Add or update document references to a topic
+     */
+    async fullUpdateDocumentReferenceRaw(requestParameters: FullUpdateDocumentReferenceRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<DocumentReference>>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateDocumentReference.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling fullUpdateDocumentReference.');
+        }
+
+        if (requestParameters.DocumentReferenceRequest === null || requestParameters.DocumentReferenceRequest === undefined) {
+            throw new runtime.RequiredError('DocumentReferenceRequest','Required parameter requestParameters.DocumentReferenceRequest was null or undefined when calling fullUpdateDocumentReference.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.format !== undefined) {
+            queryParameters['format'] = requestParameters.format;
+        }
+
+        if (requestParameters.ifcs) {
+            queryParameters['ifcs'] = requestParameters.ifcs;
+        }
+
+        if (requestParameters.models) {
+            queryParameters['models'] = requestParameters.models;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}/document_references`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.DocumentReferenceRequest.map(DocumentReferenceRequestToJSON),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentReferenceFromJSON));
+    }
+
+    /**
+     * This will replace every references by references passed in the body  Required scopes: bcf:write
+     * Add or update document references to a topic
+     */
+    async fullUpdateDocumentReference(guid: string, projects_pk: number, DocumentReferenceRequest: Array<DocumentReferenceRequest>, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<DocumentReference>> {
+        const response = await this.fullUpdateDocumentReferenceRaw({ guid: guid, projects_pk: projects_pk, DocumentReferenceRequest: DocumentReferenceRequest, format: format, ifcs: ifcs, models: models }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * This is not a standard route. You can update topic, viewpoints and comment is a signle call  Required scopes: bcf:write
      * Update all fields of a topic
      */
@@ -2398,6 +2553,72 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve all documents referenced by the topic  Required scopes: bcf:read
+     * Retrieve all documents referenced by the topic
+     */
+    async getDocumentReferencesRaw(requestParameters: GetDocumentReferencesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<DocumentReference>>> {
+        if (requestParameters.guid === null || requestParameters.guid === undefined) {
+            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getDocumentReferences.');
+        }
+
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getDocumentReferences.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.format !== undefined) {
+            queryParameters['format'] = requestParameters.format;
+        }
+
+        if (requestParameters.ifcs) {
+            queryParameters['ifcs'] = requestParameters.ifcs;
+        }
+
+        if (requestParameters.models) {
+            queryParameters['models'] = requestParameters.models;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}/document_references`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentReferenceFromJSON));
+    }
+
+    /**
+     * Retrieve all documents referenced by the topic  Required scopes: bcf:read
+     * Retrieve all documents referenced by the topic
+     */
+    async getDocumentReferences(guid: string, projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<DocumentReference>> {
+        const response = await this.getDocumentReferencesRaw({ guid: guid, projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve project extensions  Required scopes: bcf:read
      * Retrieve project extensions
      */
@@ -2870,72 +3091,6 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async getTopic(guid: string, projects_pk: number, initOverrides?: RequestInit): Promise<Topic> {
         const response = await this.getTopicRaw({ guid: guid, projects_pk: projects_pk }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
-     * Get all related documents
-     */
-    async getTopicDocumentReferencesRaw(requestParameters: GetTopicDocumentReferencesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<string>>> {
-        if (requestParameters.guid === null || requestParameters.guid === undefined) {
-            throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling getTopicDocumentReferences.');
-        }
-
-        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
-            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getTopicDocumentReferences.');
-        }
-
-        const queryParameters: any = {};
-
-        if (requestParameters.format !== undefined) {
-            queryParameters['format'] = requestParameters.format;
-        }
-
-        if (requestParameters.ifcs) {
-            queryParameters['ifcs'] = requestParameters.ifcs;
-        }
-
-        if (requestParameters.models) {
-            queryParameters['models'] = requestParameters.models;
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/bcf/2.1/projects/{projects_pk}/topics/{guid}/document_references`.replace(`{${"guid"}}`, encodeURIComponent(String(requestParameters.guid))).replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse<any>(response);
-    }
-
-    /**
-     * This feature is not supported yet and will always respond with an empty array  Required scopes: bcf:read
-     * Get all related documents
-     */
-    async getTopicDocumentReferences(guid: string, projects_pk: number, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<string>> {
-        const response = await this.getTopicDocumentReferencesRaw({ guid: guid, projects_pk: projects_pk, format: format, ifcs: ifcs, models: models }, initOverrides);
         return await response.value();
     }
 

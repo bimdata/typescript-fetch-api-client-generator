@@ -40,6 +40,8 @@ src/models/Direction.ts
 src/models/DirectionRequest.ts
 src/models/Document.ts
 src/models/DocumentPreviewFile.ts
+src/models/DocumentReference.ts
+src/models/DocumentReferenceRequest.ts
 src/models/DocumentText.ts
 src/models/DocumentWithElementList.ts
 src/models/Drawing.ts

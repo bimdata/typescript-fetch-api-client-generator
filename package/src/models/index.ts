@@ -35,6 +35,8 @@ export * from './Direction';
 export * from './DirectionRequest';
 export * from './Document';
 export * from './DocumentPreviewFile';
+export * from './DocumentReference';
+export * from './DocumentReferenceRequest';
 export * from './DocumentText';
 export * from './DocumentWithElementList';
 export * from './Drawing';
