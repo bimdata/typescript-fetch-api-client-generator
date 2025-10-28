@@ -105,12 +105,21 @@ import {
     ModelFiles,
     ModelFilesFromJSON,
     ModelFilesToJSON,
+    ModelInModelPosition,
+    ModelInModelPositionFromJSON,
+    ModelInModelPositionToJSON,
     ModelLabel,
     ModelLabelFromJSON,
     ModelLabelToJSON,
     ModelLabelRequest,
     ModelLabelRequestFromJSON,
     ModelLabelRequestToJSON,
+    ModelOnModelPosition,
+    ModelOnModelPositionFromJSON,
+    ModelOnModelPositionToJSON,
+    ModelOnModelPositionRequest,
+    ModelOnModelPositionRequestFromJSON,
+    ModelOnModelPositionRequestToJSON,
     PatchedDrawingRequest,
     PatchedDrawingRequestFromJSON,
     PatchedDrawingRequestToJSON,
@@ -129,6 +138,9 @@ import {
     PatchedModelLabelRequest,
     PatchedModelLabelRequestFromJSON,
     PatchedModelLabelRequestToJSON,
+    PatchedModelOnModelPositionRequest,
+    PatchedModelOnModelPositionRequestFromJSON,
+    PatchedModelOnModelPositionRequestToJSON,
     PatchedModelRequest,
     PatchedModelRequestFromJSON,
     PatchedModelRequestToJSON,
@@ -523,6 +535,14 @@ export interface CreatePhotosphereBuildingRequest {
     CreateBuildingByNameRequest: CreateBuildingByNameRequest;
 }
 
+export interface CreatePostionedModelRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+    ModelOnModelPositionRequest: ModelOnModelPositionRequest;
+}
+
 export interface CreatePropertySetRequest {
     cloud_pk: number;
     model_pk: number;
@@ -690,6 +710,13 @@ export interface DeleteModelUnitRequest {
 export interface DeleteModelWithoutDocRequest {
     cloud_pk: number;
     id: number;
+    project_pk: number;
+}
+
+export interface DeletePostionedModelRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
     project_pk: number;
 }
 
@@ -1040,6 +1067,20 @@ export interface GetModelsRequest {
     type?: Array<GetModelsTypeEnum>;
 }
 
+export interface GetPostionedModelRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+}
+
+export interface GetPostionedModelsRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+}
+
 export interface GetProcessorHandlerRequest {
     cloud_pk: number;
     id: number;
@@ -1204,6 +1245,15 @@ export interface ListClassificationElementRelationsRequest {
     cloud_pk: number;
     model_pk: number;
     project_pk: number;
+}
+
+export interface ListModelsPositionedInRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    source?: ListModelsPositionedInSourceEnum;
+    status?: Array<ListModelsPositionedInStatusEnum>;
+    type?: Array<ListModelsPositionedInTypeEnum>;
 }
 
 export interface MergeIfcsRequest {
@@ -1440,6 +1490,14 @@ export interface UpdateOrderStoreysRequest {
     model_pk: number;
     project_pk: number;
     request_body: Array<string>;
+}
+
+export interface UpdatePostionedModelRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+    PatchedModelOnModelPositionRequest?: PatchedModelOnModelPositionRequest;
 }
 
 export interface UpdateProcessorHandlerRequest {
@@ -3852,6 +3910,75 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * Add a child model and it\'s position on the model  Required scopes: ifc:write, model:write
+     * Add a child model and it\'s position on the model
+     */
+    async createPostionedModelRaw(requestParameters: CreatePostionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelOnModelPosition>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createPostionedModel.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createPostionedModel.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createPostionedModel.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createPostionedModel.');
+        }
+
+        if (requestParameters.ModelOnModelPositionRequest === null || requestParameters.ModelOnModelPositionRequest === undefined) {
+            throw new runtime.RequiredError('ModelOnModelPositionRequest','Required parameter requestParameters.ModelOnModelPositionRequest was null or undefined when calling createPostionedModel.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/positioned-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ModelOnModelPositionRequestToJSON(requestParameters.ModelOnModelPositionRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelOnModelPositionFromJSON(jsonValue));
+    }
+
+    /**
+     * Add a child model and it\'s position on the model  Required scopes: ifc:write, model:write
+     * Add a child model and it\'s position on the model
+     */
+    async createPostionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, ModelOnModelPositionRequest: ModelOnModelPositionRequest, initOverrides?: RequestInit): Promise<ModelOnModelPosition> {
+        const response = await this.createPostionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, ModelOnModelPositionRequest: ModelOnModelPositionRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create one or many PropertySet
      */
@@ -5386,6 +5513,67 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async deleteModelWithoutDoc(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
         await this.deleteModelWithoutDocRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+    }
+
+    /**
+     * Remove a child model and its position from the model  Required scopes: ifc:write, model:write
+     * Remove a child model and its position from the model
+     */
+    async deletePostionedModelRaw(requestParameters: DeletePostionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deletePostionedModel.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePostionedModel.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deletePostionedModel.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deletePostionedModel.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/positioned-model/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Remove a child model and its position from the model  Required scopes: ifc:write, model:write
+     * Remove a child model and its position from the model
+     */
+    async deletePostionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deletePostionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -8373,6 +8561,130 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve one specific child model & position on the model  Required scopes: ifc:read, model:read
+     * Retrieve one specific child model & position on the model
+     */
+    async getPostionedModelRaw(requestParameters: GetPostionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelOnModelPosition>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getPostionedModel.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPostionedModel.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getPostionedModel.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getPostionedModel.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/positioned-model/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelOnModelPositionFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve one specific child model & position on the model  Required scopes: ifc:read, model:read
+     * Retrieve one specific child model & position on the model
+     */
+    async getPostionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<ModelOnModelPosition> {
+        const response = await this.getPostionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all postitionned child model & positions on the model  Required scopes: ifc:read, model:read
+     * Retrieve all positioned child model & positions on the model
+     */
+    async getPostionedModelsRaw(requestParameters: GetPostionedModelsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ModelOnModelPosition>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getPostionedModels.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPostionedModels.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getPostionedModels.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getPostionedModels.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/positioned-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ModelOnModelPositionFromJSON));
+    }
+
+    /**
+     * Retrieve all postitionned child model & positions on the model  Required scopes: ifc:read, model:read
+     * Retrieve all positioned child model & positions on the model
+     */
+    async getPostionedModels(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ModelOnModelPosition>> {
+        const response = await this.getPostionedModelsRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve a processor handler  Required scopes: ifc:read, model:read
      * Retrieve a processor handler
      */
@@ -9817,6 +10129,76 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async listClassificationElementRelations(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ElementClassificationRelation>> {
         const response = await this.listClassificationElementRelationsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * List all models where the model is positioned in.
+     * List all models where the model is positioned in
+     */
+    async listModelsPositionedInRaw(requestParameters: ListModelsPositionedInRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ModelInModelPosition>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling listModelsPositionedIn.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling listModelsPositionedIn.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling listModelsPositionedIn.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.source !== undefined) {
+            queryParameters['source'] = requestParameters.source;
+        }
+
+        if (requestParameters.status) {
+            queryParameters['status'] = requestParameters.status;
+        }
+
+        if (requestParameters.type) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{id}/positioned-in`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ModelInModelPositionFromJSON));
+    }
+
+    /**
+     * List all models where the model is positioned in.
+     * List all models where the model is positioned in
+     */
+    async listModelsPositionedIn(cloud_pk: number, id: number, project_pk: number, source?: ListModelsPositionedInSourceEnum, status?: Array<ListModelsPositionedInStatusEnum>, type?: Array<ListModelsPositionedInTypeEnum>, initOverrides?: RequestInit): Promise<Array<ModelInModelPosition>> {
+        const response = await this.listModelsPositionedInRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, source: source, status: status, type: type }, initOverrides);
         return await response.value();
     }
 
@@ -11767,6 +12149,71 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * Update the position of a child model on the model  Required scopes: ifc:write, model:write
+     * Update the position of a child model on the model
+     */
+    async updatePostionedModelRaw(requestParameters: UpdatePostionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelOnModelPosition>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updatePostionedModel.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePostionedModel.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updatePostionedModel.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updatePostionedModel.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/positioned-model/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedModelOnModelPositionRequestToJSON(requestParameters.PatchedModelOnModelPositionRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelOnModelPositionFromJSON(jsonValue));
+    }
+
+    /**
+     * Update the position of a child model on the model  Required scopes: ifc:write, model:write
+     * Update the position of a child model on the model
+     */
+    async updatePostionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedModelOnModelPositionRequest?: PatchedModelOnModelPositionRequest, initOverrides?: RequestInit): Promise<ModelOnModelPosition> {
+        const response = await this.updatePostionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedModelOnModelPositionRequest: PatchedModelOnModelPositionRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Update the status of a processor handler  Required scopes: ifc:write, model:write
      * Update the status of a processor handler
      */
@@ -12345,4 +12792,46 @@ export enum GetModelsTypeEnum {
 export enum GetTilesetTileFormatEnum {
     Pnts = 'pnts',
     Xkt = 'xkt'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum ListModelsPositionedInSourceEnum {
+    Export = 'EXPORT',
+    Merge = 'MERGE',
+    Optimized = 'OPTIMIZED',
+    Split = 'SPLIT',
+    Upload = 'UPLOAD'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum ListModelsPositionedInStatusEnum {
+    C = 'C',
+    D = 'D',
+    E = 'E',
+    I = 'I',
+    P = 'P',
+    W = 'W',
+    X = 'X'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum ListModelsPositionedInTypeEnum {
+    Dwg = 'DWG',
+    Dxf = 'DXF',
+    Gltf = 'GLTF',
+    Ifc = 'IFC',
+    Jpeg = 'JPEG',
+    Metabuilding = 'METABUILDING',
+    Obj = 'OBJ',
+    Pdf = 'PDF',
+    Photosphere = 'PHOTOSPHERE',
+    PhotosphereBuilding = 'PHOTOSPHERE_BUILDING',
+    Png = 'PNG',
+    PointCloud = 'POINT_CLOUD'
 }

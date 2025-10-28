@@ -26,11 +26,11 @@ export interface PatchedDocumentTextRequest {
      */
     text?: string | null;
     /**
-     * * `spanish` - spanish
-     * * `french` - french
      * * `german` - german
-     * * `english` - english
+     * * `french` - french
+     * * `spanish` - spanish
      * * `italian` - italian
+     * * `english` - english
      * @type {string}
      * @memberof PatchedDocumentTextRequest
      */
@@ -42,11 +42,11 @@ export interface PatchedDocumentTextRequest {
 * @enum {string}
 */
 export enum PatchedDocumentTextRequestLanguageEnum {
-    Spanish = 'spanish',
-    French = 'french',
     German = 'german',
-    English = 'english',
+    French = 'french',
+    Spanish = 'spanish',
     Italian = 'italian',
+    English = 'english',
     Null = 'null'
 }
 

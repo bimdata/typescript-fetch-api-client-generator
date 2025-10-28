@@ -100,8 +100,11 @@ src/models/ModelDocumentRequest.ts
 src/models/ModelErrors.ts
 src/models/ModelErrorsRequest.ts
 src/models/ModelFiles.ts
+src/models/ModelInModelPosition.ts
 src/models/ModelLabel.ts
 src/models/ModelLabelRequest.ts
+src/models/ModelOnModelPosition.ts
+src/models/ModelOnModelPositionRequest.ts
 src/models/ModelSerializerWithoutChildren.ts
 src/models/ModelWithPositioningPlan.ts
 src/models/Organization.ts
@@ -125,6 +128,7 @@ src/models/PatchedIfcAccessTokenRequest.ts
 src/models/PatchedLayerRequest.ts
 src/models/PatchedMask2DRequest.ts
 src/models/PatchedModelLabelRequest.ts
+src/models/PatchedModelOnModelPositionRequest.ts
 src/models/PatchedModelRequest.ts
 src/models/PatchedPinRequest.ts
 src/models/PatchedPositioningPlanRequest.ts

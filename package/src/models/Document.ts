@@ -87,6 +87,12 @@ export interface Document {
      */
     file: string;
     /**
+     * Lower case file extension
+     * @type {string}
+     * @memberof Document
+     */
+    readonly file_type: string | null;
+    /**
      * Size of the file.
      * @type {number}
      * @memberof Document
@@ -215,6 +221,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'file_name': !exists(json, 'file_name') ? undefined : json['file_name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'file': json['file'],
+        'file_type': json['file_type'],
         'size': json['size'],
         'tags': ((json['tags'] as Array<any>).map(TagFromJSON)),
         'visas': ((json['visas'] as Array<any>).map(VisaFromJSON)),
