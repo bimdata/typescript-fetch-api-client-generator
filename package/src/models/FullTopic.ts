@@ -169,6 +169,12 @@ export interface FullTopic {
      * @memberof FullTopic
      */
     bimdata_viewer_layout?: any | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof FullTopic
+     */
+    groups?: Array<number>;
 }
 
 export function FullTopicFromJSON(json: any): FullTopic {
@@ -203,6 +209,7 @@ export function FullTopicFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'comments': !exists(json, 'comments') ? undefined : ((json['comments'] as Array<any>).map(CommentFromJSON)),
         'viewpoints': !exists(json, 'viewpoints') ? undefined : ((json['viewpoints'] as Array<any>).map(ViewpointFromJSON)),
         'bimdata_viewer_layout': !exists(json, 'bimdata_viewer_layout') ? undefined : json['bimdata_viewer_layout'],
+        'groups': !exists(json, 'groups') ? undefined : json['groups'],
     };
 }
 
@@ -236,6 +243,7 @@ export function FullTopicToJSON(value?: FullTopic | null): any {
         'comments': value.comments === undefined ? undefined : ((value.comments as Array<any>).map(CommentToJSON)),
         'viewpoints': value.viewpoints === undefined ? undefined : ((value.viewpoints as Array<any>).map(ViewpointToJSON)),
         'bimdata_viewer_layout': value.bimdata_viewer_layout,
+        'groups': value.groups,
     };
 }
 

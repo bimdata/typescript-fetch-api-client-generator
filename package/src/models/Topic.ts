@@ -144,6 +144,12 @@ export interface Topic {
      * @memberof Topic
      */
     bimdata_viewer_layout?: any | null;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof Topic
+     */
+    groups?: Array<number>;
 }
 
 export function TopicFromJSON(json: any): Topic {
@@ -176,6 +182,7 @@ export function TopicFromJSONTyped(json: any, ignoreDiscriminator: boolean): Top
         'format': !exists(json, 'format') ? undefined : json['format'],
         'index': !exists(json, 'index') ? undefined : json['index'],
         'bimdata_viewer_layout': !exists(json, 'bimdata_viewer_layout') ? undefined : json['bimdata_viewer_layout'],
+        'groups': !exists(json, 'groups') ? undefined : json['groups'],
     };
 }
 
@@ -207,6 +214,7 @@ export function TopicToJSON(value?: Topic | null): any {
         'format': value.format,
         'index': value.index,
         'bimdata_viewer_layout': value.bimdata_viewer_layout,
+        'groups': value.groups,
     };
 }
 
