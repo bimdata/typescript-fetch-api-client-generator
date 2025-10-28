@@ -99,7 +99,7 @@ export * from './ModelInModelPosition';
 export * from './ModelLabel';
 export * from './ModelLabelRequest';
 export * from './ModelOnModelPosition';
-export * from './ModelOnModelPositionRequest';
+export * from './ModelOnModelPositionCreationRequest';
 export * from './ModelSerializerWithoutChildren';
 export * from './ModelWithPositioningPlan';
 export * from './Organization';

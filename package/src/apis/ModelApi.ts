@@ -117,9 +117,9 @@ import {
     ModelOnModelPosition,
     ModelOnModelPositionFromJSON,
     ModelOnModelPositionToJSON,
-    ModelOnModelPositionRequest,
-    ModelOnModelPositionRequestFromJSON,
-    ModelOnModelPositionRequestToJSON,
+    ModelOnModelPositionCreationRequest,
+    ModelOnModelPositionCreationRequestFromJSON,
+    ModelOnModelPositionCreationRequestToJSON,
     PatchedDrawingRequest,
     PatchedDrawingRequestFromJSON,
     PatchedDrawingRequestToJSON,
@@ -535,12 +535,11 @@ export interface CreatePhotosphereBuildingRequest {
     CreateBuildingByNameRequest: CreateBuildingByNameRequest;
 }
 
-export interface CreatePostionedModelRequest {
+export interface CreatePositionedModelRequest {
     cloud_pk: number;
-    id: number;
     model_pk: number;
     project_pk: number;
-    ModelOnModelPositionRequest: ModelOnModelPositionRequest;
+    ModelOnModelPositionCreationRequest: ModelOnModelPositionCreationRequest;
 }
 
 export interface CreatePropertySetRequest {
@@ -713,7 +712,7 @@ export interface DeleteModelWithoutDocRequest {
     project_pk: number;
 }
 
-export interface DeletePostionedModelRequest {
+export interface DeletePositionedModelRequest {
     cloud_pk: number;
     id: number;
     model_pk: number;
@@ -1067,16 +1066,15 @@ export interface GetModelsRequest {
     type?: Array<GetModelsTypeEnum>;
 }
 
-export interface GetPostionedModelRequest {
+export interface GetPositionedModelRequest {
     cloud_pk: number;
     id: number;
     model_pk: number;
     project_pk: number;
 }
 
-export interface GetPostionedModelsRequest {
+export interface GetPositionedModelsRequest {
     cloud_pk: number;
-    id: number;
     model_pk: number;
     project_pk: number;
 }
@@ -1251,9 +1249,6 @@ export interface ListModelsPositionedInRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    source?: ListModelsPositionedInSourceEnum;
-    status?: Array<ListModelsPositionedInStatusEnum>;
-    type?: Array<ListModelsPositionedInTypeEnum>;
 }
 
 export interface MergeIfcsRequest {
@@ -1492,7 +1487,7 @@ export interface UpdateOrderStoreysRequest {
     request_body: Array<string>;
 }
 
-export interface UpdatePostionedModelRequest {
+export interface UpdatePositionedModelRequest {
     cloud_pk: number;
     id: number;
     model_pk: number;
@@ -3913,25 +3908,21 @@ export class ModelApi extends runtime.BaseAPI {
      * Add a child model and it\'s position on the model  Required scopes: ifc:write, model:write
      * Add a child model and it\'s position on the model
      */
-    async createPostionedModelRaw(requestParameters: CreatePostionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelOnModelPosition>> {
+    async createPositionedModelRaw(requestParameters: CreatePositionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelOnModelPosition>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createPostionedModel.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling createPostionedModel.');
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createPositionedModel.');
         }
 
         if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
-            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createPostionedModel.');
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createPositionedModel.');
         }
 
         if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createPostionedModel.');
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createPositionedModel.');
         }
 
-        if (requestParameters.ModelOnModelPositionRequest === null || requestParameters.ModelOnModelPositionRequest === undefined) {
-            throw new runtime.RequiredError('ModelOnModelPositionRequest','Required parameter requestParameters.ModelOnModelPositionRequest was null or undefined when calling createPostionedModel.');
+        if (requestParameters.ModelOnModelPositionCreationRequest === null || requestParameters.ModelOnModelPositionCreationRequest === undefined) {
+            throw new runtime.RequiredError('ModelOnModelPositionCreationRequest','Required parameter requestParameters.ModelOnModelPositionCreationRequest was null or undefined when calling createPositionedModel.');
         }
 
         const queryParameters: any = {};
@@ -3959,11 +3950,11 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/positioned-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/positioned-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: ModelOnModelPositionRequestToJSON(requestParameters.ModelOnModelPositionRequest),
+            body: ModelOnModelPositionCreationRequestToJSON(requestParameters.ModelOnModelPositionCreationRequest),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ModelOnModelPositionFromJSON(jsonValue));
@@ -3973,8 +3964,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Add a child model and it\'s position on the model  Required scopes: ifc:write, model:write
      * Add a child model and it\'s position on the model
      */
-    async createPostionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, ModelOnModelPositionRequest: ModelOnModelPositionRequest, initOverrides?: RequestInit): Promise<ModelOnModelPosition> {
-        const response = await this.createPostionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, ModelOnModelPositionRequest: ModelOnModelPositionRequest }, initOverrides);
+    async createPositionedModel(cloud_pk: number, model_pk: number, project_pk: number, ModelOnModelPositionCreationRequest: ModelOnModelPositionCreationRequest, initOverrides?: RequestInit): Promise<ModelOnModelPosition> {
+        const response = await this.createPositionedModelRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ModelOnModelPositionCreationRequest: ModelOnModelPositionCreationRequest }, initOverrides);
         return await response.value();
     }
 
@@ -5519,21 +5510,21 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove a child model and its position from the model  Required scopes: ifc:write, model:write
      * Remove a child model and its position from the model
      */
-    async deletePostionedModelRaw(requestParameters: DeletePostionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async deletePositionedModelRaw(requestParameters: DeletePositionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deletePostionedModel.');
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deletePositionedModel.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePostionedModel.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deletePositionedModel.');
         }
 
         if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
-            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deletePostionedModel.');
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deletePositionedModel.');
         }
 
         if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deletePostionedModel.');
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deletePositionedModel.');
         }
 
         const queryParameters: any = {};
@@ -5572,8 +5563,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Remove a child model and its position from the model  Required scopes: ifc:write, model:write
      * Remove a child model and its position from the model
      */
-    async deletePostionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deletePostionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    async deletePositionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deletePositionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -8564,21 +8555,21 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one specific child model & position on the model  Required scopes: ifc:read, model:read
      * Retrieve one specific child model & position on the model
      */
-    async getPostionedModelRaw(requestParameters: GetPostionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelOnModelPosition>> {
+    async getPositionedModelRaw(requestParameters: GetPositionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelOnModelPosition>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getPostionedModel.');
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getPositionedModel.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPostionedModel.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPositionedModel.');
         }
 
         if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
-            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getPostionedModel.');
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getPositionedModel.');
         }
 
         if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getPostionedModel.');
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getPositionedModel.');
         }
 
         const queryParameters: any = {};
@@ -8617,30 +8608,26 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve one specific child model & position on the model  Required scopes: ifc:read, model:read
      * Retrieve one specific child model & position on the model
      */
-    async getPostionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<ModelOnModelPosition> {
-        const response = await this.getPostionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    async getPositionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<ModelOnModelPosition> {
+        const response = await this.getPositionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
     /**
-     * Retrieve all postitionned child model & positions on the model  Required scopes: ifc:read, model:read
+     * Retrieve all positioned child model & positions on the model  Required scopes: ifc:read, model:read
      * Retrieve all positioned child model & positions on the model
      */
-    async getPostionedModelsRaw(requestParameters: GetPostionedModelsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ModelOnModelPosition>>> {
+    async getPositionedModelsRaw(requestParameters: GetPositionedModelsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ModelOnModelPosition>>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getPostionedModels.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getPostionedModels.');
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getPositionedModels.');
         }
 
         if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
-            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getPostionedModels.');
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getPositionedModels.');
         }
 
         if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getPostionedModels.');
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getPositionedModels.');
         }
 
         const queryParameters: any = {};
@@ -8666,7 +8653,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/positioned-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/positioned-model`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -8676,11 +8663,11 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve all postitionned child model & positions on the model  Required scopes: ifc:read, model:read
+     * Retrieve all positioned child model & positions on the model  Required scopes: ifc:read, model:read
      * Retrieve all positioned child model & positions on the model
      */
-    async getPostionedModels(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ModelOnModelPosition>> {
-        const response = await this.getPostionedModelsRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+    async getPositionedModels(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ModelOnModelPosition>> {
+        const response = await this.getPositionedModelsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -10151,18 +10138,6 @@ export class ModelApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
-        if (requestParameters.source !== undefined) {
-            queryParameters['source'] = requestParameters.source;
-        }
-
-        if (requestParameters.status) {
-            queryParameters['status'] = requestParameters.status;
-        }
-
-        if (requestParameters.type) {
-            queryParameters['type'] = requestParameters.type;
-        }
-
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -10197,8 +10172,8 @@ export class ModelApi extends runtime.BaseAPI {
      * List all models where the model is positioned in.
      * List all models where the model is positioned in
      */
-    async listModelsPositionedIn(cloud_pk: number, id: number, project_pk: number, source?: ListModelsPositionedInSourceEnum, status?: Array<ListModelsPositionedInStatusEnum>, type?: Array<ListModelsPositionedInTypeEnum>, initOverrides?: RequestInit): Promise<Array<ModelInModelPosition>> {
-        const response = await this.listModelsPositionedInRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, source: source, status: status, type: type }, initOverrides);
+    async listModelsPositionedIn(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ModelInModelPosition>> {
+        const response = await this.listModelsPositionedInRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -12152,21 +12127,21 @@ export class ModelApi extends runtime.BaseAPI {
      * Update the position of a child model on the model  Required scopes: ifc:write, model:write
      * Update the position of a child model on the model
      */
-    async updatePostionedModelRaw(requestParameters: UpdatePostionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelOnModelPosition>> {
+    async updatePositionedModelRaw(requestParameters: UpdatePositionedModelRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelOnModelPosition>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updatePostionedModel.');
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updatePositionedModel.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePostionedModel.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updatePositionedModel.');
         }
 
         if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
-            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updatePostionedModel.');
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updatePositionedModel.');
         }
 
         if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updatePostionedModel.');
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updatePositionedModel.');
         }
 
         const queryParameters: any = {};
@@ -12208,8 +12183,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Update the position of a child model on the model  Required scopes: ifc:write, model:write
      * Update the position of a child model on the model
      */
-    async updatePostionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedModelOnModelPositionRequest?: PatchedModelOnModelPositionRequest, initOverrides?: RequestInit): Promise<ModelOnModelPosition> {
-        const response = await this.updatePostionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedModelOnModelPositionRequest: PatchedModelOnModelPositionRequest }, initOverrides);
+    async updatePositionedModel(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedModelOnModelPositionRequest?: PatchedModelOnModelPositionRequest, initOverrides?: RequestInit): Promise<ModelOnModelPosition> {
+        const response = await this.updatePositionedModelRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedModelOnModelPositionRequest: PatchedModelOnModelPositionRequest }, initOverrides);
         return await response.value();
     }
 
@@ -12792,46 +12767,4 @@ export enum GetModelsTypeEnum {
 export enum GetTilesetTileFormatEnum {
     Pnts = 'pnts',
     Xkt = 'xkt'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ListModelsPositionedInSourceEnum {
-    Export = 'EXPORT',
-    Merge = 'MERGE',
-    Optimized = 'OPTIMIZED',
-    Split = 'SPLIT',
-    Upload = 'UPLOAD'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ListModelsPositionedInStatusEnum {
-    C = 'C',
-    D = 'D',
-    E = 'E',
-    I = 'I',
-    P = 'P',
-    W = 'W',
-    X = 'X'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ListModelsPositionedInTypeEnum {
-    Dwg = 'DWG',
-    Dxf = 'DXF',
-    Gltf = 'GLTF',
-    Ifc = 'IFC',
-    Jpeg = 'JPEG',
-    Metabuilding = 'METABUILDING',
-    Obj = 'OBJ',
-    Pdf = 'PDF',
-    Photosphere = 'PHOTOSPHERE',
-    PhotosphereBuilding = 'PHOTOSPHERE_BUILDING',
-    Png = 'PNG',
-    PointCloud = 'POINT_CLOUD'
 }

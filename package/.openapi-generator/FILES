@@ -104,7 +104,7 @@ src/models/ModelInModelPosition.ts
 src/models/ModelLabel.ts
 src/models/ModelLabelRequest.ts
 src/models/ModelOnModelPosition.ts
-src/models/ModelOnModelPositionRequest.ts
+src/models/ModelOnModelPositionCreationRequest.ts
 src/models/ModelSerializerWithoutChildren.ts
 src/models/ModelWithPositioningPlan.ts
 src/models/Organization.ts

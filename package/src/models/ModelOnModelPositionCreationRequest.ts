@@ -16,32 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface ModelOnModelPositionRequest
+ * @interface ModelOnModelPositionCreationRequest
  */
-export interface ModelOnModelPositionRequest {
+export interface ModelOnModelPositionCreationRequest {
+    /**
+     * The model that is positioned on the reference model
+     * @type {number}
+     * @memberof ModelOnModelPositionCreationRequest
+     */
+    positioned_model: number;
     /**
      * Must be an array [x,y,z] of the position of the positioned model in reference model coordinates
      * @type {Array<number>}
-     * @memberof ModelOnModelPositionRequest
+     * @memberof ModelOnModelPositionCreationRequest
      */
     position: Array<number>;
 }
 
-export function ModelOnModelPositionRequestFromJSON(json: any): ModelOnModelPositionRequest {
-    return ModelOnModelPositionRequestFromJSONTyped(json, false);
+export function ModelOnModelPositionCreationRequestFromJSON(json: any): ModelOnModelPositionCreationRequest {
+    return ModelOnModelPositionCreationRequestFromJSONTyped(json, false);
 }
 
-export function ModelOnModelPositionRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): ModelOnModelPositionRequest {
+export function ModelOnModelPositionCreationRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): ModelOnModelPositionCreationRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
+        'positioned_model': json['positioned_model'],
         'position': json['position'],
     };
 }
 
-export function ModelOnModelPositionRequestToJSON(value?: ModelOnModelPositionRequest | null): any {
+export function ModelOnModelPositionCreationRequestToJSON(value?: ModelOnModelPositionCreationRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -50,6 +57,7 @@ export function ModelOnModelPositionRequestToJSON(value?: ModelOnModelPositionRe
     }
     return {
         
+        'positioned_model': value.positioned_model,
         'position': value.position,
     };
 }
