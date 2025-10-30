@@ -1096,9 +1096,6 @@ export interface GetPropertiesTypesRequest {
     cloud_pk: number;
     model_pk: number;
     project_pk: number;
-    classification?: string;
-    classification__notation?: string;
-    property_filter?: string;
     type?: string;
 }
 
@@ -8810,18 +8807,6 @@ export class ModelApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
-        if (requestParameters.classification !== undefined) {
-            queryParameters['classification'] = requestParameters.classification;
-        }
-
-        if (requestParameters.classification__notation !== undefined) {
-            queryParameters['classification__notation'] = requestParameters.classification__notation;
-        }
-
-        if (requestParameters.property_filter !== undefined) {
-            queryParameters['property_filter'] = requestParameters.property_filter;
-        }
-
         if (requestParameters.type !== undefined) {
             queryParameters['type'] = requestParameters.type;
         }
@@ -8860,8 +8845,8 @@ export class ModelApi extends runtime.BaseAPI {
      * Retrieve all property types and their value type used in this model  Required scopes: ifc:read, model:read
      * Retrieve all property types and their value type used in this model
      */
-    async getPropertiesTypes(cloud_pk: number, model_pk: number, project_pk: number, classification?: string, classification__notation?: string, property_filter?: string, type?: string, initOverrides?: RequestInit): Promise<Array<PropertyList>> {
-        const response = await this.getPropertiesTypesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, classification: classification, classification__notation: classification__notation, property_filter: property_filter, type: type }, initOverrides);
+    async getPropertiesTypes(cloud_pk: number, model_pk: number, project_pk: number, type?: string, initOverrides?: RequestInit): Promise<Array<PropertyList>> {
+        const response = await this.getPropertiesTypesRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, type: type }, initOverrides);
         return await response.value();
     }
 

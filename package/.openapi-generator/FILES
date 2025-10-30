@@ -26,6 +26,8 @@ src/models/Coloring.ts
 src/models/ColoringDefinition.ts
 src/models/ColoringRequest.ts
 src/models/Comment.ts
+src/models/CommentEvent.ts
+src/models/CommentEventAction.ts
 src/models/CommentRequest.ts
 src/models/Component.ts
 src/models/ComponentRequest.ts
@@ -235,6 +237,8 @@ src/models/Tag.ts
 src/models/TagIdRequest.ts
 src/models/TagRequest.ts
 src/models/Topic.ts
+src/models/TopicEvent.ts
+src/models/TopicEventAction.ts
 src/models/TopicPin.ts
 src/models/TopicRequest.ts
 src/models/TopicStatus.ts

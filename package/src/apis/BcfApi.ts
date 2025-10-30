@@ -36,6 +36,9 @@ import {
     Comment,
     CommentFromJSON,
     CommentToJSON,
+    CommentEvent,
+    CommentEventFromJSON,
+    CommentEventToJSON,
     CommentRequest,
     CommentRequestFromJSON,
     CommentRequestToJSON,
@@ -117,6 +120,9 @@ import {
     Topic,
     TopicFromJSON,
     TopicToJSON,
+    TopicEvent,
+    TopicEventFromJSON,
+    TopicEventToJSON,
     TopicPin,
     TopicPinFromJSON,
     TopicPinToJSON,
@@ -339,6 +345,12 @@ export interface GetCommentsRequest {
     $orderby?: string;
 }
 
+export interface GetCommentsEventsRequest {
+    projects_pk: number;
+    $filter?: string;
+    $orderby?: string;
+}
+
 export interface GetDetailedExtensionsRequest {
     id: number;
 }
@@ -415,6 +427,12 @@ export interface GetTopicsRequest {
     format?: string;
     ifcs?: Array<number>;
     models?: Array<number>;
+}
+
+export interface GetTopicsEventsRequest {
+    projects_pk: number;
+    $filter?: string;
+    $orderby?: string;
 }
 
 export interface GetTopicsPinsRequest {
@@ -2503,6 +2521,64 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
+     * Get comments events  Required scopes: bcf:read
+     * Get comments events
+     */
+    async getCommentsEventsRaw(requestParameters: GetCommentsEventsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<CommentEvent>>> {
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getCommentsEvents.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.$filter !== undefined) {
+            queryParameters['$filter'] = requestParameters.$filter;
+        }
+
+        if (requestParameters.$orderby !== undefined) {
+            queryParameters['$orderby'] = requestParameters.$orderby;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/comments/events`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CommentEventFromJSON));
+    }
+
+    /**
+     * Get comments events  Required scopes: bcf:read
+     * Get comments events
+     */
+    async getCommentsEvents(projects_pk: number, $filter?: string, $orderby?: string, initOverrides?: RequestInit): Promise<Array<CommentEvent>> {
+        const response = await this.getCommentsEventsRaw({ projects_pk: projects_pk, $filter: $filter, $orderby: $orderby }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * This is not a standard route. Retrieve project detailed extensions  Required scopes: bcf:read
      * Retrieve project detailed extensions
      */
@@ -3219,6 +3295,64 @@ export class BcfApi extends runtime.BaseAPI {
      */
     async getTopics(projects_pk: number, $filter?: string, $orderby?: string, format?: string, ifcs?: Array<number>, models?: Array<number>, initOverrides?: RequestInit): Promise<Array<Topic>> {
         const response = await this.getTopicsRaw({ projects_pk: projects_pk, $filter: $filter, $orderby: $orderby, format: format, ifcs: ifcs, models: models }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get topics events  Required scopes: bcf:read
+     * Get topics events
+     */
+    async getTopicsEventsRaw(requestParameters: GetTopicsEventsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<TopicEvent>>> {
+        if (requestParameters.projects_pk === null || requestParameters.projects_pk === undefined) {
+            throw new runtime.RequiredError('projects_pk','Required parameter requestParameters.projects_pk was null or undefined when calling getTopicsEvents.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.$filter !== undefined) {
+            queryParameters['$filter'] = requestParameters.$filter;
+        }
+
+        if (requestParameters.$orderby !== undefined) {
+            queryParameters['$orderby'] = requestParameters.$orderby;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{projects_pk}/topics/events`.replace(`{${"projects_pk"}}`, encodeURIComponent(String(requestParameters.projects_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TopicEventFromJSON));
+    }
+
+    /**
+     * Get topics events  Required scopes: bcf:read
+     * Get topics events
+     */
+    async getTopicsEvents(projects_pk: number, $filter?: string, $orderby?: string, initOverrides?: RequestInit): Promise<Array<TopicEvent>> {
+        const response = await this.getTopicsEventsRaw({ projects_pk: projects_pk, $filter: $filter, $orderby: $orderby }, initOverrides);
         return await response.value();
     }
 
