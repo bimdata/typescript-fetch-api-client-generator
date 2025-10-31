@@ -12741,7 +12741,6 @@ export enum GetModelsTypeEnum {
     Obj = 'OBJ',
     Pdf = 'PDF',
     Photosphere = 'PHOTOSPHERE',
-    Photosphere = 'PHOTOSPHERE',
     PhotosphereBuilding = 'PHOTOSPHERE_BUILDING',
     Png = 'PNG',
     PointCloud = 'POINT_CLOUD'
