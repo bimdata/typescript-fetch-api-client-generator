@@ -26,6 +26,12 @@ export interface GroupRequest {
      */
     name: string;
     /**
+     * Short name of the group
+     * @type {string}
+     * @memberof GroupRequest
+     */
+    short_name?: string | null;
+    /**
      * 
      * @type {string}
      * @memberof GroupRequest
@@ -44,6 +50,7 @@ export function GroupRequestFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return {
         
         'name': json['name'],
+        'short_name': !exists(json, 'short_name') ? undefined : json['short_name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
     };
 }
@@ -58,6 +65,7 @@ export function GroupRequestToJSON(value?: GroupRequest | null): any {
     return {
         
         'name': value.name,
+        'short_name': value.short_name,
         'color': value.color,
     };
 }

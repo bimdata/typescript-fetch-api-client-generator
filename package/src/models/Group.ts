@@ -39,6 +39,12 @@ export interface Group {
      */
     name: string;
     /**
+     * Short name of the group
+     * @type {string}
+     * @memberof Group
+     */
+    short_name?: string | null;
+    /**
      * 
      * @type {string}
      * @memberof Group
@@ -64,6 +70,7 @@ export function GroupFromJSONTyped(json: any, ignoreDiscriminator: boolean): Gro
         
         'id': json['id'],
         'name': json['name'],
+        'short_name': !exists(json, 'short_name') ? undefined : json['short_name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
         'members': ((json['members'] as Array<any>).map(UserProjectFromJSON)),
     };
@@ -79,6 +86,7 @@ export function GroupToJSON(value?: Group | null): any {
     return {
         
         'name': value.name,
+        'short_name': value.short_name,
         'color': value.color,
     };
 }

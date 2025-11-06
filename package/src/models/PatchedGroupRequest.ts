@@ -26,6 +26,12 @@ export interface PatchedGroupRequest {
      */
     name?: string;
     /**
+     * Short name of the group
+     * @type {string}
+     * @memberof PatchedGroupRequest
+     */
+    short_name?: string | null;
+    /**
      * 
      * @type {string}
      * @memberof PatchedGroupRequest
@@ -44,6 +50,7 @@ export function PatchedGroupRequestFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'short_name': !exists(json, 'short_name') ? undefined : json['short_name'],
         'color': !exists(json, 'color') ? undefined : json['color'],
     };
 }
@@ -58,6 +65,7 @@ export function PatchedGroupRequestToJSON(value?: PatchedGroupRequest | null): a
     return {
         
         'name': value.name,
+        'short_name': value.short_name,
         'color': value.color,
     };
 }
