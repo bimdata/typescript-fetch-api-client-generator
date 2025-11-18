@@ -6,20 +6,31 @@ on:
       - main
       - master
 
+permissions:
+  contents: read
+
 jobs:
   publish:
-    runs-on: self-hosted
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for trusted publishing and npm provenance
+    # Use github runner and not self-hosted as trusted publishing is only supported on github runners
+    # https://docs.npmjs.com/trusted-publishers#limitations-and-future-improvementss
+    runs-on: ubuntu-latest
     if: contains('
       refs/heads/master
       refs/heads/main'
       , github.ref)
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: "24"
+          check-latest: true
       - name: Install dependencies
-        run: npm install --prefix package
+        run: npm ci --prefix package
       - name: Build
         run: npm run build --prefix package
       - name: Install release dependencies
@@ -30,8 +41,7 @@ jobs:
             @semantic-release/github \
             conventional-changelog-eslint \
       - name: Release
-        run: npx semantic-release@23.1.1 -e ./config/release.config.js
+        run: npx semantic-release@25 -e ./config/release.config.js
         working-directory: ./package
         env:
-          GITHUB_TOKEN: ${{ secrets.REPOS_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -2,9 +2,13 @@
   "name": "@bimdata/typescript-fetch-api-client",
   "version": "0.0.1",
   "description": "OpenAPI client for @bimdata/typescript-fetch-api-client",
-  "author": "OpenAPI-Generator",
+  "author": "BIMData",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
+  "homepage": "https://github.com/bimdata/typescript-fetch-api-client-generator/tree/master/package",
+  "repository": {
+    "url": "https://github.com/bimdata/typescript-fetch-api-client-generator"
+  },
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build"
