@@ -9,6 +9,7 @@ src/models/Auth.ts
 src/models/BcfLabel.ts
 src/models/BcfLabelRequest.ts
 src/models/BcfProject.ts
+src/models/BcfProjectExportRequest.ts
 src/models/BcfProjectRequest.ts
 src/models/Building.ts
 src/models/BuildingModelPlanRequest.ts

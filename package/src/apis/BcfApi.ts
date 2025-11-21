@@ -27,6 +27,9 @@ import {
     BcfProject,
     BcfProjectFromJSON,
     BcfProjectToJSON,
+    BcfProjectExportRequest,
+    BcfProjectExportRequestFromJSON,
+    BcfProjectExportRequestToJSON,
     BcfProjectRequest,
     BcfProjectRequestFromJSON,
     BcfProjectRequestToJSON,
@@ -273,11 +276,22 @@ export interface DownloadBcfExportRequest {
     topics?: string;
 }
 
+export interface DownloadBcfExportPostRequest {
+    id: number;
+    BcfProjectExportRequest?: BcfProjectExportRequest;
+}
+
 export interface DownloadBcfExportXlsxRequest {
     id: number;
     format?: string;
     locale?: DownloadBcfExportXlsxLocaleEnum;
     topics?: string;
+}
+
+export interface DownloadBcfExportXlsxPostRequest {
+    id: number;
+    locale?: DownloadBcfExportXlsxPostLocaleEnum;
+    BcfProjectExportRequest?: BcfProjectExportRequest;
 }
 
 export interface FullUpdateBcfProjectRequest {
@@ -1695,8 +1709,7 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * This is not a standard route. Export project\'s topics in bcf-xml format  Required scopes: bcf:read
-     * Export project\'s topics in bcf-xml format
+     * Required scopes: bcf:read
      */
     async downloadBcfExportRaw(requestParameters: DownloadBcfExportRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -1744,8 +1757,7 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * This is not a standard route. Export project\'s topics in bcf-xml format  Required scopes: bcf:read
-     * Export project\'s topics in bcf-xml format
+     * Required scopes: bcf:read
      */
     async downloadBcfExport(id: number, format?: string, topics?: string, initOverrides?: RequestInit): Promise<Blob> {
         const response = await this.downloadBcfExportRaw({ id: id, format: format, topics: topics }, initOverrides);
@@ -1753,8 +1765,58 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * This is not a standard route. Export project\'s topics in excel format  Required scopes: bcf:read
-     * Export project\'s topics in excel format
+     * Required scopes: bcf:write
+     */
+    async downloadBcfExportPostRaw(requestParameters: DownloadBcfExportPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Blob>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling downloadBcfExportPost.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{id}/export`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: BcfProjectExportRequestToJSON(requestParameters.BcfProjectExportRequest),
+        }, initOverrides);
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Required scopes: bcf:write
+     */
+    async downloadBcfExportPost(id: number, BcfProjectExportRequest?: BcfProjectExportRequest, initOverrides?: RequestInit): Promise<Blob> {
+        const response = await this.downloadBcfExportPostRaw({ id: id, BcfProjectExportRequest: BcfProjectExportRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Required scopes: bcf:read
      */
     async downloadBcfExportXlsxRaw(requestParameters: DownloadBcfExportXlsxRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -1806,11 +1868,65 @@ export class BcfApi extends runtime.BaseAPI {
     }
 
     /**
-     * This is not a standard route. Export project\'s topics in excel format  Required scopes: bcf:read
-     * Export project\'s topics in excel format
+     * Required scopes: bcf:read
      */
     async downloadBcfExportXlsx(id: number, format?: string, locale?: DownloadBcfExportXlsxLocaleEnum, topics?: string, initOverrides?: RequestInit): Promise<Blob> {
         const response = await this.downloadBcfExportXlsxRaw({ id: id, format: format, locale: locale, topics: topics }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Required scopes: bcf:write
+     */
+    async downloadBcfExportXlsxPostRaw(requestParameters: DownloadBcfExportXlsxPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Blob>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling downloadBcfExportXlsxPost.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.locale !== undefined) {
+            queryParameters['locale'] = requestParameters.locale;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/bcf/2.1/projects/{id}/export-xlsx`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: BcfProjectExportRequestToJSON(requestParameters.BcfProjectExportRequest),
+        }, initOverrides);
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Required scopes: bcf:write
+     */
+    async downloadBcfExportXlsxPost(id: number, locale?: DownloadBcfExportXlsxPostLocaleEnum, BcfProjectExportRequest?: BcfProjectExportRequest, initOverrides?: RequestInit): Promise<Blob> {
+        const response = await this.downloadBcfExportXlsxPostRaw({ id: id, locale: locale, BcfProjectExportRequest: BcfProjectExportRequest }, initOverrides);
         return await response.value();
     }
 
@@ -4502,6 +4618,14 @@ export enum DeleteViewpointImgFormatEnum {
     * @enum {string}
     */
 export enum DownloadBcfExportXlsxLocaleEnum {
+    En = 'en',
+    Fr = 'fr'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum DownloadBcfExportXlsxPostLocaleEnum {
     En = 'en',
     Fr = 'fr'
 }

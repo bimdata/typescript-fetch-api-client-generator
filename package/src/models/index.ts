@@ -4,6 +4,7 @@ export * from './Auth';
 export * from './BcfLabel';
 export * from './BcfLabelRequest';
 export * from './BcfProject';
+export * from './BcfProjectExportRequest';
 export * from './BcfProjectRequest';
 export * from './Building';
 export * from './BuildingModelPlanRequest';
