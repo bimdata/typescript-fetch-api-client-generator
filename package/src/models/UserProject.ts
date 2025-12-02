@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * This is a flattened nested represetation of FosUser and Invitation models in this serializer.
+ * This is a flattened nested representation of FosUser, Invitation, UserCloud and UserProject models in this serializer.
  * @export
  * @interface UserProject
  */
@@ -75,6 +75,19 @@ export interface UserProject {
      * @memberof UserProject
      */
     readonly role: UserProjectRoleEnum;
+    /**
+     * * `100` - admin
+     * * `50` - user
+     * @type {number}
+     * @memberof UserProject
+     */
+    readonly cloud_role: UserProjectCloudRoleEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UserProject
+     */
+    readonly in_all_projects: boolean;
 }
 
 /**
@@ -85,6 +98,13 @@ export enum UserProjectRoleEnum {
     NUMBER_100 = 100,
     NUMBER_50 = 50,
     NUMBER_25 = 25
+}/**
+* @export
+* @enum {string}
+*/
+export enum UserProjectCloudRoleEnum {
+    NUMBER_100 = 100,
+    NUMBER_50 = 50
 }
 
 export function UserProjectFromJSON(json: any): UserProject {
@@ -106,6 +126,8 @@ export function UserProjectFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'profile_picture': json['profile_picture'],
         'sub': json['sub'],
         'role': json['role'],
+        'cloud_role': json['cloud_role'],
+        'in_all_projects': json['in_all_projects'],
     };
 }
 

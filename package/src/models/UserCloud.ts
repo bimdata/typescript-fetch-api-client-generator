@@ -14,120 +14,100 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * This is a flattened nested representation of FosUser, Invitation, UserCloud and UserProject models in this serializer.
+ * This is a flattened nested representation of FosUser and UserCloud models in this serializer.
  * @export
- * @interface FolderUserProject
+ * @interface UserCloud
  */
-export interface FolderUserProject {
+export interface UserCloud {
     /**
      * 
      * @type {number}
-     * @memberof FolderUserProject
+     * @memberof UserCloud
      */
     readonly id: number;
     /**
      * 
      * @type {number}
-     * @memberof FolderUserProject
+     * @memberof UserCloud
      */
     readonly user_id: number | null;
     /**
      * 
-     * @type {number}
-     * @memberof FolderUserProject
-     */
-    readonly invitation_id: number | null;
-    /**
-     * 
      * @type {string}
-     * @memberof FolderUserProject
+     * @memberof UserCloud
      */
     readonly email: string;
     /**
      * 
      * @type {string}
-     * @memberof FolderUserProject
+     * @memberof UserCloud
      */
     readonly firstname: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FolderUserProject
+     * @memberof UserCloud
      */
     readonly lastname: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FolderUserProject
+     * @memberof UserCloud
      */
     readonly profile_picture: string | null;
     /**
      * 
      * @type {string}
-     * @memberof FolderUserProject
+     * @memberof UserCloud
      */
     readonly sub: string | null;
     /**
-     * * `100` - admin
-     * * `50` - user
-     * * `25` - guest
-     * @type {number}
-     * @memberof FolderUserProject
+     * 
+     * @type {Date}
+     * @memberof UserCloud
      */
-    readonly role: FolderUserProjectRoleEnum;
+    readonly created_at: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof UserCloud
+     */
+    readonly updated_at: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCloud
+     */
+    readonly provider: string;
     /**
      * * `100` - admin
      * * `50` - user
      * @type {number}
-     * @memberof FolderUserProject
+     * @memberof UserCloud
      */
-    readonly cloud_role: FolderUserProjectCloudRoleEnum;
+    readonly cloud_role: UserCloudCloudRoleEnum;
     /**
      * 
      * @type {boolean}
-     * @memberof FolderUserProject
+     * @memberof UserCloud
      */
     readonly in_all_projects: boolean;
-    /**
-     * * `1` - denied
-     * * `50` - read_only
-     * * `100` - read_write
-     * @type {number}
-     * @memberof FolderUserProject
-     */
-    readonly permission: FolderUserProjectPermissionEnum;
 }
 
 /**
 * @export
 * @enum {string}
 */
-export enum FolderUserProjectRoleEnum {
-    NUMBER_100 = 100,
-    NUMBER_50 = 50,
-    NUMBER_25 = 25
-}/**
-* @export
-* @enum {string}
-*/
-export enum FolderUserProjectCloudRoleEnum {
+export enum UserCloudCloudRoleEnum {
     NUMBER_100 = 100,
     NUMBER_50 = 50
-}/**
-* @export
-* @enum {string}
-*/
-export enum FolderUserProjectPermissionEnum {
-    NUMBER_1 = 1,
-    NUMBER_50 = 50,
-    NUMBER_100 = 100
 }
 
-export function FolderUserProjectFromJSON(json: any): FolderUserProject {
-    return FolderUserProjectFromJSONTyped(json, false);
+export function UserCloudFromJSON(json: any): UserCloud {
+    return UserCloudFromJSONTyped(json, false);
 }
 
-export function FolderUserProjectFromJSONTyped(json: any, ignoreDiscriminator: boolean): FolderUserProject {
+export function UserCloudFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserCloud {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -135,20 +115,20 @@ export function FolderUserProjectFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'id': json['id'],
         'user_id': json['user_id'],
-        'invitation_id': json['invitation_id'],
         'email': json['email'],
         'firstname': json['firstname'],
         'lastname': json['lastname'],
         'profile_picture': json['profile_picture'],
         'sub': json['sub'],
-        'role': json['role'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
+        'provider': json['provider'],
         'cloud_role': json['cloud_role'],
         'in_all_projects': json['in_all_projects'],
-        'permission': json['permission'],
     };
 }
 
-export function FolderUserProjectToJSON(value?: FolderUserProject | null): any {
+export function UserCloudToJSON(value?: UserCloud | null): any {
     if (value === undefined) {
         return undefined;
     }

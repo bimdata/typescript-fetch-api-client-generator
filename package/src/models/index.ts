@@ -246,6 +246,7 @@ export * from './TransformRequest';
 export * from './Unit';
 export * from './UnitRequest';
 export * from './User';
+export * from './UserCloud';
 export * from './UserInvitation';
 export * from './UserProject';
 export * from './UserProjectIdRequest';

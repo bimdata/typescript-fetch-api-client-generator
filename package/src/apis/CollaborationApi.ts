@@ -159,6 +159,9 @@ import {
     User,
     UserFromJSON,
     UserToJSON,
+    UserCloud,
+    UserCloudFromJSON,
+    UserCloudToJSON,
     UserInvitation,
     UserInvitationFromJSON,
     UserInvitationToJSON,
@@ -469,11 +472,6 @@ export interface GetCloudInvitationsRequest {
 }
 
 export interface GetCloudSizeRequest {
-    id: number;
-}
-
-export interface GetCloudUserRequest {
-    cloud_pk: number;
     id: number;
 }
 
@@ -1693,7 +1691,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'PHOTOSPHERE\', \'DWG\', \'DXF\', \'POINT_CLOUD\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'IFC\', \'GLTF\', \'DWG\', \'DXF\', \'PHOTOSPHERE\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1800,7 +1798,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'PHOTOSPHERE\', \'DWG\', \'DXF\', \'POINT_CLOUD\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'IFC\', \'GLTF\', \'DWG\', \'DXF\', \'PHOTOSPHERE\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -3629,64 +3627,10 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Only administrators can see a cloud member  Required scopes: cloud:read
-     * Retrieve a user in a cloud
-     */
-    async getCloudUserRaw(requestParameters: GetCloudUserRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<User>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCloudUser.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getCloudUser.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/user/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
-    }
-
-    /**
-     * Only administrators can see a cloud member  Required scopes: cloud:read
-     * Retrieve a user in a cloud
-     */
-    async getCloudUser(cloud_pk: number, id: number, initOverrides?: RequestInit): Promise<User> {
-        const response = await this.getCloudUserRaw({ cloud_pk: cloud_pk, id: id }, initOverrides);
-        return await response.value();
-    }
-
-    /**
      * Only administrators can see cloud members.  Required scopes: cloud:read
      * Retrieve all users in a cloud, or a list with a filter by email
      */
-    async getCloudUsersRaw(requestParameters: GetCloudUsersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<User>>> {
+    async getCloudUsersRaw(requestParameters: GetCloudUsersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<UserCloud>>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getCloudUsers.');
         }
@@ -3736,14 +3680,14 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(UserCloudFromJSON));
     }
 
     /**
      * Only administrators can see cloud members.  Required scopes: cloud:read
      * Retrieve all users in a cloud, or a list with a filter by email
      */
-    async getCloudUsers(cloud_pk: number, email?: string, email__contains?: string, email__endswith?: string, email__startswith?: string, initOverrides?: RequestInit): Promise<Array<User>> {
+    async getCloudUsers(cloud_pk: number, email?: string, email__contains?: string, email__endswith?: string, email__startswith?: string, initOverrides?: RequestInit): Promise<Array<UserCloud>> {
         const response = await this.getCloudUsersRaw({ cloud_pk: cloud_pk, email: email, email__contains: email__contains, email__endswith: email__endswith, email__startswith: email__startswith }, initOverrides);
         return await response.value();
     }

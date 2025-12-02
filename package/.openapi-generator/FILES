@@ -251,6 +251,7 @@ src/models/TransformRequest.ts
 src/models/Unit.ts
 src/models/UnitRequest.ts
 src/models/User.ts
+src/models/UserCloud.ts
 src/models/UserInvitation.ts
 src/models/UserProject.ts
 src/models/UserProjectIdRequest.ts
