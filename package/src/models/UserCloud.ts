@@ -24,13 +24,7 @@ export interface UserCloud {
      * @type {number}
      * @memberof UserCloud
      */
-    readonly id: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UserCloud
-     */
-    readonly user_id: number | null;
+    readonly id: number | null;
     /**
      * 
      * @type {string}
@@ -114,7 +108,6 @@ export function UserCloudFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return {
         
         'id': json['id'],
-        'user_id': json['user_id'],
         'email': json['email'],
         'firstname': json['firstname'],
         'lastname': json['lastname'],
