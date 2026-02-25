@@ -50,11 +50,11 @@ export interface ModelDocument {
      */
     description?: string | null;
     /**
-     * 
+     * URL to access the document file
      * @type {string}
      * @memberof ModelDocument
      */
-    file: string;
+    readonly file: string;
     /**
      * Size of the file.
      * @type {number}
@@ -155,7 +155,6 @@ export function ModelDocumentToJSON(value?: ModelDocument | null): any {
         'file_name': value.file_name,
         'parent_id': value.parent_id,
         'description': value.description,
-        'file': value.file,
     };
 }
 

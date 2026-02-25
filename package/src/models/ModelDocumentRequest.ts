@@ -44,12 +44,6 @@ export interface ModelDocumentRequest {
      */
     description?: string | null;
     /**
-     * 
-     * @type {Blob}
-     * @memberof ModelDocumentRequest
-     */
-    file: Blob;
-    /**
      * Provide a info about the document in order to customize the way it is processed.
      * 
      * * `PHOTOSPHERE` - PHOTOSPHERE
@@ -81,7 +75,6 @@ export function ModelDocumentRequestFromJSONTyped(json: any, ignoreDiscriminator
         'file_name': !exists(json, 'file_name') ? undefined : json['file_name'],
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'file': json['file'],
         'process_hint': !exists(json, 'process_hint') ? undefined : json['process_hint'],
     };
 }
@@ -99,7 +92,6 @@ export function ModelDocumentRequestToJSON(value?: ModelDocumentRequest | null):
         'file_name': value.file_name,
         'parent_id': value.parent_id,
         'description': value.description,
-        'file': value.file,
         'process_hint': value.process_hint,
     };
 }

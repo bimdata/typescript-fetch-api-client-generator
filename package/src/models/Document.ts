@@ -81,11 +81,11 @@ export interface Document {
      */
     description?: string | null;
     /**
-     * 
+     * URL to access the document file
      * @type {string}
      * @memberof Document
      */
-    file: string;
+    readonly file: string;
     /**
      * Lower case file extension
      * @type {string}
@@ -253,7 +253,6 @@ export function DocumentToJSON(value?: Document | null): any {
         'name': value.name,
         'file_name': value.file_name,
         'description': value.description,
-        'file': value.file,
     };
 }
 

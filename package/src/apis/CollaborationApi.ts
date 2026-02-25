@@ -227,6 +227,24 @@ export interface AddGroupMemberRequest {
     UserProjectIdRequest: UserProjectIdRequest;
 }
 
+export interface BulkDeleteDocumentHistoryRequest {
+    cloud_pk: number;
+    project_pk: number;
+    request_body: Array<number>;
+}
+
+export interface BulkDeleteDocumentsRequest {
+    cloud_pk: number;
+    project_pk: number;
+    request_body: Array<number>;
+}
+
+export interface BulkDeleteFoldersRequest {
+    cloud_pk: number;
+    project_pk: number;
+    request_body: Array<number>;
+}
+
 export interface CancelCloudUserInvitationRequest {
     cloud_pk: number;
     id: number;
@@ -278,7 +296,6 @@ export interface CreateDocumentRequest {
     cloud_pk: number;
     project_pk: number;
     name: string;
-    file: Blob;
     parent_id?: number | null;
     file_name?: string;
     description?: string | null;
@@ -1192,6 +1209,186 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: document:write
+     * Bulk delete document history
+     */
+    async bulkDeleteDocumentHistoryRaw(requestParameters: BulkDeleteDocumentHistoryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkDeleteDocumentHistory.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteDocumentHistory.');
+        }
+
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkDeleteDocumentHistory.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/bulk_destroy_history`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.request_body,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: document:write
+     * Bulk delete document history
+     */
+    async bulkDeleteDocumentHistory(cloud_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteDocumentHistoryRaw({ cloud_pk: cloud_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
+    }
+
+    /**
+     *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: document:write
+     * Bulk delete documents
+     */
+    async bulkDeleteDocumentsRaw(requestParameters: BulkDeleteDocumentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkDeleteDocuments.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteDocuments.');
+        }
+
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkDeleteDocuments.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.request_body,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: document:write
+     * Bulk delete documents
+     */
+    async bulkDeleteDocuments(cloud_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
+    }
+
+    /**
+     *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: document:write
+     * Bulk delete folders
+     */
+    async bulkDeleteFoldersRaw(requestParameters: BulkDeleteFoldersRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling bulkDeleteFolders.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling bulkDeleteFolders.');
+        }
+
+        if (requestParameters.request_body === null || requestParameters.request_body === undefined) {
+            throw new runtime.RequiredError('request_body','Required parameter requestParameters.request_body was null or undefined when calling bulkDeleteFolders.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/bulk_destroy`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters.request_body,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     *  Bulk delete. You must send a list of ids in the body. These ids (or relations with these ids in case of many-to-many relation deletion) will be deleted   Required scopes: document:write
+     * Bulk delete folders
+     */
+    async bulkDeleteFolders(cloud_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<void> {
+        await this.bulkDeleteFoldersRaw({ cloud_pk: cloud_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
+    }
+
+    /**
      * Cancel a pending invitation  Required scopes: org:manage
      * Cancel a pending invitation
      */
@@ -1691,7 +1888,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'PHOTOSPHERE\', \'DWG\', \'DXF\', \'OBJ\', \'IFC\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'IFC\', \'DXF\', \'GLTF\', \'PHOTOSPHERE\', \'POINT_CLOUD\', \'DWG\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1705,10 +1902,6 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (requestParameters.name === null || requestParameters.name === undefined) {
             throw new runtime.RequiredError('name','Required parameter requestParameters.name was null or undefined when calling createDocument.');
-        }
-
-        if (requestParameters.file === null || requestParameters.file === undefined) {
-            throw new runtime.RequiredError('file','Required parameter requestParameters.file was null or undefined when calling createDocument.');
         }
 
         const queryParameters: any = {};
@@ -1742,8 +1935,6 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         let formParams: { append(param: string, value: any): any };
         let useForm = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        useForm = canConsumeForm;
         if (useForm) {
             formParams = new FormData();
         } else {
@@ -1764,10 +1955,6 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         if (requestParameters.description !== undefined) {
             formParams.append('description', requestParameters.description as any);
-        }
-
-        if (requestParameters.file !== undefined) {
-            formParams.append('file', requestParameters.file as any);
         }
 
         if (requestParameters.model_source !== undefined) {
@@ -1798,11 +1985,11 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'PHOTOSPHERE\', \'DWG\', \'DXF\', \'OBJ\', \'IFC\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'IFC\', \'DXF\', \'GLTF\', \'PHOTOSPHERE\', \'POINT_CLOUD\', \'DWG\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
-    async createDocument(cloud_pk: number, project_pk: number, name: string, file: Blob, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
-        const response = await this.createDocumentRaw({ cloud_pk: cloud_pk, project_pk: project_pk, name: name, file: file, parent_id: parent_id, file_name: file_name, description: description, model_source: model_source, ifc_source: ifc_source, successor_of: successor_of, process_hint: process_hint }, initOverrides);
+    async createDocument(cloud_pk: number, project_pk: number, name: string, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
+        const response = await this.createDocumentRaw({ cloud_pk: cloud_pk, project_pk: project_pk, name: name, parent_id: parent_id, file_name: file_name, description: description, model_source: model_source, ifc_source: ifc_source, successor_of: successor_of, process_hint: process_hint }, initOverrides);
         return await response.value();
     }
 

@@ -44,12 +44,6 @@ export interface PatchedDocumentRequest {
      */
     description?: string | null;
     /**
-     * 
-     * @type {Blob}
-     * @memberof PatchedDocumentRequest
-     */
-    file?: Blob;
-    /**
      * Define the model.source field if the upload is a Model (IFC, PDF, DWG...)
      * 
      * * `UPLOAD` - UPLOAD
@@ -131,7 +125,6 @@ export function PatchedDocumentRequestFromJSONTyped(json: any, ignoreDiscriminat
         'name': !exists(json, 'name') ? undefined : json['name'],
         'file_name': !exists(json, 'file_name') ? undefined : json['file_name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'file': !exists(json, 'file') ? undefined : json['file'],
         'model_source': !exists(json, 'model_source') ? undefined : json['model_source'],
         'ifc_source': !exists(json, 'ifc_source') ? undefined : json['ifc_source'],
         'successor_of': !exists(json, 'successor_of') ? undefined : json['successor_of'],
@@ -152,7 +145,6 @@ export function PatchedDocumentRequestToJSON(value?: PatchedDocumentRequest | nu
         'name': value.name,
         'file_name': value.file_name,
         'description': value.description,
-        'file': value.file,
         'model_source': value.model_source,
         'ifc_source': value.ifc_source,
         'successor_of': value.successor_of,
