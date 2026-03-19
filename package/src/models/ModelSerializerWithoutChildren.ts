@@ -178,6 +178,12 @@ export interface ModelSerializerWithoutChildren {
      * @type {string}
      * @memberof ModelSerializerWithoutChildren
      */
+    readonly fragments_file: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ModelSerializerWithoutChildren
+     */
     readonly binary_2d_file: string | null;
     /**
      * 
@@ -322,6 +328,7 @@ export function ModelSerializerWithoutChildrenFromJSONTyped(json: any, ignoreDis
         'viewer_360_file': json['viewer_360_file'],
         'xkt_file': json['xkt_file'],
         'xkt_files': ((json['xkt_files'] as Array<any>).map(XktFileFromJSON)),
+        'fragments_file': json['fragments_file'],
         'binary_2d_file': json['binary_2d_file'],
         'project_id': json['project_id'],
         'world_position': !exists(json, 'world_position') ? undefined : json['world_position'],
