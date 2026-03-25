@@ -84,6 +84,7 @@ src/models/LayerElement.ts
 src/models/LayerElementRequest.ts
 src/models/LayerRequest.ts
 src/models/LightDocument.ts
+src/models/LightModel.ts
 src/models/Line.ts
 src/models/LineRequest.ts
 src/models/LogEntry.ts

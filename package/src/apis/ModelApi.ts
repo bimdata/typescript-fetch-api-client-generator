@@ -84,6 +84,9 @@ import {
     LayerRequest,
     LayerRequestFromJSON,
     LayerRequestToJSON,
+    LightModel,
+    LightModelFromJSON,
+    LightModelToJSON,
     Mask2D,
     Mask2DFromJSON,
     Mask2DToJSON,
@@ -1064,6 +1067,14 @@ export interface GetModelsRequest {
     source?: GetModelsSourceEnum;
     status?: Array<GetModelsStatusEnum>;
     type?: Array<GetModelsTypeEnum>;
+}
+
+export interface GetModelsSummaryRequest {
+    cloud_pk: number;
+    project_pk: number;
+    source?: GetModelsSummarySourceEnum;
+    status?: Array<GetModelsSummaryStatusEnum>;
+    type?: Array<GetModelsSummaryTypeEnum>;
 }
 
 export interface GetPositionedModelRequest {
@@ -8550,6 +8561,72 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve all models summary with a light payload.  Required scopes: ifc:read, model:read
+     * Retrieve all models summary
+     */
+    async getModelsSummaryRaw(requestParameters: GetModelsSummaryRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<LightModel>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getModelsSummary.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getModelsSummary.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.source !== undefined) {
+            queryParameters['source'] = requestParameters.source;
+        }
+
+        if (requestParameters.status) {
+            queryParameters['status'] = requestParameters.status;
+        }
+
+        if (requestParameters.type) {
+            queryParameters['type'] = requestParameters.type;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/summary`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LightModelFromJSON));
+    }
+
+    /**
+     * Retrieve all models summary with a light payload.  Required scopes: ifc:read, model:read
+     * Retrieve all models summary
+     */
+    async getModelsSummary(cloud_pk: number, project_pk: number, source?: GetModelsSummarySourceEnum, status?: Array<GetModelsSummaryStatusEnum>, type?: Array<GetModelsSummaryTypeEnum>, initOverrides?: RequestInit): Promise<Array<LightModel>> {
+        const response = await this.getModelsSummaryRaw({ cloud_pk: cloud_pk, project_pk: project_pk, source: source, status: status, type: type }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve one specific child model & position on the model  Required scopes: ifc:read, model:read
      * Retrieve one specific child model & position on the model
      */
@@ -12739,6 +12816,48 @@ export enum GetModelsStatusEnum {
     * @enum {string}
     */
 export enum GetModelsTypeEnum {
+    Dwg = 'DWG',
+    Dxf = 'DXF',
+    Gltf = 'GLTF',
+    Ifc = 'IFC',
+    Jpeg = 'JPEG',
+    Metabuilding = 'METABUILDING',
+    Obj = 'OBJ',
+    Pdf = 'PDF',
+    Photosphere = 'PHOTOSPHERE',
+    PhotosphereBuilding = 'PHOTOSPHERE_BUILDING',
+    Png = 'PNG',
+    PointCloud = 'POINT_CLOUD'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetModelsSummarySourceEnum {
+    Export = 'EXPORT',
+    Merge = 'MERGE',
+    Optimized = 'OPTIMIZED',
+    Split = 'SPLIT',
+    Upload = 'UPLOAD'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetModelsSummaryStatusEnum {
+    C = 'C',
+    D = 'D',
+    E = 'E',
+    I = 'I',
+    P = 'P',
+    W = 'W',
+    X = 'X'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetModelsSummaryTypeEnum {
     Dwg = 'DWG',
     Dxf = 'DXF',
     Gltf = 'GLTF',

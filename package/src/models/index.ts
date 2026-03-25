@@ -79,6 +79,7 @@ export * from './LayerElement';
 export * from './LayerElementRequest';
 export * from './LayerRequest';
 export * from './LightDocument';
+export * from './LightModel';
 export * from './Line';
 export * from './LineRequest';
 export * from './LogEntry';
