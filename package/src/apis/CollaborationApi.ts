@@ -661,7 +661,7 @@ export interface GetProjectCreatorVisasRequest {
 export interface GetProjectDMSTreeRequest {
     cloud_pk: number;
     id: number;
-    with_urls?: GetProjectDMSTreeWithUrlsEnum;
+    without_urls?: GetProjectDMSTreeWithoutUrlsEnum;
 }
 
 export interface GetProjectFolderTreeRequest {
@@ -1889,7 +1889,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'POINT_CLOUD\', \'DXF\', \'PHOTOSPHERE\', \'DWG\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'PHOTOSPHERE\', \'POINT_CLOUD\', \'IFC\', \'DWG\', \'DXF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1986,7 +1986,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'POINT_CLOUD\', \'DXF\', \'PHOTOSPHERE\', \'DWG\', \'IFC\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'PHOTOSPHERE\', \'POINT_CLOUD\', \'IFC\', \'DWG\', \'DXF\', \'OBJ\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -5117,8 +5117,8 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
-        if (requestParameters.with_urls !== undefined) {
-            queryParameters['with_urls'] = requestParameters.with_urls;
+        if (requestParameters.without_urls !== undefined) {
+            queryParameters['without_urls'] = requestParameters.without_urls;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -5155,8 +5155,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve the complete DMS tree (all folders and all documents in the project)
      * Retrieve the complete DMS tree
      */
-    async getProjectDMSTree(cloud_pk: number, id: number, with_urls?: GetProjectDMSTreeWithUrlsEnum, initOverrides?: RequestInit): Promise<Folder> {
-        const response = await this.getProjectDMSTreeRaw({ cloud_pk: cloud_pk, id: id, with_urls: with_urls }, initOverrides);
+    async getProjectDMSTree(cloud_pk: number, id: number, without_urls?: GetProjectDMSTreeWithoutUrlsEnum, initOverrides?: RequestInit): Promise<Folder> {
+        const response = await this.getProjectDMSTreeRaw({ cloud_pk: cloud_pk, id: id, without_urls: without_urls }, initOverrides);
         return await response.value();
     }
 
@@ -7872,7 +7872,7 @@ export enum GetProjectCreatorVisasStatusEnum {
     * @export
     * @enum {string}
     */
-export enum GetProjectDMSTreeWithUrlsEnum {
+export enum GetProjectDMSTreeWithoutUrlsEnum {
     False = 'false',
     True = 'true'
 }
