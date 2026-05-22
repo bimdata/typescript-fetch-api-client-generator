@@ -92,6 +92,12 @@ export interface ModelSerializerWithoutChildren {
      */
     readonly status: string;
     /**
+     * Status of the fragments process. This field may be removed in future versions when the `status` will take fragments into account.
+     * @type {string}
+     * @memberof ModelSerializerWithoutChildren
+     */
+    readonly fragments_status: string;
+    /**
      * * `UPLOAD` - UPLOAD
      * * `SPLIT` - SPLIT
      * * `MERGE` - MERGE
@@ -180,7 +186,7 @@ export interface ModelSerializerWithoutChildren {
      */
     readonly fragments_file: string | null;
     /**
-     * 
+     * DEPRECATED. This field is only used for old DWG files.
      * @type {string}
      * @memberof ModelSerializerWithoutChildren
      */
@@ -315,6 +321,7 @@ export function ModelSerializerWithoutChildrenFromJSONTyped(json: any, ignoreDis
         'type': json['type'],
         'creator': UserFromJSON(json['creator']),
         'status': json['status'],
+        'fragments_status': json['fragments_status'],
         'source': !exists(json, 'source') ? undefined : json['source'],
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),

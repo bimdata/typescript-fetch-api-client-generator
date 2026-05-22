@@ -36,13 +36,13 @@ export interface LogEntry {
      * @type {string}
      * @memberof LogEntry
      */
-    user_email: string;
+    user_email: string | null;
     /**
      * 
      * @type {string}
      * @memberof LogEntry
      */
-    app_name: string;
+    app_name: string | null;
     /**
      * 
      * @type {string}

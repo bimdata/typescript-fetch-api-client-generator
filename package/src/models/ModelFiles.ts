@@ -62,7 +62,7 @@ export interface ModelFiles {
      */
     fragments_file?: string | null;
     /**
-     * 
+     * DEPRECATED. This field is only used for old DWG files.
      * @type {string}
      * @memberof ModelFiles
      */
