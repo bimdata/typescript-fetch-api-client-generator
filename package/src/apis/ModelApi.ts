@@ -99,6 +99,12 @@ import {
     Model,
     ModelFromJSON,
     ModelToJSON,
+    ModelEquipment,
+    ModelEquipmentFromJSON,
+    ModelEquipmentToJSON,
+    ModelEquipmentRequest,
+    ModelEquipmentRequestFromJSON,
+    ModelEquipmentRequestToJSON,
     ModelErrors,
     ModelErrorsFromJSON,
     ModelErrorsToJSON,
@@ -138,6 +144,9 @@ import {
     PatchedMask2DRequest,
     PatchedMask2DRequestFromJSON,
     PatchedMask2DRequestToJSON,
+    PatchedModelEquipmentRequest,
+    PatchedModelEquipmentRequestFromJSON,
+    PatchedModelEquipmentRequestToJSON,
     PatchedModelLabelRequest,
     PatchedModelLabelRequestFromJSON,
     PatchedModelLabelRequestToJSON,
@@ -472,6 +481,13 @@ export interface CreateElementPropertySetPropertyDefinitionUnitRequest {
     UnitRequest: UnitRequest;
 }
 
+export interface CreateEquipmentRequest {
+    cloud_pk: number;
+    model_pk: number;
+    project_pk: number;
+    ModelEquipmentRequest: ModelEquipmentRequest;
+}
+
 export interface CreateLabelRequest {
     cloud_pk: number;
     model_pk: number;
@@ -660,6 +676,13 @@ export interface DeleteElementRequest {
     model_pk: number;
     project_pk: number;
     uuid: string;
+}
+
+export interface DeleteEquipmentRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface DeleteLabelRequest {
@@ -951,6 +974,19 @@ export interface GetElementsRequest {
 export interface GetElementsFromClassificationRequest {
     cloud_pk: number;
     model_classification_pk: number;
+    model_pk: number;
+    project_pk: number;
+}
+
+export interface GetEquipmentRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+}
+
+export interface GetEquipmentsRequest {
+    cloud_pk: number;
     model_pk: number;
     project_pk: number;
 }
@@ -1396,6 +1432,14 @@ export interface UpdateElementPropertySetPropertyRequest {
     project_pk: number;
     propertyset_pk: number;
     PatchedPropertyRequest?: PatchedPropertyRequest;
+}
+
+export interface UpdateEquipmentRequest {
+    cloud_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
+    PatchedModelEquipmentRequest?: PatchedModelEquipmentRequest;
 }
 
 export interface UpdateLabelRequest {
@@ -3284,6 +3328,71 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create an equipment on the model  Required scopes: ifc:write, model:write
+     * Create an equipment on the model
+     */
+    async createEquipmentRaw(requestParameters: CreateEquipmentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelEquipment>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createEquipment.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling createEquipment.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createEquipment.');
+        }
+
+        if (requestParameters.ModelEquipmentRequest === null || requestParameters.ModelEquipmentRequest === undefined) {
+            throw new runtime.RequiredError('ModelEquipmentRequest','Required parameter requestParameters.ModelEquipmentRequest was null or undefined when calling createEquipment.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ModelEquipmentRequestToJSON(requestParameters.ModelEquipmentRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelEquipmentFromJSON(jsonValue));
+    }
+
+    /**
+     * Create an equipment on the model  Required scopes: ifc:write, model:write
+     * Create an equipment on the model
+     */
+    async createEquipment(cloud_pk: number, model_pk: number, project_pk: number, ModelEquipmentRequest: ModelEquipmentRequest, initOverrides?: RequestInit): Promise<ModelEquipment> {
+        const response = await this.createEquipmentRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, ModelEquipmentRequest: ModelEquipmentRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      *  Bulk create available. You can either post an object or a list of objects. Is you post a list, the response will be a list (in the same order) of created objects or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
      * Create a label in the model
      */
@@ -5037,6 +5146,67 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async deleteElement(cloud_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
         await this.deleteElementRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    }
+
+    /**
+     * Delete an equipment of the model.  Required scopes: ifc:write, model:write
+     * Delete an equipment
+     */
+    async deleteEquipmentRaw(requestParameters: DeleteEquipmentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteEquipment.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteEquipment.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling deleteEquipment.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteEquipment.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete an equipment of the model.  Required scopes: ifc:write, model:write
+     * Delete an equipment
+     */
+    async deleteEquipment(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteEquipmentRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -7523,6 +7693,126 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async getElementsFromClassification(cloud_pk: number, model_classification_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Element>> {
         const response = await this.getElementsFromClassificationRaw({ cloud_pk: cloud_pk, model_classification_pk: model_classification_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve one equipment of the model  Required scopes: ifc:read, model:read
+     * Retrieve one equipment of the model
+     */
+    async getEquipmentRaw(requestParameters: GetEquipmentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelEquipment>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getEquipment.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getEquipment.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getEquipment.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getEquipment.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelEquipmentFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve one equipment of the model  Required scopes: ifc:read, model:read
+     * Retrieve one equipment of the model
+     */
+    async getEquipment(cloud_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<ModelEquipment> {
+        const response = await this.getEquipmentRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all equipments of the model  Required scopes: ifc:read, model:read
+     * Retrieve all equipments of the model
+     */
+    async getEquipmentsRaw(requestParameters: GetEquipmentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<ModelEquipment>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getEquipments.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getEquipments.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getEquipments.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ModelEquipmentFromJSON));
+    }
+
+    /**
+     * Retrieve all equipments of the model  Required scopes: ifc:read, model:read
+     * Retrieve all equipments of the model
+     */
+    async getEquipments(cloud_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<ModelEquipment>> {
+        const response = await this.getEquipmentsRaw({ cloud_pk: cloud_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -11356,6 +11646,71 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async updateElementPropertySetProperty(cloud_pk: number, element_uuid: string, id: number, model_pk: number, project_pk: number, propertyset_pk: number, PatchedPropertyRequest?: PatchedPropertyRequest, initOverrides?: RequestInit): Promise<Property> {
         const response = await this.updateElementPropertySetPropertyRaw({ cloud_pk: cloud_pk, element_uuid: element_uuid, id: id, model_pk: model_pk, project_pk: project_pk, propertyset_pk: propertyset_pk, PatchedPropertyRequest: PatchedPropertyRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of an equipment.  Required scopes: ifc:write, model:write
+     * Update some fields of an equipment
+     */
+    async updateEquipmentRaw(requestParameters: UpdateEquipmentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<ModelEquipment>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateEquipment.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateEquipment.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling updateEquipment.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateEquipment.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedModelEquipmentRequestToJSON(requestParameters.PatchedModelEquipmentRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ModelEquipmentFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of an equipment.  Required scopes: ifc:write, model:write
+     * Update some fields of an equipment
+     */
+    async updateEquipment(cloud_pk: number, id: number, model_pk: number, project_pk: number, PatchedModelEquipmentRequest?: PatchedModelEquipmentRequest, initOverrides?: RequestInit): Promise<ModelEquipment> {
+        const response = await this.updateEquipmentRaw({ cloud_pk: cloud_pk, id: id, model_pk: model_pk, project_pk: project_pk, PatchedModelEquipmentRequest: PatchedModelEquipmentRequest }, initOverrides);
         return await response.value();
     }
 

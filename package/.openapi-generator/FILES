@@ -101,6 +101,8 @@ src/models/MaterialRequest.ts
 src/models/Model.ts
 src/models/ModelDocument.ts
 src/models/ModelDocumentRequest.ts
+src/models/ModelEquipment.ts
+src/models/ModelEquipmentRequest.ts
 src/models/ModelErrors.ts
 src/models/ModelErrorsRequest.ts
 src/models/ModelFiles.ts
@@ -131,6 +133,7 @@ src/models/PatchedGroupRequest.ts
 src/models/PatchedIfcAccessTokenRequest.ts
 src/models/PatchedLayerRequest.ts
 src/models/PatchedMask2DRequest.ts
+src/models/PatchedModelEquipmentRequest.ts
 src/models/PatchedModelLabelRequest.ts
 src/models/PatchedModelOnModelPositionRequest.ts
 src/models/PatchedModelRequest.ts
