@@ -42,11 +42,23 @@ export interface ProjectAccessToken {
      *         If the request is made from an SSO application, you can link the token to a user.
      *         All calls made with the token will populate created_by fields with the user.
      *         If the user don't have access to some data, the token won't have access.
+     *         `available_models` can't be set when a user is impersonated.
      *         
      * @type {string}
      * @memberof ProjectAccessToken
      */
     email_impersonation?: string | null;
+    /**
+     * 
+     *         List of model IDs that the token can access.
+     *         If not specified, the token can access all models of the project.
+     *         This field can't be set if email_impersonation is set.
+     *         This field can't be set if `document:read` is in scopes.
+     *         
+     * @type {Array<number>}
+     * @memberof ProjectAccessToken
+     */
+    available_models?: Array<number>;
 }
 
 /**
@@ -78,6 +90,7 @@ export function ProjectAccessTokenFromJSONTyped(json: any, ignoreDiscriminator: 
         'scopes': json['scopes'],
         'expires_at': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
         'email_impersonation': !exists(json, 'email_impersonation') ? undefined : json['email_impersonation'],
+        'available_models': !exists(json, 'available_models') ? undefined : json['available_models'],
     };
 }
 
@@ -93,6 +106,7 @@ export function ProjectAccessTokenToJSON(value?: ProjectAccessToken | null): any
         'scopes': value.scopes,
         'expires_at': value.expires_at === undefined ? undefined : (value.expires_at.toISOString()),
         'email_impersonation': value.email_impersonation,
+        'available_models': value.available_models,
     };
 }
 
