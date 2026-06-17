@@ -49,6 +49,8 @@ export * from './ElementClassificationRelation';
 export * from './ElementClassificationRelationRequest';
 export * from './ElementPropertySetRelationRequest';
 export * from './ElementRequest';
+export * from './EquipmentImage';
+export * from './EquipmentImageRequest';
 export * from './Extensions';
 export * from './Feature';
 export * from './FeatureRequest';

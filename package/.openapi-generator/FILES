@@ -54,6 +54,8 @@ src/models/ElementClassificationRelation.ts
 src/models/ElementClassificationRelationRequest.ts
 src/models/ElementPropertySetRelationRequest.ts
 src/models/ElementRequest.ts
+src/models/EquipmentImage.ts
+src/models/EquipmentImageRequest.ts
 src/models/Extensions.ts
 src/models/Feature.ts
 src/models/FeatureRequest.ts

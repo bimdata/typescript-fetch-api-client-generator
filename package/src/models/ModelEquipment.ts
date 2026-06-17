@@ -14,6 +14,12 @@
 
 import { exists, mapValues } from '../runtime';
 import {
+    EquipmentImage,
+    EquipmentImageFromJSON,
+    EquipmentImageFromJSONTyped,
+    EquipmentImageToJSON,
+} from './EquipmentImage';
+import {
     User,
     UserFromJSON,
     UserFromJSONTyped,
@@ -58,6 +64,12 @@ export interface ModelEquipment {
     position: Array<number>;
     /**
      * 
+     * @type {Array<EquipmentImage>}
+     * @memberof ModelEquipment
+     */
+    readonly images: Array<EquipmentImage>;
+    /**
+     * 
      * @type {User}
      * @memberof ModelEquipment
      */
@@ -91,6 +103,7 @@ export function ModelEquipmentFromJSONTyped(json: any, ignoreDiscriminator: bool
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'position': json['position'],
+        'images': ((json['images'] as Array<any>).map(EquipmentImageFromJSON)),
         'creator': UserFromJSON(json['creator']),
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),

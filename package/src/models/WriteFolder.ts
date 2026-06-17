@@ -33,27 +33,23 @@ import {
  */
 export interface WriteFolder {
     /**
-     * Permission for a Folder
      * 
-     * * `1` - denied
-     * * `50` - read_only
-     * * `100` - read_write
-     * @type {number}
+     * @type {ShortUser}
      * @memberof WriteFolder
      */
-    default_permission?: WriteFolderDefaultPermissionEnum;
-    /**
-     * Creation date
-     * @type {Date}
-     * @memberof WriteFolder
-     */
-    readonly created_at: Date;
+    readonly created_by: ShortUser | null;
     /**
      * Date of the last update
      * @type {Date}
      * @memberof WriteFolder
      */
     readonly updated_at: Date;
+    /**
+     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * @type {string}
+     * @memberof WriteFolder
+     */
+    readonly nature: string;
     /**
      * Name of the folder
      * @type {string}
@@ -67,23 +63,27 @@ export interface WriteFolder {
      */
     readonly groups_permissions: Array<GroupFolderRead>;
     /**
+     * Permission for a Folder
+     * 
+     * * `1` - denied
+     * * `50` - read_only
+     * * `100` - read_write
+     * @type {number}
+     * @memberof WriteFolder
+     */
+    default_permission?: WriteFolderDefaultPermissionEnum;
+    /**
      * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
      * @memberof WriteFolder
      */
     readonly type: string;
     /**
-     * Aggregate of group user permissions and folder default permission
-     * @type {number}
+     * Creation date
+     * @type {Date}
      * @memberof WriteFolder
      */
-    readonly user_permission: WriteFolderUserPermissionEnum;
-    /**
-     * 
-     * @type {ShortUser}
-     * @memberof WriteFolder
-     */
-    readonly created_by: ShortUser | null;
+    readonly created_at: Date;
     /**
      * 
      * @type {number}
@@ -91,17 +91,17 @@ export interface WriteFolder {
      */
     readonly id: number;
     /**
-     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
-     * @type {string}
-     * @memberof WriteFolder
-     */
-    readonly nature: string;
-    /**
      * 
      * @type {number}
      * @memberof WriteFolder
      */
     parent_id?: number | null;
+    /**
+     * Aggregate of group user permissions and folder default permission
+     * @type {number}
+     * @memberof WriteFolder
+     */
+    readonly user_permission: WriteFolderUserPermissionEnum;
     /**
      * 
      * @type {Array<WriteFolder>}
@@ -138,17 +138,17 @@ export function WriteFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
-        'created_at': (new Date(json['created_at'])),
+        'created_by': ShortUserFromJSON(json['created_by']),
         'updated_at': (new Date(json['updated_at'])),
+        'nature': json['nature'],
         'name': json['name'],
         'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
+        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'type': json['type'],
-        'user_permission': json['user_permission'],
-        'created_by': ShortUserFromJSON(json['created_by']),
+        'created_at': (new Date(json['created_at'])),
         'id': json['id'],
-        'nature': json['nature'],
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'user_permission': json['user_permission'],
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderFromJSON)),
     };
 }
@@ -162,8 +162,8 @@ export function WriteFolderToJSON(value?: WriteFolder | null): any {
     }
     return {
         
-        'default_permission': value.default_permission,
         'name': value.name,
+        'default_permission': value.default_permission,
         'parent_id': value.parent_id,
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(WriteFolderToJSON)),
     };
