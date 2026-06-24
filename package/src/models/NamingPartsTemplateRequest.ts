@@ -16,48 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Priority
+ * @interface NamingPartsTemplateRequest
  */
-export interface Priority {
+export interface NamingPartsTemplateRequest {
     /**
-     * 
-     * @type {number}
-     * @memberof Priority
-     */
-    readonly id: number;
-    /**
-     * 
+     * Name of the template
      * @type {string}
-     * @memberof Priority
+     * @memberof NamingPartsTemplateRequest
      */
-    priority: string;
+    name: string;
     /**
      * 
-     * Color of the priority in hexadecimal string without the '#' prefix.
-     * Example: 'fff', 'fff0', '0f0f0f', '0f0f0f00'.
-     * @type {string}
-     * @memberof Priority
+     * @type {Array<string>}
+     * @memberof NamingPartsTemplateRequest
      */
-    color?: string | null;
+    elements: Array<string>;
 }
 
-export function PriorityFromJSON(json: any): Priority {
-    return PriorityFromJSONTyped(json, false);
+export function NamingPartsTemplateRequestFromJSON(json: any): NamingPartsTemplateRequest {
+    return NamingPartsTemplateRequestFromJSONTyped(json, false);
 }
 
-export function PriorityFromJSONTyped(json: any, ignoreDiscriminator: boolean): Priority {
+export function NamingPartsTemplateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): NamingPartsTemplateRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': json['id'],
-        'priority': json['priority'],
-        'color': !exists(json, 'color') ? undefined : json['color'],
+        'name': json['name'],
+        'elements': json['elements'],
     };
 }
 
-export function PriorityToJSON(value?: Priority | null): any {
+export function NamingPartsTemplateRequestToJSON(value?: NamingPartsTemplateRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -66,8 +57,8 @@ export function PriorityToJSON(value?: Priority | null): any {
     }
     return {
         
-        'priority': value.priority,
-        'color': value.color,
+        'name': value.name,
+        'elements': value.elements,
     };
 }
 

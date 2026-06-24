@@ -16,36 +16,42 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Tag
+ * @interface NamingConstraint
  */
-export interface Tag {
+export interface NamingConstraint {
     /**
      * 
      * @type {number}
-     * @memberof Tag
+     * @memberof NamingConstraint
      */
     readonly id: number;
     /**
-     * Full name of the tags
+     * Name of the naming constraint
      * @type {string}
-     * @memberof Tag
+     * @memberof NamingConstraint
      */
     name: string;
     /**
      * 
-     * Color of the Tag status in hexadecimal string without the '#' prefix.
-     * Example: 'fff', 'fff0', '0f0f0f', '0f0f0f00'.
-     * @type {string}
-     * @memberof Tag
+     * @type {any}
+     * @memberof NamingConstraint
      */
-    color?: string | null;
+    rule: any | null;
+    /**
+     * 
+     * When the constraint is strict, documents upload with invalid name and move in a conflict folder will be blocked.
+     * If the constraint is non scrict, documents will be flagged on field `naming_constraint_conflit`
+     * @type {boolean}
+     * @memberof NamingConstraint
+     */
+    strict: boolean;
 }
 
-export function TagFromJSON(json: any): Tag {
-    return TagFromJSONTyped(json, false);
+export function NamingConstraintFromJSON(json: any): NamingConstraint {
+    return NamingConstraintFromJSONTyped(json, false);
 }
 
-export function TagFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tag {
+export function NamingConstraintFromJSONTyped(json: any, ignoreDiscriminator: boolean): NamingConstraint {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -53,11 +59,12 @@ export function TagFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tag {
         
         'id': json['id'],
         'name': json['name'],
-        'color': !exists(json, 'color') ? undefined : json['color'],
+        'rule': json['rule'],
+        'strict': json['strict'],
     };
 }
 
-export function TagToJSON(value?: Tag | null): any {
+export function NamingConstraintToJSON(value?: NamingConstraint | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -67,7 +74,8 @@ export function TagToJSON(value?: Tag | null): any {
     return {
         
         'name': value.name,
-        'color': value.color,
+        'rule': value.rule,
+        'strict': value.strict,
     };
 }
 

@@ -20,6 +20,12 @@ import {
     GroupFolderReadToJSON,
 } from './GroupFolderRead';
 import {
+    LightDocument,
+    LightDocumentFromJSON,
+    LightDocumentFromJSONTyped,
+    LightDocumentToJSON,
+} from './LightDocument';
+import {
     ShortUser,
     ShortUserFromJSON,
     ShortUserFromJSONTyped,
@@ -29,37 +35,37 @@ import {
 /**
  * 
  * @export
- * @interface WriteFolder
+ * @interface EditFolder
  */
-export interface WriteFolder {
+export interface EditFolder {
     /**
      * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
     readonly type: string;
     /**
      * 
      * @type {number}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
     parent_id?: number | null;
     /**
      * 
      * @type {number}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
     readonly id: number;
     /**
      * List of group permissions
      * @type {Array<GroupFolderRead>}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
     readonly groups_permissions: Array<GroupFolderRead>;
     /**
      * Date of the last update
      * @type {Date}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
     readonly updated_at: Date;
     /**
@@ -69,52 +75,52 @@ export interface WriteFolder {
      * * `50` - read_only
      * * `100` - read_write
      * @type {number}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
-    default_permission?: WriteFolderDefaultPermissionEnum;
+    default_permission?: EditFolderDefaultPermissionEnum;
     /**
      * 
      * @type {ShortUser}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
     readonly created_by: ShortUser | null;
     /**
      * Creation date
      * @type {Date}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
     readonly created_at: Date;
     /**
      * Aggregate of group user permissions and folder default permission
      * @type {number}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
-    readonly user_permission: WriteFolderUserPermissionEnum;
+    readonly user_permission: EditFolderUserPermissionEnum;
     /**
      * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
     readonly nature: string;
     /**
      * Name of the folder
      * @type {string}
-     * @memberof WriteFolder
+     * @memberof EditFolder
      */
     name: string;
     /**
-     * 
-     * @type {Array<WriteFolder>}
-     * @memberof WriteFolder
+     * Return document with naming conflict. This is only set when you move a folder
+     * @type {Array<LightDocument>}
+     * @memberof EditFolder
      */
-    children?: Array<WriteFolder> | null;
+    readonly conflicting_documents: Array<LightDocument>;
 }
 
 /**
 * @export
 * @enum {string}
 */
-export enum WriteFolderDefaultPermissionEnum {
+export enum EditFolderDefaultPermissionEnum {
     NUMBER_1 = 1,
     NUMBER_50 = 50,
     NUMBER_100 = 100
@@ -122,17 +128,17 @@ export enum WriteFolderDefaultPermissionEnum {
 * @export
 * @enum {string}
 */
-export enum WriteFolderUserPermissionEnum {
+export enum EditFolderUserPermissionEnum {
     NUMBER_1 = 1,
     NUMBER_50 = 50,
     NUMBER_100 = 100
 }
 
-export function WriteFolderFromJSON(json: any): WriteFolder {
-    return WriteFolderFromJSONTyped(json, false);
+export function EditFolderFromJSON(json: any): EditFolder {
+    return EditFolderFromJSONTyped(json, false);
 }
 
-export function WriteFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean): WriteFolder {
+export function EditFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean): EditFolder {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -149,11 +155,11 @@ export function WriteFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'user_permission': json['user_permission'],
         'nature': json['nature'],
         'name': json['name'],
-        'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderFromJSON)),
+        'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
     };
 }
 
-export function WriteFolderToJSON(value?: WriteFolder | null): any {
+export function EditFolderToJSON(value?: EditFolder | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -165,7 +171,6 @@ export function WriteFolderToJSON(value?: WriteFolder | null): any {
         'parent_id': value.parent_id,
         'default_permission': value.default_permission,
         'name': value.name,
-        'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(WriteFolderToJSON)),
     };
 }
 

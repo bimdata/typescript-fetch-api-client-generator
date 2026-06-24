@@ -16,21 +16,15 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface PatchedFolderWithoutChildrenRequest
+ * @interface PatchedEditFolderRequest
  */
-export interface PatchedFolderWithoutChildrenRequest {
+export interface PatchedEditFolderRequest {
     /**
      * 
      * @type {number}
-     * @memberof PatchedFolderWithoutChildrenRequest
+     * @memberof PatchedEditFolderRequest
      */
     parent_id?: number | null;
-    /**
-     * Name of the folder
-     * @type {string}
-     * @memberof PatchedFolderWithoutChildrenRequest
-     */
-    name?: string;
     /**
      * Permission for a Folder
      * 
@@ -38,45 +32,51 @@ export interface PatchedFolderWithoutChildrenRequest {
      * * `50` - read_only
      * * `100` - read_write
      * @type {number}
-     * @memberof PatchedFolderWithoutChildrenRequest
+     * @memberof PatchedEditFolderRequest
      */
-    default_permission?: PatchedFolderWithoutChildrenRequestDefaultPermissionEnum;
+    default_permission?: PatchedEditFolderRequestDefaultPermissionEnum;
     /**
      * 
      * @type {boolean}
-     * @memberof PatchedFolderWithoutChildrenRequest
+     * @memberof PatchedEditFolderRequest
      */
     propagate?: boolean;
+    /**
+     * Name of the folder
+     * @type {string}
+     * @memberof PatchedEditFolderRequest
+     */
+    name?: string;
 }
 
 /**
 * @export
 * @enum {string}
 */
-export enum PatchedFolderWithoutChildrenRequestDefaultPermissionEnum {
+export enum PatchedEditFolderRequestDefaultPermissionEnum {
     NUMBER_1 = 1,
     NUMBER_50 = 50,
     NUMBER_100 = 100
 }
 
-export function PatchedFolderWithoutChildrenRequestFromJSON(json: any): PatchedFolderWithoutChildrenRequest {
-    return PatchedFolderWithoutChildrenRequestFromJSONTyped(json, false);
+export function PatchedEditFolderRequestFromJSON(json: any): PatchedEditFolderRequest {
+    return PatchedEditFolderRequestFromJSONTyped(json, false);
 }
 
-export function PatchedFolderWithoutChildrenRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedFolderWithoutChildrenRequest {
+export function PatchedEditFolderRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedEditFolderRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'propagate': !exists(json, 'propagate') ? undefined : json['propagate'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
     };
 }
 
-export function PatchedFolderWithoutChildrenRequestToJSON(value?: PatchedFolderWithoutChildrenRequest | null): any {
+export function PatchedEditFolderRequestToJSON(value?: PatchedEditFolderRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -86,9 +86,9 @@ export function PatchedFolderWithoutChildrenRequestToJSON(value?: PatchedFolderW
     return {
         
         'parent_id': value.parent_id,
-        'name': value.name,
         'default_permission': value.default_permission,
         'propagate': value.propagate,
+        'name': value.name,
     };
 }
 

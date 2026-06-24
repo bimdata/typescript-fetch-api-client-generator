@@ -51,6 +51,7 @@ src/models/Drawing.ts
 src/models/DrawingRequest.ts
 src/models/EditComment.ts
 src/models/EditCommentRequest.ts
+src/models/EditFolder.ts
 src/models/Element.ts
 src/models/ElementClassificationRelation.ts
 src/models/ElementClassificationRelationRequest.ts
@@ -62,6 +63,8 @@ src/models/Extensions.ts
 src/models/Feature.ts
 src/models/FeatureRequest.ts
 src/models/Folder.ts
+src/models/FolderNamingConstraint.ts
+src/models/FolderNamingConstraintRequest.ts
 src/models/FolderTree.ts
 src/models/FolderUserProject.ts
 src/models/FolderWithoutChildren.ts
@@ -117,6 +120,10 @@ src/models/ModelOnModelPosition.ts
 src/models/ModelOnModelPositionCreationRequest.ts
 src/models/ModelSerializerWithoutChildren.ts
 src/models/ModelWithPositioningPlan.ts
+src/models/NamingConstraint.ts
+src/models/NamingConstraintRequest.ts
+src/models/NamingPartsTemplate.ts
+src/models/NamingPartsTemplateRequest.ts
 src/models/Organization.ts
 src/models/OrganizationRequest.ts
 src/models/OrthogonalCamera.ts
@@ -129,8 +136,8 @@ src/models/PatchedCommentRequest.ts
 src/models/PatchedDocumentRequest.ts
 src/models/PatchedDocumentTextRequest.ts
 src/models/PatchedDrawingRequest.ts
+src/models/PatchedEditFolderRequest.ts
 src/models/PatchedElementRequest.ts
-src/models/PatchedFolderWithoutChildrenRequest.ts
 src/models/PatchedFullTopicRequest.ts
 src/models/PatchedGroupFolderRequest.ts
 src/models/PatchedGroupRequest.ts
@@ -141,6 +148,8 @@ src/models/PatchedModelEquipmentRequest.ts
 src/models/PatchedModelLabelRequest.ts
 src/models/PatchedModelOnModelPositionRequest.ts
 src/models/PatchedModelRequest.ts
+src/models/PatchedNamingConstraintRequest.ts
+src/models/PatchedNamingPartsTemplateRequest.ts
 src/models/PatchedPinRequest.ts
 src/models/PatchedPositioningPlanRequest.ts
 src/models/PatchedPriorityRequest.ts

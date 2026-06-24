@@ -55,6 +55,12 @@ export interface LightDocument {
      * @memberof LightDocument
      */
     readonly is_head_version: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof LightDocument
+     */
+    readonly naming_constraint_conflit: boolean;
 }
 
 export function LightDocumentFromJSON(json: any): LightDocument {
@@ -73,6 +79,7 @@ export function LightDocumentFromJSONTyped(json: any, ignoreDiscriminator: boole
         'description': json['description'],
         'head_id': json['head_id'],
         'is_head_version': json['is_head_version'],
+        'naming_constraint_conflit': json['naming_constraint_conflit'],
     };
 }
 

@@ -45,9 +45,18 @@ import {
     DocumentText,
     DocumentTextFromJSON,
     DocumentTextToJSON,
+    EditFolder,
+    EditFolderFromJSON,
+    EditFolderToJSON,
     Folder,
     FolderFromJSON,
     FolderToJSON,
+    FolderNamingConstraint,
+    FolderNamingConstraintFromJSON,
+    FolderNamingConstraintToJSON,
+    FolderNamingConstraintRequest,
+    FolderNamingConstraintRequestFromJSON,
+    FolderNamingConstraintRequestToJSON,
     FolderTree,
     FolderTreeFromJSON,
     FolderTreeToJSON,
@@ -72,9 +81,24 @@ import {
     ImportGroupRequest,
     ImportGroupRequestFromJSON,
     ImportGroupRequestToJSON,
+    LightDocument,
+    LightDocumentFromJSON,
+    LightDocumentToJSON,
     LogEntry,
     LogEntryFromJSON,
     LogEntryToJSON,
+    NamingConstraint,
+    NamingConstraintFromJSON,
+    NamingConstraintToJSON,
+    NamingConstraintRequest,
+    NamingConstraintRequestFromJSON,
+    NamingConstraintRequestToJSON,
+    NamingPartsTemplate,
+    NamingPartsTemplateFromJSON,
+    NamingPartsTemplateToJSON,
+    NamingPartsTemplateRequest,
+    NamingPartsTemplateRequestFromJSON,
+    NamingPartsTemplateRequestToJSON,
     PatchedClassificationRequest,
     PatchedClassificationRequestFromJSON,
     PatchedClassificationRequestToJSON,
@@ -87,15 +111,21 @@ import {
     PatchedDocumentTextRequest,
     PatchedDocumentTextRequestFromJSON,
     PatchedDocumentTextRequestToJSON,
-    PatchedFolderWithoutChildrenRequest,
-    PatchedFolderWithoutChildrenRequestFromJSON,
-    PatchedFolderWithoutChildrenRequestToJSON,
+    PatchedEditFolderRequest,
+    PatchedEditFolderRequestFromJSON,
+    PatchedEditFolderRequestToJSON,
     PatchedGroupFolderRequest,
     PatchedGroupFolderRequestFromJSON,
     PatchedGroupFolderRequestToJSON,
     PatchedGroupRequest,
     PatchedGroupRequestFromJSON,
     PatchedGroupRequestToJSON,
+    PatchedNamingConstraintRequest,
+    PatchedNamingConstraintRequestFromJSON,
+    PatchedNamingConstraintRequestToJSON,
+    PatchedNamingPartsTemplateRequest,
+    PatchedNamingPartsTemplateRequestFromJSON,
+    PatchedNamingPartsTemplateRequestToJSON,
     PatchedProjectRequest,
     PatchedProjectRequestFromJSON,
     PatchedProjectRequestToJSON,
@@ -317,6 +347,18 @@ export interface CreateManageGroupRequest {
     GroupRequest: GroupRequest;
 }
 
+export interface CreateNamingConstraintRequest {
+    cloud_pk: number;
+    project_pk: number;
+    NamingConstraintRequest: NamingConstraintRequest;
+}
+
+export interface CreateNamingPartsTemplateRequest {
+    cloud_pk: number;
+    project_pk: number;
+    NamingPartsTemplateRequest: NamingPartsTemplateRequest;
+}
+
 export interface CreateProjectRequest {
     cloud_pk: number;
     ProjectRequest: ProjectRequest;
@@ -397,6 +439,12 @@ export interface DeleteFolderRequest {
     project_pk: number;
 }
 
+export interface DeleteFolderNamingConstraintRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+}
+
 export interface DeleteGroupMemberRequest {
     cloud_pk: number;
     group_pk: number;
@@ -405,6 +453,18 @@ export interface DeleteGroupMemberRequest {
 }
 
 export interface DeleteManageGroupRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+}
+
+export interface DeleteNamingConstraintRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+}
+
+export interface DeleteNamingPartsTemplateRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
@@ -533,6 +593,7 @@ export interface GetDocumentsRequest {
     name__contains?: string;
     name__endswith?: string;
     name__startswith?: string;
+    naming_constraint_conflit?: boolean;
     parent_id__in?: Array<number>;
     search?: string;
     size_max?: number | null;
@@ -578,6 +639,7 @@ export interface GetFolderDocumentsRequest {
     name__contains?: string;
     name__endswith?: string;
     name__startswith?: string;
+    naming_constraint_conflit?: boolean;
     parent_id__in?: Array<number>;
     search?: string;
     size_max?: number | null;
@@ -592,6 +654,12 @@ export interface GetFolderDocumentsRequest {
     visa__status__strict?: GetFolderDocumentsVisaStatusStrictEnum;
     visa__validation_status?: string;
     visa__validator_email?: string;
+}
+
+export interface GetFolderNamingConstraintRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
 }
 
 export interface GetFolderProjectUsersRequest {
@@ -628,6 +696,28 @@ export interface GetManageGroupRequest {
 }
 
 export interface GetManageGroupsRequest {
+    cloud_pk: number;
+    project_pk: number;
+}
+
+export interface GetNamingConstraintRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+}
+
+export interface GetNamingConstraintsRequest {
+    cloud_pk: number;
+    project_pk: number;
+}
+
+export interface GetNamingPartsTemplateRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+}
+
+export interface GetNamingPartsTemplatesRequest {
     cloud_pk: number;
     project_pk: number;
 }
@@ -829,6 +919,13 @@ export interface ResumeVisaRequest {
     project_pk: number;
 }
 
+export interface SetFolderNamingConstraintRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    FolderNamingConstraintRequest: FolderNamingConstraintRequest;
+}
+
 export interface UpdateClassificationRequest {
     cloud_pk: number;
     id: number;
@@ -865,7 +962,7 @@ export interface UpdateFolderRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    PatchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest;
+    PatchedEditFolderRequest?: PatchedEditFolderRequest;
 }
 
 export interface UpdateGroupFolderRequest {
@@ -881,6 +978,20 @@ export interface UpdateManageGroupRequest {
     id: number;
     project_pk: number;
     PatchedGroupRequest?: PatchedGroupRequest;
+}
+
+export interface UpdateNamingConstraintRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    PatchedNamingConstraintRequest?: PatchedNamingConstraintRequest;
+}
+
+export interface UpdateNamingPartsTemplateRequest {
+    cloud_pk: number;
+    id: number;
+    project_pk: number;
+    PatchedNamingPartsTemplateRequest?: PatchedNamingPartsTemplateRequest;
 }
 
 export interface UpdatePreviewFileRequest {
@@ -1889,7 +2000,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'POINT_CLOUD\', \'OBJ\', \'DXF\', \'IFC\', \'PHOTOSPHERE\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'DXF\', \'DWG\', \'POINT_CLOUD\', \'OBJ\', \'IFC\', \'PHOTOSPHERE\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -1986,7 +2097,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'POINT_CLOUD\', \'OBJ\', \'DXF\', \'IFC\', \'PHOTOSPHERE\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'DXF\', \'DWG\', \'POINT_CLOUD\', \'OBJ\', \'IFC\', \'PHOTOSPHERE\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -2113,6 +2224,128 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async createManageGroup(cloud_pk: number, project_pk: number, GroupRequest: GroupRequest, initOverrides?: RequestInit): Promise<Group> {
         const response = await this.createManageGroupRaw({ cloud_pk: cloud_pk, project_pk: project_pk, GroupRequest: GroupRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create a naming constraint  Required scopes: document:write
+     * Create a naming constraint
+     */
+    async createNamingConstraintRaw(requestParameters: CreateNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingConstraint>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createNamingConstraint.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createNamingConstraint.');
+        }
+
+        if (requestParameters.NamingConstraintRequest === null || requestParameters.NamingConstraintRequest === undefined) {
+            throw new runtime.RequiredError('NamingConstraintRequest','Required parameter requestParameters.NamingConstraintRequest was null or undefined when calling createNamingConstraint.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-constraint`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: NamingConstraintRequestToJSON(requestParameters.NamingConstraintRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => NamingConstraintFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a naming constraint  Required scopes: document:write
+     * Create a naming constraint
+     */
+    async createNamingConstraint(cloud_pk: number, project_pk: number, NamingConstraintRequest: NamingConstraintRequest, initOverrides?: RequestInit): Promise<NamingConstraint> {
+        const response = await this.createNamingConstraintRaw({ cloud_pk: cloud_pk, project_pk: project_pk, NamingConstraintRequest: NamingConstraintRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create a naming rule list  Required scopes: document:write
+     * Create a naming rule list
+     */
+    async createNamingPartsTemplateRaw(requestParameters: CreateNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingPartsTemplate>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createNamingPartsTemplate.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createNamingPartsTemplate.');
+        }
+
+        if (requestParameters.NamingPartsTemplateRequest === null || requestParameters.NamingPartsTemplateRequest === undefined) {
+            throw new runtime.RequiredError('NamingPartsTemplateRequest','Required parameter requestParameters.NamingPartsTemplateRequest was null or undefined when calling createNamingPartsTemplate.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: NamingPartsTemplateRequestToJSON(requestParameters.NamingPartsTemplateRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => NamingPartsTemplateFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a naming rule list  Required scopes: document:write
+     * Create a naming rule list
+     */
+    async createNamingPartsTemplate(cloud_pk: number, project_pk: number, NamingPartsTemplateRequest: NamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<NamingPartsTemplate> {
+        const response = await this.createNamingPartsTemplateRaw({ cloud_pk: cloud_pk, project_pk: project_pk, NamingPartsTemplateRequest: NamingPartsTemplateRequest }, initOverrides);
         return await response.value();
     }
 
@@ -2882,6 +3115,64 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a naming constraint from a folder.  Required scopes: document:write
+     * Remove a naming constraint from a folder
+     */
+    async deleteFolderNamingConstraintRaw(requestParameters: DeleteFolderNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<LightDocument>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteFolderNamingConstraint.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteFolderNamingConstraint.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteFolderNamingConstraint.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{id}/naming-constraint`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LightDocumentFromJSON));
+    }
+
+    /**
+     * Remove a naming constraint from a folder.  Required scopes: document:write
+     * Remove a naming constraint from a folder
+     */
+    async deleteFolderNamingConstraint(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<LightDocument>> {
+        const response = await this.deleteFolderNamingConstraintRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Delete a userproject from a group. Id is the userproject_id. Must be an admin of the project.  Required scopes: org:manage
      * Delete a user from a group
      */
@@ -2997,6 +3288,120 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async deleteManageGroup(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
         await this.deleteManageGroupRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+    }
+
+    /**
+     * Delete a naming constraint  Required scopes: document:write
+     * Delete a naming constraint
+     */
+    async deleteNamingConstraintRaw(requestParameters: DeleteNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteNamingConstraint.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteNamingConstraint.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteNamingConstraint.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-constraint/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a naming constraint  Required scopes: document:write
+     * Delete a naming constraint
+     */
+    async deleteNamingConstraint(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteNamingConstraintRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+    }
+
+    /**
+     * Delete a naming rule list  Required scopes: document:write
+     * Delete a naming rule list
+     */
+    async deleteNamingPartsTemplateRaw(requestParameters: DeleteNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteNamingPartsTemplate.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteNamingPartsTemplate.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteNamingPartsTemplate.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a naming rule list  Required scopes: document:write
+     * Delete a naming rule list
+     */
+    async deleteNamingPartsTemplate(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteNamingPartsTemplateRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -4129,6 +4534,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['name__startswith'] = requestParameters.name__startswith;
         }
 
+        if (requestParameters.naming_constraint_conflit !== undefined) {
+            queryParameters['naming_constraint_conflit'] = requestParameters.naming_constraint_conflit;
+        }
+
         if (requestParameters.parent_id__in) {
             queryParameters['parent_id__in'] = requestParameters.parent_id__in.join(runtime.COLLECTION_FORMATS["csv"]);
         }
@@ -4223,8 +4632,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all documents in the project. Filters are case insentive. Search filter only works if AI features are enabled.  Required scopes: document:read
      * Retrieve all documents
      */
-    async getDocuments(cloud_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, file_type?: string, has__visa?: boolean, id__in?: Array<number>, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, parent_id__in?: Array<number>, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, text?: boolean, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetDocumentsVisaStatusEnum, visa__status__strict?: GetDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, file_type: file_type, has__visa: has__visa, id__in: id__in, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, parent_id__in: parent_id__in, search: search, size_max: size_max, size_min: size_min, tags: tags, text: text, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
+    async getDocuments(cloud_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, file_type?: string, has__visa?: boolean, id__in?: Array<number>, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, naming_constraint_conflit?: boolean, parent_id__in?: Array<number>, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, text?: boolean, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetDocumentsVisaStatusEnum, visa__status__strict?: GetDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getDocumentsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, file_type: file_type, has__visa: has__visa, id__in: id__in, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, naming_constraint_conflit: naming_constraint_conflit, parent_id__in: parent_id__in, search: search, size_max: size_max, size_min: size_min, tags: tags, text: text, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
         return await response.value();
     }
 
@@ -4377,6 +4786,10 @@ export class CollaborationApi extends runtime.BaseAPI {
             queryParameters['name__startswith'] = requestParameters.name__startswith;
         }
 
+        if (requestParameters.naming_constraint_conflit !== undefined) {
+            queryParameters['naming_constraint_conflit'] = requestParameters.naming_constraint_conflit;
+        }
+
         if (requestParameters.parent_id__in) {
             queryParameters['parent_id__in'] = requestParameters.parent_id__in.join(runtime.COLLECTION_FORMATS["csv"]);
         }
@@ -4467,8 +4880,66 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Get all documents of a folder  Required scopes: document:read
      * Get all documents of a folder
      */
-    async getFolderDocuments(cloud_pk: number, folder_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, file_type?: string, has__visa?: boolean, id__in?: Array<number>, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, parent_id__in?: Array<number>, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetFolderDocumentsVisaStatusEnum, visa__status__strict?: GetFolderDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
-        const response = await this.getFolderDocumentsRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, file_type: file_type, has__visa: has__visa, id__in: id__in, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, parent_id__in: parent_id__in, search: search, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
+    async getFolderDocuments(cloud_pk: number, folder_pk: number, project_pk: number, created_after?: Date, created_before?: Date, creator_email?: string, description?: string, description__contains?: string, description__endswith?: string, description__startswith?: string, file_name?: string, file_name__contains?: string, file_name__endswith?: string, file_name__startswith?: string, file_type?: string, has__visa?: boolean, id__in?: Array<number>, name?: string, name__contains?: string, name__endswith?: string, name__startswith?: string, naming_constraint_conflit?: boolean, parent_id__in?: Array<number>, search?: string, size_max?: number | null, size_min?: number | null, tags?: Array<string>, visa__creator_email?: string, visa__deadline_after?: Date, visa__deadline_before?: Date, visa__past__deadline?: boolean, visa__past__deadline__strict?: boolean, visa__status?: GetFolderDocumentsVisaStatusEnum, visa__status__strict?: GetFolderDocumentsVisaStatusStrictEnum, visa__validation_status?: string, visa__validator_email?: string, initOverrides?: RequestInit): Promise<Array<Document>> {
+        const response = await this.getFolderDocumentsRaw({ cloud_pk: cloud_pk, folder_pk: folder_pk, project_pk: project_pk, created_after: created_after, created_before: created_before, creator_email: creator_email, description: description, description__contains: description__contains, description__endswith: description__endswith, description__startswith: description__startswith, file_name: file_name, file_name__contains: file_name__contains, file_name__endswith: file_name__endswith, file_name__startswith: file_name__startswith, file_type: file_type, has__visa: has__visa, id__in: id__in, name: name, name__contains: name__contains, name__endswith: name__endswith, name__startswith: name__startswith, naming_constraint_conflit: naming_constraint_conflit, parent_id__in: parent_id__in, search: search, size_max: size_max, size_min: size_min, tags: tags, visa__creator_email: visa__creator_email, visa__deadline_after: visa__deadline_after, visa__deadline_before: visa__deadline_before, visa__past__deadline: visa__past__deadline, visa__past__deadline__strict: visa__past__deadline__strict, visa__status: visa__status, visa__status__strict: visa__status__strict, visa__validation_status: visa__validation_status, visa__validator_email: visa__validator_email }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get the naming constraint of a folder. The constraint may come from a parent folder with a recursive constraint.  Required scopes: document:read
+     * Get the naming constraint of a folder
+     */
+    async getFolderNamingConstraintRaw(requestParameters: GetFolderNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderNamingConstraint>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getFolderNamingConstraint.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getFolderNamingConstraint.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getFolderNamingConstraint.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{id}/naming-constraint`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => FolderNamingConstraintFromJSON(jsonValue));
+    }
+
+    /**
+     * Get the naming constraint of a folder. The constraint may come from a parent folder with a recursive constraint.  Required scopes: document:read
+     * Get the naming constraint of a folder
+     */
+    async getFolderNamingConstraint(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<FolderNamingConstraint> {
+        const response = await this.getFolderNamingConstraintRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -4859,6 +5330,230 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getManageGroups(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<Group>> {
         const response = await this.getManageGroupsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a naming constraint  Required scopes: document:read
+     * Retrieve a naming constraint
+     */
+    async getNamingConstraintRaw(requestParameters: GetNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingConstraint>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getNamingConstraint.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getNamingConstraint.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getNamingConstraint.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-constraint/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => NamingConstraintFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a naming constraint  Required scopes: document:read
+     * Retrieve a naming constraint
+     */
+    async getNamingConstraint(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<NamingConstraint> {
+        const response = await this.getNamingConstraintRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all naming constraints  Required scopes: document:read
+     * Retrieve all naming constraints
+     */
+    async getNamingConstraintsRaw(requestParameters: GetNamingConstraintsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<NamingConstraint>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getNamingConstraints.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getNamingConstraints.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-constraint`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NamingConstraintFromJSON));
+    }
+
+    /**
+     * Retrieve all naming constraints  Required scopes: document:read
+     * Retrieve all naming constraints
+     */
+    async getNamingConstraints(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<NamingConstraint>> {
+        const response = await this.getNamingConstraintsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve a naming rule list in the cloud  Required scopes: document:read
+     * Retrieve a naming rule list
+     */
+    async getNamingPartsTemplateRaw(requestParameters: GetNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingPartsTemplate>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getNamingPartsTemplate.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getNamingPartsTemplate.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getNamingPartsTemplate.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => NamingPartsTemplateFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a naming rule list in the cloud  Required scopes: document:read
+     * Retrieve a naming rule list
+     */
+    async getNamingPartsTemplate(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<NamingPartsTemplate> {
+        const response = await this.getNamingPartsTemplateRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all naming rule lists in the cloud  Required scopes: document:read
+     * Retrieve all naming rule lists
+     */
+    async getNamingPartsTemplatesRaw(requestParameters: GetNamingPartsTemplatesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<NamingPartsTemplate>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getNamingPartsTemplates.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getNamingPartsTemplates.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NamingPartsTemplateFromJSON));
+    }
+
+    /**
+     * Retrieve all naming rule lists in the cloud  Required scopes: document:read
+     * Retrieve all naming rule lists
+     */
+    async getNamingPartsTemplates(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<NamingPartsTemplate>> {
+        const response = await this.getNamingPartsTemplatesRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -6851,6 +7546,71 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * Set or replace a naming constraint on a folder.  Required scopes: document:write
+     * Set or replace a naming constraint on a folder
+     */
+    async setFolderNamingConstraintRaw(requestParameters: SetFolderNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderNamingConstraint>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling setFolderNamingConstraint.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling setFolderNamingConstraint.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling setFolderNamingConstraint.');
+        }
+
+        if (requestParameters.FolderNamingConstraintRequest === null || requestParameters.FolderNamingConstraintRequest === undefined) {
+            throw new runtime.RequiredError('FolderNamingConstraintRequest','Required parameter requestParameters.FolderNamingConstraintRequest was null or undefined when calling setFolderNamingConstraint.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/folder/{id}/naming-constraint`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: FolderNamingConstraintRequestToJSON(requestParameters.FolderNamingConstraintRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => FolderNamingConstraintFromJSON(jsonValue));
+    }
+
+    /**
+     * Set or replace a naming constraint on a folder.  Required scopes: document:write
+     * Set or replace a naming constraint on a folder
+     */
+    async setFolderNamingConstraint(cloud_pk: number, id: number, project_pk: number, FolderNamingConstraintRequest: FolderNamingConstraintRequest, initOverrides?: RequestInit): Promise<FolderNamingConstraint> {
+        const response = await this.setFolderNamingConstraintRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, FolderNamingConstraintRequest: FolderNamingConstraintRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Update some fields of a classification  Required scopes: ifc:write, model:write
      * Update some fields of a classification
      */
@@ -7147,7 +7907,7 @@ export class CollaborationApi extends runtime.BaseAPI {
      *  Update some fields of a folder. Only project admins can update the `default_permission` field.  `default_permission` choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When propagate is set to True, the permission of all children in the folder will be updated.  Caution: The \'default_permission\' field is not applied to users belonging to one or more groups.   Required scopes: document:write
      * Update some fields of a folder
      */
-    async updateFolderRaw(requestParameters: UpdateFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<FolderWithoutChildren>> {
+    async updateFolderRaw(requestParameters: UpdateFolderRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<EditFolder>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateFolder.');
         }
@@ -7189,18 +7949,18 @@ export class CollaborationApi extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedFolderWithoutChildrenRequestToJSON(requestParameters.PatchedFolderWithoutChildrenRequest),
+            body: PatchedEditFolderRequestToJSON(requestParameters.PatchedEditFolderRequest),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => FolderWithoutChildrenFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => EditFolderFromJSON(jsonValue));
     }
 
     /**
      *  Update some fields of a folder. Only project admins can update the `default_permission` field.  `default_permission` choices are : ``` 1: ACCESS_DENIED, 50: READ_ONLY, 100: READ_WRTIE ``` When propagate is set to True, the permission of all children in the folder will be updated.  Caution: The \'default_permission\' field is not applied to users belonging to one or more groups.   Required scopes: document:write
      * Update some fields of a folder
      */
-    async updateFolder(cloud_pk: number, id: number, project_pk: number, PatchedFolderWithoutChildrenRequest?: PatchedFolderWithoutChildrenRequest, initOverrides?: RequestInit): Promise<FolderWithoutChildren> {
-        const response = await this.updateFolderRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedFolderWithoutChildrenRequest: PatchedFolderWithoutChildrenRequest }, initOverrides);
+    async updateFolder(cloud_pk: number, id: number, project_pk: number, PatchedEditFolderRequest?: PatchedEditFolderRequest, initOverrides?: RequestInit): Promise<EditFolder> {
+        const response = await this.updateFolderRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedEditFolderRequest: PatchedEditFolderRequest }, initOverrides);
         return await response.value();
     }
 
@@ -7327,6 +8087,128 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async updateManageGroup(cloud_pk: number, id: number, project_pk: number, PatchedGroupRequest?: PatchedGroupRequest, initOverrides?: RequestInit): Promise<Group> {
         const response = await this.updateManageGroupRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedGroupRequest: PatchedGroupRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a naming constraint  Required scopes: document:write
+     * Update some fields of a naming constraint
+     */
+    async updateNamingConstraintRaw(requestParameters: UpdateNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingConstraint>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateNamingConstraint.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateNamingConstraint.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateNamingConstraint.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-constraint/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedNamingConstraintRequestToJSON(requestParameters.PatchedNamingConstraintRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => NamingConstraintFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a naming constraint  Required scopes: document:write
+     * Update some fields of a naming constraint
+     */
+    async updateNamingConstraint(cloud_pk: number, id: number, project_pk: number, PatchedNamingConstraintRequest?: PatchedNamingConstraintRequest, initOverrides?: RequestInit): Promise<NamingConstraint> {
+        const response = await this.updateNamingConstraintRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedNamingConstraintRequest: PatchedNamingConstraintRequest }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update some fields of a naming rule list  Required scopes: document:write
+     * Update some fields of a naming rule list
+     */
+    async updateNamingPartsTemplateRaw(requestParameters: UpdateNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingPartsTemplate>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateNamingPartsTemplate.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateNamingPartsTemplate.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateNamingPartsTemplate.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedNamingPartsTemplateRequestToJSON(requestParameters.PatchedNamingPartsTemplateRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => NamingPartsTemplateFromJSON(jsonValue));
+    }
+
+    /**
+     * Update some fields of a naming rule list  Required scopes: document:write
+     * Update some fields of a naming rule list
+     */
+    async updateNamingPartsTemplate(cloud_pk: number, id: number, project_pk: number, PatchedNamingPartsTemplateRequest?: PatchedNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<NamingPartsTemplate> {
+        const response = await this.updateNamingPartsTemplateRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedNamingPartsTemplateRequest: PatchedNamingPartsTemplateRequest }, initOverrides);
         return await response.value();
     }
 

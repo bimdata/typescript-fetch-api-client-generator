@@ -16,48 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Priority
+ * @interface FolderNamingConstraintRequest
  */
-export interface Priority {
+export interface FolderNamingConstraintRequest {
     /**
      * 
      * @type {number}
-     * @memberof Priority
+     * @memberof FolderNamingConstraintRequest
      */
-    readonly id: number;
+    constraint_id: number;
     /**
      * 
-     * @type {string}
-     * @memberof Priority
+     * @type {boolean}
+     * @memberof FolderNamingConstraintRequest
      */
-    priority: string;
-    /**
-     * 
-     * Color of the priority in hexadecimal string without the '#' prefix.
-     * Example: 'fff', 'fff0', '0f0f0f', '0f0f0f00'.
-     * @type {string}
-     * @memberof Priority
-     */
-    color?: string | null;
+    recursive: boolean;
 }
 
-export function PriorityFromJSON(json: any): Priority {
-    return PriorityFromJSONTyped(json, false);
+export function FolderNamingConstraintRequestFromJSON(json: any): FolderNamingConstraintRequest {
+    return FolderNamingConstraintRequestFromJSONTyped(json, false);
 }
 
-export function PriorityFromJSONTyped(json: any, ignoreDiscriminator: boolean): Priority {
+export function FolderNamingConstraintRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): FolderNamingConstraintRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': json['id'],
-        'priority': json['priority'],
-        'color': !exists(json, 'color') ? undefined : json['color'],
+        'constraint_id': json['constraint_id'],
+        'recursive': json['recursive'],
     };
 }
 
-export function PriorityToJSON(value?: Priority | null): any {
+export function FolderNamingConstraintRequestToJSON(value?: FolderNamingConstraintRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -66,8 +57,8 @@ export function PriorityToJSON(value?: Priority | null): any {
     }
     return {
         
-        'priority': value.priority,
-        'color': value.color,
+        'constraint_id': value.constraint_id,
+        'recursive': value.recursive,
     };
 }
 

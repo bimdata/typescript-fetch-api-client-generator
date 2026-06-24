@@ -39,22 +39,20 @@ export interface ProjectAccessToken {
     expires_at?: Date;
     /**
      * 
-     *         If the request is made from an SSO application, you can link the token to a user.
-     *         All calls made with the token will populate created_by fields with the user.
-     *         If the user don't have access to some data, the token won't have access.
-     *         `available_models` can't be set when a user is impersonated.
-     *         
+     * If the request is made from an SSO application, you can link the token to a user.
+     * All calls made with the token will populate created_by fields with the user.
+     * If the user don't have access to some data, the token won't have access.
+     * `available_models` can't be set when a user is impersonated.
      * @type {string}
      * @memberof ProjectAccessToken
      */
     email_impersonation?: string | null;
     /**
      * 
-     *         List of model IDs that the token can access.
-     *         If not specified, the token can access all models of the project.
-     *         This field can't be set if email_impersonation is set.
-     *         This field can't be set if `document:read` is in scopes.
-     *         
+     * List of model IDs that the token can access.
+     * If not specified, the token can access all models of the project.
+     * This field can't be set if email_impersonation is set.
+     * This field can't be set if `document:read` is in scopes.
      * @type {Array<number>}
      * @memberof ProjectAccessToken
      */

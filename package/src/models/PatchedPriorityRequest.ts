@@ -27,9 +27,8 @@ export interface PatchedPriorityRequest {
     priority?: string;
     /**
      * 
-     *             Color of the priority in hexadecimal string without the '#' prefix.
-     *             Example: 'fff', 'fff0', '0f0f0f', '0f0f0f00'.
-     *         
+     * Color of the priority in hexadecimal string without the '#' prefix.
+     * Example: 'fff', 'fff0', '0f0f0f', '0f0f0f00'.
      * @type {string}
      * @memberof PatchedPriorityRequest
      */

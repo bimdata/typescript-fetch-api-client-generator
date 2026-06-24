@@ -76,10 +76,10 @@ export interface Invitation {
     email: string;
     /**
      * 
-     *         A: Accepted
-     *         D: Denied
-     *         P: Pending
-     *         
+     * A: Accepted
+     * D: Denied
+     * P: Pending
+     * 
      * 
      * * `A` - accepted
      * * `D` - denied

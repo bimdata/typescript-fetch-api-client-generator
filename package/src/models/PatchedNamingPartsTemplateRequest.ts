@@ -16,41 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface PatchedTagRequest
+ * @interface PatchedNamingPartsTemplateRequest
  */
-export interface PatchedTagRequest {
+export interface PatchedNamingPartsTemplateRequest {
     /**
-     * Full name of the tags
+     * Name of the template
      * @type {string}
-     * @memberof PatchedTagRequest
+     * @memberof PatchedNamingPartsTemplateRequest
      */
     name?: string;
     /**
      * 
-     * Color of the Tag status in hexadecimal string without the '#' prefix.
-     * Example: 'fff', 'fff0', '0f0f0f', '0f0f0f00'.
-     * @type {string}
-     * @memberof PatchedTagRequest
+     * @type {Array<string>}
+     * @memberof PatchedNamingPartsTemplateRequest
      */
-    color?: string | null;
+    elements?: Array<string>;
 }
 
-export function PatchedTagRequestFromJSON(json: any): PatchedTagRequest {
-    return PatchedTagRequestFromJSONTyped(json, false);
+export function PatchedNamingPartsTemplateRequestFromJSON(json: any): PatchedNamingPartsTemplateRequest {
+    return PatchedNamingPartsTemplateRequestFromJSONTyped(json, false);
 }
 
-export function PatchedTagRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedTagRequest {
+export function PatchedNamingPartsTemplateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedNamingPartsTemplateRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'color': !exists(json, 'color') ? undefined : json['color'],
+        'elements': !exists(json, 'elements') ? undefined : json['elements'],
     };
 }
 
-export function PatchedTagRequestToJSON(value?: PatchedTagRequest | null): any {
+export function PatchedNamingPartsTemplateRequestToJSON(value?: PatchedNamingPartsTemplateRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -60,7 +58,7 @@ export function PatchedTagRequestToJSON(value?: PatchedTagRequest | null): any {
     return {
         
         'name': value.name,
-        'color': value.color,
+        'elements': value.elements,
     };
 }
 

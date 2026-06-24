@@ -64,10 +64,10 @@ export interface UserInvitation {
     project_name?: string;
     /**
      * 
-     *         A: Accepted
-     *         D: Denied
-     *         P: Pending
-     *         
+     * A: Accepted
+     * D: Denied
+     * P: Pending
+     * 
      * 
      * * `A` - accepted
      * * `D` - denied

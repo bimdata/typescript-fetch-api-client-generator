@@ -16,48 +16,46 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Priority
+ * @interface NamingPartsTemplate
  */
-export interface Priority {
+export interface NamingPartsTemplate {
     /**
      * 
      * @type {number}
-     * @memberof Priority
+     * @memberof NamingPartsTemplate
      */
     readonly id: number;
     /**
-     * 
+     * Name of the template
      * @type {string}
-     * @memberof Priority
+     * @memberof NamingPartsTemplate
      */
-    priority: string;
+    name: string;
     /**
      * 
-     * Color of the priority in hexadecimal string without the '#' prefix.
-     * Example: 'fff', 'fff0', '0f0f0f', '0f0f0f00'.
-     * @type {string}
-     * @memberof Priority
+     * @type {Array<string>}
+     * @memberof NamingPartsTemplate
      */
-    color?: string | null;
+    elements: Array<string>;
 }
 
-export function PriorityFromJSON(json: any): Priority {
-    return PriorityFromJSONTyped(json, false);
+export function NamingPartsTemplateFromJSON(json: any): NamingPartsTemplate {
+    return NamingPartsTemplateFromJSONTyped(json, false);
 }
 
-export function PriorityFromJSONTyped(json: any, ignoreDiscriminator: boolean): Priority {
+export function NamingPartsTemplateFromJSONTyped(json: any, ignoreDiscriminator: boolean): NamingPartsTemplate {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'id': json['id'],
-        'priority': json['priority'],
-        'color': !exists(json, 'color') ? undefined : json['color'],
+        'name': json['name'],
+        'elements': json['elements'],
     };
 }
 
-export function PriorityToJSON(value?: Priority | null): any {
+export function NamingPartsTemplateToJSON(value?: NamingPartsTemplate | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -66,8 +64,8 @@ export function PriorityToJSON(value?: Priority | null): any {
     }
     return {
         
-        'priority': value.priority,
-        'color': value.color,
+        'name': value.name,
+        'elements': value.elements,
     };
 }
 
