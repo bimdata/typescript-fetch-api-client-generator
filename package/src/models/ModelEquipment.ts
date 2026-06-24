@@ -20,11 +20,11 @@ import {
     EquipmentImageToJSON,
 } from './EquipmentImage';
 import {
-    User,
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-} from './User';
+    ShortUser,
+    ShortUserFromJSON,
+    ShortUserFromJSONTyped,
+    ShortUserToJSON,
+} from './ShortUser';
 
 /**
  * 
@@ -43,7 +43,7 @@ export interface ModelEquipment {
      * @type {number}
      * @memberof ModelEquipment
      */
-    readonly model: number;
+    readonly model_id: number;
     /**
      * Name of the equipment
      * @type {string}
@@ -70,10 +70,10 @@ export interface ModelEquipment {
     readonly images: Array<EquipmentImage>;
     /**
      * 
-     * @type {User}
+     * @type {ShortUser}
      * @memberof ModelEquipment
      */
-    readonly creator: User | null;
+    readonly creator: ShortUser | null;
     /**
      * Creation date
      * @type {Date}
@@ -99,12 +99,12 @@ export function ModelEquipmentFromJSONTyped(json: any, ignoreDiscriminator: bool
     return {
         
         'id': json['id'],
-        'model': json['model'],
+        'model_id': json['model_id'],
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'position': json['position'],
         'images': ((json['images'] as Array<any>).map(EquipmentImageFromJSON)),
-        'creator': UserFromJSON(json['creator']),
+        'creator': ShortUserFromJSON(json['creator']),
         'created_at': (new Date(json['created_at'])),
         'updated_at': (new Date(json['updated_at'])),
     };

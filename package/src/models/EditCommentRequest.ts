@@ -16,88 +16,74 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Comment
+ * @interface EditCommentRequest
  */
-export interface Comment {
-    /**
-     * 
-     * @type {string}
-     * @memberof Comment
-     */
-    author?: string | null;
+export interface EditCommentRequest {
     /**
      * 
      * @type {Date}
-     * @memberof Comment
+     * @memberof EditCommentRequest
      */
     date?: Date;
     /**
      * 
      * @type {string}
-     * @memberof Comment
+     * @memberof EditCommentRequest
      */
-    viewpoint_guid?: string | null;
+    author?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Comment
+     * @memberof EditCommentRequest
      */
     comment?: string;
     /**
      * 
      * @type {string}
-     * @memberof Comment
+     * @memberof EditCommentRequest
      */
-    readonly topic_guid: string;
+    viewpoint_guid?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Comment
-     */
-    modified_author?: string | null;
-    /**
-     * 
-     * @type {Date}
-     * @memberof Comment
-     */
-    readonly modified_date: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof Comment
+     * @memberof EditCommentRequest
      */
     reply_to_comment_guid?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Comment
+     * @memberof EditCommentRequest
      */
-    guid?: string;
+    modified_author?: string | null;
+    /**
+     * Only used when using POST on the full-topic route to bind viewpoint with comment
+     * @type {number}
+     * @memberof EditCommentRequest
+     */
+    viewpoint_temp_id?: number;
 }
 
-export function CommentFromJSON(json: any): Comment {
-    return CommentFromJSONTyped(json, false);
+export function EditCommentRequestFromJSON(json: any): EditCommentRequest {
+    return EditCommentRequestFromJSONTyped(json, false);
 }
 
-export function CommentFromJSONTyped(json: any, ignoreDiscriminator: boolean): Comment {
+export function EditCommentRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): EditCommentRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'author': !exists(json, 'author') ? undefined : json['author'],
         'date': !exists(json, 'date') ? undefined : (new Date(json['date'])),
-        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
+        'author': !exists(json, 'author') ? undefined : json['author'],
         'comment': !exists(json, 'comment') ? undefined : json['comment'],
-        'topic_guid': json['topic_guid'],
-        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
-        'modified_date': (new Date(json['modified_date'])),
+        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
         'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
-        'guid': !exists(json, 'guid') ? undefined : json['guid'],
+        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
+        'viewpoint_temp_id': !exists(json, 'viewpoint_temp_id') ? undefined : json['viewpoint_temp_id'],
     };
 }
 
-export function CommentToJSON(value?: Comment | null): any {
+export function EditCommentRequestToJSON(value?: EditCommentRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -106,13 +92,13 @@ export function CommentToJSON(value?: Comment | null): any {
     }
     return {
         
-        'author': value.author,
         'date': value.date === undefined ? undefined : (value.date.toISOString()),
-        'viewpoint_guid': value.viewpoint_guid,
+        'author': value.author,
         'comment': value.comment,
-        'modified_author': value.modified_author,
+        'viewpoint_guid': value.viewpoint_guid,
         'reply_to_comment_guid': value.reply_to_comment_guid,
-        'guid': value.guid,
+        'modified_author': value.modified_author,
+        'viewpoint_temp_id': value.viewpoint_temp_id,
     };
 }
 

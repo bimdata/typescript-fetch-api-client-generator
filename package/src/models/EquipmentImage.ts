@@ -21,6 +21,12 @@ import { exists, mapValues } from '../runtime';
 export interface EquipmentImage {
     /**
      * 
+     * @type {number}
+     * @memberof EquipmentImage
+     */
+    readonly id: number;
+    /**
+     * 
      * @type {string}
      * @memberof EquipmentImage
      */
@@ -37,6 +43,7 @@ export function EquipmentImageFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
+        'id': json['id'],
         'file': json['file'],
     };
 }

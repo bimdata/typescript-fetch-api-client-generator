@@ -49,6 +49,8 @@ src/models/DocumentText.ts
 src/models/DocumentWithElementList.ts
 src/models/Drawing.ts
 src/models/DrawingRequest.ts
+src/models/EditComment.ts
+src/models/EditCommentRequest.ts
 src/models/Element.ts
 src/models/ElementClassificationRelation.ts
 src/models/ElementClassificationRelationRequest.ts

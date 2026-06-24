@@ -1698,7 +1698,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{equipment_pk}/equipment-image`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"equipment_pk"}}`, encodeURIComponent(String(requestParameters.equipment_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{equipment_pk}/image`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"equipment_pk"}}`, encodeURIComponent(String(requestParameters.equipment_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -5355,7 +5355,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{equipment_pk}/equipment-image/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"equipment_pk"}}`, encodeURIComponent(String(requestParameters.equipment_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{equipment_pk}/image/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"equipment_pk"}}`, encodeURIComponent(String(requestParameters.equipment_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -7965,7 +7965,7 @@ export class ModelApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{equipment_pk}/equipment-image`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"equipment_pk"}}`, encodeURIComponent(String(requestParameters.equipment_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{equipment_pk}/image`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"equipment_pk"}}`, encodeURIComponent(String(requestParameters.equipment_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

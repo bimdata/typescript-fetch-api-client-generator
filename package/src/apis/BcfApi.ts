@@ -54,6 +54,12 @@ import {
     DocumentReferenceRequest,
     DocumentReferenceRequestFromJSON,
     DocumentReferenceRequestToJSON,
+    EditComment,
+    EditCommentFromJSON,
+    EditCommentToJSON,
+    EditCommentRequest,
+    EditCommentRequestFromJSON,
+    EditCommentRequestToJSON,
     Extensions,
     ExtensionsFromJSON,
     ExtensionsToJSON,
@@ -303,7 +309,7 @@ export interface FullUpdateCommentRequest {
     guid: string;
     projects_pk: number;
     topics_guid: string;
-    CommentRequest?: CommentRequest;
+    EditCommentRequest?: EditCommentRequest;
 }
 
 export interface FullUpdateDocumentReferenceRequest {
@@ -1991,7 +1997,7 @@ export class BcfApi extends runtime.BaseAPI {
      * Update all fields of a comment  Required scopes: bcf:write
      * Update all fields of a comment
      */
-    async fullUpdateCommentRaw(requestParameters: FullUpdateCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Comment>> {
+    async fullUpdateCommentRaw(requestParameters: FullUpdateCommentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<EditComment>> {
         if (requestParameters.guid === null || requestParameters.guid === undefined) {
             throw new runtime.RequiredError('guid','Required parameter requestParameters.guid was null or undefined when calling fullUpdateComment.');
         }
@@ -2033,18 +2039,18 @@ export class BcfApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: CommentRequestToJSON(requestParameters.CommentRequest),
+            body: EditCommentRequestToJSON(requestParameters.EditCommentRequest),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CommentFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => EditCommentFromJSON(jsonValue));
     }
 
     /**
      * Update all fields of a comment  Required scopes: bcf:write
      * Update all fields of a comment
      */
-    async fullUpdateComment(guid: string, projects_pk: number, topics_guid: string, CommentRequest?: CommentRequest, initOverrides?: RequestInit): Promise<Comment> {
-        const response = await this.fullUpdateCommentRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, CommentRequest: CommentRequest }, initOverrides);
+    async fullUpdateComment(guid: string, projects_pk: number, topics_guid: string, EditCommentRequest?: EditCommentRequest, initOverrides?: RequestInit): Promise<EditComment> {
+        const response = await this.fullUpdateCommentRaw({ guid: guid, projects_pk: projects_pk, topics_guid: topics_guid, EditCommentRequest: EditCommentRequest }, initOverrides);
         return await response.value();
     }
 

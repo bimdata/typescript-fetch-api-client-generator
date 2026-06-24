@@ -44,6 +44,8 @@ export * from './DocumentText';
 export * from './DocumentWithElementList';
 export * from './Drawing';
 export * from './DrawingRequest';
+export * from './EditComment';
+export * from './EditCommentRequest';
 export * from './Element';
 export * from './ElementClassificationRelation';
 export * from './ElementClassificationRelationRequest';
