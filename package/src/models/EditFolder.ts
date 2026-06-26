@@ -39,36 +39,6 @@ import {
  */
 export interface EditFolder {
     /**
-     * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
-     * @type {string}
-     * @memberof EditFolder
-     */
-    readonly type: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EditFolder
-     */
-    parent_id?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EditFolder
-     */
-    readonly id: number;
-    /**
-     * List of group permissions
-     * @type {Array<GroupFolderRead>}
-     * @memberof EditFolder
-     */
-    readonly groups_permissions: Array<GroupFolderRead>;
-    /**
-     * Date of the last update
-     * @type {Date}
-     * @memberof EditFolder
-     */
-    readonly updated_at: Date;
-    /**
      * Permission for a Folder
      * 
      * * `1` - denied
@@ -85,11 +55,29 @@ export interface EditFolder {
      */
     readonly created_by: ShortUser | null;
     /**
+     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * @type {string}
+     * @memberof EditFolder
+     */
+    readonly nature: string;
+    /**
+     * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * @type {string}
+     * @memberof EditFolder
+     */
+    readonly type: string;
+    /**
      * Creation date
      * @type {Date}
      * @memberof EditFolder
      */
     readonly created_at: Date;
+    /**
+     * List of group permissions
+     * @type {Array<GroupFolderRead>}
+     * @memberof EditFolder
+     */
+    readonly groups_permissions: Array<GroupFolderRead>;
     /**
      * Aggregate of group user permissions and folder default permission
      * @type {number}
@@ -97,17 +85,29 @@ export interface EditFolder {
      */
     readonly user_permission: EditFolderUserPermissionEnum;
     /**
-     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
-     * @type {string}
+     * 
+     * @type {number}
      * @memberof EditFolder
      */
-    readonly nature: string;
+    parent_id?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof EditFolder
+     */
+    readonly id: number;
     /**
      * Name of the folder
      * @type {string}
      * @memberof EditFolder
      */
     name: string;
+    /**
+     * Date of the last update
+     * @type {Date}
+     * @memberof EditFolder
+     */
+    readonly updated_at: Date;
     /**
      * Return document with naming conflict. This is only set when you move a folder
      * @type {Array<LightDocument>}
@@ -144,17 +144,17 @@ export function EditFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
-        'type': json['type'],
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'id': json['id'],
-        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
-        'updated_at': (new Date(json['updated_at'])),
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'created_by': ShortUserFromJSON(json['created_by']),
-        'created_at': (new Date(json['created_at'])),
-        'user_permission': json['user_permission'],
         'nature': json['nature'],
+        'type': json['type'],
+        'created_at': (new Date(json['created_at'])),
+        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
+        'user_permission': json['user_permission'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'id': json['id'],
         'name': json['name'],
+        'updated_at': (new Date(json['updated_at'])),
         'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
     };
 }
@@ -168,8 +168,8 @@ export function EditFolderToJSON(value?: EditFolder | null): any {
     }
     return {
         
-        'parent_id': value.parent_id,
         'default_permission': value.default_permission,
+        'parent_id': value.parent_id,
         'name': value.name,
     };
 }

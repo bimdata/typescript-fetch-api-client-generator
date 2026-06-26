@@ -34,7 +34,7 @@ export interface PatchedNamingConstraintRequest {
     /**
      * 
      * When the constraint is strict, documents upload with invalid name and move in a conflict folder will be blocked.
-     * If the constraint is non scrict, documents will be flagged on field `naming_constraint_conflit`
+     * If the constraint is non scrict, documents will be flagged on field `naming_constraint_conflict`
      * @type {boolean}
      * @memberof PatchedNamingConstraintRequest
      */

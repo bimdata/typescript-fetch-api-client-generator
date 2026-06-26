@@ -181,7 +181,7 @@ export interface Document {
      * @type {boolean}
      * @memberof Document
      */
-    readonly naming_constraint_conflit: boolean;
+    readonly naming_constraint_conflict: boolean;
 }
 
 /**
@@ -243,7 +243,7 @@ export function DocumentFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'user_permission': json['user_permission'],
         'office_preview': json['office_preview'],
         'path': json['path'],
-        'naming_constraint_conflit': json['naming_constraint_conflit'],
+        'naming_constraint_conflict': json['naming_constraint_conflict'],
     };
 }
 

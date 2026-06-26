@@ -133,7 +133,7 @@ export interface RecursiveFolderChildren {
      * @type {boolean}
      * @memberof RecursiveFolderChildren
      */
-    naming_constraint_conflit?: boolean | null;
+    naming_constraint_conflict?: boolean | null;
     /**
      * DEPRECATED: This field must be present because of legacy constraints but will always be empty. If you want to see group permissions of a folder, see `getFolder`
      * @type {boolean}
@@ -248,7 +248,7 @@ export function RecursiveFolderChildrenFromJSONTyped(json: any, ignoreDiscrimina
         'ifc_id': json['ifc_id'],
         'file': !exists(json, 'file') ? undefined : json['file'],
         'office_preview': !exists(json, 'office_preview') ? undefined : json['office_preview'],
-        'naming_constraint_conflit': !exists(json, 'naming_constraint_conflit') ? undefined : json['naming_constraint_conflit'],
+        'naming_constraint_conflict': !exists(json, 'naming_constraint_conflict') ? undefined : json['naming_constraint_conflict'],
         'groups_permissions': json['groups_permissions'],
         'default_permission': json['default_permission'],
         'user_permission': json['user_permission'],
@@ -277,7 +277,7 @@ export function RecursiveFolderChildrenToJSON(value?: RecursiveFolderChildren | 
         'size': value.size,
         'file': value.file,
         'office_preview': value.office_preview,
-        'naming_constraint_conflit': value.naming_constraint_conflit,
+        'naming_constraint_conflict': value.naming_constraint_conflict,
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(RecursiveFolderChildrenToJSON)),
     };
 }

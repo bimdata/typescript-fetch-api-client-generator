@@ -32,11 +32,11 @@ export interface DocumentText {
      */
     text?: string | null;
     /**
-     * * `french` - french
-     * * `english` - english
-     * * `italian` - italian
      * * `spanish` - spanish
+     * * `italian` - italian
      * * `german` - german
+     * * `english` - english
+     * * `french` - french
      * @type {string}
      * @memberof DocumentText
      */
@@ -48,11 +48,11 @@ export interface DocumentText {
 * @enum {string}
 */
 export enum DocumentTextLanguageEnum {
-    French = 'french',
-    English = 'english',
-    Italian = 'italian',
     Spanish = 'spanish',
+    Italian = 'italian',
     German = 'german',
+    English = 'english',
+    French = 'french',
     Null = 'null'
 }
 
