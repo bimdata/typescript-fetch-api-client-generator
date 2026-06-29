@@ -90,6 +90,9 @@ import {
     LayerRequest,
     LayerRequestFromJSON,
     LayerRequestToJSON,
+    LightDocument,
+    LightDocumentFromJSON,
+    LightDocumentToJSON,
     LightModel,
     LightModelFromJSON,
     LightModelToJSON,
@@ -1007,6 +1010,13 @@ export interface GetEquipmentRequest {
     project_pk: number;
 }
 
+export interface GetEquipmentDocumentsRequest {
+    cloud_pk: number;
+    equipment_pk: number;
+    model_pk: number;
+    project_pk: number;
+}
+
 export interface GetEquipmentImagesRequest {
     cloud_pk: number;
     equipment_pk: number;
@@ -1312,6 +1322,13 @@ export interface LinkDocumentsOfElementRequest {
     request_body: Array<number>;
 }
 
+export interface LinkDocumentsToEquipmentRequest {
+    cloud_pk: number;
+    equipment_pk: number;
+    model_pk: number;
+    project_pk: number;
+}
+
 export interface ListClassificationElementRelationsRequest {
     cloud_pk: number;
     model_pk: number;
@@ -1404,6 +1421,14 @@ export interface RemoveElementsFromClassificationRequest {
     model_pk: number;
     project_pk: number;
     uuid: string;
+}
+
+export interface RemoveEquipmentDocumentRequest {
+    cloud_pk: number;
+    equipment_pk: number;
+    id: number;
+    model_pk: number;
+    project_pk: number;
 }
 
 export interface ReprocessModelRequest {
@@ -7922,6 +7947,68 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve all documents of an equipment  Required scopes: ifc:read, model:read
+     * Retrieve all documents of an equipment
+     */
+    async getEquipmentDocumentsRaw(requestParameters: GetEquipmentDocumentsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<LightDocument>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getEquipmentDocuments.');
+        }
+
+        if (requestParameters.equipment_pk === null || requestParameters.equipment_pk === undefined) {
+            throw new runtime.RequiredError('equipment_pk','Required parameter requestParameters.equipment_pk was null or undefined when calling getEquipmentDocuments.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling getEquipmentDocuments.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getEquipmentDocuments.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{equipment_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"equipment_pk"}}`, encodeURIComponent(String(requestParameters.equipment_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LightDocumentFromJSON));
+    }
+
+    /**
+     * Retrieve all documents of an equipment  Required scopes: ifc:read, model:read
+     * Retrieve all documents of an equipment
+     */
+    async getEquipmentDocuments(cloud_pk: number, equipment_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<LightDocument>> {
+        const response = await this.getEquipmentDocumentsRaw({ cloud_pk: cloud_pk, equipment_pk: equipment_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve all images attached to the equipment  Required scopes: ifc:read, model:read
      * Retrieve all images attached to the equipment
      */
@@ -10640,6 +10727,68 @@ export class ModelApi extends runtime.BaseAPI {
     }
 
     /**
+     *  Bulk relation create available. You can either post an id or a list of ids. Is you post a list, the response will be a list (in the same order) of created relation or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
+     * Link one or many documents to an equipment
+     */
+    async linkDocumentsToEquipmentRaw(requestParameters: LinkDocumentsToEquipmentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<LightDocument>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling linkDocumentsToEquipment.');
+        }
+
+        if (requestParameters.equipment_pk === null || requestParameters.equipment_pk === undefined) {
+            throw new runtime.RequiredError('equipment_pk','Required parameter requestParameters.equipment_pk was null or undefined when calling linkDocumentsToEquipment.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling linkDocumentsToEquipment.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling linkDocumentsToEquipment.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{equipment_pk}/document`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"equipment_pk"}}`, encodeURIComponent(String(requestParameters.equipment_pk))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => LightDocumentFromJSON(jsonValue));
+    }
+
+    /**
+     *  Bulk relation create available. You can either post an id or a list of ids. Is you post a list, the response will be a list (in the same order) of created relation or of errors if any If at least one create succeeded, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors   Required scopes: ifc:write, model:write
+     * Link one or many documents to an equipment
+     */
+    async linkDocumentsToEquipment(cloud_pk: number, equipment_pk: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<LightDocument> {
+        const response = await this.linkDocumentsToEquipmentRaw({ cloud_pk: cloud_pk, equipment_pk: equipment_pk, model_pk: model_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * List all associations between classifications and elements  Required scopes: ifc:read, model:read
      * List all associations between classifications and elements
      */
@@ -11413,6 +11562,71 @@ export class ModelApi extends runtime.BaseAPI {
      */
     async removeElementsFromClassification(cloud_pk: number, model_classification_pk: number, model_pk: number, project_pk: number, uuid: string, initOverrides?: RequestInit): Promise<void> {
         await this.removeElementsFromClassificationRaw({ cloud_pk: cloud_pk, model_classification_pk: model_classification_pk, model_pk: model_pk, project_pk: project_pk, uuid: uuid }, initOverrides);
+    }
+
+    /**
+     * Remove the link between a document and an equipment, the document will not be deleted  Required scopes: ifc:write, model:write
+     * Remove a document from an equipment
+     */
+    async removeEquipmentDocumentRaw(requestParameters: RemoveEquipmentDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling removeEquipmentDocument.');
+        }
+
+        if (requestParameters.equipment_pk === null || requestParameters.equipment_pk === undefined) {
+            throw new runtime.RequiredError('equipment_pk','Required parameter requestParameters.equipment_pk was null or undefined when calling removeEquipmentDocument.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling removeEquipmentDocument.');
+        }
+
+        if (requestParameters.model_pk === null || requestParameters.model_pk === undefined) {
+            throw new runtime.RequiredError('model_pk','Required parameter requestParameters.model_pk was null or undefined when calling removeEquipmentDocument.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling removeEquipmentDocument.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/model/{model_pk}/equipment/{equipment_pk}/document/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"equipment_pk"}}`, encodeURIComponent(String(requestParameters.equipment_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"model_pk"}}`, encodeURIComponent(String(requestParameters.model_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Remove the link between a document and an equipment, the document will not be deleted  Required scopes: ifc:write, model:write
+     * Remove a document from an equipment
+     */
+    async removeEquipmentDocument(cloud_pk: number, equipment_pk: number, id: number, model_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.removeEquipmentDocumentRaw({ cloud_pk: cloud_pk, equipment_pk: equipment_pk, id: id, model_pk: model_pk, project_pk: project_pk }, initOverrides);
     }
 
     /**

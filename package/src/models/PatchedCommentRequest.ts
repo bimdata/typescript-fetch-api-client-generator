@@ -21,16 +21,10 @@ import { exists, mapValues } from '../runtime';
 export interface PatchedCommentRequest {
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof PatchedCommentRequest
      */
-    author?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PatchedCommentRequest
-     */
-    reply_to_comment_guid?: string | null;
+    date?: Date;
     /**
      * 
      * @type {string}
@@ -42,13 +36,19 @@ export interface PatchedCommentRequest {
      * @type {string}
      * @memberof PatchedCommentRequest
      */
-    modified_author?: string | null;
+    reply_to_comment_guid?: string | null;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof PatchedCommentRequest
      */
-    date?: Date;
+    comment?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PatchedCommentRequest
+     */
+    author?: string | null;
     /**
      * Only used when using POST on the full-topic route to bind viewpoint with comment
      * @type {number}
@@ -60,7 +60,7 @@ export interface PatchedCommentRequest {
      * @type {string}
      * @memberof PatchedCommentRequest
      */
-    comment?: string;
+    modified_author?: string | null;
     /**
      * 
      * @type {string}
@@ -79,13 +79,13 @@ export function PatchedCommentRequestFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
-        'author': !exists(json, 'author') ? undefined : json['author'],
-        'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
-        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
-        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
         'date': !exists(json, 'date') ? undefined : (new Date(json['date'])),
-        'viewpoint_temp_id': !exists(json, 'viewpoint_temp_id') ? undefined : json['viewpoint_temp_id'],
+        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
+        'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
         'comment': !exists(json, 'comment') ? undefined : json['comment'],
+        'author': !exists(json, 'author') ? undefined : json['author'],
+        'viewpoint_temp_id': !exists(json, 'viewpoint_temp_id') ? undefined : json['viewpoint_temp_id'],
+        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
     };
 }
@@ -99,13 +99,13 @@ export function PatchedCommentRequestToJSON(value?: PatchedCommentRequest | null
     }
     return {
         
-        'author': value.author,
-        'reply_to_comment_guid': value.reply_to_comment_guid,
-        'viewpoint_guid': value.viewpoint_guid,
-        'modified_author': value.modified_author,
         'date': value.date === undefined ? undefined : (value.date.toISOString()),
-        'viewpoint_temp_id': value.viewpoint_temp_id,
+        'viewpoint_guid': value.viewpoint_guid,
+        'reply_to_comment_guid': value.reply_to_comment_guid,
         'comment': value.comment,
+        'author': value.author,
+        'viewpoint_temp_id': value.viewpoint_temp_id,
+        'modified_author': value.modified_author,
         'guid': value.guid,
     };
 }
