@@ -107,6 +107,12 @@ export interface LightModel {
      * @memberof LightModel
      */
     readonly status: string;
+    /**
+     * Status of the fragments process. This field may be removed in future versions when the `status` will take fragments into account.
+     * @type {string}
+     * @memberof LightModel
+     */
+    readonly fragments_status: string;
 }
 
 /**
@@ -159,6 +165,7 @@ export function LightModelFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'source': json['source'],
         'archived': json['archived'],
         'status': json['status'],
+        'fragments_status': json['fragments_status'],
     };
 }
 
