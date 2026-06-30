@@ -21,16 +21,16 @@ import { exists, mapValues } from '../runtime';
 export interface PatchedEditFolderRequest {
     /**
      * 
-     * @type {number}
-     * @memberof PatchedEditFolderRequest
-     */
-    parent_id?: number | null;
-    /**
-     * 
      * @type {boolean}
      * @memberof PatchedEditFolderRequest
      */
     propagate?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof PatchedEditFolderRequest
+     */
+    parent_id?: number | null;
     /**
      * Permission for a Folder
      * 
@@ -69,8 +69,8 @@ export function PatchedEditFolderRequestFromJSONTyped(json: any, ignoreDiscrimin
     }
     return {
         
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'propagate': !exists(json, 'propagate') ? undefined : json['propagate'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
         'name': !exists(json, 'name') ? undefined : json['name'],
     };
@@ -85,8 +85,8 @@ export function PatchedEditFolderRequestToJSON(value?: PatchedEditFolderRequest 
     }
     return {
         
-        'parent_id': value.parent_id,
         'propagate': value.propagate,
+        'parent_id': value.parent_id,
         'default_permission': value.default_permission,
         'name': value.name,
     };

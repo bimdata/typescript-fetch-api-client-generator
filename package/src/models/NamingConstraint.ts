@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    LightDocument,
+    LightDocumentFromJSON,
+    LightDocumentFromJSONTyped,
+    LightDocumentToJSON,
+} from './LightDocument';
+
 /**
  * 
  * @export
@@ -45,6 +52,12 @@ export interface NamingConstraint {
      * @memberof NamingConstraint
      */
     strict: boolean;
+    /**
+     * 
+     * @type {Array<LightDocument>}
+     * @memberof NamingConstraint
+     */
+    readonly conflicting_documents: Array<LightDocument>;
 }
 
 export function NamingConstraintFromJSON(json: any): NamingConstraint {
@@ -61,6 +74,7 @@ export function NamingConstraintFromJSONTyped(json: any, ignoreDiscriminator: bo
         'name': json['name'],
         'rule': json['rule'],
         'strict': json['strict'],
+        'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
     };
 }
 

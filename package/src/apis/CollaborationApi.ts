@@ -2000,7 +2000,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DXF\', \'PHOTOSPHERE\', \'IFC\', \'OBJ\', \'DWG\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DWG\', \'GLTF\', \'PHOTOSPHERE\', \'DXF\', \'IFC\', \'OBJ\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -2097,7 +2097,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'POINT_CLOUD\', \'DXF\', \'PHOTOSPHERE\', \'IFC\', \'OBJ\', \'DWG\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'DWG\', \'GLTF\', \'PHOTOSPHERE\', \'DXF\', \'IFC\', \'OBJ\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -3291,10 +3291,10 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a naming constraint  Required scopes: document:write
+     * Delete a naming constraint. Responds with 200 OK and a list of documents that are now in conflict if the constraint is strict and some documents don\'t match the updated rule.  Required scopes: document:write
      * Delete a naming constraint
      */
-    async deleteNamingConstraintRaw(requestParameters: DeleteNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async deleteNamingConstraintRaw(requestParameters: DeleteNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<LightDocument>>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteNamingConstraint.');
         }
@@ -3336,15 +3336,16 @@ export class CollaborationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LightDocumentFromJSON));
     }
 
     /**
-     * Delete a naming constraint  Required scopes: document:write
+     * Delete a naming constraint. Responds with 200 OK and a list of documents that are now in conflict if the constraint is strict and some documents don\'t match the updated rule.  Required scopes: document:write
      * Delete a naming constraint
      */
-    async deleteNamingConstraint(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteNamingConstraintRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+    async deleteNamingConstraint(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<LightDocument>> {
+        const response = await this.deleteNamingConstraintRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+        return await response.value();
     }
 
     /**
