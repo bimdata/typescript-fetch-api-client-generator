@@ -26,12 +26,6 @@ export interface PatchedEditFolderRequest {
      */
     propagate?: boolean;
     /**
-     * 
-     * @type {number}
-     * @memberof PatchedEditFolderRequest
-     */
-    parent_id?: number | null;
-    /**
      * Permission for a Folder
      * 
      * * `1` - denied
@@ -41,6 +35,12 @@ export interface PatchedEditFolderRequest {
      * @memberof PatchedEditFolderRequest
      */
     default_permission?: PatchedEditFolderRequestDefaultPermissionEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof PatchedEditFolderRequest
+     */
+    parent_id?: number | null;
     /**
      * Name of the folder
      * @type {string}
@@ -70,8 +70,8 @@ export function PatchedEditFolderRequestFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'propagate': !exists(json, 'propagate') ? undefined : json['propagate'],
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
     };
 }
@@ -86,8 +86,8 @@ export function PatchedEditFolderRequestToJSON(value?: PatchedEditFolderRequest 
     return {
         
         'propagate': value.propagate,
-        'parent_id': value.parent_id,
         'default_permission': value.default_permission,
+        'parent_id': value.parent_id,
         'name': value.name,
     };
 }

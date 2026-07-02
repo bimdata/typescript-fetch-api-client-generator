@@ -19,6 +19,12 @@ import {
     LightDocumentFromJSONTyped,
     LightDocumentToJSON,
 } from './LightDocument';
+import {
+    ShortUser,
+    ShortUserFromJSON,
+    ShortUserFromJSONTyped,
+    ShortUserToJSON,
+} from './ShortUser';
 
 /**
  * 
@@ -58,6 +64,12 @@ export interface NamingConstraint {
      * @memberof NamingConstraint
      */
     readonly conflicting_documents: Array<LightDocument>;
+    /**
+     * 
+     * @type {ShortUser}
+     * @memberof NamingConstraint
+     */
+    readonly creator: ShortUser | null;
 }
 
 export function NamingConstraintFromJSON(json: any): NamingConstraint {
@@ -75,6 +87,7 @@ export function NamingConstraintFromJSONTyped(json: any, ignoreDiscriminator: bo
         'rule': json['rule'],
         'strict': json['strict'],
         'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
+        'creator': ShortUserFromJSON(json['creator']),
     };
 }
 

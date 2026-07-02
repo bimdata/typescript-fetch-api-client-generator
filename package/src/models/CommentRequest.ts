@@ -24,19 +24,7 @@ export interface CommentRequest {
      * @type {string}
      * @memberof CommentRequest
      */
-    viewpoint_guid?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CommentRequest
-     */
     modified_author?: string | null;
-    /**
-     * Only used when using POST on the full-topic route to bind viewpoint with comment
-     * @type {number}
-     * @memberof CommentRequest
-     */
-    viewpoint_temp_id?: number;
     /**
      * 
      * @type {Date}
@@ -48,13 +36,25 @@ export interface CommentRequest {
      * @type {string}
      * @memberof CommentRequest
      */
-    author?: string | null;
+    viewpoint_guid?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CommentRequest
      */
     reply_to_comment_guid?: string | null;
+    /**
+     * Only used when using POST on the full-topic route to bind viewpoint with comment
+     * @type {number}
+     * @memberof CommentRequest
+     */
+    viewpoint_temp_id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CommentRequest
+     */
+    author?: string | null;
     /**
      * 
      * @type {string}
@@ -79,12 +79,12 @@ export function CommentRequestFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
-        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
         'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
-        'viewpoint_temp_id': !exists(json, 'viewpoint_temp_id') ? undefined : json['viewpoint_temp_id'],
         'date': !exists(json, 'date') ? undefined : (new Date(json['date'])),
-        'author': !exists(json, 'author') ? undefined : json['author'],
+        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
         'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
+        'viewpoint_temp_id': !exists(json, 'viewpoint_temp_id') ? undefined : json['viewpoint_temp_id'],
+        'author': !exists(json, 'author') ? undefined : json['author'],
         'comment': !exists(json, 'comment') ? undefined : json['comment'],
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
     };
@@ -99,12 +99,12 @@ export function CommentRequestToJSON(value?: CommentRequest | null): any {
     }
     return {
         
-        'viewpoint_guid': value.viewpoint_guid,
         'modified_author': value.modified_author,
-        'viewpoint_temp_id': value.viewpoint_temp_id,
         'date': value.date === undefined ? undefined : (value.date.toISOString()),
-        'author': value.author,
+        'viewpoint_guid': value.viewpoint_guid,
         'reply_to_comment_guid': value.reply_to_comment_guid,
+        'viewpoint_temp_id': value.viewpoint_temp_id,
+        'author': value.author,
         'comment': value.comment,
         'guid': value.guid,
     };
