@@ -45,23 +45,23 @@ export interface EditFolder {
      */
     readonly created_at: Date;
     /**
-     * List of group permissions
-     * @type {Array<GroupFolderRead>}
+     * 
+     * @type {ShortUser}
      * @memberof EditFolder
      */
-    readonly groups_permissions: Array<GroupFolderRead>;
+    readonly created_by: ShortUser | null;
     /**
-     * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * 
+     * @type {number}
+     * @memberof EditFolder
+     */
+    parent_id?: number | null;
+    /**
+     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
      * @memberof EditFolder
      */
-    readonly type: string;
-    /**
-     * Date of the last update
-     * @type {Date}
-     * @memberof EditFolder
-     */
-    readonly updated_at: Date;
+    readonly nature: string;
     /**
      * Permission for a Folder
      * 
@@ -73,17 +73,17 @@ export interface EditFolder {
      */
     default_permission?: EditFolderDefaultPermissionEnum;
     /**
-     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
      * @memberof EditFolder
      */
-    readonly nature: string;
+    readonly type: string;
     /**
-     * 
-     * @type {ShortUser}
+     * Name of the folder
+     * @type {string}
      * @memberof EditFolder
      */
-    readonly created_by: ShortUser | null;
+    name: string;
     /**
      * Aggregate of group user permissions and folder default permission
      * @type {number}
@@ -95,19 +95,19 @@ export interface EditFolder {
      * @type {number}
      * @memberof EditFolder
      */
-    parent_id?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof EditFolder
-     */
     readonly id: number;
     /**
-     * Name of the folder
-     * @type {string}
+     * Date of the last update
+     * @type {Date}
      * @memberof EditFolder
      */
-    name: string;
+    readonly updated_at: Date;
+    /**
+     * List of group permissions
+     * @type {Array<GroupFolderRead>}
+     * @memberof EditFolder
+     */
+    readonly groups_permissions: Array<GroupFolderRead>;
     /**
      * Return document with naming conflict. This is only set when you move a folder
      * @type {Array<LightDocument>}
@@ -145,16 +145,16 @@ export function EditFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'created_at': (new Date(json['created_at'])),
-        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
-        'type': json['type'],
-        'updated_at': (new Date(json['updated_at'])),
-        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
-        'nature': json['nature'],
         'created_by': ShortUserFromJSON(json['created_by']),
-        'user_permission': json['user_permission'],
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'id': json['id'],
+        'nature': json['nature'],
+        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'type': json['type'],
         'name': json['name'],
+        'user_permission': json['user_permission'],
+        'id': json['id'],
+        'updated_at': (new Date(json['updated_at'])),
+        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
         'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
     };
 }
@@ -168,8 +168,8 @@ export function EditFolderToJSON(value?: EditFolder | null): any {
     }
     return {
         
-        'default_permission': value.default_permission,
         'parent_id': value.parent_id,
+        'default_permission': value.default_permission,
         'name': value.name,
     };
 }
