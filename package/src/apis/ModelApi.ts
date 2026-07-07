@@ -10731,7 +10731,7 @@ export class ModelApi extends runtime.BaseAPI {
      *  Bulk relation create available. You can either post an id or a list of ids. If you post a list, the response will be a list of created relation (in the same order) or of errors if any. If at least one create succeed, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors.   Required scopes: ifc:write, model:write
      * Link one or many documents to an equipment
      */
-    async linkDocumentsToEquipmentRaw(requestParameters: LinkDocumentsToEquipmentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<Document>>> {
+    async linkDocumentsToEquipmentRaw(requestParameters: LinkDocumentsToEquipmentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<LightDocument>>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
             throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling linkDocumentsToEquipment.');
         }
@@ -10784,14 +10784,14 @@ export class ModelApi extends runtime.BaseAPI {
             body: requestParameters.request_body,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DocumentFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LightDocumentFromJSON));
     }
 
     /**
      *  Bulk relation create available. You can either post an id or a list of ids. If you post a list, the response will be a list of created relation (in the same order) or of errors if any. If at least one create succeed, the status code will be 201. If every create failed, the status code we\'ll be 400 with the list of errors.   Required scopes: ifc:write, model:write
      * Link one or many documents to an equipment
      */
-    async linkDocumentsToEquipment(cloud_pk: number, equipment_pk: number, model_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<Array<Document>> {
+    async linkDocumentsToEquipment(cloud_pk: number, equipment_pk: number, model_pk: number, project_pk: number, request_body: Array<number>, initOverrides?: RequestInit): Promise<Array<LightDocument>> {
         const response = await this.linkDocumentsToEquipmentRaw({ cloud_pk: cloud_pk, equipment_pk: equipment_pk, model_pk: model_pk, project_pk: project_pk, request_body: request_body }, initOverrides);
         return await response.value();
     }

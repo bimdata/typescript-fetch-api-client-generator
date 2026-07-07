@@ -24,19 +24,19 @@ export interface Comment {
      * @type {string}
      * @memberof Comment
      */
-    readonly topic_guid: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof Comment
-     */
-    date?: Date;
+    comment?: string;
     /**
      * 
      * @type {string}
      * @memberof Comment
      */
-    viewpoint_guid?: string | null;
+    readonly topic_guid: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Comment
+     */
+    modified_author?: string | null;
     /**
      * 
      * @type {Date}
@@ -48,25 +48,25 @@ export interface Comment {
      * @type {string}
      * @memberof Comment
      */
-    reply_to_comment_guid?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Comment
-     */
-    comment?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Comment
-     */
     author?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Comment
      */
-    modified_author?: string | null;
+    reply_to_comment_guid?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Comment
+     */
+    viewpoint_guid?: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Comment
+     */
+    date?: Date;
     /**
      * 
      * @type {string}
@@ -85,14 +85,14 @@ export function CommentFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
     }
     return {
         
-        'topic_guid': json['topic_guid'],
-        'date': !exists(json, 'date') ? undefined : (new Date(json['date'])),
-        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
-        'modified_date': (new Date(json['modified_date'])),
-        'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
         'comment': !exists(json, 'comment') ? undefined : json['comment'],
-        'author': !exists(json, 'author') ? undefined : json['author'],
+        'topic_guid': json['topic_guid'],
         'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
+        'modified_date': (new Date(json['modified_date'])),
+        'author': !exists(json, 'author') ? undefined : json['author'],
+        'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
+        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
+        'date': !exists(json, 'date') ? undefined : (new Date(json['date'])),
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
     };
 }
@@ -106,12 +106,12 @@ export function CommentToJSON(value?: Comment | null): any {
     }
     return {
         
-        'date': value.date === undefined ? undefined : (value.date.toISOString()),
-        'viewpoint_guid': value.viewpoint_guid,
-        'reply_to_comment_guid': value.reply_to_comment_guid,
         'comment': value.comment,
-        'author': value.author,
         'modified_author': value.modified_author,
+        'author': value.author,
+        'reply_to_comment_guid': value.reply_to_comment_guid,
+        'viewpoint_guid': value.viewpoint_guid,
+        'date': value.date === undefined ? undefined : (value.date.toISOString()),
         'guid': value.guid,
     };
 }
