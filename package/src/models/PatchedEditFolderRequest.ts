@@ -20,18 +20,6 @@ import { exists, mapValues } from '../runtime';
  */
 export interface PatchedEditFolderRequest {
     /**
-     * 
-     * @type {number}
-     * @memberof PatchedEditFolderRequest
-     */
-    parent_id?: number | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PatchedEditFolderRequest
-     */
-    propagate?: boolean;
-    /**
      * Permission for a Folder
      * 
      * * `1` - denied
@@ -42,11 +30,23 @@ export interface PatchedEditFolderRequest {
      */
     default_permission?: PatchedEditFolderRequestDefaultPermissionEnum;
     /**
+     * 
+     * @type {number}
+     * @memberof PatchedEditFolderRequest
+     */
+    parent_id?: number | null;
+    /**
      * Name of the folder
      * @type {string}
      * @memberof PatchedEditFolderRequest
      */
     name?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PatchedEditFolderRequest
+     */
+    propagate?: boolean;
 }
 
 /**
@@ -69,10 +69,10 @@ export function PatchedEditFolderRequestFromJSONTyped(json: any, ignoreDiscrimin
     }
     return {
         
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'propagate': !exists(json, 'propagate') ? undefined : json['propagate'],
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'propagate': !exists(json, 'propagate') ? undefined : json['propagate'],
     };
 }
 
@@ -85,10 +85,10 @@ export function PatchedEditFolderRequestToJSON(value?: PatchedEditFolderRequest 
     }
     return {
         
-        'parent_id': value.parent_id,
-        'propagate': value.propagate,
         'default_permission': value.default_permission,
+        'parent_id': value.parent_id,
         'name': value.name,
+        'propagate': value.propagate,
     };
 }
 

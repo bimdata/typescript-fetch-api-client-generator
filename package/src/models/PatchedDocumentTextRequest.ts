@@ -28,9 +28,9 @@ export interface PatchedDocumentTextRequest {
     /**
      * * `german` - german
      * * `english` - english
+     * * `french` - french
      * * `italian` - italian
      * * `spanish` - spanish
-     * * `french` - french
      * @type {string}
      * @memberof PatchedDocumentTextRequest
      */
@@ -44,9 +44,9 @@ export interface PatchedDocumentTextRequest {
 export enum PatchedDocumentTextRequestLanguageEnum {
     German = 'german',
     English = 'english',
+    French = 'french',
     Italian = 'italian',
     Spanish = 'spanish',
-    French = 'french',
     Null = 'null'
 }
 
