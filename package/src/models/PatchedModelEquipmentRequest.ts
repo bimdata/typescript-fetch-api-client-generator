@@ -32,6 +32,12 @@ export interface PatchedModelEquipmentRequest {
      */
     description?: string | null;
     /**
+     * An optional link to the equipment reference.
+     * @type {string}
+     * @memberof PatchedModelEquipmentRequest
+     */
+    reference_link?: string | null;
+    /**
      * 
      * @type {Array<number>}
      * @memberof PatchedModelEquipmentRequest
@@ -51,6 +57,7 @@ export function PatchedModelEquipmentRequestFromJSONTyped(json: any, ignoreDiscr
         
         'name': !exists(json, 'name') ? undefined : json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
+        'reference_link': !exists(json, 'reference_link') ? undefined : json['reference_link'],
         'position': !exists(json, 'position') ? undefined : json['position'],
     };
 }
@@ -66,6 +73,7 @@ export function PatchedModelEquipmentRequestToJSON(value?: PatchedModelEquipment
         
         'name': value.name,
         'description': value.description,
+        'reference_link': value.reference_link,
         'position': value.position,
     };
 }

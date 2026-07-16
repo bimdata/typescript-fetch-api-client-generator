@@ -57,6 +57,12 @@ export interface ModelEquipment {
      */
     description?: string | null;
     /**
+     * An optional link to the equipment reference.
+     * @type {string}
+     * @memberof ModelEquipment
+     */
+    reference_link?: string | null;
+    /**
      * 
      * @type {Array<number>}
      * @memberof ModelEquipment
@@ -102,6 +108,7 @@ export function ModelEquipmentFromJSONTyped(json: any, ignoreDiscriminator: bool
         'model_id': json['model_id'],
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
+        'reference_link': !exists(json, 'reference_link') ? undefined : json['reference_link'],
         'position': json['position'],
         'images': ((json['images'] as Array<any>).map(EquipmentImageFromJSON)),
         'creator': ShortUserFromJSON(json['creator']),
@@ -121,6 +128,7 @@ export function ModelEquipmentToJSON(value?: ModelEquipment | null): any {
         
         'name': value.name,
         'description': value.description,
+        'reference_link': value.reference_link,
         'position': value.position,
     };
 }

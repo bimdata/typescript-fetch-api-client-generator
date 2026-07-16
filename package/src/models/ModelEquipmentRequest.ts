@@ -32,6 +32,12 @@ export interface ModelEquipmentRequest {
      */
     description?: string | null;
     /**
+     * An optional link to the equipment reference.
+     * @type {string}
+     * @memberof ModelEquipmentRequest
+     */
+    reference_link?: string | null;
+    /**
      * 
      * @type {Array<number>}
      * @memberof ModelEquipmentRequest
@@ -51,6 +57,7 @@ export function ModelEquipmentRequestFromJSONTyped(json: any, ignoreDiscriminato
         
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
+        'reference_link': !exists(json, 'reference_link') ? undefined : json['reference_link'],
         'position': json['position'],
     };
 }
@@ -66,6 +73,7 @@ export function ModelEquipmentRequestToJSON(value?: ModelEquipmentRequest | null
         
         'name': value.name,
         'description': value.description,
+        'reference_link': value.reference_link,
         'position': value.position,
     };
 }
