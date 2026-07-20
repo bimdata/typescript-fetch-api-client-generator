@@ -119,6 +119,7 @@ export * from './NamingConstraint';
 export * from './NamingConstraintRequest';
 export * from './NamingPartsTemplate';
 export * from './NamingPartsTemplateRequest';
+export * from './NamingRuleConfiguration';
 export * from './Organization';
 export * from './OrganizationRequest';
 export * from './OrthogonalCamera';

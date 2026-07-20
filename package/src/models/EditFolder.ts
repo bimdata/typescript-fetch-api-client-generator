@@ -39,29 +39,17 @@ import {
  */
 export interface EditFolder {
     /**
+     * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * @type {string}
+     * @memberof EditFolder
+     */
+    readonly type: string;
+    /**
      * 
      * @type {number}
      * @memberof EditFolder
      */
     readonly id: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof EditFolder
-     */
-    parent_id?: number | null;
-    /**
-     * Aggregate of group user permissions and folder default permission
-     * @type {number}
-     * @memberof EditFolder
-     */
-    readonly user_permission: EditFolderUserPermissionEnum;
-    /**
-     * Name of the folder
-     * @type {string}
-     * @memberof EditFolder
-     */
-    name: string;
     /**
      * Creation date
      * @type {Date}
@@ -74,6 +62,30 @@ export interface EditFolder {
      * @memberof EditFolder
      */
     readonly groups_permissions: Array<GroupFolderRead>;
+    /**
+     * 
+     * @type {number}
+     * @memberof EditFolder
+     */
+    parent_id?: number | null;
+    /**
+     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * @type {string}
+     * @memberof EditFolder
+     */
+    readonly nature: string;
+    /**
+     * Aggregate of group user permissions and folder default permission
+     * @type {number}
+     * @memberof EditFolder
+     */
+    readonly user_permission: EditFolderUserPermissionEnum;
+    /**
+     * Date of the last update
+     * @type {Date}
+     * @memberof EditFolder
+     */
+    readonly updated_at: Date;
     /**
      * 
      * @type {ShortUser}
@@ -91,23 +103,11 @@ export interface EditFolder {
      */
     default_permission?: EditFolderDefaultPermissionEnum;
     /**
-     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * Name of the folder
      * @type {string}
      * @memberof EditFolder
      */
-    readonly nature: string;
-    /**
-     * Date of the last update
-     * @type {Date}
-     * @memberof EditFolder
-     */
-    readonly updated_at: Date;
-    /**
-     * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
-     * @type {string}
-     * @memberof EditFolder
-     */
-    readonly type: string;
+    name: string;
     /**
      * Return document with naming conflict. This is only set when you move a folder
      * @type {Array<LightDocument>}
@@ -144,17 +144,17 @@ export function EditFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
+        'type': json['type'],
         'id': json['id'],
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'user_permission': json['user_permission'],
-        'name': json['name'],
         'created_at': (new Date(json['created_at'])),
         'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'nature': json['nature'],
+        'user_permission': json['user_permission'],
+        'updated_at': (new Date(json['updated_at'])),
         'created_by': ShortUserFromJSON(json['created_by']),
         'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
-        'nature': json['nature'],
-        'updated_at': (new Date(json['updated_at'])),
-        'type': json['type'],
+        'name': json['name'],
         'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
     };
 }
@@ -169,8 +169,8 @@ export function EditFolderToJSON(value?: EditFolder | null): any {
     return {
         
         'parent_id': value.parent_id,
-        'name': value.name,
         'default_permission': value.default_permission,
+        'name': value.name,
     };
 }
 

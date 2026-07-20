@@ -2000,7 +2000,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'PHOTOSPHERE\', \'DXF\', \'IFC\', \'OBJ\', \'POINT_CLOUD\', \'DWG\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'POINT_CLOUD\', \'IFC\', \'PHOTOSPHERE\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -2097,7 +2097,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'PHOTOSPHERE\', \'DXF\', \'IFC\', \'OBJ\', \'POINT_CLOUD\', \'DWG\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'OBJ\', \'POINT_CLOUD\', \'IFC\', \'PHOTOSPHERE\', \'DWG\', \'DXF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -2289,7 +2289,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a naming rule list  Required scopes: document:write
+     * Create a naming rule list. These are just templates being copied, effective rules using these lists will copy the content.  Required scopes: document:write
      * Create a naming rule list
      */
     async createNamingPartsTemplateRaw(requestParameters: CreateNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingPartsTemplate>> {
@@ -2341,7 +2341,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a naming rule list  Required scopes: document:write
+     * Create a naming rule list. These are just templates being copied, effective rules using these lists will copy the content.  Required scopes: document:write
      * Create a naming rule list
      */
     async createNamingPartsTemplate(cloud_pk: number, project_pk: number, NamingPartsTemplateRequest: NamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<NamingPartsTemplate> {
@@ -8153,7 +8153,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a naming rule list  Required scopes: document:write
+     * Update some fields of a naming rule list. These are just templates. Changing the template won\'t change the effective rules using these lists, they will keep the content they had when they were created.  Required scopes: document:write
      * Update some fields of a naming rule list
      */
     async updateNamingPartsTemplateRaw(requestParameters: UpdateNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingPartsTemplate>> {
@@ -8205,7 +8205,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a naming rule list  Required scopes: document:write
+     * Update some fields of a naming rule list. These are just templates. Changing the template won\'t change the effective rules using these lists, they will keep the content they had when they were created.  Required scopes: document:write
      * Update some fields of a naming rule list
      */
     async updateNamingPartsTemplate(cloud_pk: number, id: number, project_pk: number, PatchedNamingPartsTemplateRequest?: PatchedNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<NamingPartsTemplate> {

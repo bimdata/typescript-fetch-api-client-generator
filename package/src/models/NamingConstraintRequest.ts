@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    NamingRuleConfiguration,
+    NamingRuleConfigurationFromJSON,
+    NamingRuleConfigurationFromJSONTyped,
+    NamingRuleConfigurationToJSON,
+} from './NamingRuleConfiguration';
+
 /**
  * 
  * @export
@@ -27,10 +34,10 @@ export interface NamingConstraintRequest {
     name: string;
     /**
      * 
-     * @type {any}
+     * @type {NamingRuleConfiguration}
      * @memberof NamingConstraintRequest
      */
-    rule: any | null;
+    rule: NamingRuleConfiguration;
     /**
      * 
      * When the constraint is strict, documents upload with invalid name and move in a conflict folder will be blocked.
@@ -52,7 +59,7 @@ export function NamingConstraintRequestFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'name': json['name'],
-        'rule': json['rule'],
+        'rule': NamingRuleConfigurationFromJSON(json['rule']),
         'strict': json['strict'],
     };
 }
@@ -67,7 +74,7 @@ export function NamingConstraintRequestToJSON(value?: NamingConstraintRequest | 
     return {
         
         'name': value.name,
-        'rule': value.rule,
+        'rule': NamingRuleConfigurationToJSON(value.rule),
         'strict': value.strict,
     };
 }

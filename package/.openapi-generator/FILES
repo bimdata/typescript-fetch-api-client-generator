@@ -124,6 +124,7 @@ src/models/NamingConstraint.ts
 src/models/NamingConstraintRequest.ts
 src/models/NamingPartsTemplate.ts
 src/models/NamingPartsTemplateRequest.ts
+src/models/NamingRuleConfiguration.ts
 src/models/Organization.ts
 src/models/OrganizationRequest.ts
 src/models/OrthogonalCamera.ts

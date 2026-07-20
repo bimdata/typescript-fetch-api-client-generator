@@ -20,6 +20,12 @@ import {
     LightDocumentToJSON,
 } from './LightDocument';
 import {
+    NamingRuleConfiguration,
+    NamingRuleConfigurationFromJSON,
+    NamingRuleConfigurationFromJSONTyped,
+    NamingRuleConfigurationToJSON,
+} from './NamingRuleConfiguration';
+import {
     ShortUser,
     ShortUserFromJSON,
     ShortUserFromJSONTyped,
@@ -46,10 +52,10 @@ export interface NamingConstraint {
     name: string;
     /**
      * 
-     * @type {any}
+     * @type {NamingRuleConfiguration}
      * @memberof NamingConstraint
      */
-    rule: any | null;
+    rule: NamingRuleConfiguration;
     /**
      * 
      * When the constraint is strict, documents upload with invalid name and move in a conflict folder will be blocked.
@@ -84,7 +90,7 @@ export function NamingConstraintFromJSONTyped(json: any, ignoreDiscriminator: bo
         
         'id': json['id'],
         'name': json['name'],
-        'rule': json['rule'],
+        'rule': NamingRuleConfigurationFromJSON(json['rule']),
         'strict': json['strict'],
         'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
         'creator': ShortUserFromJSON(json['creator']),
@@ -101,7 +107,7 @@ export function NamingConstraintToJSON(value?: NamingConstraint | null): any {
     return {
         
         'name': value.name,
-        'rule': value.rule,
+        'rule': NamingRuleConfigurationToJSON(value.rule),
         'strict': value.strict,
     };
 }
