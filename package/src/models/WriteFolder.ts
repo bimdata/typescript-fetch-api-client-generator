@@ -33,27 +33,11 @@ import {
  */
 export interface WriteFolder {
     /**
-     * 
+     * Aggregate of group user permissions and folder default permission
      * @type {number}
      * @memberof WriteFolder
      */
-    parent_id?: number | null;
-    /**
-     * Permission for a Folder
-     * 
-     * * `1` - denied
-     * * `50` - read_only
-     * * `100` - read_write
-     * @type {number}
-     * @memberof WriteFolder
-     */
-    default_permission?: WriteFolderDefaultPermissionEnum;
-    /**
-     * List of group permissions
-     * @type {Array<GroupFolderRead>}
-     * @memberof WriteFolder
-     */
-    readonly groups_permissions: Array<GroupFolderRead>;
+    readonly user_permission: WriteFolderUserPermissionEnum;
     /**
      * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
@@ -61,29 +45,11 @@ export interface WriteFolder {
      */
     readonly type: string;
     /**
-     * Date of the last update
-     * @type {Date}
-     * @memberof WriteFolder
-     */
-    readonly updated_at: Date;
-    /**
-     * Aggregate of group user permissions and folder default permission
-     * @type {number}
-     * @memberof WriteFolder
-     */
-    readonly user_permission: WriteFolderUserPermissionEnum;
-    /**
      * 
      * @type {number}
      * @memberof WriteFolder
      */
     readonly id: number;
-    /**
-     * Name of the folder
-     * @type {string}
-     * @memberof WriteFolder
-     */
-    name: string;
     /**
      * Creation date
      * @type {Date}
@@ -96,6 +62,40 @@ export interface WriteFolder {
      * @memberof WriteFolder
      */
     readonly created_by: ShortUser | null;
+    /**
+     * Permission for a Folder
+     * 
+     * * `1` - denied
+     * * `50` - read_only
+     * * `100` - read_write
+     * @type {number}
+     * @memberof WriteFolder
+     */
+    default_permission?: WriteFolderDefaultPermissionEnum;
+    /**
+     * Date of the last update
+     * @type {Date}
+     * @memberof WriteFolder
+     */
+    readonly updated_at: Date;
+    /**
+     * Name of the folder
+     * @type {string}
+     * @memberof WriteFolder
+     */
+    name: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof WriteFolder
+     */
+    parent_id?: number | null;
+    /**
+     * List of group permissions
+     * @type {Array<GroupFolderRead>}
+     * @memberof WriteFolder
+     */
+    readonly groups_permissions: Array<GroupFolderRead>;
     /**
      * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
@@ -114,7 +114,7 @@ export interface WriteFolder {
 * @export
 * @enum {string}
 */
-export enum WriteFolderDefaultPermissionEnum {
+export enum WriteFolderUserPermissionEnum {
     NUMBER_1 = 1,
     NUMBER_50 = 50,
     NUMBER_100 = 100
@@ -122,7 +122,7 @@ export enum WriteFolderDefaultPermissionEnum {
 * @export
 * @enum {string}
 */
-export enum WriteFolderUserPermissionEnum {
+export enum WriteFolderDefaultPermissionEnum {
     NUMBER_1 = 1,
     NUMBER_50 = 50,
     NUMBER_100 = 100
@@ -138,16 +138,16 @@ export function WriteFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
-        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
-        'type': json['type'],
-        'updated_at': (new Date(json['updated_at'])),
         'user_permission': json['user_permission'],
+        'type': json['type'],
         'id': json['id'],
-        'name': json['name'],
         'created_at': (new Date(json['created_at'])),
         'created_by': ShortUserFromJSON(json['created_by']),
+        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'updated_at': (new Date(json['updated_at'])),
+        'name': json['name'],
+        'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
+        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
         'nature': json['nature'],
         'children': !exists(json, 'children') ? undefined : (json['children'] === null ? null : (json['children'] as Array<any>).map(WriteFolderFromJSON)),
     };
@@ -162,9 +162,9 @@ export function WriteFolderToJSON(value?: WriteFolder | null): any {
     }
     return {
         
-        'parent_id': value.parent_id,
         'default_permission': value.default_permission,
         'name': value.name,
+        'parent_id': value.parent_id,
         'children': value.children === undefined ? undefined : (value.children === null ? null : (value.children as Array<any>).map(WriteFolderToJSON)),
     };
 }

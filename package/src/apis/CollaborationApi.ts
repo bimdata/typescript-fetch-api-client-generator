@@ -529,6 +529,13 @@ export interface DenyValidationRequest {
     attachment?: Blob | null;
 }
 
+export interface DownloadDocumentRequest {
+    cloud_pk: number;
+    dl_token: string;
+    id: number;
+    project_pk: number;
+}
+
 export interface GetClassificationRequest {
     cloud_pk: number;
     id: number;
@@ -2000,7 +2007,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'GLTF\', \'PHOTOSPHERE\', \'IFC\', \'OBJ\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'IFC\', \'DWG\', \'OBJ\', \'DXF\', \'POINT_CLOUD\', \'PHOTOSPHERE\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -2097,7 +2104,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'DWG\', \'GLTF\', \'PHOTOSPHERE\', \'IFC\', \'OBJ\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'GLTF\', \'IFC\', \'DWG\', \'OBJ\', \'DXF\', \'POINT_CLOUD\', \'PHOTOSPHERE\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -3956,6 +3963,67 @@ export class CollaborationApi extends runtime.BaseAPI {
     async denyValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, attachment?: Blob | null, initOverrides?: RequestInit): Promise<VisaAttachment> {
         const response = await this.denyValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk, attachment: attachment }, initOverrides);
         return await response.value();
+    }
+
+    /**
+     * Log a document download event and redirect to the file URL  Required scopes: document:read
+     * Download a document
+     */
+    async downloadDocumentRaw(requestParameters: DownloadDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling downloadDocument.');
+        }
+
+        if (requestParameters.dl_token === null || requestParameters.dl_token === undefined) {
+            throw new runtime.RequiredError('dl_token','Required parameter requestParameters.dl_token was null or undefined when calling downloadDocument.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling downloadDocument.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling downloadDocument.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}/download/{dl_token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"dl_token"}}`, encodeURIComponent(String(requestParameters.dl_token))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Log a document download event and redirect to the file URL  Required scopes: document:read
+     * Download a document
+     */
+    async downloadDocument(cloud_pk: number, dl_token: string, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.downloadDocumentRaw({ cloud_pk: cloud_pk, dl_token: dl_token, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
