@@ -20,11 +20,11 @@ import {
     LightDocumentToJSON,
 } from './LightDocument';
 import {
-    NamingRuleConfiguration,
-    NamingRuleConfigurationFromJSON,
-    NamingRuleConfigurationFromJSONTyped,
-    NamingRuleConfigurationToJSON,
-} from './NamingRuleConfiguration';
+    NamingConstraintPart,
+    NamingConstraintPartFromJSON,
+    NamingConstraintPartFromJSONTyped,
+    NamingConstraintPartToJSON,
+} from './NamingConstraintPart';
 import {
     ShortUser,
     ShortUserFromJSON,
@@ -51,11 +51,19 @@ export interface NamingConstraint {
      */
     name: string;
     /**
-     * 
-     * @type {NamingRuleConfiguration}
+     * * `-` - -
+     * * `_` - _
+     * * `.` - .
+     * @type {string}
      * @memberof NamingConstraint
      */
-    rule: NamingRuleConfiguration;
+    separator: NamingConstraintSeparatorEnum;
+    /**
+     * 
+     * @type {Array<NamingConstraintPart>}
+     * @memberof NamingConstraint
+     */
+    parts: Array<NamingConstraintPart>;
     /**
      * 
      * When the constraint is strict, documents upload with invalid name and move in a conflict folder will be blocked.
@@ -78,6 +86,16 @@ export interface NamingConstraint {
     readonly creator: ShortUser | null;
 }
 
+/**
+* @export
+* @enum {string}
+*/
+export enum NamingConstraintSeparatorEnum {
+    Minus = '-',
+    Underscore = '_',
+    Period = '.'
+}
+
 export function NamingConstraintFromJSON(json: any): NamingConstraint {
     return NamingConstraintFromJSONTyped(json, false);
 }
@@ -90,7 +108,8 @@ export function NamingConstraintFromJSONTyped(json: any, ignoreDiscriminator: bo
         
         'id': json['id'],
         'name': json['name'],
-        'rule': NamingRuleConfigurationFromJSON(json['rule']),
+        'separator': json['separator'],
+        'parts': ((json['parts'] as Array<any>).map(NamingConstraintPartFromJSON)),
         'strict': json['strict'],
         'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
         'creator': ShortUserFromJSON(json['creator']),
@@ -107,7 +126,8 @@ export function NamingConstraintToJSON(value?: NamingConstraint | null): any {
     return {
         
         'name': value.name,
-        'rule': NamingRuleConfigurationToJSON(value.rule),
+        'separator': value.separator,
+        'parts': ((value.parts as Array<any>).map(NamingConstraintPartToJSON)),
         'strict': value.strict,
     };
 }

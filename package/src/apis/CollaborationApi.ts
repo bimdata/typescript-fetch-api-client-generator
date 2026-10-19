@@ -90,15 +90,15 @@ import {
     NamingConstraint,
     NamingConstraintFromJSON,
     NamingConstraintToJSON,
+    NamingConstraintPartList,
+    NamingConstraintPartListFromJSON,
+    NamingConstraintPartListToJSON,
+    NamingConstraintPartListRequest,
+    NamingConstraintPartListRequestFromJSON,
+    NamingConstraintPartListRequestToJSON,
     NamingConstraintRequest,
     NamingConstraintRequestFromJSON,
     NamingConstraintRequestToJSON,
-    NamingPartsTemplate,
-    NamingPartsTemplateFromJSON,
-    NamingPartsTemplateToJSON,
-    NamingPartsTemplateRequest,
-    NamingPartsTemplateRequestFromJSON,
-    NamingPartsTemplateRequestToJSON,
     PatchedClassificationRequest,
     PatchedClassificationRequestFromJSON,
     PatchedClassificationRequestToJSON,
@@ -120,12 +120,12 @@ import {
     PatchedGroupRequest,
     PatchedGroupRequestFromJSON,
     PatchedGroupRequestToJSON,
+    PatchedNamingConstraintPartListRequest,
+    PatchedNamingConstraintPartListRequestFromJSON,
+    PatchedNamingConstraintPartListRequestToJSON,
     PatchedNamingConstraintRequest,
     PatchedNamingConstraintRequestFromJSON,
     PatchedNamingConstraintRequestToJSON,
-    PatchedNamingPartsTemplateRequest,
-    PatchedNamingPartsTemplateRequestFromJSON,
-    PatchedNamingPartsTemplateRequestToJSON,
     PatchedProjectRequest,
     PatchedProjectRequestFromJSON,
     PatchedProjectRequestToJSON,
@@ -353,10 +353,10 @@ export interface CreateNamingConstraintRequest {
     NamingConstraintRequest: NamingConstraintRequest;
 }
 
-export interface CreateNamingPartsTemplateRequest {
+export interface CreateNamingConstraintPartListRequest {
     cloud_pk: number;
     project_pk: number;
-    NamingPartsTemplateRequest: NamingPartsTemplateRequest;
+    NamingConstraintPartListRequest: NamingConstraintPartListRequest;
 }
 
 export interface CreateProjectRequest {
@@ -464,7 +464,7 @@ export interface DeleteNamingConstraintRequest {
     project_pk: number;
 }
 
-export interface DeleteNamingPartsTemplateRequest {
+export interface DeleteNamingConstraintPartListRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
@@ -527,13 +527,6 @@ export interface DenyValidationRequest {
     project_pk: number;
     visa_pk: number;
     attachment?: Blob | null;
-}
-
-export interface DownloadDocumentRequest {
-    cloud_pk: number;
-    dl_token: string;
-    id: number;
-    project_pk: number;
 }
 
 export interface GetClassificationRequest {
@@ -713,18 +706,18 @@ export interface GetNamingConstraintRequest {
     project_pk: number;
 }
 
-export interface GetNamingConstraintsRequest {
-    cloud_pk: number;
-    project_pk: number;
-}
-
-export interface GetNamingPartsTemplateRequest {
+export interface GetNamingConstraintPartListRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
 }
 
-export interface GetNamingPartsTemplatesRequest {
+export interface GetNamingConstraintPartListsRequest {
+    cloud_pk: number;
+    project_pk: number;
+}
+
+export interface GetNamingConstraintsRequest {
     cloud_pk: number;
     project_pk: number;
 }
@@ -994,11 +987,11 @@ export interface UpdateNamingConstraintRequest {
     PatchedNamingConstraintRequest?: PatchedNamingConstraintRequest;
 }
 
-export interface UpdateNamingPartsTemplateRequest {
+export interface UpdateNamingConstraintPartListRequest {
     cloud_pk: number;
     id: number;
     project_pk: number;
-    PatchedNamingPartsTemplateRequest?: PatchedNamingPartsTemplateRequest;
+    PatchedNamingConstraintPartListRequest?: PatchedNamingConstraintPartListRequest;
 }
 
 export interface UpdatePreviewFileRequest {
@@ -2007,7 +2000,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'IFC\', \'DWG\', \'OBJ\', \'DXF\', \'POINT_CLOUD\', \'PHOTOSPHERE\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'GLTF\', \'DWG\', \'IFC\', \'PHOTOSPHERE\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -2104,7 +2097,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'GLTF\', \'IFC\', \'DWG\', \'OBJ\', \'DXF\', \'POINT_CLOUD\', \'PHOTOSPHERE\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'OBJ\', \'GLTF\', \'DWG\', \'IFC\', \'PHOTOSPHERE\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -2296,20 +2289,20 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a naming rule list. These are just templates being copied, effective rules using these lists will copy the content.  Required scopes: document:write
+     * Create a naming rule list. values_in parts of naming constraints reference these lists.  Required scopes: document:write
      * Create a naming rule list
      */
-    async createNamingPartsTemplateRaw(requestParameters: CreateNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingPartsTemplate>> {
+    async createNamingConstraintPartListRaw(requestParameters: CreateNamingConstraintPartListRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingConstraintPartList>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createNamingPartsTemplate.');
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling createNamingConstraintPartList.');
         }
 
         if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createNamingPartsTemplate.');
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling createNamingConstraintPartList.');
         }
 
-        if (requestParameters.NamingPartsTemplateRequest === null || requestParameters.NamingPartsTemplateRequest === undefined) {
-            throw new runtime.RequiredError('NamingPartsTemplateRequest','Required parameter requestParameters.NamingPartsTemplateRequest was null or undefined when calling createNamingPartsTemplate.');
+        if (requestParameters.NamingConstraintPartListRequest === null || requestParameters.NamingConstraintPartListRequest === undefined) {
+            throw new runtime.RequiredError('NamingConstraintPartListRequest','Required parameter requestParameters.NamingConstraintPartListRequest was null or undefined when calling createNamingConstraintPartList.');
         }
 
         const queryParameters: any = {};
@@ -2337,22 +2330,22 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-part-list`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: NamingPartsTemplateRequestToJSON(requestParameters.NamingPartsTemplateRequest),
+            body: NamingConstraintPartListRequestToJSON(requestParameters.NamingConstraintPartListRequest),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NamingPartsTemplateFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NamingConstraintPartListFromJSON(jsonValue));
     }
 
     /**
-     * Create a naming rule list. These are just templates being copied, effective rules using these lists will copy the content.  Required scopes: document:write
+     * Create a naming rule list. values_in parts of naming constraints reference these lists.  Required scopes: document:write
      * Create a naming rule list
      */
-    async createNamingPartsTemplate(cloud_pk: number, project_pk: number, NamingPartsTemplateRequest: NamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<NamingPartsTemplate> {
-        const response = await this.createNamingPartsTemplateRaw({ cloud_pk: cloud_pk, project_pk: project_pk, NamingPartsTemplateRequest: NamingPartsTemplateRequest }, initOverrides);
+    async createNamingConstraintPartList(cloud_pk: number, project_pk: number, NamingConstraintPartListRequest: NamingConstraintPartListRequest, initOverrides?: RequestInit): Promise<NamingConstraintPartList> {
+        const response = await this.createNamingConstraintPartListRaw({ cloud_pk: cloud_pk, project_pk: project_pk, NamingConstraintPartListRequest: NamingConstraintPartListRequest }, initOverrides);
         return await response.value();
     }
 
@@ -3298,7 +3291,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a naming constraint. Responds with 200 OK and a list of documents that are now in conflict if the constraint is strict and some documents don\'t match the updated rule.  Required scopes: document:write
+     * Delete a naming constraint. Responds with 200 OK and a list of documents that are now in conflict if a parent recursive rule now applies and some documents don\'t match it.  Required scopes: document:write
      * Delete a naming constraint
      */
     async deleteNamingConstraintRaw(requestParameters: DeleteNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<LightDocument>>> {
@@ -3347,7 +3340,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a naming constraint. Responds with 200 OK and a list of documents that are now in conflict if the constraint is strict and some documents don\'t match the updated rule.  Required scopes: document:write
+     * Delete a naming constraint. Responds with 200 OK and a list of documents that are now in conflict if a parent recursive rule now applies and some documents don\'t match it.  Required scopes: document:write
      * Delete a naming constraint
      */
     async deleteNamingConstraint(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<LightDocument>> {
@@ -3356,20 +3349,20 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a naming rule list  Required scopes: document:write
+     * Delete a naming rule list. Responds with 409 and the list of naming constraints using it if the list is still used.  Required scopes: document:write
      * Delete a naming rule list
      */
-    async deleteNamingPartsTemplateRaw(requestParameters: DeleteNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async deleteNamingConstraintPartListRaw(requestParameters: DeleteNamingConstraintPartListRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteNamingPartsTemplate.');
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling deleteNamingConstraintPartList.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteNamingPartsTemplate.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling deleteNamingConstraintPartList.');
         }
 
         if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteNamingPartsTemplate.');
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling deleteNamingConstraintPartList.');
         }
 
         const queryParameters: any = {};
@@ -3395,7 +3388,7 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-part-list/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -3405,11 +3398,11 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete a naming rule list  Required scopes: document:write
+     * Delete a naming rule list. Responds with 409 and the list of naming constraints using it if the list is still used.  Required scopes: document:write
      * Delete a naming rule list
      */
-    async deleteNamingPartsTemplate(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.deleteNamingPartsTemplateRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+    async deleteNamingConstraintPartList(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
+        await this.deleteNamingConstraintPartListRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -3963,67 +3956,6 @@ export class CollaborationApi extends runtime.BaseAPI {
     async denyValidation(cloud_pk: number, document_pk: number, id: number, project_pk: number, visa_pk: number, attachment?: Blob | null, initOverrides?: RequestInit): Promise<VisaAttachment> {
         const response = await this.denyValidationRaw({ cloud_pk: cloud_pk, document_pk: document_pk, id: id, project_pk: project_pk, visa_pk: visa_pk, attachment: attachment }, initOverrides);
         return await response.value();
-    }
-
-    /**
-     * Log a document download event and redirect to the file URL  Required scopes: document:read
-     * Download a document
-     */
-    async downloadDocumentRaw(requestParameters: DownloadDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling downloadDocument.');
-        }
-
-        if (requestParameters.dl_token === null || requestParameters.dl_token === undefined) {
-            throw new runtime.RequiredError('dl_token','Required parameter requestParameters.dl_token was null or undefined when calling downloadDocument.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling downloadDocument.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling downloadDocument.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/document/{id}/download/{dl_token}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"dl_token"}}`, encodeURIComponent(String(requestParameters.dl_token))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Log a document download event and redirect to the file URL  Required scopes: document:read
-     * Download a document
-     */
-    async downloadDocument(cloud_pk: number, dl_token: string, id: number, project_pk: number, initOverrides?: RequestInit): Promise<void> {
-        await this.downloadDocumentRaw({ cloud_pk: cloud_pk, dl_token: dl_token, id: id, project_pk: project_pk }, initOverrides);
     }
 
     /**
@@ -5461,6 +5393,118 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
+     * Retrieve a naming rule list in the cloud  Required scopes: document:read
+     * Retrieve a naming rule list
+     */
+    async getNamingConstraintPartListRaw(requestParameters: GetNamingConstraintPartListRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingConstraintPartList>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getNamingConstraintPartList.');
+        }
+
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getNamingConstraintPartList.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getNamingConstraintPartList.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-part-list/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => NamingConstraintPartListFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a naming rule list in the cloud  Required scopes: document:read
+     * Retrieve a naming rule list
+     */
+    async getNamingConstraintPartList(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<NamingConstraintPartList> {
+        const response = await this.getNamingConstraintPartListRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve all naming rule lists in the cloud  Required scopes: document:read
+     * Retrieve all naming rule lists
+     */
+    async getNamingConstraintPartListsRaw(requestParameters: GetNamingConstraintPartListsRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<NamingConstraintPartList>>> {
+        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getNamingConstraintPartLists.');
+        }
+
+        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getNamingConstraintPartLists.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
+        }
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
+        }
+
+        const response = await this.request({
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-part-list`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NamingConstraintPartListFromJSON));
+    }
+
+    /**
+     * Retrieve all naming rule lists in the cloud  Required scopes: document:read
+     * Retrieve all naming rule lists
+     */
+    async getNamingConstraintPartLists(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<NamingConstraintPartList>> {
+        const response = await this.getNamingConstraintPartListsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve all naming constraints  Required scopes: document:read
      * Retrieve all naming constraints
      */
@@ -5511,118 +5555,6 @@ export class CollaborationApi extends runtime.BaseAPI {
      */
     async getNamingConstraints(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<NamingConstraint>> {
         const response = await this.getNamingConstraintsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve a naming rule list in the cloud  Required scopes: document:read
-     * Retrieve a naming rule list
-     */
-    async getNamingPartsTemplateRaw(requestParameters: GetNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingPartsTemplate>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getNamingPartsTemplate.');
-        }
-
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getNamingPartsTemplate.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getNamingPartsTemplate.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => NamingPartsTemplateFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve a naming rule list in the cloud  Required scopes: document:read
-     * Retrieve a naming rule list
-     */
-    async getNamingPartsTemplate(cloud_pk: number, id: number, project_pk: number, initOverrides?: RequestInit): Promise<NamingPartsTemplate> {
-        const response = await this.getNamingPartsTemplateRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk }, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve all naming rule lists in the cloud  Required scopes: document:read
-     * Retrieve all naming rule lists
-     */
-    async getNamingPartsTemplatesRaw(requestParameters: GetNamingPartsTemplatesRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<NamingPartsTemplate>>> {
-        if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling getNamingPartsTemplates.');
-        }
-
-        if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling getNamingPartsTemplates.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // ApiKey authentication
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("BIMData_Connect", []);
-        }
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // Bearer authentication
-        }
-
-        const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(NamingPartsTemplateFromJSON));
-    }
-
-    /**
-     * Retrieve all naming rule lists in the cloud  Required scopes: document:read
-     * Retrieve all naming rule lists
-     */
-    async getNamingPartsTemplates(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<NamingPartsTemplate>> {
-        const response = await this.getNamingPartsTemplatesRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
         return await response.value();
     }
 
@@ -8160,7 +8092,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a naming constraint  Required scopes: document:write
+     * Update some fields of a naming constraint. Sending `parts` replaces all parts. Documents that no longer match are flagged with `naming_constraint_conflict` (even if the constraint is strict) and returned in `conflicting_documents`.  Required scopes: document:write
      * Update some fields of a naming constraint
      */
     async updateNamingConstraintRaw(requestParameters: UpdateNamingConstraintRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingConstraint>> {
@@ -8212,7 +8144,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a naming constraint  Required scopes: document:write
+     * Update some fields of a naming constraint. Sending `parts` replaces all parts. Documents that no longer match are flagged with `naming_constraint_conflict` (even if the constraint is strict) and returned in `conflicting_documents`.  Required scopes: document:write
      * Update some fields of a naming constraint
      */
     async updateNamingConstraint(cloud_pk: number, id: number, project_pk: number, PatchedNamingConstraintRequest?: PatchedNamingConstraintRequest, initOverrides?: RequestInit): Promise<NamingConstraint> {
@@ -8221,20 +8153,20 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update some fields of a naming rule list. These are just templates. Changing the template won\'t change the effective rules using these lists, they will keep the content they had when they were created.  Required scopes: document:write
+     * Update some fields of a naming rule list. Rules using this list are re-evaluated: documents that no longer match are flagged with `naming_constraint_conflict` (even if the rule is strict) and returned in `conflicting_documents`.  Required scopes: document:write
      * Update some fields of a naming rule list
      */
-    async updateNamingPartsTemplateRaw(requestParameters: UpdateNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingPartsTemplate>> {
+    async updateNamingConstraintPartListRaw(requestParameters: UpdateNamingConstraintPartListRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<NamingConstraintPartList>> {
         if (requestParameters.cloud_pk === null || requestParameters.cloud_pk === undefined) {
-            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateNamingPartsTemplate.');
+            throw new runtime.RequiredError('cloud_pk','Required parameter requestParameters.cloud_pk was null or undefined when calling updateNamingConstraintPartList.');
         }
 
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateNamingPartsTemplate.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling updateNamingConstraintPartList.');
         }
 
         if (requestParameters.project_pk === null || requestParameters.project_pk === undefined) {
-            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateNamingPartsTemplate.');
+            throw new runtime.RequiredError('project_pk','Required parameter requestParameters.project_pk was null or undefined when calling updateNamingConstraintPartList.');
         }
 
         const queryParameters: any = {};
@@ -8262,22 +8194,22 @@ export class CollaborationApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-parts-template/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
+            path: `/cloud/{cloud_pk}/project/{project_pk}/naming-part-list/{id}`.replace(`{${"cloud_pk"}}`, encodeURIComponent(String(requestParameters.cloud_pk))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"project_pk"}}`, encodeURIComponent(String(requestParameters.project_pk))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PatchedNamingPartsTemplateRequestToJSON(requestParameters.PatchedNamingPartsTemplateRequest),
+            body: PatchedNamingConstraintPartListRequestToJSON(requestParameters.PatchedNamingConstraintPartListRequest),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NamingPartsTemplateFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NamingConstraintPartListFromJSON(jsonValue));
     }
 
     /**
-     * Update some fields of a naming rule list. These are just templates. Changing the template won\'t change the effective rules using these lists, they will keep the content they had when they were created.  Required scopes: document:write
+     * Update some fields of a naming rule list. Rules using this list are re-evaluated: documents that no longer match are flagged with `naming_constraint_conflict` (even if the rule is strict) and returned in `conflicting_documents`.  Required scopes: document:write
      * Update some fields of a naming rule list
      */
-    async updateNamingPartsTemplate(cloud_pk: number, id: number, project_pk: number, PatchedNamingPartsTemplateRequest?: PatchedNamingPartsTemplateRequest, initOverrides?: RequestInit): Promise<NamingPartsTemplate> {
-        const response = await this.updateNamingPartsTemplateRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedNamingPartsTemplateRequest: PatchedNamingPartsTemplateRequest }, initOverrides);
+    async updateNamingConstraintPartList(cloud_pk: number, id: number, project_pk: number, PatchedNamingConstraintPartListRequest?: PatchedNamingConstraintPartListRequest, initOverrides?: RequestInit): Promise<NamingConstraintPartList> {
+        const response = await this.updateNamingConstraintPartListRaw({ cloud_pk: cloud_pk, id: id, project_pk: project_pk, PatchedNamingConstraintPartListRequest: PatchedNamingConstraintPartListRequest }, initOverrides);
         return await response.value();
     }
 

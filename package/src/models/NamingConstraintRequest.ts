@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    NamingRuleConfiguration,
-    NamingRuleConfigurationFromJSON,
-    NamingRuleConfigurationFromJSONTyped,
-    NamingRuleConfigurationToJSON,
-} from './NamingRuleConfiguration';
+    NamingConstraintPartRequest,
+    NamingConstraintPartRequestFromJSON,
+    NamingConstraintPartRequestFromJSONTyped,
+    NamingConstraintPartRequestToJSON,
+} from './NamingConstraintPartRequest';
 
 /**
  * 
@@ -33,11 +33,19 @@ export interface NamingConstraintRequest {
      */
     name: string;
     /**
-     * 
-     * @type {NamingRuleConfiguration}
+     * * `-` - -
+     * * `_` - _
+     * * `.` - .
+     * @type {string}
      * @memberof NamingConstraintRequest
      */
-    rule: NamingRuleConfiguration;
+    separator: NamingConstraintRequestSeparatorEnum;
+    /**
+     * 
+     * @type {Array<NamingConstraintPartRequest>}
+     * @memberof NamingConstraintRequest
+     */
+    parts: Array<NamingConstraintPartRequest>;
     /**
      * 
      * When the constraint is strict, documents upload with invalid name and move in a conflict folder will be blocked.
@@ -46,6 +54,16 @@ export interface NamingConstraintRequest {
      * @memberof NamingConstraintRequest
      */
     strict: boolean;
+}
+
+/**
+* @export
+* @enum {string}
+*/
+export enum NamingConstraintRequestSeparatorEnum {
+    Minus = '-',
+    Underscore = '_',
+    Period = '.'
 }
 
 export function NamingConstraintRequestFromJSON(json: any): NamingConstraintRequest {
@@ -59,7 +77,8 @@ export function NamingConstraintRequestFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'name': json['name'],
-        'rule': NamingRuleConfigurationFromJSON(json['rule']),
+        'separator': json['separator'],
+        'parts': ((json['parts'] as Array<any>).map(NamingConstraintPartRequestFromJSON)),
         'strict': json['strict'],
     };
 }
@@ -74,7 +93,8 @@ export function NamingConstraintRequestToJSON(value?: NamingConstraintRequest | 
     return {
         
         'name': value.name,
-        'rule': NamingRuleConfigurationToJSON(value.rule),
+        'separator': value.separator,
+        'parts': ((value.parts as Array<any>).map(NamingConstraintPartRequestToJSON)),
         'strict': value.strict,
     };
 }

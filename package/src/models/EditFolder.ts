@@ -39,11 +39,35 @@ import {
  */
 export interface EditFolder {
     /**
+     * 
+     * @type {number}
+     * @memberof EditFolder
+     */
+    parent_id?: number | null;
+    /**
      * Aggregate of group user permissions and folder default permission
      * @type {number}
      * @memberof EditFolder
      */
     readonly user_permission: EditFolderUserPermissionEnum;
+    /**
+     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
+     * @type {string}
+     * @memberof EditFolder
+     */
+    readonly nature: string;
+    /**
+     * Name of the folder
+     * @type {string}
+     * @memberof EditFolder
+     */
+    name: string;
+    /**
+     * 
+     * @type {ShortUser}
+     * @memberof EditFolder
+     */
+    readonly created_by: ShortUser | null;
     /**
      * DEPRECATED: Use 'nature' instead. Value is "Folder". It is usefull to parse the tree and discriminate folders and files
      * @type {string}
@@ -51,23 +75,23 @@ export interface EditFolder {
      */
     readonly type: string;
     /**
-     * 
-     * @type {number}
-     * @memberof EditFolder
-     */
-    readonly id: number;
-    /**
      * Creation date
      * @type {Date}
      * @memberof EditFolder
      */
     readonly created_at: Date;
     /**
-     * 
-     * @type {ShortUser}
+     * Date of the last update
+     * @type {Date}
      * @memberof EditFolder
      */
-    readonly created_by: ShortUser | null;
+    readonly updated_at: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof EditFolder
+     */
+    readonly id: number;
     /**
      * Permission for a Folder
      * 
@@ -79,35 +103,11 @@ export interface EditFolder {
      */
     default_permission?: EditFolderDefaultPermissionEnum;
     /**
-     * Date of the last update
-     * @type {Date}
-     * @memberof EditFolder
-     */
-    readonly updated_at: Date;
-    /**
-     * Name of the folder
-     * @type {string}
-     * @memberof EditFolder
-     */
-    name: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof EditFolder
-     */
-    parent_id?: number | null;
-    /**
      * List of group permissions
      * @type {Array<GroupFolderRead>}
      * @memberof EditFolder
      */
     readonly groups_permissions: Array<GroupFolderRead>;
-    /**
-     * Value is "Folder". It is usefull to parse the tree and discriminate folders and files
-     * @type {string}
-     * @memberof EditFolder
-     */
-    readonly nature: string;
     /**
      * Return document with naming conflict. This is only set when you move a folder
      * @type {Array<LightDocument>}
@@ -144,17 +144,17 @@ export function EditFolderFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
-        'user_permission': json['user_permission'],
-        'type': json['type'],
-        'id': json['id'],
-        'created_at': (new Date(json['created_at'])),
-        'created_by': ShortUserFromJSON(json['created_by']),
-        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
-        'updated_at': (new Date(json['updated_at'])),
-        'name': json['name'],
         'parent_id': !exists(json, 'parent_id') ? undefined : json['parent_id'],
-        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
+        'user_permission': json['user_permission'],
         'nature': json['nature'],
+        'name': json['name'],
+        'created_by': ShortUserFromJSON(json['created_by']),
+        'type': json['type'],
+        'created_at': (new Date(json['created_at'])),
+        'updated_at': (new Date(json['updated_at'])),
+        'id': json['id'],
+        'default_permission': !exists(json, 'default_permission') ? undefined : json['default_permission'],
+        'groups_permissions': ((json['groups_permissions'] as Array<any>).map(GroupFolderReadFromJSON)),
         'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
     };
 }
@@ -168,9 +168,9 @@ export function EditFolderToJSON(value?: EditFolder | null): any {
     }
     return {
         
-        'default_permission': value.default_permission,
-        'name': value.name,
         'parent_id': value.parent_id,
+        'name': value.name,
+        'default_permission': value.default_permission,
     };
 }
 

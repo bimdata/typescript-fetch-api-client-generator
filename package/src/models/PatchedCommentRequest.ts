@@ -24,31 +24,7 @@ export interface PatchedCommentRequest {
      * @type {string}
      * @memberof PatchedCommentRequest
      */
-    viewpoint_guid?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PatchedCommentRequest
-     */
-    comment?: string;
-    /**
-     * Only used when using POST on the full-topic route to bind viewpoint with comment
-     * @type {number}
-     * @memberof PatchedCommentRequest
-     */
-    viewpoint_temp_id?: number;
-    /**
-     * 
-     * @type {Date}
-     * @memberof PatchedCommentRequest
-     */
-    date?: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof PatchedCommentRequest
-     */
-    reply_to_comment_guid?: string | null;
+    author?: string | null;
     /**
      * 
      * @type {string}
@@ -60,7 +36,31 @@ export interface PatchedCommentRequest {
      * @type {string}
      * @memberof PatchedCommentRequest
      */
-    author?: string | null;
+    reply_to_comment_guid?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PatchedCommentRequest
+     */
+    comment?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof PatchedCommentRequest
+     */
+    date?: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof PatchedCommentRequest
+     */
+    viewpoint_guid?: string | null;
+    /**
+     * Only used when using POST on the full-topic route to bind viewpoint with comment
+     * @type {number}
+     * @memberof PatchedCommentRequest
+     */
+    viewpoint_temp_id?: number;
     /**
      * 
      * @type {string}
@@ -79,13 +79,13 @@ export function PatchedCommentRequestFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
-        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
-        'comment': !exists(json, 'comment') ? undefined : json['comment'],
-        'viewpoint_temp_id': !exists(json, 'viewpoint_temp_id') ? undefined : json['viewpoint_temp_id'],
-        'date': !exists(json, 'date') ? undefined : (new Date(json['date'])),
-        'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
-        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
         'author': !exists(json, 'author') ? undefined : json['author'],
+        'modified_author': !exists(json, 'modified_author') ? undefined : json['modified_author'],
+        'reply_to_comment_guid': !exists(json, 'reply_to_comment_guid') ? undefined : json['reply_to_comment_guid'],
+        'comment': !exists(json, 'comment') ? undefined : json['comment'],
+        'date': !exists(json, 'date') ? undefined : (new Date(json['date'])),
+        'viewpoint_guid': !exists(json, 'viewpoint_guid') ? undefined : json['viewpoint_guid'],
+        'viewpoint_temp_id': !exists(json, 'viewpoint_temp_id') ? undefined : json['viewpoint_temp_id'],
         'guid': !exists(json, 'guid') ? undefined : json['guid'],
     };
 }
@@ -99,13 +99,13 @@ export function PatchedCommentRequestToJSON(value?: PatchedCommentRequest | null
     }
     return {
         
-        'viewpoint_guid': value.viewpoint_guid,
-        'comment': value.comment,
-        'viewpoint_temp_id': value.viewpoint_temp_id,
-        'date': value.date === undefined ? undefined : (value.date.toISOString()),
-        'reply_to_comment_guid': value.reply_to_comment_guid,
-        'modified_author': value.modified_author,
         'author': value.author,
+        'modified_author': value.modified_author,
+        'reply_to_comment_guid': value.reply_to_comment_guid,
+        'comment': value.comment,
+        'date': value.date === undefined ? undefined : (value.date.toISOString()),
+        'viewpoint_guid': value.viewpoint_guid,
+        'viewpoint_temp_id': value.viewpoint_temp_id,
         'guid': value.guid,
     };
 }

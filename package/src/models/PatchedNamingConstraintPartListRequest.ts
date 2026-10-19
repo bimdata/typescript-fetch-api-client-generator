@@ -16,28 +16,28 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface PatchedNamingPartsTemplateRequest
+ * @interface PatchedNamingConstraintPartListRequest
  */
-export interface PatchedNamingPartsTemplateRequest {
+export interface PatchedNamingConstraintPartListRequest {
     /**
      * Name of the template
      * @type {string}
-     * @memberof PatchedNamingPartsTemplateRequest
+     * @memberof PatchedNamingConstraintPartListRequest
      */
     name?: string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PatchedNamingPartsTemplateRequest
+     * @memberof PatchedNamingConstraintPartListRequest
      */
     elements?: Array<string>;
 }
 
-export function PatchedNamingPartsTemplateRequestFromJSON(json: any): PatchedNamingPartsTemplateRequest {
-    return PatchedNamingPartsTemplateRequestFromJSONTyped(json, false);
+export function PatchedNamingConstraintPartListRequestFromJSON(json: any): PatchedNamingConstraintPartListRequest {
+    return PatchedNamingConstraintPartListRequestFromJSONTyped(json, false);
 }
 
-export function PatchedNamingPartsTemplateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedNamingPartsTemplateRequest {
+export function PatchedNamingConstraintPartListRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedNamingConstraintPartListRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -48,7 +48,7 @@ export function PatchedNamingPartsTemplateRequestFromJSONTyped(json: any, ignore
     };
 }
 
-export function PatchedNamingPartsTemplateRequestToJSON(value?: PatchedNamingPartsTemplateRequest | null): any {
+export function PatchedNamingConstraintPartListRequestToJSON(value?: PatchedNamingConstraintPartListRequest | null): any {
     if (value === undefined) {
         return undefined;
     }

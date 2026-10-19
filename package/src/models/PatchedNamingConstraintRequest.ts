@@ -14,11 +14,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    NamingRuleConfiguration,
-    NamingRuleConfigurationFromJSON,
-    NamingRuleConfigurationFromJSONTyped,
-    NamingRuleConfigurationToJSON,
-} from './NamingRuleConfiguration';
+    NamingConstraintPartRequest,
+    NamingConstraintPartRequestFromJSON,
+    NamingConstraintPartRequestFromJSONTyped,
+    NamingConstraintPartRequestToJSON,
+} from './NamingConstraintPartRequest';
 
 /**
  * 
@@ -33,11 +33,19 @@ export interface PatchedNamingConstraintRequest {
      */
     name?: string;
     /**
-     * 
-     * @type {NamingRuleConfiguration}
+     * * `-` - -
+     * * `_` - _
+     * * `.` - .
+     * @type {string}
      * @memberof PatchedNamingConstraintRequest
      */
-    rule?: NamingRuleConfiguration;
+    separator?: PatchedNamingConstraintRequestSeparatorEnum;
+    /**
+     * 
+     * @type {Array<NamingConstraintPartRequest>}
+     * @memberof PatchedNamingConstraintRequest
+     */
+    parts?: Array<NamingConstraintPartRequest>;
     /**
      * 
      * When the constraint is strict, documents upload with invalid name and move in a conflict folder will be blocked.
@@ -46,6 +54,16 @@ export interface PatchedNamingConstraintRequest {
      * @memberof PatchedNamingConstraintRequest
      */
     strict?: boolean;
+}
+
+/**
+* @export
+* @enum {string}
+*/
+export enum PatchedNamingConstraintRequestSeparatorEnum {
+    Minus = '-',
+    Underscore = '_',
+    Period = '.'
 }
 
 export function PatchedNamingConstraintRequestFromJSON(json: any): PatchedNamingConstraintRequest {
@@ -59,7 +77,8 @@ export function PatchedNamingConstraintRequestFromJSONTyped(json: any, ignoreDis
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'rule': !exists(json, 'rule') ? undefined : NamingRuleConfigurationFromJSON(json['rule']),
+        'separator': !exists(json, 'separator') ? undefined : json['separator'],
+        'parts': !exists(json, 'parts') ? undefined : ((json['parts'] as Array<any>).map(NamingConstraintPartRequestFromJSON)),
         'strict': !exists(json, 'strict') ? undefined : json['strict'],
     };
 }
@@ -74,7 +93,8 @@ export function PatchedNamingConstraintRequestToJSON(value?: PatchedNamingConstr
     return {
         
         'name': value.name,
-        'rule': NamingRuleConfigurationToJSON(value.rule),
+        'separator': value.separator,
+        'parts': value.parts === undefined ? undefined : ((value.parts as Array<any>).map(NamingConstraintPartRequestToJSON)),
         'strict': value.strict,
     };
 }

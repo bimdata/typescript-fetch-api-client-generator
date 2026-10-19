@@ -121,10 +121,11 @@ src/models/ModelOnModelPositionCreationRequest.ts
 src/models/ModelSerializerWithoutChildren.ts
 src/models/ModelWithPositioningPlan.ts
 src/models/NamingConstraint.ts
+src/models/NamingConstraintPart.ts
+src/models/NamingConstraintPartList.ts
+src/models/NamingConstraintPartListRequest.ts
+src/models/NamingConstraintPartRequest.ts
 src/models/NamingConstraintRequest.ts
-src/models/NamingPartsTemplate.ts
-src/models/NamingPartsTemplateRequest.ts
-src/models/NamingRuleConfiguration.ts
 src/models/Organization.ts
 src/models/OrganizationRequest.ts
 src/models/OrthogonalCamera.ts
@@ -149,8 +150,8 @@ src/models/PatchedModelEquipmentRequest.ts
 src/models/PatchedModelLabelRequest.ts
 src/models/PatchedModelOnModelPositionRequest.ts
 src/models/PatchedModelRequest.ts
+src/models/PatchedNamingConstraintPartListRequest.ts
 src/models/PatchedNamingConstraintRequest.ts
-src/models/PatchedNamingPartsTemplateRequest.ts
 src/models/PatchedPinRequest.ts
 src/models/PatchedPositioningPlanRequest.ts
 src/models/PatchedPriorityRequest.ts

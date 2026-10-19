@@ -16,28 +16,28 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface NamingPartsTemplateRequest
+ * @interface NamingConstraintPartListRequest
  */
-export interface NamingPartsTemplateRequest {
+export interface NamingConstraintPartListRequest {
     /**
      * Name of the template
      * @type {string}
-     * @memberof NamingPartsTemplateRequest
+     * @memberof NamingConstraintPartListRequest
      */
     name: string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof NamingPartsTemplateRequest
+     * @memberof NamingConstraintPartListRequest
      */
     elements: Array<string>;
 }
 
-export function NamingPartsTemplateRequestFromJSON(json: any): NamingPartsTemplateRequest {
-    return NamingPartsTemplateRequestFromJSONTyped(json, false);
+export function NamingConstraintPartListRequestFromJSON(json: any): NamingConstraintPartListRequest {
+    return NamingConstraintPartListRequestFromJSONTyped(json, false);
 }
 
-export function NamingPartsTemplateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): NamingPartsTemplateRequest {
+export function NamingConstraintPartListRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): NamingConstraintPartListRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -48,7 +48,7 @@ export function NamingPartsTemplateRequestFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function NamingPartsTemplateRequestToJSON(value?: NamingPartsTemplateRequest | null): any {
+export function NamingConstraintPartListRequestToJSON(value?: NamingConstraintPartListRequest | null): any {
     if (value === undefined) {
         return undefined;
     }

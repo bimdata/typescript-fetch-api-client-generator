@@ -13,37 +13,50 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    LightDocument,
+    LightDocumentFromJSON,
+    LightDocumentFromJSONTyped,
+    LightDocumentToJSON,
+} from './LightDocument';
+
 /**
  * 
  * @export
- * @interface NamingPartsTemplate
+ * @interface NamingConstraintPartList
  */
-export interface NamingPartsTemplate {
+export interface NamingConstraintPartList {
     /**
      * 
      * @type {number}
-     * @memberof NamingPartsTemplate
+     * @memberof NamingConstraintPartList
      */
     readonly id: number;
     /**
      * Name of the template
      * @type {string}
-     * @memberof NamingPartsTemplate
+     * @memberof NamingConstraintPartList
      */
     name: string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof NamingPartsTemplate
+     * @memberof NamingConstraintPartList
      */
     elements: Array<string>;
+    /**
+     * Documents now in conflict with a rule using this template. Only set in update responses.
+     * @type {Array<LightDocument>}
+     * @memberof NamingConstraintPartList
+     */
+    readonly conflicting_documents: Array<LightDocument>;
 }
 
-export function NamingPartsTemplateFromJSON(json: any): NamingPartsTemplate {
-    return NamingPartsTemplateFromJSONTyped(json, false);
+export function NamingConstraintPartListFromJSON(json: any): NamingConstraintPartList {
+    return NamingConstraintPartListFromJSONTyped(json, false);
 }
 
-export function NamingPartsTemplateFromJSONTyped(json: any, ignoreDiscriminator: boolean): NamingPartsTemplate {
+export function NamingConstraintPartListFromJSONTyped(json: any, ignoreDiscriminator: boolean): NamingConstraintPartList {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -52,10 +65,11 @@ export function NamingPartsTemplateFromJSONTyped(json: any, ignoreDiscriminator:
         'id': json['id'],
         'name': json['name'],
         'elements': json['elements'],
+        'conflicting_documents': ((json['conflicting_documents'] as Array<any>).map(LightDocumentFromJSON)),
     };
 }
 
-export function NamingPartsTemplateToJSON(value?: NamingPartsTemplate | null): any {
+export function NamingConstraintPartListToJSON(value?: NamingConstraintPartList | null): any {
     if (value === undefined) {
         return undefined;
     }
