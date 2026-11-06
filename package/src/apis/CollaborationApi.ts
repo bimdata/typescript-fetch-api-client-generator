@@ -687,6 +687,8 @@ export interface GetGroupsRequest {
 export interface GetLogsRequest {
     cloud_pk: number;
     project_pk: number;
+    date_after?: Date;
+    date_before?: Date;
 }
 
 export interface GetManageGroupRequest {
@@ -2000,7 +2002,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'OBJ\', \'GLTF\', \'DWG\', \'IFC\', \'PHOTOSPHERE\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'IFC\', \'POINT_CLOUD\', \'OBJ\', \'DXF\', \'PHOTOSPHERE\', \'DWG\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Document>> {
@@ -2097,7 +2099,7 @@ export class CollaborationApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a document. If the document is one of {\'OBJ\', \'GLTF\', \'DWG\', \'IFC\', \'PHOTOSPHERE\', \'DXF\', \'POINT_CLOUD\'}, a model will be created and attached to this document  Required scopes: document:write
+     * Create a document. If the document is one of {\'IFC\', \'POINT_CLOUD\', \'OBJ\', \'DXF\', \'PHOTOSPHERE\', \'DWG\', \'GLTF\'}, a model will be created and attached to this document  Required scopes: document:write
      * Create a document
      */
     async createDocument(cloud_pk: number, project_pk: number, name: string, parent_id?: number | null, file_name?: string, description?: string | null, model_source?: CreateDocumentModelSourceEnum, ifc_source?: CreateDocumentIfcSourceEnum, successor_of?: number, process_hint?: CreateDocumentProcessHintEnum, initOverrides?: RequestInit): Promise<Document> {
@@ -5183,6 +5185,14 @@ export class CollaborationApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
+        if (requestParameters.date_after !== undefined) {
+            queryParameters['date_after'] = (requestParameters.date_after as any).toISOString();
+        }
+
+        if (requestParameters.date_before !== undefined) {
+            queryParameters['date_before'] = (requestParameters.date_before as any).toISOString();
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
@@ -5217,8 +5227,8 @@ export class CollaborationApi extends runtime.BaseAPI {
      * Retrieve all logs of the project  Required scopes: logs:read
      * Retrieve all logs of the project
      */
-    async getLogs(cloud_pk: number, project_pk: number, initOverrides?: RequestInit): Promise<Array<LogEntry>> {
-        const response = await this.getLogsRaw({ cloud_pk: cloud_pk, project_pk: project_pk }, initOverrides);
+    async getLogs(cloud_pk: number, project_pk: number, date_after?: Date, date_before?: Date, initOverrides?: RequestInit): Promise<Array<LogEntry>> {
+        const response = await this.getLogsRaw({ cloud_pk: cloud_pk, project_pk: project_pk, date_after: date_after, date_before: date_before }, initOverrides);
         return await response.value();
     }
 
